@@ -6,19 +6,32 @@
 //  Copyright imaginary products 2010. All rights reserved.
 //
 
-// Import the interfaces
+//-----------------------------------------------------------------------------------------------------------------------------------
 #import "MapScene.h"
 
-// HelloWorld implementation
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@interface MapScene (PrivateAPI)
+
+@end
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation MapScene
 
-+(id) scene
-{
+//-----------------------------------------------------------------------------------------------------------------------------------
+
+//===================================================================================================================================
+#pragma mark MapScene PrivateAPI
+
+//===================================================================================================================================
+#pragma mark MapScene
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++(id) scene {
 	// 'scene' is an autorelease object.
 	CCScene *scene = [CCScene node];
 	
 	// 'layer' is an autorelease object.
-	HelloWorld *layer = [HelloWorld node];
+	MapScene *layer = [MapScene node];
 	
 	// add layer as a child to scene
 	[scene addChild: layer];
@@ -27,11 +40,8 @@
 	return scene;
 }
 
-// on "init" you need to initialize your instance
--(id) init
-{
-	// always call "super" init
-	// Apple recommends to re-assign "self" with the "super" return value
+//-----------------------------------------------------------------------------------------------------------------------------------
+-(id) init {
 	if( (self=[super init] )) {
 		
 		// create and initialize a Label
@@ -49,14 +59,9 @@
 	return self;
 }
 
-// on "dealloc" you need to release all your retained objects
-- (void) dealloc
-{
-	// in case you have something to dealloc, do it in this method
-	// in this particular example nothing needs to be released.
-	// cocos2d will automatically release all the children (Label)
-	
-	// don't forget to call "super dealloc"
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void) dealloc {
 	[super dealloc];
 }
+
 @end
