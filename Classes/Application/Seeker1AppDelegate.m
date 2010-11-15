@@ -9,7 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "Seeker1AppDelegate.h"
 #import "cocos2d.h"
-#import "MapScene.h"
+#import "StartScene.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface Seeker1AppDelegate (PrivateAPI)
@@ -65,7 +65,7 @@
 	[CCTexture2D setDefaultAlphaPixelFormat:kTexture2DPixelFormat_RGBA8888];	
 	
     // startup scene
-	[[CCDirector sharedDirector] runWithScene: [MapScene scene]];
+	[[CCDirector sharedDirector] runWithScene: [StartScene scene]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

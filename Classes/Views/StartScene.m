@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "StartScene.h"
+#import "MapScene.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface StartScene (PrivateAPI)
@@ -18,7 +19,7 @@
 @implementation StartScene
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize startMenu
+@synthesize startMenu;
 
 //===================================================================================================================================
 #pragma mark StartScene PrivateAPI
@@ -37,19 +38,20 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 -(id) init {
 	if( (self=[super init] )) {
-        self.startMenu = [CCMenu menuWithItems:nil];
-        CCMenuItemImage *playMenuItem = [CCMenuItemImage itemFromNormalImage:@"myFirstButton.png"
-                                                         selectedImage: @"myFirstButton_selected.png"
+        CCMenuItemImage* playMenuItem = [CCMenuItemImage itemFromNormalImage:@"play-button.png"
+                                                         selectedImage: @"play-button.png"
                                                          target:self
                                                          selector:@selector(startPlaying)];
         [self.startMenu alignItemsVertically];
-        [self.startMenu addChild:playMenuItem];
+        self.startMenu = [CCMenu menuWithItems:playMenuItem, nil];
+        [self addChild:self.startMenu];
     }
 	return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)startPlaying {
+    [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
 }
     
 @end
