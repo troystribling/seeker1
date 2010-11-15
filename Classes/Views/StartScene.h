@@ -1,25 +1,25 @@
 //
-//  MapScene.h
+//  StartScene.h
 //  seeker1
 //
 //  Created by Troy Stribling on 11/14/10.
-//  Copyright imaginary products 2010. All rights reserved.
+//  Copyright 2010 imaginary products. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+#import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface MapScene : CCLayer {
-    CCSprite* seeker1;
+@interface StartScene : CCLayer {
+    CCMenu* startMenu;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) CCSprite* seeker1;
+@property (nonatomic, retain) CCMenu* startMenu;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+(id) scene;
 
 @end

@@ -1,35 +1,35 @@
 //
-//  MapScene.m
+//  StartScene.m
 //  seeker1
 //
 //  Created by Troy Stribling on 11/14/10.
-//  Copyright imaginary products 2010. All rights reserved.
+//  Copyright 2010 imaginary products. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "MapScene.h"
+#import "StartScene.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface MapScene (PrivateAPI)
+@interface StartScene (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation MapScene
+@implementation StartScene
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize seeker1;
+@synthesize startMenu
 
 //===================================================================================================================================
-#pragma mark MapScene PrivateAPI
+#pragma mark StartScene PrivateAPI
 
 //===================================================================================================================================
-#pragma mark MapScene
+#pragma mark StartScene
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 +(id) scene {
 	CCScene *scene = [CCScene node];
-	MapScene *layer = [MapScene node];
+	StartScene *layer = [StartScene node];
 	[scene addChild: layer];
 	return scene;
 }
@@ -37,20 +37,19 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 -(id) init {
 	if( (self=[super init] )) {
-        self.seeker1 = [CCSprite spriteWithFile: @"Icon.png"];
-        seeker1.position = ccp( 50, 100 );
-        [self addChild:self.seeker1];	
-        [self schedule:@selector(nextFrame:)];
-	}
+        self.startMenu = [CCMenu menuWithItems:nil];
+        CCMenuItemImage *playMenuItem = [CCMenuItemImage itemFromNormalImage:@"myFirstButton.png"
+                                                         selectedImage: @"myFirstButton_selected.png"
+                                                         target:self
+                                                         selector:@selector(startPlaying)];
+        [self.startMenu alignItemsVertically];
+        [self.startMenu addChild:playMenuItem];
+    }
 	return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void) nextFrame:(ccTime)dt {
-    seeker1.position = ccp( seeker1.position.x + 100*dt, seeker1.position.y );
-    if (seeker1.position.x > 320+32) {
-        seeker1.position = ccp( -32, seeker1.position.y );
-    }
+- (void)startPlaying {
 }
-
+    
 @end
