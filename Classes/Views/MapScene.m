@@ -39,7 +39,7 @@
 	if( (self=[super init] )) {
         self.seeker1 = [CCSprite spriteWithFile: @"Icon.png"];
         seeker1.position = ccp( 50, 100 );
-        [self addChild:self.seeker1];	
+        [self addChild:self.seeker1 z:0 tag:kSEEKER_1];	
         [self schedule:@selector(nextFrame:)];
 	}
 	return self;
@@ -51,14 +51,6 @@
     if (seeker1.position.x > 320+32) {
         seeker1.position = ccp( -32, seeker1.position.y );
     }
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
--(void)draw {    
-	glColor4f(0.8, 1.0, 0.76, 1.0);
-	glLineWidth(6.0f);
-    glEnable(GL_LINE_SMOOTH);
-	ccDrawLine(ccp(0, 0), ccp(100.0, 100.0));
 }
 
 @end
