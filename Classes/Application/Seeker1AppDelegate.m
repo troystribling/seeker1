@@ -53,7 +53,7 @@
 	[director setDeviceOrientation:kCCDeviceOrientationPortrait];
 	
 	// Turn on display FPS
-	[director setDisplayFPS:YES];
+	[director setDisplayFPS:NO];
 	
 	// Turn on multiple touches
 	EAGLView *view = [director openGLView];

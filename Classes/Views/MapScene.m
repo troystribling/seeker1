@@ -27,7 +27,7 @@
 #pragma mark MapScene
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+(id) scene {
++ (id)scene {
 	CCScene *scene = [CCScene node];
 	MapScene *layer = [MapScene node];
 	[scene addChild: layer];
@@ -35,11 +35,10 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
--(id) init {
+- (id)init {
 	if( (self=[super init] )) {
-        self.seeker1 = [CCSprite spriteWithFile: @"Icon.png"];
-        seeker1.position = ccp( 50, 100 );
-        [self addChild:self.seeker1 z:0 tag:kSEEKER_1];	
+		CCTMXTiledMap* tileMap = [CCTMXTiledMap tiledMapWithTMXFile:@"map-1.tmx"];
+		[self addChild:tileMap z:-1 tag:kMAP];
         [self schedule:@selector(nextFrame:)];
 	}
 	return self;
@@ -47,10 +46,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void) nextFrame:(ccTime)dt {
-    seeker1.position = ccp( seeker1.position.x + 100*dt, seeker1.position.y );
-    if (seeker1.position.x > 320+32) {
-        seeker1.position = ccp( -32, seeker1.position.y );
-    }
 }
 
 @end

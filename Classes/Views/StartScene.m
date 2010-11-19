@@ -28,7 +28,7 @@
 #pragma mark StartScene
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+(id) scene {
++ (id)scene {
 	CCScene *scene = [CCScene node];
 	StartScene *layer = [StartScene node];
 	[scene addChild: layer];
@@ -36,7 +36,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
--(id) init {
+- (id)init {
 	if( (self=[super init] )) {
         CCMenuItemImage* playMenuItem = [CCMenuItemImage itemFromNormalImage:@"play-button.png"
                                                          selectedImage: @"play-button.png"
