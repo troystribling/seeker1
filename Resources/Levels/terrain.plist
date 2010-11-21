@@ -5,127 +5,7 @@
 	<key>frames</key>
 	<dict>
 		
-		<key>empty-tile-bottom.png</key>
-		<dict>
-			<key>aliases</key>
-			<array/>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {40, 40}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{40, 40}</string>
-			<key>spriteSourceSize</key>
-			<string>{40, 40}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{80, 40}, {40, 40}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		
-		<key>empty-tile-left.png</key>
-		<dict>
-			<key>aliases</key>
-			<array/>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {40, 40}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{40, 40}</string>
-			<key>spriteSourceSize</key>
-			<string>{40, 40}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{0, 80}, {40, 40}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		
-		<key>empty-tile-lower-left.png</key>
-		<dict>
-			<key>aliases</key>
-			<array/>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {40, 40}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{40, 40}</string>
-			<key>spriteSourceSize</key>
-			<string>{40, 40}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{40, 40}, {40, 40}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		
-		<key>empty-tile-lower-right.png</key>
-		<dict>
-			<key>aliases</key>
-			<array/>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {40, 40}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{40, 40}</string>
-			<key>spriteSourceSize</key>
-			<string>{40, 40}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{40, 0}, {40, 40}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		
-		<key>empty-tile-right.png</key>
-		<dict>
-			<key>aliases</key>
-			<array/>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {40, 40}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{40, 40}</string>
-			<key>spriteSourceSize</key>
-			<string>{40, 40}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{0, 0}, {40, 40}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		
-		<key>empty-tile-top.png</key>
-		<dict>
-			<key>aliases</key>
-			<array/>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {40, 40}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{40, 40}</string>
-			<key>spriteSourceSize</key>
-			<string>{40, 40}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{40, 80}, {40, 40}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		
-		<key>empty-tile-upper-left.png</key>
+		<key>terrain-1-tile.png</key>
 		<dict>
 			<key>aliases</key>
 			<array/>
@@ -145,7 +25,7 @@
 			<false/>
 		</dict>
 		
-		<key>empty-tile-upper-right.png</key>
+		<key>terrain-2-tile.png</key>
 		<dict>
 			<key>aliases</key>
 			<array/>
@@ -160,12 +40,12 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{80, 80}, {40, 40}}</string>
+			<string>{{0, 0}, {40, 40}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
 		
-		<key>empty-tile.png</key>
+		<key>terrain-3-tile.png</key>
 		<dict>
 			<key>aliases</key>
 			<array/>
@@ -180,7 +60,47 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{80, 0}, {40, 40}}</string>
+			<string>{{40, 40}, {40, 40}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>terrain-4-tile.png</key>
+		<dict>
+			<key>aliases</key>
+			<array/>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {40, 40}}</string>
+			<key>spriteOffset</key>
+			<string>{0, -0}</string>
+			<key>spriteSize</key>
+			<string>{40, 40}</string>
+			<key>spriteSourceSize</key>
+			<string>{40, 40}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{40, 0}, {40, 40}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>terrain-5-tile.png</key>
+		<dict>
+			<key>aliases</key>
+			<array/>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {40, 40}}</string>
+			<key>spriteOffset</key>
+			<string>{0, -0}</string>
+			<key>spriteSize</key>
+			<string>{40, 40}</string>
+			<key>spriteSourceSize</key>
+			<string>{40, 40}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{0, 80}, {40, 40}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>

@@ -19,7 +19,7 @@
 + (CCAnimation*)animationWithFile:(NSString*)name frameCount:(int)frameCount delay:(float)delay {
 	NSMutableArray* frames = [NSMutableArray arrayWithCapacity:frameCount];
 	for (int i = 0; i < frameCount; i++) {
-		NSString* file = [NSString stringWithFormat:@"%@%i.png", name, i];
+		NSString* file = [NSString stringWithFormat:@"%@-%i.png", name, i];
 		CCTexture2D* texture = [[CCTextureCache sharedTextureCache] addImage:file];
 		CGSize texSize = texture.contentSize;
 		CGRect texRect = CGRectMake(0, 0, texSize.width, texSize.height);

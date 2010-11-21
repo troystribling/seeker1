@@ -2,10 +2,121 @@
 <map version="1.0" orientation="orthogonal" width="8" height="12" tilewidth="40" tileheight="40">
  <tileset firstgid="1" name="map" tilewidth="40" tileheight="40">
   <image source="map.png"/>
+  <tile id="0">
+   <properties>
+    <property name="isRightEdge" value="6"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="isLowerRightCorner" value="4"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="isEmpty" value="0"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="isUpperLeftCorner" value="1"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="isLowerLeftCorner" value="3"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="isBottomEgde" value="8"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="isLeftEdge" value="5"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="isTopEdge" value="7"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="isUpperRightCorner" value="2"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="isUpperLeftCorner" value=""/>
+   </properties>
+  </tile>
  </tileset>
- <layer name="Tile Layer 1" width="8" height="12">
+ <tileset firstgid="37" name="terrrain" tilewidth="40" tileheight="40">
+  <image source="terrain.png"/>
+  <tile id="0">
+   <properties>
+    <property name="isElevated2" value="10"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="isElevated4" value="12"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="isElevated1" value="9"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="isElevated3" value="11"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="isElevated5" value="13"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="46" name="station" tilewidth="40" tileheight="40">
+  <image source="station.png"/>
+  <tile id="0">
+   <properties>
+    <property name="isStationLowerLeft" value="23"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="isStationUpperRight" value="22"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="isStationLowerRight" value="24"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="isStationUpperLeft" value="21"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="gameBoard" width="8" height="12">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+NiYGBgx4EZgZgTiNlwYNZReYLyTEDMjAOzADEAoV75UYABAAA=
+   H4sIAAAAAAAAA2NhYGDgwIE5gZgdiJlxYMZReYLyrEDMhgMzATEAxXQpMIABAAA=
+  </data>
+ </layer>
+ <layer name="terrain" width="8" height="12">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NgGB5AAwkPJQAAFQFvRoABAAA=
+  </data>
+ </layer>
+ <layer name="items" width="8" height="12">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NgGBxAH4hN8MjrAbEhndxCTwAAnzFZBoABAAA=
   </data>
  </layer>
 </map>
