@@ -12,6 +12,14 @@
 		050CC7521296011000974B8F /* map.plist in Resources */ = {isa = PBXBuildFile; fileRef = 050CC74F1296011000974B8F /* map.plist */; };
 		050CC7531296011000974B8F /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 050CC7501296011000974B8F /* map.png */; };
 		051B48281290E293008A9CB7 /* play-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 051B48261290E293008A9CB7 /* play-button.png */; };
+		051E5882129B269E00A5440E /* sample-site.plist in Resources */ = {isa = PBXBuildFile; fileRef = 051E587A129B269E00A5440E /* sample-site.plist */; };
+		051E5883129B269E00A5440E /* sample-site.png in Resources */ = {isa = PBXBuildFile; fileRef = 051E587B129B269E00A5440E /* sample-site.png */; };
+		051E5884129B269E00A5440E /* sensor-site.plist in Resources */ = {isa = PBXBuildFile; fileRef = 051E587C129B269E00A5440E /* sensor-site.plist */; };
+		051E5885129B269E00A5440E /* sensor-site.png in Resources */ = {isa = PBXBuildFile; fileRef = 051E587D129B269E00A5440E /* sensor-site.png */; };
+		051E5886129B269E00A5440E /* station.plist in Resources */ = {isa = PBXBuildFile; fileRef = 051E587E129B269E00A5440E /* station.plist */; };
+		051E5887129B269E00A5440E /* station.png in Resources */ = {isa = PBXBuildFile; fileRef = 051E587F129B269E00A5440E /* station.png */; };
+		051E5888129B269E00A5440E /* terrain.plist in Resources */ = {isa = PBXBuildFile; fileRef = 051E5880129B269E00A5440E /* terrain.plist */; };
+		051E5889129B269E00A5440E /* terrain.png in Resources */ = {isa = PBXBuildFile; fileRef = 051E5881129B269E00A5440E /* terrain.png */; };
 		051F8622129641B30081CF3E /* CCAnimationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 051F8621129641B30081CF3E /* CCAnimationHelper.m */; };
 		0528CDB512909FE600F4078A /* Seeker1AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0528CDB412909FE600F4078A /* Seeker1AppDelegate.m */; };
 		0528CDB91290A00200F4078A /* MapScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0528CDB81290A00200F4078A /* MapScene.m */; };
@@ -248,6 +256,14 @@
 		050CC74F1296011000974B8F /* map.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = map.plist; sourceTree = "<group>"; };
 		050CC7501296011000974B8F /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
 		051B48261290E293008A9CB7 /* play-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-button.png"; sourceTree = "<group>"; };
+		051E587A129B269E00A5440E /* sample-site.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "sample-site.plist"; sourceTree = "<group>"; };
+		051E587B129B269E00A5440E /* sample-site.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sample-site.png"; sourceTree = "<group>"; };
+		051E587C129B269E00A5440E /* sensor-site.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "sensor-site.plist"; sourceTree = "<group>"; };
+		051E587D129B269E00A5440E /* sensor-site.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sensor-site.png"; sourceTree = "<group>"; };
+		051E587E129B269E00A5440E /* station.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = station.plist; sourceTree = "<group>"; };
+		051E587F129B269E00A5440E /* station.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = station.png; sourceTree = "<group>"; };
+		051E5880129B269E00A5440E /* terrain.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = terrain.plist; sourceTree = "<group>"; };
+		051E5881129B269E00A5440E /* terrain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = terrain.png; sourceTree = "<group>"; };
 		051F8620129641B30081CF3E /* CCAnimationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAnimationHelper.h; sourceTree = "<group>"; };
 		051F8621129641B30081CF3E /* CCAnimationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCAnimationHelper.m; sourceTree = "<group>"; };
 		0528CDB312909FE600F4078A /* Seeker1AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Seeker1AppDelegate.h; sourceTree = "<group>"; };
@@ -506,6 +522,14 @@
 		050CC73D1295F93300974B8F /* Levels */ = {
 			isa = PBXGroup;
 			children = (
+				051E587A129B269E00A5440E /* sample-site.plist */,
+				051E587B129B269E00A5440E /* sample-site.png */,
+				051E587C129B269E00A5440E /* sensor-site.plist */,
+				051E587D129B269E00A5440E /* sensor-site.png */,
+				051E587E129B269E00A5440E /* station.plist */,
+				051E587F129B269E00A5440E /* station.png */,
+				051E5880129B269E00A5440E /* terrain.plist */,
+				051E5881129B269E00A5440E /* terrain.png */,
 				050CC74E1296011000974B8F /* map-1.tmx */,
 				050CC74F1296011000974B8F /* map.plist */,
 				050CC7501296011000974B8F /* map.png */,
@@ -1071,6 +1095,14 @@
 				050CC7511296011000974B8F /* map-1.tmx in Resources */,
 				050CC7521296011000974B8F /* map.plist in Resources */,
 				050CC7531296011000974B8F /* map.png in Resources */,
+				051E5882129B269E00A5440E /* sample-site.plist in Resources */,
+				051E5883129B269E00A5440E /* sample-site.png in Resources */,
+				051E5884129B269E00A5440E /* sensor-site.plist in Resources */,
+				051E5885129B269E00A5440E /* sensor-site.png in Resources */,
+				051E5886129B269E00A5440E /* station.plist in Resources */,
+				051E5887129B269E00A5440E /* station.png in Resources */,
+				051E5888129B269E00A5440E /* terrain.plist in Resources */,
+				051E5889129B269E00A5440E /* terrain.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
