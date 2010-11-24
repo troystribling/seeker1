@@ -4,47 +4,47 @@
   <image source="map.png"/>
   <tile id="0">
    <properties>
-    <property name="isRightEdge" value="6"/>
+    <property name="tileType" value="isRightEdge"/>
    </properties>
   </tile>
   <tile id="1">
    <properties>
-    <property name="isLowerRightCorner" value="4"/>
+    <property name="tileType" value="isLowerRightCorner"/>
    </properties>
   </tile>
   <tile id="2">
    <properties>
-    <property name="isEmpty" value="0"/>
+    <property name="tileType" value="isEmpty"/>
    </properties>
   </tile>
   <tile id="3">
    <properties>
-    <property name="isUpperLeftCorner" value="1"/>
+    <property name="tileType" value="isUpperLeftCorner"/>
    </properties>
   </tile>
   <tile id="4">
    <properties>
-    <property name="isLowerLeftCorner" value="3"/>
+    <property name="tileType" value="isLowerLeftCorner"/>
    </properties>
   </tile>
   <tile id="5">
    <properties>
-    <property name="isBottomEgde" value="8"/>
+    <property name="tileType" value="isBottomEdge"/>
    </properties>
   </tile>
   <tile id="6">
    <properties>
-    <property name="isLeftEdge" value="5"/>
+    <property name="tileType" value="isLeftEdge"/>
    </properties>
   </tile>
   <tile id="7">
    <properties>
-    <property name="isTopEdge" value="7"/>
+    <property name="tileType" value="isTopEdge"/>
    </properties>
   </tile>
   <tile id="8">
    <properties>
-    <property name="isUpperRightCorner" value="2"/>
+    <property name="tileType" value="isUpperRightCorner"/>
    </properties>
   </tile>
  </tileset>
@@ -52,27 +52,27 @@
   <image source="terrain.png"/>
   <tile id="0">
    <properties>
-    <property name="isElevated2" value="10"/>
+    <property name="tileType" value="2"/>
    </properties>
   </tile>
   <tile id="1">
    <properties>
-    <property name="isElevated4" value="12"/>
+    <property name="tileType" value="4"/>
    </properties>
   </tile>
   <tile id="3">
    <properties>
-    <property name="isElevated1" value="9"/>
+    <property name="tileType" value="1"/>
    </properties>
   </tile>
   <tile id="4">
    <properties>
-    <property name="isElevated3" value="11"/>
+    <property name="tileType" value="3"/>
    </properties>
   </tile>
   <tile id="6">
    <properties>
-    <property name="isElevated5" value="13"/>
+    <property name="tileType" value="5"/>
    </properties>
   </tile>
  </tileset>
@@ -80,32 +80,32 @@
   <image source="items.png"/>
   <tile id="0">
    <properties>
-    <property name="isSample" value="19"/>
+    <property name="tileType" value="isSample"/>
    </properties>
   </tile>
   <tile id="5">
    <properties>
-    <property name="isStation" value="21"/>
+    <property name="tileType" value="isStation"/>
    </properties>
   </tile>
   <tile id="6">
    <properties>
-    <property name="isStation" value="21"/>
+    <property name="tileType" value="isStation"/>
    </properties>
   </tile>
   <tile id="9">
    <properties>
-    <property name="isStation" value="21"/>
+    <property name="tileType" value="isStation"/>
    </properties>
   </tile>
   <tile id="10">
    <properties>
-    <property name="isStation" value="21"/>
+    <property name="tileType" value="isStation"/>
    </properties>
   </tile>
   <tile id="12">
    <properties>
-    <property name="isSensor" value="20"/>
+    <property name="tileType" value="isSensor"/>
    </properties>
   </tile>
  </tileset>
@@ -125,6 +125,10 @@
   </data>
  </layer>
  <objectgroup name="path-objects" width="8" height="12">
-  <object name="" x="100" y="301"/>
+  <object name="start" x="80" y="280">
+   <properties>
+    <property name="orientation" value="east"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

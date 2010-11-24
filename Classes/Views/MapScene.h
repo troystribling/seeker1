@@ -10,14 +10,27 @@
 #import "cocos2d.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@class SeekerSprite;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapScene : CCLayer {
-    CCSprite* seeker1;
+    SeekerSprite* seeker1;
+    NSInteger level;
+    CCTMXTiledMap* tileMap;
+    CCTMXLayer* gameDisplay;
+    CCTMXLayer* terrain;
+    CCTMXLayer* items;
+    CCTMXObjectGroup* pathObjects;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) CCSprite* seeker1;
+@property (nonatomic, retain) SeekerSprite* seeker1;
+@property (nonatomic, assign) NSInteger level;
+@property (nonatomic, retain) CCTMXTiledMap* tileMap;
+@property (nonatomic, retain) CCTMXLayer* gameDisplay;
+@property (nonatomic, retain) CCTMXLayer* terrain;
+@property (nonatomic, retain) CCTMXLayer* items;
+@property (nonatomic, retain) CCTMXObjectGroup* pathObjects;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)scene;
