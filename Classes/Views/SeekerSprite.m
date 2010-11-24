@@ -25,11 +25,15 @@
 #pragma mark SeekerSprite PrivateAPI
 
 - (void)setStartOrientation:(NSString*)_orientation {
+    float rotationAngle = 0.0;
     if ([_orientation isEqualToString:@"east"]) {
+        rotationAngle = 90.0;
     } else if ([_orientation isEqualToString:@"west"]) {
-    } else if ([_orientation isEqualToString:@"north"]) {
+        rotationAngle = 270.0;
     } else if ([_orientation isEqualToString:@"south"]) {
+        rotationAngle = 180.0;
     }
+    [self runAction:[CCRotateBy actionWithDuration:1.0f angle:rotationAngle]];
 }
 
 //===================================================================================================================================
@@ -57,7 +61,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithFile:(NSString *)_filename {
 	if( (self=[super initWithFile:_filename] )) {
-        self.anchorPoint = CGPointMake(0.0f, 0.0f);
+        self.anchorPoint = CGPointMake(0.5f, 0.5f);
 	}
 	return self;
 }
