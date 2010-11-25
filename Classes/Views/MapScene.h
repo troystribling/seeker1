@@ -16,6 +16,7 @@
 @interface MapScene : CCLayer {
     SeekerSprite* seeker1;
     NSInteger level;
+    CGPoint screenCenter;
     CCTMXTiledMap* tileMap;
     CCTMXLayer* gameDisplay;
     CCTMXLayer* terrain;
@@ -26,6 +27,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) SeekerSprite* seeker1;
 @property (nonatomic, assign) NSInteger level;
+@property (nonatomic, assign) CGPoint screenCenter;
 @property (nonatomic, retain) CCTMXTiledMap* tileMap;
 @property (nonatomic, retain) CCTMXLayer* gameDisplay;
 @property (nonatomic, retain) CCTMXLayer* terrain;

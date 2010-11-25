@@ -16,8 +16,8 @@
 - (void)loadMapLevel:(NSInteger)_level;
 - (void)unloadCurrentMapLevel;
 - (void)setSeekerStartPosition;
-- (CGRect)getRectFromObjectProperties:(NSDictionary*)dict;
 - (CGPoint)getPointFromObjectProperties:(NSDictionary*)dict;
+- (CGPoint)toTileCoords:(CGPoint)point;
 
 @end
 
@@ -26,6 +26,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize seeker1;
+@synthesize screenCenter;
 @synthesize level;
 @synthesize tileMap;
 @synthesize gameDisplay;
@@ -57,6 +58,7 @@
 - (void)setSeekerStartPosition {
     NSDictionary* startObject = [self.pathObjects objectNamed:@"start"];
     CGPoint startPoint = [self getPointFromObjectProperties:startObject];
+    CGPoint tilePos = [self toTileCoordsPoint:startPoint];
     self.seeker1 = [SeekerSprite create];
     NSString* orientation = [startObject valueForKey:@"orientation"];
     [self.seeker1 setToStartPoint:startPoint withOrientation:orientation];
@@ -64,22 +66,24 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (CGRect)getRectFromObjectProperties:(NSDictionary*)dict {
-	float x, y, width, height;
-	x = [[dict valueForKey:@"x"] floatValue] + self.tileMap.position.x;
-	y = [[dict valueForKey:@"y"] floatValue] + self.tileMap.position.y;
-	width = [[dict valueForKey:@"width"] floatValue];
-	height = [[dict valueForKey:@"height"] floatValue];
-	return CGRectMake(x, y, width, height);
+- (CGPoint)getPointFromObjectProperties:(NSDictionary*)dict {
+	float x = [[dict valueForKey:@"x"] floatValue];
+    float y = [[dict valueForKey:@"y"] floatValue];
+    CGPoint mapPos = self.tileMap.position;
+	return CGPointMake(x + mapPos.x, y + mapPos.y);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (CGPoint)getPointFromObjectProperties:(NSDictionary*)dict {
-	float x, y;
-	x = [[dict valueForKey:@"x"] floatValue] + self.tileMap.position.x;
-	y = [[dict valueForKey:@"y"] floatValue] + self.tileMap.position.y;
-	return CGPointMake(x, y);
+- (CGPoint)toTileCoords:(CGPoint)_point {
+	float halfMapWidth = tileMap.mapSize.width * 0.5f;
+	float mapHeight = tileMap.mapSize.height;
+	float tileWidth = tileMap.tileSize.width;
+	float tileHeight = tileMap.tileSize.height;	
+	return CGPointMake(_point.x/tileWidth, mapHeight-_point.y/tileHeight);
 }
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)
 
 //===================================================================================================================================
 #pragma mark MapScene
@@ -95,6 +99,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)init {
 	if( (self=[super init] )) {
+		CGSize screenSize = [[CCDirector sharedDirector] winSize];
+		self.screenCenter = CGPointMake(screenSize.width / 2, screenSize.height / 2);
         [self loadMapLevel:1];
         [self schedule:@selector(nextFrame:)];
 	}
