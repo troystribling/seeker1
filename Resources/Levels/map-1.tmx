@@ -1,72 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="24" height="36" tilewidth="40" tileheight="40">
- <tileset firstgid="1" name="map" tilewidth="40" tileheight="40">
-  <image source="map.png"/>
- </tileset>
- <tileset firstgid="2" name="terrain" tilewidth="40" tileheight="40">
-  <image source="terrain.png"/>
+ <tileset firstgid="1" name="items" tilewidth="40" tileheight="40">
+  <image source="items.png"/>
   <tile id="0">
    <properties>
-    <property name="terrainID" value="2"/>
+    <property name="itemType" value="2"/>
    </properties>
   </tile>
-  <tile id="1">
-   <properties>
-    <property name="terrainID" value="5"/>
-   </properties>
-  </tile>
-  <tile id="3">
-   <properties>
-    <property name="terrainID" value="1"/>
-   </properties>
-  </tile>
-  <tile id="4">
-   <properties>
-    <property name="terrainID" value="3"/>
-   </properties>
-  </tile>
-  <tile id="6">
-   <properties>
-    <property name="terrainID" value="5"/>
-   </properties>
-  </tile>
- </tileset>
- <tileset firstgid="11" name="items" tilewidth="40" tileheight="40">
-  <image source="items.png"/>
   <tile id="5">
    <properties>
-    <property name="itemID" value="1"/>
+    <property name="" value=""/>
    </properties>
   </tile>
   <tile id="6">
    <properties>
-    <property name="itemID" value="1"/>
+    <property name="itemType" value="4"/>
    </properties>
   </tile>
   <tile id="9">
    <properties>
-    <property name="itemID" value="1"/>
+    <property name="" value=""/>
    </properties>
   </tile>
   <tile id="10">
    <properties>
-    <property name="itemID" value="1"/>
+    <property name="" value=""/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="" value=""/>
    </properties>
   </tile>
   <tile id="12">
    <properties>
-    <property name="itemID" value="2"/>
+    <property name="itemType" value="3"/>
    </properties>
   </tile>
   <tile id="13">
    <properties>
-    <property name="itemID" value="3"/>
+    <property name="" value=""/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="" value=""/>
+   </properties>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="itemType" value="1"/>
+   </properties>
+  </tile>
+  <tile id="19">
+   <properties>
+    <property name="itemType" value="1"/>
+   </properties>
+  </tile>
+  <tile id="20">
+   <properties>
+    <property name="itemType" value="1"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="itemType" value="1"/>
    </properties>
   </tile>
  </tileset>
- <layer name="game-display" width="24" height="36">
+ <tileset firstgid="37" name="map" tilewidth="40" tileheight="40">
+  <image source="map.png"/>
+ </tileset>
+ <layer name="grid" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3DQQ0AAAwDoat/01OxHySsmqqqqu8PfyLpGIANAAA=
+   H4sIAAAAAAAAA+3DQQ0AAAwDoTNT/xanYj9IWDVVVVXfH9ursTuADQAA
   </data>
  </layer>
  <layer name="terrain" width="24" height="36">
@@ -76,13 +83,13 @@
  </layer>
  <layer name="items" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA2NgGAWjYBSMglEwVIEgEIvQ0HwBIBZF4ovT0K5RMApGwSgYBaNgJAAAHvD5H4ANAAA=
+   H4sIAAAAAAAAA+3OuQkAMAwEQTXgyE//pVqxcmEMM7DpcREAdNnZadyf2Wrc/914fQAAigsZ2NSbgA0AAA==
   </data>
  </layer>
  <objectgroup name="path-objects" width="24" height="36">
-  <object name="start" x="380" y="660">
+  <object name="start" x="380" y="620">
    <properties>
-    <property name="orientation" value="east"/>
+    <property name="orientation" value="south"/>
    </properties>
   </object>
  </objectgroup>

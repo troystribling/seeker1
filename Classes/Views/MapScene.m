@@ -18,6 +18,7 @@
 - (void)setSeekerStartPosition;
 - (CGPoint)getPointFromObjectProperties:(NSDictionary*)dict;
 - (CGPoint)toTileCoords:(CGPoint)point;
+- (void)centerTileMapOnPoint:(CGPoint)_point;
 
 @end
 
@@ -29,7 +30,7 @@
 @synthesize screenCenter;
 @synthesize level;
 @synthesize tileMap;
-@synthesize gameDisplay;
+@synthesize grid;
 @synthesize terrain;
 @synthesize items;
 @synthesize pathObjects;
@@ -42,11 +43,13 @@
     self.level = _level;
     NSString* mapName = [NSString stringWithFormat:@"map-%d.tmx", _level];
     self.tileMap = [CCTMXTiledMap tiledMapWithTMXFile:mapName];
-    self.gameDisplay = [self.tileMap layerNamed:@"game-display"];
+    self.grid = [self.tileMap layerNamed:@"grid"];
     self.terrain = [self.tileMap layerNamed:@"terrain"];
     self.items = [self.tileMap layerNamed:@"items"];
     self.pathObjects = [self.tileMap objectGroupNamed:@"path-objects"];
-    [self setSeekerStartPosition];
+    NSDictionary* startObject = [self.pathObjects objectNamed:@"start"];
+    CGPoint startPoint = [self getPointFromObjectProperties:startObject];
+    [self centerTileMapOnPoint:startPoint];
     [self addChild:self.tileMap z:-1 tag:kMAP];
 }
 
@@ -58,8 +61,6 @@
 - (void)setSeekerStartPosition {
     NSDictionary* startObject = [self.pathObjects objectNamed:@"start"];
     CGPoint startPoint = [self getPointFromObjectProperties:startObject];
-    CGPoint tilePos = [self toTileCoordsPoint:startPoint];
-    self.seeker1 = [SeekerSprite create];
     NSString* orientation = [startObject valueForKey:@"orientation"];
     [self.seeker1 setToStartPoint:startPoint withOrientation:orientation];
     [self addChild:self.seeker1];
@@ -75,15 +76,35 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGPoint)toTileCoords:(CGPoint)_point {
-	float halfMapWidth = tileMap.mapSize.width * 0.5f;
-	float mapHeight = tileMap.mapSize.height;
-	float tileWidth = tileMap.tileSize.width;
-	float tileHeight = tileMap.tileSize.height;	
+	float mapHeight = self.tileMap.mapSize.height;
+	float tileWidth = self.tileMap.tileSize.width;
+	float tileHeight = self.tileMap.tileSize.height;	
 	return CGPointMake(_point.x/tileWidth, mapHeight-_point.y/tileHeight);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)
+- (void)centerTileMapOnPoint:(CGPoint)_point {
+    CGPoint tileMapPos = self.tileMap.position;
+    CGPoint currentCenter = ccpAdd(tileMapPos, self.screenCenter);
+    CGPoint delta = ccpSub(_point, currentCenter);
+    CGSize tileMapSize = self.tileMap.mapSize;
+    CGSize tileMapTileSize = self.tileMap.tileSize;
+    float edgeX = tileMapSize.width*tileMapTileSize.width - _point.x;
+    float edgeY = tileMapSize.height*tileMapTileSize.height - _point.y;
+    if ((_point.x < self.screenCenter.x) && (delta.x < 0)) {
+        delta.x = -tileMapPos.x;
+    } else if ((edgeX < self.screenCenter.x) && (delta.x > 0)) {
+        delta.x = self.tileMap.mapSize.width - tileMapPos.x - 2.0*self.screenCenter.x;
+    } 
+    if ((_point.y < self.screenCenter.y) && (delta.y < 0)) {
+        delta.y = -tileMapPos.y;
+    } else if ((edgeY < self.screenCenter.y) && (delta.y > 0)) {
+        delta.y = self.tileMap.mapSize.height - tileMapPos.y - 2.0*self.screenCenter.y;
+    } 
+	CCAction* move = [CCMoveTo actionWithDuration:1.0f position:CGPointMake(-delta.x, -delta.y)];
+	[tileMap stopAllActions];
+	[tileMap runAction:move];
+}
 
 //===================================================================================================================================
 #pragma mark MapScene
@@ -101,6 +122,7 @@
 	if( (self=[super init] )) {
 		CGSize screenSize = [[CCDirector sharedDirector] winSize];
 		self.screenCenter = CGPointMake(screenSize.width / 2, screenSize.height / 2);
+        self.seeker1 = [SeekerSprite create];
         [self loadMapLevel:1];
         [self schedule:@selector(nextFrame:)];
 	}
@@ -109,6 +131,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void) nextFrame:(ccTime)dt {
+	if ([self.tileMap numberOfRunningActions] == 0) {
+        if (self.seeker1.isUninitiailized) {
+            [self setSeekerStartPosition];
+        }
+	}
 }
 
 @end

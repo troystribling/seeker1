@@ -20,6 +20,7 @@
 @implementation SeekerSprite
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize isUninitiailized;
 
 //===================================================================================================================================
 #pragma mark SeekerSprite PrivateAPI
@@ -46,6 +47,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setToStartPoint:(CGPoint)_point withOrientation:(NSString*)_orientation {
+    self.isUninitiailized = NO;
     self.position = _point;
     [self setStartOrientation:_orientation];
 }
@@ -61,6 +63,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithFile:(NSString *)_filename {
 	if( (self=[super initWithFile:_filename] )) {
+        self.isUninitiailized = YES;
         self.anchorPoint = CGPointMake(0.5f, 0.5f);
 	}
 	return self;
