@@ -9,6 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "MapScene.h"
 #import "SeekerSprite.h"
+#import "StatusDisplay.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapScene (PrivateAPI)
@@ -27,13 +28,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize seeker1;
+@synthesize statusDisplay;
 @synthesize screenCenter;
 @synthesize level;
 @synthesize tileMap;
-@synthesize grid;
-@synthesize terrain;
-@synthesize items;
-@synthesize pathObjects;
+@synthesize mapLayer;
+@synthesize terrainLayer;
+@synthesize itemsLayer;
+@synthesize objectsLayer;
 
 //===================================================================================================================================
 #pragma mark MapScene PrivateAPI
@@ -43,11 +45,11 @@
     self.level = _level;
     NSString* mapName = [NSString stringWithFormat:@"map-%d.tmx", _level];
     self.tileMap = [CCTMXTiledMap tiledMapWithTMXFile:mapName];
-    self.grid = [self.tileMap layerNamed:@"grid"];
-    self.terrain = [self.tileMap layerNamed:@"terrain"];
-    self.items = [self.tileMap layerNamed:@"items"];
-    self.pathObjects = [self.tileMap objectGroupNamed:@"path-objects"];
-    NSDictionary* startObject = [self.pathObjects objectNamed:@"start"];
+    self.mapLayer = [self.tileMap layerNamed:@"map"];
+    self.terrainLayer = [self.tileMap layerNamed:@"terrain"];
+    self.itemsLayer = [self.tileMap layerNamed:@"items"];
+    self.objectsLayer = [self.tileMap objectGroupNamed:@"objects"];
+    NSDictionary* startObject = [self.objectsLayer objectNamed:@"start"];
     CGPoint startPoint = [self getPointFromObjectProperties:startObject];
     [self centerTileMapOnPoint:startPoint];
     [self addChild:self.tileMap z:-1 tag:kMAP];
@@ -59,7 +61,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setSeekerStartPosition {
-    NSDictionary* startObject = [self.pathObjects objectNamed:@"start"];
+    NSDictionary* startObject = [self.objectsLayer objectNamed:@"start"];
     CGPoint startPoint = [self getPointFromObjectProperties:startObject];
     NSString* orientation = [startObject valueForKey:@"orientation"];
     [self.seeker1 setToStartPoint:startPoint withOrientation:orientation];
@@ -94,12 +96,12 @@
     if ((_point.x < self.screenCenter.x) && (delta.x < 0)) {
         delta.x = -tileMapPos.x;
     } else if ((edgeX < self.screenCenter.x) && (delta.x > 0)) {
-        delta.x = self.tileMap.mapSize.width - tileMapPos.x - 2.0*self.screenCenter.x;
+        delta.x = self.tileMap.mapSize.width*tileMapTileSize.width - tileMapPos.x - 2.0*self.screenCenter.x;
     } 
     if ((_point.y < self.screenCenter.y) && (delta.y < 0)) {
         delta.y = -tileMapPos.y;
     } else if ((edgeY < self.screenCenter.y) && (delta.y > 0)) {
-        delta.y = self.tileMap.mapSize.height - tileMapPos.y - 2.0*self.screenCenter.y;
+        delta.y = self.tileMap.mapSize.height*tileMapTileSize.height - tileMapPos.y - 2.0*self.screenCenter.y;
     } 
 	CCAction* move = [CCMoveTo actionWithDuration:1.0f position:CGPointMake(-delta.x, -delta.y)];
 	[tileMap stopAllActions];
@@ -123,6 +125,8 @@
 		CGSize screenSize = [[CCDirector sharedDirector] winSize];
 		self.screenCenter = CGPointMake(screenSize.width / 2, screenSize.height / 2);
         self.seeker1 = [SeekerSprite create];
+        self.statusDisplay = [StatusDisplay create];
+        [self.statusDisplay insert:self];
         [self loadMapLevel:1];
         [self schedule:@selector(nextFrame:)];
 	}

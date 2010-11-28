@@ -30,4 +30,23 @@
     return [[[self alloc] initWithFile:@"display.png"] autorelease];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)insert:(CCLayer*)_layer {
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    CGRect rect = self.textureRect;
+    self.position = CGPointMake(0.0f, screenSize.height-rect.size.height);
+    [_layer addChild:self];
+}
+
+//===================================================================================================================================
+#pragma mark CCSprite
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (id)initWithFile:(NSString *)_filename {
+	if((self=[super initWithFile:_filename])) {
+        self.anchorPoint = CGPointMake(0.0f, 0.0f);
+	}
+	return self;
+}
+
 @end

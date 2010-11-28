@@ -11,28 +11,31 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class SeekerSprite;
+@class StatusDisplay;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapScene : CCLayer {
     SeekerSprite* seeker1;
+    StatusDisplay* statusDisplay;
     NSInteger level;
     CGPoint screenCenter;
     CCTMXTiledMap* tileMap;
-    CCTMXLayer* grid;
-    CCTMXLayer* terrain;
-    CCTMXLayer* items;
-    CCTMXObjectGroup* pathObjects;
+    CCTMXLayer* mapLayer;
+    CCTMXLayer* terrainLayer;
+    CCTMXLayer* itemsLayer;
+    CCTMXObjectGroup* objectsLayer;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) SeekerSprite* seeker1;
+@property (nonatomic, retain) StatusDisplay* statusDisplay;
 @property (nonatomic, assign) NSInteger level;
 @property (nonatomic, assign) CGPoint screenCenter;
 @property (nonatomic, retain) CCTMXTiledMap* tileMap;
-@property (nonatomic, retain) CCTMXLayer* grid;
-@property (nonatomic, retain) CCTMXLayer* terrain;
-@property (nonatomic, retain) CCTMXLayer* items;
-@property (nonatomic, retain) CCTMXObjectGroup* pathObjects;
+@property (nonatomic, retain) CCTMXLayer* mapLayer;
+@property (nonatomic, retain) CCTMXLayer* terrainLayer;
+@property (nonatomic, retain) CCTMXLayer* itemsLayer;
+@property (nonatomic, retain) CCTMXObjectGroup* objectsLayer;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)scene;
