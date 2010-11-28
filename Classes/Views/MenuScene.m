@@ -1,59 +1,61 @@
 //
-//  StartScene.m
+//  MenuScene.m
 //  seeker1
 //
-//  Created by Troy Stribling on 11/14/10.
+//  Created by Troy Stribling on 11/28/10.
 //  Copyright 2010 imaginary products. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "StartScene.h"
-#import "StatusDisplay.h"
 #import "MenuScene.h"
+#import "MapScene.h"
+#import "StatusDisplay.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface StartScene (PrivateAPI)
+@interface MenuScene (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation StartScene
+@implementation MenuScene
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize startMenu;
 @synthesize statusDisplay;
-@synthesize counter;
 
 //===================================================================================================================================
-#pragma mark StartScene PrivateAPI
+#pragma mark MenuScene PrivateAPI
 
 //===================================================================================================================================
-#pragma mark StartScene
+#pragma mark MenuScene
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)scene {
 	CCScene *scene = [CCScene node];
-	StartScene *layer = [StartScene node];
+	MenuScene *layer = [MenuScene node];
 	[scene addChild: layer];
 	return scene;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)init {
-	if((self=[super init])) {
-        self.counter = 0;
+	if( (self=[super init] )) {
+        CCMenuItemImage* playMenuItem = [CCMenuItemImage itemFromNormalImage:@"play-button.png"
+                                                               selectedImage: @"play-button.png"
+                                                                      target:self
+                                                                    selector:@selector(startPlaying)];
+        [self.startMenu alignItemsVertically];
+        self.startMenu = [CCMenu menuWithItems:playMenuItem, nil];
+        [self addChild:self.startMenu];
         self.statusDisplay = [StatusDisplay createWithFile:@"empty-display.png"];
         [self.statusDisplay insert:self];
-        [self schedule:@selector(nextFrame:)];
     }
 	return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void) nextFrame:(ccTime)dt {
-    self.counter++;
-    if (self.counter > kSTARTUP_TICKS) {
-        [[CCDirector sharedDirector] replaceScene: [MenuScene scene]];
-    }
+- (void)startPlaying {
+    [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
 }
 
 @end

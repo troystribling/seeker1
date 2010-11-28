@@ -62,7 +62,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithFile:(NSString *)_filename {
-	if( (self=[super initWithFile:_filename] )) {
+	if((self=[super initWithFile:_filename])) {
         self.isUninitiailized = YES;
         self.anchorPoint = CGPointMake(0.5f, 0.5f);
 	}

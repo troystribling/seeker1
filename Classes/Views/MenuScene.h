@@ -1,8 +1,8 @@
 //
-//  StartScene.h
+//  MenuScene.h
 //  seeker1
 //
-//  Created by Troy Stribling on 11/14/10.
+//  Created by Troy Stribling on 11/28/10.
 //  Copyright 2010 imaginary products. All rights reserved.
 //
 
@@ -14,14 +14,14 @@
 @class StatusDisplay;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface StartScene : CCLayer {
+@interface MenuScene : CCLayer {
+    CCMenu* startMenu;
     StatusDisplay* statusDisplay;
-    NSInteger counter;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@property (nonatomic, retain) CCMenu* startMenu;
 @property (nonatomic, retain) StatusDisplay* statusDisplay;
-@property (nonatomic, assign) NSInteger counter;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)scene;
