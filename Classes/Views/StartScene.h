@@ -16,11 +16,13 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface StartScene : CCLayer {
     StatusDisplay* statusDisplay;
+    CCLabel* bootingLabel;
     NSInteger counter;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) StatusDisplay* statusDisplay;
+@property (nonatomic, retain) CCLabel* bootingLabel;
 @property (nonatomic, assign) NSInteger counter;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

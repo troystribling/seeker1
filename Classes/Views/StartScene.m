@@ -14,6 +14,9 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface StartScene (PrivateAPI)
 
+- (void)updateBootingLabel:(NSString*)_booting;
+- (void)insertBootingLabel;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,10 +24,23 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize statusDisplay;
+@synthesize bootingLabel;
 @synthesize counter;
 
 //===================================================================================================================================
 #pragma mark StartScene PrivateAPI
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)updateBootingLabel:(NSString*)_booting; {
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)insertBootingLabel {
+    self.bootingLabel = [CCLabel labelWithString:@"BOOTING." fontName:@"Apple ][" fontSize:18];
+    self.bootingLabel.position = CGPointMake(10.0f, 380.0f);
+    self.bootingLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
+    [self addChild:self.bootingLabel];
+}
 
 //===================================================================================================================================
 #pragma mark StartScene
@@ -43,6 +59,7 @@
         self.counter = 0;
         self.statusDisplay = [StatusDisplay createWithFile:@"empty-display.png"];
         [self.statusDisplay insert:self];
+        [self insertBootingLabel];
         [self schedule:@selector(nextFrame:)];
     }
 	return self;
