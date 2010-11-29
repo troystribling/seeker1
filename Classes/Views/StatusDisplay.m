@@ -26,6 +26,10 @@
 #pragma mark StatusDisplay
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (id)create {
+    return [self createWithFile:@"empty-display.png"];
+}
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (id)createWithFile:(NSString*)_display {
     return [[[self alloc] initWithFile:_display] autorelease];
 }

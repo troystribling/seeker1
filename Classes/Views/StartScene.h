@@ -17,12 +17,20 @@
 @interface StartScene : CCLayer {
     StatusDisplay* statusDisplay;
     CCLabel* bootingLabel;
+    CCLabel* consoleLabel;
+    CCLabel* protocolsLabel;
+    CCLabel* connectingLabel;
+    CCLabel* productLabel;
     NSInteger counter;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) StatusDisplay* statusDisplay;
 @property (nonatomic, retain) CCLabel* bootingLabel;
+@property (nonatomic, retain) CCLabel* consoleLabel;
+@property (nonatomic, retain) CCLabel* protocolsLabel;
+@property (nonatomic, retain) CCLabel* connectingLabel;
+@property (nonatomic, retain) CCLabel* productLabel;
 @property (nonatomic, assign) NSInteger counter;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

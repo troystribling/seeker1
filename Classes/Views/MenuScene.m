@@ -14,6 +14,9 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MenuScene (PrivateAPI)
 
+- (void)startMission;
+- (void)configure;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -40,22 +43,33 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)init {
 	if( (self=[super init] )) {
-        CCMenuItemImage* playMenuItem = [CCMenuItemImage itemFromNormalImage:@"play-button.png"
-                                                               selectedImage: @"play-button.png"
-                                                                      target:self
-                                                                    selector:@selector(startPlaying)];
+        CCMenuItemImage* startMissionItem = [CCMenuItemImage itemFromNormalImage:@"start-mission.png"
+                                                             selectedImage: @"start-mission.png"
+                                                             target:self
+                                                             selector:@selector(startMission)];
+        startMissionItem.anchorPoint = CGPointMake(0.0f, 0.0f);
+        CCMenuItemImage* configureItem = [CCMenuItemImage itemFromNormalImage:@"configure.png"
+                                                          selectedImage: @"configure.png"
+                                                          target:self
+                                                          selector:@selector(configure)];
+        configureItem.anchorPoint = CGPointMake(0.0f, 0.0f);
+        self.startMenu = [CCMenu menuWithItems:startMissionItem, configureItem, nil];
         [self.startMenu alignItemsVertically];
-        self.startMenu = [CCMenu menuWithItems:playMenuItem, nil];
+        self.startMenu.position = CGPointMake(20.0f, 350.0f);
         [self addChild:self.startMenu];
-        self.statusDisplay = [StatusDisplay createWithFile:@"empty-display.png"];
+        self.statusDisplay = [StatusDisplay create];
         [self.statusDisplay insert:self];
     }
 	return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)startPlaying {
+- (void)startMission {
     [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)configure {
 }
 
 @end

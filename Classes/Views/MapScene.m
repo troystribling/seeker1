@@ -125,7 +125,7 @@
 		CGSize screenSize = [[CCDirector sharedDirector] winSize];
 		self.screenCenter = CGPointMake(screenSize.width / 2, screenSize.height / 2);
         self.seeker1 = [SeekerSprite create];
-        self.statusDisplay = [StatusDisplay createWithFile:@"map-display.png"];
+        self.statusDisplay = [StatusDisplay create];
         [self.statusDisplay insert:self];
         [self loadMapLevel:1];
         [self schedule:@selector(nextFrame:)];

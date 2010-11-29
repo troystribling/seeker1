@@ -16,4 +16,13 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 // startup 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define kSTARTUP_TICKS  300
+#define kSTARTUP_TICKS  460
+#define kBOOT_TICK_1    20
+#define kBOOT_TICK_2    40
+#define kBOOT_TICK_3    60
+#define kBOOT_TICK_4    80
+#define kBOOT_TICK_5    100
+#define kBOOT_TICK_6    140
+#define kBOOT_TICK_7    180
+#define kBOOT_TICK_8    220
+#define kBOOT_TICK_9    240
