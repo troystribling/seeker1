@@ -16,6 +16,7 @@
 
 - (void)startMission;
 - (void)configure;
+- (void)gameCenter;
 
 @end
 
@@ -53,9 +54,14 @@
                                                           target:self
                                                           selector:@selector(configure)];
         configureItem.anchorPoint = CGPointMake(0.0f, 0.0f);
-        self.startMenu = [CCMenu menuWithItems:startMissionItem, configureItem, nil];
+        CCMenuItemImage* gameCenterItem = [CCMenuItemImage itemFromNormalImage:@"game-center.png"
+                                                           selectedImage: @"game-center.png"
+                                                           target:self
+                                                           selector:@selector(gameCenter)];
+        gameCenterItem.anchorPoint = CGPointMake(0.0f, 0.0f);
+        self.startMenu = [CCMenu menuWithItems:startMissionItem, configureItem, gameCenterItem, nil];
         [self.startMenu alignItemsVertically];
-        self.startMenu.position = CGPointMake(20.0f, 350.0f);
+        self.startMenu.position = CGPointMake(30.0f, 330.0f);
         [self addChild:self.startMenu];
         self.statusDisplay = [StatusDisplay create];
         [self.statusDisplay insert:self];
@@ -70,6 +76,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)configure {
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)gameCenter {
 }
 
 @end

@@ -1,5 +1,5 @@
 //
-//  StartScene.h
+//  BootScene.h
 //  seeker1
 //
 //  Created by Troy Stribling on 11/14/10.
@@ -14,23 +14,33 @@
 @class StatusDisplay;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface StartScene : CCLayer {
+@interface BootScene : CCLayer {
     StatusDisplay* statusDisplay;
     CCLabel* bootingLabel;
-    CCLabel* consoleLabel;
-    CCLabel* protocolsLabel;
-    CCLabel* connectingLabel;
     CCLabel* productLabel;
+    CCSprite* postRunning;
+    CCSprite* postOK;
+    CCSprite* consoleStarting;
+    CCSprite* consoleStarted;
+    CCSprite* protocolStarting;
+    CCSprite* protocolStarted;
+    CCSprite* connecting;
+    CCSprite* connected;
     NSInteger counter;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) StatusDisplay* statusDisplay;
 @property (nonatomic, retain) CCLabel* bootingLabel;
-@property (nonatomic, retain) CCLabel* consoleLabel;
-@property (nonatomic, retain) CCLabel* protocolsLabel;
-@property (nonatomic, retain) CCLabel* connectingLabel;
 @property (nonatomic, retain) CCLabel* productLabel;
+@property (nonatomic, retain) CCSprite* postRunning;
+@property (nonatomic, retain) CCSprite* postOK;
+@property (nonatomic, retain) CCSprite* consoleStarting;
+@property (nonatomic, retain) CCSprite* consoleStarted;
+@property (nonatomic, retain) CCSprite* protocolStarting;
+@property (nonatomic, retain) CCSprite* protocolStarted;
+@property (nonatomic, retain) CCSprite* connecting;
+@property (nonatomic, retain) CCSprite* connected;
 @property (nonatomic, assign) NSInteger counter;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

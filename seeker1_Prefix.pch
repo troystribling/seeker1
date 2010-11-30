@@ -22,7 +22,12 @@
 #define kBOOT_TICK_3    60
 #define kBOOT_TICK_4    80
 #define kBOOT_TICK_5    100
-#define kBOOT_TICK_6    140
-#define kBOOT_TICK_7    180
-#define kBOOT_TICK_8    220
-#define kBOOT_TICK_9    240
+#define kBOOT_TICK_6    120
+#define kBOOT_TICK_7    130
+#define kBOOT_TICK_8    140
+#define kBOOT_TICK_9    150
+#define kBOOT_TICK_10   160
+#define kBOOT_TICK_11   170
+#define kBOOT_TICK_12   210
+#define kBOOT_TICK_13   250
+#define kBOOT_TICK_14   310

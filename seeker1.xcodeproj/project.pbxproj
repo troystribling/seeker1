@@ -7,7 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		050B27811290C82400CC6149 /* StartScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 050B27801290C82400CC6149 /* StartScene.m */; };
+		0505C5A412A4873A0033D42E /* Connected.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C59C12A4873A0033D42E /* Connected.png */; };
+		0505C5A512A4873A0033D42E /* Connecting.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C59D12A4873A0033D42E /* Connecting.png */; };
+		0505C5A612A4873A0033D42E /* Console-started.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C59E12A4873A0033D42E /* Console-started.png */; };
+		0505C5A712A4873A0033D42E /* Console-starting.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C59F12A4873A0033D42E /* Console-starting.png */; };
+		0505C5A812A4873A0033D42E /* POST-ok.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C5A012A4873A0033D42E /* POST-ok.png */; };
+		0505C5A912A4873A0033D42E /* POST-running.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C5A112A4873A0033D42E /* POST-running.png */; };
+		0505C5AA12A4873A0033D42E /* Protocol-started.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C5A212A4873A0033D42E /* Protocol-started.png */; };
+		0505C5AB12A4873A0033D42E /* Protocol-starting.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C5A312A4873A0033D42E /* Protocol-starting.png */; };
+		0505C5FD12A49BC50033D42E /* LCD-0.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C5F112A49BC50033D42E /* LCD-0.png */; };
+		0505C5FE12A49BC50033D42E /* LCD-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C5F212A49BC50033D42E /* LCD-1.png */; };
+		0505C5FF12A49BC50033D42E /* LCD-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C5F312A49BC50033D42E /* LCD-2.png */; };
+		0505C60012A49BC50033D42E /* LCD-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C5F412A49BC50033D42E /* LCD-3.png */; };
+		0505C60112A49BC50033D42E /* LCD-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C5F512A49BC50033D42E /* LCD-4.png */; };
+		0505C60212A49BC50033D42E /* LCD-5.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C5F612A49BC50033D42E /* LCD-5.png */; };
+		0505C60312A49BC50033D42E /* LCD-6.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C5F712A49BC50033D42E /* LCD-6.png */; };
+		0505C60512A49BC50033D42E /* LCD-8.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C5F912A49BC50033D42E /* LCD-8.png */; };
+		0505C60612A49BC50033D42E /* LCD-9.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C5FA12A49BC50033D42E /* LCD-9.png */; };
+		0505C60712A49BC50033D42E /* LCD-empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C5FB12A49BC50033D42E /* LCD-empty.png */; };
+		0505C60812A49BC50033D42E /* LCD-test.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C5FC12A49BC50033D42E /* LCD-test.png */; };
+		050B27811290C82400CC6149 /* BootScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 050B27801290C82400CC6149 /* BootScene.m */; };
 		050CC7511296011000974B8F /* map-1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 050CC74E1296011000974B8F /* map-1.tmx */; };
 		050CC7521296011000974B8F /* map.plist in Resources */ = {isa = PBXBuildFile; fileRef = 050CC74F1296011000974B8F /* map.plist */; };
 		050CC7531296011000974B8F /* map.png in Resources */ = {isa = PBXBuildFile; fileRef = 050CC7501296011000974B8F /* map.png */; };
@@ -18,6 +37,7 @@
 		0528CDB91290A00200F4078A /* MapScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0528CDB81290A00200F4078A /* MapScene.m */; };
 		052D51CF12A33DAF00A3935B /* start-mission.png in Resources */ = {isa = PBXBuildFile; fileRef = 052D51CE12A33DAF00A3935B /* start-mission.png */; };
 		052D520012A3460C00A3935B /* configure.png in Resources */ = {isa = PBXBuildFile; fileRef = 052D51FF12A3460C00A3935B /* configure.png */; };
+		0533DAE912A412650070F42E /* game-center.png in Resources */ = {isa = PBXBuildFile; fileRef = 0533DAE812A412650070F42E /* game-center.png */; };
 		053D2BF4129C309100AB59FA /* seeker-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 053D2BF1129C309100AB59FA /* seeker-1.png */; };
 		053FBFCA129D8C45000BCBCF /* StatusDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 053FBFC9129D8C45000BCBCF /* StatusDisplay.m */; };
 		0540119612A2B9B900CCC62D /* MenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0540119512A2B9B900CCC62D /* MenuScene.m */; };
@@ -252,8 +272,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		050B277F1290C82400CC6149 /* StartScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartScene.h; sourceTree = "<group>"; };
-		050B27801290C82400CC6149 /* StartScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartScene.m; sourceTree = "<group>"; };
+		0505C59C12A4873A0033D42E /* Connected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Connected.png; sourceTree = "<group>"; };
+		0505C59D12A4873A0033D42E /* Connecting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Connecting.png; sourceTree = "<group>"; };
+		0505C59E12A4873A0033D42E /* Console-started.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Console-started.png"; sourceTree = "<group>"; };
+		0505C59F12A4873A0033D42E /* Console-starting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Console-starting.png"; sourceTree = "<group>"; };
+		0505C5A012A4873A0033D42E /* POST-ok.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "POST-ok.png"; sourceTree = "<group>"; };
+		0505C5A112A4873A0033D42E /* POST-running.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "POST-running.png"; sourceTree = "<group>"; };
+		0505C5A212A4873A0033D42E /* Protocol-started.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Protocol-started.png"; sourceTree = "<group>"; };
+		0505C5A312A4873A0033D42E /* Protocol-starting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Protocol-starting.png"; sourceTree = "<group>"; };
+		0505C5F112A49BC50033D42E /* LCD-0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LCD-0.png"; sourceTree = "<group>"; };
+		0505C5F212A49BC50033D42E /* LCD-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LCD-1.png"; sourceTree = "<group>"; };
+		0505C5F312A49BC50033D42E /* LCD-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LCD-2.png"; sourceTree = "<group>"; };
+		0505C5F412A49BC50033D42E /* LCD-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LCD-3.png"; sourceTree = "<group>"; };
+		0505C5F512A49BC50033D42E /* LCD-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LCD-4.png"; sourceTree = "<group>"; };
+		0505C5F612A49BC50033D42E /* LCD-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LCD-5.png"; sourceTree = "<group>"; };
+		0505C5F712A49BC50033D42E /* LCD-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LCD-6.png"; sourceTree = "<group>"; };
+		0505C5F912A49BC50033D42E /* LCD-8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LCD-8.png"; sourceTree = "<group>"; };
+		0505C5FA12A49BC50033D42E /* LCD-9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LCD-9.png"; sourceTree = "<group>"; };
+		0505C5FB12A49BC50033D42E /* LCD-empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LCD-empty.png"; sourceTree = "<group>"; };
+		0505C5FC12A49BC50033D42E /* LCD-test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LCD-test.png"; sourceTree = "<group>"; };
+		050B277F1290C82400CC6149 /* BootScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BootScene.h; sourceTree = "<group>"; };
+		050B27801290C82400CC6149 /* BootScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BootScene.m; sourceTree = "<group>"; };
 		050CC74E1296011000974B8F /* map-1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-1.tmx"; sourceTree = "<group>"; };
 		050CC74F1296011000974B8F /* map.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = map.plist; sourceTree = "<group>"; };
 		050CC7501296011000974B8F /* map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map.png; sourceTree = "<group>"; };
@@ -267,6 +306,7 @@
 		0528CDB81290A00200F4078A /* MapScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapScene.m; sourceTree = "<group>"; };
 		052D51CE12A33DAF00A3935B /* start-mission.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "start-mission.png"; sourceTree = "<group>"; };
 		052D51FF12A3460C00A3935B /* configure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = configure.png; sourceTree = "<group>"; };
+		0533DAE812A412650070F42E /* game-center.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "game-center.png"; sourceTree = "<group>"; };
 		053D2BF1129C309100AB59FA /* seeker-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "seeker-1.png"; sourceTree = "<group>"; };
 		053FBFC8129D8C44000BCBCF /* StatusDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusDisplay.h; sourceTree = "<group>"; };
 		053FBFC9129D8C45000BCBCF /* StatusDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusDisplay.m; sourceTree = "<group>"; };
@@ -526,6 +566,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0505C59B12A4873A0033D42E /* BootDisplay */ = {
+			isa = PBXGroup;
+			children = (
+				0505C59C12A4873A0033D42E /* Connected.png */,
+				0505C59D12A4873A0033D42E /* Connecting.png */,
+				0505C59E12A4873A0033D42E /* Console-started.png */,
+				0505C59F12A4873A0033D42E /* Console-starting.png */,
+				0505C5A012A4873A0033D42E /* POST-ok.png */,
+				0505C5A112A4873A0033D42E /* POST-running.png */,
+				0505C5A212A4873A0033D42E /* Protocol-started.png */,
+				0505C5A312A4873A0033D42E /* Protocol-starting.png */,
+			);
+			path = BootDisplay;
+			sourceTree = "<group>";
+		};
 		050CC73D1295F93300974B8F /* Levels */ = {
 			isa = PBXGroup;
 			children = (
@@ -541,6 +596,17 @@
 		051D8B4C12A0340800237EA2 /* StatusDisplay */ = {
 			isa = PBXGroup;
 			children = (
+				0505C5F112A49BC50033D42E /* LCD-0.png */,
+				0505C5F212A49BC50033D42E /* LCD-1.png */,
+				0505C5F312A49BC50033D42E /* LCD-2.png */,
+				0505C5F412A49BC50033D42E /* LCD-3.png */,
+				0505C5F512A49BC50033D42E /* LCD-4.png */,
+				0505C5F612A49BC50033D42E /* LCD-5.png */,
+				0505C5F712A49BC50033D42E /* LCD-6.png */,
+				0505C5F912A49BC50033D42E /* LCD-8.png */,
+				0505C5FA12A49BC50033D42E /* LCD-9.png */,
+				0505C5FB12A49BC50033D42E /* LCD-empty.png */,
+				0505C5FC12A49BC50033D42E /* LCD-test.png */,
 				0540120E12A2D12900CCC62D /* empty-display.png */,
 			);
 			path = StatusDisplay;
@@ -573,8 +639,8 @@
 				0540119512A2B9B900CCC62D /* MenuScene.m */,
 				0556B81B129C603B00B5F8FB /* SeekerSprite.h */,
 				0556B81C129C603B00B5F8FB /* SeekerSprite.m */,
-				050B277F1290C82400CC6149 /* StartScene.h */,
-				050B27801290C82400CC6149 /* StartScene.m */,
+				050B277F1290C82400CC6149 /* BootScene.h */,
+				050B27801290C82400CC6149 /* BootScene.m */,
 				053FBFC8129D8C44000BCBCF /* StatusDisplay.h */,
 				053FBFC9129D8C45000BCBCF /* StatusDisplay.m */,
 			);
@@ -585,6 +651,7 @@
 			isa = PBXGroup;
 			children = (
 				052D51FF12A3460C00A3935B /* configure.png */,
+				0533DAE812A412650070F42E /* game-center.png */,
 				052D51CE12A33DAF00A3935B /* start-mission.png */,
 			);
 			path = Menu;
@@ -930,6 +997,7 @@
 		50F414EB1069373D002A0D5E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0505C59B12A4873A0033D42E /* BootDisplay */,
 				054012B812A30FF600CCC62D /* Fonts */,
 				050CC73D1295F93300974B8F /* Levels */,
 				052D51CD12A33DAF00A3935B /* Menu */,
@@ -1138,6 +1206,26 @@
 				0540130512A31E2C00CCC62D /* Default.png in Resources */,
 				052D51CF12A33DAF00A3935B /* start-mission.png in Resources */,
 				052D520012A3460C00A3935B /* configure.png in Resources */,
+				0533DAE912A412650070F42E /* game-center.png in Resources */,
+				0505C5A412A4873A0033D42E /* Connected.png in Resources */,
+				0505C5A512A4873A0033D42E /* Connecting.png in Resources */,
+				0505C5A612A4873A0033D42E /* Console-started.png in Resources */,
+				0505C5A712A4873A0033D42E /* Console-starting.png in Resources */,
+				0505C5A812A4873A0033D42E /* POST-ok.png in Resources */,
+				0505C5A912A4873A0033D42E /* POST-running.png in Resources */,
+				0505C5AA12A4873A0033D42E /* Protocol-started.png in Resources */,
+				0505C5AB12A4873A0033D42E /* Protocol-starting.png in Resources */,
+				0505C5FD12A49BC50033D42E /* LCD-0.png in Resources */,
+				0505C5FE12A49BC50033D42E /* LCD-1.png in Resources */,
+				0505C5FF12A49BC50033D42E /* LCD-2.png in Resources */,
+				0505C60012A49BC50033D42E /* LCD-3.png in Resources */,
+				0505C60112A49BC50033D42E /* LCD-4.png in Resources */,
+				0505C60212A49BC50033D42E /* LCD-5.png in Resources */,
+				0505C60312A49BC50033D42E /* LCD-6.png in Resources */,
+				0505C60512A49BC50033D42E /* LCD-8.png in Resources */,
+				0505C60612A49BC50033D42E /* LCD-9.png in Resources */,
+				0505C60712A49BC50033D42E /* LCD-empty.png in Resources */,
+				0505C60812A49BC50033D42E /* LCD-test.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1151,7 +1239,7 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				0528CDB512909FE600F4078A /* Seeker1AppDelegate.m in Sources */,
 				0528CDB91290A00200F4078A /* MapScene.m in Sources */,
-				050B27811290C82400CC6149 /* StartScene.m in Sources */,
+				050B27811290C82400CC6149 /* BootScene.m in Sources */,
 				051F8622129641B30081CF3E /* CCAnimationHelper.m in Sources */,
 				0556B81D129C603B00B5F8FB /* SeekerSprite.m in Sources */,
 				053FBFCA129D8C45000BCBCF /* StatusDisplay.m in Sources */,
