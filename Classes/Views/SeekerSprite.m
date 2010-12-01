@@ -26,7 +26,7 @@
 #pragma mark SeekerSprite PrivateAPI
 
 - (void)setStartOrientation:(NSString*)_orientation {
-    float rotationAngle = 0.0;
+    CGFloat rotationAngle = 0.0;
     if ([_orientation isEqualToString:@"east"]) {
         rotationAngle = 90.0;
     } else if ([_orientation isEqualToString:@"west"]) {

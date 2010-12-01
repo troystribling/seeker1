@@ -16,7 +16,7 @@
 #pragma mark CCAnimationHelper
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (CCAnimation*)animationWithFile:(NSString*)name frameCount:(int)frameCount delay:(float)delay {
++ (CCAnimation*)animationWithFile:(NSString*)name frameCount:(int)frameCount delay:(CGFloat)delay {
 	NSMutableArray* frames = [NSMutableArray arrayWithCapacity:frameCount];
 	for (int i = 0; i < frameCount; i++) {
 		NSString* file = [NSString stringWithFormat:@"%@-%i.png", name, i];
@@ -30,7 +30,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (CCAnimation*)animationWithFrame:(NSString*)frame frameCount:(int)frameCount delay:(float)delay {
++ (CCAnimation*)animationWithFrame:(NSString*)frame frameCount:(int)frameCount delay:(CGFloat)delay {
 	NSMutableArray* frames = [NSMutableArray arrayWithCapacity:frameCount];
 	for (int i = 0; i < frameCount; i++) {
 		NSString* file = [NSString stringWithFormat:@"%@%i.png", frame, i];

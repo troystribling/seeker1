@@ -7,14 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0500B8C512A5E7260026C7E0 /* LCD-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 0500B8C412A5E7260026C7E0 /* LCD-7.png */; };
 		0505C5A412A4873A0033D42E /* Connected.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C59C12A4873A0033D42E /* Connected.png */; };
 		0505C5A512A4873A0033D42E /* Connecting.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C59D12A4873A0033D42E /* Connecting.png */; };
 		0505C5A612A4873A0033D42E /* Console-started.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C59E12A4873A0033D42E /* Console-started.png */; };
 		0505C5A712A4873A0033D42E /* Console-starting.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C59F12A4873A0033D42E /* Console-starting.png */; };
 		0505C5A812A4873A0033D42E /* POST-ok.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C5A012A4873A0033D42E /* POST-ok.png */; };
 		0505C5A912A4873A0033D42E /* POST-running.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C5A112A4873A0033D42E /* POST-running.png */; };
-		0505C5AA12A4873A0033D42E /* Protocol-started.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C5A212A4873A0033D42E /* Protocol-started.png */; };
-		0505C5AB12A4873A0033D42E /* Protocol-starting.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C5A312A4873A0033D42E /* Protocol-starting.png */; };
 		0505C5FD12A49BC50033D42E /* LCD-0.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C5F112A49BC50033D42E /* LCD-0.png */; };
 		0505C5FE12A49BC50033D42E /* LCD-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C5F212A49BC50033D42E /* LCD-1.png */; };
 		0505C5FF12A49BC50033D42E /* LCD-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0505C5F312A49BC50033D42E /* LCD-2.png */; };
@@ -272,14 +271,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0500B8C412A5E7260026C7E0 /* LCD-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LCD-7.png"; sourceTree = "<group>"; };
 		0505C59C12A4873A0033D42E /* Connected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Connected.png; sourceTree = "<group>"; };
 		0505C59D12A4873A0033D42E /* Connecting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Connecting.png; sourceTree = "<group>"; };
 		0505C59E12A4873A0033D42E /* Console-started.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Console-started.png"; sourceTree = "<group>"; };
 		0505C59F12A4873A0033D42E /* Console-starting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Console-starting.png"; sourceTree = "<group>"; };
 		0505C5A012A4873A0033D42E /* POST-ok.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "POST-ok.png"; sourceTree = "<group>"; };
 		0505C5A112A4873A0033D42E /* POST-running.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "POST-running.png"; sourceTree = "<group>"; };
-		0505C5A212A4873A0033D42E /* Protocol-started.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Protocol-started.png"; sourceTree = "<group>"; };
-		0505C5A312A4873A0033D42E /* Protocol-starting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Protocol-starting.png"; sourceTree = "<group>"; };
 		0505C5F112A49BC50033D42E /* LCD-0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LCD-0.png"; sourceTree = "<group>"; };
 		0505C5F212A49BC50033D42E /* LCD-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LCD-1.png"; sourceTree = "<group>"; };
 		0505C5F312A49BC50033D42E /* LCD-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LCD-2.png"; sourceTree = "<group>"; };
@@ -575,8 +573,6 @@
 				0505C59F12A4873A0033D42E /* Console-starting.png */,
 				0505C5A012A4873A0033D42E /* POST-ok.png */,
 				0505C5A112A4873A0033D42E /* POST-running.png */,
-				0505C5A212A4873A0033D42E /* Protocol-started.png */,
-				0505C5A312A4873A0033D42E /* Protocol-starting.png */,
 			);
 			path = BootDisplay;
 			sourceTree = "<group>";
@@ -603,6 +599,7 @@
 				0505C5F512A49BC50033D42E /* LCD-4.png */,
 				0505C5F612A49BC50033D42E /* LCD-5.png */,
 				0505C5F712A49BC50033D42E /* LCD-6.png */,
+				0500B8C412A5E7260026C7E0 /* LCD-7.png */,
 				0505C5F912A49BC50033D42E /* LCD-8.png */,
 				0505C5FA12A49BC50033D42E /* LCD-9.png */,
 				0505C5FB12A49BC50033D42E /* LCD-empty.png */,
@@ -1213,8 +1210,6 @@
 				0505C5A712A4873A0033D42E /* Console-starting.png in Resources */,
 				0505C5A812A4873A0033D42E /* POST-ok.png in Resources */,
 				0505C5A912A4873A0033D42E /* POST-running.png in Resources */,
-				0505C5AA12A4873A0033D42E /* Protocol-started.png in Resources */,
-				0505C5AB12A4873A0033D42E /* Protocol-starting.png in Resources */,
 				0505C5FD12A49BC50033D42E /* LCD-0.png in Resources */,
 				0505C5FE12A49BC50033D42E /* LCD-1.png in Resources */,
 				0505C5FF12A49BC50033D42E /* LCD-2.png in Resources */,
@@ -1226,6 +1221,7 @@
 				0505C60612A49BC50033D42E /* LCD-9.png in Resources */,
 				0505C60712A49BC50033D42E /* LCD-empty.png in Resources */,
 				0505C60812A49BC50033D42E /* LCD-test.png in Resources */,
+				0500B8C512A5E7260026C7E0 /* LCD-7.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

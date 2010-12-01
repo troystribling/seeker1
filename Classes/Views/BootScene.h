@@ -22,8 +22,6 @@
     CCSprite* postOK;
     CCSprite* consoleStarting;
     CCSprite* consoleStarted;
-    CCSprite* protocolStarting;
-    CCSprite* protocolStarted;
     CCSprite* connecting;
     CCSprite* connected;
     NSInteger counter;
@@ -37,8 +35,6 @@
 @property (nonatomic, retain) CCSprite* postOK;
 @property (nonatomic, retain) CCSprite* consoleStarting;
 @property (nonatomic, retain) CCSprite* consoleStarted;
-@property (nonatomic, retain) CCSprite* protocolStarting;
-@property (nonatomic, retain) CCSprite* protocolStarted;
 @property (nonatomic, retain) CCSprite* connecting;
 @property (nonatomic, retain) CCSprite* connected;
 @property (nonatomic, assign) NSInteger counter;

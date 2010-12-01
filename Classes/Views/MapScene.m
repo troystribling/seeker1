@@ -70,17 +70,17 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGPoint)getPointFromObjectProperties:(NSDictionary*)dict {
-	float x = [[dict valueForKey:@"x"] floatValue];
-    float y = [[dict valueForKey:@"y"] floatValue];
+	CGFloat x = [[dict valueForKey:@"x"] floatValue];
+    CGFloat y = [[dict valueForKey:@"y"] floatValue];
     CGPoint mapPos = self.tileMap.position;
 	return CGPointMake(x + mapPos.x, y + mapPos.y);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGPoint)toTileCoords:(CGPoint)_point {
-	float mapHeight = self.tileMap.mapSize.height;
-	float tileWidth = self.tileMap.tileSize.width;
-	float tileHeight = self.tileMap.tileSize.height;	
+	CGFloat mapHeight = self.tileMap.mapSize.height;
+	CGFloat tileWidth = self.tileMap.tileSize.width;
+	CGFloat tileHeight = self.tileMap.tileSize.height;	
 	return CGPointMake(_point.x/tileWidth, mapHeight-_point.y/tileHeight);
 }
 
@@ -91,8 +91,8 @@
     CGPoint delta = ccpSub(_point, currentCenter);
     CGSize tileMapSize = self.tileMap.mapSize;
     CGSize tileMapTileSize = self.tileMap.tileSize;
-    float edgeX = tileMapSize.width*tileMapTileSize.width - _point.x;
-    float edgeY = tileMapSize.height*tileMapTileSize.height - _point.y;
+    CGFloat edgeX = tileMapSize.width*tileMapTileSize.width - _point.x;
+    CGFloat edgeY = tileMapSize.height*tileMapTileSize.height - _point.y;
     if ((_point.x < self.screenCenter.x) && (delta.x < 0)) {
         delta.x = -tileMapPos.x;
     } else if ((edgeX < self.screenCenter.x) && (delta.x > 0)) {

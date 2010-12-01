@@ -20,10 +20,9 @@
 - (void)loadPOSTOK;
 - (void)loadConsoleStarting;
 - (void)loadConsoleStarted;
-- (void)loadProtocolStarting;
-- (void)loadProtocolStarted;
 - (void)loadConnecting;
 - (void)loadConnected;
+- (void)testDisplay;
 
 @end
 
@@ -38,8 +37,6 @@
 @synthesize postOK;
 @synthesize consoleStarting;
 @synthesize consoleStarted;
-@synthesize protocolStarting;
-@synthesize protocolStarted;
 @synthesize connecting;
 @synthesize connected;
 @synthesize counter;
@@ -94,31 +91,25 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)loadProtocolStarting {
-    self.protocolStarting = [CCSprite spriteWithFile:@"Protocol-starting.png"];
-    self.protocolStarting.position = CGPointMake(0.0f, 310.0f);
-    self.protocolStarting.anchorPoint = CGPointMake(0.0f, 0.0f);
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)loadProtocolStarted {
-    self.protocolStarted = [CCSprite spriteWithFile:@"Protocol-started.png"];
-    self.protocolStarted.position = CGPointMake(0.0f, 310.0f);
-    self.protocolStarted.anchorPoint = CGPointMake(0.0f, 0.0f);
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadConnecting {
     self.connecting = [CCSprite spriteWithFile:@"Connecting.png"];
-    self.connecting.position = CGPointMake(0.0f, 280.0f);
+    self.connecting.position = CGPointMake(0.0f, 310.0f);
     self.connecting.anchorPoint = CGPointMake(0.0f, 0.0f);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadConnected {
     self.connected = [CCSprite spriteWithFile:@"Connected.png"];
-    self.connected.position = CGPointMake(0.0f, 280.0f);
+    self.connected.position = CGPointMake(0.0f, 310.0f);
     self.connected.anchorPoint = CGPointMake(0.0f, 0.0f);
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)testDisplay {
+    [self.statusDisplay setTest:EnergyDisplayType];
+    [self.statusDisplay setTest:SpeedDisplayType];
+    [self.statusDisplay setTest:SensorDisplayType];
+    [self.statusDisplay setTest:SampleDisplayType];
 }
 
 //===================================================================================================================================
@@ -143,8 +134,6 @@
         [self loadPOSTOK];
         [self loadConsoleStarting];
         [self loadConsoleStarted];
-        [self loadProtocolStarting];
-        [self loadProtocolStarted];
         [self loadConnecting];
         [self loadConnected];
         [self schedule:@selector(nextFrame:)];
@@ -169,24 +158,28 @@
         [self.bootingLabel setString:@"Booting......"];
     } else if (self.counter == kBOOT_TICK_6) {
         [self.bootingLabel removeFromParentAndCleanup:YES];
+        [self.statusDisplay setTest:EnergyDisplayType];
         [self addChild:self.postRunning];
     } else if (self.counter == kBOOT_TICK_7) {
+        [self.statusDisplay setTest:SpeedDisplayType];
     } else if (self.counter == kBOOT_TICK_8) {
+        [self.statusDisplay setTest:SensorDisplayType];
     } else if (self.counter == kBOOT_TICK_9) {
+        [self.statusDisplay setTest:SampleDisplayType];
     } else if (self.counter == kBOOT_TICK_10) {
+        [self.statusDisplay clear];
     } else if (self.counter == kBOOT_TICK_11) {
+        [self testDisplay];
         [self.postRunning removeFromParentAndCleanup:YES];
         [self addChild:self.postOK];
         [self addChild:self.consoleStarting];
     } else if (self.counter == kBOOT_TICK_12) {
+        [self.statusDisplay clear];
         [self.consoleStarting removeFromParentAndCleanup:YES];
         [self addChild:self.consoleStarted];
-        [self addChild:self.protocolStarting];
-    } else if (self.counter == kBOOT_TICK_13) {
-        [self.protocolStarting removeFromParentAndCleanup:YES];
-        [self addChild:self.protocolStarted];
         [self addChild:self.connecting];
-    } else if (self.counter == kBOOT_TICK_14) {
+    } else if (self.counter == kBOOT_TICK_13) {
+        [self testDisplay];
         [self.connecting removeFromParentAndCleanup:YES];
         [self addChild:self.connected];
         [self insertProductLabel];

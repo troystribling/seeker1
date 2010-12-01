@@ -20,8 +20,12 @@ typedef enum tagDisplayType {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface StatusDisplay : CCSprite {
-    CCSprite* testDisplay;
-    NSMutableArray* digits;
+    UIImage* testDigitImage;
+    NSMutableArray* digitImages;
+    NSMutableArray* energyDigits;
+    NSMutableArray* speedDigits;
+    NSMutableArray* sampleDigits;
+    NSMutableArray* sensorDigits;
     CGPoint energyPosition;
     CGPoint speedPosition;
     CGPoint samplePosition;
@@ -29,8 +33,12 @@ typedef enum tagDisplayType {
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) CCSprite* testDisplay;
-@property (nonatomic, retain) NSMutableArray* digits;
+@property (nonatomic, retain) UIImage* testDigitImage;
+@property (nonatomic, retain) NSMutableArray* digitImages;
+@property (nonatomic, retain) NSMutableArray* energyDigits;
+@property (nonatomic, retain) NSMutableArray* speedDigits;
+@property (nonatomic, retain) NSMutableArray* sampleDigits;
+@property (nonatomic, retain) NSMutableArray* sensorDigits;
 @property (nonatomic, assign) CGPoint energyPosition;
 @property (nonatomic, assign) CGPoint speedPosition;
 @property (nonatomic, assign) CGPoint samplePosition;
@@ -40,6 +48,7 @@ typedef enum tagDisplayType {
 + (id)createWithFile:(NSString*)_display;
 + (id)create;
 - (void)insert:(CCLayer*)_layer;
+- (void)clear;
 - (void)setTest:(DisplayType)_displayType;
 - (void)setDigits:(NSInteger)_digit forDisplay:(DisplayType)_displayType;
 
