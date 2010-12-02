@@ -65,6 +65,7 @@
         [self addChild:self.startMenu];
         self.statusDisplay = [StatusDisplay create];
         [self.statusDisplay insert:self];
+        [self.statusDisplay test];
     }
 	return self;
 }

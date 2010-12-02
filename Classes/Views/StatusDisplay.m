@@ -21,7 +21,6 @@
 @interface StatusDisplay (PrivateAPI)
 
 - (void)removeDigits:(NSMutableArray*)_digits;
-- (void)removeDigitsFromDisplay:(DisplayType)_displayType;
 - (CCSprite*)insertImage:(UIImage*)_image atPostion:(float)_position withKey:(NSString*)_key;
 
 @end
@@ -50,24 +49,6 @@
         [digit removeFromParentAndCleanup:YES];
     }
     [_digits removeAllObjects];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)removeDigitsFromDisplay:(DisplayType)_displayType {
-    switch(_displayType) {
-        case EnergyDisplayType:
-            [self removeDigits:self.energyDigits];
-            break;
-        case SpeedDisplayType:
-            [self removeDigits:self.speedDigits];
-            break;
-        case SensorDisplayType:
-            [self removeDigits:self.sensorDigits];
-            break;
-        case SampleDisplayType:
-            [self removeDigits:self.sampleDigits];
-            break;
-    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -101,6 +82,14 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)test {
+    [self setTest:EnergyDisplayType];
+    [self setTest:SpeedDisplayType];
+    [self setTest:SensorDisplayType];
+    [self setTest:SampleDisplayType];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert:(CCLayer*)_layer {
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     CGRect rect = self.textureRect;
@@ -110,7 +99,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setTest:(DisplayType)_displayType {
-    [self removeDigitsFromDisplay:_displayType];
+    [self clearDisplay:_displayType];
     switch(_displayType) {
         case EnergyDisplayType:
             [self.energyDigits addObject:[self insertImage:self.testDigitImage atPostion:kENERGY_XPOS withKey:@"test"]];
@@ -133,7 +122,7 @@
                                         
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setDigits:(NSInteger)_digits forDisplay:(DisplayType)_displayType {
-    [self removeDigitsFromDisplay:_displayType];
+    [self clearDisplay:_displayType];
     NSInteger tensDigit = floor((CGFloat)_digits/10.0f);
     NSInteger onesDigit = _digits - 10*tensDigit;
     NSString* tensDigitKey = [NSString stringWithFormat:@"%d", tensDigit];
@@ -154,6 +143,24 @@
         case SampleDisplayType:
             [self.sampleDigits addObject:[self insertImage:[self.digitImages objectAtIndex:tensDigit] atPostion:kSAMPLE_XPOS withKey:tensDigitKey]];
             [self.sampleDigits addObject:[self insertImage:[self.digitImages objectAtIndex:onesDigit] atPostion:(kSAMPLE_XPOS+kDISPLAY_SECOND_DIGIT) withKey:onesDigitKey]];
+            break;
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)clearDisplay:(DisplayType)_displayType {
+    switch(_displayType) {
+        case EnergyDisplayType:
+            [self removeDigits:self.energyDigits];
+            break;
+        case SpeedDisplayType:
+            [self removeDigits:self.speedDigits];
+            break;
+        case SensorDisplayType:
+            [self removeDigits:self.sensorDigits];
+            break;
+        case SampleDisplayType:
+            [self removeDigits:self.sampleDigits];
             break;
     }
 }

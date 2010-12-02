@@ -22,7 +22,6 @@
 - (void)loadConsoleStarted;
 - (void)loadConnecting;
 - (void)loadConnected;
-- (void)testDisplay;
 
 @end
 
@@ -104,14 +103,6 @@
     self.connected.anchorPoint = CGPointMake(0.0f, 0.0f);
 }
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)testDisplay {
-    [self.statusDisplay setTest:EnergyDisplayType];
-    [self.statusDisplay setTest:SpeedDisplayType];
-    [self.statusDisplay setTest:SensorDisplayType];
-    [self.statusDisplay setTest:SampleDisplayType];
-}
-
 //===================================================================================================================================
 #pragma mark BootScene
 
@@ -169,7 +160,7 @@
     } else if (self.counter == kBOOT_TICK_10) {
         [self.statusDisplay clear];
     } else if (self.counter == kBOOT_TICK_11) {
-        [self testDisplay];
+        [self.statusDisplay test];
         [self.postRunning removeFromParentAndCleanup:YES];
         [self addChild:self.postOK];
         [self addChild:self.consoleStarting];
@@ -179,7 +170,7 @@
         [self addChild:self.consoleStarted];
         [self addChild:self.connecting];
     } else if (self.counter == kBOOT_TICK_13) {
-        [self testDisplay];
+        [self.statusDisplay test];
         [self.connecting removeFromParentAndCleanup:YES];
         [self addChild:self.connected];
         [self insertProductLabel];

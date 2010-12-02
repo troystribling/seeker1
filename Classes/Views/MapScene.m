@@ -15,8 +15,11 @@
 @interface MapScene (PrivateAPI)
 
 - (void)loadMapLevel:(NSInteger)_level;
+- (void)getSensorSites;
+- (void)getSampleSites;
 - (void)unloadCurrentMapLevel;
 - (void)setSeekerStartPosition;
+- (void)initStatusDisplay;
 - (CGPoint)getPointFromObjectProperties:(NSDictionary*)dict;
 - (CGPoint)toTileCoords:(CGPoint)point;
 - (void)centerTileMapOnPoint:(CGPoint)_point;
@@ -31,6 +34,12 @@
 @synthesize statusDisplay;
 @synthesize screenCenter;
 @synthesize level;
+@synthesize energyLevel;
+@synthesize energyCurrent;
+@synthesize speed;
+@synthesize startSite;
+@synthesize sensorSites;
+@synthesize sampleSites;
 @synthesize tileMap;
 @synthesize mapLayer;
 @synthesize terrainLayer;
@@ -49,9 +58,12 @@
     self.terrainLayer = [self.tileMap layerNamed:@"terrain"];
     self.itemsLayer = [self.tileMap layerNamed:@"items"];
     self.objectsLayer = [self.tileMap objectGroupNamed:@"objects"];
-    NSDictionary* startObject = [self.objectsLayer objectNamed:@"start"];
-    CGPoint startPoint = [self getPointFromObjectProperties:startObject];
+    [self getSampleSites];
+    [self getSensorSites];
+    self.startSite = [self.objectsLayer objectNamed:@"startSite"];
+    CGPoint startPoint = [self getPointFromObjectProperties:self.startSite];
     [self centerTileMapOnPoint:startPoint];
+    [self initStatusDisplay];
     [self addChild:self.tileMap z:-1 tag:kMAP];
 }
 
@@ -60,10 +72,38 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)getSensorSites {
+    for (NSMutableDictionary* obj in self.objectsLayer.objects) {
+        NSString* objName = [obj valueForKey:@"name"];
+        if ([objName isEqualToString:@"sensorSite"]) {
+            [self.sensorSites addObject:obj];
+        }
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)getSampleSites {
+    for (NSMutableDictionary* obj in self.objectsLayer.objects) {
+        NSString* objName = [obj valueForKey:@"name"];
+        if ([objName isEqualToString:@"sampleSite"]) {
+            [self.sampleSites addObject:obj];
+        }
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)initStatusDisplay {
+    self.energyLevel = [[self.startSite valueForKey:@"energy"] intValue];
+    [self.statusDisplay setDigits:self.energyLevel forDisplay:EnergyDisplayType];
+    [self.statusDisplay setDigits:self.speed forDisplay:SpeedDisplayType];
+    [self.statusDisplay setDigits:[self.sampleSites count] forDisplay:SampleDisplayType];
+    [self.statusDisplay setDigits:[self.sensorSites count] forDisplay:SensorDisplayType];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setSeekerStartPosition {
-    NSDictionary* startObject = [self.objectsLayer objectNamed:@"start"];
-    CGPoint startPoint = [self getPointFromObjectProperties:startObject];
-    NSString* orientation = [startObject valueForKey:@"orientation"];
+    CGPoint startPoint = [self getPointFromObjectProperties:self.startSite];
+    NSString* orientation = [self.startSite valueForKey:@"orientation"];
     [self.seeker1 setToStartPoint:startPoint withOrientation:orientation];
     [self addChild:self.seeker1];
 }
@@ -126,6 +166,9 @@
 		self.screenCenter = CGPointMake(screenSize.width / 2, screenSize.height / 2);
         self.seeker1 = [SeekerSprite create];
         self.statusDisplay = [StatusDisplay create];
+        self.sensorSites = [NSMutableArray arrayWithCapacity:10];
+        self.sampleSites = [NSMutableArray arrayWithCapacity:10];
+        self.speed = 0;
         [self.statusDisplay insert:self];
         [self loadMapLevel:1];
         [self schedule:@selector(nextFrame:)];

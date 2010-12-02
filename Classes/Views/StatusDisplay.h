@@ -18,6 +18,8 @@ typedef enum tagDisplayType {
     SampleDisplayType,
 } DisplayType;
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface StatusDisplay : CCSprite {
     UIImage* testDigitImage;
@@ -48,7 +50,9 @@ typedef enum tagDisplayType {
 + (id)createWithFile:(NSString*)_display;
 + (id)create;
 - (void)insert:(CCLayer*)_layer;
+- (void)clearDisplay:(DisplayType)_displayType;
 - (void)clear;
+- (void)test;
 - (void)setTest:(DisplayType)_displayType;
 - (void)setDigits:(NSInteger)_digit forDisplay:(DisplayType)_displayType;
 
