@@ -592,6 +592,7 @@
 		051D8B4C12A0340800237EA2 /* StatusDisplay */ = {
 			isa = PBXGroup;
 			children = (
+				0540120E12A2D12900CCC62D /* empty-display.png */,
 				0505C5F112A49BC50033D42E /* LCD-0.png */,
 				0505C5F212A49BC50033D42E /* LCD-1.png */,
 				0505C5F312A49BC50033D42E /* LCD-2.png */,
@@ -604,7 +605,6 @@
 				0505C5FA12A49BC50033D42E /* LCD-9.png */,
 				0505C5FB12A49BC50033D42E /* LCD-empty.png */,
 				0505C5FC12A49BC50033D42E /* LCD-test.png */,
-				0540120E12A2D12900CCC62D /* empty-display.png */,
 			);
 			path = StatusDisplay;
 			sourceTree = "<group>";

@@ -23,6 +23,11 @@
 - (CGPoint)getPointFromObjectProperties:(NSDictionary*)dict;
 - (CGPoint)toTileCoords:(CGPoint)point;
 - (void)centerTileMapOnPoint:(CGPoint)_point;
+- (CGPoint)locationFromTouch:(UITouch*)touch;
+- (CGPoint)locationFromTouches:(NSSet*)touches;
+- (BOOL)isInMenuRect:(CGPoint)_point;
+- (void)showMenu;
+- (void)terminal;
 
 @end
 
@@ -40,6 +45,8 @@
 @synthesize startSite;
 @synthesize sensorSites;
 @synthesize sampleSites;
+@synthesize menuRect;
+@synthesize menu;
 @synthesize tileMap;
 @synthesize mapLayer;
 @synthesize terrainLayer;
@@ -148,6 +155,28 @@
 	[tileMap runAction:move];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGPoint)locationFromTouch:(UITouch*)touch {
+	CGPoint touchLocation = [touch locationInView:[touch view]];
+	return [[CCDirector sharedDirector] convertToGL:touchLocation];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGPoint)locationFromTouches:(NSSet*)touches {
+	return [self locationFromTouch:[touches anyObject]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)isInMenuRect:(CGPoint)_point {
+    BOOL isInRect = NO;
+    CGFloat xDelta = _point.x - self.menuRect.origin.x;
+    CGFloat yDelta = _point.y - self.menuRect.origin.y;
+    if (xDelta < self.menuRect.size.width && yDelta < self.menuRect.size.height && xDelta > 0 && yDelta > 0) {
+        isInRect = YES;
+    }
+    return isInRect;    
+}
+ 
 //===================================================================================================================================
 #pragma mark MapScene
 
@@ -162,8 +191,10 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)init {
 	if((self=[super init])) {
+        self.isTouchEnabled = YES;
 		CGSize screenSize = [[CCDirector sharedDirector] winSize];
-		self.screenCenter = CGPointMake(screenSize.width / 2, screenSize.height / 2);
+        self.menuRect = CGRectMake(0.75*screenSize.width, 0.88*screenSize.height, 0.21*screenSize.width, 0.1*screenSize.height);
+		self.screenCenter = CGPointMake(screenSize.width/2, screenSize.height/2);
         self.seeker1 = [SeekerSprite create];
         self.statusDisplay = [StatusDisplay create];
         self.sensorSites = [NSMutableArray arrayWithCapacity:10];
@@ -183,6 +214,18 @@
             [self setSeekerStartPosition];
         }
 	}
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+-(void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+	CGPoint touchLocation = [self locationFromTouches:touches]; 
+    if ([self isInMenuRect:touchLocation]) {
+        [self addChild:self.menu];
+    }
+}    
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)terminal {
 }
 
 @end

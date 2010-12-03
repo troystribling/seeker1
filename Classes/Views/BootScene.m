@@ -45,7 +45,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertBootingLabel {
-    self.bootingLabel = [CCLabel labelWithString:@"Booting." fontName:@"Retroville NC" fontSize:20];
+    self.bootingLabel = [CCLabel labelWithString:@"Booting" fontName:@"Retroville NC" fontSize:20];
     self.bootingLabel.position = CGPointMake(20.0f, 376.0f);
     self.bootingLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     self.bootingLabel.color = ccc3(103,243,27);
@@ -138,15 +138,15 @@
     if (self.counter > kSTARTUP_TICKS) {
         [[CCDirector sharedDirector] replaceScene: [MenuScene scene]];
     } else if (self.counter == kBOOT_TICK_1) {
-        [self.bootingLabel setString:@"Booting.."];
+        [self.bootingLabel setString:@"Booting."];
     } else if (self.counter == kBOOT_TICK_2) {
-        [self.bootingLabel setString:@"Booting..."];
+        [self.bootingLabel setString:@"Booting.."];
     } else if (self.counter == kBOOT_TICK_3) {
-        [self.bootingLabel setString:@"Booting...."];
+        [self.bootingLabel setString:@"Booting..."];
     } else if (self.counter == kBOOT_TICK_4) {
-        [self.bootingLabel setString:@"Booting....."];
+        [self.bootingLabel setString:@"Booting...."];
     } else if (self.counter == kBOOT_TICK_5) {
-        [self.bootingLabel setString:@"Booting......"];
+        [self.bootingLabel setString:@"Booting....."];
     } else if (self.counter == kBOOT_TICK_6) {
         [self.bootingLabel removeFromParentAndCleanup:YES];
         [self.statusDisplay setTest:EnergyDisplayType];

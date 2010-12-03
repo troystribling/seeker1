@@ -42,6 +42,8 @@ typedef enum tagMapID {
     NSMutableDictionary* startSite;
     NSMutableArray* sensorSites;
     NSMutableArray* sampleSites;
+    CGRect menuRect;
+    CCMenu* menu;
     CGPoint screenCenter;
     CCTMXTiledMap* tileMap;
     CCTMXLayer* mapLayer;
@@ -60,6 +62,8 @@ typedef enum tagMapID {
 @property (nonatomic, assign) NSInteger speed;
 @property (nonatomic, retain) NSMutableArray* sensorSites;
 @property (nonatomic, retain) NSMutableArray* sampleSites;
+@property (nonatomic, assign) CGRect menuRect;
+@property (nonatomic, retain) CCMenu* menu;
 @property (nonatomic, assign) CGPoint screenCenter;
 @property (nonatomic, retain) CCTMXTiledMap* tileMap;
 @property (nonatomic, retain) CCTMXLayer* mapLayer;
