@@ -53,6 +53,7 @@
 @synthesize terrainLayer;
 @synthesize itemsLayer;
 @synthesize objectsLayer;
+@synthesize menuIsOpen;
 
 //===================================================================================================================================
 #pragma mark MapScene PrivateAPI
@@ -202,6 +203,7 @@
         self.sampleSites = [NSMutableArray arrayWithCapacity:10];
         self.speed = 0;
         self.menu = [MapMenuView create];
+        self.menuIsOpen = NO;
         [self.statusDisplay insert:self];
         [self loadMapLevel:1];
         [self schedule:@selector(nextFrame:)];
@@ -222,8 +224,12 @@
 -(void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	CGPoint touchLocation = [self locationFromTouches:touches]; 
     if ([self isInMenuRect:touchLocation]) {
+        self.menuIsOpen = YES;
         [[[CCDirector sharedDirector] openGLView] addSubview:self.menu];
+    } else if (self.menuIsOpen) {
+        [self.menu removeFromSuperview];
     }
+
 }    
 
 //-----------------------------------------------------------------------------------------------------------------------------------

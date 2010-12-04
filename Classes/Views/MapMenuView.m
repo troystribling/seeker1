@@ -8,6 +8,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "MapMenuView.h"
+#import "MenuScene.h"
+#import "TouchImageView.h"
 #import "cocos2d.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -19,9 +21,6 @@
 @implementation MapMenuView
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize main;
-@synthesize terminal;
-@synthesize run;
 
 //===================================================================================================================================
 #pragma mark MapMenuView PrivateAPI
@@ -41,10 +40,26 @@
     self = [super initWithFrame:_frame];
     if (self) {
         self.image = [UIImage imageNamed:@"terminal-menu.png"];
-        CGRect mainRect = CGRectMake(<#CGFloat x#>, <#CGFloat y#>, <#CGFloat width#>, <#CGFloat height#>);
-        self.main = [TouchImageView createWithFrame:mainRect name:@"main" andDelegate:self];
-        self.terminal = [TouchImageView createWithFrame:terminalRect name:@"terminal" andDelegate:self];
-        self.run = [TouchImageView createWithFrame:runRect name:@"run" andDelegate:self];
+        self.contentMode = UIViewContentModeScaleToFill;
+        self.userInteractionEnabled = YES;
+        CGSize itemSize = CGSizeMake(0.71*_frame.size.width,  0.23*_frame.size.height);
+        CGFloat yOffset = _frame.size.height - 3.0*itemSize.height - 0.15*_frame.size.height;
+        CGFloat xOffset = 0.05*_frame.size.width;
+        CGRect mainRect = CGRectMake(xOffset, yOffset, itemSize.width,  itemSize.height);
+        TouchImageView* mainItem = [TouchImageView createWithFrame:mainRect name:@"main" andDelegate:self];
+        mainItem.image = [UIImage imageNamed:@"menu-main.png"];
+        mainItem.contentMode = UIViewContentModeScaleToFill;
+        [self addSubview:mainItem];
+        CGRect terminalRect = CGRectMake(xOffset, yOffset+itemSize.height, itemSize.width,  itemSize.height);
+        TouchImageView* terminalItem = [TouchImageView createWithFrame:terminalRect name:@"terminal" andDelegate:self];
+        terminalItem.image = [UIImage imageNamed:@"menu-term.png"];
+        terminalItem.contentMode = UIViewContentModeScaleToFill;
+        [self addSubview:terminalItem];
+        CGRect runRect = CGRectMake(xOffset, yOffset+2.0*itemSize.height, itemSize.width,  itemSize.height);
+        TouchImageView* runItem = [TouchImageView createWithFrame:runRect name:@"run" andDelegate:self];
+        runItem.image = [UIImage imageNamed:@"menu-run.png"];
+        runItem.contentMode = UIViewContentModeScaleToFill;
+        [self addSubview:runItem];
     }
     return self;
 }
@@ -58,7 +73,14 @@
 #pragma mark TouchImageViewDelegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)imageTouched:(TouchImageView*)pubSubImage {
+- (void)imageTouched:(TouchImageView*)_menuItem {
+    NSString* itemName = _menuItem.viewName;
+    [self removeFromSuperview];
+    if ([itemName isEqualToString:@"term"]) {
+    } else if ([itemName isEqualToString:@"main"]) {
+        [[CCDirector sharedDirector] replaceScene: [MenuScene scene]];
+    } else if ([itemName isEqualToString:@"run"]) {
+    }
 }
 
 @end

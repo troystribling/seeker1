@@ -51,6 +51,7 @@ typedef enum tagMapID {
     CCTMXLayer* terrainLayer;
     CCTMXLayer* itemsLayer;
     CCTMXObjectGroup* objectsLayer;
+    BOOL menuIsOpen;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -71,6 +72,7 @@ typedef enum tagMapID {
 @property (nonatomic, retain) CCTMXLayer* terrainLayer;
 @property (nonatomic, retain) CCTMXLayer* itemsLayer;
 @property (nonatomic, retain) CCTMXObjectGroup* objectsLayer;
+@property (nonatomic, assign) BOOL menuIsOpen;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)scene;

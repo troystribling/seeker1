@@ -14,15 +14,9 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapMenuView : UIImageView {
-    TouchImageView* main;
-    TouchImageView* terminal;
-    TouchImageView* run;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, assign) TouchImageView* main;
-@property (nonatomic, assign) TouchImageView* terminal;
-@property (nonatomic, assign) TouchImageView* run;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)create;
