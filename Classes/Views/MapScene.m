@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "MapScene.h"
+#import "MapMenuView.h"
 #import "SeekerSprite.h"
 #import "StatusDisplay.h"
 
@@ -200,6 +201,7 @@
         self.sensorSites = [NSMutableArray arrayWithCapacity:10];
         self.sampleSites = [NSMutableArray arrayWithCapacity:10];
         self.speed = 0;
+        self.menu = [MapMenuView create];
         [self.statusDisplay insert:self];
         [self loadMapLevel:1];
         [self schedule:@selector(nextFrame:)];
@@ -220,7 +222,7 @@
 -(void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	CGPoint touchLocation = [self locationFromTouches:touches]; 
     if ([self isInMenuRect:touchLocation]) {
-        [self addChild:self.menu];
+        [[[CCDirector sharedDirector] openGLView] addSubview:self.menu];
     }
 }    
 
