@@ -179,6 +179,12 @@
     return isInRect;    
 }
  
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)showMenu {
+    [[[CCDirector sharedDirector] openGLView] addSubview:self.menu];
+}
+
 //===================================================================================================================================
 #pragma mark MapScene
 
@@ -225,7 +231,7 @@
 	CGPoint touchLocation = [self locationFromTouches:touches]; 
     if ([self isInMenuRect:touchLocation]) {
         self.menuIsOpen = YES;
-        [[[CCDirector sharedDirector] openGLView] addSubview:self.menu];
+        [self showMenu];
     } else if (self.menuIsOpen) {
         [self.menu removeFromSuperview];
     }

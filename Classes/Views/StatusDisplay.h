@@ -28,6 +28,7 @@ typedef enum tagDisplayType {
     NSMutableArray* speedDigits;
     NSMutableArray* sampleDigits;
     NSMutableArray* sensorDigits;
+    NSMutableArray* terminalText;
     CGPoint energyPosition;
     CGPoint speedPosition;
     CGPoint samplePosition;
@@ -41,6 +42,7 @@ typedef enum tagDisplayType {
 @property (nonatomic, retain) NSMutableArray* speedDigits;
 @property (nonatomic, retain) NSMutableArray* sampleDigits;
 @property (nonatomic, retain) NSMutableArray* sensorDigits;
+@property (nonatomic, retain) NSMutableArray* terminalText;
 @property (nonatomic, assign) CGPoint energyPosition;
 @property (nonatomic, assign) CGPoint speedPosition;
 @property (nonatomic, assign) CGPoint samplePosition;
@@ -55,5 +57,6 @@ typedef enum tagDisplayType {
 - (void)test;
 - (void)setTest:(DisplayType)_displayType;
 - (void)setDigits:(NSInteger)_digit forDisplay:(DisplayType)_displayType;
+- (void)addTerminalText:(NSString*)_text;
 
 @end

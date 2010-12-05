@@ -22,6 +22,7 @@
 
 - (void)removeDigits:(NSMutableArray*)_digits;
 - (CCSprite*)insertImage:(UIImage*)_image atPostion:(float)_position withKey:(NSString*)_key;
+- (void)writeDisplay;
 
 @end
 
@@ -39,6 +40,7 @@
 @synthesize speedPosition;
 @synthesize samplePosition;
 @synthesize sensorPosition;
+@synthesize terminalText;
 
 //===================================================================================================================================
 #pragma mark StatusDisplay PrivateAPI
@@ -60,8 +62,37 @@
     return digitSprite;
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)writeDisplay {
+    CGPoint basePoint = CGPointMake(245.0f, 10.0f);
+    CGFloat yOffset = 10.0;
+    for (int i = 0; i < [self.terminalText count]; i++) {
+        CCLabel* _text = [self.terminalText objectAtIndex:i];
+        _text.position = CGPointMake(basePoint.x, basePoint.y+i*yOffset);
+        _text.anchorPoint = CGPointMake(0.0, 0.0);
+        [self addChild:_text];
+    }
+}
+
 //===================================================================================================================================
 #pragma mark StatusDisplay
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)clearTerminal {
+    for (CCLabel* _text in self.terminalText) {
+        [_text removeFromParentAndCleanup:YES];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addTerminalText:(NSString*)_text {
+    if ([self.terminalText count] > 3) {
+        [self.terminalText removeLastObject];
+    }
+    [self.terminalText insertObject:[CCLabel labelWithString:_text fontName:@"Retroville NC" fontSize:10] atIndex:0];
+    [self clearTerminal];
+    [self writeDisplay];
+}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)create {
@@ -182,6 +213,7 @@
         self.speedDigits = [NSMutableArray arrayWithCapacity:2];
         self.sensorDigits = [NSMutableArray arrayWithCapacity:2];
         self.sampleDigits = [NSMutableArray arrayWithCapacity:2];
+        self.terminalText = [NSMutableArray arrayWithCapacity:3];
         for (int i = 0; i < 10; i++) {
             NSString* imageFile = [NSString stringWithFormat:@"LCD-%d.png", i];
             UIImage* digitImage = [UIImage imageNamed:imageFile];
