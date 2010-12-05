@@ -14,9 +14,11 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MainScene (PrivateAPI)
 
-- (void)startMission;
+- (void)buildMenu;
+- (void)mission;
 - (void)configure;
 - (void)gameCenter;
+- (void)tutorial;
 
 @end
 
@@ -29,6 +31,55 @@
 
 //===================================================================================================================================
 #pragma mark MainScene PrivateAPI
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)buildMenu {
+    CCLabel* missionLabel = [CCLabel labelWithString:@"mission" fontName:@"Retroville NC" fontSize:24];
+    missionLabel.color = ccc3(103,243,27);
+    CCMenuItemLabel* missionItem = [CCMenuItemLabel itemWithLabel:missionLabel
+                                                           target:self
+                                                         selector:@selector(mission)];
+    missionItem.anchorPoint = CGPointMake(0.0f, 0.0f);
+    CCLabel* settingsLabel = [CCLabel labelWithString:@"settings" fontName:@"Retroville NC" fontSize:24];
+    settingsLabel.color = ccc3(103,243,27);
+    CCMenuItemLabel* settingsItem = [CCMenuItemLabel itemWithLabel:settingsLabel
+                                                            target:self
+                                                          selector:@selector(configure)];
+    settingsItem.anchorPoint = CGPointMake(0.0f, 0.0f);
+    CCLabel* gameCenterLabel = [CCLabel labelWithString:@"game center" fontName:@"Retroville NC" fontSize:24];
+    gameCenterLabel.color = ccc3(103,243,27);
+    CCMenuItemLabel* gameCenterItem = [CCMenuItemLabel itemWithLabel:gameCenterLabel
+                                                              target:self
+                                                            selector:@selector(gameCenter)];
+    gameCenterItem.anchorPoint = CGPointMake(0.0f, 0.0f);
+    CCLabel* tutorialLabel = [CCLabel labelWithString:@"tutorial" fontName:@"Retroville NC" fontSize:24];
+    tutorialLabel.color = ccc3(103,243,27);
+    CCMenuItemLabel* tutorialItem = [CCMenuItemLabel itemWithLabel:tutorialLabel
+                                                      target:self
+                                                      selector:@selector(tutorial)];
+    tutorialItem.anchorPoint = CGPointMake(0.0f, 0.0f);
+    self.startMenu = [CCMenu menuWithItems:missionItem, settingsItem, gameCenterItem, tutorialItem, nil];
+    [self.startMenu alignItemsVertically];
+    self.startMenu.position = CGPointMake(30.0f, 300.0f);
+    [self addChild:self.startMenu];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)mission {
+    [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)configure {
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)gameCenter {
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)tutorial {
+}
 
 //===================================================================================================================================
 #pragma mark MainScene
@@ -44,45 +95,13 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)init {
 	if( (self=[super init] )) {
-        CCMenuItemImage* startMissionItem = [CCMenuItemImage itemFromNormalImage:@"start-mission.png"
-                                                             selectedImage: @"start-mission.png"
-                                                             target:self
-                                                             selector:@selector(startMission)];
-        startMissionItem.anchorPoint = CGPointMake(0.0f, 0.0f);
-        CCMenuItemImage* configureItem = [CCMenuItemImage itemFromNormalImage:@"configure.png"
-                                                          selectedImage: @"configure.png"
-                                                          target:self
-                                                          selector:@selector(configure)];
-        configureItem.anchorPoint = CGPointMake(0.0f, 0.0f);
-        CCMenuItemImage* gameCenterItem = [CCMenuItemImage itemFromNormalImage:@"game-center.png"
-                                                           selectedImage: @"game-center.png"
-                                                           target:self
-                                                           selector:@selector(gameCenter)];
-        gameCenterItem.anchorPoint = CGPointMake(0.0f, 0.0f);
-        self.startMenu = [CCMenu menuWithItems:startMissionItem, configureItem, gameCenterItem, nil];
-        [self.startMenu alignItemsVertically];
-        self.startMenu.position = CGPointMake(30.0f, 330.0f);
-        [self addChild:self.startMenu];
+        [self buildMenu];
         self.statusDisplay = [StatusDisplay create];
         [self.statusDisplay insert:self];
-        [self.statusDisplay addTerminalText:@"$ boot"];
         [self.statusDisplay addTerminalText:@"$ main"];
         [self.statusDisplay test];
     }
 	return self;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)startMission {
-    [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)configure {
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)gameCenter {
 }
 
 @end

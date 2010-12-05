@@ -140,6 +140,7 @@
         [[CCDirector sharedDirector] replaceScene: [MainScene scene]];
     } else if (self.counter == kBOOT_TICK_1) {
         [self.bootingLabel setString:@"Booting."];
+        [self insertProductLabel];
     } else if (self.counter == kBOOT_TICK_2) {
         [self.bootingLabel setString:@"Booting.."];
     } else if (self.counter == kBOOT_TICK_3) {
@@ -152,6 +153,7 @@
         [self.bootingLabel removeFromParentAndCleanup:YES];
         [self.statusDisplay setTest:EnergyDisplayType];
         [self addChild:self.postRunning];
+        [self.statusDisplay addTerminalText:@"$ post"];
     } else if (self.counter == kBOOT_TICK_7) {
         [self.statusDisplay setTest:SpeedDisplayType];
     } else if (self.counter == kBOOT_TICK_8) {
@@ -165,6 +167,7 @@
         [self.postRunning removeFromParentAndCleanup:YES];
         [self addChild:self.postOK];
         [self addChild:self.consoleStarting];
+        [self.statusDisplay addTerminalText:@"$ con"];
     } else if (self.counter == kBOOT_TICK_12) {
         [self.statusDisplay clear];
         [self.consoleStarting removeFromParentAndCleanup:YES];
@@ -174,7 +177,6 @@
         [self.statusDisplay test];
         [self.connecting removeFromParentAndCleanup:YES];
         [self addChild:self.connected];
-        [self insertProductLabel];
     }    
 }
 

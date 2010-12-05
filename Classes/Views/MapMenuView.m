@@ -31,7 +31,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)create {
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
-    CGRect _frame = CGRectMake(0.56*screenSize.width, 0.0f, 0.44*screenSize.width, 0.21*screenSize.height);
+    CGRect _frame = CGRectMake(0.38*screenSize.width, 0.0f, 0.62*screenSize.width, 0.32*screenSize.height);
     return [[[MapMenuView alloc] initWithFrame:_frame] autorelease];
 }
 
@@ -42,8 +42,8 @@
         self.image = [UIImage imageNamed:@"terminal-menu.png"];
         self.contentMode = UIViewContentModeScaleToFill;
         self.userInteractionEnabled = YES;
-        CGSize itemSize = CGSizeMake(0.71*_frame.size.width,  0.23*_frame.size.height);
-        CGFloat yOffset = _frame.size.height - 3.0*itemSize.height - 0.15*_frame.size.height;
+        CGSize itemSize = CGSizeMake(0.76*_frame.size.width,  0.24*_frame.size.height);
+        CGFloat yOffset = _frame.size.height - 3.0*itemSize.height - 0.13*_frame.size.height;
         CGFloat xOffset = 0.05*_frame.size.width;
         CGRect mainRect = CGRectMake(xOffset, yOffset, itemSize.width,  itemSize.height);
         TouchImageView* mainItem = [TouchImageView createWithFrame:mainRect name:@"main" andDelegate:self];
