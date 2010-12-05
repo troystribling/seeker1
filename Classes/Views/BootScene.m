@@ -151,9 +151,9 @@
         [self.bootingLabel setString:@"Booting....."];
     } else if (self.counter == kBOOT_TICK_6) {
         [self.bootingLabel removeFromParentAndCleanup:YES];
+        [self.statusDisplay addTerminalText:@"$ post"];
         [self.statusDisplay setTest:EnergyDisplayType];
         [self addChild:self.postRunning];
-        [self.statusDisplay addTerminalText:@"$ post"];
     } else if (self.counter == kBOOT_TICK_7) {
         [self.statusDisplay setTest:SpeedDisplayType];
     } else if (self.counter == kBOOT_TICK_8) {
@@ -166,8 +166,8 @@
         [self.statusDisplay test];
         [self.postRunning removeFromParentAndCleanup:YES];
         [self addChild:self.postOK];
-        [self addChild:self.consoleStarting];
         [self.statusDisplay addTerminalText:@"$ con"];
+        [self addChild:self.consoleStarting];
     } else if (self.counter == kBOOT_TICK_12) {
         [self.statusDisplay clear];
         [self.consoleStarting removeFromParentAndCleanup:YES];
