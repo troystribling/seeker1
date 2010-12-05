@@ -211,6 +211,9 @@
         self.menu = [MapMenuView create];
         self.menuIsOpen = NO;
         [self.statusDisplay insert:self];
+        [self.statusDisplay addTerminalText:@"$ main"];
+        [self.statusDisplay addTerminalText:@"$ term"];
+        [self.statusDisplay addTerminalText:@"$ run"];
         [self loadMapLevel:1];
         [self schedule:@selector(nextFrame:)];
 	}

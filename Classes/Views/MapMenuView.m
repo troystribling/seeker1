@@ -8,7 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "MapMenuView.h"
-#import "MenuScene.h"
+#import "MainScene.h"
 #import "TouchImageView.h"
 #import "cocos2d.h"
 
@@ -78,7 +78,7 @@
     [self removeFromSuperview];
     if ([itemName isEqualToString:@"term"]) {
     } else if ([itemName isEqualToString:@"main"]) {
-        [[CCDirector sharedDirector] replaceScene: [MenuScene scene]];
+        [[CCDirector sharedDirector] replaceScene: [MainScene scene]];
     } else if ([itemName isEqualToString:@"run"]) {
     }
 }

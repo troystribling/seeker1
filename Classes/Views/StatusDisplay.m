@@ -64,12 +64,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)writeDisplay {
-    CGPoint basePoint = CGPointMake(245.0f, 10.0f);
-    CGFloat yOffset = 10.0;
+    CGPoint basePoint = CGPointMake(248.0f, 11.0f);
+    CGFloat yOffset = 13.0;
     for (int i = 0; i < [self.terminalText count]; i++) {
         CCLabel* _text = [self.terminalText objectAtIndex:i];
         _text.position = CGPointMake(basePoint.x, basePoint.y+i*yOffset);
-        _text.anchorPoint = CGPointMake(0.0, 0.0);
         [self addChild:_text];
     }
 }
@@ -89,7 +88,10 @@
     if ([self.terminalText count] > 3) {
         [self.terminalText removeLastObject];
     }
-    [self.terminalText insertObject:[CCLabel labelWithString:_text fontName:@"Retroville NC" fontSize:10] atIndex:0];
+    CCLabel* _textLabel = [CCLabel labelWithString:_text fontName:@"Retroville NC" fontSize:12];
+    _textLabel.color = ccc3(103,243,27);
+    _textLabel.anchorPoint = CGPointMake(0.0, 0.0);
+    [self.terminalText insertObject:_textLabel atIndex:0];
     [self clearTerminal];
     [self writeDisplay];
 }

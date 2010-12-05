@@ -1,5 +1,5 @@
 //
-//  MenuScene.m
+//  MainScene.m
 //  seeker1
 //
 //  Created by Troy Stribling on 11/28/10.
@@ -7,12 +7,12 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "MenuScene.h"
+#import "MainScene.h"
 #import "MapScene.h"
 #import "StatusDisplay.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface MenuScene (PrivateAPI)
+@interface MainScene (PrivateAPI)
 
 - (void)startMission;
 - (void)configure;
@@ -21,22 +21,22 @@
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation MenuScene
+@implementation MainScene
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize startMenu;
 @synthesize statusDisplay;
 
 //===================================================================================================================================
-#pragma mark MenuScene PrivateAPI
+#pragma mark MainScene PrivateAPI
 
 //===================================================================================================================================
-#pragma mark MenuScene
+#pragma mark MainScene
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)scene {
 	CCScene *scene = [CCScene node];
-	MenuScene *layer = [MenuScene node];
+	MainScene *layer = [MainScene node];
 	[scene addChild: layer];
 	return scene;
 }
@@ -65,6 +65,8 @@
         [self addChild:self.startMenu];
         self.statusDisplay = [StatusDisplay create];
         [self.statusDisplay insert:self];
+        [self.statusDisplay addTerminalText:@"$ boot"];
+        [self.statusDisplay addTerminalText:@"$ main"];
         [self.statusDisplay test];
     }
 	return self;

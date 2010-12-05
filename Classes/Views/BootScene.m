@@ -9,7 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "BootScene.h"
 #import "StatusDisplay.h"
-#import "MenuScene.h"
+#import "MainScene.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface BootScene (PrivateAPI)
@@ -120,6 +120,7 @@
         self.counter = 0;
         self.statusDisplay = [StatusDisplay createWithFile:@"empty-display.png"];
         [self.statusDisplay insert:self];
+        [self.statusDisplay addTerminalText:@"$ boot"];
         [self insertBootingLabel];
         [self loadPOSTRunning];
         [self loadPOSTOK];
@@ -136,7 +137,7 @@
 - (void) nextFrame:(ccTime)dt {
     self.counter++;
     if (self.counter > kSTARTUP_TICKS) {
-        [[CCDirector sharedDirector] replaceScene: [MenuScene scene]];
+        [[CCDirector sharedDirector] replaceScene: [MainScene scene]];
     } else if (self.counter == kBOOT_TICK_1) {
         [self.bootingLabel setString:@"Booting."];
     } else if (self.counter == kBOOT_TICK_2) {

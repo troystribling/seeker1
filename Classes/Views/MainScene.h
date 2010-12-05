@@ -1,5 +1,5 @@
 //
-//  MenuScene.h
+//  MainScene.h
 //  seeker1
 //
 //  Created by Troy Stribling on 11/28/10.
@@ -14,7 +14,7 @@
 @class StatusDisplay;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface MenuScene : CCLayer {
+@interface MainScene : CCLayer {
     CCMenu* startMenu;
     StatusDisplay* statusDisplay;
 }
