@@ -36,6 +36,8 @@
 		050F792B12AC64910017BDE1 /* TerminalLauncherView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050F792A12AC64910017BDE1 /* TerminalLauncherView.m */; };
 		050F795012AC670F0017BDE1 /* LauncherView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050F794F12AC670F0017BDE1 /* LauncherView.m */; };
 		050F795F12AC69030017BDE1 /* terminal-launcher.png in Resources */ = {isa = PBXBuildFile; fileRef = 050F795E12AC69030017BDE1 /* terminal-launcher.png */; };
+		051A7D9A12AC85BD00CC9DF9 /* terminal-launcher-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 051A7D9812AC85BD00CC9DF9 /* terminal-launcher-back.png */; };
+		051A7D9B12AC85BD00CC9DF9 /* terminal-launcher-run.png in Resources */ = {isa = PBXBuildFile; fileRef = 051A7D9912AC85BD00CC9DF9 /* terminal-launcher-run.png */; };
 		051E5896129B7CF000A5440E /* items.plist in Resources */ = {isa = PBXBuildFile; fileRef = 051E5894129B7CF000A5440E /* items.plist */; };
 		051E5897129B7CF000A5440E /* items.png in Resources */ = {isa = PBXBuildFile; fileRef = 051E5895129B7CF000A5440E /* items.png */; };
 		051F8622129641B30081CF3E /* CCAnimationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 051F8621129641B30081CF3E /* CCAnimationHelper.m */; };
@@ -317,6 +319,8 @@
 		050F794E12AC670F0017BDE1 /* LauncherView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauncherView.h; sourceTree = "<group>"; };
 		050F794F12AC670F0017BDE1 /* LauncherView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LauncherView.m; sourceTree = "<group>"; };
 		050F795E12AC69030017BDE1 /* terminal-launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher.png"; sourceTree = "<group>"; };
+		051A7D9812AC85BD00CC9DF9 /* terminal-launcher-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-back.png"; sourceTree = "<group>"; };
+		051A7D9912AC85BD00CC9DF9 /* terminal-launcher-run.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-run.png"; sourceTree = "<group>"; };
 		051E5894129B7CF000A5440E /* items.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = items.plist; sourceTree = "<group>"; };
 		051E5895129B7CF000A5440E /* items.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = items.png; sourceTree = "<group>"; };
 		051F8620129641B30081CF3E /* CCAnimationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAnimationHelper.h; sourceTree = "<group>"; };
@@ -630,6 +634,8 @@
 		050F795D12AC69030017BDE1 /* Terminal */ = {
 			isa = PBXGroup;
 			children = (
+				051A7D9812AC85BD00CC9DF9 /* terminal-launcher-back.png */,
+				051A7D9912AC85BD00CC9DF9 /* terminal-launcher-run.png */,
 				050F795E12AC69030017BDE1 /* terminal-launcher.png */,
 			);
 			path = Terminal;
@@ -1312,6 +1318,8 @@
 				0547A46712AC349400D2F0D1 /* TerminalViewController.xib in Resources */,
 				0547A48212AC38B100D2F0D1 /* TerminalCell.xib in Resources */,
 				050F795F12AC69030017BDE1 /* terminal-launcher.png in Resources */,
+				051A7D9A12AC85BD00CC9DF9 /* terminal-launcher-back.png in Resources */,
+				051A7D9B12AC85BD00CC9DF9 /* terminal-launcher-run.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

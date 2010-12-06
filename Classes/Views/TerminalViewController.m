@@ -79,7 +79,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewTouchedNamed:(NSString*)name {
-    if ([name isEqualToString:@"cancel"]) {
+    if ([name isEqualToString:@"back"]) {
+        [self.view removeFromSuperview];
     } else if ([name isEqualToString:@"run"]) {
     } else if ([name isEqualToString:@"functions"]) {
     }

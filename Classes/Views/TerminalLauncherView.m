@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "TerminalLauncherView.h"
+#import "TouchImageView.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TerminalLauncherView (PrivateAPI)
@@ -29,9 +30,22 @@
     CGRect viewFrame = CGRectMake(0.0, 0.0, viewWidth, viewHeight);
     if ((self = [self initWithFrame:viewFrame image:@"terminal-launcher.png" andDelegate:_delegate])) {
         self.containedView = _view;
+        CGRect backRect = CGRectMake(0.0, 0.12*viewHeight, 0.39*viewWidth, 0.61*viewHeight);
+        TouchImageView* backItem = [TouchImageView createWithFrame:backRect name:@"back" andDelegate:self];
+        backItem.image = [UIImage imageNamed:@"terminal-launcher-back.png"];
+        backItem.contentMode = UIViewContentModeScaleToFill;
+        [self addSubview:backItem];
         [_view addSubview:self];
     }
     return self;
+}
+
+//===================================================================================================================================
+#pragma mark TouchImageViewDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)imageTouched:(TouchImageView*)_touchedView {
+    [self.delegate viewTouchedNamed:_touchedView.viewName];
 }
 
 @end
