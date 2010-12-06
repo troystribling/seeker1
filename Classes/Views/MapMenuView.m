@@ -8,9 +8,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "MapMenuView.h"
+#import "cocos2d.h"
 #import "MainScene.h"
 #import "TouchImageView.h"
-#import "cocos2d.h"
+#import "ViewControllerManager.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapMenuView (PrivateAPI)
@@ -51,7 +52,7 @@
         mainItem.contentMode = UIViewContentModeScaleToFill;
         [self addSubview:mainItem];
         CGRect terminalRect = CGRectMake(xOffset, yOffset+itemSize.height, itemSize.width,  itemSize.height);
-        TouchImageView* terminalItem = [TouchImageView createWithFrame:terminalRect name:@"terminal" andDelegate:self];
+        TouchImageView* terminalItem = [TouchImageView createWithFrame:terminalRect name:@"term" andDelegate:self];
         terminalItem.image = [UIImage imageNamed:@"menu-term.png"];
         terminalItem.contentMode = UIViewContentModeScaleToFill;
         [self addSubview:terminalItem];
@@ -77,6 +78,7 @@
     NSString* itemName = _menuItem.viewName;
     [self removeFromSuperview];
     if ([itemName isEqualToString:@"term"]) {
+        [[ViewControllerManager instance] showTerminalView:[[CCDirector sharedDirector] openGLView]];
     } else if ([itemName isEqualToString:@"main"]) {
         [[CCDirector sharedDirector] replaceScene: [MainScene scene]];
     } else if ([itemName isEqualToString:@"run"]) {

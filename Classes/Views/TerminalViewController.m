@@ -20,6 +20,7 @@
 @implementation TerminalViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize programView;
 @synthesize containerView;
 @synthesize programListing;
 
@@ -48,6 +49,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
+    [TerminalLauncherView inView:self.view andDelegate:self];
+    self.programView.separatorColor = [UIColor blackColor];
     [super viewDidLoad];
 }
 
@@ -71,6 +74,16 @@
     [super didReceiveMemoryWarning];
 }
 
+//===================================================================================================================================
+#pragma mark LauncherViewDelegate 
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)viewTouchedNamed:(NSString*)name {
+    if ([name isEqualToString:@"cancel"]) {
+    } else if ([name isEqualToString:@"run"]) {
+    } else if ([name isEqualToString:@"functions"]) {
+    }
+}
 
 //===================================================================================================================================
 #pragma mark UITableViewDataSource
@@ -98,12 +111,10 @@
 
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
     }   
 }
 

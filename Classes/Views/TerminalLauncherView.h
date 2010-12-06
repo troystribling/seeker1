@@ -1,5 +1,5 @@
 //
-//  TerminalViewController.h
+//  TerminalLauncherView.h
 //  seeker1
 //
 //  Created by Troy Stribling on 12/5/10.
@@ -8,24 +8,18 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <UIKit/UIKit.h>
-#import "TerminalLauncherView.h"
+#import "LauncherView.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface TerminalViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, LauncherViewDelegate> {
-    IBOutlet UITableView* programView;
-    UIView* containerView;
-	NSMutableArray* programListing;
+@interface TerminalLauncherView : LauncherView {
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) UITableView* programView;
-@property (nonatomic, retain) UIView* containerView;
-@property (nonatomic, retain) NSMutableArray* programListing;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (id)inView:(UIView*)_view;
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
++ (id)inView:(UIView*)_view andDelegate:(id<LauncherViewDelegate>)_delegate;
+- (id)initInView:(UIView*)_view andDelegate:(id<LauncherViewDelegate>)_delegate;
 
 @end
