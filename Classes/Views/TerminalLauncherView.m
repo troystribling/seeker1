@@ -30,11 +30,14 @@
     CGRect viewFrame = CGRectMake(0.0, 0.0, viewWidth, viewHeight);
     if ((self = [self initWithFrame:viewFrame image:@"terminal-launcher.png" andDelegate:_delegate])) {
         self.containedView = _view;
-        CGRect backRect = CGRectMake(0.0, 0.12*viewHeight, 0.39*viewWidth, 0.61*viewHeight);
+        CGRect backRect = CGRectMake(0.0, 0.15*viewHeight, 0.39*viewWidth, 0.61*viewHeight);
         TouchImageView* backItem = [TouchImageView createWithFrame:backRect name:@"back" andDelegate:self];
         backItem.image = [UIImage imageNamed:@"terminal-launcher-back.png"];
-        backItem.contentMode = UIViewContentModeScaleToFill;
         [self addSubview:backItem];
+        CGRect runRect = CGRectMake(0.75*viewWidth, 0.15*viewHeight, 0.25*viewWidth, 0.61*viewHeight);
+        TouchImageView* runItem = [TouchImageView createWithFrame:runRect name:@"run" andDelegate:self];
+        runItem.image = [UIImage imageNamed:@"terminal-launcher-run.png"];
+        [self addSubview:runItem];
         [_view addSubview:self];
     }
     return self;

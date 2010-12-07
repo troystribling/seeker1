@@ -40,6 +40,7 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.view.frame = self.containerView.frame;
+        self.programListing = [NSMutableArray arrayWithCapacity:10];
     }
     return self;
 }
@@ -82,7 +83,6 @@
     if ([name isEqualToString:@"back"]) {
         [self.view removeFromSuperview];
     } else if ([name isEqualToString:@"run"]) {
-    } else if ([name isEqualToString:@"functions"]) {
     }
 }
 
@@ -96,12 +96,17 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return [self.programListing count] + 1;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TerminalCell* cell = (TerminalCell*)[CellUtils createCell:[TerminalCell class] forTableView:tableView];
+    if (indexPath.row == [self.programListing count]) {
+        cell.lineLabel.text = @"$";
+    } else {
+        cell.lineLabel.text = [self.programListing objectAtIndex:indexPath.row];
+    }
     return cell;
 }
 
@@ -112,7 +117,7 @@
 
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {    
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath*)indexPath {    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
@@ -120,7 +125,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath*)toIndexPath {
 }
 
 
@@ -134,6 +139,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
+    return kTERMINAL_LINE_CELL_HEIGHT;
 }
 
 //===================================================================================================================================

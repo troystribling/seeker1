@@ -34,25 +34,25 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)buildMenu {
-    CCLabel* missionLabel = [CCLabel labelWithString:@"mission" fontName:@"Retroville NC" fontSize:24];
+    CCLabel* missionLabel = [CCLabel labelWithString:@"mission" fontName:@"Courier" fontSize:28];
     missionLabel.color = ccc3(103,243,27);
     CCMenuItemLabel* missionItem = [CCMenuItemLabel itemWithLabel:missionLabel
                                                            target:self
                                                          selector:@selector(mission)];
     missionItem.anchorPoint = CGPointMake(0.0f, 0.0f);
-    CCLabel* settingsLabel = [CCLabel labelWithString:@"settings" fontName:@"Retroville NC" fontSize:24];
+    CCLabel* settingsLabel = [CCLabel labelWithString:@"settings" fontName:@"Courier" fontSize:28];
     settingsLabel.color = ccc3(103,243,27);
     CCMenuItemLabel* settingsItem = [CCMenuItemLabel itemWithLabel:settingsLabel
                                                             target:self
                                                           selector:@selector(configure)];
     settingsItem.anchorPoint = CGPointMake(0.0f, 0.0f);
-    CCLabel* gameCenterLabel = [CCLabel labelWithString:@"game center" fontName:@"Retroville NC" fontSize:24];
+    CCLabel* gameCenterLabel = [CCLabel labelWithString:@"game center" fontName:@"Courier" fontSize:28];
     gameCenterLabel.color = ccc3(103,243,27);
     CCMenuItemLabel* gameCenterItem = [CCMenuItemLabel itemWithLabel:gameCenterLabel
                                                               target:self
                                                             selector:@selector(gameCenter)];
     gameCenterItem.anchorPoint = CGPointMake(0.0f, 0.0f);
-    CCLabel* tutorialLabel = [CCLabel labelWithString:@"tutorial" fontName:@"Retroville NC" fontSize:24];
+    CCLabel* tutorialLabel = [CCLabel labelWithString:@"tutorial" fontName:@"Courier" fontSize:28];
     tutorialLabel.color = ccc3(103,243,27);
     CCMenuItemLabel* tutorialItem = [CCMenuItemLabel itemWithLabel:tutorialLabel
                                                       target:self
@@ -60,7 +60,7 @@
     tutorialItem.anchorPoint = CGPointMake(0.0f, 0.0f);
     self.startMenu = [CCMenu menuWithItems:missionItem, settingsItem, gameCenterItem, tutorialItem, nil];
     [self.startMenu alignItemsVertically];
-    self.startMenu.position = CGPointMake(30.0f, 300.0f);
+    self.startMenu.position = CGPointMake(20.0f, 305.0f);
     [self addChild:self.startMenu];
 }
 

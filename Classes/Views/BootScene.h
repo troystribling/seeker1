@@ -18,12 +18,9 @@
     StatusDisplay* statusDisplay;
     CCLabel* bootingLabel;
     CCLabel* productLabel;
-    CCSprite* postRunning;
-    CCSprite* postOK;
-    CCSprite* consoleStarting;
-    CCSprite* consoleStarted;
-    CCSprite* connecting;
-    CCSprite* connected;
+    CCLabel* post;
+    CCLabel* console;
+    CCLabel* connection;
     NSInteger counter;
 }
 
@@ -31,12 +28,9 @@
 @property (nonatomic, retain) StatusDisplay* statusDisplay;
 @property (nonatomic, retain) CCLabel* bootingLabel;
 @property (nonatomic, retain) CCLabel* productLabel;
-@property (nonatomic, retain) CCSprite* postRunning;
-@property (nonatomic, retain) CCSprite* postOK;
-@property (nonatomic, retain) CCSprite* consoleStarting;
-@property (nonatomic, retain) CCSprite* consoleStarted;
-@property (nonatomic, retain) CCSprite* connecting;
-@property (nonatomic, retain) CCSprite* connected;
+@property (nonatomic, retain) CCLabel* post;
+@property (nonatomic, retain) CCLabel* console;
+@property (nonatomic, retain) CCLabel* connection;
 @property (nonatomic, assign) NSInteger counter;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

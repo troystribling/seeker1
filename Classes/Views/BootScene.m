@@ -16,12 +16,9 @@
 
 - (void)insertBootingLabel;
 - (void)insertProductLabel;
-- (void)loadPOSTRunning;
-- (void)loadPOSTOK;
-- (void)loadConsoleStarting;
-- (void)loadConsoleStarted;
-- (void)loadConnecting;
-- (void)loadConnected;
+- (void)insertPOST:(NSString*)_post;
+- (void)insertConsole:(NSString*)_console;
+- (void)insertConnection:(NSString*)_connection;
 
 @end
 
@@ -32,12 +29,9 @@
 @synthesize statusDisplay;
 @synthesize bootingLabel;
 @synthesize productLabel;
-@synthesize postRunning;
-@synthesize postOK;
-@synthesize consoleStarting;
-@synthesize consoleStarted;
-@synthesize connecting;
-@synthesize connected;
+@synthesize post;
+@synthesize console;
+@synthesize connection;
 @synthesize counter;
 
 //===================================================================================================================================
@@ -45,8 +39,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertBootingLabel {
-    self.bootingLabel = [CCLabel labelWithString:@"Booting" fontName:@"Retroville NC" fontSize:20];
-    self.bootingLabel.position = CGPointMake(20.0f, 376.0f);
+    self.bootingLabel = [CCLabel labelWithString:@"Booting" fontName:@"Courier" fontSize:28];
+    self.bootingLabel.position = CGPointMake(20.0f, 361.0f);
     self.bootingLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     self.bootingLabel.color = ccc3(103,243,27);
     [self addChild:self.bootingLabel];
@@ -54,7 +48,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertProductLabel {
-    self.productLabel = [CCLabel labelWithString:@"an imaginary product" fontName:@"Retroville NC" fontSize:20];
+    self.productLabel = [CCLabel labelWithString:@"an imaginary product" fontName:@"Courier" fontSize:24];
     self.productLabel.position = CGPointMake(20.0f, 20.0f);
     self.productLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     self.productLabel.color = ccc3(103,243,27);
@@ -62,45 +56,30 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)loadPOSTRunning {
-    self.postRunning = [CCSprite spriteWithFile:@"POST-running.png"];
-    self.postRunning.position = CGPointMake(0.0f, 370.0f);
-    self.postRunning.anchorPoint = CGPointMake(0.0f, 0.0f);
+- (void)insertPOST:(NSString*)_post {
+    self.post = [CCLabel labelWithString:_post fontName:@"Courier" fontSize:28];
+    self.post.position = CGPointMake(20.0f, 361.0f);
+    self.post.anchorPoint = CGPointMake(0.0f, 0.0f);
+    self.post.color = ccc3(103,243,27);
+    [self addChild:self.post];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)loadPOSTOK {
-    self.postOK = [CCSprite spriteWithFile:@"POST-ok.png"];
-    self.postOK.position = CGPointMake(0.0f, 370.0f);
-    self.postOK.anchorPoint = CGPointMake(0.0f, 0.0f);
+- (void)insertConsole:(NSString*)_console {
+    self.console = [CCLabel labelWithString:_console fontName:@"Courier" fontSize:28];
+    self.console.position = CGPointMake(20.0f, 321.0f);
+    self.console.anchorPoint = CGPointMake(0.0f, 0.0f);
+    self.console.color = ccc3(103,243,27);
+    [self addChild:self.console];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)loadConsoleStarting {
-    self.consoleStarting = [CCSprite spriteWithFile:@"Console-starting.png"];
-    self.consoleStarting.position = CGPointMake(0.0f, 340.0f);
-    self.consoleStarting.anchorPoint = CGPointMake(0.0f, 0.0f);
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)loadConsoleStarted {
-    self.consoleStarted = [CCSprite spriteWithFile:@"Console-started.png"];
-    self.consoleStarted.position = CGPointMake(0.0f, 340.0f);
-    self.consoleStarted.anchorPoint = CGPointMake(0.0f, 0.0f);
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)loadConnecting {
-    self.connecting = [CCSprite spriteWithFile:@"Connecting.png"];
-    self.connecting.position = CGPointMake(0.0f, 310.0f);
-    self.connecting.anchorPoint = CGPointMake(0.0f, 0.0f);
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)loadConnected {
-    self.connected = [CCSprite spriteWithFile:@"Connected.png"];
-    self.connected.position = CGPointMake(0.0f, 310.0f);
-    self.connected.anchorPoint = CGPointMake(0.0f, 0.0f);
+- (void)insertConnection:(NSString*)_connection {
+    self.connection = [CCLabel labelWithString:_connection fontName:@"Courier" fontSize:28];
+    self.connection.position = CGPointMake(20.0f, 281.0f);
+    self.connection.anchorPoint = CGPointMake(0.0f, 0.0f);
+    self.connection.color = ccc3(103,243,27);
+    [self addChild:self.connection];
 }
 
 //===================================================================================================================================
@@ -122,12 +101,6 @@
         [self.statusDisplay insert:self];
         [self.statusDisplay addTerminalText:@"$ boot"];
         [self insertBootingLabel];
-        [self loadPOSTRunning];
-        [self loadPOSTOK];
-        [self loadConsoleStarting];
-        [self loadConsoleStarted];
-        [self loadConnecting];
-        [self loadConnected];
         [self schedule:@selector(nextFrame:)];
     }
 	return self;
@@ -153,7 +126,7 @@
         [self.bootingLabel removeFromParentAndCleanup:YES];
         [self.statusDisplay addTerminalText:@"$ post"];
         [self.statusDisplay setTest:EnergyDisplayType];
-        [self addChild:self.postRunning];
+        [self insertPOST:@"POST    [start]"];
     } else if (self.counter == kBOOT_TICK_7) {
         [self.statusDisplay setTest:SpeedDisplayType];
     } else if (self.counter == kBOOT_TICK_8) {
@@ -164,19 +137,19 @@
         [self.statusDisplay clear];
     } else if (self.counter == kBOOT_TICK_11) {
         [self.statusDisplay test];
-        [self.postRunning removeFromParentAndCleanup:YES];
-        [self addChild:self.postOK];
+        [self.post removeFromParentAndCleanup:YES];
+        [self insertPOST:@"POST    [OK]"];
         [self.statusDisplay addTerminalText:@"$ con"];
-        [self addChild:self.consoleStarting];
+        [self insertConsole:@"console [start]"];
     } else if (self.counter == kBOOT_TICK_12) {
         [self.statusDisplay clear];
-        [self.consoleStarting removeFromParentAndCleanup:YES];
-        [self addChild:self.consoleStarted];
-        [self addChild:self.connecting];
+        [self.console removeFromParentAndCleanup:YES];
+        [self insertConsole:@"console [started]"];
+        [self insertConnection:@"connecting"];
     } else if (self.counter == kBOOT_TICK_13) {
         [self.statusDisplay test];
-        [self.connecting removeFromParentAndCleanup:YES];
-        [self addChild:self.connected];
+        [self.connection removeFromParentAndCleanup:YES];
+        [self insertConnection:@"connected"];
     }    
 }
 

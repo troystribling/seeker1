@@ -51,7 +51,6 @@
 		0540120F12A2D12900CCC62D /* empty-display.png in Resources */ = {isa = PBXBuildFile; fileRef = 0540120E12A2D12900CCC62D /* empty-display.png */; };
 		054012BB12A30FF600CCC62D /* Apple ][.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 054012B912A30FF600CCC62D /* Apple ][.ttf */; };
 		054012BC12A30FF600CCC62D /* Retroville NC.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 054012BA12A30FF600CCC62D /* Retroville NC.ttf */; };
-		0547A42A12AC01ED00D2F0D1 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0547A42912AC01ED00D2F0D1 /* Default.png */; };
 		0547A46312AC33C700D2F0D1 /* TerminalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0547A46112AC33C700D2F0D1 /* TerminalViewController.m */; };
 		0547A46712AC349400D2F0D1 /* TerminalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0547A46612AC349400D2F0D1 /* TerminalViewController.xib */; };
 		0547A48012AC388C00D2F0D1 /* TerminalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0547A47F12AC388C00D2F0D1 /* TerminalCell.m */; };
@@ -61,6 +60,7 @@
 		0547A4B912AC4FD000D2F0D1 /* NSObjectExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0547A4B812AC4FD000D2F0D1 /* NSObjectExtension.m */; };
 		0547A4C112AC509700D2F0D1 /* ProgramNgin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0547A4C012AC509700D2F0D1 /* ProgramNgin.m */; };
 		0556B81D129C603B00B5F8FB /* SeekerSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 0556B81C129C603B00B5F8FB /* SeekerSprite.m */; };
+		0564145E12ADFF0C00B9D734 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0564145D12ADFF0C00B9D734 /* Default.png */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		504DFBCE10AF12E9006D82FE /* CLScoreServerPost.h in Headers */ = {isa = PBXBuildFile; fileRef = 504DFBC810AF12E9006D82FE /* CLScoreServerPost.h */; };
 		504DFBCF10AF12E9006D82FE /* CLScoreServerPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 504DFBC910AF12E9006D82FE /* CLScoreServerPost.m */; };
@@ -341,7 +341,6 @@
 		0540120E12A2D12900CCC62D /* empty-display.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "empty-display.png"; sourceTree = "<group>"; };
 		054012B912A30FF600CCC62D /* Apple ][.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Apple ][.ttf"; sourceTree = "<group>"; };
 		054012BA12A30FF600CCC62D /* Retroville NC.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Retroville NC.ttf"; sourceTree = "<group>"; };
-		0547A42912AC01ED00D2F0D1 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		0547A46012AC33C700D2F0D1 /* TerminalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerminalViewController.h; sourceTree = "<group>"; };
 		0547A46112AC33C700D2F0D1 /* TerminalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerminalViewController.m; sourceTree = "<group>"; };
 		0547A46612AC349400D2F0D1 /* TerminalViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TerminalViewController.xib; sourceTree = "<group>"; };
@@ -358,6 +357,7 @@
 		0547A4C012AC509700D2F0D1 /* ProgramNgin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramNgin.m; sourceTree = "<group>"; };
 		0556B81B129C603B00B5F8FB /* SeekerSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeekerSprite.h; sourceTree = "<group>"; };
 		0556B81C129C603B00B5F8FB /* SeekerSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeekerSprite.m; sourceTree = "<group>"; };
+		0564145D12ADFF0C00B9D734 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* seeker1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = seeker1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F3B9A820EF2151B00286867 /* seeker1_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = seeker1_Prefix.pch; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1095,7 +1095,7 @@
 				50F414EE1069373D002A0D5E /* Icon.png */,
 				50F414EF1069373D002A0D5E /* Info.plist */,
 				053D2BF1129C309100AB59FA /* seeker-1.png */,
-				0547A42912AC01ED00D2F0D1 /* Default.png */,
+				0564145D12ADFF0C00B9D734 /* Default.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1314,12 +1314,12 @@
 				050D2FCB12A9E6630093C9EE /* menu-run.png in Resources */,
 				050D2FCC12A9E6630093C9EE /* menu-term.png in Resources */,
 				050D2FCE12A9E69E0093C9EE /* menu-main.png in Resources */,
-				0547A42A12AC01ED00D2F0D1 /* Default.png in Resources */,
 				0547A46712AC349400D2F0D1 /* TerminalViewController.xib in Resources */,
 				0547A48212AC38B100D2F0D1 /* TerminalCell.xib in Resources */,
 				050F795F12AC69030017BDE1 /* terminal-launcher.png in Resources */,
 				051A7D9A12AC85BD00CC9DF9 /* terminal-launcher-back.png in Resources */,
 				051A7D9B12AC85BD00CC9DF9 /* terminal-launcher-run.png in Resources */,
+				0564145E12ADFF0C00B9D734 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
