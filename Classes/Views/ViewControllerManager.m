@@ -9,6 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "ViewControllerManager.h"
 #import "TerminalViewController.h"
+#import "FunctionsViewController.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 static ViewControllerManager* thisViewControllerManager = nil;
@@ -23,6 +24,7 @@ static ViewControllerManager* thisViewControllerManager = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize terminalViewController;
+@synthesize functionsViewController;
 
 //===================================================================================================================================
 #pragma mark ViewControllerManager PrivateApi
@@ -66,8 +68,38 @@ static ViewControllerManager* thisViewControllerManager = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)rerminalViewWillDisappear {
+- (void)terminalViewWillDisappear {
     [self.terminalViewController viewWillDisappear:NO];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// FunctionsViewController
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (FunctionsViewController*)showFunctionsView:(TerminalViewController*)_terminalViewController {
+    if (self.functionsViewController == nil) {
+        self.functionsViewController = [FunctionsViewController inTerminalViewController:_terminalViewController];
+    } 
+    [_terminalViewController.containerView addSubview:self.functionsViewController.view];
+    [self.functionsViewController viewWillAppear:NO];
+    return self.functionsViewController;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeFunctionsView {
+    if (self.functionsViewController) {
+        [self.functionsViewController viewWillDisappear:NO];
+        [self.functionsViewController.view removeFromSuperview];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)functionsViewWillAppear {
+    [self.functionsViewController viewWillAppear:NO];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)functionsViewWillDisappear {
+    [self.functionsViewController viewWillDisappear:NO];
 }
 
 @end

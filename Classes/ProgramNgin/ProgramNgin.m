@@ -38,4 +38,14 @@ static ProgramNgin* thisProgramNgin = nil;
     return thisProgramNgin;
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSMutableArray*)getPrimativeFunctions {
+    return [NSMutableArray arrayWithObjects:@"move", @"turn left", @"get sample", @"put sensor", nil];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSMutableArray*)getUserFunctions {
+    return [NSMutableArray arrayWithCapacity:10];
+}
+
 @end

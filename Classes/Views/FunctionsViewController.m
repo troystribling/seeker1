@@ -1,42 +1,44 @@
 //
-//  TerminalViewController.m
+//  FunctionsViewController.m
 //  seeker1
 //
-//  Created by Troy Stribling on 12/5/10.
+//  Created by Troy Stribling on 12/7/10.
 //  Copyright 2010 imaginary products. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "TerminalViewController.h"
 #import "FunctionsViewController.h"
-#import "ViewControllerManager.h"
-#import "TerminalCell.h"
+#import "TerminalViewController.h"
 #import "CellUtils.h"
+#import "TerminalCell.h"
+#import "ProgramNgin.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface TerminalViewController (PrivateAPI)
+@interface FunctionsViewController (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation TerminalViewController
+@implementation FunctionsViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize programView;
+@synthesize functionsView;
 @synthesize containerView;
-@synthesize programListing;
-@synthesize functionUpdate;
-@synthesize rowUpdated;
+@synthesize functionList;
+@synthesize terminalViewController;
 
 //===================================================================================================================================
-#pragma mark TerminalViewController PrivateAPI
+#pragma mark FunctionsViewController PrivateAPI
 
 //===================================================================================================================================
-#pragma mark TerminalViewController
+#pragma mark FunctionsViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (id)inView:(UIView*)_containerView {
-    return [[TerminalViewController alloc] initWithNibName:@"TerminalViewController" bundle:nil inView:_containerView];
++ (id)inTerminalViewController:(TerminalViewController*)_terminalViewController {
+    FunctionsViewController* viewController = 
+    [[FunctionsViewController alloc] initWithNibName:@"FunctionsViewController" bundle:nil inView:_terminalViewController.containerView];
+    viewController.terminalViewController = _terminalViewController;
+    return viewController;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -44,7 +46,7 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.view.frame = self.containerView.frame;
-        self.programListing = [NSMutableArray arrayWithCapacity:10];
+        self.functionList = [NSMutableArray arrayWithCapacity:10];
     }
     return self;
 }
@@ -54,13 +56,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
-    [TerminalLauncherView inView:self.view andDelegate:self];
-    self.programView.separatorColor = [UIColor blackColor];
+    [FunctionsLauncherView inView:self.view andDelegate:self];
+    self.functionsView.separatorColor = [UIColor blackColor];
     [super viewDidLoad];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
+    self.functionList = [[ProgramNgin instance] getPrimativeFunctions];
 	[super viewWillAppear:animated];
 }
 
@@ -100,24 +103,21 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.programListing count] + 1;
+    return [self.functionList count];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TerminalCell* cell = (TerminalCell*)[CellUtils createCell:[TerminalCell class] forTableView:tableView];
-    if (indexPath.row == [self.programListing count]) {
-        cell.lineLabel.text = @"$";
-    } else {
-        cell.lineLabel.text = [NSString stringWithFormat:@"$ %@", [self.programListing objectAtIndex:indexPath.row]];
-    }
+    cell.lineLabel.text = [self.functionList objectAtIndex:indexPath.row];
     return cell;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
+    return NO;
 }
+
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath*)indexPath {    
@@ -142,8 +142,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.rowUpdated = indexPath.row;
-    [[ViewControllerManager instance] showFunctionsView:self];
+    NSString* function = [self.functionList objectAtIndex:indexPath.row];
+    if (self.terminalViewController.rowUpdated < [self.terminalViewController.programListing count]) {
+        [self.terminalViewController.programListing replaceObjectAtIndex:self.terminalViewController.rowUpdated withObject:function];
+    } else {
+        [self.terminalViewController.programListing addObject:function];
+    }
+    [self.terminalViewController.programView reloadData];
+    [self.view removeFromSuperview];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -155,4 +161,3 @@
 #pragma mark NSObject
 
 @end
-
