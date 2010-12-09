@@ -21,6 +21,9 @@ static ProgramNgin* thisProgramNgin = nil;
 @implementation ProgramNgin
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize program;
+@synthesize runProgram;
+@synthesize currentStep;
 
 //===================================================================================================================================
 #pragma mark ProgramNgin PrivateApi
@@ -39,6 +42,15 @@ static ProgramNgin* thisProgramNgin = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (id)init {
+	if((self=[super init])) {
+        self.program = [NSMutableArray arrayWithCapacity:10];
+        self.currentStep = 0;
+	}
+	return self;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (NSMutableArray*)getPrimativeFunctions {
     return [NSMutableArray arrayWithObjects:@"move", @"turn left", @"get sample", @"put sensor", nil];
 }
@@ -46,6 +58,26 @@ static ProgramNgin* thisProgramNgin = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSMutableArray*)getUserFunctions {
     return [NSMutableArray arrayWithCapacity:10];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)loadProgram:(NSMutableArray*)_program {
+    self.program = _program;
+    self.currentStep = 0;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)restartProgram {
+    self.currentStep = 0;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)endOfProgram {
+    BOOL endOfProgram = NO;
+    if (self.currentStep == [self.program count] -1) {
+        endOfProgram = YES;
+    }
+    return endOfProgram;
 }
 
 @end

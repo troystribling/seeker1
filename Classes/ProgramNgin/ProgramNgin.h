@@ -13,13 +13,22 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ProgramNgin : NSObject {
+    NSMutableArray* program;
+    BOOL runProgram;
+    NSInteger currentStep;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@property (nonatomic, retain) NSMutableArray* program;
+@property (nonatomic, assign) BOOL runProgram;
+@property (nonatomic, assign) NSInteger currentStep;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ProgramNgin*)instance;
 - (NSMutableArray*)getPrimativeFunctions;
 - (NSMutableArray*)getUserFunctions;
+- (void)loadProgram:(NSMutableArray*)_program;
+- (void)restartProgram;
+- (BOOL)endOfProgram;
 
 @end

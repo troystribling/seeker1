@@ -32,7 +32,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)create {
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
-    CGRect _frame = CGRectMake(0.38*screenSize.width, 0.0f, 0.62*screenSize.width, 0.32*screenSize.height);
+    CGRect _frame = CGRectMake(0.5*screenSize.width, 0.0f, 0.5*screenSize.width, 0.25*screenSize.height);
     return [[[MapMenuView alloc] initWithFrame:_frame] autorelease];
 }
 

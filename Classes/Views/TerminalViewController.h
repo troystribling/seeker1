@@ -15,18 +15,22 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TerminalViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, LauncherViewDelegate> {
     IBOutlet UITableView* programView;
+    TerminalLauncherView* terminalLauncherView;
     UIView* containerView;
 	NSMutableArray* programListing;
     NSString* functionUpdate;
-    NSInteger rowUpdated;
+    NSInteger rowUpdated;    
+    BOOL editingEnabled;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UITableView* programView;
+@property (nonatomic, retain) TerminalLauncherView* terminalLauncherView;
 @property (nonatomic, retain) UIView* containerView;
 @property (nonatomic, retain) NSMutableArray* programListing;
 @property (nonatomic, retain) NSString* functionUpdate;
 @property (nonatomic, assign) NSInteger rowUpdated;
+@property (nonatomic, assign) BOOL editingEnabled;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)inView:(UIView*)_view;

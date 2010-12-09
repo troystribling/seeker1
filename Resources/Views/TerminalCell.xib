@@ -50,7 +50,7 @@
 							<object class="IBUILabel" id="659126751">
 								<reference key="NSNextResponder" ref="174063417"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{20, 14}, {280, 26}}</string>
+								<string key="NSFrame">{{20, 12}, {280, 26}}</string>
 								<reference key="NSSuperview" ref="174063417"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -75,7 +75,7 @@
 								<float key="IBUIMinimumFontSize">10</float>
 							</object>
 						</object>
-						<string key="NSFrameSize">{320, 60}</string>
+						<string key="NSFrameSize">{320, 50}</string>
 						<reference key="NSSuperview" ref="106008330"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -88,7 +88,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</object>
-				<string key="NSFrameSize">{320, 60}</string>
+				<string key="NSFrameSize">{320, 50}</string>
 				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor" id="794427284">
 					<int key="NSColorSpace">1</int>
@@ -164,11 +164,11 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>UIResponder</string>
 					<string>TerminalCell</string>
-					<string>{{685, 718}, {320, 60}}</string>
+					<string>{{685, 728}, {320, 50}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABB4AAAwhgAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABBoAAAwhgAAA</bytes>
 					</object>
 				</object>
 			</object>
