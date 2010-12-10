@@ -15,13 +15,13 @@
 @interface ProgramNgin : NSObject {
     NSMutableArray* program;
     BOOL runProgram;
-    NSInteger currentStep;
+    NSInteger nextLine;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) NSMutableArray* program;
 @property (nonatomic, assign) BOOL runProgram;
-@property (nonatomic, assign) NSInteger currentStep;
+@property (nonatomic, assign) NSInteger nextLine;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ProgramNgin*)instance;
@@ -29,6 +29,6 @@
 - (NSMutableArray*)getUserFunctions;
 - (void)loadProgram:(NSMutableArray*)_program;
 - (void)restartProgram;
-- (BOOL)endOfProgram;
+- (NSString*)nextInstruction;
 
 @end

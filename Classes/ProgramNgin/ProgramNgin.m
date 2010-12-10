@@ -23,7 +23,7 @@ static ProgramNgin* thisProgramNgin = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize program;
 @synthesize runProgram;
-@synthesize currentStep;
+@synthesize nextLine;
 
 //===================================================================================================================================
 #pragma mark ProgramNgin PrivateApi
@@ -45,7 +45,7 @@ static ProgramNgin* thisProgramNgin = nil;
 - (id)init {
 	if((self=[super init])) {
         self.program = [NSMutableArray arrayWithCapacity:10];
-        self.currentStep = 0;
+        self.nextLine = 0;
 	}
 	return self;
 }
@@ -63,21 +63,26 @@ static ProgramNgin* thisProgramNgin = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadProgram:(NSMutableArray*)_program {
     self.program = _program;
-    self.currentStep = 0;
+    self.nextLine = 0;
+    self.runProgram = YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)restartProgram {
-    self.currentStep = 0;
+    self.nextLine = 0;
+    self.runProgram = YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)endOfProgram {
-    BOOL endOfProgram = NO;
-    if (self.currentStep == [self.program count] -1) {
-        endOfProgram = YES;
-    }
-    return endOfProgram;
+- (NSString*)nextInstruction {
+    NSString* instruction = nil;
+    if (self.nextLine < [self.program count]) {
+        instruction = [self.program objectAtIndex:self.nextLine];
+        self.nextLine++;
+    } else {
+        self.runProgram = NO;
+    }    
+    return instruction;
 }
 
 @end

@@ -11,6 +11,7 @@
 #import "MapMenuView.h"
 #import "SeekerSprite.h"
 #import "StatusDisplay.h"
+#import "ProgramNgin.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapScene (PrivateAPI)
@@ -222,9 +223,15 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void) nextFrame:(ccTime)dt {
+    ProgramNgin* ngin = [ProgramNgin instance];
 	if ([self.tileMap numberOfRunningActions] == 0) {
         if (self.seeker1.isUninitiailized) {
             [self setSeekerStartPosition];
+        }
+        if ([[ProgramNgin instance] runProgram]) {
+            NSString* instruction = nil;
+            if ((instruction = [ngin nextInstruction])) {
+            }
         }
 	}
 }
