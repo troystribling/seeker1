@@ -46,6 +46,7 @@
 @synthesize speed;
 @synthesize startSite;
 @synthesize sensorSites;
+@synthesize sensorPool;
 @synthesize sampleSites;
 @synthesize menuRect;
 @synthesize menu;
@@ -89,6 +90,7 @@
             [self.sensorSites addObject:obj];
         }
     }
+    self.sensorPool = [self.sensorSites count];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -113,8 +115,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setSeekerStartPosition {
     CGPoint startPoint = [self getPointFromObjectProperties:self.startSite];
-    NSString* orientation = [self.startSite valueForKey:@"orientation"];
-    [self.seeker1 setToStartPoint:startPoint withOrientation:orientation];
+    NSString* bearing = [self.startSite valueForKey:@"bearing"];
+    self.sensorPool = [self.seeker1 loadSensors:self.sensorPool];
+    [self.seeker1 setToStartPoint:startPoint withBearing:bearing];
     [self addChild:self.seeker1];
 }
 
@@ -228,9 +231,14 @@
         if (self.seeker1.isUninitiailized) {
             [self setSeekerStartPosition];
         }
-        if ([[ProgramNgin instance] runProgram]) {
+        if ([[ProgramNgin instance] runProgram] && [self.seeker1 numberOfRunningActions] == 0) {
             NSString* instruction = nil;
             if ((instruction = [ngin nextInstruction])) {
+                if ([instruction isEqualToString:@"move"]) {
+                } else if ([instruction isEqualToString:@"turn left"]) {
+                } else if ([instruction isEqualToString:@"put sensor"]) {
+                } else if ([instruction isEqualToString:@"get sample"]) {
+                }
             }
         }
 	}

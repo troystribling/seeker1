@@ -11,18 +11,38 @@
 #import "cocos2d.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+typedef enum tagSeekerBearing {
+    NorthSeekerBearing,
+    SouthSeekerBearing,
+    EastSeekerBearing,
+    WestSeekerBearing,
+} SeekerBearing;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface SeekerSprite : CCSprite {
     BOOL isUninitiailized;
+    SeekerBearing bearing;
+    NSInteger sensorCount;
+    NSInteger sampleCount;
+    CGFloat speed;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, assign) BOOL isUninitiailized;
+@property (nonatomic, assign) SeekerBearing bearing;
+@property (nonatomic, assign) NSInteger sensorCount;
+@property (nonatomic, assign) NSInteger sampleCount;
+@property (nonatomic, assign) CGFloat speed;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)create;
-- (void)setToStartPoint:(CGPoint)_point withOrientation:(NSString*)_orientation;
+- (void)setToStartPoint:(CGPoint)_point withBearing:(NSString*)_bearing;
 - (void)moveToPoint:(CGPoint)_point;
+- (void)rotateLeft;
+- (BOOL)getSample;
+- (void)putSensor;
+- (NSInteger)loadSensors:(NSInteger)_sensors;
 
 @end
