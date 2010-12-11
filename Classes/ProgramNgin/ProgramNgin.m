@@ -68,20 +68,24 @@ static ProgramNgin* thisProgramNgin = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)restartProgram {
+- (void)stopProgram {
     self.nextLine = 0;
-    self.runProgram = YES;
+    self.runProgram = NO;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSString*)nextInstruction {
     NSString* instruction = nil;
-    if (self.nextLine < [self.program count]) {
+    if (self.nextLine < [self.program count] - 1) {
         instruction = [self.program objectAtIndex:self.nextLine];
         self.nextLine++;
+    } else if (self.nextLine == [self.program count] - 1) {
+        instruction = [self.program objectAtIndex:self.nextLine];
+        self.nextLine = 0;
     } else {
+        self.nextLine = 0;
         self.runProgram = NO;
-    }    
+    }   
     return instruction;
 }
 

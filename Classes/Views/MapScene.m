@@ -226,16 +226,17 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void) nextFrame:(ccTime)dt {
-    ProgramNgin* ngin = [ProgramNgin instance];
 	if ([self.tileMap numberOfRunningActions] == 0) {
+        ProgramNgin* ngin = [ProgramNgin instance];
         if (self.seeker1.isUninitiailized) {
             [self setSeekerStartPosition];
-        }
-        if ([[ProgramNgin instance] runProgram] && [self.seeker1 numberOfRunningActions] == 0) {
+        } else if ([ngin runProgram] && [self.seeker1 numberOfRunningActions] == 0) {
             NSString* instruction = nil;
             if ((instruction = [ngin nextInstruction])) {
                 if ([instruction isEqualToString:@"move"]) {
+                    [self.seeker1 moveBy:self.tileMap.tileSize];
                 } else if ([instruction isEqualToString:@"turn left"]) {
+                    [self.seeker1 turnLeft];
                 } else if ([instruction isEqualToString:@"put sensor"]) {
                 } else if ([instruction isEqualToString:@"get sample"]) {
                 }

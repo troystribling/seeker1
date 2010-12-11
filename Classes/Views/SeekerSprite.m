@@ -83,12 +83,27 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)moveToPoint:(CGPoint)_point {
-    [self runAction:[CCMoveBy actionWithDuration:kSEEKER_BASE_SPEED/self.speed position:_point]];
+- (void)moveBy:(CGSize)_delta {
+    CGPoint newPoint;
+    switch(self.bearing) {
+        case NorthSeekerBearing:
+            newPoint = CGPointMake(0.0, _delta.height);
+            break;
+        case SouthSeekerBearing:
+            newPoint = CGPointMake(0.0, -_delta.height);
+            break;
+        case EastSeekerBearing:
+            newPoint = CGPointMake(_delta.width, 0.0);
+            break;
+        case WestSeekerBearing:
+            newPoint = CGPointMake(-_delta.width, 0.0);
+            break;
+    }
+    [self runAction:[CCMoveBy actionWithDuration:kSEEKER_BASE_SPEED/self.speed position:newPoint]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)rotateLeft {
+- (void)turnLeft {
     self.bearing = [self leftFromBearing];
     [self runAction:[CCRotateBy actionWithDuration:kSEEKER_BASE_SPEED/self.speed angle:-90.0]];
 }

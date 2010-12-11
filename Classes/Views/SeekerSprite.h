@@ -39,8 +39,8 @@ typedef enum tagSeekerBearing {
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)create;
 - (void)setToStartPoint:(CGPoint)_point withBearing:(NSString*)_bearing;
-- (void)moveToPoint:(CGPoint)_point;
-- (void)rotateLeft;
+- (void)moveBy:(CGSize)_delta;
+- (void)turnLeft;
 - (BOOL)getSample;
 - (void)putSensor;
 - (NSInteger)loadSensors:(NSInteger)_sensors;

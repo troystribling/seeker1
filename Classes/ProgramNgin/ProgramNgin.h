@@ -28,7 +28,7 @@
 - (NSMutableArray*)getPrimativeFunctions;
 - (NSMutableArray*)getUserFunctions;
 - (void)loadProgram:(NSMutableArray*)_program;
-- (void)restartProgram;
+- (void)stopProgram;
 - (NSString*)nextInstruction;
 
 @end
