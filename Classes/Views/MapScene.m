@@ -78,7 +78,7 @@
     [self getSensorSites];
     CGSize tileMapTiles = self.tileMap.mapSize;
     CGSize tileMapTileSize = self.tileMap.tileSize;
-    self.tileMapSize = CGSizeMake(tileMapTiles.width*tileMapTileSize.width, tileMapTiles.width*tileMapTileSize.width);
+    self.tileMapSize = CGSizeMake(tileMapTiles.width*tileMapTileSize.width, tileMapTiles.height*tileMapTileSize.height);
     self.startSite = [self.objectsLayer objectNamed:@"startSite"];
     CGPoint startPoint = [self getPointFromObjectProperties:self.startSite];
     [self centerTileMapOnPoint:startPoint];
@@ -147,7 +147,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGPoint)screenCoordsToTileCoords:(CGPoint)_screenPoint {
     CGPoint tileMapPos = self.tileMap.position;
-	return ccpSub(_screenPoint, tileMapPos);
+    CGPoint screenCoords = ccpSub(_screenPoint, tileMapPos);
+	return CGPointMake(screenCoords.x, tileMapSize.height - screenCoords.y);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -172,7 +173,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)shouldMoveMap:(CGPoint)_delta {
-    CGPoint seekerPosition = [self screenCoordsToTileCoords:self.seeker1.position];
+    CGPoint newPosition = ccpAdd([self screenCoordsToTileCoords:self.seeker1.position], CGPointMake(_delta.x, -_delta.y));
+    if (newPosition.x < self.screenCenter.x || (self.tileMapSize.width - newPosition.x) < self.screenCenter.x) {
+        return NO;
+    } else if (newPosition.y < self.screenCenter.y || (self.tileMapSize.height - newPosition.y) < self.screenCenter.y) {
+        return NO;
+    }
     return YES;
 }
 
@@ -181,10 +187,9 @@
     CGPoint newPosition = ccpAdd([self screenCoordsToTileCoords:self.seeker1.position], CGPointMake(_delta.x, -_delta.y));
     CGPoint tilePosition = [self tileCoordsToTile:newPosition];
     CGSize tiles = self.tileMap.mapSize; 
-    if (tilePosition.x < 1 || tilePosition.x > (tiles.width - kMAP_EDGE_BUFFER)) {
+    if (tilePosition.x < kMAP_EDGE_BUFFER || tilePosition.x > (tiles.width - kMAP_EDGE_BUFFER)) {
         return NO;
-    }
-    if (tilePosition.y < 1 || tilePosition.y > (tiles.height - kMAP_EDGE_BUFFER)) {
+    } else if (tilePosition.y < 1 + kMAP_EDGE_BUFFER || tilePosition.y > (tiles.height - kMAP_EDGE_BUFFER - 1)) {
         return NO;
     }
     return YES;
@@ -281,6 +286,7 @@
                             [self.seeker1 moveBy:self.tileMap.tileSize];
                         }
                     } else {
+                        [ngin stopProgram];
                     }
                 } else if ([instruction isEqualToString:@"turn left"]) {
                     [self.seeker1 turnLeft];

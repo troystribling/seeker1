@@ -49,7 +49,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (SeekerBearing)leftFromBearing {
-    SeekerBearing left;
+    SeekerBearing left = 0;
     switch(self.bearing) {
         case NorthSeekerBearing:
             left = WestSeekerBearing;
