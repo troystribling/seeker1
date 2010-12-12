@@ -19,7 +19,7 @@
     UIView* containerView;
 	NSMutableArray* programListing;
     NSString* functionUpdate;
-    NSInteger rowUpdated;    
+    NSIndexPath* selectedLine;    
     BOOL editingEnabled;
 }
 
@@ -29,7 +29,7 @@
 @property (nonatomic, retain) UIView* containerView;
 @property (nonatomic, retain) NSMutableArray* programListing;
 @property (nonatomic, retain) NSString* functionUpdate;
-@property (nonatomic, assign) NSInteger rowUpdated;
+@property (nonatomic, assign) NSIndexPath* selectedLine;
 @property (nonatomic, assign) BOOL editingEnabled;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

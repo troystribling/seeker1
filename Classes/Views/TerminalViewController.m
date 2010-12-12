@@ -29,7 +29,7 @@
 @synthesize containerView;
 @synthesize programListing;
 @synthesize functionUpdate;
-@synthesize rowUpdated;
+@synthesize selectedLine;
 @synthesize editingEnabled;
 
 //===================================================================================================================================
@@ -150,7 +150,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath*)toIndexPath {
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath*)fromIndexPath toIndexPath:(NSIndexPath*)toIndexPath {
     NSString* lineOfCode = [self.programListing objectAtIndex:fromIndexPath.row];
     [self.programListing removeObjectAtIndex:fromIndexPath.row];
     [self.programListing insertObject:lineOfCode atIndex:toIndexPath.row];
@@ -171,7 +171,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.rowUpdated = indexPath.row;
+    self.selectedLine = indexPath;
     [[ViewControllerManager instance] showFunctionsView:self];
 }
 

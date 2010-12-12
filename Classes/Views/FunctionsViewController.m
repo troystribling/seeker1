@@ -143,12 +143,14 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString* function = [self.functionList objectAtIndex:indexPath.row];
-    if (self.terminalViewController.rowUpdated < [self.terminalViewController.programListing count]) {
-        [self.terminalViewController.programListing replaceObjectAtIndex:self.terminalViewController.rowUpdated withObject:function];
+    if (self.terminalViewController.selectedLine.row < [self.terminalViewController.programListing count]) {
+        [self.terminalViewController.programListing replaceObjectAtIndex:self.terminalViewController.selectedLine.row withObject:function];
     } else {
         [self.terminalViewController.programListing addObject:function];
     }
     [self.terminalViewController.programView reloadData];
+    NSIndexPath* bottomLine = [NSIndexPath indexPathForRow:(self.terminalViewController.selectedLine.row + 1) inSection:0];
+    [self.terminalViewController.programView scrollToRowAtIndexPath:bottomLine atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     [self.view removeFromSuperview];
 }
 

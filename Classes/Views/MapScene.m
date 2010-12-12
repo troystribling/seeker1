@@ -29,6 +29,7 @@
 - (void)moveMapTo:(CGPoint)_point withDuration:(CGFloat)_duration;
 - (BOOL)shouldMoveMap:(CGPoint)_delta;
 - (BOOL)moveIsInPlayingArea:(CGPoint)_delta;
+- (void)executeSeekerInstruction:(ccTime)dt;
 - (CGPoint)locationFromTouch:(UITouch*)touch;
 - (CGPoint)locationFromTouches:(NSSet*)touches;
 - (BOOL)isInMenuRect:(CGPoint)_point;
@@ -196,6 +197,31 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)executeSeekerInstruction:(ccTime)dt {
+    ProgramNgin* ngin = [ProgramNgin instance];
+    NSString* instruction = nil;
+    if ((instruction = [ngin nextInstruction])) {
+        if ([instruction isEqualToString:@"move"]) {
+            CGPoint delta = [self.seeker1 positionDeltaAlongBearing:self.tileMap.tileSize];
+            if ([self moveIsInPlayingArea:delta]) {
+                if ([self shouldMoveMap:delta]) {
+                    CGPoint mapPosition = ccpAdd(CGPointMake(-delta.x, -delta.y), self.tileMap.position);
+                    [self moveMapTo:mapPosition withDuration:1.0];
+                } else {
+                    [self.seeker1 moveBy:self.tileMap.tileSize];
+                }
+            } else {
+                [ngin stopProgram];
+            }
+        } else if ([instruction isEqualToString:@"turn left"]) {
+            [self.seeker1 turnLeft];
+        } else if ([instruction isEqualToString:@"put sensor"]) {
+        } else if ([instruction isEqualToString:@"get sample"]) {
+        }
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)moveMapTo:(CGPoint)_point withDuration:(CGFloat)_duration {
 	CCAction* move = [CCMoveTo actionWithDuration:_duration position:_point];
 	[tileMap stopAllActions];
@@ -274,26 +300,7 @@
         if (self.seeker1.isUninitiailized) {
             [self setSeekerStartPosition];
         } else if ([ngin runProgram] && seekerActions == 0) {
-            NSString* instruction = nil;
-            if ((instruction = [ngin nextInstruction])) {
-                if ([instruction isEqualToString:@"move"]) {
-                    CGPoint delta = [self.seeker1 positionDeltaAlongBearing:self.tileMap.tileSize];
-                    if ([self moveIsInPlayingArea:delta]) {
-                        if ([self shouldMoveMap:delta]) {
-                            CGPoint mapPosition = ccpAdd(CGPointMake(-delta.x, -delta.y), self.tileMap.position);
-                            [self moveMapTo:mapPosition withDuration:1.0];
-                        } else {
-                            [self.seeker1 moveBy:self.tileMap.tileSize];
-                        }
-                    } else {
-                        [ngin stopProgram];
-                    }
-                } else if ([instruction isEqualToString:@"turn left"]) {
-                    [self.seeker1 turnLeft];
-                } else if ([instruction isEqualToString:@"put sensor"]) {
-                } else if ([instruction isEqualToString:@"get sample"]) {
-                }
-            }
+            [self executeSeekerInstruction:dt];
         }
 	}
 }
