@@ -175,10 +175,31 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)shouldMoveMap:(CGPoint)_delta {
     CGPoint newPosition = ccpAdd([self screenCoordsToTileCoords:self.seeker1.position], CGPointMake(_delta.x, -_delta.y));
-    if (newPosition.x < self.screenCenter.x || (self.tileMapSize.width - newPosition.x) < self.screenCenter.x) {
-        return NO;
-    } else if (newPosition.y < self.screenCenter.y || (self.tileMapSize.height - newPosition.y) < self.screenCenter.y) {
-        return NO;
+    CGPoint seekerScreen = self.seeker1.position;
+    if (self.seeker1.bearing == WestSeekerBearing) {        
+        if (newPosition.x < self.screenCenter.x) {
+            return NO;
+        } else if ((self.screenCenter.x - seekerScreen.x) < 0) {
+            return NO;
+        }
+    } else if (self.seeker1.bearing == EastSeekerBearing) {
+        if ((self.tileMapSize.width - newPosition.x) < self.screenCenter.x) {
+            return NO;
+        } else if ((self.screenCenter.x - seekerScreen.x) > 0) {
+            return NO;
+        }
+    } else if (self.seeker1.bearing == NorthSeekerBearing) {
+        if (newPosition.y < self.screenCenter.y) {
+            return NO;
+        } else if ((self.screenCenter.y - seekerScreen.y) > 0) {
+            return NO;
+        }
+    } else if (self.seeker1.bearing == SouthSeekerBearing) {
+        if ((self.tileMapSize.height - newPosition.y) < self.screenCenter.y) {
+            return NO;
+        } else if ((self.screenCenter.y - seekerScreen.y) < 0) {
+            return NO;
+        }
     }
     return YES;
 }

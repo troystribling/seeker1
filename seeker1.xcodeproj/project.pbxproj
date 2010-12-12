@@ -43,6 +43,7 @@
 		050D76A712AF143B005EF9BE /* FunctionsLauncherView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050D76A612AF143B005EF9BE /* FunctionsLauncherView.m */; };
 		050F792B12AC64910017BDE1 /* TerminalLauncherView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050F792A12AC64910017BDE1 /* TerminalLauncherView.m */; };
 		050F795012AC670F0017BDE1 /* LauncherView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050F794F12AC670F0017BDE1 /* LauncherView.m */; };
+		051B025312B555190078EF8B /* menu-stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 051B025212B555190078EF8B /* menu-stop.png */; };
 		051C779612B091AC00E41A23 /* terminal-launcher-edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 051C779512B091AC00E41A23 /* terminal-launcher-edit.png */; };
 		051C77C712B0A88300E41A23 /* terminal-launcher-editing.png in Resources */ = {isa = PBXBuildFile; fileRef = 051C77C612B0A88300E41A23 /* terminal-launcher-editing.png */; };
 		051E5896129B7CF000A5440E /* items.plist in Resources */ = {isa = PBXBuildFile; fileRef = 051E5894129B7CF000A5440E /* items.plist */; };
@@ -333,6 +334,7 @@
 		050F792A12AC64910017BDE1 /* TerminalLauncherView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerminalLauncherView.m; sourceTree = "<group>"; };
 		050F794E12AC670F0017BDE1 /* LauncherView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauncherView.h; sourceTree = "<group>"; };
 		050F794F12AC670F0017BDE1 /* LauncherView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LauncherView.m; sourceTree = "<group>"; };
+		051B025212B555190078EF8B /* menu-stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-stop.png"; sourceTree = "<group>"; };
 		051C779512B091AC00E41A23 /* terminal-launcher-edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-edit.png"; sourceTree = "<group>"; };
 		051C77C612B0A88300E41A23 /* terminal-launcher-editing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-editing.png"; sourceTree = "<group>"; };
 		051E5894129B7CF000A5440E /* items.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = items.plist; sourceTree = "<group>"; };
@@ -634,7 +636,6 @@
 			isa = PBXGroup;
 			children = (
 				050D765312AF0F6B005EF9BE /* BootDisplay */,
-				050D765A12AF0F6B005EF9BE /* Menu */,
 				050D765B12AF0F6B005EF9BE /* seeker-1.png */,
 				050D765C12AF0F6B005EF9BE /* StatusDisplay */,
 				050D766E12AF0F6B005EF9BE /* Terminal */,
@@ -655,13 +656,6 @@
 			path = BootDisplay;
 			sourceTree = "<group>";
 		};
-		050D765A12AF0F6B005EF9BE /* Menu */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Menu;
-			sourceTree = "<group>";
-		};
 		050D765C12AF0F6B005EF9BE /* StatusDisplay */ = {
 			isa = PBXGroup;
 			children = (
@@ -680,6 +674,7 @@
 				050D766912AF0F6B005EF9BE /* LCD-test.png */,
 				050D766A12AF0F6B005EF9BE /* menu-main.png */,
 				050D766B12AF0F6B005EF9BE /* menu-run.png */,
+				051B025212B555190078EF8B /* menu-stop.png */,
 				050D766C12AF0F6B005EF9BE /* menu-term.png */,
 				050D766D12AF0F6B005EF9BE /* terminal-menu.png */,
 			);
@@ -1350,6 +1345,7 @@
 				050D768C12AF0F6B005EF9BE /* terminal-launcher.png in Resources */,
 				051C779612B091AC00E41A23 /* terminal-launcher-edit.png in Resources */,
 				051C77C712B0A88300E41A23 /* terminal-launcher-editing.png in Resources */,
+				051B025312B555190078EF8B /* menu-stop.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

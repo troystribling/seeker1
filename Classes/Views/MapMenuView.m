@@ -22,6 +22,8 @@
 @implementation MapMenuView
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize runItem;
+@synthesize stopItem;
 
 //===================================================================================================================================
 #pragma mark MapMenuView PrivateAPI
@@ -56,11 +58,14 @@
         terminalItem.image = [UIImage imageNamed:@"menu-term.png"];
         terminalItem.contentMode = UIViewContentModeScaleToFill;
         [self addSubview:terminalItem];
-        CGRect runRect = CGRectMake(xOffset, yOffset+2.0*itemSize.height, itemSize.width,  itemSize.height);
-        TouchImageView* runItem = [TouchImageView createWithFrame:runRect name:@"run" andDelegate:self];
-        runItem.image = [UIImage imageNamed:@"menu-run.png"];
-        runItem.contentMode = UIViewContentModeScaleToFill;
-        [self addSubview:runItem];
+        CGRect programControlRect = CGRectMake(xOffset, yOffset+2.0*itemSize.height, itemSize.width,  itemSize.height);
+        self.runItem = [TouchImageView createWithFrame:programControlRect name:@"run" andDelegate:self];
+        self.runItem.image = [UIImage imageNamed:@"menu-run.png"];
+        self.runItem.contentMode = UIViewContentModeScaleToFill;
+        [self addSubview:self.runItem];
+        self.stopItem = [TouchImageView createWithFrame:programControlRect name:@"stop" andDelegate:self];
+        self.stopItem.image = [UIImage imageNamed:@"menu-stop.png"];
+        self.stopItem.contentMode = UIViewContentModeScaleToFill;
     }
     return self;
 }
@@ -68,6 +73,18 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
     [super dealloc];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addStop {
+    [self.runItem removeFromSuperview];
+    [self addSubview:self.stopItem];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addRun {
+    [self.stopItem removeFromSuperview];
+    [self addSubview:self.runItem];
 }
 
 //===================================================================================================================================
@@ -82,6 +99,7 @@
     } else if ([itemName isEqualToString:@"main"]) {
         [[CCDirector sharedDirector] replaceScene: [MainScene scene]];
     } else if ([itemName isEqualToString:@"run"]) {
+    } else if ([itemName isEqualToString:@"stop"]) {
     }
 }
 

@@ -74,6 +74,15 @@ static ProgramNgin* thisProgramNgin = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)programLoaded {
+    if ([self.program count] == 0) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (NSString*)nextInstruction {
     NSString* instruction = nil;
     if (self.nextLine < [self.program count] - 1) {
