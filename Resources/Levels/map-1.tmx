@@ -83,16 +83,16 @@
  </layer>
  <layer name="items" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA2NgGAWjYBSMglEwCkbBKBgFo2AUkAoEgZiThuYrArEkDc2nNeAaaAcMUgAAyv/Mm4ANAAA=
+   H4sIAAAAAAAAA2NgGAWjYBSMglEwHIAgEHPS0HxFIJakofm0BlwD7YBRMApGwSgYBaMACACUfutLgA0AAA==
   </data>
  </layer>
  <objectgroup name="objects" width="24" height="36">
-  <object name="startSite" x="150" y="1830">
+  <object name="startSite" x="750" y="930">
    <properties>
     <property name="bearing" value="south"/>
     <property name="energy" value="3"/>
    </properties>
   </object>
-  <object name="sensorSite" x="150" y="2010"/>
+  <object name="sensorSite" x="750" y="1110"/>
  </objectgroup>
 </map>

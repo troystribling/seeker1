@@ -83,23 +83,35 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)moveBy:(CGSize)_delta {
-    CGPoint newPoint;
+- (CGPoint)nextPositionForDelta:(CGSize)_delta {
+    CGPoint deltaBearing = [self positionDeltaAlongBearing:_delta];
+    return ccpAdd(self.position, deltaBearing);
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGPoint)positionDeltaAlongBearing:(CGSize)_delta {
+    CGPoint bearingDelta;
     switch(self.bearing) {
         case NorthSeekerBearing:
-            newPoint = CGPointMake(0.0, _delta.height);
+            bearingDelta = CGPointMake(0.0, _delta.height);
             break;
         case SouthSeekerBearing:
-            newPoint = CGPointMake(0.0, -_delta.height);
+            bearingDelta = CGPointMake(0.0, -_delta.height);
             break;
         case EastSeekerBearing:
-            newPoint = CGPointMake(_delta.width, 0.0);
+            bearingDelta = CGPointMake(_delta.width, 0.0);
             break;
         case WestSeekerBearing:
-            newPoint = CGPointMake(-_delta.width, 0.0);
+            bearingDelta = CGPointMake(-_delta.width, 0.0);
             break;
     }
-    [self runAction:[CCMoveBy actionWithDuration:kSEEKER_BASE_SPEED/self.speed position:newPoint]];
+    return bearingDelta;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)moveBy:(CGSize)_delta {
+    CGPoint deltaBearing = [self positionDeltaAlongBearing:_delta];
+    [self runAction:[CCMoveBy actionWithDuration:kSEEKER_BASE_SPEED/self.speed position:deltaBearing]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

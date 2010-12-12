@@ -47,6 +47,7 @@ typedef enum tagMapID {
     CGRect menuRect;
     MapMenuView* menu;
     CGPoint screenCenter;
+    CGSize tileMapSize;
     CCTMXTiledMap* tileMap;
     CCTMXLayer* mapLayer;
     CCTMXLayer* terrainLayer;
@@ -69,6 +70,7 @@ typedef enum tagMapID {
 @property (nonatomic, assign) CGRect menuRect;
 @property (nonatomic, retain) MapMenuView* menu;
 @property (nonatomic, assign) CGPoint screenCenter;
+@property (nonatomic, assign) CGSize tileMapSize;
 @property (nonatomic, retain) CCTMXTiledMap* tileMap;
 @property (nonatomic, retain) CCTMXLayer* mapLayer;
 @property (nonatomic, retain) CCTMXLayer* terrainLayer;
