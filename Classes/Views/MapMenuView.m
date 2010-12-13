@@ -10,8 +10,11 @@
 #import "MapMenuView.h"
 #import "cocos2d.h"
 #import "MainScene.h"
+#import "MapScene.h"
+#import "SeekerSprite.h"
 #import "TouchImageView.h"
 #import "ProgramNgin.h"
+#import "TerminalViewController.h"
 #import "ViewControllerManager.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -25,6 +28,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize runItem;
 @synthesize stopItem;
+@synthesize mapScene;
 
 //===================================================================================================================================
 #pragma mark MapMenuView PrivateAPI
@@ -95,13 +99,18 @@
     NSString* itemName = _menuItem.viewName;
     [self removeFromSuperview];
     if ([itemName isEqualToString:@"term"]) {
-        [[ViewControllerManager instance] showTerminalView:[[CCDirector sharedDirector] openGLView]];
+        TerminalViewController* viewController = [[ViewControllerManager instance] showTerminalView:[[CCDirector sharedDirector] openGLView]];
+        viewController.mapScene = self.mapScene;
     } else if ([itemName isEqualToString:@"main"]) {
         [[CCDirector sharedDirector] replaceScene: [MainScene scene]];
     } else if ([itemName isEqualToString:@"run"]) {
-        [[ProgramNgin instance] runProgram];
+        [ProgramNgin instance].runProgram = YES;
+        [self.mapScene addStopMenuItem];
     } else if ([itemName isEqualToString:@"stop"]) {
         [[ProgramNgin instance] stopProgram];
+        self.mapScene.seeker1.isUninitiailized = YES;
+        [self.mapScene loadMapLevel:1];
+        [self.mapScene addRunMenuItem];
     }
 }
 

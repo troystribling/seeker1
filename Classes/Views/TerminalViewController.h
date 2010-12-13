@@ -11,11 +11,14 @@
 #import "TerminalLauncherView.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@class TouchImageView;
+@class MapScene;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TerminalViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, LauncherViewDelegate> {
     IBOutlet UITableView* programView;
     TerminalLauncherView* terminalLauncherView;
+    MapScene* mapScene;
     UIView* containerView;
 	NSMutableArray* programListing;
     NSString* functionUpdate;
@@ -26,6 +29,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UITableView* programView;
 @property (nonatomic, retain) TerminalLauncherView* terminalLauncherView;
+@property (nonatomic, retain) MapScene* mapScene;
 @property (nonatomic, retain) UIView* containerView;
 @property (nonatomic, retain) NSMutableArray* programListing;
 @property (nonatomic, retain) NSString* functionUpdate;

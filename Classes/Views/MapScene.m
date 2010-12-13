@@ -16,7 +16,6 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapScene (PrivateAPI)
 
-- (void)loadMapLevel:(NSInteger)_level;
 - (void)getSensorSites;
 - (void)getSampleSites;
 - (void)unloadCurrentMapLevel;
@@ -34,8 +33,6 @@
 - (CGPoint)locationFromTouches:(NSSet*)touches;
 - (BOOL)isInMenuRect:(CGPoint)_point;
 - (void)showMenu;
-- (void)addStopMenuItem;
-- (void)addRunMenuItem;
 - (void)terminal;
 
 @end
@@ -95,6 +92,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)getSensorSites {
+    [self.sensorSites removeAllObjects];
     for (NSMutableDictionary* obj in self.objectsLayer.objects) {
         NSString* objName = [obj valueForKey:@"name"];
         if ([objName isEqualToString:@"sensorSite"]) {
@@ -106,6 +104,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)getSampleSites {
+    [self.sampleSites removeAllObjects];
     for (NSMutableDictionary* obj in self.objectsLayer.objects) {
         NSString* objName = [obj valueForKey:@"name"];
         if ([objName isEqualToString:@"sampleSite"]) {
@@ -223,7 +222,6 @@
 - (void)executeSeekerInstruction:(ccTime)dt {
     ProgramNgin* ngin = [ProgramNgin instance];
     NSString* instruction = nil;
-    [self addStopMenuItem];
     if ((instruction = [ngin nextInstruction])) {
         if ([instruction isEqualToString:@"move"]) {
             CGPoint delta = [self.seeker1 positionDeltaAlongBearing:self.tileMap.tileSize];
@@ -321,6 +319,7 @@
         self.sampleSites = [NSMutableArray arrayWithCapacity:10];
         self.speed = 0;
         self.menu = [MapMenuView create];
+        self.menu.mapScene = self;
         self.menuIsOpen = NO;
         [self.statusDisplay insert:self];
         [self.statusDisplay addTerminalText:@"$ main"];

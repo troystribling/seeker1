@@ -80,5 +80,8 @@ typedef enum tagMapID {
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)scene;
+- (void)loadMapLevel:(NSInteger)_level;
+- (void)addStopMenuItem;
+- (void)addRunMenuItem;
 
 @end

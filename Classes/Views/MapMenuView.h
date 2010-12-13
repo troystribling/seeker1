@@ -11,16 +11,19 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class TouchImageView;
+@class MapScene;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapMenuView : UIImageView {
     TouchImageView* runItem;
     TouchImageView* stopItem;
+    MapScene* mapScene;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) TouchImageView* runItem;
 @property (nonatomic, retain) TouchImageView* stopItem;
+@property (nonatomic, retain) MapScene* mapScene;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)create;

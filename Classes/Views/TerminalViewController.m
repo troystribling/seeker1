@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "TerminalViewController.h"
+#import "MapScene.h"
 #import "FunctionsViewController.h"
 #import "ViewControllerManager.h"
 #import "ProgramNgin.h"
@@ -26,6 +27,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize programView;
 @synthesize terminalLauncherView;
+@synthesize mapScene;
 @synthesize containerView;
 @synthesize programListing;
 @synthesize functionUpdate;
@@ -103,6 +105,7 @@
         }
     } else if ([name isEqualToString:@"run"]) {
         [[ProgramNgin instance] loadProgram:self.programListing];
+        [self.mapScene addStopMenuItem];
         [self.view removeFromSuperview];
     }
 }
