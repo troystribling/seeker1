@@ -11,6 +11,7 @@
 #import "cocos2d.h"
 #import "MainScene.h"
 #import "TouchImageView.h"
+#import "ProgramNgin.h"
 #import "ViewControllerManager.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -48,21 +49,20 @@
         CGSize itemSize = CGSizeMake(0.76*_frame.size.width,  0.24*_frame.size.height);
         CGFloat yOffset = _frame.size.height - 3.0*itemSize.height - 0.13*_frame.size.height;
         CGFloat xOffset = 0.05*_frame.size.width;
-        CGRect mainRect = CGRectMake(xOffset, yOffset, itemSize.width,  itemSize.height);
+        CGRect mainRect = CGRectMake(xOffset, yOffset+itemSize.height, itemSize.width,  itemSize.height);
         TouchImageView* mainItem = [TouchImageView createWithFrame:mainRect name:@"main" andDelegate:self];
         mainItem.image = [UIImage imageNamed:@"menu-main.png"];
         mainItem.contentMode = UIViewContentModeScaleToFill;
         [self addSubview:mainItem];
-        CGRect terminalRect = CGRectMake(xOffset, yOffset+itemSize.height, itemSize.width,  itemSize.height);
+        CGRect terminalRect = CGRectMake(xOffset, yOffset+2.0*itemSize.height, itemSize.width,  itemSize.height);
         TouchImageView* terminalItem = [TouchImageView createWithFrame:terminalRect name:@"term" andDelegate:self];
         terminalItem.image = [UIImage imageNamed:@"menu-term.png"];
         terminalItem.contentMode = UIViewContentModeScaleToFill;
         [self addSubview:terminalItem];
-        CGRect programControlRect = CGRectMake(xOffset, yOffset+2.0*itemSize.height, itemSize.width,  itemSize.height);
+        CGRect programControlRect = CGRectMake(xOffset, yOffset, itemSize.width,  itemSize.height);
         self.runItem = [TouchImageView createWithFrame:programControlRect name:@"run" andDelegate:self];
         self.runItem.image = [UIImage imageNamed:@"menu-run.png"];
         self.runItem.contentMode = UIViewContentModeScaleToFill;
-        [self addSubview:self.runItem];
         self.stopItem = [TouchImageView createWithFrame:programControlRect name:@"stop" andDelegate:self];
         self.stopItem.image = [UIImage imageNamed:@"menu-stop.png"];
         self.stopItem.contentMode = UIViewContentModeScaleToFill;
@@ -99,7 +99,9 @@
     } else if ([itemName isEqualToString:@"main"]) {
         [[CCDirector sharedDirector] replaceScene: [MainScene scene]];
     } else if ([itemName isEqualToString:@"run"]) {
+        [[ProgramNgin instance] runProgram];
     } else if ([itemName isEqualToString:@"stop"]) {
+        [[ProgramNgin instance] stopProgram];
     }
 }
 

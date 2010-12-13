@@ -34,6 +34,8 @@
 - (CGPoint)locationFromTouches:(NSSet*)touches;
 - (BOOL)isInMenuRect:(CGPoint)_point;
 - (void)showMenu;
+- (void)addStopMenuItem;
+- (void)addRunMenuItem;
 - (void)terminal;
 
 @end
@@ -221,6 +223,7 @@
 - (void)executeSeekerInstruction:(ccTime)dt {
     ProgramNgin* ngin = [ProgramNgin instance];
     NSString* instruction = nil;
+    [self addStopMenuItem];
     if ((instruction = [ngin nextInstruction])) {
         if ([instruction isEqualToString:@"move"]) {
             CGPoint delta = [self.seeker1 positionDeltaAlongBearing:self.tileMap.tileSize];
@@ -233,6 +236,7 @@
                 }
             } else {
                 [ngin stopProgram];
+                [self addRunMenuItem];
             }
         } else if ([instruction isEqualToString:@"turn left"]) {
             [self.seeker1 turnLeft];
@@ -277,6 +281,22 @@
     [[[CCDirector sharedDirector] openGLView] addSubview:self.menu];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addStopMenuItem{
+    [self.statusDisplay addTerminalText:@"$ stop"];
+    [self.statusDisplay addTerminalText:@"$ main"];
+    [self.statusDisplay addTerminalText:@"$ term"];
+    [self.menu addStop];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addRunMenuItem {
+    [self.statusDisplay addTerminalText:@"$ run"];
+    [self.statusDisplay addTerminalText:@"$ main"];
+    [self.statusDisplay addTerminalText:@"$ term"];
+    [self.menu addRun];
+}
+
 //===================================================================================================================================
 #pragma mark MapScene
 
@@ -305,7 +325,6 @@
         [self.statusDisplay insert:self];
         [self.statusDisplay addTerminalText:@"$ main"];
         [self.statusDisplay addTerminalText:@"$ term"];
-        [self.statusDisplay addTerminalText:@"$ run"];
         [self loadMapLevel:1];
         [self schedule:@selector(nextFrame:)];
 	}

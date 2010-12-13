@@ -29,7 +29,8 @@
 - (NSMutableArray*)getUserFunctions;
 - (void)loadProgram:(NSMutableArray*)_program;
 - (void)stopProgram;
-- (BOOL)programLoaded;
+- (BOOL)programIsLoaded;
+- (BOOL)programIsRunning;
 - (NSString*)nextInstruction;
 
 @end

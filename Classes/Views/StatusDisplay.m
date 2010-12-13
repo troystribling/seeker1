@@ -85,14 +85,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addTerminalText:(NSString*)_text {
-    if ([self.terminalText count] > 3) {
+    [self clearTerminal];
+    if ([self.terminalText count] > 2) {
         [self.terminalText removeLastObject];
     }
     CCLabel* _textLabel = [CCLabel labelWithString:_text fontName:@"Courier" fontSize:12];
     _textLabel.color = ccc3(103,243,27);
     _textLabel.anchorPoint = CGPointMake(0.0, 0.0);
     [self.terminalText insertObject:_textLabel atIndex:0];
-    [self clearTerminal];
     [self writeDisplay];
 }
 
