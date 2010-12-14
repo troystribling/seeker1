@@ -12,9 +12,11 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface SeekerSprite (PrivateAPI)
 
-- (void)setStartOrientation:(NSString*)_orientation;
+- (CGFloat)rotationFromNorthToBearing:(SeekerBearing)_bearing;
 - (CGFloat)rotateToNorthFromBearing;
+- (SeekerBearing)stringToBearing:(NSString*)_bearingString;
 - (SeekerBearing)leftFromBearing;
+- (void)rotate:(CGFloat)_angle;
 
 @end
 
@@ -31,21 +33,54 @@
 #pragma mark SeekerSprite PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)setStartBearing:(NSString*)_bearing {
+- (CGFloat)rotationFromNorthToBearing:(SeekerBearing)_bearing {
     CGFloat rotationAngle = 0.0;
-    if ([_bearing isEqualToString:@"east"]) {
-        self.bearing = EastSeekerBearing;
-        rotationAngle = -270.0;
-    } else if ([_bearing isEqualToString:@"west"]) {
-        self.bearing = WestSeekerBearing;
-        rotationAngle = -90.0;
-    } else if ([_bearing isEqualToString:@"south"]) {
-        self.bearing = SouthSeekerBearing;
-        rotationAngle = -180.0;
-    } else {
-        self.bearing = NorthSeekerBearing;
+    switch(_bearing) {
+        case NorthSeekerBearing:
+            break;
+        case SouthSeekerBearing:
+            rotationAngle = -180.0;
+            break;
+        case EastSeekerBearing:
+            rotationAngle = -270.0;
+            break;
+        case WestSeekerBearing:
+            rotationAngle = -90.0;
+            break;
     }
-    [self runAction:[CCRotateBy actionWithDuration:kSEEKER_BASE_SPEED/self.speed angle:rotationAngle]];
+    return rotationAngle;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGFloat)rotationToNorthFromBearing {
+    CGFloat rotationAngle = 0.0;
+    switch(self.bearing) {
+        case NorthSeekerBearing:
+            break;
+        case SouthSeekerBearing:
+            rotationAngle = 180.0;
+            break;
+        case EastSeekerBearing:
+            rotationAngle = 270.0;
+            break;
+        case WestSeekerBearing:
+            rotationAngle = 90.0;
+            break;
+    }
+    return rotationAngle;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (SeekerBearing)stringToBearing:(NSString*)_bearingString {
+    SeekerBearing transBearing = NorthSeekerBearing;
+    if ([_bearingString isEqualToString:@"east"]) {
+        transBearing = EastSeekerBearing;
+    } else if ([_bearingString isEqualToString:@"west"]) {
+        transBearing = WestSeekerBearing;
+    } else if ([_bearingString isEqualToString:@"south"]) {
+        transBearing = SouthSeekerBearing;
+    }
+    return transBearing;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -69,16 +104,8 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (CGFloat)rotationToNorthFromBearing {
-    CGFloat rotationAngle = 0.0;
-    if (self.bearing == EastSeekerBearing) {
-        rotationAngle = -270.0;
-    } else if (self.bearing == WestSeekerBearing) {
-        rotationAngle = -90.0;
-    } else if (self.bearing == SouthSeekerBearing) {
-        rotationAngle = -180.0;
-    }
-    return rotationAngle;
+- (void)rotate:(CGFloat)_angle {
+    [self runAction:[CCRotateBy actionWithDuration:kSEEKER_BASE_SPEED/self.speed angle:_angle]];
 }
 
 //===================================================================================================================================
@@ -92,12 +119,18 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setToStartPoint:(CGPoint)_point withBearing:(NSString*)_bearing {
     self.position = _point;
-    [self setStartBearing:_bearing];
+    self.bearing = [self stringToBearing:_bearing];
+    CGFloat startRotation = [self rotationFromNorthToBearing:self.bearing];
+    [self rotate:startRotation];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)resetToStartPoint:(CGPoint)_point withBearing:(NSString*)_bearing {
     self.position = _point;
+    self.bearing = [self stringToBearing:_bearing];
+    CGFloat northRotation = [self rotationToNorthFromBearing];
+    CGFloat startRotation = [self rotationFromNorthToBearing:self.bearing];
+    [self rotate:(northRotation + startRotation)];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

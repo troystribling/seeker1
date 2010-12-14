@@ -326,7 +326,6 @@
         self.menuIsOpen = NO;
         self.levelReset = NO;
         self.levelUninitiailized = NO;
-        self.levelResetRotateSeeker = NO;
         [self.statusDisplay insert:self];
         [self.statusDisplay addTerminalText:@"$ main"];
         [self.statusDisplay addTerminalText:@"$ term"];
@@ -347,7 +346,8 @@
             [self addChild:self.seeker1];
             self.levelUninitiailized = NO;
         } else if (self.levelReset) {
-            [self setSeekerStartPosition];
+            [self resetSeekerStartPosition];
+            [self addChild:self.seeker1];
             self.levelReset = NO;
         } else if ([ngin runProgram]) {
             [self executeSeekerInstruction:dt];
@@ -369,6 +369,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)resetLevel {
+    [self.seeker1 removeFromParentAndCleanup:YES];
     [self centerTileMapOnStartPoint];
     self.levelReset = YES;
 }
