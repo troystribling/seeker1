@@ -20,18 +20,60 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapMenuView (PrivateAPI)
 
+- (void)createMainItem:(CGRect)_rect;
+- (void)createTermItem:(CGRect)_rect;
+- (void)createRunItem:(CGRect)_rect;
+- (void)createResetItem:(CGRect)_rect;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation MapMenuView
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize mainItem;
+@synthesize termItem;
 @synthesize runItem;
-@synthesize stopItem;
+@synthesize resetItem;
 @synthesize mapScene;
+@synthesize firstRect;
+@synthesize secondRect;
+@synthesize thirdRect;
 
 //===================================================================================================================================
 #pragma mark MapMenuView PrivateAPI
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)createMainItem:(CGRect)_rect {
+    self.mainItem = [TouchImageView createWithFrame:_rect name:@"main" andDelegate:self];
+    self.mainItem.image = [UIImage imageNamed:@"menu-main.png"];
+    self.mainItem.contentMode = UIViewContentModeScaleToFill;
+    [self addSubview:self.mainItem];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)createTermItem:(CGRect)_rect {
+    self.termItem = [TouchImageView createWithFrame:_rect name:@"term" andDelegate:self];
+    self.termItem.image = [UIImage imageNamed:@"menu-term.png"];
+    self.termItem.contentMode = UIViewContentModeScaleToFill;
+    [self addSubview:self.termItem];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)createRunItem:(CGRect)_rect {
+    self.runItem = [TouchImageView createWithFrame:_rect name:@"run" andDelegate:self];
+    self.runItem.image = [UIImage imageNamed:@"menu-run.png"];
+    self.runItem.contentMode = UIViewContentModeScaleToFill;
+    [self addSubview:self.runItem];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)createResetItem:(CGRect)_rect {
+    self.resetItem = [TouchImageView createWithFrame:_rect name:@"reset" andDelegate:self];
+    self.resetItem.image = [UIImage imageNamed:@"menu-reset.png"];
+    self.resetItem.contentMode = UIViewContentModeScaleToFill;
+    [self addSubview:self.resetItem];
+}
 
 //===================================================================================================================================
 #pragma mark MapMenuView
@@ -53,23 +95,11 @@
         CGSize itemSize = CGSizeMake(0.76*_frame.size.width,  0.24*_frame.size.height);
         CGFloat yOffset = _frame.size.height - 3.0*itemSize.height - 0.13*_frame.size.height;
         CGFloat xOffset = 0.05*_frame.size.width;
-        CGRect mainRect = CGRectMake(xOffset, yOffset+itemSize.height, itemSize.width,  itemSize.height);
-        TouchImageView* mainItem = [TouchImageView createWithFrame:mainRect name:@"main" andDelegate:self];
-        mainItem.image = [UIImage imageNamed:@"menu-main.png"];
-        mainItem.contentMode = UIViewContentModeScaleToFill;
-        [self addSubview:mainItem];
-        CGRect terminalRect = CGRectMake(xOffset, yOffset+2.0*itemSize.height, itemSize.width,  itemSize.height);
-        TouchImageView* terminalItem = [TouchImageView createWithFrame:terminalRect name:@"term" andDelegate:self];
-        terminalItem.image = [UIImage imageNamed:@"menu-term.png"];
-        terminalItem.contentMode = UIViewContentModeScaleToFill;
-        [self addSubview:terminalItem];
-        CGRect programControlRect = CGRectMake(xOffset, yOffset, itemSize.width,  itemSize.height);
-        self.runItem = [TouchImageView createWithFrame:programControlRect name:@"run" andDelegate:self];
-        self.runItem.image = [UIImage imageNamed:@"menu-run.png"];
-        self.runItem.contentMode = UIViewContentModeScaleToFill;
-        self.stopItem = [TouchImageView createWithFrame:programControlRect name:@"stop" andDelegate:self];
-        self.stopItem.image = [UIImage imageNamed:@"menu-stop.png"];
-        self.stopItem.contentMode = UIViewContentModeScaleToFill;
+        self.firstRect = CGRectMake(xOffset, yOffset+2.0*itemSize.height, itemSize.width,  itemSize.height);
+        self.secondRect = CGRectMake(xOffset, yOffset+itemSize.height, itemSize.width,  itemSize.height);
+        self.thirdRect = CGRectMake(xOffset, yOffset, itemSize.width,  itemSize.height);
+        [self createMainItem:self.secondRect];
+        [self createTermItem:self.firstRect];
     }
     return self;
 }
@@ -80,15 +110,23 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addStop {
+- (void)addReset {
     [self.runItem removeFromSuperview];
-    [self addSubview:self.stopItem];
+    [self.mainItem removeFromSuperview];
+    [self.termItem removeFromSuperview];
+    [self createResetItem:self.firstRect];
+    [self createTermItem:self.secondRect];
+    [self createMainItem:self.thirdRect];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addRun {
-    [self.stopItem removeFromSuperview];
-    [self addSubview:self.runItem];
+    [self.resetItem removeFromSuperview];
+    [self.mainItem removeFromSuperview];
+    [self.termItem removeFromSuperview];
+    [self createRunItem:self.firstRect];
+    [self createTermItem:self.secondRect];
+    [self createMainItem:self.thirdRect];
 }
 
 //===================================================================================================================================
@@ -105,12 +143,13 @@
         [[CCDirector sharedDirector] replaceScene: [MainScene scene]];
     } else if ([itemName isEqualToString:@"run"]) {
         [ProgramNgin instance].runProgram = YES;
-        [self.mapScene addStopMenuItem];
-    } else if ([itemName isEqualToString:@"stop"]) {
+        [self.mapScene addResetTerminalItems];
+        [self addReset];
+    } else if ([itemName isEqualToString:@"reset"]) {
         [[ProgramNgin instance] stopProgram];
-        self.mapScene.seeker1.isUninitiailized = YES;
-        [self.mapScene loadMapLevel:1];
-        [self.mapScene addRunMenuItem];
+        [self.mapScene resetLevel];
+        [self.mapScene addRunTerminalItems];
+        [self addRun];
     }
 }
 

@@ -9,6 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "TerminalViewController.h"
 #import "MapScene.h"
+#import "MapMenuView.h"
 #import "FunctionsViewController.h"
 #import "ViewControllerManager.h"
 #import "ProgramNgin.h"
@@ -105,7 +106,8 @@
         }
     } else if ([name isEqualToString:@"run"]) {
         [[ProgramNgin instance] loadProgram:self.programListing];
-        [self.mapScene addStopMenuItem];
+        [self.mapScene addResetTerminalItems];
+        [self.mapScene.menu addReset];
         [self.view removeFromSuperview];
     }
 }

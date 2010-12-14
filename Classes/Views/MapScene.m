@@ -18,13 +18,13 @@
 
 - (void)getSensorSites;
 - (void)getSampleSites;
-- (void)unloadCurrentMapLevel;
 - (void)setSeekerStartPosition;
+- (void)resetSeekerStartPosition;
 - (void)initStatusDisplay;
 - (CGPoint)getPointFromObjectProperties:(NSDictionary*)dict;
 - (CGPoint)screenCoordsToTileCoords:(CGPoint)_point;
 - (CGPoint)tileCoordsToTile:(CGPoint)point;
-- (void)centerTileMapOnPoint:(CGPoint)_point;
+- (void)centerTileMapOnStartPoint;
 - (void)moveMapTo:(CGPoint)_point withDuration:(CGFloat)_duration;
 - (BOOL)shouldMoveMap:(CGPoint)_delta;
 - (BOOL)moveIsInPlayingArea:(CGPoint)_delta;
@@ -61,6 +61,8 @@
 @synthesize itemsLayer;
 @synthesize objectsLayer;
 @synthesize menuIsOpen;
+@synthesize levelReset;
+@synthesize levelUninitiailized;
 
 //===================================================================================================================================
 #pragma mark MapScene PrivateAPI
@@ -80,14 +82,10 @@
     CGSize tileMapTileSize = self.tileMap.tileSize;
     self.tileMapSize = CGSizeMake(tileMapTiles.width*tileMapTileSize.width, tileMapTiles.height*tileMapTileSize.height);
     self.startSite = [self.objectsLayer objectNamed:@"startSite"];
-    CGPoint startPoint = [self getPointFromObjectProperties:self.startSite];
-    [self centerTileMapOnPoint:startPoint];
+    [self centerTileMapOnStartPoint];
     [self initStatusDisplay];
     [self addChild:self.tileMap z:-1 tag:kMAP];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)unloadCurrentMapLevel {
+    self.levelUninitiailized = YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -128,7 +126,14 @@
     NSString* bearing = [self.startSite valueForKey:@"bearing"];
     self.sensorPool = [self.seeker1 loadSensors:self.sensorPool];
     [self.seeker1 setToStartPoint:startPoint withBearing:bearing];
-    [self addChild:self.seeker1];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)resetSeekerStartPosition {
+    CGPoint startPoint = [self getPointFromObjectProperties:self.startSite];
+    NSString* bearing = [self.startSite valueForKey:@"bearing"];
+    self.sensorPool = [self.seeker1 loadSensors:self.sensorPool];
+    [self.seeker1 resetToStartPoint:startPoint withBearing:bearing];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -151,26 +156,6 @@
     CGPoint tileMapPos = self.tileMap.position;
     CGPoint screenCoords = ccpSub(_screenPoint, tileMapPos);
 	return CGPointMake(screenCoords.x, tileMapSize.height - screenCoords.y);
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)centerTileMapOnPoint:(CGPoint)_point {
-    CGPoint tileMapPos = self.tileMap.position;
-    CGPoint currentCenter = ccpAdd(tileMapPos, self.screenCenter);
-    CGPoint delta = ccpSub(_point, currentCenter);
-    CGFloat edgeX = self.tileMapSize.width - _point.x;
-    CGFloat edgeY = self.tileMapSize.height - _point.y;
-    if ((_point.x < self.screenCenter.x) && (delta.x < 0)) {
-        delta.x = -tileMapPos.x;
-    } else if ((edgeX < self.screenCenter.x) && (delta.x > 0)) {
-        delta.x = self.tileMapSize.width - tileMapPos.x - 2.0*self.screenCenter.x;
-    } 
-    if ((_point.y < self.screenCenter.y) && (delta.y < 0)) {
-        delta.y = -tileMapPos.y;
-    } else if ((edgeY < self.screenCenter.y) && (delta.y > 0)) {
-        delta.y = self.tileMapSize.height - tileMapPos.y - 2.0*self.screenCenter.y;
-    }  
-    [self moveMapTo:CGPointMake(-delta.x, -delta.y) withDuration:1.0];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -234,7 +219,6 @@
                 }
             } else {
                 [ngin stopProgram];
-                [self addRunMenuItem];
             }
         } else if ([instruction isEqualToString:@"turn left"]) {
             [self.seeker1 turnLeft];
@@ -280,19 +264,38 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addStopMenuItem{
-    [self.statusDisplay addTerminalText:@"$ stop"];
+- (void)addResetTerminalItems {
     [self.statusDisplay addTerminalText:@"$ main"];
     [self.statusDisplay addTerminalText:@"$ term"];
-    [self.menu addStop];
+    [self.statusDisplay addTerminalText:@"$ reset"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addRunMenuItem {
-    [self.statusDisplay addTerminalText:@"$ run"];
+- (void)addRunTerminalItems {
     [self.statusDisplay addTerminalText:@"$ main"];
     [self.statusDisplay addTerminalText:@"$ term"];
-    [self.menu addRun];
+    [self.statusDisplay addTerminalText:@"$ run"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)centerTileMapOnStartPoint {
+    CGPoint startPoint = [self getPointFromObjectProperties:self.startSite];
+    CGPoint tileMapPos = self.tileMap.position;
+    CGPoint currentCenter = ccpAdd(tileMapPos, self.screenCenter);
+    CGPoint delta = ccpSub(startPoint, currentCenter);
+    CGFloat edgeX = self.tileMapSize.width - startPoint.x;
+    CGFloat edgeY = self.tileMapSize.height - startPoint.y;
+    if ((startPoint.x < self.screenCenter.x) && (delta.x < 0)) {
+        delta.x = -tileMapPos.x;
+    } else if ((edgeX < self.screenCenter.x) && (delta.x > 0)) {
+        delta.x = self.tileMapSize.width - tileMapPos.x - 2.0*self.screenCenter.x;
+    } 
+    if ((startPoint.y < self.screenCenter.y) && (delta.y < 0)) {
+        delta.y = -tileMapPos.y;
+    } else if ((edgeY < self.screenCenter.y) && (delta.y > 0)) {
+        delta.y = self.tileMapSize.height - tileMapPos.y - 2.0*self.screenCenter.y;
+    }  
+    [self moveMapTo:CGPointMake(-delta.x, -delta.y) withDuration:1.0];
 }
 
 //===================================================================================================================================
@@ -321,6 +324,9 @@
         self.menu = [MapMenuView create];
         self.menu.mapScene = self;
         self.menuIsOpen = NO;
+        self.levelReset = NO;
+        self.levelUninitiailized = NO;
+        self.levelResetRotateSeeker = NO;
         [self.statusDisplay insert:self];
         [self.statusDisplay addTerminalText:@"$ main"];
         [self.statusDisplay addTerminalText:@"$ term"];
@@ -334,11 +340,16 @@
 - (void) nextFrame:(ccTime)dt {
     NSInteger tileMapActions = [self.tileMap numberOfRunningActions];
     NSInteger seekerActions = [self.seeker1 numberOfRunningActions];
-	if (tileMapActions == 0) {
+	if (tileMapActions == 0 && seekerActions == 0) {
         ProgramNgin* ngin = [ProgramNgin instance];
-        if (self.seeker1.isUninitiailized) {
+        if (self.levelUninitiailized) {
             [self setSeekerStartPosition];
-        } else if ([ngin runProgram] && seekerActions == 0) {
+            [self addChild:self.seeker1];
+            self.levelUninitiailized = NO;
+        } else if (self.levelReset) {
+            [self setSeekerStartPosition];
+            self.levelReset = NO;
+        } else if ([ngin runProgram]) {
             [self executeSeekerInstruction:dt];
         }
 	}
@@ -357,7 +368,9 @@
 }    
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)terminal {
+- (void)resetLevel {
+    [self centerTileMapOnStartPoint];
+    self.levelReset = YES;
 }
 
 @end

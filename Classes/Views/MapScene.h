@@ -54,6 +54,8 @@ typedef enum tagMapID {
     CCTMXLayer* itemsLayer;
     CCTMXObjectGroup* objectsLayer;
     BOOL menuIsOpen;
+    BOOL levelReset;
+    BOOL levelUninitiailized;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -77,11 +79,14 @@ typedef enum tagMapID {
 @property (nonatomic, retain) CCTMXLayer* itemsLayer;
 @property (nonatomic, retain) CCTMXObjectGroup* objectsLayer;
 @property (nonatomic, assign) BOOL menuIsOpen;
+@property (nonatomic, assign) BOOL levelReset;
+@property (nonatomic, assign) BOOL levelUninitiailized;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)scene;
 - (void)loadMapLevel:(NSInteger)_level;
-- (void)addStopMenuItem;
-- (void)addRunMenuItem;
+- (void)addResetTerminalItems;
+- (void)addRunTerminalItems;
+- (void)resetLevel;
 
 @end

@@ -13,6 +13,7 @@
 @interface SeekerSprite (PrivateAPI)
 
 - (void)setStartOrientation:(NSString*)_orientation;
+- (CGFloat)rotateToNorthFromBearing;
 - (SeekerBearing)leftFromBearing;
 
 @end
@@ -21,7 +22,6 @@
 @implementation SeekerSprite
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize isUninitiailized;
 @synthesize bearing;
 @synthesize sampleCount;
 @synthesize sensorCount;
@@ -30,6 +30,7 @@
 //===================================================================================================================================
 #pragma mark SeekerSprite PrivateAPI
 
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setStartBearing:(NSString*)_bearing {
     CGFloat rotationAngle = 0.0;
     if ([_bearing isEqualToString:@"east"]) {
@@ -67,6 +68,19 @@
     return left;
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGFloat)rotationToNorthFromBearing {
+    CGFloat rotationAngle = 0.0;
+    if (self.bearing == EastSeekerBearing) {
+        rotationAngle = -270.0;
+    } else if (self.bearing == WestSeekerBearing) {
+        rotationAngle = -90.0;
+    } else if (self.bearing == SouthSeekerBearing) {
+        rotationAngle = -180.0;
+    }
+    return rotationAngle;
+}
+
 //===================================================================================================================================
 #pragma mark SeekerSprite
 
@@ -77,9 +91,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setToStartPoint:(CGPoint)_point withBearing:(NSString*)_bearing {
-    self.isUninitiailized = NO;
     self.position = _point;
     [self setStartBearing:_bearing];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)resetToStartPoint:(CGPoint)_point withBearing:(NSString*)_bearing {
+    self.position = _point;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -150,7 +168,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithFile:(NSString *)_filename {
 	if((self=[super initWithFile:_filename])) {
-        self.isUninitiailized = YES;
         self.speed = 1.0;
         self.anchorPoint = CGPointMake(0.5f, 0.5f);
 	}

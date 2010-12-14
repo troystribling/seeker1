@@ -22,7 +22,6 @@ typedef enum tagSeekerBearing {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface SeekerSprite : CCSprite {
-    BOOL isUninitiailized;
     SeekerBearing bearing;
     NSInteger sensorCount;
     NSInteger sampleCount;
@@ -30,7 +29,6 @@ typedef enum tagSeekerBearing {
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, assign) BOOL isUninitiailized;
 @property (nonatomic, assign) SeekerBearing bearing;
 @property (nonatomic, assign) NSInteger sensorCount;
 @property (nonatomic, assign) NSInteger sampleCount;
@@ -39,6 +37,7 @@ typedef enum tagSeekerBearing {
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)create;
 - (void)setToStartPoint:(CGPoint)_point withBearing:(NSString*)_bearing;
+- (void)resetToStartPoint:(CGPoint)_point withBearing:(NSString*)_bearing;
 - (CGPoint)positionDeltaAlongBearing:(CGSize)_delta;
 - (CGPoint)nextPositionForDelta:(CGSize)_delta;
 - (void)moveBy:(CGSize)_delta;
