@@ -4,32 +4,32 @@
   <image source="map.png"/>
   <tile id="0">
    <properties>
-    <property name="mapID" value="0"/>
+    <property name="mapID" value="empty"/>
    </properties>
   </tile>
   <tile id="1">
    <properties>
-    <property name="mapID" value="1"/>
+    <property name="mapID" value="level-1"/>
    </properties>
   </tile>
   <tile id="2">
    <properties>
-    <property name="mapID" value="2"/>
+    <property name="mapID" value="level-2"/>
    </properties>
   </tile>
   <tile id="3">
    <properties>
-    <property name="mapID" value="3"/>
+    <property name="mapID" value="level-3"/>
    </properties>
   </tile>
   <tile id="4">
    <properties>
-    <property name="mapID" value="4"/>
+    <property name="mapID" value="level-4"/>
    </properties>
   </tile>
   <tile id="5">
    <properties>
-    <property name="mapID" value="5"/>
+    <property name="mapID" value="level-5"/>
    </properties>
   </tile>
  </tileset>
@@ -37,37 +37,37 @@
   <image source="items.png"/>
   <tile id="0">
    <properties>
-    <property name="itemID" value="0"/>
+    <property name="itemID" value="station"/>
    </properties>
   </tile>
   <tile id="1">
    <properties>
-    <property name="itemID" value="1"/>
+    <property name="itemID" value="sensorSite"/>
    </properties>
   </tile>
   <tile id="8">
    <properties>
-    <property name="itemID" value="0"/>
+    <property name="itemID" value="station"/>
    </properties>
   </tile>
   <tile id="9">
    <properties>
-    <property name="itemID" value="2"/>
+    <property name="itemID" value="sensor"/>
    </properties>
   </tile>
   <tile id="16">
    <properties>
-    <property name="itemID" value="0"/>
+    <property name="itemID" value="station"/>
    </properties>
   </tile>
   <tile id="17">
    <properties>
-    <property name="itemID" value="3"/>
+    <property name="itemID" value="sampleSite"/>
    </properties>
   </tile>
   <tile id="24">
    <properties>
-    <property name="itemID" value="0"/>
+    <property name="itemID" value="station"/>
    </properties>
   </tile>
  </tileset>

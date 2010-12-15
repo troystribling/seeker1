@@ -29,6 +29,10 @@
 - (BOOL)shouldMoveMap:(CGPoint)_delta;
 - (BOOL)moveIsInPlayingArea:(CGPoint)_delta;
 - (void)executeSeekerInstruction:(ccTime)dt;
+- (NSDictionary*)getTileProperties:(CGPoint)_point forLayer:(CCTMXLayer*)_layer;
+- (CGPoint)getSeekerTile;
+- (void)putSensor;
+- (void)getSample;
 - (CGPoint)locationFromTouch:(UITouch*)touch;
 - (CGPoint)locationFromTouches:(NSSet*)touches;
 - (BOOL)isInMenuRect:(CGPoint)_point;
@@ -223,8 +227,55 @@
         } else if ([instruction isEqualToString:@"turn left"]) {
             [self.seeker1 turnLeft];
         } else if ([instruction isEqualToString:@"put sensor"]) {
+            [self putSensor];
         } else if ([instruction isEqualToString:@"get sample"]) {
+            [self getSample];
         }
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSDictionary*)getTileProperties:(CGPoint)_point forLayer:(CCTMXLayer*)_layer {
+    NSDictionary* properties = nil;
+    int tileGID = [self.itemsLayer tileGIDAt:CGPointMake(_point.x, _point.y)];
+    if (tileGID != 0) {
+        properties = [self.tileMap propertiesForGID:tileGID];
+    }
+    return properties;
+}
+  
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGPoint)getSeekerTile {
+    CGPoint seekerTile = [self tileCoordsToTile:[self screenCoordsToTileCoords:seeker1.position]];
+    return CGPointMake((int)seekerTile.x, (int)seekerTile.y);
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)putSensor {
+    CGPoint seekerTile = [self getSeekerTile];
+    NSDictionary* properties = [self getTileProperties:seekerTile forLayer:self.itemsLayer];
+    if (properties) {
+        NSString* itemID = [properties valueForKey:@"itemID"];
+        if ([itemID isEqualToString:@"sensorSite"]) {   
+            [self.itemsLayer removeTileAt:seekerTile];
+            [self.itemsLayer setTileGID:18 at:seekerTile];
+        } else {
+        }
+    } else {
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)getSample {
+    CGPoint seekerTile = [self getSeekerTile];
+    NSDictionary* properties = [self getTileProperties:seekerTile forLayer:self.itemsLayer];
+    if (properties) {
+        NSString* itemID = [properties valueForKey:@"itemID"];
+        if ([itemID isEqualToString:@"sample"]) {        
+            [self.itemsLayer removeTileAt:seekerTile];
+        } else {        
+        }
+    } else {        
     }
 }
 
@@ -337,9 +388,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void) nextFrame:(ccTime)dt {
-    NSInteger tileMapActions = [self.tileMap numberOfRunningActions];
-    NSInteger seekerActions = [self.seeker1 numberOfRunningActions];
-	if (tileMapActions == 0 && seekerActions == 0) {
+	if ([self.tileMap numberOfRunningActions] == 0 && [self.seeker1 numberOfRunningActions] == 0) {
         ProgramNgin* ngin = [ProgramNgin instance];
         if (self.levelUninitiailized) {
             [self setSeekerStartPosition];
