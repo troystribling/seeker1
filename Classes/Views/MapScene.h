@@ -36,14 +36,8 @@ typedef enum tagMapID {
 @interface MapScene : CCLayer {
     SeekerSprite* seeker1;
     StatusDisplay* statusDisplay;
-    NSInteger level;
-    NSInteger energyLevel;
-    NSInteger energyCurrent;
-    NSInteger speed;
     NSMutableDictionary* startSite;
-    NSMutableArray* sensorSites;
-    NSInteger sensorPool;
-    NSMutableArray* sampleSites;
+    NSInteger level;
     CGRect menuRect;
     MapMenuView* menu;
     CGPoint screenCenter;
@@ -63,12 +57,6 @@ typedef enum tagMapID {
 @property (nonatomic, retain) StatusDisplay* statusDisplay;
 @property (nonatomic, assign) NSMutableDictionary* startSite;
 @property (nonatomic, assign) NSInteger level;
-@property (nonatomic, assign) NSInteger energyLevel;
-@property (nonatomic, assign) NSInteger energyCurrent;
-@property (nonatomic, assign) NSInteger speed;
-@property (nonatomic, retain) NSMutableArray* sensorSites;
-@property (nonatomic, retain) NSMutableArray* sampleSites;
-@property (nonatomic, assign) NSInteger sensorPool;
 @property (nonatomic, assign) CGRect menuRect;
 @property (nonatomic, retain) MapMenuView* menu;
 @property (nonatomic, assign) CGPoint screenCenter;

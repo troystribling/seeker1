@@ -25,8 +25,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize bearing;
-@synthesize sampleCount;
-@synthesize sensorCount;
+@synthesize energyTotal;
+@synthesize energy;
+@synthesize sampleSites;
+@synthesize samplesBin;
+@synthesize samples;
+@synthesize sensorSites;
+@synthesize sensorBin;
+@synthesize sensors;
 @synthesize speed;
 
 //===================================================================================================================================
@@ -172,27 +178,41 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)getSample {
+- (BOOL)putSample {
     BOOL status = YES;
-    self.sampleCount++;
-    if (self.sampleCount == kSEEKER_MAX_SAMMPLES) {
+    self.samples++;
+    if (self.samples == kSEEKER_MAX_SENSORS) {
         status = NO;
     }
     return status;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)putSensor {
-    self.sensorCount--;
+- (void)emptySampleBin {
+    self.samplesBin = 0;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSInteger)loadSensors:(NSInteger)_sensors {
-    NSInteger extra = 0;
-    if (_sensors >= kSEEKER_MAX_SENSORS) {
-        extra = _sensors - kSEEKER_MAX_SENSORS;
+- (BOOL)putSensor {
+    BOOL status = YES;
+    self.sensors++;
+    if (self.sensors == kSEEKER_MAX_SAMPLES) {
+        status = NO;
     }
-    return extra;
+    return status;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)emptySensorBin {
+    self.sensorBin = 0;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)initParams:(NSDictionary*)_site {
+    self.energyTotal = [[_site valueForKey:@"energy"] intValue];
+    self.energy = self.energyTotal;
+    self.sensorSites = [[_site valueForKey:@"sensorSites"] intValue];
+    self.sampleSites = [[_site valueForKey:@"sampleSites"] intValue];
 }
 
 //===================================================================================================================================
@@ -201,7 +221,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithFile:(NSString *)_filename {
 	if((self=[super initWithFile:_filename])) {
-        self.speed = 1.0;
+        self.speed = 10;
         self.anchorPoint = CGPointMake(0.5f, 0.5f);
 	}
 	return self;
