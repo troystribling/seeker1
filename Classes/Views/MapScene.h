@@ -50,8 +50,8 @@ typedef enum tagMapID {
     CCTMXLayer* itemsLayer;
     CCTMXObjectGroup* objectsLayer;
     BOOL menuIsOpen;
-    BOOL levelResetSeekerTranslate;
-    BOOL levelResetMapTranslate;
+    BOOL levelResetSeeker;
+    BOOL levelResetMap;
     BOOL levelUninitiailized;
 }
 
@@ -72,8 +72,8 @@ typedef enum tagMapID {
 @property (nonatomic, retain) CCTMXLayer* itemsLayer;
 @property (nonatomic, retain) CCTMXObjectGroup* objectsLayer;
 @property (nonatomic, assign) BOOL menuIsOpen;
-@property (nonatomic, assign) BOOL levelResetSeekerTranslate;
-@property (nonatomic, assign) BOOL levelResetMapTranslate;
+@property (nonatomic, assign) BOOL levelResetSeeker;
+@property (nonatomic, assign) BOOL levelResetMap;
 @property (nonatomic, assign) BOOL levelUninitiailized;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

@@ -17,13 +17,15 @@
 @interface MapScene (PrivateAPI)
 
 // inialize
-- (void)loadMapLevel:(NSInteger)_level;
-- (void)getSensorSites;
-- (void)getSampleSites;
+- (void)initLevel:(NSInteger)_level;
 - (void)setSeekerStartPosition;
 - (void)initStatusDisplay;
+- (CCTMXTiledMap*)initMap:(NSInteger)_level;
 - (void)centerTileMapOnStartPoint;
+- (void)getSensorSites;
+- (void)getSampleSites;
 // reset
+- (void)resetMap:(NSInteger)_level;
 - (void)resetSeekerStartPosition;
 - (void)resetSampleSites;
 - (void)resetSensorSites;
@@ -72,8 +74,8 @@
 @synthesize itemsLayer;
 @synthesize objectsLayer;
 @synthesize menuIsOpen;
-@synthesize levelResetSeekerTranslate;
-@synthesize levelResetMapTranslate;
+@synthesize levelResetSeeker;
+@synthesize levelResetMap;
 @synthesize levelUninitiailized;
 
 //===================================================================================================================================
@@ -82,20 +84,16 @@
 // initialize
 //-----------------------------------------------------------------------------------------------------------------------------------
 #pragma mark initialize
+
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)loadMapLevel:(NSInteger)_level {
+- (void)initLevel:(NSInteger)_level {
     self.level = _level;
-    NSString* mapName = [NSString stringWithFormat:@"map-%d.tmx", _level];
-    self.tileMap = [CCTMXTiledMap tiledMapWithTMXFile:mapName];
-    self.mapLayer = [self.tileMap layerNamed:@"map"];
-    self.terrainLayer = [self.tileMap layerNamed:@"terrain"];
-    self.itemsLayer = [self.tileMap layerNamed:@"items"];
-    self.objectsLayer = [self.tileMap objectGroupNamed:@"objects"];
+    self.tileMap = [self initMap:_level];
     [self getSampleSites];
-    [self getSensorSites];    CGSize tileMapTiles = self.tileMap.mapSize;
+    [self getSensorSites];    
+    CGSize tileMapTiles = self.tileMap.mapSize;
     CGSize tileMapTileSize = self.tileMap.tileSize;
     self.tileMapSize = CGSizeMake(tileMapTiles.width*tileMapTileSize.width, tileMapTiles.height*tileMapTileSize.height);
-    self.startSite = [self.objectsLayer objectNamed:@"startSite"];
     [self.seeker1 initParams:self.startSite sensorSites:[self.sensorSites count] andSampleSites:[self.sampleSites count]];
     [self centerTileMapOnStartPoint];
     [self initStatusDisplay];
@@ -104,32 +102,24 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)getSensorSites {
-    [self.sensorSites removeAllObjects];
-    for (NSMutableDictionary* obj in self.objectsLayer.objects) {
-        NSString* objName = [obj valueForKey:@"name"];
-        if ([objName isEqualToString:@"sensorSite"]) {
-            [self.sensorSites addObject:obj];
-        }
-    }
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)getSampleSites {
-    [self.sampleSites removeAllObjects];
-    for (NSMutableDictionary* obj in self.objectsLayer.objects) {
-        NSString* objName = [obj valueForKey:@"name"];
-        if ([objName isEqualToString:@"sampleSite"]) {
-            [self.sampleSites addObject:obj];
-        }
-    }
+- (CCTMXTiledMap*)initMap:(NSInteger)_level {
+    NSString* mapName = [NSString stringWithFormat:@"map-%d.tmx", _level];
+    CCTMXTiledMap* map = [CCTMXTiledMap tiledMapWithTMXFile:mapName];
+    self.mapLayer = [map layerNamed:@"map"];
+    self.terrainLayer = [map layerNamed:@"terrain"];
+    self.itemsLayer = [map layerNamed:@"items"];
+    self.objectsLayer = [map objectGroupNamed:@"objects"];
+    self.startSite = [self.objectsLayer objectNamed:@"startSite"];
+    return map;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setSeekerStartPosition {
+    self.levelUninitiailized = NO;
     CGPoint startPoint = [self getPointFromObjectPropertiesInScreenCoords:self.startSite];
     NSString* bearing = [self.startSite valueForKey:@"bearing"];
     [self.seeker1 setToStartPoint:startPoint withBearing:bearing];
+    [self addChild:self.seeker1];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -158,14 +148,52 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)getSensorSites {
+    [self.sensorSites removeAllObjects];
+    for (NSMutableDictionary* obj in self.objectsLayer.objects) {
+        NSString* objName = [obj valueForKey:@"name"];
+        if ([objName isEqualToString:@"sensorSite"]) {
+            [self.sensorSites addObject:obj];
+        }
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)getSampleSites {
+    [self.sampleSites removeAllObjects];
+    for (NSMutableDictionary* obj in self.objectsLayer.objects) {
+        NSString* objName = [obj valueForKey:@"name"];
+        if ([objName isEqualToString:@"sampleSite"]) {
+            [self.sampleSites addObject:obj];
+        }
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 // reset
 //-----------------------------------------------------------------------------------------------------------------------------------
 #pragma mark reset
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)resetMap:(NSInteger)_level {
+    self.levelResetMap = NO;
+    [self.seeker1 removeFromParentAndCleanup:YES];
+    CCTMXTiledMap* newTileMap = [self initMap:_level];
+    [self addChild:newTileMap z:-1 tag:kMAP];
+    [self.tileMap removeFromParentAndCleanup:YES];
+    self.tileMap = newTileMap;
+    [self centerTileMapOnStartPoint];
+    [self.seeker1 initParams:self.startSite sensorSites:[self.sensorSites count] andSampleSites:[self.sampleSites count]];
+    self.levelResetSeeker = YES;
+}
+
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)resetSeekerStartPosition {
+    self.levelResetSeeker = NO;
     CGPoint startPoint = [self getPointFromObjectPropertiesInScreenCoords:self.startSite];
     NSString* bearing = [self.startSite valueForKey:@"bearing"];
     [self.seeker1 resetToStartPoint:startPoint withBearing:bearing];
+    [self addChild:self.seeker1];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -197,6 +225,7 @@
 // coordinate transforms
 //-----------------------------------------------------------------------------------------------------------------------------------
 #pragma mark coordinate transforms
+
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGPoint)getPointFromObjectPropertiesInScreenCoords:(NSDictionary*)dict {
 	CGFloat x = [[dict valueForKey:@"x"] floatValue];
@@ -230,6 +259,7 @@
 // program instructions
 //-----------------------------------------------------------------------------------------------------------------------------------
 #pragma mark program instructions
+
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)shouldMoveMap:(CGPoint)_delta {
     CGPoint newPosition = ccpAdd([self screenCoordsToTileCoords:self.seeker1.position], CGPointMake(_delta.x, -_delta.y));
@@ -357,6 +387,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 // touches
 //-----------------------------------------------------------------------------------------------------------------------------------
+
 #pragma mark touches
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGPoint)locationFromTouch:(UITouch*)touch {
@@ -372,6 +403,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 // menu
 //-----------------------------------------------------------------------------------------------------------------------------------
+
 #pragma mark menu
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)isInMenuRect:(CGPoint)_point {
@@ -427,15 +459,15 @@
         self.menu = [MapMenuView create];
         self.menu.mapScene = self;
         self.menuIsOpen = NO;
-        self.levelResetSeekerTranslate = NO;
-        self.levelResetMapTranslate = NO;
+        self.levelResetSeeker = NO;
+        self.levelResetMap = NO;
         self.levelUninitiailized = NO;
         self.sensorSites = [NSMutableArray arrayWithCapacity:10];
         self.sampleSites = [NSMutableArray arrayWithCapacity:10];
         [self.statusDisplay insert:self];
         [self.statusDisplay addTerminalText:@"$ main"];
         [self.statusDisplay addTerminalText:@"$ term"];
-        [self loadMapLevel:1];
+        [self initLevel:1];
         [self schedule:@selector(nextFrame:)];
 	}
 	return self;
@@ -447,19 +479,10 @@
         ProgramNgin* ngin = [ProgramNgin instance];
         if (self.levelUninitiailized) {
             [self setSeekerStartPosition];
-            [self addChild:self.seeker1];
-            self.levelUninitiailized = NO;
-        } else if (self.levelResetMapTranslate) {
-            [self.seeker1 removeFromParentAndCleanup:YES];
-            [self centerTileMapOnStartPoint];
-            [self resetSampleSites];
-            [self resetSensorSites];
-            self.levelResetSeekerTranslate = YES;
-            self.levelResetMapTranslate = NO;
-        } else if (self.levelResetSeekerTranslate) {
+        } else if (self.levelResetMap) {
+            [self resetMap:1];
+        } else if (self.levelResetSeeker) {
             [self resetSeekerStartPosition];
-            [self addChild:self.seeker1];
-            self.levelResetSeekerTranslate = NO;
         } else if ([ngin runProgram]) {
             [self executeSeekerInstruction:dt];
         }
@@ -480,7 +503,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)resetLevel {
-    self.levelResetMapTranslate = YES;
+    self.levelResetMap = YES;
 }
 
 @end
