@@ -36,6 +36,8 @@ typedef enum tagMapID {
 @interface MapScene : CCLayer {
     SeekerSprite* seeker1;
     StatusDisplay* statusDisplay;
+    NSMutableArray* sensorSites;
+    NSMutableArray* sampleSites;
     NSMutableDictionary* startSite;
     NSInteger level;
     CGRect menuRect;
@@ -48,13 +50,16 @@ typedef enum tagMapID {
     CCTMXLayer* itemsLayer;
     CCTMXObjectGroup* objectsLayer;
     BOOL menuIsOpen;
-    BOOL levelReset;
+    BOOL levelResetSeekerTranslate;
+    BOOL levelResetMapTranslate;
     BOOL levelUninitiailized;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) SeekerSprite* seeker1;
 @property (nonatomic, retain) StatusDisplay* statusDisplay;
+@property (nonatomic, retain) NSMutableArray* sensorSites;
+@property (nonatomic, retain) NSMutableArray* sampleSites;
 @property (nonatomic, assign) NSMutableDictionary* startSite;
 @property (nonatomic, assign) NSInteger level;
 @property (nonatomic, assign) CGRect menuRect;
@@ -67,12 +72,12 @@ typedef enum tagMapID {
 @property (nonatomic, retain) CCTMXLayer* itemsLayer;
 @property (nonatomic, retain) CCTMXObjectGroup* objectsLayer;
 @property (nonatomic, assign) BOOL menuIsOpen;
-@property (nonatomic, assign) BOOL levelReset;
+@property (nonatomic, assign) BOOL levelResetSeekerTranslate;
+@property (nonatomic, assign) BOOL levelResetMapTranslate;
 @property (nonatomic, assign) BOOL levelUninitiailized;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)scene;
-- (void)loadMapLevel:(NSInteger)_level;
 - (void)addResetTerminalItems;
 - (void)addRunTerminalItems;
 - (void)resetLevel;

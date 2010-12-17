@@ -133,8 +133,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)resetToStartPoint:(CGPoint)_point withBearing:(NSString*)_bearing {
     self.position = _point;
-    self.bearing = [self stringToBearing:_bearing];
     CGFloat northRotation = [self rotationToNorthFromBearing];
+    self.bearing = [self stringToBearing:_bearing];
     CGFloat startRotation = [self rotationFromNorthToBearing:self.bearing];
     [self rotate:(northRotation + startRotation)];
 }
@@ -208,11 +208,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)initParams:(NSDictionary*)_site {
+- (void)initParams:(NSDictionary*)_site sensorSites:(NSInteger)_sensorSites andSampleSites:(NSInteger)_sampleSites {
     self.energyTotal = [[_site valueForKey:@"energy"] intValue];
     self.energy = self.energyTotal;
-    self.sensorSites = [[_site valueForKey:@"sensorSites"] intValue];
-    self.sampleSites = [[_site valueForKey:@"sampleSites"] intValue];
+    self.sensorSites = _sensorSites;
+    self.sampleSites = _sampleSites;
 }
 
 //===================================================================================================================================

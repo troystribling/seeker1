@@ -47,4 +47,6 @@
 // map 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kMAP_EDGE_BUFFER        1
+#define kMAP_SENSOR_SITE_GID    10
+#define kMAP_SAMPLE_SITE_GID    26
 #define kMAP_SENSOR_GID         18
