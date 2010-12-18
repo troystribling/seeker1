@@ -12,11 +12,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface SeekerSprite (PrivateAPI)
 
-- (CGFloat)rotationFromNorthToBearing:(SeekerBearing)_bearing;
-- (CGFloat)rotateToNorthFromBearing;
-- (SeekerBearing)stringToBearing:(NSString*)_bearingString;
 - (SeekerBearing)leftFromBearing;
-- (void)rotate:(CGFloat)_angle;
 
 @end
 
@@ -39,57 +35,6 @@
 #pragma mark SeekerSprite PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (CGFloat)rotationFromNorthToBearing:(SeekerBearing)_bearing {
-    CGFloat rotationAngle = 0.0;
-    switch(_bearing) {
-        case NorthSeekerBearing:
-            break;
-        case SouthSeekerBearing:
-            rotationAngle = -180.0;
-            break;
-        case EastSeekerBearing:
-            rotationAngle = -270.0;
-            break;
-        case WestSeekerBearing:
-            rotationAngle = -90.0;
-            break;
-    }
-    return rotationAngle;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (CGFloat)rotationToNorthFromBearing {
-    CGFloat rotationAngle = 0.0;
-    switch(self.bearing) {
-        case NorthSeekerBearing:
-            break;
-        case SouthSeekerBearing:
-            rotationAngle = 180.0;
-            break;
-        case EastSeekerBearing:
-            rotationAngle = 270.0;
-            break;
-        case WestSeekerBearing:
-            rotationAngle = 90.0;
-            break;
-    }
-    return rotationAngle;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (SeekerBearing)stringToBearing:(NSString*)_bearingString {
-    SeekerBearing transBearing = NorthSeekerBearing;
-    if ([_bearingString isEqualToString:@"east"]) {
-        transBearing = EastSeekerBearing;
-    } else if ([_bearingString isEqualToString:@"west"]) {
-        transBearing = WestSeekerBearing;
-    } else if ([_bearingString isEqualToString:@"south"]) {
-        transBearing = SouthSeekerBearing;
-    }
-    return transBearing;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (SeekerBearing)leftFromBearing {
     SeekerBearing left = 0;
     switch(self.bearing) {
@@ -109,13 +54,12 @@
     return left;
 }
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)rotate:(CGFloat)_angle {
-    [self runAction:[CCRotateBy actionWithDuration:kSEEKER_BASE_SPEED/self.speed angle:_angle]];
-}
-
 //===================================================================================================================================
 #pragma mark SeekerSprite
+//-----------------------------------------------------------------------------------------------------------------------------------
+// initialize/reset
+//-----------------------------------------------------------------------------------------------------------------------------------
+#pragma mark initialize/reset
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)create {
@@ -138,6 +82,19 @@
     CGFloat startRotation = [self rotationFromNorthToBearing:self.bearing];
     [self rotate:(northRotation + startRotation)];
 }
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)initParams:(NSDictionary*)_site {
+    self.energyTotal = [[_site valueForKey:@"energy"] intValue];
+    self.energy = self.energyTotal;
+    self.sensorSites = [[_site valueForKey:@"sensorSites"] intValue];
+    self.sampleSites = [[_site valueForKey:@"sampleSites"] intValue];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// instructions
+//-----------------------------------------------------------------------------------------------------------------------------------
+#pragma mark instructions
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGPoint)nextPositionForDelta:(CGSize)_delta {
@@ -208,11 +165,89 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)initParams:(NSDictionary*)_site {
-    self.energyTotal = [[_site valueForKey:@"energy"] intValue];
-    self.energy = self.energyTotal;
-    self.sensorSites = [[_site valueForKey:@"sensorSites"] intValue];
-    self.sampleSites = [[_site valueForKey:@"sampleSites"] intValue];
+// rotate
+//-----------------------------------------------------------------------------------------------------------------------------------
+#pragma mark rotate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)rotate:(CGFloat)_angle {
+    [self runAction:[CCRotateBy actionWithDuration:kSEEKER_BASE_SPEED/self.speed angle:_angle]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGFloat)rotationToNorthFromBearing {
+    CGFloat rotationAngle = 0.0;
+    switch(self.bearing) {
+        case NorthSeekerBearing:
+            break;
+        case SouthSeekerBearing:
+            rotationAngle = 180.0;
+            break;
+        case EastSeekerBearing:
+            rotationAngle = 270.0;
+            break;
+        case WestSeekerBearing:
+            rotationAngle = 90.0;
+            break;
+    }
+    return rotationAngle;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGFloat)rotationFromNorthToBearing:(SeekerBearing)_bearing {
+    CGFloat rotationAngle = 0.0;
+    switch(_bearing) {
+        case NorthSeekerBearing:
+            break;
+        case SouthSeekerBearing:
+            rotationAngle = -180.0;
+            break;
+        case EastSeekerBearing:
+            rotationAngle = -270.0;
+            break;
+        case WestSeekerBearing:
+            rotationAngle = -90.0;
+            break;
+    }
+    return rotationAngle;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// bearing
+//-----------------------------------------------------------------------------------------------------------------------------------
+#pragma mark bearing
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (SeekerBearing)stringToBearing:(NSString*)_bearingString {
+    SeekerBearing transBearing = NorthSeekerBearing;
+    if ([_bearingString isEqualToString:@"east"]) {
+        transBearing = EastSeekerBearing;
+    } else if ([_bearingString isEqualToString:@"west"]) {
+        transBearing = WestSeekerBearing;
+    } else if ([_bearingString isEqualToString:@"south"]) {
+        transBearing = SouthSeekerBearing;
+    }
+    return transBearing;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSString*)bearingToString {
+    NSString* bearingString;
+    switch(self.bearing) {
+        case NorthSeekerBearing:
+            bearingString = @"north";
+            break;
+        case SouthSeekerBearing:
+            bearingString = @"south";
+            break;
+        case EastSeekerBearing:
+            bearingString = @"east";
+            break;
+        case WestSeekerBearing:
+            bearingString = @"west";
+            break;
+    }
+    return bearingString;
 }
 
 //===================================================================================================================================

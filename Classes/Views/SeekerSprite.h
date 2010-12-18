@@ -47,9 +47,12 @@ typedef enum tagSeekerBearing {
 @property (nonatomic, assign) NSInteger speed;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+// initialize/reset
 + (id)create;
 - (void)setToStartPoint:(CGPoint)_point withBearing:(NSString*)_bearing;
 - (void)resetToStartPoint:(CGPoint)_point withBearing:(NSString*)_bearing;
+- (void)initParams:(NSDictionary*)_site;
+// instructions
 - (CGPoint)positionDeltaAlongBearing:(CGSize)_delta;
 - (CGPoint)nextPositionForDelta:(CGSize)_delta;
 - (void)moveBy:(CGSize)_delta;
@@ -58,6 +61,12 @@ typedef enum tagSeekerBearing {
 - (void)emptySampleBin;
 - (BOOL)putSensor;
 - (void)emptySensorBin;
-- (void)initParams:(NSDictionary*)_site;
+// rotate
+- (void)rotate:(CGFloat)_angle;
+- (CGFloat)rotationFromNorthToBearing:(SeekerBearing)_bearing;
+- (CGFloat)rotationToNorthFromBearing;
+// bearing
+- (SeekerBearing)stringToBearing:(NSString*)_bearingString;
+- (NSString*)bearingToString;
 
 @end

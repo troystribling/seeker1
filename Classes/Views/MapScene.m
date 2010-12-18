@@ -41,7 +41,6 @@
 - (void)getSample;
 - (void)moveMapTo:(CGPoint)_point withDuration:(CGFloat)_duration;
 // seeker crash
-- (void)crashDance;
 - (void)crashHitMapBoundary;
 - (void)crashNoEnergy;
 - (void)crashPutSensor;
@@ -78,7 +77,8 @@
 @synthesize crash;
 @synthesize levelResetSeeker;
 @synthesize levelResetMap;
-@synthesize levelUninitiailized;
+@synthesize levelInitSeeker;
+@synthesize levelCrash;
 
 //===================================================================================================================================
 #pragma mark MapScene PrivateAPI
@@ -98,7 +98,7 @@
     [self centerTileMapOnStartPoint];
     [self initStatusDisplay];
     [self addChild:self.tileMap z:-1 tag:kMAP];
-    self.levelUninitiailized = YES;
+    self.levelInitSeeker = YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -115,7 +115,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setSeekerStartPosition {
-    self.levelUninitiailized = NO;
+    self.levelInitSeeker = NO;
     CGPoint startPoint = [self getPointFromObjectPropertiesInScreenCoords:self.startSite];
     NSString* bearing = [self.startSite valueForKey:@"bearing"];
     [self.seeker1 setToStartPoint:startPoint withBearing:bearing];
@@ -155,7 +155,12 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)resetMap:(NSInteger)_level {
     self.levelResetMap = NO;
-    [self.seeker1 removeFromParentAndCleanup:YES];
+    if (self.crash){
+        [self.crash removeFromParentAndCleanup:YES];
+        self.crash = nil;
+    } else {
+        [self.seeker1 removeFromParentAndCleanup:YES];
+    }
     CCTMXTiledMap* newTileMap = [self initMap:_level];
     [self addChild:newTileMap z:-1 tag:kMAP];
     [self.tileMap removeFromParentAndCleanup:YES];
@@ -351,14 +356,9 @@
 #pragma mark seeker crashes
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)crashDance {
-    float danceRotation = [self.seeker1 rotationToNorthFromBearing] + 360.0;
-    [self.seeker1 rotate:danceRotation];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashHitMapBoundary {
-    self.crash = [[[CCSprite alloc] initWithFile:@"red-seeker-1.png"] autorelease];  
+    NSString* seekerName = [NSString stringWithFormat:@"red-seeker-1-%@.png", [self.seeker1 bearingToString]];
+    self.crash = [[[CCSprite alloc] initWithFile:seekerName] autorelease];  
     self.crash.position = self.seeker1.position;
     [self.seeker1 removeFromParentAndCleanup:YES];
     [self addChild:self.crash];
@@ -379,8 +379,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 // touches
 //-----------------------------------------------------------------------------------------------------------------------------------
-#pragma mark touches
 
+#pragma mark touches
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGPoint)locationFromTouch:(UITouch*)touch {
 	CGPoint touchLocation = [touch locationInView:[touch view]];
@@ -453,7 +453,8 @@
         self.menuIsOpen = NO;
         self.levelResetSeeker = NO;
         self.levelResetMap = NO;
-        self.levelUninitiailized = NO;
+        self.levelInitSeeker = NO;
+        self.levelCrash = NO;
         [self.statusDisplay insert:self];
         [self.statusDisplay addTerminalText:@"$ main"];
         [self.statusDisplay addTerminalText:@"$ term"];
@@ -465,14 +466,19 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void) nextFrame:(ccTime)dt {
-	if ([self.tileMap numberOfRunningActions] == 0 && [self.seeker1 numberOfRunningActions] == 0) {
+    NSInteger mapActions = [self.tileMap numberOfRunningActions];
+    NSInteger seekerActions = [self.seeker1 numberOfRunningActions];
+    NSInteger crashActions = 0;
+    if (self.crash) {crashActions = [self.crash numberOfRunningActions];}
+	if (mapActions == 0 && seekerActions == 0) {
         ProgramNgin* ngin = [ProgramNgin instance];
-        if (self.levelUninitiailized) {
+        if (self.levelInitSeeker) {
             [self setSeekerStartPosition];
         } else if (self.levelResetMap) {
             [self resetMap:1];
         } else if (self.levelResetSeeker) {
             [self resetSeekerStartPosition];
+        } else if (self.levelCrash) {
         } else if ([ngin runProgram]) {
             [self executeSeekerInstruction:dt];
         }
