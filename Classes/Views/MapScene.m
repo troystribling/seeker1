@@ -40,11 +40,15 @@
 - (void)putSensor;
 - (void)getSample;
 - (void)moveMapTo:(CGPoint)_point withDuration:(CGFloat)_duration;
+// display updates
+- (BOOL)decrementSeekerEnergy;
 // seeker crash
 - (void)crashHitMapBoundary;
 - (void)crashNoEnergy;
 - (void)crashPutSensor;
 - (void)crashGetSensor;
+// crash animations
+- (void)fadeToRed;
 // finish dance
 // touches
 - (CGPoint)locationFromTouch:(UITouch*)touch;
@@ -278,11 +282,16 @@
         if ([instruction isEqualToString:@"move"]) {
             CGPoint delta = [self.seeker1 positionDeltaAlongBearing:self.tileMap.tileSize];
             if ([self moveIsInPlayingArea:delta]) {
-                if ([self shouldMoveMap:delta]) {
-                    CGPoint mapPosition = ccpAdd(CGPointMake(-delta.x, -delta.y), self.tileMap.position);
-                    [self moveMapTo:mapPosition withDuration:1.0];
+                if ([self decrementSeekerEnergy]) {
+                    if ([self shouldMoveMap:delta]) {
+                        CGPoint mapPosition = ccpAdd(CGPointMake(-delta.x, -delta.y), self.tileMap.position);
+                        [self moveMapTo:mapPosition withDuration:1.0];
+                    } else {
+                        [self.seeker1 moveBy:self.tileMap.tileSize];
+                    }
                 } else {
-                    [self.seeker1 moveBy:self.tileMap.tileSize];
+                    [ngin stopProgram];
+                    [self crashNoEnergy];
                 }
             } else {
                 [ngin stopProgram];
@@ -345,9 +354,24 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)moveMapTo:(CGPoint)_point withDuration:(CGFloat)_duration {
-	CCAction* move = [CCMoveTo actionWithDuration:_duration position:_point];
 	[tileMap stopAllActions];
-	[tileMap runAction:move];
+	[tileMap runAction:[CCMoveTo actionWithDuration:_duration position:_point]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// display updates
+//-----------------------------------------------------------------------------------------------------------------------------------
+#pragma mark display updates
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)decrementSeekerEnergy {
+    BOOL hasEnergy = NO;
+    self.seeker1.energy--;
+    if (self.seeker1.energy >= 0) {
+        [self.statusDisplay setDigits:self.seeker1.energy forDisplay:EnergyDisplayType]; 
+        hasEnergy = YES;
+    }
+    return hasEnergy;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -356,16 +380,19 @@
 #pragma mark seeker crashes
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)crashHitMapBoundary {
-    NSString* seekerName = [NSString stringWithFormat:@"red-seeker-1-%@.png", [self.seeker1 bearingToString]];
-    self.crash = [[[CCSprite alloc] initWithFile:seekerName] autorelease];  
-    self.crash.position = self.seeker1.position;
+- (void)crashCompleted {
+    self.levelCrash = NO;
     [self.seeker1 removeFromParentAndCleanup:YES];
-    [self addChild:self.crash];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)crashHitMapBoundary {
+    [self fadeToRed];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashNoEnergy {
+    [self fadeToRed];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -374,6 +401,22 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashGetSensor {
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// crash animations
+//-----------------------------------------------------------------------------------------------------------------------------------
+#pragma mark crash animations
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)fadeToRed {
+    NSString* seekerName = [NSString stringWithFormat:@"red-seeker-1-%@.png", [self.seeker1 bearingToString]];
+    self.crash = [[[CCSprite alloc] initWithFile:seekerName] autorelease];  
+    self.crash.opacity = 0;
+    self.crash.position = self.seeker1.position;
+	[self.crash runAction:[CCFadeIn actionWithDuration:1.0]];
+    [self addChild:self.crash];
+    self.levelCrash = YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -470,7 +513,7 @@
     NSInteger seekerActions = [self.seeker1 numberOfRunningActions];
     NSInteger crashActions = 0;
     if (self.crash) {crashActions = [self.crash numberOfRunningActions];}
-	if (mapActions == 0 && seekerActions == 0) {
+	if (mapActions == 0 && seekerActions == 0 && crashActions == 0) {
         ProgramNgin* ngin = [ProgramNgin instance];
         if (self.levelInitSeeker) {
             [self setSeekerStartPosition];
@@ -479,6 +522,7 @@
         } else if (self.levelResetSeeker) {
             [self resetSeekerStartPosition];
         } else if (self.levelCrash) {
+            [self crashCompleted];
         } else if ([ngin runProgram]) {
             [self executeSeekerInstruction:dt];
         }
