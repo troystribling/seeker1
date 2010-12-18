@@ -208,11 +208,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)initParams:(NSDictionary*)_site sensorSites:(NSInteger)_sensorSites andSampleSites:(NSInteger)_sampleSites {
+- (void)initParams:(NSDictionary*)_site {
     self.energyTotal = [[_site valueForKey:@"energy"] intValue];
     self.energy = self.energyTotal;
-    self.sensorSites = _sensorSites;
-    self.sampleSites = _sampleSites;
+    self.sensorSites = [[_site valueForKey:@"sensorSites"] intValue];
+    self.sampleSites = [[_site valueForKey:@"sampleSites"] intValue];
 }
 
 //===================================================================================================================================

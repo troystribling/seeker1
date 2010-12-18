@@ -58,6 +58,6 @@ typedef enum tagSeekerBearing {
 - (void)emptySampleBin;
 - (BOOL)putSensor;
 - (void)emptySensorBin;
-- (void)initParams:(NSDictionary*)_site sensorSites:(NSInteger)_sensorSites andSampleSites:(NSInteger)_sampleSites;
+- (void)initParams:(NSDictionary*)_site;
 
 @end

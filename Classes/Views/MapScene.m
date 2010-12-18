@@ -22,13 +22,9 @@
 - (void)initStatusDisplay;
 - (CCTMXTiledMap*)initMap:(NSInteger)_level;
 - (void)centerTileMapOnStartPoint;
-- (void)getSensorSites;
-- (void)getSampleSites;
 // reset
 - (void)resetMap:(NSInteger)_level;
 - (void)resetSeekerStartPosition;
-- (void)resetSampleSites;
-- (void)resetSensorSites;
 - (CGPoint)getTile:(CGPoint)_tileCoords;
 // coordinate transforms
 - (CGPoint)getPointFromObjectPropertiesInScreenCoords:(NSDictionary*)dict;
@@ -44,6 +40,13 @@
 - (void)putSensor;
 - (void)getSample;
 - (void)moveMapTo:(CGPoint)_point withDuration:(CGFloat)_duration;
+// seeker crash
+- (void)crashDance;
+- (void)crashHitMapBoundary;
+- (void)crashNoEnergy;
+- (void)crashPutSensor;
+- (void)crashGetSensor;
+// finish dance
 // touches
 - (CGPoint)locationFromTouch:(UITouch*)touch;
 - (CGPoint)locationFromTouches:(NSSet*)touches;
@@ -60,8 +63,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize seeker1;
 @synthesize statusDisplay;
-@synthesize sensorSites;
-@synthesize sampleSites;
 @synthesize screenCenter;
 @synthesize tileMapSize;
 @synthesize level;
@@ -74,6 +75,7 @@
 @synthesize itemsLayer;
 @synthesize objectsLayer;
 @synthesize menuIsOpen;
+@synthesize crash;
 @synthesize levelResetSeeker;
 @synthesize levelResetMap;
 @synthesize levelUninitiailized;
@@ -89,12 +91,10 @@
 - (void)initLevel:(NSInteger)_level {
     self.level = _level;
     self.tileMap = [self initMap:_level];
-    [self getSampleSites];
-    [self getSensorSites];    
     CGSize tileMapTiles = self.tileMap.mapSize;
     CGSize tileMapTileSize = self.tileMap.tileSize;
     self.tileMapSize = CGSizeMake(tileMapTiles.width*tileMapTileSize.width, tileMapTiles.height*tileMapTileSize.height);
-    [self.seeker1 initParams:self.startSite sensorSites:[self.sensorSites count] andSampleSites:[self.sampleSites count]];
+    [self.seeker1 initParams:self.startSite];
     [self centerTileMapOnStartPoint];
     [self initStatusDisplay];
     [self addChild:self.tileMap z:-1 tag:kMAP];
@@ -148,28 +148,6 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)getSensorSites {
-    [self.sensorSites removeAllObjects];
-    for (NSMutableDictionary* obj in self.objectsLayer.objects) {
-        NSString* objName = [obj valueForKey:@"name"];
-        if ([objName isEqualToString:@"sensorSite"]) {
-            [self.sensorSites addObject:obj];
-        }
-    }
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)getSampleSites {
-    [self.sampleSites removeAllObjects];
-    for (NSMutableDictionary* obj in self.objectsLayer.objects) {
-        NSString* objName = [obj valueForKey:@"name"];
-        if ([objName isEqualToString:@"sampleSite"]) {
-            [self.sampleSites addObject:obj];
-        }
-    }
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 // reset
 //-----------------------------------------------------------------------------------------------------------------------------------
 #pragma mark reset
@@ -183,7 +161,7 @@
     [self.tileMap removeFromParentAndCleanup:YES];
     self.tileMap = newTileMap;
     [self centerTileMapOnStartPoint];
-    [self.seeker1 initParams:self.startSite sensorSites:[self.sensorSites count] andSampleSites:[self.sampleSites count]];
+    [self.seeker1 initParams:self.startSite];
     self.levelResetSeeker = YES;
 }
 
@@ -194,24 +172,6 @@
     NSString* bearing = [self.startSite valueForKey:@"bearing"];
     [self.seeker1 resetToStartPoint:startPoint withBearing:bearing];
     [self addChild:self.seeker1];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)resetSampleSites {
-    for (NSMutableDictionary* site in self.sampleSites) {
-        CGPoint sitePosition = [self getTile:[self getPointFromObjectPropertiesInTileCoords:site]];
-        [self.itemsLayer removeTileAt:sitePosition];
-        [self.itemsLayer setTileGID:kMAP_SAMPLE_SITE_GID at:sitePosition];
-    }
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)resetSensorSites {
-    for (NSMutableDictionary* site in self.sensorSites) {
-        CGPoint sitePosition = [self getTile:[self getPointFromObjectPropertiesInTileCoords:site]];
-        [self.itemsLayer removeTileAt:sitePosition];
-        [self.itemsLayer setTileGID:kMAP_SENSOR_SITE_GID at:sitePosition];
-    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -321,6 +281,7 @@
                 }
             } else {
                 [ngin stopProgram];
+                [self crashHitMapBoundary];
             }
         } else if ([instruction isEqualToString:@"turn left"]) {
             [self.seeker1 turnLeft];
@@ -385,10 +346,41 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+// seeker crashes
+//-----------------------------------------------------------------------------------------------------------------------------------
+#pragma mark seeker crashes
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)crashDance {
+    float danceRotation = [self.seeker1 rotationToNorthFromBearing] + 360.0;
+    [self.seeker1 rotate:danceRotation];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)crashHitMapBoundary {
+    self.crash = [[[CCSprite alloc] initWithFile:@"red-seeker-1.png"] autorelease];  
+    self.crash.position = self.seeker1.position;
+    [self.seeker1 removeFromParentAndCleanup:YES];
+    [self addChild:self.crash];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)crashNoEnergy {
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)crashPutSensor {
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)crashGetSensor {
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 // touches
 //-----------------------------------------------------------------------------------------------------------------------------------
-
 #pragma mark touches
+
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGPoint)locationFromTouch:(UITouch*)touch {
 	CGPoint touchLocation = [touch locationInView:[touch view]];
@@ -462,8 +454,6 @@
         self.levelResetSeeker = NO;
         self.levelResetMap = NO;
         self.levelUninitiailized = NO;
-        self.sensorSites = [NSMutableArray arrayWithCapacity:10];
-        self.sampleSites = [NSMutableArray arrayWithCapacity:10];
         [self.statusDisplay insert:self];
         [self.statusDisplay addTerminalText:@"$ main"];
         [self.statusDisplay addTerminalText:@"$ term"];

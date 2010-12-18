@@ -36,8 +36,6 @@ typedef enum tagMapID {
 @interface MapScene : CCLayer {
     SeekerSprite* seeker1;
     StatusDisplay* statusDisplay;
-    NSMutableArray* sensorSites;
-    NSMutableArray* sampleSites;
     NSMutableDictionary* startSite;
     NSInteger level;
     CGRect menuRect;
@@ -49,6 +47,7 @@ typedef enum tagMapID {
     CCTMXLayer* terrainLayer;
     CCTMXLayer* itemsLayer;
     CCTMXObjectGroup* objectsLayer;
+    CCSprite* crash;
     BOOL menuIsOpen;
     BOOL levelResetSeeker;
     BOOL levelResetMap;
@@ -58,8 +57,6 @@ typedef enum tagMapID {
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) SeekerSprite* seeker1;
 @property (nonatomic, retain) StatusDisplay* statusDisplay;
-@property (nonatomic, retain) NSMutableArray* sensorSites;
-@property (nonatomic, retain) NSMutableArray* sampleSites;
 @property (nonatomic, assign) NSMutableDictionary* startSite;
 @property (nonatomic, assign) NSInteger level;
 @property (nonatomic, assign) CGRect menuRect;
@@ -71,6 +68,7 @@ typedef enum tagMapID {
 @property (nonatomic, retain) CCTMXLayer* terrainLayer;
 @property (nonatomic, retain) CCTMXLayer* itemsLayer;
 @property (nonatomic, retain) CCTMXObjectGroup* objectsLayer;
+@property (nonatomic, assign) CCSprite* crash;
 @property (nonatomic, assign) BOOL menuIsOpen;
 @property (nonatomic, assign) BOOL levelResetSeeker;
 @property (nonatomic, assign) BOOL levelResetMap;
