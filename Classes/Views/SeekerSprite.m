@@ -232,7 +232,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSString*)bearingToString {
-    NSString* bearingString;
+    NSString* bearingString = @"north";
     switch(self.bearing) {
         case NorthSeekerBearing:
             bearingString = @"north";

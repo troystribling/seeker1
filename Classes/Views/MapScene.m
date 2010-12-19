@@ -170,6 +170,7 @@
     [self.tileMap removeFromParentAndCleanup:YES];
     self.tileMap = newTileMap;
     [self centerTileMapOnStartPoint];
+    [self initStatusDisplay];
     [self.seeker1 initParams:self.startSite];
     self.levelResetSeeker = YES;
 }
