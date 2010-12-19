@@ -26,11 +26,13 @@ typedef enum tagSeekerBearing {
     NSInteger energyTotal;
     NSInteger energy;
     NSInteger sampleSites;
-    NSInteger samplesBin;
-    NSInteger samples;
+    NSInteger sampleBin;
+    NSInteger samplesCollected;
+    NSInteger samplesRemaining;
     NSInteger sensorSites;
     NSInteger sensorBin;
-    NSInteger sensors;
+    NSInteger sensorsPlaced;
+    NSInteger sensorsRemaining;
     NSInteger speed;
 }
 
@@ -39,11 +41,13 @@ typedef enum tagSeekerBearing {
 @property (nonatomic, assign) NSInteger energyTotal;
 @property (nonatomic, assign) NSInteger energy;
 @property (nonatomic, assign) NSInteger sampleSites;
-@property (nonatomic, assign) NSInteger samplesBin;
-@property (nonatomic, assign) NSInteger samples;
+@property (nonatomic, assign) NSInteger sampleBin;
+@property (nonatomic, assign) NSInteger samplesCollected;
+@property (nonatomic, assign) NSInteger samplesRemaining;
 @property (nonatomic, assign) NSInteger sensorSites;
 @property (nonatomic, assign) NSInteger sensorBin;
-@property (nonatomic, assign) NSInteger sensors;
+@property (nonatomic, assign) NSInteger sensorsPlaced;
+@property (nonatomic, assign) NSInteger sensorsRemaining;
 @property (nonatomic, assign) NSInteger speed;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -56,11 +60,13 @@ typedef enum tagSeekerBearing {
 - (CGPoint)positionDeltaAlongBearing:(CGSize)_delta;
 - (CGPoint)nextPositionForDelta:(CGSize)_delta;
 - (void)moveBy:(CGSize)_delta;
+- (BOOL)useEnergy;
 - (void)turnLeft;
-- (BOOL)putSample;
+- (BOOL)getSample;
 - (void)emptySampleBin;
 - (BOOL)putSensor;
-- (void)emptySensorBin;
+- (void)loadSensorBin;
+- (BOOL)isGameOver;
 // rotate
 - (void)rotate:(CGFloat)_angle;
 - (CGFloat)rotationFromNorthToBearing:(SeekerBearing)_bearing;

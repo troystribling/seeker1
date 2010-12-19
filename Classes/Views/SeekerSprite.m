@@ -24,11 +24,13 @@
 @synthesize energyTotal;
 @synthesize energy;
 @synthesize sampleSites;
-@synthesize samplesBin;
-@synthesize samples;
+@synthesize sampleBin;
+@synthesize samplesCollected;
+@synthesize samplesRemaining;
 @synthesize sensorSites;
 @synthesize sensorBin;
-@synthesize sensors;
+@synthesize sensorsPlaced;
+@synthesize sensorsRemaining;
 @synthesize speed;
 
 //===================================================================================================================================
@@ -89,6 +91,12 @@
     self.energy = self.energyTotal;
     self.sensorSites = [[_site valueForKey:@"sensorSites"] intValue];
     self.sampleSites = [[_site valueForKey:@"sampleSites"] intValue];
+    self.samplesCollected = 0;
+    self.sensorsPlaced = 0;
+    self.samplesRemaining = self.sampleSites;
+    self.sensorsRemaining = self.sensorSites;
+    [self emptySampleBin];
+    [self loadSensorBin];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -129,16 +137,26 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)useEnergy {
+    BOOL hasEnergy = NO;
+    self.energy--;
+    if (self.energy >= 0) {hasEnergy = YES;}
+    return hasEnergy;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)turnLeft {
     self.bearing = [self leftFromBearing];
     [self runAction:[CCRotateBy actionWithDuration:kSEEKER_BASE_SPEED/self.speed angle:-90.0]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)putSample {
+- (BOOL)getSample {
     BOOL status = YES;
-    self.samples++;
-    if (self.samples == kSEEKER_MAX_SENSORS) {
+    self.samplesCollected++;
+    self.sampleBin++;
+    self.samplesRemaining--;
+    if (self.sampleBin == kSEEKER_SAMPLE_BIN_SIZE) {
         status = NO;
     }
     return status;
@@ -146,22 +164,39 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)emptySampleBin {
-    self.samplesBin = 0;
+    self.sampleBin = 0;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)putSensor {
     BOOL status = YES;
-    self.sensors++;
-    if (self.sensors == kSEEKER_MAX_SAMPLES) {
+    self.sensorsPlaced++;
+    self.sensorBin--;
+    self.sensorsRemaining--;
+    if (self.sensorBin < 0) {
         status = NO;
     }
     return status;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)emptySensorBin {
-    self.sensorBin = 0;
+- (void)loadSensorBin {
+    if (self.sensorsRemaining > kSEEKER_SENSOR_BIN_SIZE) {
+        self.sensorBin = kSEEKER_SENSOR_BIN_SIZE;
+    } else {
+        self.sensorBin = self.sensorsRemaining;
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)isGameOver {
+    BOOL gameIsOver = YES;
+    if (self.sensorsPlaced == self.sensorSites &&
+        self.samplesCollected == self.sampleSites &&
+        self.sampleBin  == 0) {
+        gameIsOver = YES;
+    }
+    return gameIsOver;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

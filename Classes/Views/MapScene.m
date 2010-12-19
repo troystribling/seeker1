@@ -40,8 +40,10 @@
 - (void)putSensor;
 - (void)getSample;
 - (void)moveMapTo:(CGPoint)_point withDuration:(CGFloat)_duration;
-// display updates
-- (BOOL)decrementSeekerEnergy;
+// display parameter updates
+- (void)updateEnergy;
+- (void)updateSensorCount;
+- (void)updateSampleCount;
 // seeker crash
 - (void)crashHitMapBoundary;
 - (void)crashNoEnergy;
@@ -283,7 +285,8 @@
         if ([instruction isEqualToString:@"move"]) {
             CGPoint delta = [self.seeker1 positionDeltaAlongBearing:self.tileMap.tileSize];
             if ([self moveIsInPlayingArea:delta]) {
-                if ([self decrementSeekerEnergy]) {
+                if ([self.seeker1 useEnergy]) {
+                    [self updateEnergy];
                     if ([self shouldMoveMap:delta]) {
                         CGPoint mapPosition = ccpAdd(CGPointMake(-delta.x, -delta.y), self.tileMap.position);
                         [self moveMapTo:mapPosition withDuration:1.0];
@@ -360,19 +363,23 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-// display updates
+// display parameter updates
 //-----------------------------------------------------------------------------------------------------------------------------------
-#pragma mark display updates
+#pragma mark display parameter updates
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)decrementSeekerEnergy {
-    BOOL hasEnergy = NO;
-    self.seeker1.energy--;
-    if (self.seeker1.energy >= 0) {
-        [self.statusDisplay setDigits:self.seeker1.energy forDisplay:EnergyDisplayType]; 
-        hasEnergy = YES;
-    }
-    return hasEnergy;
+- (void)updateEnergy {
+    [self.statusDisplay setDigits:self.seeker1.energy forDisplay:EnergyDisplayType]; 
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)updateSensorCount {
+    [self.statusDisplay setDigits:self.seeker1.sensorsRemaining forDisplay:SensorDisplayType]; 
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)updateSampleCount {
+    [self.statusDisplay setDigits:self.seeker1.samplesRemaining forDisplay:SampleDisplayType]; 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
