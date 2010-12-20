@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "Seeker1AppDelegate.h"
+#import "SeekerDbi.h"
 #import "cocos2d.h"
 #import "BootScene.h"
 
@@ -29,8 +30,13 @@
 #pragma mark Seeker1AppDelegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void) applicationDidFinishLaunching:(UIApplication*)application
-{
+- (void) applicationDidFinishLaunching:(UIApplication*)application {
+	SeekerDbi* dbi = [SeekerDbi instance];
+	if (![dbi copyDbFile]) {
+		NSLog (@"Database inilaization failed");
+		return;
+	}	
+	[dbi open];
 	// CC_DIRECTOR_INIT()
 	//
 	// 1. Initializes an EAGLView with 0-bit depth format, and RGB565 render buffer
