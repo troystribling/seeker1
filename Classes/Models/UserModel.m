@@ -41,7 +41,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UserModel*)find {
++ (UserModel*)findFirst {
 	UserModel* model = [[[UserModel alloc] init] autorelease];
 	[[SeekerDbi instance] selectForModel:[UserModel class] withStatement:@"SELECT * FROM users LIMIT 1" andOutputTo:model];
     if (model.pk == 0) {
@@ -105,14 +105,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)collectFromResult:(sqlite3_stmt*)result andOutputTo:(id)output {
 	[output setAttributesWithStatement:result];
-}
-
-//===================================================================================================================================
-#pragma mark NSObject
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)dealloc {
-    [super dealloc];
 }
 
 @end
