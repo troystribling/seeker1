@@ -37,9 +37,11 @@
 - (void)executeSeekerInstruction:(ccTime)dt;
 - (NSDictionary*)getTileProperties:(CGPoint)_point forLayer:(CCTMXLayer*)_layer;
 - (CGPoint)getSeekerTile;
+- (CGFloat)tileUsedEnergy;
+- (void)move;
+- (void)moveMapTo:(CGPoint)_point withDuration:(CGFloat)_duration;
 - (void)putSensor;
 - (void)getSample;
-- (void)moveMapTo:(CGPoint)_point withDuration:(CGFloat)_duration;
 // display parameter updates
 - (void)updateEnergy;
 - (void)updateSensorCount;
@@ -47,8 +49,10 @@
 // seeker crash
 - (void)crashHitMapBoundary;
 - (void)crashNoEnergy;
-- (void)crashPutSensor;
-- (void)crashGetSensor;
+- (void)crashNoSensorInBin;
+- (void)crashNoSensorAtPosition;
+- (void)crashSampleBinFull;
+- (void)crashNoSampleAtPosition;
 // crash animations
 - (void)fadeToRed;
 // finish dance
@@ -279,28 +283,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)executeSeekerInstruction:(ccTime)dt {
-    ProgramNgin* ngin = [ProgramNgin instance];
     NSString* instruction = nil;
-    if ((instruction = [ngin nextInstruction])) {
+    if ((instruction = [[ProgramNgin instance] nextInstruction])) {
         if ([instruction isEqualToString:@"move"]) {
-            CGPoint delta = [self.seeker1 positionDeltaAlongBearing:self.tileMap.tileSize];
-            if ([self moveIsInPlayingArea:delta]) {
-                if ([self.seeker1 useEnergy]) {
-                    [self updateEnergy];
-                    if ([self shouldMoveMap:delta]) {
-                        CGPoint mapPosition = ccpAdd(CGPointMake(-delta.x, -delta.y), self.tileMap.position);
-                        [self moveMapTo:mapPosition withDuration:1.0];
-                    } else {
-                        [self.seeker1 moveBy:self.tileMap.tileSize];
-                    }
-                } else {
-                    [ngin stopProgram];
-                    [self crashNoEnergy];
-                }
-            } else {
-                [ngin stopProgram];
-                [self crashHitMapBoundary];
-            }
+            [self move];
         } else if ([instruction isEqualToString:@"turn left"]) {
             [self.seeker1 turnLeft];
         } else if ([instruction isEqualToString:@"put sensor"]) {
@@ -328,31 +314,48 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)putSensor {
+- (CGFloat)tileUsedEnergy {
+    CGFloat usedEnergy = 1.0;
     CGPoint seekerTile = [self getSeekerTile];
-    NSDictionary* properties = [self getTileProperties:seekerTile forLayer:self.itemsLayer];
-    if (properties) {
-        NSString* itemID = [properties valueForKey:@"itemID"];
-        if ([itemID isEqualToString:@"sensorSite"]) {   
-            [self.itemsLayer removeTileAt:seekerTile];
-            [self.itemsLayer setTileGID:kMAP_SENSOR_GID at:seekerTile];
-        } else {
+    NSDictionary* mapProperties = [self getTileProperties:seekerTile forLayer:self.terrainLayer];
+    if (mapProperties) {
+        NSString* mapID = [mapProperties valueForKey:@"mapID"];
+        if ([mapID isEqualToString:@"level-1"]) {
+            usedEnergy = -1.0;
+        } else if ([mapID isEqualToString:@"level-2"]) {
+            usedEnergy = 0.8;
+        } else if ([mapID isEqualToString:@"level-3"]) {
+            usedEnergy = 0.6;
+        } else if ([mapID isEqualToString:@"level-4"]) {
+            usedEnergy = 0.4;
+        } else if ([mapID isEqualToString:@"level-5"]) {
+            usedEnergy = 0.2;
         }
-    } else {
-    }
+    } 
+    return usedEnergy;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)getSample {
-    CGPoint seekerTile = [self getSeekerTile];
-    NSDictionary* properties = [self getTileProperties:seekerTile forLayer:self.itemsLayer];
-    if (properties) {
-        NSString* itemID = [properties valueForKey:@"itemID"];
-        if ([itemID isEqualToString:@"sample"]) {        
-            [self.itemsLayer removeTileAt:seekerTile];
-        } else {        
+- (void)move {
+    ProgramNgin* ngin = [ProgramNgin instance];
+    CGPoint delta = [self.seeker1 positionDeltaAlongBearing:self.tileMap.tileSize];
+    if ([self moveIsInPlayingArea:delta]) {
+        CGFloat usedEnergy = [self tileUsedEnergy];
+        if ([self.seeker1 useEnergy:usedEnergy]) {
+            [self updateEnergy];
+            if ([self shouldMoveMap:delta]) {
+                CGPoint mapPosition = ccpAdd(CGPointMake(-delta.x, -delta.y), self.tileMap.position);
+                [self moveMapTo:mapPosition withDuration:1.0];
+            } else {
+                [self.seeker1 moveBy:self.tileMap.tileSize];
+            }
+        } else {
+            [ngin stopProgram];
+            [self crashNoEnergy];
         }
-    } else {        
+    } else {
+        [ngin stopProgram];
+        [self crashHitMapBoundary];
     }
 }
 
@@ -363,13 +366,64 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)putSensor {
+    ProgramNgin* ngin = [ProgramNgin instance];
+    CGPoint seekerTile = [self getSeekerTile];
+    NSDictionary* properties = [self getTileProperties:seekerTile forLayer:self.itemsLayer];
+    if (properties) {
+        NSString* itemID = [properties valueForKey:@"itemID"];
+        if ([itemID isEqualToString:@"sensorSite"]) {   
+            if ([self.seeker1 putSensor]) {
+                [self.itemsLayer removeTileAt:seekerTile];
+                [self.itemsLayer setTileGID:kMAP_SENSOR_GID at:seekerTile];
+                [self updateSensorCount];
+            } else {
+                [ngin stopProgram];
+                [self crashNoSensorInBin];
+            }
+        } else {
+            [ngin stopProgram];
+            [self crashNoSensorAtPosition];
+        }
+    } else {
+        [ngin stopProgram];
+        [self crashNoSensorAtPosition];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)getSample {
+    ProgramNgin* ngin = [ProgramNgin instance];
+    CGPoint seekerTile = [self getSeekerTile];
+    NSDictionary* properties = [self getTileProperties:seekerTile forLayer:self.itemsLayer];
+    if (properties) {
+        NSString* itemID = [properties valueForKey:@"itemID"];
+        if ([itemID isEqualToString:@"sample"]) {        
+            if ([self.seeker1 putSensor]) {
+                [self.itemsLayer removeTileAt:seekerTile];
+                [self updateSampleCount];
+            } else {
+                [ngin stopProgram];
+                [self crashSampleBinFull];
+            }
+        } else {        
+            [ngin stopProgram];
+            [self crashNoSampleAtPosition];
+        }
+    } else {        
+        [ngin stopProgram];
+        [self crashNoSampleAtPosition];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 // display parameter updates
 //-----------------------------------------------------------------------------------------------------------------------------------
 #pragma mark display parameter updates
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)updateEnergy {
-    [self.statusDisplay setDigits:self.seeker1.energy forDisplay:EnergyDisplayType]; 
+    [self.statusDisplay setDigits:(int)(self.seeker1.energy + 0.001) forDisplay:EnergyDisplayType]; 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -404,11 +458,23 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)crashPutSensor {
+- (void)crashNoSensorInBin {
+    [self fadeToRed];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)crashGetSensor {
+- (void)crashNoSensorAtPosition {
+    [self fadeToRed];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)crashSampleBinFull {
+    [self fadeToRed];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)crashNoSampleAtPosition {
+    [self fadeToRed];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

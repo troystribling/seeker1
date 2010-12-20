@@ -23,8 +23,8 @@ typedef enum tagSeekerBearing {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface SeekerSprite : CCSprite {
     SeekerBearing bearing;
-    NSInteger energyTotal;
-    NSInteger energy;
+    CGFloat energyTotal;
+    CGFloat energy;
     NSInteger sampleSites;
     NSInteger sampleBin;
     NSInteger samplesCollected;
@@ -38,8 +38,8 @@ typedef enum tagSeekerBearing {
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, assign) SeekerBearing bearing;
-@property (nonatomic, assign) NSInteger energyTotal;
-@property (nonatomic, assign) NSInteger energy;
+@property (nonatomic, assign) CGFloat energyTotal;
+@property (nonatomic, assign) CGFloat energy;
 @property (nonatomic, assign) NSInteger sampleSites;
 @property (nonatomic, assign) NSInteger sampleBin;
 @property (nonatomic, assign) NSInteger samplesCollected;
@@ -60,7 +60,7 @@ typedef enum tagSeekerBearing {
 - (CGPoint)positionDeltaAlongBearing:(CGSize)_delta;
 - (CGPoint)nextPositionForDelta:(CGSize)_delta;
 - (void)moveBy:(CGSize)_delta;
-- (BOOL)useEnergy;
+- (BOOL)useEnergy:(CGFloat)_deltaEnergy;
 - (void)turnLeft;
 - (BOOL)getSample;
 - (void)emptySampleBin;

@@ -137,9 +137,9 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)useEnergy {
+- (BOOL)useEnergy:(CGFloat)_deltaEnergy {
     BOOL hasEnergy = NO;
-    self.energy--;
+    self.energy -= _deltaEnergy;
     if (self.energy >= 0) {hasEnergy = YES;}
     return hasEnergy;
 }
