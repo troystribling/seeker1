@@ -91,8 +91,8 @@
    <properties>
     <property name="bearing" value="south"/>
     <property name="energy" value="3"/>
-    <property name="sampleSites" value="1"/>
-    <property name="sensorSites" value="0"/>
+    <property name="sampleSites" value="0"/>
+    <property name="sensorSites" value="1"/>
    </properties>
   </object>
  </objectgroup>

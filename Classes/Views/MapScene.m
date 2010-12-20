@@ -17,13 +17,13 @@
 @interface MapScene (PrivateAPI)
 
 // inialize
-- (void)initLevel:(NSInteger)_level;
+- (void)initLevel;
 - (void)setSeekerStartPosition;
 - (void)initStatusDisplay;
-- (CCTMXTiledMap*)initMap:(NSInteger)_level;
+- (CCTMXTiledMap*)initMap;
 - (void)centerTileMapOnStartPoint;
 // reset
-- (void)resetMap:(NSInteger)_level;
+- (void)resetMap;
 - (void)resetSeekerStartPosition;
 - (CGPoint)getTile:(CGPoint)_tileCoords;
 // coordinate transforms
@@ -55,7 +55,9 @@
 - (void)crashNoSampleAtPosition;
 // crash animations
 - (void)fadeToRed;
-// finish dance
+// level completed animations
+- (void)runLevelCompletedAnimation;
+- (void)levelCompletedAnimation;
 // touches
 - (CGPoint)locationFromTouch:(UITouch*)touch;
 - (CGPoint)locationFromTouches:(NSSet*)touches;
@@ -89,6 +91,7 @@
 @synthesize levelResetMap;
 @synthesize levelInitSeeker;
 @synthesize levelCrash;
+@synthesize levelCompleted;
 
 //===================================================================================================================================
 #pragma mark MapScene PrivateAPI
@@ -98,9 +101,9 @@
 #pragma mark initialize
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)initLevel:(NSInteger)_level {
-    self.level = _level;
-    self.tileMap = [self initMap:_level];
+- (void)initLevel {
+    self.level = 1;
+    self.tileMap = [self initMap];
     CGSize tileMapTiles = self.tileMap.mapSize;
     CGSize tileMapTileSize = self.tileMap.tileSize;
     self.tileMapSize = CGSizeMake(tileMapTiles.width*tileMapTileSize.width, tileMapTiles.height*tileMapTileSize.height);
@@ -112,8 +115,8 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (CCTMXTiledMap*)initMap:(NSInteger)_level {
-    NSString* mapName = [NSString stringWithFormat:@"map-%d.tmx", _level];
+- (CCTMXTiledMap*)initMap {
+    NSString* mapName = [NSString stringWithFormat:@"map-%d.tmx", self.level];
     CCTMXTiledMap* map = [CCTMXTiledMap tiledMapWithTMXFile:mapName];
     self.mapLayer = [map layerNamed:@"map"];
     self.terrainLayer = [map layerNamed:@"terrain"];
@@ -136,8 +139,8 @@
 - (void)initStatusDisplay {
     [self.statusDisplay setDigits:self.seeker1.energyTotal forDisplay:EnergyDisplayType];
     [self.statusDisplay setDigits:self.seeker1.speed forDisplay:SpeedDisplayType];
-    [self.statusDisplay setDigits:self.seeker1.sensorSites forDisplay:SampleDisplayType];
-    [self.statusDisplay setDigits:self.seeker1.sampleSites forDisplay:SensorDisplayType];
+    [self.statusDisplay setDigits:self.seeker1.sensorSites forDisplay:SensorDisplayType];
+    [self.statusDisplay setDigits:self.seeker1.sampleSites forDisplay:SampleDisplayType];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -163,7 +166,7 @@
 #pragma mark reset
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)resetMap:(NSInteger)_level {
+- (void)resetMap {
     self.levelResetMap = NO;
     if (self.crash){
         [self.crash removeFromParentAndCleanup:YES];
@@ -171,7 +174,7 @@
     } else {
         [self.seeker1 removeFromParentAndCleanup:YES];
     }
-    CCTMXTiledMap* newTileMap = [self initMap:_level];
+    CCTMXTiledMap* newTileMap = [self initMap];
     [self addChild:newTileMap z:-1 tag:kMAP];
     [self.tileMap removeFromParentAndCleanup:YES];
     self.tileMap = newTileMap;
@@ -284,7 +287,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)executeSeekerInstruction:(ccTime)dt {
     NSString* instruction = nil;
-    if ((instruction = [[ProgramNgin instance] nextInstruction])) {
+    ProgramNgin* ngin = [ProgramNgin instance];
+    if ((instruction = [ngin nextInstruction])) {
         if ([instruction isEqualToString:@"move"]) {
             [self move];
         } else if ([instruction isEqualToString:@"turn left"]) {
@@ -295,6 +299,10 @@
             [self getSample];
         }
     }
+    if ([self.seeker1 isLevelCompleted]) {
+        [ngin stopProgram];
+        [self levelCompletedAnimation];
+    }    
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -494,6 +502,22 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+// level completed animations
+//-----------------------------------------------------------------------------------------------------------------------------------
+#pragma mark level completed animations
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)runLevelCompletedAnimation {
+    [self.seeker1 rotate:360.0];
+    self.levelCompleted = NO;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)levelCompletedAnimation {
+    self.levelCompleted = YES;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 // touches
 //-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -572,10 +596,11 @@
         self.levelResetMap = NO;
         self.levelInitSeeker = NO;
         self.levelCrash = NO;
+        self.levelCompleted = NO;
         [self.statusDisplay insert:self];
         [self.statusDisplay addTerminalText:@"$ main"];
         [self.statusDisplay addTerminalText:@"$ term"];
-        [self initLevel:1];
+        [self initLevel];
         [self schedule:@selector(nextFrame:)];
 	}
 	return self;
@@ -592,11 +617,13 @@
         if (self.levelInitSeeker) {
             [self setSeekerStartPosition];
         } else if (self.levelResetMap) {
-            [self resetMap:1];
+            [self resetMap];
         } else if (self.levelResetSeeker) {
             [self resetSeekerStartPosition];
         } else if (self.levelCrash) {
             [self crashCompleted];
+        } else if (self.levelCompleted) {
+            [self runLevelCompletedAnimation];
         } else if ([ngin runProgram]) {
             [self executeSeekerInstruction:dt];
         }

@@ -66,7 +66,7 @@ typedef enum tagSeekerBearing {
 - (void)emptySampleBin;
 - (BOOL)putSensor;
 - (void)loadSensorBin;
-- (BOOL)isGameOver;
+- (BOOL)isLevelCompleted;
 // rotate
 - (void)rotate:(CGFloat)_angle;
 - (CGFloat)rotationFromNorthToBearing:(SeekerBearing)_bearing;

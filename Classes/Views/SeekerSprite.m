@@ -139,8 +139,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)useEnergy:(CGFloat)_deltaEnergy {
     BOOL hasEnergy = NO;
-    self.energy -= _deltaEnergy;
     if (self.energy >= 0) {hasEnergy = YES;}
+    self.energy -= _deltaEnergy;
     return hasEnergy;
 }
 
@@ -189,8 +189,8 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)isGameOver {
-    BOOL gameIsOver = YES;
+- (BOOL)isLevelCompleted {
+    BOOL gameIsOver = NO;
     if (self.sensorsPlaced == self.sensorSites &&
         self.samplesCollected == self.sampleSites &&
         self.sampleBin  == 0) {
