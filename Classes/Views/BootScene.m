@@ -48,7 +48,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertProductLabel {
-    self.productLabel = [CCLabel labelWithString:@"an imaginaryProduct" fontName:@"Courier" fontSize:24];
+    self.productLabel = [CCLabel labelWithString:@"imaginaryProducts.com" fontName:@"Courier" fontSize:22];
     self.productLabel.position = CGPointMake(20.0f, 20.0f);
     self.productLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     self.productLabel.color = ccc3(103,243,27);

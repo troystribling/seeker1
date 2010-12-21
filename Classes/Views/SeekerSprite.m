@@ -156,7 +156,7 @@
     self.samplesCollected++;
     self.sampleBin++;
     self.samplesRemaining--;
-    if (self.sampleBin == kSEEKER_SAMPLE_BIN_SIZE) {
+    if (self.sampleBin > kSEEKER_SAMPLE_BIN_SIZE) {
         status = NO;
     }
     return status;

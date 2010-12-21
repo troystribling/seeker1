@@ -40,6 +40,7 @@
 - (NSDictionary*)getTileProperties:(CGPoint)_point forLayer:(CCTMXLayer*)_layer;
 - (CGPoint)getSeekerTile;
 - (CGFloat)tileUsedEnergy;
+- (BOOL)isStationTile;
 - (void)move;
 - (void)moveMapTo:(CGPoint)_point withDuration:(CGFloat)_duration;
 - (void)putSensor;
@@ -51,7 +52,7 @@
 // seeker crash
 - (void)crashHitMapBoundary;
 - (void)crashNoEnergy;
-- (void)crashNoSensorInBin;
+- (void)crashSensorBinEmpty;
 - (void)crashNoSensorAtPosition;
 - (void)crashSampleBinFull;
 - (void)crashNoSampleAtPosition;
@@ -105,7 +106,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initLevel {
+#define kDEBUG_LEVEL 2
+#ifdef kDEBUG_LEVEL   
+    self.level = kDEBUG_LEVEL;
+#else    
     self.level = [UserModel level];
+#endif    
     self.tileMap = [self initMap];
     CGSize tileMapTiles = self.tileMap.mapSize;
     CGSize tileMapTileSize = self.tileMap.tileSize;
@@ -118,7 +124,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initNextLevel {
     self.nextLevel = NO;
-    [UserModel nextLevel];
+#ifndef kDEBUG_LEVEL    
+    [UserModel nextLevel];    
+#endif    
     [self.tileMap removeFromParentAndCleanup:YES];
     [self.seeker1 removeFromParentAndCleanup:YES];
     [self initLevel];
@@ -291,7 +299,7 @@
     CGSize tiles = self.tileMap.mapSize; 
     if (tilePosition.x < kMAP_EDGE_BUFFER || tilePosition.x > (tiles.width - kMAP_EDGE_BUFFER)) {
         return NO;
-    } else if (tilePosition.y < 1 + kMAP_EDGE_BUFFER || tilePosition.y > (tiles.height - kMAP_EDGE_BUFFER - 1)) {
+    } else if (tilePosition.y < kMAP_EDGE_BUFFER || tilePosition.y > (tiles.height - kMAP_EDGE_BUFFER)) {
         return NO;
     }
     return YES;
@@ -311,6 +319,10 @@
         } else if ([instruction isEqualToString:@"get sample"]) {
             [self getSample];
         }
+    }
+    if ([self isStationTile]) {
+        [self.seeker1 emptySampleBin];
+        [self.seeker1 loadSensorBin];
     }
     if ([self.seeker1 isLevelCompleted]) {
         [ngin stopProgram];
@@ -357,6 +369,20 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)isStationTile {
+    BOOL status = NO;
+    CGPoint seekerTile = [self getSeekerTile];
+    NSDictionary* itemProperties = [self getTileProperties:seekerTile forLayer:self.itemsLayer];
+    if (itemProperties) {
+        NSString* itemID = [itemProperties valueForKey:@"itemID"];
+        if ([itemID isEqualToString:@"station"]) {
+            status = YES;
+        }            
+    }
+    return status;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)move {
     ProgramNgin* ngin = [ProgramNgin instance];
     CGPoint delta = [self.seeker1 positionDeltaAlongBearing:self.tileMap.tileSize];
@@ -400,7 +426,7 @@
                 [self updateSensorCount];
             } else {
                 [ngin stopProgram];
-                [self crashNoSensorInBin];
+                [self crashSensorBinEmpty];
             }
         } else {
             [ngin stopProgram];
@@ -420,7 +446,7 @@
     if (properties) {
         NSString* itemID = [properties valueForKey:@"itemID"];
         if ([itemID isEqualToString:@"sample"]) {        
-            if ([self.seeker1 putSensor]) {
+            if ([self.seeker1 getSample]) {
                 [self.itemsLayer removeTileAt:seekerTile];
                 [self updateSampleCount];
             } else {
@@ -479,7 +505,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)crashNoSensorInBin {
+- (void)crashSensorBinEmpty {
     [self fadeToRed];
 }
 
