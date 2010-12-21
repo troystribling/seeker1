@@ -11,9 +11,12 @@
 #import "SeekerDbi.h"
 #import "cocos2d.h"
 #import "BootScene.h"
+#import "UserModel.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface Seeker1AppDelegate (PrivateAPI)
+
+- (void)initDb;
 
 @end
 
@@ -31,12 +34,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void) applicationDidFinishLaunching:(UIApplication*)application {
-	SeekerDbi* dbi = [SeekerDbi instance];
-	if (![dbi copyDbFile]) {
-		NSLog (@"Database inilaization failed");
-		return;
-	}	
-	[dbi open];
+    [self initDb];
 	// CC_DIRECTOR_INIT()
 	//
 	// 1. Initializes an EAGLView with 0-bit depth format, and RGB565 render buffer
@@ -107,6 +105,22 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)applicationSignificantTimeChange:(UIApplication *)application {
 	[[CCDirector sharedDirector] setNextDeltaTimeZero:YES];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)initDb {
+	SeekerDbi* dbi = [SeekerDbi instance];
+	if (![dbi copyDbFile]) {
+		NSLog (@"Database inilaization failed");
+		return;
+	}	
+	[dbi open];
+    UserModel* user = [UserModel findFirst];
+    if (user == nil) {
+        user = [[[UserModel alloc] init] autorelease];
+        user.level = 1;
+        [user insert];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

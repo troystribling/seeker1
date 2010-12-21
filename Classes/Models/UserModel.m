@@ -41,6 +41,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (void)destroyAll {
+	[[SeekerDbi instance]  updateWithStatement:@"DELETE FROM users"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (UserModel*)findFirst {
 	UserModel* model = [[[UserModel alloc] init] autorelease];
 	[[SeekerDbi instance] selectForModel:[UserModel class] withStatement:@"SELECT * FROM users LIMIT 1" andOutputTo:model];
@@ -50,12 +55,19 @@
 	return model;
 }
 
-
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)destroyAll {
-	[[SeekerDbi instance]  updateWithStatement:@"DELETE FROM users"];
++ (NSInteger)nextLevel {
+    UserModel* user = [self findFirst];
+    user.level++;
+    [user update];
+    return user.level;
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSInteger)level {
+    UserModel* user = [self findFirst];
+    return user.level;
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------------------------------------------------------------

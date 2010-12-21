@@ -27,11 +27,18 @@
 #pragma mark FunctionModel
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (FunctionModel*)loadFunction:(NSMutableArray*)_function withName:(NSString*)_name {
-    FunctionModel* function = [[[FunctionModel alloc] init] autorelease];
-    function.codeListing = [_function componentsJoinedByString:@";"];
-    function.functionName = _name;
-    return function;
++ (void)insertFunction:(NSMutableArray*)_function withName:(NSString*)_name {
+    FunctionModel* function = [self findByName:_name];
+    if (function) {
+        function.codeListing = [_function componentsJoinedByString:@";"];
+        function.functionName = _name;
+        [function update];
+    } else {
+       function = [[[FunctionModel alloc] init] autorelease];
+        function.codeListing = [_function componentsJoinedByString:@";"];
+        function.functionName = _name;
+        [function insert];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

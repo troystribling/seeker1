@@ -25,7 +25,7 @@
 @property (nonatomic, retain) NSString* codeListing;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (ProgramModel*)loadProgram:(NSMutableArray*)_program forLevel:(NSInteger)_level;
++ (void)insertProgram:(NSMutableArray*)_program forLevel:(NSInteger)_level;
 + (NSInteger)count;
 + (void)drop;
 + (void)create;

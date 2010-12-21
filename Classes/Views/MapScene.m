@@ -12,12 +12,14 @@
 #import "SeekerSprite.h"
 #import "StatusDisplay.h"
 #import "ProgramNgin.h"
+#import "UserModel.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapScene (PrivateAPI)
 
 // inialize
 - (void)initLevel;
+- (void)initNextLevel;
 - (void)setSeekerStartPosition;
 - (void)initStatusDisplay;
 - (CCTMXTiledMap*)initMap;
@@ -92,6 +94,7 @@
 @synthesize levelInitSeeker;
 @synthesize levelCrash;
 @synthesize levelCompleted;
+@synthesize nextLevel;
 
 //===================================================================================================================================
 #pragma mark MapScene PrivateAPI
@@ -102,16 +105,23 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initLevel {
-    self.level = 1;
+    self.level = [UserModel level];
     self.tileMap = [self initMap];
     CGSize tileMapTiles = self.tileMap.mapSize;
     CGSize tileMapTileSize = self.tileMap.tileSize;
     self.tileMapSize = CGSizeMake(tileMapTiles.width*tileMapTileSize.width, tileMapTiles.height*tileMapTileSize.height);
-    [self.seeker1 initParams:self.startSite];
     [self centerTileMapOnStartPoint];
-    [self initStatusDisplay];
     [self addChild:self.tileMap z:-1 tag:kMAP];
     self.levelInitSeeker = YES;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)initNextLevel {
+    self.nextLevel = NO;
+    [UserModel nextLevel];
+    [self.tileMap removeFromParentAndCleanup:YES];
+    [self.seeker1 removeFromParentAndCleanup:YES];
+    [self initLevel];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -129,6 +139,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setSeekerStartPosition {
     self.levelInitSeeker = NO;
+    self.seeker1 = [SeekerSprite create];
+    [self.seeker1 initParams:self.startSite];
+    [self initStatusDisplay];
     CGPoint startPoint = [self getPointFromObjectPropertiesInScreenCoords:self.startSite];
     NSString* bearing = [self.startSite valueForKey:@"bearing"];
     [self.seeker1 setToStartPoint:startPoint withBearing:bearing];
@@ -508,8 +521,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)runLevelCompletedAnimation {
-    [self.seeker1 rotate:360.0];
     self.levelCompleted = NO;
+    [self.seeker1 rotate:360.0];
+    self.nextLevel = YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -587,7 +601,6 @@
 		CGSize screenSize = [[CCDirector sharedDirector] winSize];
         self.menuRect = CGRectMake(0.75*screenSize.width, 0.88*screenSize.height, 0.21*screenSize.width, 0.1*screenSize.height);
 		self.screenCenter = CGPointMake(screenSize.width/2, screenSize.height/2);
-        self.seeker1 = [SeekerSprite create];
         self.statusDisplay = [StatusDisplay create];
         self.menu = [MapMenuView create];
         self.menu.mapScene = self;
@@ -597,6 +610,7 @@
         self.levelInitSeeker = NO;
         self.levelCrash = NO;
         self.levelCompleted = NO;
+        self.nextLevel = NO;
         [self.statusDisplay insert:self];
         [self.statusDisplay addTerminalText:@"$ main"];
         [self.statusDisplay addTerminalText:@"$ term"];
@@ -624,6 +638,8 @@
             [self crashCompleted];
         } else if (self.levelCompleted) {
             [self runLevelCompletedAnimation];
+        } else if (self.nextLevel) {
+            [self initNextLevel];
         } else if ([ngin runProgram]) {
             [self executeSeekerInstruction:dt];
         }

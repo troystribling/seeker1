@@ -54,6 +54,7 @@ typedef enum tagMapID {
     BOOL levelCrash;
     BOOL levelInitSeeker;
     BOOL levelCompleted;
+    BOOL nextLevel;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -77,6 +78,7 @@ typedef enum tagMapID {
 @property (nonatomic, assign) BOOL levelCrash;
 @property (nonatomic, assign) BOOL levelInitSeeker;
 @property (nonatomic, assign) BOOL levelCompleted;
+@property (nonatomic, assign) BOOL nextLevel;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)scene;

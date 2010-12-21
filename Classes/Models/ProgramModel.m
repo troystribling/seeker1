@@ -27,11 +27,18 @@
 #pragma mark ProgramModel
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (ProgramModel*)loadProgram:(NSMutableArray*)_program forLevel:(NSInteger)_level {
-    ProgramModel* program = [[[ProgramModel alloc] init] autorelease];
-    program.codeListing = [_program componentsJoinedByString:@";"];
-    program.level = _level;
-    return program;
++ (void)insertProgram:(NSMutableArray*)_program forLevel:(NSInteger)_level {
+    ProgramModel* program = [self findByLevel:_level];
+    if (program) {
+        program.codeListing = [_program componentsJoinedByString:@";"];
+        program.level = _level;
+        [program update];
+    } else {
+        program = [[[ProgramModel alloc] init] autorelease];
+        program.codeListing = [_program componentsJoinedByString:@";"];
+        program.level = _level;
+        [program insert];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

@@ -50,6 +50,9 @@
 		050F792B12AC64910017BDE1 /* TerminalLauncherView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050F792A12AC64910017BDE1 /* TerminalLauncherView.m */; };
 		050F795012AC670F0017BDE1 /* LauncherView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050F794F12AC670F0017BDE1 /* LauncherView.m */; };
 		0510EDD812BC680E00355F28 /* seeker-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0510EDD712BC680E00355F28 /* seeker-1.png */; };
+		051AB7E912C028260020AC2D /* map-2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 051AB7E612C028260020AC2D /* map-2.tmx */; };
+		051AB7EA12C028260020AC2D /* map-3.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 051AB7E712C028260020AC2D /* map-3.tmx */; };
+		051AB7EB12C028260020AC2D /* map-4.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 051AB7E812C028260020AC2D /* map-4.tmx */; };
 		051C779612B091AC00E41A23 /* terminal-launcher-edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 051C779512B091AC00E41A23 /* terminal-launcher-edit.png */; };
 		051C77C712B0A88300E41A23 /* terminal-launcher-editing.png in Resources */ = {isa = PBXBuildFile; fileRef = 051C77C612B0A88300E41A23 /* terminal-launcher-editing.png */; };
 		051E5896129B7CF000A5440E /* items.plist in Resources */ = {isa = PBXBuildFile; fileRef = 051E5894129B7CF000A5440E /* items.plist */; };
@@ -355,6 +358,9 @@
 		050F794E12AC670F0017BDE1 /* LauncherView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauncherView.h; sourceTree = "<group>"; };
 		050F794F12AC670F0017BDE1 /* LauncherView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LauncherView.m; sourceTree = "<group>"; };
 		0510EDD712BC680E00355F28 /* seeker-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "seeker-1.png"; sourceTree = "<group>"; };
+		051AB7E612C028260020AC2D /* map-2.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-2.tmx"; sourceTree = "<group>"; };
+		051AB7E712C028260020AC2D /* map-3.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-3.tmx"; sourceTree = "<group>"; };
+		051AB7E812C028260020AC2D /* map-4.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-4.tmx"; sourceTree = "<group>"; };
 		051C779512B091AC00E41A23 /* terminal-launcher-edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-edit.png"; sourceTree = "<group>"; };
 		051C77C612B0A88300E41A23 /* terminal-launcher-editing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-editing.png"; sourceTree = "<group>"; };
 		051E5894129B7CF000A5440E /* items.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = items.plist; sourceTree = "<group>"; };
@@ -651,6 +657,9 @@
 				051E5894129B7CF000A5440E /* items.plist */,
 				051E5895129B7CF000A5440E /* items.png */,
 				050CC74E1296011000974B8F /* map-1.tmx */,
+				051AB7E612C028260020AC2D /* map-2.tmx */,
+				051AB7E712C028260020AC2D /* map-3.tmx */,
+				051AB7E812C028260020AC2D /* map-4.tmx */,
 				050CC74F1296011000974B8F /* map.plist */,
 				050CC7501296011000974B8F /* map.png */,
 			);
@@ -1406,6 +1415,9 @@
 				0527E61612BD5F3D0039D55E /* red-seeker-1-south.png in Resources */,
 				0527E61712BD5F3D0039D55E /* red-seeker-1-west.png in Resources */,
 				050D445E12BF05FE00A0FE30 /* seeker.db in Resources */,
+				051AB7E912C028260020AC2D /* map-2.tmx in Resources */,
+				051AB7EA12C028260020AC2D /* map-3.tmx in Resources */,
+				051AB7EB12C028260020AC2D /* map-4.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

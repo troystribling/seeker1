@@ -25,7 +25,7 @@
 @property (nonatomic, retain) NSString* functionName;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (FunctionModel*)loadFunction:(NSMutableArray*)_function withName:(NSString*)_name;
++ (void)insertFunction:(NSMutableArray*)_function withName:(NSString*)_name;
 + (NSInteger)count;
 + (void)drop;
 + (void)create;

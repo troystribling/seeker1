@@ -28,6 +28,8 @@
 + (void)create;
 + (void)destroyAll;
 + (UserModel*)findFirst;
++ (NSInteger)nextLevel;
++ (NSInteger)level;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;
