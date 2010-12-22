@@ -107,7 +107,7 @@
     } else if ([name isEqualToString:@"run"]) {
         [[ProgramNgin instance] loadProgram:self.programListing];
         [self.mapScene addResetTerminalItems];
-        [self.mapScene.menu addReset];
+        [self.mapScene.menu addResetItems];
         [self.view removeFromSuperview];
     }
 }

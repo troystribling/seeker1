@@ -37,7 +37,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)create;
-- (void)addReset;
-- (void)addRun;
+- (void)initItems;
+- (void)addResetItems;
+- (void)addRunItems;
 
 @end

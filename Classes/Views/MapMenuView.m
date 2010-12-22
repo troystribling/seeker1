@@ -98,8 +98,7 @@
         self.firstRect = CGRectMake(xOffset, yOffset+2.0*itemSize.height, itemSize.width,  itemSize.height);
         self.secondRect = CGRectMake(xOffset, yOffset+itemSize.height, itemSize.width,  itemSize.height);
         self.thirdRect = CGRectMake(xOffset, yOffset, itemSize.width,  itemSize.height);
-        [self createMainItem:self.secondRect];
-        [self createTermItem:self.firstRect];
+        [self initItems];
     }
     return self;
 }
@@ -110,7 +109,16 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addReset {
+- (void)initItems {
+    [self.runItem removeFromSuperview];
+    [self.mainItem removeFromSuperview];
+    [self.termItem removeFromSuperview];
+    [self createTermItem:self.secondRect];
+    [self createMainItem:self.thirdRect];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addResetItems {
     [self.runItem removeFromSuperview];
     [self.mainItem removeFromSuperview];
     [self.termItem removeFromSuperview];
@@ -120,7 +128,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addRun {
+- (void)addRunItems {
     [self.resetItem removeFromSuperview];
     [self.mainItem removeFromSuperview];
     [self.termItem removeFromSuperview];
@@ -144,12 +152,12 @@
     } else if ([itemName isEqualToString:@"run"]) {
         [[ProgramNgin instance] runProgram];
         [self.mapScene addResetTerminalItems];
-        [self addReset];
+        [self addResetItems];
     } else if ([itemName isEqualToString:@"reset"]) {
         [[ProgramNgin instance] stopProgram];
         [self.mapScene resetLevel];
         [self.mapScene addRunTerminalItems];
-        [self addRun];
+        [self addRunItems];
     }
 }
 

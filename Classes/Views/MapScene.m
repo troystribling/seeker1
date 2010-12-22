@@ -37,10 +37,14 @@
 - (BOOL)shouldMoveMap:(CGPoint)_delta;
 - (BOOL)moveIsInPlayingArea:(CGPoint)_delta;
 - (void)executeSeekerInstruction:(ccTime)dt;
+- (void)checkMove;
 - (NSDictionary*)getTileProperties:(CGPoint)_point forLayer:(CCTMXLayer*)_layer;
 - (CGPoint)getSeekerTile;
 - (CGFloat)tileUsedEnergy;
+- (BOOL)isItemTileType:(NSString*)_itemType;
 - (BOOL)isStationTile;
+- (BOOL)isSensorSiteTile;
+- (BOOL)isSampleTile;
 - (void)move;
 - (void)moveMapTo:(CGPoint)_point withDuration:(CGFloat)_duration;
 - (void)putSensor;
@@ -53,8 +57,8 @@
 - (void)crashHitMapBoundary;
 - (void)crashNoEnergy;
 - (void)crashSensorBinEmpty;
-- (void)crashNoSensorAtPosition;
-- (void)crashSensorAtPositionMissed;
+- (void)crashNoSensorSiteAtPosition;
+- (void)crashSensorSiteAtPositionMissed;
 - (void)crashSampleBinFull;
 - (void)crashNoSampleAtPosition;
 - (void)crashSampleAtPositionMissed;
@@ -69,7 +73,9 @@
 // menu
 - (BOOL)isInMenuRect:(CGPoint)_point;
 - (void)showMenu;
-- (void)terminal;
+- (void)initTerminalItems;
+- (void)addResetTerminalItems;
+- (void)addRunTerminalItems;
 
 @end
 
@@ -96,6 +102,7 @@
 @synthesize levelResetMap;
 @synthesize levelInitSeeker;
 @synthesize levelCrash;
+@synthesize levelCheckMove;
 @synthesize levelCompleted;
 @synthesize nextLevel;
 
@@ -119,6 +126,7 @@
     CGSize tileMapTileSize = self.tileMap.tileSize;
     self.tileMapSize = CGSizeMake(tileMapTiles.width*tileMapTileSize.width, tileMapTiles.height*tileMapTileSize.height);
     [self centerTileMapOnStartPoint];
+    [self initTerminalItems];
     [self addChild:self.tileMap z:-1 tag:kMAP];
     self.levelInitSeeker = YES;
 }
@@ -326,10 +334,17 @@
         [self.seeker1 emptySampleBin];
         [self.seeker1 loadSensorBin];
     }
+    self.levelCheckMove = YES;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)checkMove {
+    self.levelCheckMove = NO;
+    ProgramNgin* ngin = [ProgramNgin instance];
     if ([self.seeker1 isLevelCompleted]) {
         [ngin deleteProgram];
         [self levelCompletedAnimation];
-    }    
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -371,17 +386,32 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)isStationTile {
+- (BOOL)isItemTileType:(NSString*)_itemType {
     BOOL status = NO;
     CGPoint seekerTile = [self getSeekerTile];
     NSDictionary* itemProperties = [self getTileProperties:seekerTile forLayer:self.itemsLayer];
     if (itemProperties) {
         NSString* itemID = [itemProperties valueForKey:@"itemID"];
-        if ([itemID isEqualToString:@"station"]) {
+        if ([itemID isEqualToString:_itemType]) {
             status = YES;
         }            
     }
     return status;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)isStationTile {
+    return [self isItemTileType:@"station"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)isSensorSiteTile {
+    return [self isItemTileType:@"sensorSite"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)isSampleTile {
+    return [self isItemTileType:@"sample"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -432,11 +462,11 @@
             }
         } else {
             [ngin haltProgram];
-            [self crashNoSensorAtPosition];
+            [self crashNoSensorSiteAtPosition];
         }
     } else {
         [ngin haltProgram];
-        [self crashNoSensorAtPosition];
+        [self crashNoSensorSiteAtPosition];
     }
 }
 
@@ -512,12 +542,12 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)crashNoSensorAtPosition {
+- (void)crashNoSensorSiteAtPosition {
     [self fadeToRed];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)crashSensorAtPositionMissed {
+- (void)crashSensorSiteAtPositionMissed {
     [self fadeToRed];
 }
 
@@ -608,6 +638,13 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)initTerminalItems {
+    [self.statusDisplay addTerminalText:@"$ main"];
+    [self.statusDisplay addTerminalText:@"$ term"];
+    [self.statusDisplay addTerminalText:@""];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addResetTerminalItems {
     [self.statusDisplay addTerminalText:@"$ main"];
     [self.statusDisplay addTerminalText:@"$ term"];
@@ -650,8 +687,6 @@
         self.levelCompleted = NO;
         self.nextLevel = NO;
         [self.statusDisplay insert:self];
-        [self.statusDisplay addTerminalText:@"$ main"];
-        [self.statusDisplay addTerminalText:@"$ term"];
         [self initLevel];
         [self schedule:@selector(nextFrame:)];
 	}
@@ -674,6 +709,8 @@
             [self resetSeekerStartPosition];
         } else if (self.levelCrash) {
             [self crashCompleted];
+        } else if (self.levelCheckMove) {
+            [self checkMove];
         } else if (self.levelCompleted) {
             [self runLevelCompletedAnimation];
         } else if (self.nextLevel) {
