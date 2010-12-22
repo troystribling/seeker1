@@ -98,7 +98,6 @@
         self.firstRect = CGRectMake(xOffset, yOffset+2.0*itemSize.height, itemSize.width,  itemSize.height);
         self.secondRect = CGRectMake(xOffset, yOffset+itemSize.height, itemSize.width,  itemSize.height);
         self.thirdRect = CGRectMake(xOffset, yOffset, itemSize.width,  itemSize.height);
-        [self initItems];
     }
     return self;
 }
@@ -111,10 +110,11 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initItems {
     [self.runItem removeFromSuperview];
+    [self.resetItem removeFromSuperview];
     [self.mainItem removeFromSuperview];
     [self.termItem removeFromSuperview];
-    [self createTermItem:self.secondRect];
-    [self createMainItem:self.thirdRect];
+    [self createTermItem:self.thirdRect];
+    [self createMainItem:self.secondRect];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -122,9 +122,9 @@
     [self.runItem removeFromSuperview];
     [self.mainItem removeFromSuperview];
     [self.termItem removeFromSuperview];
+    [self createTermItem:self.thirdRect];
+    [self createMainItem:self.secondRect];
     [self createResetItem:self.firstRect];
-    [self createTermItem:self.secondRect];
-    [self createMainItem:self.thirdRect];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -132,9 +132,9 @@
     [self.resetItem removeFromSuperview];
     [self.mainItem removeFromSuperview];
     [self.termItem removeFromSuperview];
+    [self createTermItem:self.thirdRect];
+    [self createMainItem:self.secondRect];
     [self createRunItem:self.firstRect];
-    [self createTermItem:self.secondRect];
-    [self createMainItem:self.thirdRect];
 }
 
 //===================================================================================================================================

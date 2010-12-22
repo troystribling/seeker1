@@ -127,6 +127,7 @@
     self.tileMapSize = CGSizeMake(tileMapTiles.width*tileMapTileSize.width, tileMapTiles.height*tileMapTileSize.height);
     [self centerTileMapOnStartPoint];
     [self initTerminalItems];
+    [self.menu initItems];
     [self addChild:self.tileMap z:-1 tag:kMAP];
     self.levelInitSeeker = YES;
 }
@@ -639,23 +640,23 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initTerminalItems {
+    [self.statusDisplay addTerminalText:@""];
     [self.statusDisplay addTerminalText:@"$ main"];
     [self.statusDisplay addTerminalText:@"$ term"];
-    [self.statusDisplay addTerminalText:@""];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addResetTerminalItems {
+    [self.statusDisplay addTerminalText:@"$ reset"];
     [self.statusDisplay addTerminalText:@"$ main"];
     [self.statusDisplay addTerminalText:@"$ term"];
-    [self.statusDisplay addTerminalText:@"$ reset"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addRunTerminalItems {
+    [self.statusDisplay addTerminalText:@"$ run"];
     [self.statusDisplay addTerminalText:@"$ main"];
     [self.statusDisplay addTerminalText:@"$ term"];
-    [self.statusDisplay addTerminalText:@"$ run"];
 }
 
 //===================================================================================================================================

@@ -64,11 +64,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)writeDisplay {
-    CGPoint basePoint = CGPointMake(248.0f, 11.0f);
+    CGPoint basePoint = CGPointMake(248.0f, 37.0f);
     CGFloat yOffset = 13.0;
     for (int i = 0; i < [self.terminalText count]; i++) {
         CCLabel* _text = [self.terminalText objectAtIndex:i];
-        _text.position = CGPointMake(basePoint.x, basePoint.y+i*yOffset);
+        _text.position = CGPointMake(basePoint.x, basePoint.y-i*yOffset);
         [self addChild:_text];
     }
 }
