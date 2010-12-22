@@ -51,7 +51,6 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.view.frame = self.containerView.frame;
-        self.programListing = [NSMutableArray arrayWithCapacity:10];
         self.editingEnabled = NO;
     }
     return self;
@@ -69,6 +68,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
     self.terminalLauncherView = [TerminalLauncherView inView:self.view andDelegate:self];
+    self.programListing = [NSMutableArray arrayWithArray:[ProgramNgin instance].program];
+    [self.programView reloadData];
 	[super viewWillAppear:animated];
 }
 
@@ -94,6 +95,7 @@
 - (void)viewTouchedNamed:(NSString*)name {
     if ([name isEqualToString:@"back"]) {
         [self.view removeFromSuperview];
+        [ProgramNgin instance].program = [NSMutableArray arrayWithArray:self.programListing];
     } else if ([name isEqualToString:@"edit"]) {
         if (self.editingEnabled) {
             self.editingEnabled = NO;

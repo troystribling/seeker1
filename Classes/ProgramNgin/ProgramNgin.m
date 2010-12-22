@@ -63,7 +63,7 @@ static ProgramNgin* thisProgramNgin = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadProgram:(NSMutableArray*)_program {
-    self.program = _program;
+    self.program = [NSMutableArray arrayWithArray:_program];
     [self runProgram];
 }
 
@@ -116,10 +116,11 @@ static ProgramNgin* thisProgramNgin = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSString*)nextInstruction {
     NSString* instruction = nil;
-    if (self.nextLine < [self.program count] - 1) {
+    NSInteger codeLines = [self.program count];
+    if (self.nextLine < codeLines - 1) {
         instruction = [self.program objectAtIndex:self.nextLine];
         self.nextLine++;
-    } else if (self.nextLine == [self.program count] - 1) {
+    } else if (self.nextLine == codeLines - 1) {
         instruction = [self.program objectAtIndex:self.nextLine];
         self.nextLine = 0;
     } else {

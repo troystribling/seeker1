@@ -43,8 +43,6 @@
 - (CGFloat)tileUsedEnergy;
 - (BOOL)isItemTileType:(NSString*)_itemType;
 - (BOOL)isStationTile;
-- (BOOL)isSensorSiteTile;
-- (BOOL)isSampleTile;
 - (void)move;
 - (void)moveMapTo:(CGPoint)_point withDuration:(CGFloat)_duration;
 - (void)putSensor;
@@ -140,6 +138,7 @@
 #endif    
     [self.tileMap removeFromParentAndCleanup:YES];
     [self.seeker1 removeFromParentAndCleanup:YES];
+    [[ProgramNgin instance] deleteProgram];
     [self initLevel];
 }
 
@@ -310,7 +309,7 @@
     CGSize tiles = self.tileMap.mapSize; 
     if (tilePosition.x < kMAP_EDGE_BUFFER || tilePosition.x > (tiles.width - kMAP_EDGE_BUFFER)) {
         return NO;
-    } else if (tilePosition.y < kMAP_EDGE_BUFFER + 1 || tilePosition.y > (tiles.height - kMAP_EDGE_BUFFER)) {
+    } else if (tilePosition.y < (kMAP_EDGE_BUFFER + 1) || tilePosition.y > (tiles.height - kMAP_EDGE_BUFFER)) {
         return NO;
     }
     return YES;
@@ -341,9 +340,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)checkMove {
     self.levelCheckMove = NO;
-    ProgramNgin* ngin = [ProgramNgin instance];
     if ([self.seeker1 isLevelCompleted]) {
-        [ngin deleteProgram];
         [self levelCompletedAnimation];
     }
 }
@@ -403,16 +400,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)isStationTile {
     return [self isItemTileType:@"station"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)isSensorSiteTile {
-    return [self isItemTileType:@"sensorSite"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)isSampleTile {
-    return [self isItemTileType:@"sample"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
