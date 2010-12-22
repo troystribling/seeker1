@@ -30,6 +30,7 @@
 - (NSMutableArray*)getPrimativeFunctions;
 - (NSMutableArray*)getUserFunctions;
 - (void)loadProgram:(NSMutableArray*)_program;
+- (void)saveProgram:(NSMutableArray*)_program;
 - (void)deleteProgram;
 - (void)runProgram;
 - (void)stopProgram;

@@ -63,13 +63,17 @@ static ProgramNgin* thisProgramNgin = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadProgram:(NSMutableArray*)_program {
-    self.program = [NSMutableArray arrayWithArray:_program];
+    [self saveProgram:_program];
     [self runProgram];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)saveProgram:(NSMutableArray*)_program {
+    self.program = [NSMutableArray arrayWithArray:_program];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)deleteProgram {
-    [self stopProgram];
     [self.program removeAllObjects];
 }
 

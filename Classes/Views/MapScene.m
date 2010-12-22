@@ -37,7 +37,6 @@
 - (BOOL)shouldMoveMap:(CGPoint)_delta;
 - (BOOL)moveIsInPlayingArea:(CGPoint)_delta;
 - (void)executeSeekerInstruction:(ccTime)dt;
-- (void)checkMove;
 - (NSDictionary*)getTileProperties:(CGPoint)_point forLayer:(CCTMXLayer*)_layer;
 - (CGPoint)getSeekerTile;
 - (CGFloat)tileUsedEnergy;
@@ -100,7 +99,6 @@
 @synthesize levelResetMap;
 @synthesize levelInitSeeker;
 @synthesize levelCrash;
-@synthesize levelCheckMove;
 @synthesize levelCompleted;
 @synthesize nextLevel;
 
@@ -334,13 +332,8 @@
         [self.seeker1 emptySampleBin];
         [self.seeker1 loadSensorBin];
     }
-    self.levelCheckMove = YES;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)checkMove {
-    self.levelCheckMove = NO;
     if ([self.seeker1 isLevelCompleted]) {
+        [[ProgramNgin instance] stopProgram];
         [self levelCompletedAnimation];
     }
 }
@@ -697,8 +690,6 @@
             [self resetSeekerStartPosition];
         } else if (self.levelCrash) {
             [self crashCompleted];
-        } else if (self.levelCheckMove) {
-            [self checkMove];
         } else if (self.levelCompleted) {
             [self runLevelCompletedAnimation];
         } else if (self.nextLevel) {

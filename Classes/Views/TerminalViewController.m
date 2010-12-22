@@ -95,7 +95,7 @@
 - (void)viewTouchedNamed:(NSString*)name {
     if ([name isEqualToString:@"back"]) {
         [self.view removeFromSuperview];
-        [ProgramNgin instance].program = [NSMutableArray arrayWithArray:self.programListing];
+        [[ProgramNgin instance] saveProgram:self.programListing];
     } else if ([name isEqualToString:@"edit"]) {
         if (self.editingEnabled) {
             self.editingEnabled = NO;
