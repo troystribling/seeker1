@@ -14,13 +14,15 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ProgramNgin : NSObject {
     NSMutableArray* program;
-    BOOL runProgram;
+    BOOL programHalted;
+    BOOL programRunning;
     NSInteger nextLine;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) NSMutableArray* program;
-@property (nonatomic, assign) BOOL runProgram;
+@property (nonatomic, assign) BOOL programHalted;
+@property (nonatomic, assign) BOOL programRunning;
 @property (nonatomic, assign) NSInteger nextLine;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -28,9 +30,13 @@
 - (NSMutableArray*)getPrimativeFunctions;
 - (NSMutableArray*)getUserFunctions;
 - (void)loadProgram:(NSMutableArray*)_program;
+- (void)deleteProgram;
+- (void)runProgram;
 - (void)stopProgram;
+- (void)haltProgram;
 - (BOOL)programIsLoaded;
 - (BOOL)programIsRunning;
+- (BOOL)programIsHalted;
 - (NSString*)nextInstruction;
 
 @end

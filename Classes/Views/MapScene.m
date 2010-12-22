@@ -54,8 +54,10 @@
 - (void)crashNoEnergy;
 - (void)crashSensorBinEmpty;
 - (void)crashNoSensorAtPosition;
+- (void)crashSensorAtPositionMissed;
 - (void)crashSampleBinFull;
 - (void)crashNoSampleAtPosition;
+- (void)crashSampleAtPositionMissed;
 // crash animations
 - (void)fadeToRed;
 // level completed animations
@@ -299,7 +301,7 @@
     CGSize tiles = self.tileMap.mapSize; 
     if (tilePosition.x < kMAP_EDGE_BUFFER || tilePosition.x > (tiles.width - kMAP_EDGE_BUFFER)) {
         return NO;
-    } else if (tilePosition.y < kMAP_EDGE_BUFFER || tilePosition.y > (tiles.height - kMAP_EDGE_BUFFER)) {
+    } else if (tilePosition.y < kMAP_EDGE_BUFFER + 1 || tilePosition.y > (tiles.height - kMAP_EDGE_BUFFER)) {
         return NO;
     }
     return YES;
@@ -325,7 +327,7 @@
         [self.seeker1 loadSensorBin];
     }
     if ([self.seeker1 isLevelCompleted]) {
-        [ngin stopProgram];
+        [ngin deleteProgram];
         [self levelCompletedAnimation];
     }    
 }
@@ -397,11 +399,11 @@
                 [self.seeker1 moveBy:self.tileMap.tileSize];
             }
         } else {
-            [ngin stopProgram];
+            [ngin haltProgram];
             [self crashNoEnergy];
         }
     } else {
-        [ngin stopProgram];
+        [ngin haltProgram];
         [self crashHitMapBoundary];
     }
 }
@@ -425,15 +427,15 @@
                 [self.itemsLayer setTileGID:kMAP_SENSOR_GID at:seekerTile];
                 [self updateSensorCount];
             } else {
-                [ngin stopProgram];
+                [ngin haltProgram];
                 [self crashSensorBinEmpty];
             }
         } else {
-            [ngin stopProgram];
+            [ngin haltProgram];
             [self crashNoSensorAtPosition];
         }
     } else {
-        [ngin stopProgram];
+        [ngin haltProgram];
         [self crashNoSensorAtPosition];
     }
 }
@@ -450,15 +452,15 @@
                 [self.itemsLayer removeTileAt:seekerTile];
                 [self updateSampleCount];
             } else {
-                [ngin stopProgram];
+                [ngin haltProgram];
                 [self crashSampleBinFull];
             }
         } else {        
-            [ngin stopProgram];
+            [ngin haltProgram];
             [self crashNoSampleAtPosition];
         }
     } else {        
-        [ngin stopProgram];
+        [ngin haltProgram];
         [self crashNoSampleAtPosition];
     }
 }
@@ -515,12 +517,22 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)crashSensorAtPositionMissed {
+    [self fadeToRed];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashSampleBinFull {
     [self fadeToRed];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashNoSampleAtPosition {
+    [self fadeToRed];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)crashSampleAtPositionMissed {
     [self fadeToRed];
 }
 
@@ -666,7 +678,7 @@
             [self runLevelCompletedAnimation];
         } else if (self.nextLevel) {
             [self initNextLevel];
-        } else if ([ngin runProgram]) {
+        } else if ([ngin programIsRunning]) {
             [self executeSeekerInstruction:dt];
         }
 	}

@@ -142,7 +142,7 @@
     } else if ([itemName isEqualToString:@"main"]) {
         [[CCDirector sharedDirector] replaceScene: [MainScene scene]];
     } else if ([itemName isEqualToString:@"run"]) {
-        [ProgramNgin instance].runProgram = YES;
+        [[ProgramNgin instance] runProgram];
         [self.mapScene addResetTerminalItems];
         [self addReset];
     } else if ([itemName isEqualToString:@"reset"]) {

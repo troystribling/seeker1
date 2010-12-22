@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "TerminalLauncherView.h"
+#import "ProgramNgin.h"
 #import "TouchImageView.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -40,10 +41,12 @@
         TouchImageView* backItem = [TouchImageView createWithFrame:backRect name:@"back" andDelegate:self];
         backItem.image = [UIImage imageNamed:@"terminal-launcher-back.png"];
         [self addSubview:backItem];
-        CGRect runRect = CGRectMake(0.375*viewWidth, 0.15*viewHeight, 0.25*viewWidth, 0.61*viewHeight);
-        TouchImageView* runItem = [TouchImageView createWithFrame:runRect name:@"run" andDelegate:self];
-        runItem.image = [UIImage imageNamed:@"terminal-launcher-run.png"];
-        [self addSubview:runItem];
+        if (![[ProgramNgin instance] programIsHalted] && ![[ProgramNgin instance] programIsRunning]) {
+            CGRect runRect = CGRectMake(0.375*viewWidth, 0.15*viewHeight, 0.25*viewWidth, 0.61*viewHeight);
+            TouchImageView* runItem = [TouchImageView createWithFrame:runRect name:@"run" andDelegate:self];
+            runItem.image = [UIImage imageNamed:@"terminal-launcher-run.png"];
+            [self addSubview:runItem];
+        }
         CGRect editRect = CGRectMake(0.69*viewWidth, 0.15*viewHeight, 0.31*viewWidth, 0.61*viewHeight);
         self.editItem = [TouchImageView createWithFrame:editRect name:@"edit" andDelegate:self];
         self.editItem.image = [UIImage imageNamed:@"terminal-launcher-edit.png"];

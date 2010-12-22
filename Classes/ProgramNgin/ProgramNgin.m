@@ -22,7 +22,8 @@ static ProgramNgin* thisProgramNgin = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize program;
-@synthesize runProgram;
+@synthesize programHalted;
+@synthesize programRunning;
 @synthesize nextLine;
 
 //===================================================================================================================================
@@ -63,14 +64,34 @@ static ProgramNgin* thisProgramNgin = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadProgram:(NSMutableArray*)_program {
     self.program = _program;
+    [self runProgram];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)deleteProgram {
+    [self stopProgram];
+    [self.program removeAllObjects];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)runProgram {
     self.nextLine = 0;
-    self.runProgram = YES;
+    self.programRunning = YES;
+    self.programHalted = NO;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)stopProgram {
     self.nextLine = 0;
-    self.runProgram = NO;
+    self.programRunning = NO;
+    self.programHalted = NO;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)haltProgram {
+    self.nextLine = 0;
+    self.programRunning = NO;
+    self.programHalted = YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -84,7 +105,12 @@ static ProgramNgin* thisProgramNgin = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)programIsRunning {
-    return self.runProgram;
+    return self.programRunning;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)programIsHalted {
+    return self.programHalted;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -97,8 +123,7 @@ static ProgramNgin* thisProgramNgin = nil;
         instruction = [self.program objectAtIndex:self.nextLine];
         self.nextLine = 0;
     } else {
-        self.nextLine = 0;
-        self.runProgram = NO;
+        [self stopProgram];
     }   
     return instruction;
 }

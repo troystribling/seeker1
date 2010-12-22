@@ -62,13 +62,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
-    self.terminalLauncherView = [TerminalLauncherView inView:self.view andDelegate:self];
     self.programView.separatorColor = [UIColor blackColor];
     [super viewDidLoad];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
+    self.terminalLauncherView = [TerminalLauncherView inView:self.view andDelegate:self];
 	[super viewWillAppear:animated];
 }
 
