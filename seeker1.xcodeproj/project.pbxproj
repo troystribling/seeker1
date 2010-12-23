@@ -66,7 +66,10 @@
 		0527E61712BD5F3D0039D55E /* red-seeker-1-west.png in Resources */ = {isa = PBXBuildFile; fileRef = 0527E61312BD5F3D0039D55E /* red-seeker-1-west.png */; };
 		0528CDB512909FE600F4078A /* Seeker1AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0528CDB412909FE600F4078A /* Seeker1AppDelegate.m */; };
 		0528CDB91290A00200F4078A /* MapScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0528CDB81290A00200F4078A /* MapScene.m */; };
-		0531D76F12C2CD25008C4A55 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0531D76E12C2CD25008C4A55 /* Default.png */; };
+		05355F2C12C3D86D00CA770E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 05355F2B12C3D86D00CA770E /* Default.png */; };
+		05355F3212C3DA8F00CA770E /* MissionsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 05355F3112C3DA8F00CA770E /* MissionsScene.m */; };
+		05355F4012C3DC1700CA770E /* QuadsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 05355F3F12C3DC1700CA770E /* QuadsScene.m */; };
+		05355F4312C3DCBA00CA770E /* LevelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05355F4212C3DCBA00CA770E /* LevelModel.m */; };
 		053FBFCA129D8C45000BCBCF /* StatusDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 053FBFC9129D8C45000BCBCF /* StatusDisplay.m */; };
 		0540119612A2B9B900CCC62D /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0540119512A2B9B900CCC62D /* MainScene.m */; };
 		054012BB12A30FF600CCC62D /* Apple ][.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 054012B912A30FF600CCC62D /* Apple ][.ttf */; };
@@ -379,7 +382,13 @@
 		0528CDB412909FE600F4078A /* Seeker1AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Seeker1AppDelegate.m; sourceTree = "<group>"; };
 		0528CDB71290A00200F4078A /* MapScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapScene.h; sourceTree = "<group>"; };
 		0528CDB81290A00200F4078A /* MapScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapScene.m; sourceTree = "<group>"; };
-		0531D76E12C2CD25008C4A55 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		05355F2B12C3D86D00CA770E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		05355F3012C3DA8F00CA770E /* MissionsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissionsScene.h; sourceTree = "<group>"; };
+		05355F3112C3DA8F00CA770E /* MissionsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionsScene.m; sourceTree = "<group>"; };
+		05355F3E12C3DC1700CA770E /* QuadsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuadsScene.h; sourceTree = "<group>"; };
+		05355F3F12C3DC1700CA770E /* QuadsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuadsScene.m; sourceTree = "<group>"; };
+		05355F4112C3DCBA00CA770E /* LevelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelModel.h; sourceTree = "<group>"; };
+		05355F4212C3DCBA00CA770E /* LevelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelModel.m; sourceTree = "<group>"; };
 		053FBFC8129D8C44000BCBCF /* StatusDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusDisplay.h; sourceTree = "<group>"; };
 		053FBFC9129D8C45000BCBCF /* StatusDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusDisplay.m; sourceTree = "<group>"; };
 		0540119412A2B9B900CCC62D /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScene.h; sourceTree = "<group>"; };
@@ -673,6 +682,8 @@
 				050D444512BF001300A0FE30 /* FunctionModel.m */,
 				050D444112BF000600A0FE30 /* ProgramModel.h */,
 				050D444212BF000600A0FE30 /* ProgramModel.m */,
+				05355F4112C3DCBA00CA770E /* LevelModel.h */,
+				05355F4212C3DCBA00CA770E /* LevelModel.m */,
 				050D43D212BEFC7D00A0FE30 /* SeekerDbi.h */,
 				050D43D312BEFC7D00A0FE30 /* SeekerDbi.m */,
 				050D443E12BEFFE700A0FE30 /* UserModel.h */,
@@ -793,6 +804,10 @@
 				0540119512A2B9B900CCC62D /* MainScene.m */,
 				0528CDB71290A00200F4078A /* MapScene.h */,
 				0528CDB81290A00200F4078A /* MapScene.m */,
+				05355F3012C3DA8F00CA770E /* MissionsScene.h */,
+				05355F3112C3DA8F00CA770E /* MissionsScene.m */,
+				05355F3E12C3DC1700CA770E /* QuadsScene.h */,
+				05355F3F12C3DC1700CA770E /* QuadsScene.m */,
 				0556B81B129C603B00B5F8FB /* SeekerSprite.h */,
 				0556B81C129C603B00B5F8FB /* SeekerSprite.m */,
 				053FBFC8129D8C44000BCBCF /* StatusDisplay.h */,
@@ -1181,7 +1196,7 @@
 				50F414EE1069373D002A0D5E /* Icon.png */,
 				50F414EF1069373D002A0D5E /* Info.plist */,
 				050D445D12BF05FE00A0FE30 /* seeker.db */,
-				0531D76E12C2CD25008C4A55 /* Default.png */,
+				05355F2B12C3D86D00CA770E /* Default.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1417,7 +1432,7 @@
 				051AB7E912C028260020AC2D /* map-2.tmx in Resources */,
 				051AB7EA12C028260020AC2D /* map-3.tmx in Resources */,
 				051AB7EB12C028260020AC2D /* map-4.tmx in Resources */,
-				0531D76F12C2CD25008C4A55 /* Default.png in Resources */,
+				05355F2C12C3D86D00CA770E /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1452,6 +1467,9 @@
 				050D444012BEFFE700A0FE30 /* UserModel.m in Sources */,
 				050D444312BF000600A0FE30 /* ProgramModel.m in Sources */,
 				050D444612BF001300A0FE30 /* FunctionModel.m in Sources */,
+				05355F3212C3DA8F00CA770E /* MissionsScene.m in Sources */,
+				05355F4012C3DC1700CA770E /* QuadsScene.m in Sources */,
+				05355F4312C3DCBA00CA770E /* LevelModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
