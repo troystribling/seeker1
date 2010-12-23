@@ -53,7 +53,6 @@
 		051AB7E912C028260020AC2D /* map-2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 051AB7E612C028260020AC2D /* map-2.tmx */; };
 		051AB7EA12C028260020AC2D /* map-3.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 051AB7E712C028260020AC2D /* map-3.tmx */; };
 		051AB7EB12C028260020AC2D /* map-4.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 051AB7E812C028260020AC2D /* map-4.tmx */; };
-		051C391D12C1BE0C00851571 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 051C391C12C1BE0C00851571 /* Default.png */; };
 		051C779612B091AC00E41A23 /* terminal-launcher-edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 051C779512B091AC00E41A23 /* terminal-launcher-edit.png */; };
 		051C77C712B0A88300E41A23 /* terminal-launcher-editing.png in Resources */ = {isa = PBXBuildFile; fileRef = 051C77C612B0A88300E41A23 /* terminal-launcher-editing.png */; };
 		051E5896129B7CF000A5440E /* items.plist in Resources */ = {isa = PBXBuildFile; fileRef = 051E5894129B7CF000A5440E /* items.plist */; };
@@ -67,6 +66,7 @@
 		0527E61712BD5F3D0039D55E /* red-seeker-1-west.png in Resources */ = {isa = PBXBuildFile; fileRef = 0527E61312BD5F3D0039D55E /* red-seeker-1-west.png */; };
 		0528CDB512909FE600F4078A /* Seeker1AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0528CDB412909FE600F4078A /* Seeker1AppDelegate.m */; };
 		0528CDB91290A00200F4078A /* MapScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0528CDB81290A00200F4078A /* MapScene.m */; };
+		0531D76F12C2CD25008C4A55 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0531D76E12C2CD25008C4A55 /* Default.png */; };
 		053FBFCA129D8C45000BCBCF /* StatusDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 053FBFC9129D8C45000BCBCF /* StatusDisplay.m */; };
 		0540119612A2B9B900CCC62D /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0540119512A2B9B900CCC62D /* MainScene.m */; };
 		054012BB12A30FF600CCC62D /* Apple ][.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 054012B912A30FF600CCC62D /* Apple ][.ttf */; };
@@ -361,7 +361,6 @@
 		051AB7E612C028260020AC2D /* map-2.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-2.tmx"; sourceTree = "<group>"; };
 		051AB7E712C028260020AC2D /* map-3.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-3.tmx"; sourceTree = "<group>"; };
 		051AB7E812C028260020AC2D /* map-4.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-4.tmx"; sourceTree = "<group>"; };
-		051C391C12C1BE0C00851571 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		051C779512B091AC00E41A23 /* terminal-launcher-edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-edit.png"; sourceTree = "<group>"; };
 		051C77C612B0A88300E41A23 /* terminal-launcher-editing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-editing.png"; sourceTree = "<group>"; };
 		051E5894129B7CF000A5440E /* items.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = items.plist; sourceTree = "<group>"; };
@@ -380,6 +379,7 @@
 		0528CDB412909FE600F4078A /* Seeker1AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Seeker1AppDelegate.m; sourceTree = "<group>"; };
 		0528CDB71290A00200F4078A /* MapScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapScene.h; sourceTree = "<group>"; };
 		0528CDB81290A00200F4078A /* MapScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapScene.m; sourceTree = "<group>"; };
+		0531D76E12C2CD25008C4A55 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		053FBFC8129D8C44000BCBCF /* StatusDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusDisplay.h; sourceTree = "<group>"; };
 		053FBFC9129D8C45000BCBCF /* StatusDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusDisplay.m; sourceTree = "<group>"; };
 		0540119412A2B9B900CCC62D /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScene.h; sourceTree = "<group>"; };
@@ -1177,11 +1177,11 @@
 				050D765212AF0F6B005EF9BE /* Images */,
 				050CC73D1295F93300974B8F /* Levels */,
 				0547A46512AC349400D2F0D1 /* Views */,
-				051C391C12C1BE0C00851571 /* Default.png */,
 				50F414ED1069373D002A0D5E /* fps_images.png */,
 				50F414EE1069373D002A0D5E /* Icon.png */,
 				50F414EF1069373D002A0D5E /* Info.plist */,
 				050D445D12BF05FE00A0FE30 /* seeker.db */,
+				0531D76E12C2CD25008C4A55 /* Default.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1417,7 +1417,7 @@
 				051AB7E912C028260020AC2D /* map-2.tmx in Resources */,
 				051AB7EA12C028260020AC2D /* map-3.tmx in Resources */,
 				051AB7EB12C028260020AC2D /* map-4.tmx in Resources */,
-				051C391D12C1BE0C00851571 /* Default.png in Resources */,
+				0531D76F12C2CD25008C4A55 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
