@@ -10,12 +10,15 @@
 #import "StatusDisplay.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define kDISPLAY_SECOND_DIGIT   23.0f
-#define kENERGY_XPOS            10.0f
-#define kSPEED_XPOS             68.0f
-#define kSENSOR_XPOS            127.0f
-#define kSAMPLE_XPOS            185.0f
-#define kDIGIT_YPOS             5.0f
+#define kDISPLAY_DIGIT_DELTA    22.0f
+#define kENERGY_XPOS            3.0f
+#define kSPEED_XPOS             81.0f
+#define kSENSOR_XPOS            136.0f
+#define kSAMPLE_XPOS            191.0f
+#define kDIGIT_YPOS             6.0f
+#define kTERMINAL_XPOS          250.0f
+#define kTERMINAL_YPOS          37.0f
+#define kTERMINAL_YOFFSET       13.0f
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface StatusDisplay (PrivateAPI)
@@ -64,11 +67,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)writeDisplay {
-    CGPoint basePoint = CGPointMake(248.0f, 37.0f);
-    CGFloat yOffset = 13.0;
+    CGPoint basePoint = CGPointMake(kTERMINAL_XPOS, kTERMINAL_YPOS);
     for (int i = 0; i < [self.terminalText count]; i++) {
         CCLabel* _text = [self.terminalText objectAtIndex:i];
-        _text.position = CGPointMake(basePoint.x, basePoint.y-i*yOffset);
+        _text.position = CGPointMake(basePoint.x, basePoint.y-i*kTERMINAL_YOFFSET);
         [self addChild:_text];
     }
 }
@@ -136,19 +138,20 @@
     switch(_displayType) {
         case EnergyDisplayType:
             [self.energyDigits addObject:[self insertImage:self.testDigitImage atPostion:kENERGY_XPOS withKey:@"test"]];
-            [self.energyDigits addObject:[self insertImage:self.testDigitImage atPostion:(kENERGY_XPOS+kDISPLAY_SECOND_DIGIT) withKey:@"test"]];
+            [self.energyDigits addObject:[self insertImage:self.testDigitImage atPostion:(kENERGY_XPOS+kDISPLAY_DIGIT_DELTA) withKey:@"test"]];
+            [self.energyDigits addObject:[self insertImage:self.testDigitImage atPostion:(kENERGY_XPOS+2*kDISPLAY_DIGIT_DELTA) withKey:@"test"]];
             break;
         case SpeedDisplayType:
             [self.speedDigits addObject:[self insertImage:self.testDigitImage atPostion:kSPEED_XPOS withKey:@"test"]];
-            [self.speedDigits addObject:[self insertImage:self.testDigitImage atPostion:(kSPEED_XPOS+kDISPLAY_SECOND_DIGIT) withKey:@"test"]];
+            [self.speedDigits addObject:[self insertImage:self.testDigitImage atPostion:(kSPEED_XPOS+kDISPLAY_DIGIT_DELTA) withKey:@"test"]];
             break;
         case SensorDisplayType:
             [self.sensorDigits addObject:[self insertImage:self.testDigitImage atPostion:kSENSOR_XPOS withKey:@"test"]];
-            [self.sensorDigits addObject:[self insertImage:self.testDigitImage atPostion:(kSENSOR_XPOS+kDISPLAY_SECOND_DIGIT) withKey:@"test"]];
+            [self.sensorDigits addObject:[self insertImage:self.testDigitImage atPostion:(kSENSOR_XPOS+kDISPLAY_DIGIT_DELTA) withKey:@"test"]];
             break;
         case SampleDisplayType:
             [self.sampleDigits addObject:[self insertImage:self.testDigitImage atPostion:kSAMPLE_XPOS withKey:@"test"]];
-            [self.sampleDigits addObject:[self insertImage:self.testDigitImage atPostion:(kSAMPLE_XPOS+kDISPLAY_SECOND_DIGIT) withKey:@"test"]];
+            [self.sampleDigits addObject:[self insertImage:self.testDigitImage atPostion:(kSAMPLE_XPOS+kDISPLAY_DIGIT_DELTA) withKey:@"test"]];
             break;
     }
 }
@@ -156,26 +159,29 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setDigits:(NSInteger)_digits forDisplay:(DisplayType)_displayType {
     [self clearDisplay:_displayType];
-    NSInteger tensDigit = floor((CGFloat)_digits/10.0f);
-    NSInteger onesDigit = _digits - 10*tensDigit;
+    NSInteger hunsDigit = floor((CGFloat)_digits/100.0f);
+    NSInteger tensDigit = floor((CGFloat)(_digits - 100*hunsDigit)/10.0f);
+    NSInteger onesDigit = _digits - 100*hunsDigit - 10*tensDigit;
+    NSString* hunsDigitKey = [NSString stringWithFormat:@"%d", hunsDigit];
     NSString* tensDigitKey = [NSString stringWithFormat:@"%d", tensDigit];
     NSString* onesDigitKey = [NSString stringWithFormat:@"%d", onesDigit];
     switch(_displayType) {
         case EnergyDisplayType:
-            [self.energyDigits addObject:[self insertImage:[self.digitImages objectAtIndex:tensDigit] atPostion:kENERGY_XPOS withKey:tensDigitKey]];
-            [self.energyDigits addObject:[self insertImage:[self.digitImages objectAtIndex:onesDigit] atPostion:(kENERGY_XPOS+kDISPLAY_SECOND_DIGIT) withKey:onesDigitKey]];
+            [self.energyDigits addObject:[self insertImage:[self.digitImages objectAtIndex:hunsDigit] atPostion:kENERGY_XPOS withKey:hunsDigitKey]];
+            [self.energyDigits addObject:[self insertImage:[self.digitImages objectAtIndex:tensDigit] atPostion:(kENERGY_XPOS+kDISPLAY_DIGIT_DELTA) withKey:tensDigitKey]];
+            [self.energyDigits addObject:[self insertImage:[self.digitImages objectAtIndex:onesDigit] atPostion:(kENERGY_XPOS+2*kDISPLAY_DIGIT_DELTA) withKey:onesDigitKey]];
             break;
         case SpeedDisplayType:
             [self.speedDigits addObject:[self insertImage:[self.digitImages objectAtIndex:tensDigit] atPostion:kSPEED_XPOS withKey:tensDigitKey]];
-            [self.speedDigits addObject:[self insertImage:[self.digitImages objectAtIndex:onesDigit] atPostion:(kSPEED_XPOS+kDISPLAY_SECOND_DIGIT) withKey:onesDigitKey]];
+            [self.speedDigits addObject:[self insertImage:[self.digitImages objectAtIndex:onesDigit] atPostion:(kSPEED_XPOS+kDISPLAY_DIGIT_DELTA) withKey:onesDigitKey]];
             break;
         case SensorDisplayType:
             [self.sensorDigits addObject:[self insertImage:[self.digitImages objectAtIndex:tensDigit] atPostion:kSENSOR_XPOS withKey:tensDigitKey]];
-            [self.sensorDigits addObject:[self insertImage:[self.digitImages objectAtIndex:onesDigit] atPostion:(kSENSOR_XPOS+kDISPLAY_SECOND_DIGIT) withKey:onesDigitKey]];
+            [self.sensorDigits addObject:[self insertImage:[self.digitImages objectAtIndex:onesDigit] atPostion:(kSENSOR_XPOS+kDISPLAY_DIGIT_DELTA) withKey:onesDigitKey]];
             break;
         case SampleDisplayType:
             [self.sampleDigits addObject:[self insertImage:[self.digitImages objectAtIndex:tensDigit] atPostion:kSAMPLE_XPOS withKey:tensDigitKey]];
-            [self.sampleDigits addObject:[self insertImage:[self.digitImages objectAtIndex:onesDigit] atPostion:(kSAMPLE_XPOS+kDISPLAY_SECOND_DIGIT) withKey:onesDigitKey]];
+            [self.sampleDigits addObject:[self insertImage:[self.digitImages objectAtIndex:onesDigit] atPostion:(kSAMPLE_XPOS+kDISPLAY_DIGIT_DELTA) withKey:onesDigitKey]];
             break;
     }
 }
