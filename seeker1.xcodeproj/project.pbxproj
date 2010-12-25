@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		050A69A712B6FE0B00D486CC /* menu-reset.png in Resources */ = {isa = PBXBuildFile; fileRef = 050A69A612B6FE0B00D486CC /* menu-reset.png */; };
+		050A9DB712C42C9C00FF1BA9 /* QuadsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 050A9DB612C42C9C00FF1BA9 /* QuadsScene.m */; };
 		050B27811290C82400CC6149 /* BootScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 050B27801290C82400CC6149 /* BootScene.m */; };
 		050CC7511296011000974B8F /* map-1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 050CC74E1296011000974B8F /* map-1.tmx */; };
 		050CC7521296011000974B8F /* map.plist in Resources */ = {isa = PBXBuildFile; fileRef = 050CC74F1296011000974B8F /* map.plist */; };
@@ -58,6 +59,9 @@
 		051E5896129B7CF000A5440E /* items.plist in Resources */ = {isa = PBXBuildFile; fileRef = 051E5894129B7CF000A5440E /* items.plist */; };
 		051E5897129B7CF000A5440E /* items.png in Resources */ = {isa = PBXBuildFile; fileRef = 051E5895129B7CF000A5440E /* items.png */; };
 		051F8622129641B30081CF3E /* CCAnimationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 051F8621129641B30081CF3E /* CCAnimationHelper.m */; };
+		0521EF6D12C5637B0078C77C /* elysium.png in Resources */ = {isa = PBXBuildFile; fileRef = 0521EF6A12C5637B0078C77C /* elysium.png */; };
+		0521EF6E12C5637B0078C77C /* memnonia.png in Resources */ = {isa = PBXBuildFile; fileRef = 0521EF6B12C5637B0078C77C /* memnonia.png */; };
+		0521EF6F12C5637B0078C77C /* tharsis.png in Resources */ = {isa = PBXBuildFile; fileRef = 0521EF6C12C5637B0078C77C /* tharsis.png */; };
 		0527C52512A9A8B900DD4099 /* MapMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0527C52412A9A8B900DD4099 /* MapMenuView.m */; };
 		0527C57212A9C21100DD4099 /* TouchImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0527C57112A9C21100DD4099 /* TouchImageView.m */; };
 		0527E61412BD5F3D0039D55E /* red-seeker-1-east.png in Resources */ = {isa = PBXBuildFile; fileRef = 0527E61012BD5F3D0039D55E /* red-seeker-1-east.png */; };
@@ -68,7 +72,6 @@
 		0528CDB91290A00200F4078A /* MapScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0528CDB81290A00200F4078A /* MapScene.m */; };
 		05355F2C12C3D86D00CA770E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 05355F2B12C3D86D00CA770E /* Default.png */; };
 		05355F3212C3DA8F00CA770E /* MissionsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 05355F3112C3DA8F00CA770E /* MissionsScene.m */; };
-		05355F4012C3DC1700CA770E /* QuadsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 05355F3F12C3DC1700CA770E /* QuadsScene.m */; };
 		05355F4312C3DCBA00CA770E /* LevelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05355F4212C3DCBA00CA770E /* LevelModel.m */; };
 		053FBFCA129D8C45000BCBCF /* StatusDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 053FBFC9129D8C45000BCBCF /* StatusDisplay.m */; };
 		0540119612A2B9B900CCC62D /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0540119512A2B9B900CCC62D /* MainScene.m */; };
@@ -310,6 +313,8 @@
 
 /* Begin PBXFileReference section */
 		050A69A612B6FE0B00D486CC /* menu-reset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-reset.png"; sourceTree = "<group>"; };
+		050A9DB512C42C9C00FF1BA9 /* QuadsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuadsScene.h; sourceTree = "<group>"; };
+		050A9DB612C42C9C00FF1BA9 /* QuadsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuadsScene.m; sourceTree = "<group>"; };
 		050B277F1290C82400CC6149 /* BootScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BootScene.h; sourceTree = "<group>"; };
 		050B27801290C82400CC6149 /* BootScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BootScene.m; sourceTree = "<group>"; };
 		050CC74E1296011000974B8F /* map-1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-1.tmx"; sourceTree = "<group>"; };
@@ -370,6 +375,9 @@
 		051E5895129B7CF000A5440E /* items.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = items.png; sourceTree = "<group>"; };
 		051F8620129641B30081CF3E /* CCAnimationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAnimationHelper.h; sourceTree = "<group>"; };
 		051F8621129641B30081CF3E /* CCAnimationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCAnimationHelper.m; sourceTree = "<group>"; };
+		0521EF6A12C5637B0078C77C /* elysium.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = elysium.png; sourceTree = "<group>"; };
+		0521EF6B12C5637B0078C77C /* memnonia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = memnonia.png; sourceTree = "<group>"; };
+		0521EF6C12C5637B0078C77C /* tharsis.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tharsis.png; sourceTree = "<group>"; };
 		0527C52312A9A8B900DD4099 /* MapMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapMenuView.h; sourceTree = "<group>"; };
 		0527C52412A9A8B900DD4099 /* MapMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapMenuView.m; sourceTree = "<group>"; };
 		0527C57012A9C21100DD4099 /* TouchImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchImageView.h; sourceTree = "<group>"; };
@@ -385,8 +393,6 @@
 		05355F2B12C3D86D00CA770E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		05355F3012C3DA8F00CA770E /* MissionsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissionsScene.h; sourceTree = "<group>"; };
 		05355F3112C3DA8F00CA770E /* MissionsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionsScene.m; sourceTree = "<group>"; };
-		05355F3E12C3DC1700CA770E /* QuadsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuadsScene.h; sourceTree = "<group>"; };
-		05355F3F12C3DC1700CA770E /* QuadsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuadsScene.m; sourceTree = "<group>"; };
 		05355F4112C3DCBA00CA770E /* LevelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelModel.h; sourceTree = "<group>"; };
 		05355F4212C3DCBA00CA770E /* LevelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelModel.m; sourceTree = "<group>"; };
 		053FBFC8129D8C44000BCBCF /* StatusDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusDisplay.h; sourceTree = "<group>"; };
@@ -696,6 +702,7 @@
 			isa = PBXGroup;
 			children = (
 				050D765312AF0F6B005EF9BE /* BootDisplay */,
+				0521EF6912C5637B0078C77C /* Missions */,
 				0510EDD612BC680E00355F28 /* Seeker */,
 				050D765C12AF0F6B005EF9BE /* StatusDisplay */,
 				050D766E12AF0F6B005EF9BE /* Terminal */,
@@ -780,6 +787,16 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		0521EF6912C5637B0078C77C /* Missions */ = {
+			isa = PBXGroup;
+			children = (
+				0521EF6A12C5637B0078C77C /* elysium.png */,
+				0521EF6B12C5637B0078C77C /* memnonia.png */,
+				0521EF6C12C5637B0078C77C /* tharsis.png */,
+			);
+			path = Missions;
+			sourceTree = "<group>";
+		};
 		0528CDB212909FE600F4078A /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -806,8 +823,8 @@
 				0528CDB81290A00200F4078A /* MapScene.m */,
 				05355F3012C3DA8F00CA770E /* MissionsScene.h */,
 				05355F3112C3DA8F00CA770E /* MissionsScene.m */,
-				05355F3E12C3DC1700CA770E /* QuadsScene.h */,
-				05355F3F12C3DC1700CA770E /* QuadsScene.m */,
+				050A9DB512C42C9C00FF1BA9 /* QuadsScene.h */,
+				050A9DB612C42C9C00FF1BA9 /* QuadsScene.m */,
 				0556B81B129C603B00B5F8FB /* SeekerSprite.h */,
 				0556B81C129C603B00B5F8FB /* SeekerSprite.m */,
 				053FBFC8129D8C44000BCBCF /* StatusDisplay.h */,
@@ -1433,6 +1450,9 @@
 				051AB7EA12C028260020AC2D /* map-3.tmx in Resources */,
 				051AB7EB12C028260020AC2D /* map-4.tmx in Resources */,
 				05355F2C12C3D86D00CA770E /* Default.png in Resources */,
+				0521EF6D12C5637B0078C77C /* elysium.png in Resources */,
+				0521EF6E12C5637B0078C77C /* memnonia.png in Resources */,
+				0521EF6F12C5637B0078C77C /* tharsis.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1468,8 +1488,8 @@
 				050D444312BF000600A0FE30 /* ProgramModel.m in Sources */,
 				050D444612BF001300A0FE30 /* FunctionModel.m in Sources */,
 				05355F3212C3DA8F00CA770E /* MissionsScene.m in Sources */,
-				05355F4012C3DC1700CA770E /* QuadsScene.m in Sources */,
 				05355F4312C3DCBA00CA770E /* LevelModel.m in Sources */,
+				050A9DB712C42C9C00FF1BA9 /* QuadsScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
