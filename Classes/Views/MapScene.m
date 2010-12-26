@@ -12,6 +12,7 @@
 #import "SeekerSprite.h"
 #import "StatusDisplay.h"
 #import "ProgramNgin.h"
+#import "TouchUtils.h"
 #import "UserModel.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,9 +65,6 @@
 // level completed animations
 - (void)runLevelCompletedAnimation;
 - (void)levelCompletedAnimation;
-// touches
-- (CGPoint)locationFromTouch:(UITouch*)touch;
-- (CGPoint)locationFromTouches:(NSSet*)touches;
 // menu
 - (BOOL)isInMenuRect:(CGPoint)_point;
 - (void)showMenu;
@@ -581,22 +579,6 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-// touches
-//-----------------------------------------------------------------------------------------------------------------------------------
-
-#pragma mark touches
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (CGPoint)locationFromTouch:(UITouch*)touch {
-	CGPoint touchLocation = [touch locationInView:[touch view]];
-	return [[CCDirector sharedDirector] convertToGL:touchLocation];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (CGPoint)locationFromTouches:(NSSet*)touches {
-	return [self locationFromTouch:[touches anyObject]];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 // menu
 //-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -702,7 +684,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 -(void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	CGPoint touchLocation = [self locationFromTouches:touches]; 
+	CGPoint touchLocation = [TouchUtils locationFromTouches:touches]; 
     if ([self isInMenuRect:touchLocation]) {
         self.menuIsOpen = YES;
         [self showMenu];

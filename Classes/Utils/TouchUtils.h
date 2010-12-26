@@ -1,8 +1,8 @@
 //
-//  MissionsScene.h
+//  TouchUtils.h
 //  seeker1
 //
-//  Created by Troy Stribling on 12/23/10.
+//  Created by Troy Stribling on 12/25/10.
 //  Copyright 2010 imaginary products. All rights reserved.
 //
 
@@ -10,22 +10,15 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface MissionsScene : CCLayer {
-    NSInteger quadrangle;
-    NSInteger levelsUnlocked;
-    CGSize screenSize;    
+@interface TouchUtils : NSObject {
+
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, assign) NSInteger quadrangle;
-@property (nonatomic, assign) NSInteger levelsUnlocked;
-@property (nonatomic, assign) CGSize screenSize;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (id)scene;
-- (void)loadMissions:(NSInteger)_quadrangle;
++ (CGPoint)locationFromTouch:(UITouch*)touch;
++ (CGPoint)locationFromTouches:(NSSet*)touches;
 
 @end

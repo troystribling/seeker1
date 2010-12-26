@@ -1,48 +1,39 @@
 //
-//  LauncherView.m
-//  streethak
+//  TouchUtils.m
+//  seeker1
 //
-//  Created by Troy Stribling on 10/8/10.
-//  Copyright 2010 planBresearch. All rights reserved.
+//  Created by Troy Stribling on 12/25/10.
+//  Copyright 2010 imaginary products. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "LauncherView.h"
+#import "TouchUtils.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface LauncherView (PrivateAPI)
+@interface TouchUtils (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation LauncherView
+@implementation TouchUtils
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize delegate;
-@synthesize containedView;
 
 //===================================================================================================================================
-#pragma mark LauncherView PrivateAPI
+#pragma mark TouchUtils PrivateAPI
 
 //===================================================================================================================================
-#pragma mark LauncherView
+#pragma mark TouchUtils
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithFrame:(CGRect)_frame image:(NSString*)_image andDelegate:(id<LauncherViewDelegate>)_delegate {
-    if ((self = [self initWithFrame:_frame])) {
-        self.delegate = _delegate;
-        self.image = [UIImage imageNamed:_image];
-        self.userInteractionEnabled = YES;
-    }
-    return self;
++ (CGPoint)locationFromTouch:(UITouch*)touch {
+	CGPoint touchLocation = [touch locationInView:[touch view]];
+	return [[CCDirector sharedDirector] convertToGL:touchLocation];
 }
 
-//===================================================================================================================================
-#pragma mark NSObject
-
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)dealloc {
-    [super dealloc];
++ (CGPoint)locationFromTouches:(NSSet*)touches {
+	return [self locationFromTouch:[touches anyObject]];
 }
 
 @end

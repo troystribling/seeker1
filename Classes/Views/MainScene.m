@@ -8,7 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "MainScene.h"
-#import "MapScene.h"
+#import "QuadsScene.h"
 #import "StatusDisplay.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -72,7 +72,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)mission {
-    [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
+    [[CCDirector sharedDirector] replaceScene: [QuadsScene scene]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -108,7 +108,6 @@
         [self buildMenu];
         self.statusDisplay = [StatusDisplay create];
         [self.statusDisplay insert:self];
-        [self.statusDisplay addTerminalText:@"$ main"];
         [self.statusDisplay test];
     }
 	return self;

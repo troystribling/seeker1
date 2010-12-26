@@ -73,7 +73,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
     NSString* insertStatement;
-    insertStatement = [NSString stringWithFormat:@"INSERT INTO users (level) values ('%d')", self.level];	
+    insertStatement = [NSString stringWithFormat:@"INSERT INTO users (level) values (%d)", self.level];	
     [[SeekerDbi instance]  updateWithStatement:insertStatement];
 }
 
@@ -90,7 +90,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
-    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE users SET level = '%d'WHERE pk = %d", self.level, self.pk];
+    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE users SET level = %d WHERE pk = %d", self.level, self.pk];
 	[[SeekerDbi instance]  updateWithStatement:updateStatement];
 }
 

@@ -17,12 +17,14 @@
     NSInteger pk;
     NSInteger level;
     NSInteger codeReview;
+    BOOL completed;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, assign) NSInteger pk;
 @property (nonatomic, assign) NSInteger level;
 @property (nonatomic, assign) NSInteger codeReview;
+@property (nonatomic, assign) BOOL completed;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
@@ -37,5 +39,7 @@
 - (void)destroy;
 - (void)load;
 - (void)update;
+- (NSInteger)completedAsInteger;
+- (void)setCompletedAsInteger:(NSInteger)_value;
 
 @end

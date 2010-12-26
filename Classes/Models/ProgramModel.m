@@ -58,7 +58,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ProgramModel*)findByLevel:(NSInteger)_level {
-	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM programs WHERE level = '%d'", _level];
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM programs WHERE level = %d", _level];
 	ProgramModel* model = [[[ProgramModel alloc] init] autorelease];
 	[[SeekerDbi instance] selectForModel:[ProgramModel class] withStatement:selectStatement andOutputTo:model];
     if (model.pk == 0) {
@@ -83,7 +83,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
     NSString* insertStatement;
-    insertStatement = [NSString stringWithFormat:@"INSERT INTO programs (codeListing, level) values ('%@', '%d')", self.codeListing, self.level];	
+    insertStatement = [NSString stringWithFormat:@"INSERT INTO programs (codeListing, level) values ('%@', %d)", self.codeListing, self.level];	
     [[SeekerDbi instance]  updateWithStatement:insertStatement];
 }
 
@@ -95,13 +95,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)load {
-    NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM programs WHERE level = '%d'", self.level];
+    NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM programs WHERE level = %d", self.level];
 	[[SeekerDbi instance] selectForModel:[ProgramModel class] withStatement:selectStatement andOutputTo:self];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
-    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE funtions SET codeListing = '%@', level = '%d' WHERE pk = %d", self.codeListing, 
+    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE funtions SET codeListing = '%@', level = %d WHERE pk = %d", self.codeListing, 
                                  self.level, self.pk];
 	[[SeekerDbi instance] updateWithStatement:updateStatement];
 }
