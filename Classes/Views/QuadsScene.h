@@ -19,6 +19,7 @@ typedef enum tagQuadType {
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class StatusDisplay;
+@class TermMenuView;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface QuadsScene : CCLayer {
@@ -29,6 +30,8 @@ typedef enum tagQuadType {
     QuadType displayedQuad; 
     CGPoint screenCenter;
     CGPoint firstTouch;
+    CGRect menuRect;
+    TermMenuView* menu;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -39,6 +42,8 @@ typedef enum tagQuadType {
 @property (nonatomic, assign) QuadType displayedQuad;
 @property (nonatomic, assign) CGPoint screenCenter;
 @property (nonatomic, assign) CGPoint firstTouch;
+@property (nonatomic, assign) CGRect menuRect;
+@property (nonatomic, retain) TermMenuView* menu;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)scene;

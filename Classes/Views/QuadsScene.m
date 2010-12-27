@@ -43,6 +43,8 @@
 @synthesize displayedQuad;
 @synthesize screenCenter;
 @synthesize firstTouch;
+@synthesize menuRect;
+@synthesize menu;
 
 //===================================================================================================================================
 #pragma mark QuadsScene PrivateAPI

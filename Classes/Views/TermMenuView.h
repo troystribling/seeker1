@@ -1,5 +1,5 @@
 //
-//  MapMenuView.h
+//  TermMenuView.h
 //  seeker1
 //
 //  Created by Troy Stribling on 12/3/10.
@@ -14,11 +14,12 @@
 @class MapScene;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface MapMenuView : UIImageView {
+@interface TermMenuView : UIImageView {
     TouchImageView* runItem;
     TouchImageView* resetItem;
     TouchImageView* mainItem;
     TouchImageView* termItem;
+    TouchImageView* missItem;
     CGRect firstRect;
     CGRect secondRect;
     CGRect thirdRect;
@@ -30,6 +31,7 @@
 @property (nonatomic, retain) TouchImageView* resetItem;
 @property (nonatomic, retain) TouchImageView* mainItem;
 @property (nonatomic, retain) TouchImageView* termItem;
+@property (nonatomic, retain) TouchImageView* missItem;
 @property (nonatomic, retain) MapScene* mapScene;
 @property (nonatomic, assign) CGRect firstRect;
 @property (nonatomic, assign) CGRect secondRect;
@@ -37,7 +39,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)create;
-- (void)initItems;
+- (void)mapInitItems;
+- (void)quadsInitItems;
+- (void)missionsInitItems;
 - (void)addResetItems;
 - (void)addRunItems;
 

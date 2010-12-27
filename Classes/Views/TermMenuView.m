@@ -1,5 +1,5 @@
 //
-//  MapMenuView.m
+//  TermMenuView.m
 //  seeker1
 //
 //  Created by Troy Stribling on 12/3/10.
@@ -7,10 +7,11 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "MapMenuView.h"
+#import "TermMenuView.h"
 #import "cocos2d.h"
 #import "MainScene.h"
 #import "MapScene.h"
+#import "QuadsScene.h"
 #import "SeekerSprite.h"
 #import "TouchImageView.h"
 #import "ProgramNgin.h"
@@ -18,30 +19,33 @@
 #import "ViewControllerManager.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface MapMenuView (PrivateAPI)
+@interface TermMenuView (PrivateAPI)
 
 - (void)createMainItem:(CGRect)_rect;
 - (void)createTermItem:(CGRect)_rect;
 - (void)createRunItem:(CGRect)_rect;
 - (void)createResetItem:(CGRect)_rect;
+- (void)createMissItem:(CGRect)_rect;
+- (void)removeMenuItems;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation MapMenuView
+@implementation TermMenuView
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize mainItem;
 @synthesize termItem;
 @synthesize runItem;
 @synthesize resetItem;
+@synthesize missItem;
 @synthesize mapScene;
 @synthesize firstRect;
 @synthesize secondRect;
 @synthesize thirdRect;
 
 //===================================================================================================================================
-#pragma mark MapMenuView PrivateAPI
+#pragma mark TermMenuView PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)createMainItem:(CGRect)_rect {
@@ -75,14 +79,31 @@
     [self addSubview:self.resetItem];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)createMissItem:(CGRect)_rect {
+    self.missItem = [TouchImageView createWithFrame:_rect name:@"miss" andDelegate:self];
+    self.missItem.image = [UIImage imageNamed:@"menu-miss.png"];
+    self.missItem.contentMode = UIViewContentModeScaleToFill;
+    [self addSubview:self.missItem];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeMenuItems {
+    [self.runItem removeFromSuperview];
+    [self.resetItem removeFromSuperview];
+    [self.mainItem removeFromSuperview];
+    [self.termItem removeFromSuperview];
+    [self.missItem removeFromSuperview];
+}
+
 //===================================================================================================================================
-#pragma mark MapMenuView
+#pragma mark TermMenuView
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)create {
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     CGRect _frame = CGRectMake(0.5*screenSize.width, 0.0f, 0.5*screenSize.width, 0.25*screenSize.height);
-    return [[[MapMenuView alloc] initWithFrame:_frame] autorelease];
+    return [[[TermMenuView alloc] initWithFrame:_frame] autorelease];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -108,20 +129,28 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)initItems {
-    [self.runItem removeFromSuperview];
-    [self.resetItem removeFromSuperview];
-    [self.mainItem removeFromSuperview];
-    [self.termItem removeFromSuperview];
+- (void)mapInitItems {
+    [self removeMenuItems];
     [self createTermItem:self.thirdRect];
     [self createMainItem:self.secondRect];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)quadsInitItems {
+    [self removeMenuItems];
+    [self createMainItem:self.thirdRect];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)missionsInitItems {
+    [self removeMenuItems];
+    [self createMainItem:self.thirdRect];
+    [self createMissItem:self.secondRect];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addResetItems {
-    [self.runItem removeFromSuperview];
-    [self.mainItem removeFromSuperview];
-    [self.termItem removeFromSuperview];
+    [self removeMenuItems];
     [self createTermItem:self.thirdRect];
     [self createMainItem:self.secondRect];
     [self createResetItem:self.firstRect];
@@ -129,9 +158,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addRunItems {
-    [self.resetItem removeFromSuperview];
-    [self.mainItem removeFromSuperview];
-    [self.termItem removeFromSuperview];
+    [self removeMenuItems];
     [self createTermItem:self.thirdRect];
     [self createMainItem:self.secondRect];
     [self createRunItem:self.firstRect];
@@ -149,6 +176,8 @@
         viewController.mapScene = self.mapScene;
     } else if ([itemName isEqualToString:@"main"]) {
         [[CCDirector sharedDirector] replaceScene: [MainScene scene]];
+    } else if ([itemName isEqualToString:@"miss"]) {
+        [[CCDirector sharedDirector] replaceScene: [QuadsScene scene]];
     } else if ([itemName isEqualToString:@"run"]) {
         [[ProgramNgin instance] runProgram];
         [self.mapScene addResetTerminalItems];

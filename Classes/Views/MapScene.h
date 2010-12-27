@@ -30,7 +30,7 @@ typedef enum tagMapID {
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class SeekerSprite;
 @class StatusDisplay;
-@class MapMenuView;
+@class TermMenuView;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapScene : CCLayer {
@@ -39,7 +39,7 @@ typedef enum tagMapID {
     NSMutableDictionary* startSite;
     NSInteger level;
     CGRect menuRect;
-    MapMenuView* menu;
+    TermMenuView* menu;
     CGPoint screenCenter;
     CGSize tileMapSize;
     CCTMXTiledMap* tileMap;
@@ -63,7 +63,7 @@ typedef enum tagMapID {
 @property (nonatomic, assign) NSMutableDictionary* startSite;
 @property (nonatomic, assign) NSInteger level;
 @property (nonatomic, assign) CGRect menuRect;
-@property (nonatomic, retain) MapMenuView* menu;
+@property (nonatomic, retain) TermMenuView* menu;
 @property (nonatomic, assign) CGPoint screenCenter;
 @property (nonatomic, assign) CGSize tileMapSize;
 @property (nonatomic, retain) CCTMXTiledMap* tileMap;

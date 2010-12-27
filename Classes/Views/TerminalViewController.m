@@ -9,7 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "TerminalViewController.h"
 #import "MapScene.h"
-#import "MapMenuView.h"
+#import "TermMenuView.h"
 #import "FunctionsViewController.h"
 #import "ViewControllerManager.h"
 #import "ProgramNgin.h"

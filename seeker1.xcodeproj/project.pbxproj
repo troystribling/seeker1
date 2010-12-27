@@ -62,7 +62,8 @@
 		0521EF6D12C5637B0078C77C /* elysium.png in Resources */ = {isa = PBXBuildFile; fileRef = 0521EF6A12C5637B0078C77C /* elysium.png */; };
 		0521EF6E12C5637B0078C77C /* memnonia.png in Resources */ = {isa = PBXBuildFile; fileRef = 0521EF6B12C5637B0078C77C /* memnonia.png */; };
 		0521EF6F12C5637B0078C77C /* tharsis.png in Resources */ = {isa = PBXBuildFile; fileRef = 0521EF6C12C5637B0078C77C /* tharsis.png */; };
-		0527C52512A9A8B900DD4099 /* MapMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0527C52412A9A8B900DD4099 /* MapMenuView.m */; };
+		0525995412C90B7400E9A3B1 /* menu-miss.png in Resources */ = {isa = PBXBuildFile; fileRef = 0525995312C90B7400E9A3B1 /* menu-miss.png */; };
+		0527C52512A9A8B900DD4099 /* TermMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0527C52412A9A8B900DD4099 /* TermMenuView.m */; };
 		0527C57212A9C21100DD4099 /* TouchImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0527C57112A9C21100DD4099 /* TouchImageView.m */; };
 		0527E61412BD5F3D0039D55E /* red-seeker-1-east.png in Resources */ = {isa = PBXBuildFile; fileRef = 0527E61012BD5F3D0039D55E /* red-seeker-1-east.png */; };
 		0527E61512BD5F3D0039D55E /* red-seeker-1-north.png in Resources */ = {isa = PBXBuildFile; fileRef = 0527E61112BD5F3D0039D55E /* red-seeker-1-north.png */; };
@@ -384,8 +385,9 @@
 		0521EF6A12C5637B0078C77C /* elysium.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = elysium.png; sourceTree = "<group>"; };
 		0521EF6B12C5637B0078C77C /* memnonia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = memnonia.png; sourceTree = "<group>"; };
 		0521EF6C12C5637B0078C77C /* tharsis.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tharsis.png; sourceTree = "<group>"; };
-		0527C52312A9A8B900DD4099 /* MapMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapMenuView.h; sourceTree = "<group>"; };
-		0527C52412A9A8B900DD4099 /* MapMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapMenuView.m; sourceTree = "<group>"; };
+		0525995312C90B7400E9A3B1 /* menu-miss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-miss.png"; sourceTree = "<group>"; };
+		0527C52312A9A8B900DD4099 /* TermMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermMenuView.h; sourceTree = "<group>"; };
+		0527C52412A9A8B900DD4099 /* TermMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermMenuView.m; sourceTree = "<group>"; };
 		0527C57012A9C21100DD4099 /* TouchImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchImageView.h; sourceTree = "<group>"; };
 		0527C57112A9C21100DD4099 /* TouchImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchImageView.m; sourceTree = "<group>"; };
 		0527E61012BD5F3D0039D55E /* red-seeker-1-east.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-seeker-1-east.png"; sourceTree = "<group>"; };
@@ -739,7 +741,6 @@
 		050D765C12AF0F6B005EF9BE /* StatusDisplay */ = {
 			isa = PBXGroup;
 			children = (
-				050A69A612B6FE0B00D486CC /* menu-reset.png */,
 				050D765D12AF0F6B005EF9BE /* empty-display.png */,
 				050D765E12AF0F6B005EF9BE /* LCD-0.png */,
 				050D765F12AF0F6B005EF9BE /* LCD-1.png */,
@@ -754,6 +755,8 @@
 				050D766812AF0F6B005EF9BE /* LCD-empty.png */,
 				050D766912AF0F6B005EF9BE /* LCD-test.png */,
 				050D766A12AF0F6B005EF9BE /* menu-main.png */,
+				0525995312C90B7400E9A3B1 /* menu-miss.png */,
+				050A69A612B6FE0B00D486CC /* menu-reset.png */,
 				050D766B12AF0F6B005EF9BE /* menu-run.png */,
 				050D766C12AF0F6B005EF9BE /* menu-term.png */,
 				050D766D12AF0F6B005EF9BE /* terminal-menu.png */,
@@ -835,8 +838,8 @@
 				050D76A612AF143B005EF9BE /* FunctionsLauncherView.m */,
 				050D764B12AF0E44005EF9BE /* FunctionsViewController.h */,
 				050D764C12AF0E44005EF9BE /* FunctionsViewController.m */,
-				0527C52312A9A8B900DD4099 /* MapMenuView.h */,
-				0527C52412A9A8B900DD4099 /* MapMenuView.m */,
+				0527C52312A9A8B900DD4099 /* TermMenuView.h */,
+				0527C52412A9A8B900DD4099 /* TermMenuView.m */,
 				0540119412A2B9B900CCC62D /* MainScene.h */,
 				0540119512A2B9B900CCC62D /* MainScene.m */,
 				0528CDB71290A00200F4078A /* MapScene.h */,
@@ -1478,6 +1481,7 @@
 				0532CF7412C6BD7800DB92D8 /* elysium-locked.png in Resources */,
 				0532CF7512C6BD7800DB92D8 /* memnonia-locked.png in Resources */,
 				0532CF7712C6BDD900DB92D8 /* tharsis-locked.png in Resources */,
+				0525995412C90B7400E9A3B1 /* menu-miss.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1496,7 +1500,7 @@
 				0556B81D129C603B00B5F8FB /* SeekerSprite.m in Sources */,
 				053FBFCA129D8C45000BCBCF /* StatusDisplay.m in Sources */,
 				0540119612A2B9B900CCC62D /* MainScene.m in Sources */,
-				0527C52512A9A8B900DD4099 /* MapMenuView.m in Sources */,
+				0527C52512A9A8B900DD4099 /* TermMenuView.m in Sources */,
 				0527C57212A9C21100DD4099 /* TouchImageView.m in Sources */,
 				0547A46312AC33C700D2F0D1 /* TerminalViewController.m in Sources */,
 				0547A48012AC388C00D2F0D1 /* TerminalCell.m in Sources */,

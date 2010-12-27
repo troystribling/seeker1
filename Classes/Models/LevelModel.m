@@ -98,7 +98,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
-    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE levels SET level = %d completed = %d WHERE pk = %d", self.level, 
+    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE levels SET level = %d, completed = %d WHERE pk = %d", self.level, 
                                     [self completedAsInteger], self.pk];
 	[[SeekerDbi instance]  updateWithStatement:updateStatement];
 }

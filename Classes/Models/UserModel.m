@@ -125,8 +125,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
-    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE users SET level = %d quadrangle = %d WHERE pk = %d", 
-                                 self.level, self.pk, self.quadrangle];
+    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE users SET level = %d, quadrangle = %d WHERE pk = %d", 
+                                 self.level, self.quadrangle, self.pk];
 	[[SeekerDbi instance]  updateWithStatement:updateStatement];
 }
 

@@ -8,7 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "MapScene.h"
-#import "MapMenuView.h"
+#import "TermMenuView.h"
 #import "SeekerSprite.h"
 #import "StatusDisplay.h"
 #import "ProgramNgin.h"
@@ -123,7 +123,7 @@
     self.tileMapSize = CGSizeMake(tileMapTiles.width*tileMapTileSize.width, tileMapTiles.height*tileMapTileSize.height);
     [self centerTileMapOnStartPoint];
     [self initTerminalItems];
-    [self.menu initItems];
+    [self.menu mapInitItems];
     [self addChild:self.tileMap z:-1 tag:kMAP];
     self.levelInitSeeker = YES;
 }
@@ -642,7 +642,7 @@
         self.menuRect = CGRectMake(0.75*screenSize.width, 0.88*screenSize.height, 0.21*screenSize.width, 0.1*screenSize.height);
 		self.screenCenter = CGPointMake(screenSize.width/2, screenSize.height/2);
         self.statusDisplay = [StatusDisplay create];
-        self.menu = [MapMenuView create];
+        self.menu = [TermMenuView create];
         self.menu.mapScene = self;
         self.menuIsOpen = NO;
         self.levelResetSeeker = NO;
