@@ -25,6 +25,10 @@
 - (void)backwardQuads;
 - (void)shiftQuadsForward;
 - (void)shiftQuadsBackward;
+- (void)moveQuadsBy:(CGFloat)_delta withDuration:(CGFloat)_duration;
+- (void)updateQuadsPosition:(CGFloat)_delta;
+- (void)stopRunningQuads;
+- (BOOL)quadsAreNotMoving;
 
 @end
 
@@ -126,36 +130,61 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)shiftQuadsForward {
-    CGPoint tharsisPosition = self.tharsisSprite.position;
     CGFloat quadShiftDelta = self.tharsisSprite.contentSize.height + kQUAD_IMAGE_YDELTA;
-
-    CGPoint tharsisNextPosition = CGPointMake(tharsisPosition.x, tharsisPosition.y + quadShiftDelta);
-	[self.tharsisSprite runAction:[CCMoveTo actionWithDuration:0.5 position:tharsisNextPosition]];
-    
-    CGPoint memnoniaPosition = self.memnoniaSprite.position;
-    CGPoint memnoniaNextPosition = CGPointMake(memnoniaPosition.x, memnoniaPosition.y + quadShiftDelta);
-	[self.memnoniaSprite runAction:[CCMoveTo actionWithDuration:0.5 position:memnoniaNextPosition]];
-    
-    CGPoint elysiumPosition = self.elysiumSprite.position;
-    CGPoint elysiumNextPosition = CGPointMake(elysiumPosition.x, elysiumPosition.y + quadShiftDelta);
-	[self.elysiumSprite runAction:[CCMoveTo actionWithDuration:0.5 position:elysiumNextPosition]];
+    [self moveQuadsBy:quadShiftDelta withDuration:0.2];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)shiftQuadsBackward {
-    CGPoint tharsisPosition = self.tharsisSprite.position;
-    CGFloat quadShiftDelta = self.tharsisSprite.contentSize.height + kQUAD_IMAGE_YDELTA;
+    CGFloat quadShiftDelta = -(self.tharsisSprite.contentSize.height + kQUAD_IMAGE_YDELTA);
+    [self moveQuadsBy:quadShiftDelta withDuration:0.2];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)moveQuadsBy:(CGFloat)_delta withDuration:(CGFloat)_duration {
+    [self stopRunningQuads];
     
-    CGPoint tharsisNextPosition = CGPointMake(tharsisPosition.x, tharsisPosition.y - quadShiftDelta);
-	[self.tharsisSprite runAction:[CCMoveTo actionWithDuration:0.5 position:tharsisNextPosition]];
+    CGPoint tharsisPosition = self.tharsisSprite.position;
+    CGPoint tharsisNextPosition = CGPointMake(tharsisPosition.x, tharsisPosition.y + _delta);
+	[self.tharsisSprite runAction:[CCMoveTo actionWithDuration:_duration position:tharsisNextPosition]];
     
     CGPoint memnoniaPosition = self.memnoniaSprite.position;
-    CGPoint memnoniaNextPosition = CGPointMake(memnoniaPosition.x, memnoniaPosition.y - quadShiftDelta);
-	[self.memnoniaSprite runAction:[CCMoveTo actionWithDuration:0.5 position:memnoniaNextPosition]];
+    CGPoint memnoniaNextPosition = CGPointMake(memnoniaPosition.x, memnoniaPosition.y + _delta);
+	[self.memnoniaSprite runAction:[CCMoveTo actionWithDuration:_duration position:memnoniaNextPosition]];
     
     CGPoint elysiumPosition = self.elysiumSprite.position;
-    CGPoint elysiumNextPosition = CGPointMake(elysiumPosition.x, elysiumPosition.y - quadShiftDelta);
-	[self.elysiumSprite runAction:[CCMoveTo actionWithDuration:0.5 position:elysiumNextPosition]];
+    CGPoint elysiumNextPosition = CGPointMake(elysiumPosition.x, elysiumPosition.y + _delta);
+	[self.elysiumSprite runAction:[CCMoveTo actionWithDuration:_duration position:elysiumNextPosition]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)updateQuadsPosition:(CGFloat)_delta {
+    CGPoint tharsisPosition = self.tharsisSprite.position;
+    self.tharsisSprite.position = CGPointMake(tharsisPosition.x, tharsisPosition.y + _delta);
+    
+    CGPoint memnoniaPosition = self.memnoniaSprite.position;
+    self.memnoniaSprite.position = CGPointMake(memnoniaPosition.x, memnoniaPosition.y + _delta);
+    
+    CGPoint elysiumPosition = self.elysiumSprite.position;
+    self.elysiumSprite.position = CGPointMake(elysiumPosition.x, elysiumPosition.y + _delta);
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)stopRunningQuads {
+    [self.tharsisSprite stopAllActions];
+    [self.memnoniaSprite stopAllActions];
+    [self.elysiumSprite stopAllActions];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)quadsAreNotMoving {
+    BOOL status = YES;
+    if (([self.tharsisSprite numberOfRunningActions] != 0) || 
+        ([self.memnoniaSprite numberOfRunningActions] != 0) ||
+        ([self.elysiumSprite numberOfRunningActions] != 0)) {
+        status = NO;
+    }
+    return status;
 }
 
 //===================================================================================================================================
@@ -200,7 +229,7 @@
 -(void) ccTouchesEnded:(NSSet*)touches withEvent:(UIEvent *)event {
 	CGPoint touchLocation = [TouchUtils locationFromTouches:touches];
     CGPoint touchDelta = ccpSub(touchLocation, self.firstTouch);
-    if (touchDelta.y == 0) {
+    if (abs(touchDelta.y) < 10) {
         if ([self displayedQuadIsUnlocked]) {
             [[CCDirector sharedDirector] replaceScene:[MissionsScene scene]];
         }
@@ -212,13 +241,7 @@
 }    
 
 //-----------------------------------------------------------------------------------------------------------------------------------
--(void) ccTouchesMOved:(NSSet*)touches withEvent:(UIEvent *)event {
-	CGPoint touchLocation = [TouchUtils locationFromTouches:touches];
-    CGPoint touchDelta = ccpSub(self.firstTouch, touchLocation);
-    if (touchDelta.y == 0) {
-    } else if (touchDelta.y > 0) {
-    } else {
-    }
+-(void) ccTouchesMoved:(NSSet*)touches withEvent:(UIEvent *)event {
 }
 
 @end
