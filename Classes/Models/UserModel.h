@@ -16,11 +16,13 @@
 @interface UserModel : NSObject {
     NSInteger pk;
     NSInteger level;
+    NSInteger quadrangle;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, assign) NSInteger pk;
 @property (nonatomic, assign) NSInteger level;
+@property (nonatomic, assign) NSInteger quadrangle;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
@@ -29,7 +31,11 @@
 + (void)destroyAll;
 + (UserModel*)findFirst;
 + (NSInteger)nextLevel;
++ (void)setLevel:(NSInteger)_level;
 + (NSInteger)level;
++ (NSInteger)nextQuadrangle;
++ (NSInteger)quadrangle;
++ (void)insert;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;

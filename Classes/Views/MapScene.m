@@ -14,6 +14,7 @@
 #import "ProgramNgin.h"
 #import "TouchUtils.h"
 #import "UserModel.h"
+#import "LevelModel.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapScene (PrivateAPI)
@@ -109,11 +110,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initLevel {
-#define kDEBUG_LEVEL 2
+//#define kDEBUG_LEVEL 2
 #ifdef kDEBUG_LEVEL   
     self.level = kDEBUG_LEVEL;
 #else    
     self.level = [UserModel level];
+    [LevelModel insertForLevel:self.level];
 #endif    
     self.tileMap = [self initMap];
     CGSize tileMapTiles = self.tileMap.mapSize;
@@ -130,7 +132,7 @@
 - (void)initNextLevel {
     self.nextLevel = NO;
 #ifndef kDEBUG_LEVEL    
-    [UserModel nextLevel];    
+    [UserModel nextLevel];
 #endif    
     [self.tileMap removeFromParentAndCleanup:YES];
     [self.seeker1 removeFromParentAndCleanup:YES];

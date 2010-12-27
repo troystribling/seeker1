@@ -33,6 +33,7 @@
 + (void)destroyAll;
 + (LevelModel*)findByLevel:(NSInteger)_level;
 + (NSMutableArray*)findAll;
++ (void)insertForLevel:(NSInteger)_level;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;

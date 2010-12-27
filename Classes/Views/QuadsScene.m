@@ -23,6 +23,8 @@
 - (BOOL)displayedQuadIsUnlocked;
 - (void)fowardQuads;
 - (void)backwardQuads;
+- (void)shiftQuadsForward;
+- (void)shiftQuadsBackward;
 
 @end
 
@@ -46,10 +48,11 @@
     
     NSInteger levelsUnlocked = [LevelModel count];
     NSInteger quadsUnlocked = levelsUnlocked / kMISSIONS_PER_QUAD;
+    CGFloat quadShiftDelta = self.tharsisSprite.contentSize.height + kQUAD_IMAGE_YDELTA;
     
     self.displayedQuad = TharsisQuadType;
     self.tharsisSprite.position = self.screenCenter;
-    [self addChild:self.tharsisSprite];
+    [self addChild:self.tharsisSprite z:-1];
 
     if (quadsUnlocked >= 1) {
         self.memnoniaSprite = [[[CCSprite alloc] initWithFile:@"memnonia.png"] autorelease];
@@ -57,22 +60,20 @@
         self.memnoniaSprite = [[[CCSprite alloc] initWithFile:@"memnonia-locked.png"] autorelease];
     }
     if (quadsUnlocked >= 2) {
-        self.tharsisSprite = [[[CCSprite alloc] initWithFile:@"tharsis.png"] autorelease];
+        self.elysiumSprite = [[[CCSprite alloc] initWithFile:@"elysium.png"] autorelease];
     } else {
-        self.tharsisSprite = [[[CCSprite alloc] initWithFile:@"tharsis-locked.png"] autorelease];
+        self.elysiumSprite = [[[CCSprite alloc] initWithFile:@"elysium-locked.png"] autorelease];
     }    
     self.memnoniaSprite.anchorPoint = CGPointMake(0.5f, 0.5f);
     self.tharsisSprite.anchorPoint = CGPointMake(0.5f, 0.5f);
     
-    CGSize tharsisSize = self.tharsisSprite.contentSize;
-    CGPoint nextPosition = CGPointMake(self.screenCenter.x, self.screenCenter.y - tharsisSize.height - kQUAD_IMAGE_YDELTA);
+    CGPoint nextPosition = CGPointMake(self.screenCenter.x, self.screenCenter.y - quadShiftDelta);
     self.memnoniaSprite.position = nextPosition;
-    [self addChild:self.memnoniaSprite];
+    [self addChild:self.memnoniaSprite z:-1];
 
-    CGSize memnoniaSize = self.memnoniaSprite.contentSize;
-    nextPosition = CGPointMake(self.screenCenter.x, self.screenCenter.y - tharsisSize.height - memnoniaSize.height - 2*kQUAD_IMAGE_YDELTA);
+    nextPosition = CGPointMake(self.screenCenter.x, self.screenCenter.y - 2 * quadShiftDelta);
     self.elysiumSprite.position = nextPosition;
-    [self addChild:self.elysiumSprite];
+    [self addChild:self.elysiumSprite z:-1];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -89,10 +90,72 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)fowardQuads {
+    switch (self.displayedQuad) {
+        case TharsisQuadType:
+            self.displayedQuad  = MemnoniaQuadType;
+            [self shiftQuadsForward];
+            break;
+        case MemnoniaQuadType:
+            self.displayedQuad  = ElysiumQuadType;
+            [self shiftQuadsForward];
+            break;
+        case ElysiumQuadType:
+            break;
+        default:
+            break;
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)backwardQuads {
+    switch (self.displayedQuad) {
+        case TharsisQuadType:
+            break;
+        case MemnoniaQuadType:
+            self.displayedQuad  = TharsisQuadType;
+            [self shiftQuadsBackward];
+            break;
+        case ElysiumQuadType:
+            self.displayedQuad  = MemnoniaQuadType;
+            [self shiftQuadsBackward];
+            break;
+        default:
+            break;
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)shiftQuadsForward {
+    CGPoint tharsisPosition = self.tharsisSprite.position;
+    CGFloat quadShiftDelta = self.tharsisSprite.contentSize.height + kQUAD_IMAGE_YDELTA;
+
+    CGPoint tharsisNextPosition = CGPointMake(tharsisPosition.x, tharsisPosition.y + quadShiftDelta);
+	[self.tharsisSprite runAction:[CCMoveTo actionWithDuration:0.5 position:tharsisNextPosition]];
+    
+    CGPoint memnoniaPosition = self.memnoniaSprite.position;
+    CGPoint memnoniaNextPosition = CGPointMake(memnoniaPosition.x, memnoniaPosition.y + quadShiftDelta);
+	[self.memnoniaSprite runAction:[CCMoveTo actionWithDuration:0.5 position:memnoniaNextPosition]];
+    
+    CGPoint elysiumPosition = self.elysiumSprite.position;
+    CGPoint elysiumNextPosition = CGPointMake(elysiumPosition.x, elysiumPosition.y + quadShiftDelta);
+	[self.elysiumSprite runAction:[CCMoveTo actionWithDuration:0.5 position:elysiumNextPosition]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)shiftQuadsBackward {
+    CGPoint tharsisPosition = self.tharsisSprite.position;
+    CGFloat quadShiftDelta = self.tharsisSprite.contentSize.height + kQUAD_IMAGE_YDELTA;
+    
+    CGPoint tharsisNextPosition = CGPointMake(tharsisPosition.x, tharsisPosition.y - quadShiftDelta);
+	[self.tharsisSprite runAction:[CCMoveTo actionWithDuration:0.5 position:tharsisNextPosition]];
+    
+    CGPoint memnoniaPosition = self.memnoniaSprite.position;
+    CGPoint memnoniaNextPosition = CGPointMake(memnoniaPosition.x, memnoniaPosition.y - quadShiftDelta);
+	[self.memnoniaSprite runAction:[CCMoveTo actionWithDuration:0.5 position:memnoniaNextPosition]];
+    
+    CGPoint elysiumPosition = self.elysiumSprite.position;
+    CGPoint elysiumNextPosition = CGPointMake(elysiumPosition.x, elysiumPosition.y - quadShiftDelta);
+	[self.elysiumSprite runAction:[CCMoveTo actionWithDuration:0.5 position:elysiumNextPosition]];
 }
 
 //===================================================================================================================================
@@ -112,8 +175,8 @@
         self.isTouchEnabled = YES;
 		CGSize screenSize = [[CCDirector sharedDirector] winSize];
 		self.screenCenter = CGPointMake(screenSize.width/2, screenSize.height/2);
-        self.elysiumSprite = [[[CCSprite alloc] initWithFile:@"elysium.png"] autorelease];
-        self.elysiumSprite.anchorPoint = CGPointMake(0.5f, 0.5f);
+        self.tharsisSprite = [[[CCSprite alloc] initWithFile:@"tharsis.png"] autorelease];
+        self.tharsisSprite.anchorPoint = CGPointMake(0.5f, 0.5f);
         self.statusDisplay = [StatusDisplay create];
         [self.statusDisplay insert:self];
         [self.statusDisplay addTerminalText:@"$ main"];
@@ -136,16 +199,26 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 -(void) ccTouchesEnded:(NSSet*)touches withEvent:(UIEvent *)event {
 	CGPoint touchLocation = [TouchUtils locationFromTouches:touches];
-    CGPoint touchDelta = ccpSub(self.firstTouch, touchLocation);
+    CGPoint touchDelta = ccpSub(touchLocation, self.firstTouch);
     if (touchDelta.y == 0) {
         if ([self displayedQuadIsUnlocked]) {
-            [[CCDirector sharedDirector] replaceScene: [MissionsScene scene]];
+            [[CCDirector sharedDirector] replaceScene:[MissionsScene scene]];
         }
-    } else if (touchDelta.y > 0) {
+    } else if (touchDelta.y < 0) {
         [self backwardQuads];
     } else {
         [self fowardQuads];
     }
 }    
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+-(void) ccTouchesMOved:(NSSet*)touches withEvent:(UIEvent *)event {
+	CGPoint touchLocation = [TouchUtils locationFromTouches:touches];
+    CGPoint touchDelta = ccpSub(self.firstTouch, touchLocation);
+    if (touchDelta.y == 0) {
+    } else if (touchDelta.y > 0) {
+    } else {
+    }
+}
 
 @end

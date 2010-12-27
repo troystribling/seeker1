@@ -21,6 +21,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize pk;
 @synthesize level;
+@synthesize quadrangle;
 
 //===================================================================================================================================
 #pragma mark UserModel
@@ -37,7 +38,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[SeekerDbi instance]  updateWithStatement:@"CREATE TABLE users (pk integer primary key, level integer)"];
+	[[SeekerDbi instance]  updateWithStatement:@"CREATE TABLE users (pk integer primary key, level integer, quadrangle integer)"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -59,8 +60,20 @@
 + (NSInteger)nextLevel {
     UserModel* user = [self findFirst];
     user.level++;
+    NSInteger quad = user.level / kMISSIONS_PER_QUAD;
+    if (quad > user.quadrangle) {
+        user.quadrangle++;
+    }
     [user update];
     return user.level;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)setLevel:(NSInteger)_level {
+    UserModel* user = [self findFirst];
+    user.level = _level;
+    user.quadrangle = user.level / kMISSIONS_PER_QUAD;
+    [user update];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -69,11 +82,33 @@
     return user.level;
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSInteger)nextQuadrangle {
+    UserModel* user = [self findFirst];
+    user.quadrangle++;
+    [user update];
+    return user.quadrangle;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSInteger)quadrangle {
+    UserModel* user = [self findFirst];
+    return user.quadrangle;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)insert {
+    UserModel* user = [[[UserModel alloc] init] autorelease];
+    user.level = 1;
+    user.quadrangle = 0;
+    [user insert];
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
     NSString* insertStatement;
-    insertStatement = [NSString stringWithFormat:@"INSERT INTO users (level) values (%d)", self.level];	
+    insertStatement = [NSString stringWithFormat:@"INSERT INTO users (level, quadrangle) values (%d, %d)", self.level, self.quadrangle];	
     [[SeekerDbi instance]  updateWithStatement:insertStatement];
 }
 
@@ -90,7 +125,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
-    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE users SET level = %d WHERE pk = %d", self.level, self.pk];
+    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE users SET level = %d quadrangle = %d WHERE pk = %d", 
+                                 self.level, self.pk, self.quadrangle];
 	[[SeekerDbi instance]  updateWithStatement:updateStatement];
 }
 
@@ -104,6 +140,7 @@
 - (void)setAttributesWithStatement:(sqlite3_stmt*)statement {
 	self.pk = (int)sqlite3_column_int(statement, 0);
 	self.level = (int)sqlite3_column_int(statement, 1);
+    self.quadrangle = (int)sqlite3_column_int(statement, 2);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

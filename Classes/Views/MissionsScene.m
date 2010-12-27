@@ -8,8 +8,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "MissionsScene.h"
+#import "StatusDisplay.h"
 #import "LevelModel.h"
+#import "UserModel.h"
 #import "TouchUtils.h"
+#import "MapScene.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -21,6 +24,7 @@
 - (CGPoint)missionToPosition:(NSInteger)_mission;
 - (BOOL)missionIsUnlocked:(NSInteger)_mission;
 - (CCSprite*)getMissionSprite:(NSInteger)_mission;
+- (void)loadMissions;
 
 @end
 
@@ -28,6 +32,7 @@
 @implementation MissionsScene
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize statusDisplay;
 @synthesize quadrangle;
 @synthesize levelsUnlocked;
 @synthesize screenSize;
@@ -42,18 +47,23 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)positionToMission:(CGPoint)_position {
-    NSInteger missionColumn = kMISSIONS_PER_ROW * (self.position.x / self.screenSize.width);
-    NSInteger missionRow = (kMISSIONS_PER_QUAD / kMISSIONS_ROWS) * (self.position.y / self.screenSize.height);
+    CGFloat displayOffset = self.statusDisplay.contentSize.height;
+    NSInteger missionWidth = self.screenSize.width / kMISSIONS_PER_ROW;
+    NSInteger missionHeight = (self.screenSize.height - displayOffset) / kMISSIONS_ROWS;
+    NSInteger missionColumn = (_position.x - 0.5 * missionWidth ) / missionWidth;
+    NSInteger missionRow = (self.screenSize.height - displayOffset - 0.5 * missionHeight - _position.y) / missionHeight;
     return missionRow + missionColumn;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGPoint)missionToPosition:(NSInteger)_mission {
+    CGFloat displayOffset = self.statusDisplay.contentSize.height;
     NSInteger missionRow = _mission / kMISSIONS_PER_ROW;
     NSInteger missionColumn = _mission - missionRow * kMISSIONS_PER_ROW;
     NSInteger missionWidth = self.screenSize.width / kMISSIONS_PER_ROW;
-    NSInteger missionHeight = self.screenSize.height / kMISSIONS_ROWS;
-    return CGPointMake(missionRow * missionHeight, missionColumn * missionWidth);
+    NSInteger missionHeight = (self.screenSize.height - displayOffset) / kMISSIONS_ROWS;
+    return CGPointMake(0.5 * missionWidth + missionColumn * missionWidth,  
+                       self.screenSize.height - missionRow * missionHeight - displayOffset - 0.5 * missionHeight);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -65,8 +75,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)missionIsUnlocked:(NSInteger)_mission {
-    NSInteger unlockedMissions = self.levelsUnlocked - kMISSIONS_PER_QUAD*(self.quadrangle - 1);
-    if (_mission <= unlockedMissions + 1) {
+    NSInteger unlockedMissions = self.levelsUnlocked - kMISSIONS_PER_QUAD * self.quadrangle;
+    if (_mission < unlockedMissions) {
         return YES;
     } else {
         return NO;
@@ -81,26 +91,26 @@
     } else {
         sprite = [[[CCSprite alloc] initWithFile:@"mission-locked.png"] autorelease];
     }
-    sprite.anchorPoint = CGPointMake(0.5f, 0.5f);
+    sprite.anchorPoint = CGPointMake(0.5, 0.5);
     return sprite;
 }
 
-//===================================================================================================================================
-#pragma mark MissionsScene
-
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)loadMissions:(NSInteger)_quadrangle {
-    self.quadrangle = _quadrangle;
+- (void)loadMissions {
+    self.quadrangle = [UserModel quadrangle];
     self.levelsUnlocked =[LevelModel count];
     for (int i = 0; i < kMISSIONS_PER_QUAD; i++) {
         [self loadMission:i];
     }
 }
 
+//===================================================================================================================================
+#pragma mark MissionsScene
+
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)scene {
 	CCScene *scene = [CCScene node];
-	MissionsScene *layer = [MissionsScene node];
+	MissionsScene* layer = [MissionsScene node];
 	[scene addChild: layer];
 	return scene;
 }
@@ -110,7 +120,12 @@
 	if( (self=[super init] )) {
 		self.screenSize = [[CCDirector sharedDirector] winSize];
         self.isTouchEnabled = YES;
-        [self loadMissions:0];
+        self.statusDisplay = [StatusDisplay create];
+        [self.statusDisplay insert:self];
+        [self.statusDisplay addTerminalText:@"$ main"];
+        [self.statusDisplay addTerminalText:@"$ miss"];
+        [self.statusDisplay test];
+        [self loadMissions];
     }
 	return self;
 }
@@ -119,6 +134,11 @@
 -(void) ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent *)event {
 	CGPoint touchLocation = [TouchUtils locationFromTouches:touches];
     NSInteger mission = [self positionToMission:touchLocation];
+    if ([self missionIsUnlocked:mission]) {
+        NSInteger level = [self missionToLevel:mission];
+        [UserModel setLevel:level];
+        [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
+    }
 }    
 
 @end

@@ -65,6 +65,17 @@
 	[[SeekerDbi instance]  updateWithStatement:@"DELETE FROM levels"];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)insertForLevel:(NSInteger)_level {
+    LevelModel* model = [self findByLevel:_level];
+    if (model == nil) {
+        model = [[[LevelModel alloc] init] autorelease];
+        model.level = 1;
+        model.completed = NO;
+        model.codeReview = 0;
+        [model insert];
+    }
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------------------------------------------------------------

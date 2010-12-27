@@ -12,6 +12,7 @@
 #import "cocos2d.h"
 #import "BootScene.h"
 #import "UserModel.h"
+#import "LevelModel.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface Seeker1AppDelegate (PrivateAPI)
@@ -117,9 +118,8 @@
 	[dbi open];
     UserModel* user = [UserModel findFirst];
     if (user == nil) {
-        user = [[[UserModel alloc] init] autorelease];
-        user.level = 1;
-        [user insert];
+        [UserModel insert];
+        [LevelModel insertForLevel:1];
     }
 }
 
