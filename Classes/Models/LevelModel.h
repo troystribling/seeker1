@@ -34,6 +34,7 @@
 + (LevelModel*)findByLevel:(NSInteger)_level;
 + (NSMutableArray*)findAll;
 + (void)insertForLevel:(NSInteger)_level;
++ (void)completeLevel:(NSInteger)_level;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;

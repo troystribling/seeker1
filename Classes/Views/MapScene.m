@@ -330,6 +330,7 @@
     }
     if ([self.seeker1 isLevelCompleted]) {
         [[ProgramNgin instance] stopProgram];
+        [LevelModel completeLevel:self.level];
         [self levelCompletedAnimation];
     }
 }

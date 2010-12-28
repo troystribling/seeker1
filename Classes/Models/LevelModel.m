@@ -70,10 +70,19 @@
     LevelModel* model = [self findByLevel:_level];
     if (model == nil) {
         model = [[[LevelModel alloc] init] autorelease];
-        model.level = 1;
+        model.level = _level;
         model.completed = NO;
         model.codeReview = 0;
         [model insert];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)completeLevel:(NSInteger)_level {
+    LevelModel* model = [self findByLevel:_level];
+    if (model) {
+        model.completed = YES;
+        [model update];
     }
 }
 
@@ -81,7 +90,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
     NSString* insertStatement;
-    insertStatement = [NSString stringWithFormat:@"INSERT INTO levels (level) values (%d)", self.level];	
+    insertStatement = [NSString stringWithFormat:@"INSERT INTO levels (level, completed) values (%d, %d)", self.level, [self completedAsInteger]];	
     [[SeekerDbi instance]  updateWithStatement:insertStatement];
 }
 
