@@ -21,8 +21,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize pk;
 @synthesize level;
-@synthesize codeReview;
 @synthesize completed;
+@synthesize score;
 
 //===================================================================================================================================
 #pragma mark LevelModel
@@ -39,7 +39,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[SeekerDbi instance]  updateWithStatement:@"CREATE TABLE levels (pk integer primary key, level integer, completed integer)"];
+	[[SeekerDbi instance]  updateWithStatement:@"CREATE TABLE levels (pk integer primary key, level integer, completed integer, score integer)"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -72,16 +72,17 @@
         model = [[[LevelModel alloc] init] autorelease];
         model.level = _level;
         model.completed = NO;
-        model.codeReview = 0;
+        model.score = 0;
         [model insert];
     }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)completeLevel:(NSInteger)_level {
++ (void)completeLevel:(NSInteger)_level withScore:(NSInteger)_score {
     LevelModel* model = [self findByLevel:_level];
     if (model) {
         model.completed = YES;
+        model.score = _score;
         [model update];
     }
 }
@@ -90,7 +91,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
     NSString* insertStatement;
-    insertStatement = [NSString stringWithFormat:@"INSERT INTO levels (level, completed) values (%d, %d)", self.level, [self completedAsInteger]];	
+    insertStatement = [NSString stringWithFormat:@"INSERT INTO levels (level, completed, score) values (%d, %d, %d)", 
+                        self.level, [self completedAsInteger], self.score];	
     [[SeekerDbi instance]  updateWithStatement:insertStatement];
 }
 
@@ -107,8 +109,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
-    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE levels SET level = %d, completed = %d WHERE pk = %d", self.level, 
-                                    [self completedAsInteger], self.pk];
+    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE levels SET level = %d, completed = %d, score = %d WHERE pk = %d", self.level, 
+                                    [self completedAsInteger], self.score, self.pk];
 	[[SeekerDbi instance]  updateWithStatement:updateStatement];
 }
 
@@ -136,8 +138,8 @@
 - (void)setAttributesWithStatement:(sqlite3_stmt*)statement {
 	self.pk = (int)sqlite3_column_int(statement, 0);
 	self.level = (int)sqlite3_column_int(statement, 1);
-	self.codeReview = (int)sqlite3_column_int(statement, 2);
-	[self setCompletedAsInteger:(int)sqlite3_column_int(statement, 6)];
+	[self setCompletedAsInteger:(int)sqlite3_column_int(statement, 2)];
+	self.score = (int)sqlite3_column_int(statement, 3);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

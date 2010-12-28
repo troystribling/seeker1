@@ -16,15 +16,15 @@
 @interface LevelModel : NSObject {
     NSInteger pk;
     NSInteger level;
-    NSInteger codeReview;
     BOOL completed;
+    NSInteger score;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, assign) NSInteger pk;
 @property (nonatomic, assign) NSInteger level;
-@property (nonatomic, assign) NSInteger codeReview;
 @property (nonatomic, assign) BOOL completed;
+@property (nonatomic, assign) NSInteger score;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
@@ -34,7 +34,7 @@
 + (LevelModel*)findByLevel:(NSInteger)_level;
 + (NSMutableArray*)findAll;
 + (void)insertForLevel:(NSInteger)_level;
-+ (void)completeLevel:(NSInteger)_level;
++ (void)completeLevel:(NSInteger)_level withScore:(NSInteger)_score;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;

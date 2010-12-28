@@ -22,10 +22,13 @@
 
 - (NSInteger)missionToLevel:(NSInteger)_mission;
 - (NSInteger)positionToMission:(CGPoint)_position;
+- (CGSize)missionSize;
 - (CGPoint)missionToPosition:(NSInteger)_mission;
 - (BOOL)missionIsUnlocked:(NSInteger)_mission;
-- (CCSprite*)getMissionSprite:(NSInteger)_mission;
 - (void)loadMissions;
+- (void)loadMission:(NSInteger)_mission;
+- (CCSprite*)getMissionSprite:(NSInteger)_mission;
+- (void)addMissionLabel:(NSInteger)_mission toSprite:(CCSprite*)_sprite;
 
 @end
 
@@ -58,14 +61,30 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (CGSize)missionSize {
+    CGFloat displayOffset = self.statusDisplay.contentSize.height;
+    NSInteger missionWidth = self.screenSize.width / kMISSIONS_PER_ROW;
+    NSInteger missionHeight = (self.screenSize.height - displayOffset) / kMISSIONS_ROWS;
+    return CGSizeMake(missionWidth, missionHeight);
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (CGPoint)missionToPosition:(NSInteger)_mission {
     CGFloat displayOffset = self.statusDisplay.contentSize.height;
     NSInteger missionRow = _mission / kMISSIONS_PER_ROW;
     NSInteger missionColumn = _mission - missionRow * kMISSIONS_PER_ROW;
-    NSInteger missionWidth = self.screenSize.width / kMISSIONS_PER_ROW;
-    NSInteger missionHeight = (self.screenSize.height - displayOffset) / kMISSIONS_ROWS;
-    return CGPointMake(0.5 * missionWidth + missionColumn * missionWidth,  
-                       self.screenSize.height - missionRow * missionHeight - displayOffset - 0.5 * missionHeight);
+    CGSize missionSize = [self missionSize];
+    return CGPointMake(0.5 * missionSize.width + missionColumn * missionSize.width,  
+                       self.screenSize.height - missionRow * missionSize.height - displayOffset - 0.5 * missionSize.height);
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)loadMissions {
+    self.quadrangle = [UserModel quadrangle];
+    self.levelsUnlocked =[LevelModel count];
+    for (int i = 0; i < kMISSIONS_PER_QUAD; i++) {
+        [self loadMission:i];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -89,7 +108,13 @@
 - (CCSprite*)getMissionSprite:(NSInteger)_mission {
     CCSprite* sprite = nil;
     if ([self missionIsUnlocked:_mission]) {
-        sprite = [[[CCSprite alloc] initWithFile:@"mission-unlocked.png"] autorelease];
+        LevelModel* levelModel = [LevelModel findByLevel:[self missionToLevel:_mission]];
+        if (levelModel.completed) {
+            sprite = [[[CCSprite alloc] initWithFile:@"mission-complete.png"] autorelease];
+        } else {
+            sprite = [[[CCSprite alloc] initWithFile:@"mission-incomplete.png"] autorelease];
+        }
+        [self addMissionLabel:_mission toSprite:sprite];
     } else {
         sprite = [[[CCSprite alloc] initWithFile:@"mission-locked.png"] autorelease];
     }
@@ -98,12 +123,13 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)loadMissions {
-    self.quadrangle = [UserModel quadrangle];
-    self.levelsUnlocked =[LevelModel count];
-    for (int i = 0; i < kMISSIONS_PER_QUAD; i++) {
-        [self loadMission:i];
-    }
+- (void)addMissionLabel:(NSInteger)_mission toSprite:(CCSprite*)_sprite {
+    CCLabel* missionLable = [CCLabel labelWithString:[NSString stringWithFormat:@"%d", _mission + 1] fontName:@"Courier" fontSize:24];
+    CGSize missionSize = [self missionSize];
+    missionLable.anchorPoint = CGPointMake(0.5, 0.5);
+    missionLable.position = CGPointMake(0.29*missionSize.width, 0.325*missionSize.height);
+    missionLable.color = ccc3(0,0,0); 
+    [_sprite addChild:missionLable];
 }
 
 //===================================================================================================================================

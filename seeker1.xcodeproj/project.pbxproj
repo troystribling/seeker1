@@ -75,7 +75,7 @@
 		0528CDB91290A00200F4078A /* MapScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0528CDB81290A00200F4078A /* MapScene.m */; };
 		0532CF2012C6979E00DB92D8 /* TouchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0532CF1F12C6979E00DB92D8 /* TouchUtils.m */; };
 		0532CF7012C6BA5A00DB92D8 /* mission-locked.png in Resources */ = {isa = PBXBuildFile; fileRef = 0532CF6E12C6BA5A00DB92D8 /* mission-locked.png */; };
-		0532CF7112C6BA5A00DB92D8 /* mission-unlocked.png in Resources */ = {isa = PBXBuildFile; fileRef = 0532CF6F12C6BA5A00DB92D8 /* mission-unlocked.png */; };
+		0532CF7112C6BA5A00DB92D8 /* mission-complete.png in Resources */ = {isa = PBXBuildFile; fileRef = 0532CF6F12C6BA5A00DB92D8 /* mission-complete.png */; };
 		0532CF7412C6BD7800DB92D8 /* elysium-locked.png in Resources */ = {isa = PBXBuildFile; fileRef = 0532CF7212C6BD7800DB92D8 /* elysium-locked.png */; };
 		0532CF7512C6BD7800DB92D8 /* memnonia-locked.png in Resources */ = {isa = PBXBuildFile; fileRef = 0532CF7312C6BD7800DB92D8 /* memnonia-locked.png */; };
 		0532CF7712C6BDD900DB92D8 /* tharsis-locked.png in Resources */ = {isa = PBXBuildFile; fileRef = 0532CF7612C6BDD900DB92D8 /* tharsis-locked.png */; };
@@ -85,6 +85,7 @@
 		0540119612A2B9B900CCC62D /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0540119512A2B9B900CCC62D /* MainScene.m */; };
 		054012BB12A30FF600CCC62D /* Apple ][.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 054012B912A30FF600CCC62D /* Apple ][.ttf */; };
 		054012BC12A30FF600CCC62D /* Retroville NC.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 054012BA12A30FF600CCC62D /* Retroville NC.ttf */; };
+		0542036A12CA715700F48FE4 /* mission-incomplete.png in Resources */ = {isa = PBXBuildFile; fileRef = 0542036912CA715700F48FE4 /* mission-incomplete.png */; };
 		0547A46312AC33C700D2F0D1 /* TerminalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0547A46112AC33C700D2F0D1 /* TerminalViewController.m */; };
 		0547A46712AC349400D2F0D1 /* TerminalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0547A46612AC349400D2F0D1 /* TerminalViewController.xib */; };
 		0547A48012AC388C00D2F0D1 /* TerminalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0547A47F12AC388C00D2F0D1 /* TerminalCell.m */; };
@@ -404,7 +405,7 @@
 		0532CF1E12C6979E00DB92D8 /* TouchUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchUtils.h; sourceTree = "<group>"; };
 		0532CF1F12C6979E00DB92D8 /* TouchUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchUtils.m; sourceTree = "<group>"; };
 		0532CF6E12C6BA5A00DB92D8 /* mission-locked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mission-locked.png"; sourceTree = "<group>"; };
-		0532CF6F12C6BA5A00DB92D8 /* mission-unlocked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mission-unlocked.png"; sourceTree = "<group>"; };
+		0532CF6F12C6BA5A00DB92D8 /* mission-complete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mission-complete.png"; sourceTree = "<group>"; };
 		0532CF7212C6BD7800DB92D8 /* elysium-locked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "elysium-locked.png"; sourceTree = "<group>"; };
 		0532CF7312C6BD7800DB92D8 /* memnonia-locked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "memnonia-locked.png"; sourceTree = "<group>"; };
 		0532CF7612C6BDD900DB92D8 /* tharsis-locked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tharsis-locked.png"; sourceTree = "<group>"; };
@@ -418,6 +419,7 @@
 		0540119512A2B9B900CCC62D /* MainScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainScene.m; sourceTree = "<group>"; };
 		054012B912A30FF600CCC62D /* Apple ][.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Apple ][.ttf"; sourceTree = "<group>"; };
 		054012BA12A30FF600CCC62D /* Retroville NC.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Retroville NC.ttf"; sourceTree = "<group>"; };
+		0542036912CA715700F48FE4 /* mission-incomplete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mission-incomplete.png"; sourceTree = "<group>"; };
 		0547A46012AC33C700D2F0D1 /* TerminalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerminalViewController.h; sourceTree = "<group>"; };
 		0547A46112AC33C700D2F0D1 /* TerminalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerminalViewController.m; sourceTree = "<group>"; };
 		0547A46612AC349400D2F0D1 /* TerminalViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TerminalViewController.xib; sourceTree = "<group>"; };
@@ -816,7 +818,8 @@
 				0521EF6B12C5637B0078C77C /* memnonia.png */,
 				0532CF7312C6BD7800DB92D8 /* memnonia-locked.png */,
 				0532CF6E12C6BA5A00DB92D8 /* mission-locked.png */,
-				0532CF6F12C6BA5A00DB92D8 /* mission-unlocked.png */,
+				0542036912CA715700F48FE4 /* mission-incomplete.png */,
+				0532CF6F12C6BA5A00DB92D8 /* mission-complete.png */,
 				0521EF6C12C5637B0078C77C /* tharsis.png */,
 				0532CF7612C6BDD900DB92D8 /* tharsis-locked.png */,
 			);
@@ -1479,13 +1482,14 @@
 				0521EF6E12C5637B0078C77C /* memnonia.png in Resources */,
 				0521EF6F12C5637B0078C77C /* tharsis.png in Resources */,
 				0532CF7012C6BA5A00DB92D8 /* mission-locked.png in Resources */,
-				0532CF7112C6BA5A00DB92D8 /* mission-unlocked.png in Resources */,
+				0532CF7112C6BA5A00DB92D8 /* mission-complete.png in Resources */,
 				0532CF7412C6BD7800DB92D8 /* elysium-locked.png in Resources */,
 				0532CF7512C6BD7800DB92D8 /* memnonia-locked.png in Resources */,
 				0532CF7712C6BDD900DB92D8 /* tharsis-locked.png in Resources */,
 				051806BA12C9903F00568813 /* menu-site.png in Resources */,
 				051806ED12C997DB00568813 /* menu-empty.png in Resources */,
 				0518071212C99B6C00568813 /* Default.png in Resources */,
+				0542036A12CA715700F48FE4 /* mission-incomplete.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
