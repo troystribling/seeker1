@@ -170,8 +170,7 @@
     } else if (self.menu.menuIsOpen) {
         [self.menu hideMenu];
     } else if ([self missionIsUnlocked:mission]) {
-        NSInteger level = [self missionToLevel:mission];
-        [UserModel setLevel:level];
+        [UserModel setLevel:[self missionToLevel:mission]];
         [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
     }
 }    
