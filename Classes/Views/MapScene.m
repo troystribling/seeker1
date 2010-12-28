@@ -67,8 +67,6 @@
 - (void)runLevelCompletedAnimation;
 - (void)levelCompletedAnimation;
 // menu
-- (BOOL)isInMenuRect:(CGPoint)_point;
-- (void)showMenu;
 - (void)initTerminalItems;
 - (void)addResetTerminalItems;
 - (void)addRunTerminalItems;
@@ -85,14 +83,12 @@
 @synthesize tileMapSize;
 @synthesize level;
 @synthesize startSite;
-@synthesize menuRect;
 @synthesize menu;
 @synthesize tileMap;
 @synthesize mapLayer;
 @synthesize terrainLayer;
 @synthesize itemsLayer;
 @synthesize objectsLayer;
-@synthesize menuIsOpen;
 @synthesize crash;
 @synthesize levelResetSeeker;
 @synthesize levelResetMap;
@@ -586,41 +582,24 @@
 
 #pragma mark menu
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)isInMenuRect:(CGPoint)_point {
-    BOOL isInRect = NO;
-    CGFloat xDelta = _point.x - self.menuRect.origin.x;
-    CGFloat yDelta = _point.y - self.menuRect.origin.y;
-    if (xDelta < self.menuRect.size.width && yDelta < self.menuRect.size.height && xDelta > 0 && yDelta > 0) {
-        isInRect = YES;
-    }
-    return isInRect;    
-}
- 
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)showMenu {
-    [[[CCDirector sharedDirector] openGLView] addSubview:self.menu];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initTerminalItems {
-    [self.statusDisplay addTerminalText:@""];
     [self.statusDisplay addTerminalText:@"$ main"];
     [self.statusDisplay addTerminalText:@"$ term"];
+    [self.statusDisplay addTerminalText:@"$"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addResetTerminalItems {
-    [self.statusDisplay addTerminalText:@"$ reset"];
     [self.statusDisplay addTerminalText:@"$ main"];
     [self.statusDisplay addTerminalText:@"$ term"];
+    [self.statusDisplay addTerminalText:@"$ reset"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addRunTerminalItems {
-    [self.statusDisplay addTerminalText:@"$ run"];
     [self.statusDisplay addTerminalText:@"$ main"];
     [self.statusDisplay addTerminalText:@"$ term"];
+    [self.statusDisplay addTerminalText:@"$ run"];
 }
 
 //===================================================================================================================================
@@ -639,12 +618,10 @@
 	if((self=[super init])) {
         self.isTouchEnabled = YES;
 		CGSize screenSize = [[CCDirector sharedDirector] winSize];
-        self.menuRect = CGRectMake(0.75*screenSize.width, 0.88*screenSize.height, 0.21*screenSize.width, 0.1*screenSize.height);
 		self.screenCenter = CGPointMake(screenSize.width/2, screenSize.height/2);
         self.statusDisplay = [StatusDisplay create];
         self.menu = [TermMenuView create];
         self.menu.mapScene = self;
-        self.menuIsOpen = NO;
         self.levelResetSeeker = NO;
         self.levelResetMap = NO;
         self.levelInitSeeker = NO;
@@ -687,11 +664,10 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 -(void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	CGPoint touchLocation = [TouchUtils locationFromTouches:touches]; 
-    if ([self isInMenuRect:touchLocation]) {
-        self.menuIsOpen = YES;
-        [self showMenu];
-    } else if (self.menuIsOpen) {
-        [self.menu removeFromSuperview];
+    if ([self.menu isInMenuRect:touchLocation]) {
+        [self.menu showMenu];
+    } else if (self.menu.menuIsOpen) {
+        [self.menu hideMenu];
     }
 }    
 

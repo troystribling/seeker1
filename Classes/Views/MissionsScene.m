@@ -13,6 +13,7 @@
 #import "UserModel.h"
 #import "TouchUtils.h"
 #import "MapScene.h"
+#import "TermMenuView.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -36,6 +37,7 @@
 @synthesize quadrangle;
 @synthesize levelsUnlocked;
 @synthesize screenSize;
+@synthesize menu;
 
 //===================================================================================================================================
 #pragma mark MissionsScene PrivateAPI
@@ -123,8 +125,11 @@
         self.statusDisplay = [StatusDisplay create];
         [self.statusDisplay insert:self];
         [self.statusDisplay addTerminalText:@"$ main"];
-        [self.statusDisplay addTerminalText:@"$ miss"];
+        [self.statusDisplay addTerminalText:@"$ site"];
+        [self.statusDisplay addTerminalText:@"$"];
         [self.statusDisplay test];
+        self.menu = [TermMenuView create];
+        [self.menu missionsInitItems];
         [self loadMissions];
     }
 	return self;
@@ -134,7 +139,11 @@
 -(void) ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent *)event {
 	CGPoint touchLocation = [TouchUtils locationFromTouches:touches];
     NSInteger mission = [self positionToMission:touchLocation];
-    if ([self missionIsUnlocked:mission]) {
+    if ([self.menu isInMenuRect:touchLocation]) {
+        [self.menu showMenu];
+    } else if (self.menu.menuIsOpen) {
+        [self.menu hideMenu];
+    } else if ([self missionIsUnlocked:mission]) {
         NSInteger level = [self missionToLevel:mission];
         [UserModel setLevel:level];
         [[CCDirector sharedDirector] replaceScene: [MapScene scene]];

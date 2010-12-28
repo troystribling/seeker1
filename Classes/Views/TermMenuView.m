@@ -25,7 +25,8 @@
 - (void)createTermItem:(CGRect)_rect;
 - (void)createRunItem:(CGRect)_rect;
 - (void)createResetItem:(CGRect)_rect;
-- (void)createMissItem:(CGRect)_rect;
+- (void)createSiteItem:(CGRect)_rect;
+- (void)createEmptyItem:(CGRect)_rect;
 - (void)removeMenuItems;
 
 @end
@@ -38,11 +39,14 @@
 @synthesize termItem;
 @synthesize runItem;
 @synthesize resetItem;
-@synthesize missItem;
-@synthesize mapScene;
+@synthesize siteItem;
+@synthesize emptyItem;
 @synthesize firstRect;
 @synthesize secondRect;
 @synthesize thirdRect;
+@synthesize activateRect;
+@synthesize menuIsOpen;
+@synthesize mapScene;
 
 //===================================================================================================================================
 #pragma mark TermMenuView PrivateAPI
@@ -80,11 +84,19 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)createMissItem:(CGRect)_rect {
-    self.missItem = [TouchImageView createWithFrame:_rect name:@"miss" andDelegate:self];
-    self.missItem.image = [UIImage imageNamed:@"menu-miss.png"];
-    self.missItem.contentMode = UIViewContentModeScaleToFill;
-    [self addSubview:self.missItem];
+- (void)createSiteItem:(CGRect)_rect {
+    self.siteItem = [TouchImageView createWithFrame:_rect name:@"site" andDelegate:self];
+    self.siteItem.image = [UIImage imageNamed:@"menu-site.png"];
+    self.siteItem.contentMode = UIViewContentModeScaleToFill;
+    [self addSubview:self.siteItem];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)createEmptyItem:(CGRect)_rect {
+    self.emptyItem = [[[UIImageView alloc] initWithFrame:_rect] autorelease];
+    self.emptyItem.image = [UIImage imageNamed:@"menu-empty.png"];
+    self.emptyItem.contentMode = UIViewContentModeScaleToFill;
+    [self addSubview:self.emptyItem];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -93,7 +105,8 @@
     [self.resetItem removeFromSuperview];
     [self.mainItem removeFromSuperview];
     [self.termItem removeFromSuperview];
-    [self.missItem removeFromSuperview];
+    [self.siteItem removeFromSuperview];
+    [self.emptyItem removeFromSuperview];
 }
 
 //===================================================================================================================================
@@ -119,48 +132,71 @@
         self.firstRect = CGRectMake(xOffset, yOffset+2.0*itemSize.height, itemSize.width,  itemSize.height);
         self.secondRect = CGRectMake(xOffset, yOffset+itemSize.height, itemSize.width,  itemSize.height);
         self.thirdRect = CGRectMake(xOffset, yOffset, itemSize.width,  itemSize.height);
+		CGSize screenSize = [[CCDirector sharedDirector] winSize];
+        self.activateRect = CGRectMake(0.75*screenSize.width, 0.88*screenSize.height, 0.21*screenSize.width, 0.1*screenSize.height);
     }
     return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)dealloc {
-    [super dealloc];
+- (BOOL)isInMenuRect:(CGPoint)_point {
+    BOOL isInRect = NO;
+    CGFloat xDelta = _point.x - self.activateRect.origin.x;
+    CGFloat yDelta = _point.y - self.activateRect.origin.y;
+    if (xDelta < self.activateRect.size.width && yDelta < self.activateRect.size.height && xDelta > 0 && yDelta > 0) {
+        isInRect = YES;
+    }
+    return isInRect;    
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)showMenu {
+    self.menuIsOpen = YES;
+    [[[CCDirector sharedDirector] openGLView] addSubview:self];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)hideMenu {
+    self.menuIsOpen = NO;
+    [self removeFromSuperview];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)mapInitItems {
     [self removeMenuItems];
-    [self createTermItem:self.thirdRect];
-    [self createMainItem:self.secondRect];
+    [self createMainItem:self.thirdRect];
+    [self createTermItem:self.secondRect];
+    [self createEmptyItem:self.firstRect];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)quadsInitItems {
     [self removeMenuItems];
     [self createMainItem:self.thirdRect];
+    [self createEmptyItem:self.secondRect];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)missionsInitItems {
     [self removeMenuItems];
     [self createMainItem:self.thirdRect];
-    [self createMissItem:self.secondRect];
+    [self createSiteItem:self.secondRect];
+    [self createEmptyItem:self.firstRect];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addResetItems {
     [self removeMenuItems];
-    [self createTermItem:self.thirdRect];
-    [self createMainItem:self.secondRect];
+    [self createMainItem:self.thirdRect];
+    [self createTermItem:self.secondRect];
     [self createResetItem:self.firstRect];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addRunItems {
     [self removeMenuItems];
-    [self createTermItem:self.thirdRect];
-    [self createMainItem:self.secondRect];
+    [self createMainItem:self.thirdRect];
+    [self createTermItem:self.secondRect];
     [self createRunItem:self.firstRect];
 }
 
@@ -176,7 +212,7 @@
         viewController.mapScene = self.mapScene;
     } else if ([itemName isEqualToString:@"main"]) {
         [[CCDirector sharedDirector] replaceScene: [MainScene scene]];
-    } else if ([itemName isEqualToString:@"miss"]) {
+    } else if ([itemName isEqualToString:@"site"]) {
         [[CCDirector sharedDirector] replaceScene: [QuadsScene scene]];
     } else if ([itemName isEqualToString:@"run"]) {
         [[ProgramNgin instance] runProgram];

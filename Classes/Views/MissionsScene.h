@@ -12,6 +12,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class StatusDisplay;
+@class TermMenuView;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MissionsScene : CCLayer {
@@ -19,6 +20,7 @@
     NSInteger quadrangle;
     NSInteger levelsUnlocked;
     CGSize screenSize;    
+    TermMenuView* menu;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -26,6 +28,7 @@
 @property (nonatomic, assign) NSInteger quadrangle;
 @property (nonatomic, assign) NSInteger levelsUnlocked;
 @property (nonatomic, assign) CGSize screenSize;
+@property (nonatomic, retain) TermMenuView* menu;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)scene;

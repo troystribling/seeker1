@@ -79,26 +79,6 @@
 #pragma mark StatusDisplay
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)clearTerminal {
-    for (CCLabel* _text in self.terminalText) {
-        [_text removeFromParentAndCleanup:YES];
-    }
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addTerminalText:(NSString*)_text {
-    [self clearTerminal];
-    if ([self.terminalText count] > 2) {
-        [self.terminalText removeLastObject];
-    }
-    CCLabel* _textLabel = [CCLabel labelWithString:_text fontName:@"Courier" fontSize:12];
-    _textLabel.color = ccc3(103,243,27);
-    _textLabel.anchorPoint = CGPointMake(0.0, 0.0);
-    [self.terminalText insertObject:_textLabel atIndex:0];
-    [self writeDisplay];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 + (id)create {
     return [self createWithFile:@"empty-display.png"];
 }
@@ -202,6 +182,26 @@
             [self removeDigits:self.sampleDigits];
             break;
     }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)clearTerminal {
+    for (CCLabel* _text in self.terminalText) {
+        [_text removeFromParentAndCleanup:YES];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addTerminalText:(NSString*)_text {
+    [self clearTerminal];
+    if ([self.terminalText count] > 2) {
+        [self.terminalText removeObjectAtIndex:0];
+    }
+    CCLabel* _textLabel = [CCLabel labelWithString:_text fontName:@"Courier" fontSize:12];
+    _textLabel.color = ccc3(103,243,27);
+    _textLabel.anchorPoint = CGPointMake(0.0, 0.0);
+    [self.terminalText addObject:_textLabel];
+    [self writeDisplay];
 }
 
 //===================================================================================================================================

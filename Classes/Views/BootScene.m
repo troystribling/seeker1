@@ -100,6 +100,7 @@
         self.statusDisplay = [StatusDisplay createWithFile:@"empty-display.png"];
         [self.statusDisplay insert:self];
         [self.statusDisplay addTerminalText:@"$ boot"];
+        [self.statusDisplay addTerminalText:@"$"];
         [self insertBootingLabel];
         [self schedule:@selector(nextFrame:)];
     }
@@ -124,7 +125,10 @@
         [self.bootingLabel setString:@"Booting....."];
     } else if (self.counter == kBOOT_TICK_6) {
         [self.bootingLabel removeFromParentAndCleanup:YES];
+        [self.statusDisplay clearTerminal];
+        [self.statusDisplay addTerminalText:@"$ boot"];
         [self.statusDisplay addTerminalText:@"$ post"];
+        [self.statusDisplay addTerminalText:@"$"];
         [self.statusDisplay setTest:EnergyDisplayType];
         [self insertPOST:@"POST    [start]"];
     } else if (self.counter == kBOOT_TICK_7) {
@@ -139,6 +143,9 @@
         [self.statusDisplay test];
         [self.post removeFromParentAndCleanup:YES];
         [self insertPOST:@"POST    [OK]"];
+        [self.statusDisplay clearTerminal];
+        [self.statusDisplay addTerminalText:@"$ boot"];
+        [self.statusDisplay addTerminalText:@"$ post"];
         [self.statusDisplay addTerminalText:@"$ con"];
         [self insertConsole:@"console [start]"];
     } else if (self.counter == kBOOT_TICK_12) {

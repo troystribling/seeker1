@@ -57,6 +57,7 @@ typedef enum tagDisplayType {
 - (void)test;
 - (void)setTest:(DisplayType)_displayType;
 - (void)setDigits:(NSInteger)_digit forDisplay:(DisplayType)_displayType;
+- (void)clearTerminal;
 - (void)addTerminalText:(NSString*)_text;
 
 @end

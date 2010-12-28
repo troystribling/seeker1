@@ -12,6 +12,7 @@
 #import "TouchUtils.h"
 #import "LevelModel.h"
 #import "MissionsScene.h"
+#import "TermMenuView.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kQUAD_IMAGE_YDELTA  75.0f
@@ -26,9 +27,7 @@
 - (void)shiftQuadsForward;
 - (void)shiftQuadsBackward;
 - (void)moveQuadsBy:(CGFloat)_delta withDuration:(CGFloat)_duration;
-- (void)updateQuadsPosition:(CGFloat)_delta;
 - (void)stopRunningQuads;
-- (BOOL)quadsAreNotMoving;
 
 @end
 
@@ -43,7 +42,6 @@
 @synthesize displayedQuad;
 @synthesize screenCenter;
 @synthesize firstTouch;
-@synthesize menuRect;
 @synthesize menu;
 
 //===================================================================================================================================
@@ -160,33 +158,10 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)updateQuadsPosition:(CGFloat)_delta {
-    CGPoint tharsisPosition = self.tharsisSprite.position;
-    self.tharsisSprite.position = CGPointMake(tharsisPosition.x, tharsisPosition.y + _delta);
-    
-    CGPoint memnoniaPosition = self.memnoniaSprite.position;
-    self.memnoniaSprite.position = CGPointMake(memnoniaPosition.x, memnoniaPosition.y + _delta);
-    
-    CGPoint elysiumPosition = self.elysiumSprite.position;
-    self.elysiumSprite.position = CGPointMake(elysiumPosition.x, elysiumPosition.y + _delta);
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)stopRunningQuads {
     [self.tharsisSprite stopAllActions];
     [self.memnoniaSprite stopAllActions];
     [self.elysiumSprite stopAllActions];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)quadsAreNotMoving {
-    BOOL status = YES;
-    if (([self.tharsisSprite numberOfRunningActions] != 0) || 
-        ([self.memnoniaSprite numberOfRunningActions] != 0) ||
-        ([self.elysiumSprite numberOfRunningActions] != 0)) {
-        status = NO;
-    }
-    return status;
 }
 
 //===================================================================================================================================
@@ -211,8 +186,11 @@
         self.statusDisplay = [StatusDisplay create];
         [self.statusDisplay insert:self];
         [self.statusDisplay addTerminalText:@"$ main"];
+        [self.statusDisplay addTerminalText:@"$"];
         [self.statusDisplay test];
         [self initQuads];
+        self.menu = [TermMenuView create];
+        [self.menu quadsInitItems];
         [self schedule:@selector(nextFrame:)];
     }
 	return self;
@@ -230,15 +208,21 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 -(void) ccTouchesEnded:(NSSet*)touches withEvent:(UIEvent *)event {
 	CGPoint touchLocation = [TouchUtils locationFromTouches:touches];
-    CGPoint touchDelta = ccpSub(touchLocation, self.firstTouch);
-    if (abs(touchDelta.y) < 10) {
-        if ([self displayedQuadIsUnlocked]) {
-            [[CCDirector sharedDirector] replaceScene:[MissionsScene scene]];
-        }
-    } else if (touchDelta.y < 0) {
-        [self backwardQuads];
+    if ([self.menu isInMenuRect:self.firstTouch]) {
+        [self.menu showMenu];
+    } else if (self.menu.menuIsOpen) {
+        [self.menu hideMenu];
     } else {
-        [self fowardQuads];
+        CGPoint touchDelta = ccpSub(touchLocation, self.firstTouch);
+        if (abs(touchDelta.y) < 10) {
+            if ([self displayedQuadIsUnlocked]) {
+                [[CCDirector sharedDirector] replaceScene:[MissionsScene scene]];
+            }
+        } else if (touchDelta.y < 0) {
+            [self backwardQuads];
+        } else {
+            [self fowardQuads];
+        }
     }
 }    
 

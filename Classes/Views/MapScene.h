@@ -38,7 +38,6 @@ typedef enum tagMapID {
     StatusDisplay* statusDisplay;
     NSMutableDictionary* startSite;
     NSInteger level;
-    CGRect menuRect;
     TermMenuView* menu;
     CGPoint screenCenter;
     CGSize tileMapSize;
@@ -48,7 +47,6 @@ typedef enum tagMapID {
     CCTMXLayer* itemsLayer;
     CCTMXObjectGroup* objectsLayer;
     CCSprite* crash;
-    BOOL menuIsOpen;
     BOOL levelResetSeeker;
     BOOL levelResetMap;
     BOOL levelCrash;
@@ -62,7 +60,6 @@ typedef enum tagMapID {
 @property (nonatomic, retain) StatusDisplay* statusDisplay;
 @property (nonatomic, assign) NSMutableDictionary* startSite;
 @property (nonatomic, assign) NSInteger level;
-@property (nonatomic, assign) CGRect menuRect;
 @property (nonatomic, retain) TermMenuView* menu;
 @property (nonatomic, assign) CGPoint screenCenter;
 @property (nonatomic, assign) CGSize tileMapSize;
@@ -72,7 +69,6 @@ typedef enum tagMapID {
 @property (nonatomic, retain) CCTMXLayer* itemsLayer;
 @property (nonatomic, retain) CCTMXObjectGroup* objectsLayer;
 @property (nonatomic, assign) CCSprite* crash;
-@property (nonatomic, assign) BOOL menuIsOpen;
 @property (nonatomic, assign) BOOL levelResetSeeker;
 @property (nonatomic, assign) BOOL levelResetMap;
 @property (nonatomic, assign) BOOL levelCrash;

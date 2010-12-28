@@ -108,6 +108,7 @@
         [self buildMenu];
         self.statusDisplay = [StatusDisplay create];
         [self.statusDisplay insert:self];
+        [self.statusDisplay addTerminalText:@"$"];
         [self.statusDisplay test];
     }
 	return self;
