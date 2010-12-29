@@ -28,6 +28,9 @@
 - (void)shiftQuadsBackward;
 - (void)moveQuadsBy:(CGFloat)_delta withDuration:(CGFloat)_duration;
 - (void)stopRunningQuads;
+- (NSInteger)percentComplete:(NSInteger)_quad;
+- (NSInteger)totalScore:(NSInteger)_quad;
+- (void)addQuadStats:(NSInteger)_quad toSprite:(CCSprite*)_sprite;
 
 @end
 
@@ -164,6 +167,45 @@
     [self.elysiumSprite stopAllActions];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSInteger)percentComplete:(NSInteger)_quad {
+    NSInteger completedLevels = 0;
+    NSMutableArray* levels = [LevelModel findAllByQudrangle:_quad];
+    for (LevelModel* level in levels) {
+        if (level.completed) {
+            completedLevels++;
+        }
+    }
+    return 100.0 * ((float)completedLevels/(float)kMISSIONS_PER_QUAD);
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSInteger)totalScore:(NSInteger)_quad {
+    NSInteger score = 0;
+    NSMutableArray* levels = [LevelModel findAllByQudrangle:_quad];
+    for (LevelModel* level in levels) {
+        score += level.score;
+    }
+    return score;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addQuadStats:(NSInteger)_quad toSprite:(CCSprite*)_sprite {
+    NSInteger perComp = [self percentComplete:_quad];
+    NSInteger score = [self totalScore:_quad];
+    CCLabel* perCompLable = [CCLabel labelWithString:[NSString stringWithFormat:@"%d", perComp] fontName:@"Courier" fontSize:26];
+    perCompLable.anchorPoint = CGPointMake(0.5, 0.5);
+    perCompLable.position = CGPointMake(0.0, 0.0);
+    perCompLable.color = ccc3(103,243,27); 
+    [_sprite addChild:perCompLable];
+    CCLabel* scoreLable = [CCLabel labelWithString:[NSString stringWithFormat:@"%d", score] fontName:@"Courier" fontSize:26];
+    scoreLable.anchorPoint = CGPointMake(0.5, 0.5);
+    scoreLable.position = CGPointMake(0.0, 0.0);
+    scoreLable.color = ccc3(103,243,27); 
+    [_sprite addChild:scoreLable];
+}
+
+
 //===================================================================================================================================
 #pragma mark QuadsScene
 
@@ -183,6 +225,7 @@
 		self.screenCenter = CGPointMake(screenSize.width/2, screenSize.height/2);
         self.tharsisSprite = [[[CCSprite alloc] initWithFile:@"tharsis.png"] autorelease];
         self.tharsisSprite.anchorPoint = CGPointMake(0.5f, 0.5f);
+        [self addQuadStats:TharsisQuadType toSprite:self.tharsisSprite];
         self.statusDisplay = [StatusDisplay create];
         [self.statusDisplay insert:self];
         [self.statusDisplay addTerminalText:@"$ main"];

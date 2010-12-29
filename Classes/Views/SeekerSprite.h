@@ -28,6 +28,7 @@ typedef enum tagSeekerBearing {
     NSInteger sampleSites;
     NSInteger sampleBin;
     NSInteger samplesCollected;
+    NSInteger samplesReturned;
     NSInteger samplesRemaining;
     NSInteger sensorSites;
     NSInteger sensorBin;
@@ -43,6 +44,7 @@ typedef enum tagSeekerBearing {
 @property (nonatomic, assign) NSInteger sampleSites;
 @property (nonatomic, assign) NSInteger sampleBin;
 @property (nonatomic, assign) NSInteger samplesCollected;
+@property (nonatomic, assign) NSInteger samplesReturned;
 @property (nonatomic, assign) NSInteger samplesRemaining;
 @property (nonatomic, assign) NSInteger sensorSites;
 @property (nonatomic, assign) NSInteger sensorBin;
@@ -67,6 +69,7 @@ typedef enum tagSeekerBearing {
 - (BOOL)putSensor;
 - (void)loadSensorBin;
 - (BOOL)isLevelCompleted;
+- (NSInteger)score;
 // rotate
 - (void)rotate:(CGFloat)_angle;
 - (CGFloat)rotationFromNorthToBearing:(SeekerBearing)_bearing;

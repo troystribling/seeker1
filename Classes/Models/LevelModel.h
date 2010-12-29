@@ -16,6 +16,7 @@
 @interface LevelModel : NSObject {
     NSInteger pk;
     NSInteger level;
+    NSInteger quadrangle;
     BOOL completed;
     NSInteger score;
 }
@@ -23,6 +24,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, assign) NSInteger pk;
 @property (nonatomic, assign) NSInteger level;
+@property (nonatomic, assign) NSInteger quadrangle;
 @property (nonatomic, assign) BOOL completed;
 @property (nonatomic, assign) NSInteger score;
 
@@ -32,9 +34,11 @@
 + (void)create;
 + (void)destroyAll;
 + (LevelModel*)findByLevel:(NSInteger)_level;
++ (NSMutableArray*)findAllByQudrangle:(NSInteger)_quad;
 + (NSMutableArray*)findAll;
 + (void)insertForLevel:(NSInteger)_level;
 + (void)completeLevel:(NSInteger)_level withScore:(NSInteger)_score;
++ (void)setScore:(NSInteger)_score forLevel:(NSInteger)_level;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;

@@ -9,6 +9,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "SeekerSprite.h"
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface SeekerSprite (PrivateAPI)
 
@@ -26,6 +28,7 @@
 @synthesize sampleSites;
 @synthesize sampleBin;
 @synthesize samplesCollected;
+@synthesize samplesReturned;
 @synthesize samplesRemaining;
 @synthesize sensorSites;
 @synthesize sensorBin;
@@ -92,6 +95,8 @@
     self.sensorSites = [[_site valueForKey:@"sensorSites"] intValue];
     self.sampleSites = [[_site valueForKey:@"sampleSites"] intValue];
     self.samplesCollected = 0;
+    self.samplesReturned = 0;
+    self.sampleBin = 0;
     self.sensorsPlaced = 0;
     self.samplesRemaining = self.sampleSites;
     self.sensorsRemaining = self.sensorSites;
@@ -164,6 +169,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)emptySampleBin {
+    self.samplesReturned += self.sampleBin;
     self.sampleBin = 0;
 }
 
@@ -197,6 +203,18 @@
         gameIsOver = YES;
     }
     return gameIsOver;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSInteger)score {
+    NSInteger totalScore = kPOINTS_PER_OBJECT * (self.samplesReturned + self.samplesCollected + self.sensorsPlaced);
+    if (self.energy > 0) {
+        totalScore += self.energy;
+    }
+    if ([self isLevelCompleted]) {
+        totalScore = 2 * totalScore;
+    }
+    return totalScore;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

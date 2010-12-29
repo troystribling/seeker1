@@ -330,7 +330,7 @@
     }
     if ([self.seeker1 isLevelCompleted]) {
         [[ProgramNgin instance] stopProgram];
-        [LevelModel completeLevel:self.level withScore:100];
+        [LevelModel completeLevel:self.level withScore:[self.seeker1 score]];
         [self levelCompletedAnimation];
     }
 }
@@ -408,10 +408,12 @@
             }
         } else {
             [ngin haltProgram];
+            [LevelModel setScore:[self.seeker1 score] forLevel:self.level];
             [self crashNoEnergy];
         }
     } else {
         [ngin haltProgram];
+        [LevelModel setScore:[self.seeker1 score] forLevel:self.level];
         [self crashHitMapBoundary];
     }
 }
@@ -436,14 +438,17 @@
                 [self updateSensorCount];
             } else {
                 [ngin haltProgram];
+                [LevelModel setScore:[self.seeker1 score] forLevel:self.level];
                 [self crashSensorBinEmpty];
             }
         } else {
             [ngin haltProgram];
+            [LevelModel setScore:[self.seeker1 score] forLevel:self.level];
             [self crashNoSensorSiteAtPosition];
         }
     } else {
         [ngin haltProgram];
+        [LevelModel setScore:[self.seeker1 score] forLevel:self.level];
         [self crashNoSensorSiteAtPosition];
     }
 }
@@ -461,14 +466,17 @@
                 [self updateSampleCount];
             } else {
                 [ngin haltProgram];
+                [LevelModel setScore:[self.seeker1 score] forLevel:self.level];
                 [self crashSampleBinFull];
             }
         } else {        
             [ngin haltProgram];
+            [LevelModel setScore:[self.seeker1 score] forLevel:self.level];
             [self crashNoSampleAtPosition];
         }
     } else {        
         [ngin haltProgram];
+        [LevelModel setScore:[self.seeker1 score] forLevel:self.level];
         [self crashNoSampleAtPosition];
     }
 }

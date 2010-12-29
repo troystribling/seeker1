@@ -21,6 +21,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize pk;
 @synthesize level;
+@synthesize quadrangle;
 @synthesize completed;
 @synthesize score;
 
@@ -39,7 +40,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[SeekerDbi instance]  updateWithStatement:@"CREATE TABLE levels (pk integer primary key, level integer, completed integer, score integer)"];
+	[[SeekerDbi instance]  updateWithStatement:@"CREATE TABLE levels (pk integer primary key, level integer, completed integer, score integer, quadrangle integer)"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -51,6 +52,14 @@
         model = nil;
     }
 	return model;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSMutableArray*)findAllByQudrangle:(NSInteger)_quad {
+	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM levels WHERE quadrangle = %d", _quad];
+	[[SeekerDbi instance] selectAllForModel:[LevelModel class] withStatement:selectStatement andOutputTo:output];
+	return output;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -71,6 +80,7 @@
     if (model == nil) {
         model = [[[LevelModel alloc] init] autorelease];
         model.level = _level;
+        model.quadrangle = model.level / kMISSIONS_PER_QUAD;
         model.completed = NO;
         model.score = 0;
         [model insert];
@@ -87,11 +97,20 @@
     }
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)setScore:(NSInteger)_score forLevel:(NSInteger)_level {
+    LevelModel* model = [self findByLevel:_level];
+    if (model) {
+        model.score = _score;
+        [model update];
+    }
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
     NSString* insertStatement;
-    insertStatement = [NSString stringWithFormat:@"INSERT INTO levels (level, completed, score) values (%d, %d, %d)", 
+    insertStatement = [NSString stringWithFormat:@"INSERT INTO levels (level, completed, score, quadrangle) values (%d, %d, %d, %d)", 
                         self.level, [self completedAsInteger], self.score];	
     [[SeekerDbi instance]  updateWithStatement:insertStatement];
 }
@@ -109,8 +128,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
-    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE levels SET level = %d, completed = %d, score = %d WHERE pk = %d", self.level, 
-                                    [self completedAsInteger], self.score, self.pk];
+    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE levels SET level = %d, completed = %d, score = %d, quadrangle = %d WHERE pk = %d", self.level, 
+                                    [self completedAsInteger], self.score, self.quadrangle, self.pk];
 	[[SeekerDbi instance]  updateWithStatement:updateStatement];
 }
 
@@ -140,6 +159,7 @@
 	self.level = (int)sqlite3_column_int(statement, 1);
 	[self setCompletedAsInteger:(int)sqlite3_column_int(statement, 2)];
 	self.score = (int)sqlite3_column_int(statement, 3);
+	self.quadrangle = (int)sqlite3_column_int(statement, 4);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

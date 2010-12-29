@@ -29,6 +29,7 @@
 - (void)loadMission:(NSInteger)_mission;
 - (CCSprite*)getMissionSprite:(NSInteger)_mission;
 - (void)addMissionLabel:(NSInteger)_mission toSprite:(CCSprite*)_sprite;
+- (void)addMissionScore:(NSInteger)_mission toSprite:(CCSprite*)_sprite;
 
 @end
 
@@ -115,6 +116,7 @@
             sprite = [[[CCSprite alloc] initWithFile:@"mission-incomplete.png"] autorelease];
         }
         [self addMissionLabel:_mission toSprite:sprite];
+        [self addMissionScore:_mission toSprite:sprite];
     } else {
         sprite = [[[CCSprite alloc] initWithFile:@"mission-locked.png"] autorelease];
     }
@@ -124,12 +126,25 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addMissionLabel:(NSInteger)_mission toSprite:(CCSprite*)_sprite {
-    CCLabel* missionLable = [CCLabel labelWithString:[NSString stringWithFormat:@"%d", _mission + 1] fontName:@"Courier" fontSize:24];
+    CCLabel* missionLable = [CCLabel labelWithString:[NSString stringWithFormat:@"%d", _mission + 1] fontName:@"Courier" fontSize:26];
     CGSize missionSize = [self missionSize];
     missionLable.anchorPoint = CGPointMake(0.5, 0.5);
-    missionLable.position = CGPointMake(0.29*missionSize.width, 0.325*missionSize.height);
+    missionLable.position = CGPointMake(0.285*missionSize.width, 0.31*missionSize.height);
     missionLable.color = ccc3(0,0,0); 
     [_sprite addChild:missionLable];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addMissionScore:(NSInteger)_mission toSprite:(CCSprite*)_sprite {
+    LevelModel* levelModel = [LevelModel findByLevel:[self missionToLevel:_mission]];
+    if ([levelModel score] > 0) {
+        CCLabel* missionScore = [CCLabel labelWithString:[NSString stringWithFormat:@"%d", [levelModel score]] fontName:@"Courier" fontSize:16];
+        CGSize missionSize = [self missionSize];
+        missionScore.anchorPoint = CGPointMake(0.5, 0.5);
+        missionScore.position = CGPointMake(0.29*missionSize.width, -0.06*missionSize.height);
+        missionScore.color = ccc3(103,243,27); 
+        [_sprite addChild:missionScore];
+    }
 }
 
 //===================================================================================================================================
