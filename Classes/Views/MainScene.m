@@ -34,7 +34,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)buildMenu {
-    CCLabel* missionLabel = [CCLabel labelWithString:@"1. missions" fontName:@"Courier" fontSize:26];
+    CCLabel* missionLabel = [CCLabel labelWithString:@"1. mission sites" fontName:@"Courier" fontSize:26];
     missionLabel.color = ccc3(103,243,27);
     CCMenuItemLabel* missionItem = [CCMenuItemLabel itemWithLabel:missionLabel
                                                         target:self

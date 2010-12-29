@@ -63,11 +63,13 @@
 
     if (quadsUnlocked >= 1) {
         self.memnoniaSprite = [[[CCSprite alloc] initWithFile:@"memnonia.png"] autorelease];
+        [self addQuadStats:TharsisQuadType toSprite:self.memnoniaSprite];
     } else {
         self.memnoniaSprite = [[[CCSprite alloc] initWithFile:@"memnonia-locked.png"] autorelease];
     }
     if (quadsUnlocked >= 2) {
         self.elysiumSprite = [[[CCSprite alloc] initWithFile:@"elysium.png"] autorelease];
+        [self addQuadStats:TharsisQuadType toSprite:self.elysiumSprite];
     } else {
         self.elysiumSprite = [[[CCSprite alloc] initWithFile:@"elysium-locked.png"] autorelease];
     }    
@@ -193,16 +195,19 @@
 - (void)addQuadStats:(NSInteger)_quad toSprite:(CCSprite*)_sprite {
     NSInteger perComp = [self percentComplete:_quad];
     NSInteger score = [self totalScore:_quad];
-    CCLabel* perCompLable = [CCLabel labelWithString:[NSString stringWithFormat:@"%d", perComp] fontName:@"Courier" fontSize:26];
-    perCompLable.anchorPoint = CGPointMake(0.5, 0.5);
-    perCompLable.position = CGPointMake(0.0, 0.0);
-    perCompLable.color = ccc3(103,243,27); 
-    [_sprite addChild:perCompLable];
-    CCLabel* scoreLable = [CCLabel labelWithString:[NSString stringWithFormat:@"%d", score] fontName:@"Courier" fontSize:26];
-    scoreLable.anchorPoint = CGPointMake(0.5, 0.5);
-    scoreLable.position = CGPointMake(0.0, 0.0);
+    CGSize spriteSize = _sprite.contentSize;
+
+    CCLabel* scoreLable = [CCLabel labelWithString:[NSString stringWithFormat:@"Score:     %d", score] fontName:@"Courier" fontSize:18];
+    scoreLable.anchorPoint = CGPointMake(0.0, 0.0);
+    scoreLable.position = CGPointMake(0.115*spriteSize.width, -0.07*spriteSize.height);
     scoreLable.color = ccc3(103,243,27); 
     [_sprite addChild:scoreLable];
+
+    CCLabel* perCompLable = [CCLabel labelWithString:[NSString stringWithFormat:@"Completed: %d%%", perComp] fontName:@"Courier" fontSize:18];
+    perCompLable.anchorPoint = CGPointMake(0.0, 0.0);
+    perCompLable.position = CGPointMake(0.115*spriteSize.width, -0.135*spriteSize.height);
+    perCompLable.color = ccc3(103,243,27); 
+    [_sprite addChild:perCompLable];
 }
 
 

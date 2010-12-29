@@ -111,7 +111,7 @@
 - (void)insert {
     NSString* insertStatement;
     insertStatement = [NSString stringWithFormat:@"INSERT INTO levels (level, completed, score, quadrangle) values (%d, %d, %d, %d)", 
-                        self.level, [self completedAsInteger], self.score];	
+                        self.level, [self completedAsInteger], self.quadrangle, self.score];	
     [[SeekerDbi instance]  updateWithStatement:insertStatement];
 }
 
