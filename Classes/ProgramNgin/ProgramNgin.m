@@ -8,6 +8,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "ProgramNgin.h"
+#import "UserModel.h"
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+#define kLEVEL_FOR_ITERATIONS       1
+#define kLEVEL_FOR_WHILE_UNTIL      1
+#define kLEVEL_FOR_IF_THEN          1
+#define kLEVEL_FOR_IF_THEN_ELSE     1
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 static ProgramNgin* thisProgramNgin = nil;
@@ -53,7 +60,16 @@ static ProgramNgin* thisProgramNgin = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSMutableArray*)getPrimativeFunctions {
-    return [NSMutableArray arrayWithObjects:@"move", @"turn left", @"get sample", @"put sensor", nil];
+    NSMutableArray* primatives = [NSMutableArray arrayWithObjects:@"move", @"turn left", @"get sample", @"put sensor", nil];
+    NSInteger level = [UserModel level];
+    if (level >= kLEVEL_FOR_ITERATIONS) {
+        [primatives addObject:@"do n times"];
+    }
+    if (level >= kLEVEL_FOR_WHILE_UNTIL) {
+        [primatives addObject:@"do while"];
+        [primatives addObject:@"do until"];
+    }
+    return primatives;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

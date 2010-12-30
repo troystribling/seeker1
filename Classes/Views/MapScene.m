@@ -358,15 +358,15 @@
     NSDictionary* mapProperties = [self getTileProperties:seekerTile forLayer:self.terrainLayer];
     if (mapProperties) {
         NSString* mapID = [mapProperties valueForKey:@"mapID"];
-        if ([mapID isEqualToString:@"level-1"]) {
+        if ([mapID isEqualToString:@"up-1"]) {
             usedEnergy = -1.0;
-        } else if ([mapID isEqualToString:@"level-2"]) {
+        } else if ([mapID isEqualToString:@"up-2"]) {
             usedEnergy = 0.8;
-        } else if ([mapID isEqualToString:@"level-3"]) {
+        } else if ([mapID isEqualToString:@"up-3"]) {
             usedEnergy = 0.6;
-        } else if ([mapID isEqualToString:@"level-4"]) {
+        } else if ([mapID isEqualToString:@"up-4"]) {
             usedEnergy = 0.4;
-        } else if ([mapID isEqualToString:@"level-5"]) {
+        } else if ([mapID isEqualToString:@"up-5"]) {
             usedEnergy = 0.2;
         }
     } 

@@ -65,6 +65,8 @@
 		0521EF6D12C5637B0078C77C /* elysium.png in Resources */ = {isa = PBXBuildFile; fileRef = 0521EF6A12C5637B0078C77C /* elysium.png */; };
 		0521EF6E12C5637B0078C77C /* memnonia.png in Resources */ = {isa = PBXBuildFile; fileRef = 0521EF6B12C5637B0078C77C /* memnonia.png */; };
 		0521EF6F12C5637B0078C77C /* tharsis.png in Resources */ = {isa = PBXBuildFile; fileRef = 0521EF6C12C5637B0078C77C /* tharsis.png */; };
+		0522D25212CBA29400E0530C /* IterateTerminalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0522D25112CBA29400E0530C /* IterateTerminalCell.m */; };
+		0522D27412CBF17300E0530C /* IterateTerminalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0522D27312CBF17300E0530C /* IterateTerminalCell.xib */; };
 		0527C52512A9A8B900DD4099 /* TermMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0527C52412A9A8B900DD4099 /* TermMenuView.m */; };
 		0527C57212A9C21100DD4099 /* TouchImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0527C57112A9C21100DD4099 /* TouchImageView.m */; };
 		0527E61412BD5F3D0039D55E /* red-seeker-1-east.png in Resources */ = {isa = PBXBuildFile; fileRef = 0527E61012BD5F3D0039D55E /* red-seeker-1-east.png */; };
@@ -390,6 +392,9 @@
 		0521EF6A12C5637B0078C77C /* elysium.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = elysium.png; sourceTree = "<group>"; };
 		0521EF6B12C5637B0078C77C /* memnonia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = memnonia.png; sourceTree = "<group>"; };
 		0521EF6C12C5637B0078C77C /* tharsis.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tharsis.png; sourceTree = "<group>"; };
+		0522D25012CBA29400E0530C /* IterateTerminalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IterateTerminalCell.h; sourceTree = "<group>"; };
+		0522D25112CBA29400E0530C /* IterateTerminalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IterateTerminalCell.m; sourceTree = "<group>"; };
+		0522D27312CBF17300E0530C /* IterateTerminalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IterateTerminalCell.xib; sourceTree = "<group>"; };
 		0527C52312A9A8B900DD4099 /* TermMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermMenuView.h; sourceTree = "<group>"; };
 		0527C52412A9A8B900DD4099 /* TermMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermMenuView.m; sourceTree = "<group>"; };
 		0527C57012A9C21100DD4099 /* TouchImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchImageView.h; sourceTree = "<group>"; };
@@ -826,6 +831,38 @@
 			path = Missions;
 			sourceTree = "<group>";
 		};
+		0522D27112CBF09400E0530C /* Terminal */ = {
+			isa = PBXGroup;
+			children = (
+				0522D25012CBA29400E0530C /* IterateTerminalCell.h */,
+				0522D25112CBA29400E0530C /* IterateTerminalCell.m */,
+				050D76A512AF143B005EF9BE /* FunctionsLauncherView.h */,
+				050D76A612AF143B005EF9BE /* FunctionsLauncherView.m */,
+				050D764B12AF0E44005EF9BE /* FunctionsViewController.h */,
+				050D764C12AF0E44005EF9BE /* FunctionsViewController.m */,
+				050F792912AC64910017BDE1 /* TerminalLauncherView.h */,
+				050F792A12AC64910017BDE1 /* TerminalLauncherView.m */,
+				0527C52312A9A8B900DD4099 /* TermMenuView.h */,
+				0527C52412A9A8B900DD4099 /* TermMenuView.m */,
+				0547A46012AC33C700D2F0D1 /* TerminalViewController.h */,
+				0547A46112AC33C700D2F0D1 /* TerminalViewController.m */,
+				0547A47E12AC388C00D2F0D1 /* TerminalCell.h */,
+				0547A47F12AC388C00D2F0D1 /* TerminalCell.m */,
+			);
+			name = Terminal;
+			sourceTree = "<group>";
+		};
+		0522D27212CBF0A000E0530C /* Missions */ = {
+			isa = PBXGroup;
+			children = (
+				05355F3012C3DA8F00CA770E /* MissionsScene.h */,
+				05355F3112C3DA8F00CA770E /* MissionsScene.m */,
+				050A9DB512C42C9C00FF1BA9 /* QuadsScene.h */,
+				050A9DB612C42C9C00FF1BA9 /* QuadsScene.m */,
+			);
+			name = Missions;
+			sourceTree = "<group>";
+		};
 		0528CDB212909FE600F4078A /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -838,32 +875,18 @@
 		0528CDB61290A00200F4078A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0522D27212CBF0A000E0530C /* Missions */,
+				0522D27112CBF09400E0530C /* Terminal */,
 				050B277F1290C82400CC6149 /* BootScene.h */,
 				050B27801290C82400CC6149 /* BootScene.m */,
-				050D76A512AF143B005EF9BE /* FunctionsLauncherView.h */,
-				050D76A612AF143B005EF9BE /* FunctionsLauncherView.m */,
-				050D764B12AF0E44005EF9BE /* FunctionsViewController.h */,
-				050D764C12AF0E44005EF9BE /* FunctionsViewController.m */,
 				0540119412A2B9B900CCC62D /* MainScene.h */,
 				0540119512A2B9B900CCC62D /* MainScene.m */,
 				0528CDB71290A00200F4078A /* MapScene.h */,
 				0528CDB81290A00200F4078A /* MapScene.m */,
-				05355F3012C3DA8F00CA770E /* MissionsScene.h */,
-				05355F3112C3DA8F00CA770E /* MissionsScene.m */,
-				050A9DB512C42C9C00FF1BA9 /* QuadsScene.h */,
-				050A9DB612C42C9C00FF1BA9 /* QuadsScene.m */,
 				0556B81B129C603B00B5F8FB /* SeekerSprite.h */,
 				0556B81C129C603B00B5F8FB /* SeekerSprite.m */,
 				053FBFC8129D8C44000BCBCF /* StatusDisplay.h */,
 				053FBFC9129D8C45000BCBCF /* StatusDisplay.m */,
-				050F792912AC64910017BDE1 /* TerminalLauncherView.h */,
-				050F792A12AC64910017BDE1 /* TerminalLauncherView.m */,
-				0527C52312A9A8B900DD4099 /* TermMenuView.h */,
-				0527C52412A9A8B900DD4099 /* TermMenuView.m */,
-				0547A46012AC33C700D2F0D1 /* TerminalViewController.h */,
-				0547A46112AC33C700D2F0D1 /* TerminalViewController.m */,
-				0547A47E12AC388C00D2F0D1 /* TerminalCell.h */,
-				0547A47F12AC388C00D2F0D1 /* TerminalCell.m */,
 				0527C57012A9C21100DD4099 /* TouchImageView.h */,
 				0527C57112A9C21100DD4099 /* TouchImageView.m */,
 				0547A4A812AC441200D2F0D1 /* ViewControllerManager.h */,
@@ -884,6 +907,7 @@
 		0547A46512AC349400D2F0D1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0522D27312CBF17300E0530C /* IterateTerminalCell.xib */,
 				050D765012AF0F5D005EF9BE /* FunctionsViewController.xib */,
 				0547A46612AC349400D2F0D1 /* TerminalViewController.xib */,
 				0547A48112AC38B100D2F0D1 /* TerminalCell.xib */,
@@ -1490,6 +1514,7 @@
 				051806ED12C997DB00568813 /* menu-empty.png in Resources */,
 				0518071212C99B6C00568813 /* Default.png in Resources */,
 				0542036A12CA715700F48FE4 /* mission-incomplete.png in Resources */,
+				0522D27412CBF17300E0530C /* IterateTerminalCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1528,6 +1553,7 @@
 				05355F4312C3DCBA00CA770E /* LevelModel.m in Sources */,
 				050A9DB712C42C9C00FF1BA9 /* QuadsScene.m in Sources */,
 				0532CF2012C6979E00DB92D8 /* TouchUtils.m in Sources */,
+				0522D25212CBA29400E0530C /* IterateTerminalCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

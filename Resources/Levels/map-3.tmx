@@ -5,94 +5,93 @@
   <tile id="0">
    <properties>
     <property name="mapID" value="empty"/>
-    <property name="mapID" value="empty"/>
-    <property name="mapID" value="empty"/>
    </properties>
   </tile>
   <tile id="1">
    <properties>
-    <property name="mapID" value="level-1"/>
-    <property name="mapID" value="level-1"/>
-    <property name="mapID" value="level-1"/>
+    <property name="mapID" value="down-1"/>
    </properties>
   </tile>
   <tile id="2">
    <properties>
-    <property name="mapID" value="level-2"/>
-    <property name="mapID" value="level-2"/>
-    <property name="mapID" value="level-2"/>
+    <property name="mapID" value="down-2"/>
    </properties>
   </tile>
   <tile id="3">
    <properties>
-    <property name="mapID" value="level-3"/>
-    <property name="mapID" value="level-3"/>
-    <property name="mapID" value="level-3"/>
+    <property name="mapID" value="down-3"/>
    </properties>
   </tile>
   <tile id="4">
    <properties>
-    <property name="mapID" value="level-4"/>
-    <property name="mapID" value="level-4"/>
-    <property name="mapID" value="level-4"/>
+    <property name="mapID" value="down-4"/>
    </properties>
   </tile>
   <tile id="5">
    <properties>
-    <property name="mapID" value="level-5"/>
-    <property name="mapID" value="level-5"/>
-    <property name="mapID" value="level-5"/>
+    <property name="mapID" value="down-5"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="mapID" value="up-1"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="mapID" value="up-2"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="mapID" value="up-3"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="mapID" value="up-4"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="mapID" value="up-5"/>
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="9" name="items" tilewidth="60" tileheight="60">
+ <tileset firstgid="17" name="items" tilewidth="60" tileheight="60">
   <image source="items.png"/>
   <tile id="0">
    <properties>
-    <property name="itemID" value="station"/>
-    <property name="itemID" value="station"/>
     <property name="itemID" value="station"/>
    </properties>
   </tile>
   <tile id="1">
    <properties>
-    <property name="itemID" value="sensorSite"/>
-    <property name="itemID" value="sensorSite"/>
     <property name="itemID" value="sensorSite"/>
    </properties>
   </tile>
   <tile id="8">
    <properties>
     <property name="itemID" value="station"/>
-    <property name="itemID" value="station"/>
-    <property name="itemID" value="station"/>
    </properties>
   </tile>
   <tile id="9">
    <properties>
-    <property name="itemID" value="sensor"/>
-    <property name="itemID" value="sensor"/>
     <property name="itemID" value="sensor"/>
    </properties>
   </tile>
   <tile id="16">
    <properties>
     <property name="itemID" value="station"/>
-    <property name="itemID" value="station"/>
-    <property name="itemID" value="station"/>
    </properties>
   </tile>
   <tile id="17">
    <properties>
-    <property name="itemID" value="sampleSite"/>
-    <property name="itemID" value="sampleSite"/>
-    <property name="itemID" value="sampleSite"/>
+    <property name="itemID" value="sample"/>
    </properties>
   </tile>
   <tile id="24">
    <properties>
-    <property name="itemID" value="station"/>
-    <property name="itemID" value="station"/>
     <property name="itemID" value="station"/>
    </properties>
   </tile>
@@ -104,19 +103,19 @@
  </layer>
  <layer name="terrain" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3OQQkAAAwDsTL/ouehv0Ii4LgEAABo3XB/+X3VA2A7V2mADQAA
+   H4sIAAAAAAAAA+3MoQ0AQAgEQRyh/4bfvESRnJtJ1m4VAABw0b+UCf+Tb3YPBVKUQYANAAA=
   </data>
  </layer>
  <layer name="items" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3NIQ4AIAwEwVpwSCT//yQ1BI0oaiZZexcBAAC8Glkr3F/ZLNw/+ocPrg3kEuf+gA0AAA==
+   H4sIAAAAAAAAA2NgGAWjYBSMglEwCkbBKBgFo2AUkAokgViQhuZrArEiDc2HASE62DEKEAAAgbqDh4ANAAA=
   </data>
  </layer>
  <objectgroup name="objects" width="24" height="36">
   <object name="startSite" x="150" y="1830">
    <properties>
     <property name="bearing" value="south"/>
-    <property name="energy" value="8"/>
+    <property name="energy" value="6"/>
     <property name="sampleSites" value="0"/>
     <property name="sensorSites" value="1"/>
    </properties>

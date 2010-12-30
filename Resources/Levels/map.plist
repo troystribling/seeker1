@@ -25,7 +25,7 @@
 			<false/>
 		</dict>
 		
-		<key>terrain-1-tile.png</key>
+		<key>terrain-down-1-tile.png</key>
 		<dict>
 			<key>aliases</key>
 			<array/>
@@ -45,7 +45,47 @@
 			<false/>
 		</dict>
 		
-		<key>terrain-2-tile.png</key>
+		<key>terrain-down-2-tile.png</key>
+		<dict>
+			<key>aliases</key>
+			<array/>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {60, 60}}</string>
+			<key>spriteOffset</key>
+			<string>{0, -0}</string>
+			<key>spriteSize</key>
+			<string>{60, 60}</string>
+			<key>spriteSourceSize</key>
+			<string>{60, 60}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{120, 0}, {60, 60}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>terrain-down-3-tile.png</key>
+		<dict>
+			<key>aliases</key>
+			<array/>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {60, 60}}</string>
+			<key>spriteOffset</key>
+			<string>{0, -0}</string>
+			<key>spriteSize</key>
+			<string>{60, 60}</string>
+			<key>spriteSourceSize</key>
+			<string>{60, 60}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{180, 0}, {60, 60}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>terrain-down-4-tile.png</key>
 		<dict>
 			<key>aliases</key>
 			<array/>
@@ -65,7 +105,7 @@
 			<false/>
 		</dict>
 		
-		<key>terrain-3-tile.png</key>
+		<key>terrain-down-5-tile.png</key>
 		<dict>
 			<key>aliases</key>
 			<array/>
@@ -85,7 +125,47 @@
 			<false/>
 		</dict>
 		
-		<key>terrain-4-tile.png</key>
+		<key>terrain-up-1-tile.png</key>
+		<dict>
+			<key>aliases</key>
+			<array/>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {60, 60}}</string>
+			<key>spriteOffset</key>
+			<string>{0, -0}</string>
+			<key>spriteSize</key>
+			<string>{60, 60}</string>
+			<key>spriteSourceSize</key>
+			<string>{60, 60}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{120, 60}, {60, 60}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>terrain-up-2-tile.png</key>
+		<dict>
+			<key>aliases</key>
+			<array/>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {60, 60}}</string>
+			<key>spriteOffset</key>
+			<string>{0, -0}</string>
+			<key>spriteSize</key>
+			<string>{60, 60}</string>
+			<key>spriteSourceSize</key>
+			<string>{60, 60}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{180, 60}, {60, 60}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
+		<key>terrain-up-3-tile.png</key>
 		<dict>
 			<key>aliases</key>
 			<array/>
@@ -105,7 +185,7 @@
 			<false/>
 		</dict>
 		
-		<key>terrain-5-tile.png</key>
+		<key>terrain-up-4-tile.png</key>
 		<dict>
 			<key>aliases</key>
 			<array/>
@@ -125,13 +205,33 @@
 			<false/>
 		</dict>
 		
+		<key>terrain-up-5-tile.png</key>
+		<dict>
+			<key>aliases</key>
+			<array/>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {60, 60}}</string>
+			<key>spriteOffset</key>
+			<string>{0, -0}</string>
+			<key>spriteSize</key>
+			<string>{60, 60}</string>
+			<key>spriteSourceSize</key>
+			<string>{60, 60}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{120, 120}, {60, 60}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
 	</dict>
 	<key>metadata</key>
 	<dict>
 		<key>format</key>
 		<integer>3</integer>
 		<key>size</key>
-		<string>{128, 256}</string>
+		<string>{256, 256}</string>
 	</dict>
 </dict>
 </plist>

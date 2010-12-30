@@ -56,7 +56,7 @@
     CGFloat displayOffset = self.statusDisplay.contentSize.height;
     NSInteger missionWidth = self.screenSize.width / kMISSIONS_PER_ROW;
     NSInteger missionHeight = (self.screenSize.height - displayOffset) / kMISSIONS_ROWS;
-    NSInteger missionColumn = (_position.x - 0.5 * missionWidth ) / missionWidth;
+    NSInteger missionColumn = _position.x / missionWidth;
     NSInteger missionRow = (self.screenSize.height - displayOffset - 0.5 * missionHeight - _position.y) / missionHeight;
     return missionRow + missionColumn;
 }

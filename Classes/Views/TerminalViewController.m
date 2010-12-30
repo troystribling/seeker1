@@ -163,7 +163,6 @@
     [self.programListing insertObject:lineOfCode atIndex:toIndexPath.row];
 }
 
-
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == [self.programListing count]) {
