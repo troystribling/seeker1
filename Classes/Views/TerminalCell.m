@@ -29,18 +29,33 @@
 #pragma mark TerminalCell
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet {
++ (UITableViewCell*)tableView:(UITableView*)tableView promptCellForRowAtIndexPath:(NSIndexPath*)indexPath {
+    TerminalCell* cell = (TerminalCell*)[CellUtils createCell:[TerminalCell class] forTableView:tableView];
+    cell.instructionLabel.text = @"~>";
+    return cell;
+}
+
+//===================================================================================================================================
+#pragma mark TerminalCellInterface
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (UITableViewCell*)tableView:(UITableView*)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet {
     TerminalCell* cell = (TerminalCell*)[CellUtils createCell:[TerminalCell class] forTableView:tableView];
     NSString* instructionString = [[ProgramNgin instance] instructionToString:_instructionSet];
-    cell.instructionLabel.text = [NSString stringWithFormat:@"$ %@", instructionString];;
+    cell.instructionLabel.text = [NSString stringWithFormat:@"~> %@", instructionString];
     return cell;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UITableViewCell*)tableView:(UITableView*)tableView promptCellForRowAtIndexPath:(NSIndexPath*)indexPath {
++ (UITableViewCell*)tableView:(UITableView*)tableView listCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet {
     TerminalCell* cell = (TerminalCell*)[CellUtils createCell:[TerminalCell class] forTableView:tableView];
-    cell.instructionLabel.text = @"$";
+    NSString* instructionString = [[ProgramNgin instance] instructionToString:_instructionSet];
+    cell.instructionLabel.text = [NSString stringWithFormat:@"%d. %@", (indexPath.row + 1), instructionString];
     return cell;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)enableUserInteraction {
 }
 
 //===================================================================================================================================

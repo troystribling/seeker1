@@ -19,6 +19,7 @@
 @implementation DoTimesTerminalCell
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize promtLabel;
 @synthesize timesLabel;
 @synthesize timesClosingBracketLabel;
 @synthesize methodClosingBracketLabel;
@@ -31,9 +32,23 @@
 //===================================================================================================================================
 #pragma mark DoTimesTerminalCell
 
+//===================================================================================================================================
+#pragma mark TerminalCellInterface
+
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet {
++ (UITableViewCell*)tableView:(UITableView*)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet {
     DoTimesTerminalCell* cell = (DoTimesTerminalCell*)[CellUtils createCell:[DoTimesTerminalCell class] forTableView:tableView];
+    cell.methodLabel.userInteractionEnabled = YES;
+    cell.numberTextField.userInteractionEnabled = YES;
+    return cell;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (UITableViewCell*)tableView:(UITableView*)tableView listCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet {
+    DoTimesTerminalCell* cell = (DoTimesTerminalCell*)[CellUtils createCell:[DoTimesTerminalCell class] forTableView:tableView];
+    cell.promtLabel.text = [NSString stringWithFormat:@"%d.", (indexPath.row + 1)];
+    cell.methodLabel.userInteractionEnabled = NO;
+    cell.numberTextField.userInteractionEnabled = NO;
     return cell;
 }
 

@@ -8,11 +8,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <UIKit/UIKit.h>
+#import "TerminalCellFactory.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface TerminalCell : UITableViewCell {
+@interface TerminalCell : UITableViewCell <TerminalCellInterface> {
     IBOutlet UILabel* instructionLabel;
 }
 
@@ -20,7 +21,6 @@
 @property (nonatomic, retain) UILabel* instructionLabel;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet;
 + (UITableViewCell*)tableView:(UITableView*)tableView promptCellForRowAtIndexPath:(NSIndexPath*)indexPath;
 
 @end

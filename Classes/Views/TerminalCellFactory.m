@@ -57,23 +57,52 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet {
++ (UITableViewCell*)tableView:(UITableView*)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet {
     UITableViewCell* tableCell = nil;
     ProgramInstruction instruction = [[_instructionSet objectAtIndex:0] intValue];
     switch (instruction) {
         case MoveProgramInstruction:
-            tableCell = [TerminalCell tableView:tableView cellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
             break;
         case TurnLeftProgramInstruction:
-            tableCell = [TerminalCell tableView:tableView cellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
             break;
         case PutSensorProgramInstruction:
-            tableCell = [TerminalCell tableView:tableView cellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
             break;
         case GetSampleProgramInstruction:
-            tableCell = [TerminalCell tableView:tableView cellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
             break;
         case DoTimesProgramInstruction:
+            tableCell = [DoTimesTerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            break;
+        case DoWhileProgramInstruction:
+            break;
+        case DoUntilProgramInstruction:
+            break;
+    }
+    return tableCell;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (UITableViewCell*)tableView:(UITableView*)tableView listCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet {
+    UITableViewCell* tableCell = nil;
+    ProgramInstruction instruction = [[_instructionSet objectAtIndex:0] intValue];
+    switch (instruction) {
+        case MoveProgramInstruction:
+            tableCell = [TerminalCell tableView:tableView listCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            break;
+        case TurnLeftProgramInstruction:
+            tableCell = [TerminalCell tableView:tableView listCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            break;
+        case PutSensorProgramInstruction:
+            tableCell = [TerminalCell tableView:tableView listCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            break;
+        case GetSampleProgramInstruction:
+            tableCell = [TerminalCell tableView:tableView listCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            break;
+        case DoTimesProgramInstruction:
+            tableCell = [DoTimesTerminalCell tableView:tableView listCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
             break;
         case DoWhileProgramInstruction:
             break;

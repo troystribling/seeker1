@@ -97,12 +97,12 @@ static ProgramNgin* thisProgramNgin = nil;
     [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:TurnLeftProgramInstruction], nil]];
     [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:PutSensorProgramInstruction], nil]];
     [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:GetSampleProgramInstruction], nil]];
-//    NSInteger level = [UserModel level];
-//    if (level >= kLEVEL_FOR_ITERATIONS) {
-//        [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:DoTimesProgramInstruction], 
-//                                                               [NSNumber numberWithInt:MoveProgramInstruction], 
-//                                                               [NSNumber numberWithInt:1], nil]];
-//    }
+    NSInteger level = [UserModel level];
+    if (level >= kLEVEL_FOR_ITERATIONS) {
+        [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:DoTimesProgramInstruction], 
+                                                               [NSNumber numberWithInt:MoveProgramInstruction], 
+                                                               [NSNumber numberWithInt:1], nil]];
+    }
 //    if (level >= kLEVEL_FOR_WHILE_UNTIL) {
 //        [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:DoWhileProgramInstruction], nil]];
 //        [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:DoUntilProgramInstruction], nil]];

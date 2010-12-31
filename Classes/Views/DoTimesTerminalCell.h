@@ -8,10 +8,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <UIKit/UIKit.h>
+#import "TerminalCellFactory.h"
+
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface DoTimesTerminalCell : UITableViewCell {
+@interface DoTimesTerminalCell : UITableViewCell <TerminalCellInterface> {
+    IBOutlet UILabel* promtLabel;
     IBOutlet UILabel* timesLabel;
     IBOutlet UILabel* timesClosingBracketLabel;
     IBOutlet UILabel* methodClosingBracketLabel;
@@ -20,6 +23,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@property (nonatomic, retain) UILabel* promtLabel;
 @property (nonatomic, retain) UILabel* timesLabel;
 @property (nonatomic, retain) UILabel* timesClosingBracketLabel;
 @property (nonatomic, retain) UILabel* methodClosingBracketLabel;
@@ -27,6 +31,5 @@
 @property (nonatomic, retain) UITextField* numberTextField;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet;
 
 @end

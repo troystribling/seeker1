@@ -9,7 +9,15 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <Foundation/Foundation.h>
 
-//-----------------------------------------------------------------------------------------------------------------------------------
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@protocol TerminalCellInterface <NSObject>
+
+@required
+
++ (UITableViewCell*)tableView:(UITableView *)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet;
++ (UITableViewCell*)tableView:(UITableView *)tableView listCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet;
+
+@end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TerminalCellFactory : NSObject {
@@ -20,6 +28,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (CGFloat)tableView:(UITableView *)tableView heightForRowWithInstructionSet:(NSMutableArray*)_instructionSet;
-+ (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet;
++ (UITableViewCell*)tableView:(UITableView *)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet;
++ (UITableViewCell*)tableView:(UITableView *)tableView listCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet;
 
 @end

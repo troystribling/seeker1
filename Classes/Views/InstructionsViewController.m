@@ -110,7 +110,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSMutableArray* instructionSet = [self.instructionsList objectAtIndex:indexPath.row];
-    return [TerminalCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forInstructionSet:instructionSet];
+    return [TerminalCellFactory tableView:tableView listCellForRowAtIndexPath:indexPath forInstructionSet:instructionSet];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

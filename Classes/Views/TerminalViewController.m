@@ -134,13 +134,14 @@
         return [TerminalCell tableView:tableView promptCellForRowAtIndexPath:indexPath];
     } else {
         NSMutableArray* instructionSet = [self.programListing objectAtIndex:indexPath.row];
-        return [TerminalCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forInstructionSet:instructionSet];
+        return [TerminalCellFactory tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:instructionSet];
     }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == [self.programListing count]) {
+    NSInteger linesOfCode = [self.programListing count];
+    if (indexPath.row == linesOfCode || linesOfCode == 1) {
         return NO;
     } else {
         return YES;
@@ -165,7 +166,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == [self.programListing count]) {
+    NSInteger linesOfCode = [self.programListing count];
+    if (indexPath.row == linesOfCode || linesOfCode == 1) {
         return NO;
     } else {
         return YES;
