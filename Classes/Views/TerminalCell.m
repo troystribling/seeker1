@@ -8,6 +8,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "TerminalCell.h"
+#import "CellUtils.h"
+#import "ProgramNgin.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TerminalCell (PrivateAPI)
@@ -18,13 +20,28 @@
 @implementation TerminalCell
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize lineLabel;
+@synthesize instructionLabel;
 
 //===================================================================================================================================
 #pragma mark TerminalCell PrivateAPI
 
 //===================================================================================================================================
 #pragma mark TerminalCell
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet {
+    TerminalCell* cell = (TerminalCell*)[CellUtils createCell:[TerminalCell class] forTableView:tableView];
+    NSString* instructionString = [[ProgramNgin instance] instructionToString:_instructionSet];
+    cell.instructionLabel.text = [NSString stringWithFormat:@"$ %@", instructionString];;
+    return cell;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (UITableViewCell*)tableView:(UITableView*)tableView promptCellForRowAtIndexPath:(NSIndexPath*)indexPath {
+    TerminalCell* cell = (TerminalCell*)[CellUtils createCell:[TerminalCell class] forTableView:tableView];
+    cell.instructionLabel.text = @"$";
+    return cell;
+}
 
 //===================================================================================================================================
 #pragma mark TerminalCell

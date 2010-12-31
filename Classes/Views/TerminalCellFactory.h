@@ -1,25 +1,25 @@
 //
-//  FunctionsLauncherView.h
+//  TerminalCellFactory.h
 //  seeker1
 //
-//  Created by Troy Stribling on 12/7/10.
+//  Created by Troy Stribling on 12/30/10.
 //  Copyright 2010 imaginary products. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import <UIKit/UIKit.h>
-#import "LauncherView.h"
+#import <Foundation/Foundation.h>
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface FunctionsLauncherView : LauncherView {
+@interface TerminalCellFactory : NSObject {
+
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (id)inView:(UIView*)_view andDelegate:(id<LauncherViewDelegate>)_delegate;
-- (id)initInView:(UIView*)_view andDelegate:(id<LauncherViewDelegate>)_delegate;
++ (CGFloat)tableView:(UITableView *)tableView heightForRowWithInstructionSet:(NSMutableArray*)_instructionSet;
++ (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet;
 
 @end

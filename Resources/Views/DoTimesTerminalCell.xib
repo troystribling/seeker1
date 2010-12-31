@@ -246,7 +246,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<int key="IBUISeparatorStyle">1</int>
 				<reference key="IBUIContentView" ref="880399814"/>
-				<string key="IBUIReuseIdentifier">IterateTerminalCell</string>
+				<string key="IBUIReuseIdentifier">DoTimesTerminalCell</string>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -411,7 +411,7 @@
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAABDKAAAwnwAAA</bytes>
 					</object>
-					<string>IterateTerminalCell</string>
+					<string>DoTimesTerminalCell</string>
 					<string>{{170, 354}, {335, 84}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -458,7 +458,7 @@
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
-					<string key="className">IterateTerminalCell</string>
+					<string key="className">DoTimesTerminalCell</string>
 					<string key="superclassName">UITableViewCell</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -515,7 +515,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/Views/IterateTerminalCell.h</string>
+						<string key="minorKey">Classes/Views/DoTimesTerminalCell.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

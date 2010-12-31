@@ -1,5 +1,5 @@
 //
-//  FunctionsViewController.h
+//  InstructionsViewController.h
 //  seeker1
 //
 //  Created by Troy Stribling on 12/7/10.
@@ -8,23 +8,23 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <UIKit/UIKit.h>
-#import "FunctionsLauncherView.h"
+#import "InstructionsLauncherView.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class TerminalViewController;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface FunctionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, LauncherViewDelegate> {
-    IBOutlet UITableView* functionsView;
+@interface InstructionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, LauncherViewDelegate> {
+    IBOutlet UITableView* instructionsView;
     UIView* containerView;
-	NSMutableArray* functionList;
+	NSMutableArray* instructionsList;
     TerminalViewController* terminalViewController;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) UITableView* functionsView;
+@property (nonatomic, retain) UITableView* instructionsView;
 @property (nonatomic, retain) UIView* containerView;
-@property (nonatomic, retain) NSMutableArray* functionList;
+@property (nonatomic, retain) NSMutableArray* instructionsList;
 @property (nonatomic, retain) TerminalViewController* terminalViewController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

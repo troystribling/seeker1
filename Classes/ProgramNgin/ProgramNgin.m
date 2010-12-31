@@ -22,6 +22,8 @@ static ProgramNgin* thisProgramNgin = nil;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ProgramNgin (PrivateAPI)
 
+- (void)compile;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -29,12 +31,21 @@ static ProgramNgin* thisProgramNgin = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize program;
+@synthesize compiledProgram;
 @synthesize programHalted;
 @synthesize programRunning;
 @synthesize nextLine;
 
 //===================================================================================================================================
 #pragma mark ProgramNgin PrivateApi
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)compile {
+    [self.compiledProgram removeAllObjects];
+    for (NSMutableArray* instruction in self.program) {
+        [self.compiledProgram addObject:instruction];
+    }
+}
 
 //===================================================================================================================================
 #pragma mark ProgramNgin
@@ -53,33 +64,68 @@ static ProgramNgin* thisProgramNgin = nil;
 - (id)init {
 	if((self=[super init])) {
         self.program = [NSMutableArray arrayWithCapacity:10];
+        self.compiledProgram = [NSMutableArray arrayWithCapacity:10];
         self.nextLine = 0;
 	}
 	return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSMutableArray*)getPrimativeFunctions {
-    NSMutableArray* primatives = [NSMutableArray arrayWithObjects:@"move", @"turn left", @"get sample", @"put sensor", nil];
+- (NSMutableArray*)getPrimativeInstructions {
+    NSMutableArray* primatives = [NSMutableArray arrayWithCapacity:10];
+    [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:MoveProgramInstruction], nil]];
+    [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:TurnLeftProgramInstruction], nil]];
+    [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:PutSensorProgramInstruction], nil]];
+    [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:GetSampleProgramInstruction], nil]];
     NSInteger level = [UserModel level];
-    if (level >= kLEVEL_FOR_ITERATIONS) {
-        [primatives addObject:@"do n times"];
-    }
-    if (level >= kLEVEL_FOR_WHILE_UNTIL) {
-        [primatives addObject:@"do while"];
-        [primatives addObject:@"do until"];
-    }
+//    if (level >= kLEVEL_FOR_ITERATIONS) {
+//        [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:DoTimesProgramInstruction], 
+//                                                               [NSNumber numberWithInt:MoveProgramInstruction], 
+//                                                               [NSNumber numberWithInt:1], nil]];
+//    }
+//    if (level >= kLEVEL_FOR_WHILE_UNTIL) {
+//        [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:DoWhileProgramInstruction], nil]];
+//        [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:DoUntilProgramInstruction], nil]];
+//    }
     return primatives;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSMutableArray*)getUserFunctions {
+- (NSMutableArray*)getSubroutines {
     return [NSMutableArray arrayWithCapacity:10];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSString*)instructionToString:(NSMutableArray*)_instructionSet {
+    NSString* instructionString = nil;
+    ProgramInstruction instruction = [[_instructionSet objectAtIndex:0] intValue];
+    switch (instruction) {
+        case MoveProgramInstruction:
+            instructionString = @"move";
+            break;
+        case TurnLeftProgramInstruction:
+            instructionString = @"turn left";
+            break;
+        case PutSensorProgramInstruction:
+            instructionString = @"put sensor";
+            break;
+        case GetSampleProgramInstruction:
+            instructionString = @"get sample";
+            break;
+        case DoTimesProgramInstruction:
+            break;
+        case DoWhileProgramInstruction:
+            break;
+        case DoUntilProgramInstruction:
+            break;
+    }
+    return instructionString;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadProgram:(NSMutableArray*)_program {
     [self saveProgram:_program];
+    [self compile];
     [self runProgram];
 }
 
@@ -134,8 +180,8 @@ static ProgramNgin* thisProgramNgin = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)nextInstruction {
-    NSString* instruction = nil;
+- (NSMutableArray*)nextInstruction {
+    NSMutableArray* instruction = nil;
     NSInteger codeLines = [self.program count];
     if (self.nextLine < codeLines - 1) {
         instruction = [self.program objectAtIndex:self.nextLine];

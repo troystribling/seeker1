@@ -10,10 +10,20 @@
 #import <Foundation/Foundation.h>
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+typedef enum tagProgramInstruction {
+    MoveProgramInstruction,
+    TurnLeftProgramInstruction,
+    PutSensorProgramInstruction,
+    GetSampleProgramInstruction,
+    DoTimesProgramInstruction,
+    DoWhileProgramInstruction,
+    DoUntilProgramInstruction,
+} ProgramInstruction;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ProgramNgin : NSObject {
     NSMutableArray* program;
+    NSMutableArray* compiledProgram;
     BOOL programHalted;
     BOOL programRunning;
     NSInteger nextLine;
@@ -21,14 +31,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) NSMutableArray* program;
+@property (nonatomic, retain) NSMutableArray* compiledProgram;
 @property (nonatomic, assign) BOOL programHalted;
 @property (nonatomic, assign) BOOL programRunning;
 @property (nonatomic, assign) NSInteger nextLine;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ProgramNgin*)instance;
-- (NSMutableArray*)getPrimativeFunctions;
-- (NSMutableArray*)getUserFunctions;
+- (NSMutableArray*)getPrimativeInstructions;
+- (NSMutableArray*)getSubroutines;
+- (NSString*)instructionToString:(NSMutableArray*)_instructions;
 - (void)loadProgram:(NSMutableArray*)_program;
 - (void)saveProgram:(NSMutableArray*)_program;
 - (void)deleteProgram;
@@ -38,6 +50,6 @@
 - (BOOL)programIsLoaded;
 - (BOOL)programIsRunning;
 - (BOOL)programIsHalted;
-- (NSString*)nextInstruction;
+- (NSMutableArray*)nextInstruction;
 
 @end

@@ -1,5 +1,5 @@
 //
-//  FunctionsViewController.m
+//  InstructionsViewController.m
 //  seeker1
 //
 //  Created by Troy Stribling on 12/7/10.
@@ -7,36 +7,37 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "FunctionsViewController.h"
+#import "InstructionsViewController.h"
 #import "TerminalViewController.h"
+#import "TerminalCellFactory.h"
 #import "CellUtils.h"
 #import "TerminalCell.h"
 #import "ProgramNgin.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface FunctionsViewController (PrivateAPI)
+@interface InstructionsViewController (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation FunctionsViewController
+@implementation InstructionsViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize functionsView;
+@synthesize instructionsView;
 @synthesize containerView;
-@synthesize functionList;
+@synthesize instructionsList;
 @synthesize terminalViewController;
 
 //===================================================================================================================================
-#pragma mark FunctionsViewController PrivateAPI
+#pragma mark InstructionsViewController PrivateAPI
 
 //===================================================================================================================================
-#pragma mark FunctionsViewController
+#pragma mark InstructionsViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)inTerminalViewController:(TerminalViewController*)_terminalViewController {
-    FunctionsViewController* viewController = 
-    [[FunctionsViewController alloc] initWithNibName:@"FunctionsViewController" bundle:nil inView:_terminalViewController.containerView];
+    InstructionsViewController* viewController = 
+        [[InstructionsViewController alloc] initWithNibName:@"InstructionsViewController" bundle:nil inView:_terminalViewController.containerView];
     viewController.terminalViewController = _terminalViewController;
     return viewController;
 }
@@ -46,7 +47,7 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.view.frame = self.containerView.frame;
-        self.functionList = [NSMutableArray arrayWithCapacity:10];
+        self.instructionsList = [NSMutableArray arrayWithCapacity:10];
     }
     return self;
 }
@@ -56,14 +57,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
-    [FunctionsLauncherView inView:self.view andDelegate:self];
-    self.functionsView.separatorColor = [UIColor blackColor];
+    [InstructionsLauncherView inView:self.view andDelegate:self];
+    self.instructionsView.separatorColor = [UIColor blackColor];
     [super viewDidLoad];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
-    self.functionList = [[ProgramNgin instance] getPrimativeFunctions];
+    self.instructionsList = [[ProgramNgin instance] getPrimativeInstructions];
 	[super viewWillAppear:animated];
 }
 
@@ -103,14 +104,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.functionList count];
+    return [self.instructionsList count];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TerminalCell* cell = (TerminalCell*)[CellUtils createCell:[TerminalCell class] forTableView:tableView];
-    cell.lineLabel.text = [self.functionList objectAtIndex:indexPath.row];
-    return cell;
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSMutableArray* instructionSet = [self.instructionsList objectAtIndex:indexPath.row];
+    return [TerminalCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forInstructionSet:instructionSet];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -142,11 +142,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString* function = [self.functionList objectAtIndex:indexPath.row];
+    NSString* instructions = [self.instructionsList objectAtIndex:indexPath.row];
     if (self.terminalViewController.selectedLine.row < [self.terminalViewController.programListing count]) {
-        [self.terminalViewController.programListing replaceObjectAtIndex:self.terminalViewController.selectedLine.row withObject:function];
+        [self.terminalViewController.programListing replaceObjectAtIndex:self.terminalViewController.selectedLine.row withObject:instructions];
     } else {
-        [self.terminalViewController.programListing addObject:function];
+        [self.terminalViewController.programListing addObject:instructions];
     }
     [self.terminalViewController.programView reloadData];
     NSIndexPath* bottomLine = [NSIndexPath indexPathForRow:(self.terminalViewController.selectedLine.row + 1) inSection:0];
@@ -156,7 +156,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    return kTERMINAL_LINE_CELL_HEIGHT;
+    NSMutableArray* instructionSet = [self.instructionsList objectAtIndex:indexPath.row];
+    return [TerminalCellFactory tableView:tableView heightForRowWithInstructionSet:instructionSet];
 }
 
 //===================================================================================================================================

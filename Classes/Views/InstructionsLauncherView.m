@@ -1,5 +1,5 @@
 //
-//  FunctionsLauncherView.m
+//  InstructionsLauncherView.m
 //  seeker1
 //
 //  Created by Troy Stribling on 12/7/10.
@@ -7,21 +7,26 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "FunctionsLauncherView.h"
+#import "InstructionsLauncherView.h"
 #import "TouchImageView.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface FunctionsLauncherView (PrivateAPI)
+@interface InstructionsLauncherView (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation FunctionsLauncherView
+@implementation InstructionsLauncherView
 
+//===================================================================================================================================
+#pragma mark InstructionsLauncherView PrivateAPI
+
+//===================================================================================================================================
+#pragma mark InstructionsLauncherView
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)inView:(UIView*)_view andDelegate:(id<LauncherViewDelegate>)_delegate {
-    return [[FunctionsLauncherView alloc] initInView:_view andDelegate:_delegate];
+    return [[InstructionsLauncherView alloc] initInView:_view andDelegate:_delegate];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

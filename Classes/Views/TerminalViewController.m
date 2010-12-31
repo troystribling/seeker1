@@ -10,9 +10,10 @@
 #import "TerminalViewController.h"
 #import "MapScene.h"
 #import "TermMenuView.h"
-#import "FunctionsViewController.h"
+#import "InstructionsViewController.h"
 #import "ViewControllerManager.h"
 #import "ProgramNgin.h"
+#import "TerminalCellFactory.h"
 #import "TerminalCell.h"
 #import "TouchImageView.h"
 #import "CellUtils.h"
@@ -129,13 +130,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TerminalCell* cell = (TerminalCell*)[CellUtils createCell:[TerminalCell class] forTableView:tableView];
     if (indexPath.row == [self.programListing count]) {
-        cell.lineLabel.text = @"$";
+        return [TerminalCell tableView:tableView promptCellForRowAtIndexPath:indexPath];
     } else {
-        cell.lineLabel.text = [NSString stringWithFormat:@"$ %@", [self.programListing objectAtIndex:indexPath.row]];
+        NSMutableArray* instructionSet = [self.programListing objectAtIndex:indexPath.row];
+        return [TerminalCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forInstructionSet:instructionSet];
     }
-    return cell;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -178,12 +178,17 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedLine = indexPath;
-    [[ViewControllerManager instance] showFunctionsView:self];
+    [[ViewControllerManager instance] showInstructionsView:self];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    return kTERMINAL_LINE_CELL_HEIGHT;
+    if (indexPath.row == [self.programListing count]) {
+        return kTERMINAL_DEFAULT_CELL_HEIGHT;
+    } else {
+        NSMutableArray* instructionSet = [self.programListing objectAtIndex:indexPath.row];
+        return [TerminalCellFactory tableView:tableView heightForRowWithInstructionSet:instructionSet];
+    }
 }
 
 //===================================================================================================================================

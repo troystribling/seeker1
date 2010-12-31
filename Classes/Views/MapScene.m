@@ -311,17 +311,29 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)executeSeekerInstruction:(ccTime)dt {
-    NSString* instruction = nil;
+    NSMutableArray* instructionSet = nil;
     ProgramNgin* ngin = [ProgramNgin instance];
-    if ((instruction = [ngin nextInstruction])) {
-        if ([instruction isEqualToString:@"move"]) {
-            [self move];
-        } else if ([instruction isEqualToString:@"turn left"]) {
-            [self.seeker1 turnLeft];
-        } else if ([instruction isEqualToString:@"put sensor"]) {
-            [self putSensor];
-        } else if ([instruction isEqualToString:@"get sample"]) {
-            [self getSample];
+    if ((instructionSet = [ngin nextInstruction])) {
+        ProgramInstruction instruction = [[instructionSet objectAtIndex:0] intValue];
+        switch (instruction) {
+            case MoveProgramInstruction:
+                [self move];
+                break;
+            case TurnLeftProgramInstruction:
+                [self.seeker1 turnLeft];
+                break;
+            case PutSensorProgramInstruction:
+                [self putSensor];
+                break;
+            case GetSampleProgramInstruction:
+                [self getSample];
+                break;
+            case DoTimesProgramInstruction:
+                break;
+            case DoWhileProgramInstruction:
+                break;
+            case DoUntilProgramInstruction:
+                break;
         }
     }
     if ([self isStationTile]) {

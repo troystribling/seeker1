@@ -1,5 +1,5 @@
 //
-//  IterateTerminalCell.m
+//  DoTimesTerminalCell.m
 //  seeker1
 //
 //  Created by Troy Stribling on 12/29/10.
@@ -7,15 +7,16 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "IterateTerminalCell.h"
+#import "DoTimesTerminalCell.h"
+#import "CellUtils.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface IterateTerminalCell (PrivateAPI)
+@interface DoTimesTerminalCell (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation IterateTerminalCell
+@implementation DoTimesTerminalCell
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize timesLabel;
@@ -25,13 +26,19 @@
 @synthesize numberTextField;
 
 //===================================================================================================================================
-#pragma mark IterateTerminalCell PrivateAPI
+#pragma mark DoTimesTerminalCell PrivateAPI
 
 //===================================================================================================================================
-#pragma mark IterateTerminalCell
+#pragma mark DoTimesTerminalCell
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet {
+    DoTimesTerminalCell* cell = (DoTimesTerminalCell*)[CellUtils createCell:[DoTimesTerminalCell class] forTableView:tableView];
+    return cell;
+}
 
 //===================================================================================================================================
-#pragma mark IterateTerminalCell
+#pragma mark DoTimesTerminalCell
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {    

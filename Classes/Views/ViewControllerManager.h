@@ -11,17 +11,17 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class TerminalViewController;
-@class FunctionsViewController;
+@class InstructionsViewController;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ViewControllerManager : NSObject {
     TerminalViewController* terminalViewController;
-    FunctionsViewController* functionsViewController;
+    InstructionsViewController* functionsViewController;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) TerminalViewController* terminalViewController;
-@property (nonatomic, retain) FunctionsViewController* functionsViewController;
+@property (nonatomic, retain) InstructionsViewController* functionsViewController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ViewControllerManager*)instance;
@@ -33,9 +33,9 @@
 - (void)terminalViewWillDisappear;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (FunctionsViewController*)showFunctionsView:(TerminalViewController*)containerView;
-- (void)removeFunctionsView;
-- (void)functionsViewWillAppear;
-- (void)functionsViewWillDisappear;
+- (InstructionsViewController*)showInstructionsView:(TerminalViewController*)containerView;
+- (void)removeInstructionsView;
+- (void)instructionsViewWillAppear;
+- (void)instructionsViewWillDisappear;
 
 @end
