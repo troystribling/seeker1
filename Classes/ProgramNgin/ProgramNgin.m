@@ -42,8 +42,28 @@ static ProgramNgin* thisProgramNgin = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)compile {
     [self.compiledProgram removeAllObjects];
-    for (NSMutableArray* instruction in self.program) {
-        [self.compiledProgram addObject:instruction];
+    for (NSMutableArray* instructionSet in self.program) {
+        ProgramInstruction instruction = [[instructionSet objectAtIndex:0] intValue];
+        switch (instruction) {
+            case MoveProgramInstruction:
+                [self.compiledProgram addObject:instructionSet];
+                break;
+            case TurnLeftProgramInstruction:
+                [self.compiledProgram addObject:instructionSet];
+                break;
+            case PutSensorProgramInstruction:
+                [self.compiledProgram addObject:instructionSet];
+                break;
+            case GetSampleProgramInstruction:
+                [self.compiledProgram addObject:instructionSet];
+                break;
+            case DoTimesProgramInstruction:
+                break;
+            case DoWhileProgramInstruction:
+                break;
+            case DoUntilProgramInstruction:
+                break;
+        }
     }
 }
 
@@ -77,7 +97,7 @@ static ProgramNgin* thisProgramNgin = nil;
     [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:TurnLeftProgramInstruction], nil]];
     [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:PutSensorProgramInstruction], nil]];
     [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:GetSampleProgramInstruction], nil]];
-    NSInteger level = [UserModel level];
+//    NSInteger level = [UserModel level];
 //    if (level >= kLEVEL_FOR_ITERATIONS) {
 //        [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:DoTimesProgramInstruction], 
 //                                                               [NSNumber numberWithInt:MoveProgramInstruction], 
@@ -184,10 +204,10 @@ static ProgramNgin* thisProgramNgin = nil;
     NSMutableArray* instruction = nil;
     NSInteger codeLines = [self.program count];
     if (self.nextLine < codeLines - 1) {
-        instruction = [self.program objectAtIndex:self.nextLine];
+        instruction = [self.compiledProgram objectAtIndex:self.nextLine];
         self.nextLine++;
     } else if (self.nextLine == codeLines - 1) {
-        instruction = [self.program objectAtIndex:self.nextLine];
+        instruction = [self.compiledProgram objectAtIndex:self.nextLine];
         self.nextLine = 0;
     } else {
         [self stopProgram];
