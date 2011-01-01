@@ -604,23 +604,23 @@
 #pragma mark menu
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initTerminalItems {
-    [self.statusDisplay addTerminalText:@"$ main"];
-    [self.statusDisplay addTerminalText:@"$ term"];
-    [self.statusDisplay addTerminalText:@"$"];
+    [self.statusDisplay addTerminalText:@"~> main"];
+    [self.statusDisplay addTerminalText:@"~> term"];
+    [self.statusDisplay addTerminalText:@"~>"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addResetTerminalItems {
-    [self.statusDisplay addTerminalText:@"$ main"];
-    [self.statusDisplay addTerminalText:@"$ term"];
-    [self.statusDisplay addTerminalText:@"$ reset"];
+    [self.statusDisplay addTerminalText:@"~> main"];
+    [self.statusDisplay addTerminalText:@"~> term"];
+    [self.statusDisplay addTerminalText:@"~> rset"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addRunTerminalItems {
-    [self.statusDisplay addTerminalText:@"$ main"];
-    [self.statusDisplay addTerminalText:@"$ term"];
-    [self.statusDisplay addTerminalText:@"$ run"];
+    [self.statusDisplay addTerminalText:@"~> main"];
+    [self.statusDisplay addTerminalText:@"~> term"];
+    [self.statusDisplay addTerminalText:@"~> run"];
 }
 
 //===================================================================================================================================

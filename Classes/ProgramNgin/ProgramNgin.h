@@ -39,6 +39,9 @@ typedef enum tagProgramInstruction {
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ProgramNgin*)instance;
 - (NSMutableArray*)getPrimativeInstructions;
+- (NSMutableArray*)getDoTimesInstructions;
+- (NSMutableArray*)getDoUntilPredicates;
+- (NSMutableArray*)getDoWhilePredicates;
 - (NSMutableArray*)getSubroutines;
 - (NSString*)instructionToString:(NSMutableArray*)_instructions;
 - (void)loadProgram:(NSMutableArray*)_program;

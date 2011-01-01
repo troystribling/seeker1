@@ -165,9 +165,9 @@
         self.isTouchEnabled = YES;
         self.statusDisplay = [StatusDisplay create];
         [self.statusDisplay insert:self];
-        [self.statusDisplay addTerminalText:@"$ main"];
-        [self.statusDisplay addTerminalText:@"$ site"];
-        [self.statusDisplay addTerminalText:@"$"];
+        [self.statusDisplay addTerminalText:@"~> main"];
+        [self.statusDisplay addTerminalText:@"~> site"];
+        [self.statusDisplay addTerminalText:@"~>"];
         [self.statusDisplay test];
         self.menu = [TermMenuView create];
         [self.menu missionsInitItems];

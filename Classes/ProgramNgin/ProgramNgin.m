@@ -111,6 +111,28 @@ static ProgramNgin* thisProgramNgin = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (NSMutableArray*)getDoTimesInstructions {
+    NSMutableArray* primatives = [NSMutableArray arrayWithCapacity:10];
+    [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:MoveProgramInstruction], nil]];
+    [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:TurnLeftProgramInstruction], nil]];
+    [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:PutSensorProgramInstruction], nil]];
+    [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:GetSampleProgramInstruction], nil]];
+    return primatives;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSMutableArray*)getDoUntilPredicates {
+    NSMutableArray* primatives = [NSMutableArray arrayWithCapacity:10];
+    return primatives;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSMutableArray*)getDoWhilePredicates {
+    NSMutableArray* primatives = [NSMutableArray arrayWithCapacity:10];
+    return primatives;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (NSMutableArray*)getSubroutines {
     return [NSMutableArray arrayWithCapacity:10];
 }

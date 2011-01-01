@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "DoTimesTerminalCell.h"
+#import "TerminalViewController.h"
 #import "CellUtils.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -40,6 +41,7 @@
     DoTimesTerminalCell* cell = (DoTimesTerminalCell*)[CellUtils createCell:[DoTimesTerminalCell class] forTableView:tableView];
     cell.methodLabel.userInteractionEnabled = YES;
     cell.numberTextField.userInteractionEnabled = YES;
+    cell.numberTextField.delegate = (TerminalViewController*)tableView;
     return cell;
 }
 

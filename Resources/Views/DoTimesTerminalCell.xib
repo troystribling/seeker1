@@ -155,7 +155,7 @@
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">10</float>
 							</object>
-							<object class="IBUILabel" id="1002866210">
+							<object class="IBUILabel" id="164852745">
 								<reference key="NSNextResponder" ref="880399814"/>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{20, 64}, {29, 29}}</string>
@@ -223,7 +223,7 @@
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MAA</bytes>
-									<object class="NSColorSpace" key="NSCustomColorSpace">
+									<object class="NSColorSpace" key="NSCustomColorSpace" id="833471176">
 										<int key="NSID">2</int>
 									</object>
 								</object>
@@ -270,7 +270,13 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<int key="IBUISeparatorStyle">1</int>
+				<int key="IBUISelectionStyle">0</int>
 				<reference key="IBUIContentView" ref="880399814"/>
+				<object class="NSColor" key="IBUISelectedTextColor">
+					<int key="NSColorSpace">3</int>
+					<bytes key="NSWhite">MAA</bytes>
+					<reference key="NSCustomColorSpace" ref="833471176"/>
+				</object>
 				<string key="IBUIReuseIdentifier">DoTimesTerminalCell</string>
 			</object>
 		</object>
@@ -321,7 +327,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">promtLabel</string>
 						<reference key="source" ref="882791124"/>
-						<reference key="destination" ref="1002866210"/>
+						<reference key="destination" ref="164852745"/>
 					</object>
 					<int key="connectionID">25</int>
 				</object>
@@ -359,7 +365,7 @@
 							<reference ref="796491075"/>
 							<reference ref="628532573"/>
 							<reference ref="384737151"/>
-							<reference ref="1002866210"/>
+							<reference ref="164852745"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -405,7 +411,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">23</int>
-						<reference key="object" ref="1002866210"/>
+						<reference key="object" ref="164852745"/>
 						<reference key="parent" ref="882791124"/>
 					</object>
 				</object>

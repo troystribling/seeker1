@@ -38,7 +38,7 @@
 @synthesize mainItem;
 @synthesize termItem;
 @synthesize runItem;
-@synthesize resetItem;
+@synthesize rsetItem;
 @synthesize siteItem;
 @synthesize emptyItem;
 @synthesize firstRect;
@@ -77,10 +77,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)createResetItem:(CGRect)_rect {
-    self.resetItem = [TouchImageView createWithFrame:_rect name:@"reset" andDelegate:self];
-    self.resetItem.image = [UIImage imageNamed:@"menu-reset.png"];
-    self.resetItem.contentMode = UIViewContentModeScaleToFill;
-    [self addSubview:self.resetItem];
+    self.rsetItem = [TouchImageView createWithFrame:_rect name:@"rset" andDelegate:self];
+    self.rsetItem.image = [UIImage imageNamed:@"menu-rset.png"];
+    self.rsetItem.contentMode = UIViewContentModeScaleToFill;
+    [self addSubview:self.rsetItem];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -102,7 +102,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)removeMenuItems {
     [self.runItem removeFromSuperview];
-    [self.resetItem removeFromSuperview];
+    [self.rsetItem removeFromSuperview];
     [self.mainItem removeFromSuperview];
     [self.termItem removeFromSuperview];
     [self.siteItem removeFromSuperview];
@@ -218,7 +218,7 @@
         [[ProgramNgin instance] runProgram];
         [self.mapScene addResetTerminalItems];
         [self addResetItems];
-    } else if ([itemName isEqualToString:@"reset"]) {
+    } else if ([itemName isEqualToString:@"rset"]) {
         [[ProgramNgin instance] stopProgram];
         [self.mapScene resetLevel];
         [self.mapScene addRunTerminalItems];

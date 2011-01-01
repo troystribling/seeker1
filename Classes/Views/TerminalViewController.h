@@ -15,7 +15,7 @@
 @class MapScene;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface TerminalViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, LauncherViewDelegate> {
+@interface TerminalViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, LauncherViewDelegate, UITextFieldDelegate> {
     IBOutlet UITableView* programView;
     TerminalLauncherView* terminalLauncherView;
     MapScene* mapScene;

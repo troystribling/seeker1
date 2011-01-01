@@ -16,7 +16,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TermMenuView : UIImageView {
     TouchImageView* runItem;
-    TouchImageView* resetItem;
+    TouchImageView* rsetItem;
     TouchImageView* mainItem;
     TouchImageView* termItem;
     TouchImageView* siteItem;
@@ -31,7 +31,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) TouchImageView* runItem;
-@property (nonatomic, retain) TouchImageView* resetItem;
+@property (nonatomic, retain) TouchImageView* rsetItem;
 @property (nonatomic, retain) TouchImageView* mainItem;
 @property (nonatomic, retain) TouchImageView* termItem;
 @property (nonatomic, retain) TouchImageView* siteItem;
