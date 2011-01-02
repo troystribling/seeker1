@@ -138,10 +138,9 @@ static ProgramNgin* thisProgramNgin = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)instructionToString:(NSMutableArray*)_instructionSet {
+- (NSString*)instructionToString:(ProgramInstruction)_instruction {
     NSString* instructionString = nil;
-    ProgramInstruction instruction = [[_instructionSet objectAtIndex:0] intValue];
-    switch (instruction) {
+    switch (_instruction) {
         case MoveProgramInstruction:
             instructionString = @"move";
             break;

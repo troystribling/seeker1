@@ -21,6 +21,11 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TerminalViewController (PrivateAPI)
 
+- (void)keyboardWillShow:(NSNotification*)note;
+- (void)keyboardWillHide:(NSNotification*)note;
+- (void)doneButtonPressed:(NSNotification*)note;
+- (UIView*)findKeyboard;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -71,16 +76,11 @@
     self.terminalLauncherView = [TerminalLauncherView inView:self.view andDelegate:self];
     self.programListing = [NSMutableArray arrayWithArray:[ProgramNgin instance].program];
     [self.programView reloadData];
-    [[NSNotificationCenter defaultCenter] addObserver:self 
-                                          selector:@selector(keyboardWillShow:) 
-                                          name:UIKeyboardWillShowNotification 
-                                          object:nil];    
 	[super viewWillAppear:animated];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillDisappear:(BOOL)animated {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 	[super viewWillDisappear:animated];
 }
 
@@ -208,26 +208,6 @@
     return shouldReturn;
 }
 
-//===================================================================================================================================
-#pragma mark keyboardWillShow
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)keyboardWillShow:(NSNotification *)note {  
-//    UIButton *doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    doneButton.frame = CGRectMake(0, 163, 211, 106);
-//    doneButton.adjustsImageWhenHighlighted = NO;
-//    [doneButton setImage:[UIImage imageNamed:@"DoneUp.png"] forState:UIControlStateNormal];
-//    [doneButton setImage:[UIImage imageNamed:@"DoneDown.png"] forState:UIControlStateHighlighted];
-//    [doneButton addTarget:self action:@selector(doneButton:) forControlEvents:UIControlEventTouchUpInside];
-//    UIWindow* tempWindow = [[[UIApplication sharedApplication] windows] objectAtIndex:1];
-//    UIView* keyboard;
-//    for(int i=0; i<[tempWindow.subviews count]; i++) {
-//        keyboard = [tempWindow.subviews objectAtIndex:i];
-//        // keyboard view found; add the custom button to it
-//        if([[keyboard description] hasPrefix:@"<UIKeyboard"] == YES)
-//            [keyboard addSubview:doneButton];
-//    }
-}
 //===================================================================================================================================
 #pragma mark NSObject
 

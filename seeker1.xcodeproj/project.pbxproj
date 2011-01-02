@@ -74,12 +74,13 @@
 		0527E61712BD5F3D0039D55E /* red-seeker-1-west.png in Resources */ = {isa = PBXBuildFile; fileRef = 0527E61312BD5F3D0039D55E /* red-seeker-1-west.png */; };
 		0528CDB512909FE600F4078A /* Seeker1AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0528CDB412909FE600F4078A /* Seeker1AppDelegate.m */; };
 		0528CDB91290A00200F4078A /* MapScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0528CDB81290A00200F4078A /* MapScene.m */; };
+		052A05EE12CFCCBA005F1948 /* DoTimesEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 052A05ED12CFCCBA005F1948 /* DoTimesEditViewController.m */; };
+		052A05FF12CFCFE6005F1948 /* DoTimesEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 052A05FE12CFCFE6005F1948 /* DoTimesEditViewController.xib */; };
+		052A060B12CFD712005F1948 /* terminal-launcher-done.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A060A12CFD712005F1948 /* terminal-launcher-done.png */; };
 		052A2F0512CEC529002EE6D1 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A2F0412CEC529002EE6D1 /* Default.png */; };
 		052A2F1D12CEEA1D002EE6D1 /* menu-miss.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A2F1A12CEEA1D002EE6D1 /* menu-miss.png */; };
 		052A2F1E12CEEA1D002EE6D1 /* menu-rset.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A2F1B12CEEA1D002EE6D1 /* menu-rset.png */; };
 		052A2F1F12CEEA1D002EE6D1 /* menu-stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A2F1C12CEEA1D002EE6D1 /* menu-stop.png */; };
-		052A2F3612CEF60E002EE6D1 /* keyboard-done-down.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A2F3412CEF60E002EE6D1 /* keyboard-done-down.png */; };
-		052A2F3712CEF60E002EE6D1 /* keyboard-done-up.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A2F3512CEF60E002EE6D1 /* keyboard-done-up.png */; };
 		0532CF2012C6979E00DB92D8 /* TouchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0532CF1F12C6979E00DB92D8 /* TouchUtils.m */; };
 		0532CF7012C6BA5A00DB92D8 /* mission-locked.png in Resources */ = {isa = PBXBuildFile; fileRef = 0532CF6E12C6BA5A00DB92D8 /* mission-locked.png */; };
 		0532CF7112C6BA5A00DB92D8 /* mission-complete.png in Resources */ = {isa = PBXBuildFile; fileRef = 0532CF6F12C6BA5A00DB92D8 /* mission-complete.png */; };
@@ -412,12 +413,14 @@
 		0528CDB412909FE600F4078A /* Seeker1AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Seeker1AppDelegate.m; sourceTree = "<group>"; };
 		0528CDB71290A00200F4078A /* MapScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapScene.h; sourceTree = "<group>"; };
 		0528CDB81290A00200F4078A /* MapScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapScene.m; sourceTree = "<group>"; };
+		052A05EC12CFCCBA005F1948 /* DoTimesEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoTimesEditViewController.h; sourceTree = "<group>"; };
+		052A05ED12CFCCBA005F1948 /* DoTimesEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoTimesEditViewController.m; sourceTree = "<group>"; };
+		052A05FE12CFCFE6005F1948 /* DoTimesEditViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoTimesEditViewController.xib; sourceTree = "<group>"; };
+		052A060A12CFD712005F1948 /* terminal-launcher-done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-done.png"; sourceTree = "<group>"; };
 		052A2F0412CEC529002EE6D1 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		052A2F1A12CEEA1D002EE6D1 /* menu-miss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-miss.png"; sourceTree = "<group>"; };
 		052A2F1B12CEEA1D002EE6D1 /* menu-rset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-rset.png"; sourceTree = "<group>"; };
 		052A2F1C12CEEA1D002EE6D1 /* menu-stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-stop.png"; sourceTree = "<group>"; };
-		052A2F3412CEF60E002EE6D1 /* keyboard-done-down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard-done-down.png"; sourceTree = "<group>"; };
-		052A2F3512CEF60E002EE6D1 /* keyboard-done-up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard-done-up.png"; sourceTree = "<group>"; };
 		0532CF1E12C6979E00DB92D8 /* TouchUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchUtils.h; sourceTree = "<group>"; };
 		0532CF1F12C6979E00DB92D8 /* TouchUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchUtils.m; sourceTree = "<group>"; };
 		0532CF6E12C6BA5A00DB92D8 /* mission-locked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mission-locked.png"; sourceTree = "<group>"; };
@@ -790,11 +793,10 @@
 		050D766E12AF0F6B005EF9BE /* Terminal */ = {
 			isa = PBXGroup;
 			children = (
-				052A2F3412CEF60E002EE6D1 /* keyboard-done-down.png */,
-				052A2F3512CEF60E002EE6D1 /* keyboard-done-up.png */,
+				050D766F12AF0F6B005EF9BE /* terminal-launcher-back.png */,
+				052A060A12CFD712005F1948 /* terminal-launcher-done.png */,
 				051C77C612B0A88300E41A23 /* terminal-launcher-editing.png */,
 				051C779512B091AC00E41A23 /* terminal-launcher-edit.png */,
-				050D766F12AF0F6B005EF9BE /* terminal-launcher-back.png */,
 				050D767012AF0F6B005EF9BE /* terminal-launcher-run.png */,
 				050D767112AF0F6B005EF9BE /* terminal-launcher.png */,
 			);
@@ -851,6 +853,8 @@
 			children = (
 				0522D25012CBA29400E0530C /* DoTimesTerminalCell.h */,
 				0522D25112CBA29400E0530C /* DoTimesTerminalCell.m */,
+				052A05EC12CFCCBA005F1948 /* DoTimesEditViewController.h */,
+				052A05ED12CFCCBA005F1948 /* DoTimesEditViewController.m */,
 				050D76A512AF143B005EF9BE /* InstructionsLauncherView.h */,
 				050D76A612AF143B005EF9BE /* InstructionsLauncherView.m */,
 				050D764B12AF0E44005EF9BE /* InstructionsViewController.h */,
@@ -861,8 +865,6 @@
 				05246DA112CD01B0000EB7AF /* TerminalCellFactory.m */,
 				050F792912AC64910017BDE1 /* TerminalLauncherView.h */,
 				050F792A12AC64910017BDE1 /* TerminalLauncherView.m */,
-				0527C52312A9A8B900DD4099 /* TermMenuView.h */,
-				0527C52412A9A8B900DD4099 /* TermMenuView.m */,
 				0547A46012AC33C700D2F0D1 /* TerminalViewController.h */,
 				0547A46112AC33C700D2F0D1 /* TerminalViewController.m */,
 			);
@@ -904,6 +906,8 @@
 				0556B81C129C603B00B5F8FB /* SeekerSprite.m */,
 				053FBFC8129D8C44000BCBCF /* StatusDisplay.h */,
 				053FBFC9129D8C45000BCBCF /* StatusDisplay.m */,
+				0527C52312A9A8B900DD4099 /* TermMenuView.h */,
+				0527C52412A9A8B900DD4099 /* TermMenuView.m */,
 				0527C57012A9C21100DD4099 /* TouchImageView.h */,
 				0527C57112A9C21100DD4099 /* TouchImageView.m */,
 				0547A4A812AC441200D2F0D1 /* ViewControllerManager.h */,
@@ -924,6 +928,7 @@
 		0547A46512AC349400D2F0D1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				052A05FE12CFCFE6005F1948 /* DoTimesEditViewController.xib */,
 				0522D27312CBF17300E0530C /* DoTimesTerminalCell.xib */,
 				050D765012AF0F5D005EF9BE /* InstructionsViewController.xib */,
 				0547A46612AC349400D2F0D1 /* TerminalViewController.xib */,
@@ -1534,8 +1539,8 @@
 				052A2F1D12CEEA1D002EE6D1 /* menu-miss.png in Resources */,
 				052A2F1E12CEEA1D002EE6D1 /* menu-rset.png in Resources */,
 				052A2F1F12CEEA1D002EE6D1 /* menu-stop.png in Resources */,
-				052A2F3612CEF60E002EE6D1 /* keyboard-done-down.png in Resources */,
-				052A2F3712CEF60E002EE6D1 /* keyboard-done-up.png in Resources */,
+				052A05FF12CFCFE6005F1948 /* DoTimesEditViewController.xib in Resources */,
+				052A060B12CFD712005F1948 /* terminal-launcher-done.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1576,6 +1581,7 @@
 				0532CF2012C6979E00DB92D8 /* TouchUtils.m in Sources */,
 				0522D25212CBA29400E0530C /* DoTimesTerminalCell.m in Sources */,
 				05246DA212CD01B0000EB7AF /* TerminalCellFactory.m in Sources */,
+				052A05EE12CFCCBA005F1948 /* DoTimesEditViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

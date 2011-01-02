@@ -12,30 +12,41 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class TerminalViewController;
 @class InstructionsViewController;
+@class DoTimesEditViewController;
+@class DoTimesTerminalCell;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ViewControllerManager : NSObject {
     TerminalViewController* terminalViewController;
-    InstructionsViewController* functionsViewController;
+    InstructionsViewController* instructionsViewController;
+    DoTimesEditViewController* doTimesEditViewController;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) TerminalViewController* terminalViewController;
-@property (nonatomic, retain) InstructionsViewController* functionsViewController;
+@property (nonatomic, retain) InstructionsViewController* instructionsViewController;
+@property (nonatomic, retain) DoTimesEditViewController* doTimesEditViewController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ViewControllerManager*)instance;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (TerminalViewController*)showTerminalView:(UIView*)containerView;
+- (TerminalViewController*)showTerminalView:(UIView*)_containerView;
 - (void)removeTerminalView;
 - (void)terminalViewWillAppear;
 - (void)terminalViewWillDisappear;
+- (void)terminalViewSaveProgram;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (InstructionsViewController*)showInstructionsView:(TerminalViewController*)containerView;
+- (InstructionsViewController*)showInstructionsView:(TerminalViewController*)_terminalViewController;
 - (void)removeInstructionsView;
 - (void)instructionsViewWillAppear;
 - (void)instructionsViewWillDisappear;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (DoTimesEditViewController*)showDoTimesEditView:(UIView*)containerView forTerminalCell:(DoTimesTerminalCell*)_terminalCell;
+- (void)removeDoTimesEditView;
+- (void)doTimesEditViewWillAppear;
+- (void)doTimesEditViewWillDisappear;
 
 @end

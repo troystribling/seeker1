@@ -10,6 +10,8 @@
 #import "ViewControllerManager.h"
 #import "TerminalViewController.h"
 #import "InstructionsViewController.h"
+#import "DoTimesEditViewController.h"
+#import "ProgramNgin.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 static ViewControllerManager* thisViewControllerManager = nil;
@@ -24,7 +26,8 @@ static ViewControllerManager* thisViewControllerManager = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize terminalViewController;
-@synthesize functionsViewController;
+@synthesize instructionsViewController;
+@synthesize doTimesEditViewController;
 
 //===================================================================================================================================
 #pragma mark ViewControllerManager PrivateApi
@@ -45,11 +48,11 @@ static ViewControllerManager* thisViewControllerManager = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 // TerminalViewController
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (TerminalViewController*)showTerminalView:(UIView*)containerView {
+- (TerminalViewController*)showTerminalView:(UIView*)_containerView {
     if (self.terminalViewController == nil) {
-        self.terminalViewController = [TerminalViewController inView:containerView];
+        self.terminalViewController = [TerminalViewController inView:_containerView];
     } 
-    [containerView addSubview:self.terminalViewController.view];
+    [_containerView addSubview:self.terminalViewController.view];
     [self.terminalViewController viewWillAppear:NO];
     return self.terminalViewController;
 }
@@ -73,33 +76,68 @@ static ViewControllerManager* thisViewControllerManager = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)terminalViewSaveProgram {
+    [[ProgramNgin instance] saveProgram:self.terminalViewController.programListing];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 // InstructionsViewController
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (InstructionsViewController*)showInstructionsView:(TerminalViewController*)_terminalViewController {
-    if (self.functionsViewController == nil) {
-        self.functionsViewController = [InstructionsViewController inTerminalViewController:_terminalViewController];
+    if (self.instructionsViewController == nil) {
+        self.instructionsViewController = [InstructionsViewController inTerminalViewController:_terminalViewController];
     } 
-    [_terminalViewController.containerView addSubview:self.functionsViewController.view];
-    [self.functionsViewController viewWillAppear:NO];
-    return self.functionsViewController;
+    [_terminalViewController.containerView addSubview:self.instructionsViewController.view];
+    [self.instructionsViewController viewWillAppear:NO];
+    return self.instructionsViewController;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)removeInstructionsView {
-    if (self.functionsViewController) {
-        [self.functionsViewController viewWillDisappear:NO];
-        [self.functionsViewController.view removeFromSuperview];
+    if (self.instructionsViewController) {
+        [self.instructionsViewController viewWillDisappear:NO];
+        [self.instructionsViewController.view removeFromSuperview];
     }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)instructionsViewWillAppear {
-    [self.functionsViewController viewWillAppear:NO];
+    [self.instructionsViewController viewWillAppear:NO];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)instructionsViewWillDisappear {
-    [self.functionsViewController viewWillDisappear:NO];
+    [self.instructionsViewController viewWillDisappear:NO];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// DoTimesEditViewController
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (DoTimesEditViewController*)showDoTimesEditView:(UIView*)_containerView forTerminalCell:(DoTimesTerminalCell*)_terminalCell {
+    if (self.doTimesEditViewController == nil) {
+        self.doTimesEditViewController = [DoTimesEditViewController inView:_containerView forTerminalCell:_terminalCell];
+    } 
+    [_containerView addSubview:self.doTimesEditViewController.view];
+    [self.doTimesEditViewController viewWillAppear:NO];
+    return self.doTimesEditViewController;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeDoTimesEditView {
+    if (self.doTimesEditViewController) {
+        [self.doTimesEditViewController viewWillDisappear:NO];
+        [self.doTimesEditViewController.view removeFromSuperview];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)doTimesEditViewWillAppear {
+    [self.doTimesEditViewController viewWillAppear:NO];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)doTimesEditViewWillDisappear {
+    [self.doTimesEditViewController viewWillDisappear:NO];
 }
 
 @end
