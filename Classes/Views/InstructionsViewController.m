@@ -14,6 +14,9 @@
 #import "TerminalCell.h"
 #import "ProgramNgin.h"
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+#define kINSTRUCTIONS_LAUNCHER_BACK_TAG     1
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface InstructionsViewController (PrivateAPI)
 
@@ -57,7 +60,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
-    [InstructionsLauncherView inView:self.view andDelegate:self];
     self.instructionsView.separatorColor = [UIColor blackColor];
     [super viewDidLoad];
 }
@@ -84,13 +86,19 @@
 }
 
 //===================================================================================================================================
-#pragma mark LauncherViewDelegate 
+#pragma mark UIResponder
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)viewTouchedNamed:(NSString*)name {
-    if ([name isEqualToString:@"back"]) {
-        [self.view removeFromSuperview];
-    } else if ([name isEqualToString:@"run"]) {
+- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
+    UITouch* touch = [touches anyObject];
+    NSInteger touchTag = touch.view.tag;
+    switch (touchTag) {
+        case kINSTRUCTIONS_LAUNCHER_BACK_TAG:
+            [self.view removeFromSuperview];
+            break;
+        default:
+            [super touchesBegan:touches withEvent:event];
+            break;
     }
 }
 

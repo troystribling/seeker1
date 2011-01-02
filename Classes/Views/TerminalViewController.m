@@ -1,6 +1,6 @@
 //
 //  TerminalViewController.m
-//  seeker1
+//  seeker
 //
 //  Created by Troy Stribling on 12/5/10.
 //  Copyright 2010 imaginary products. All rights reserved.
@@ -18,6 +18,11 @@
 #import "TouchImageView.h"
 #import "CellUtils.h"
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+#define kTERMINAL_LAUNCHER_BACK_TAG     1
+#define kTERMINAL_LAUNCHER_RUN_TAG      2
+#define kTERMINAL_LAUNCHER_EDIT_TAG     3
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TerminalViewController (PrivateAPI)
 
@@ -33,7 +38,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize programView;
-@synthesize terminalLauncherView;
+@synthesize editImageView;
+@synthesize runImageView;
 @synthesize mapScene;
 @synthesize containerView;
 @synthesize programListing;
@@ -73,8 +79,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
-    self.terminalLauncherView = [TerminalLauncherView inView:self.view andDelegate:self];
     self.programListing = [NSMutableArray arrayWithArray:[ProgramNgin instance].program];
+    if ([[ProgramNgin instance] programIsHalted] || [[ProgramNgin instance] programIsRunning]) {
+       self.runImageView.hidden = YES;
+    } else {
+        self.runImageView.hidden = NO;
+    }
     [self.programView reloadData];
 	[super viewWillAppear:animated];
 }
@@ -95,28 +105,37 @@
 }
 
 //===================================================================================================================================
-#pragma mark LauncherViewDelegate 
+#pragma mark UIResponder
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)viewTouchedNamed:(NSString*)name {
-    if ([name isEqualToString:@"back"]) {
-        [self.view removeFromSuperview];
-        [[ProgramNgin instance] saveProgram:self.programListing];
-    } else if ([name isEqualToString:@"edit"]) {
-        if (self.editingEnabled) {
-            self.editingEnabled = NO;
-            self.terminalLauncherView.editItem.image = [UIImage imageNamed:@"terminal-launcher-edit.png"];
-            [self.programView setEditing:NO animated:YES];
-        } else {
-            self.editingEnabled = YES;
-            self.terminalLauncherView.editItem.image = [UIImage imageNamed:@"terminal-launcher-editing.png"];
-            [self.programView setEditing:YES animated:YES];
-        }
-    } else if ([name isEqualToString:@"run"]) {
-        [[ProgramNgin instance] loadProgram:self.programListing];
-        [self.mapScene addResetTerminalItems];
-        [self.mapScene.menu addResetItems];
-        [self.view removeFromSuperview];
+- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
+    UITouch* touch = [touches anyObject];
+    NSInteger touchTag = touch.view.tag;
+    switch (touchTag) {
+        case kTERMINAL_LAUNCHER_BACK_TAG:
+            [self.view removeFromSuperview];
+            [[ProgramNgin instance] saveProgram:self.programListing];
+            break;
+        case kTERMINAL_LAUNCHER_RUN_TAG:
+            [[ProgramNgin instance] loadProgram:self.programListing];
+            [self.mapScene addResetTerminalItems];
+            [self.mapScene.menu addResetItems];
+            [self.view removeFromSuperview];
+            break;
+        case kTERMINAL_LAUNCHER_EDIT_TAG:
+            if (self.editingEnabled) {
+                self.editingEnabled = NO;
+                self.editImageView.image = [UIImage imageNamed:@"terminal-launcher-edit.png"];
+                [self.programView setEditing:NO animated:YES];
+            } else {
+                self.editingEnabled = YES;
+                self.editImageView.image = [UIImage imageNamed:@"terminal-launcher-editing.png"];
+                [self.programView setEditing:YES animated:YES];
+            }
+            break;
+        default:
+            [super touchesBegan:touches withEvent:event];
+            break;
     }
 }
 
@@ -196,16 +215,6 @@
         NSMutableArray* instructionSet = [self.programListing objectAtIndex:indexPath.row];
         return [TerminalCellFactory tableView:tableView heightForRowWithInstructionSet:instructionSet];
     }
-}
-
-//===================================================================================================================================
-#pragma mark UITextFieldDelegate
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    BOOL shouldReturn = YES;
-    [textField resignFirstResponder];
-    return shouldReturn;
 }
 
 //===================================================================================================================================

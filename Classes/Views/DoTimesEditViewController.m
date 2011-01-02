@@ -10,6 +10,7 @@
 #import "DoTimesEditViewController.h"
 #import "DoTimesTerminalCell.h"
 #import "ViewControllerManager.h"
+#import "ProgramNgin.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kDOTIMES_LAUNCHER_BACK_TAG          1
@@ -35,9 +36,8 @@
 #pragma mark DoTimesEditViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (id)inView:(UIView*)_containerView forTerminalCell:(DoTimesTerminalCell*)_terminalCell {
++ (id)inView:(UIView*)_containerView {
     DoTimesEditViewController* viewController = [[DoTimesEditViewController alloc] initWithNibName:@"DoTimesEditViewController" bundle:nil inView:_containerView];
-    viewController.terminalCell = _terminalCell;
     return viewController;
 }
 

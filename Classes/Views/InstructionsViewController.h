@@ -8,13 +8,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <UIKit/UIKit.h>
-#import "InstructionsLauncherView.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class TerminalViewController;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface InstructionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, LauncherViewDelegate> {
+@interface InstructionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     IBOutlet UITableView* instructionsView;
     UIView* containerView;
 	NSMutableArray* instructionsList;

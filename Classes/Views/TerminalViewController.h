@@ -8,16 +8,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <UIKit/UIKit.h>
-#import "TerminalLauncherView.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class TouchImageView;
 @class MapScene;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface TerminalViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, LauncherViewDelegate, UITextFieldDelegate> {
+@interface TerminalViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     IBOutlet UITableView* programView;
-    TerminalLauncherView* terminalLauncherView;
+    IBOutlet UIImageView* editImageView;
+    IBOutlet UIImageView* runImageView;
     MapScene* mapScene;
     UIView* containerView;
 	NSMutableArray* programListing;
@@ -28,7 +28,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UITableView* programView;
-@property (nonatomic, retain) TerminalLauncherView* terminalLauncherView;
+@property (nonatomic, retain) UIImageView* editImageView;
+@property (nonatomic, retain) UIImageView* runImageView;
 @property (nonatomic, retain) MapScene* mapScene;
 @property (nonatomic, retain) UIView* containerView;
 @property (nonatomic, retain) NSMutableArray* programListing;

@@ -115,8 +115,9 @@ static ViewControllerManager* thisViewControllerManager = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (DoTimesEditViewController*)showDoTimesEditView:(UIView*)_containerView forTerminalCell:(DoTimesTerminalCell*)_terminalCell {
     if (self.doTimesEditViewController == nil) {
-        self.doTimesEditViewController = [DoTimesEditViewController inView:_containerView forTerminalCell:_terminalCell];
+        self.doTimesEditViewController = [DoTimesEditViewController inView:_containerView];
     } 
+    self.doTimesEditViewController.terminalCell = _terminalCell;
     [_containerView addSubview:self.doTimesEditViewController.view];
     [self.doTimesEditViewController viewWillAppear:NO];
     return self.doTimesEditViewController;

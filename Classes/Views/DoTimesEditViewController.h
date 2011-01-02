@@ -25,7 +25,7 @@
 @property (nonatomic, retain) UITextField* numberTextField;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (id)inView:(UIView*)_containerView forTerminalCell:(DoTimesTerminalCell*)_terminalCell;
++ (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
 
 @end
