@@ -10,6 +10,17 @@
 #import "SeekerSprite.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+// scoring 
+//-----------------------------------------------------------------------------------------------------------------------------------
+#define kPOINTS_PER_OBJECT          500
+#define kPOINTS_PER_ENERGY_UNIT     100
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// seeker capacities
+//-----------------------------------------------------------------------------------------------------------------------------------
+#define kSEEKER_SENSOR_BIN_SIZE     2
+#define kSEEKER_SAMPLE_BIN_SIZE     2
+#define kSEEKER_BASE_SPEED          10.0
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface SeekerSprite (PrivateAPI)
@@ -209,7 +220,7 @@
 - (NSInteger)score {
     NSInteger totalScore = kPOINTS_PER_OBJECT * (self.samplesReturned + self.samplesCollected + self.sensorsPlaced);
     if (self.energy > 0) {
-        totalScore += self.energy;
+        totalScore += kPOINTS_PER_ENERGY_UNIT * self.energy;
     }
     if ([self isLevelCompleted]) {
         totalScore = 2 * totalScore;

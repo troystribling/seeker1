@@ -420,12 +420,12 @@
             }
         } else {
             [ngin haltProgram];
-            [LevelModel setScore:[self.seeker1 score] forLevel:self.level];
+            [LevelModel incompleteLevel:self.level withScore:[self.seeker1 score]];
             [self crashNoEnergy];
         }
     } else {
         [ngin haltProgram];
-        [LevelModel setScore:[self.seeker1 score] forLevel:self.level];
+        [LevelModel incompleteLevel:self.level withScore:[self.seeker1 score]];
         [self crashHitMapBoundary];
     }
 }
@@ -450,17 +450,17 @@
                 [self updateSensorCount];
             } else {
                 [ngin haltProgram];
-                [LevelModel setScore:[self.seeker1 score] forLevel:self.level];
+                [LevelModel incompleteLevel:self.level withScore:[self.seeker1 score]];
                 [self crashSensorBinEmpty];
             }
         } else {
             [ngin haltProgram];
-            [LevelModel setScore:[self.seeker1 score] forLevel:self.level];
+            [LevelModel incompleteLevel:self.level withScore:[self.seeker1 score]];
             [self crashNoSensorSiteAtPosition];
         }
     } else {
         [ngin haltProgram];
-        [LevelModel setScore:[self.seeker1 score] forLevel:self.level];
+        [LevelModel incompleteLevel:self.level withScore:[self.seeker1 score]];
         [self crashNoSensorSiteAtPosition];
     }
 }
@@ -478,17 +478,17 @@
                 [self updateSampleCount];
             } else {
                 [ngin haltProgram];
-                [LevelModel setScore:[self.seeker1 score] forLevel:self.level];
+                [LevelModel incompleteLevel:self.level withScore:[self.seeker1 score]];
                 [self crashSampleBinFull];
             }
         } else {        
             [ngin haltProgram];
-            [LevelModel setScore:[self.seeker1 score] forLevel:self.level];
+            [LevelModel incompleteLevel:self.level withScore:[self.seeker1 score]];
             [self crashNoSampleAtPosition];
         }
     } else {        
         [ngin haltProgram];
-        [LevelModel setScore:[self.seeker1 score] forLevel:self.level];
+        [LevelModel incompleteLevel:self.level withScore:[self.seeker1 score]];
         [self crashNoSampleAtPosition];
     }
 }

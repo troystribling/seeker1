@@ -98,10 +98,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)setScore:(NSInteger)_score forLevel:(NSInteger)_level {
++ (void)incompleteLevel:(NSInteger)_level withScore:(NSInteger)_score {
     LevelModel* model = [self findByLevel:_level];
     if (model) {
         model.score = _score;
+        model.completed = NO;
         [model update];
     }
 }

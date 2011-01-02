@@ -38,7 +38,7 @@
 + (NSMutableArray*)findAll;
 + (void)insertForLevel:(NSInteger)_level;
 + (void)completeLevel:(NSInteger)_level withScore:(NSInteger)_score;
-+ (void)setScore:(NSInteger)_score forLevel:(NSInteger)_level;
++ (void)incompleteLevel:(NSInteger)_level withScore:(NSInteger)_score;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;
