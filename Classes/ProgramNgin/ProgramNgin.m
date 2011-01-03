@@ -91,7 +91,7 @@ static ProgramNgin* thisProgramNgin = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSMutableArray*)getPrimativeInstructions {
+- (NSMutableArray*)getPrimitiveInstructions {
     NSMutableArray* primatives = [NSMutableArray arrayWithCapacity:10];
     [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:MoveProgramInstruction], nil]];
     [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:TurnLeftProgramInstruction], nil]];
@@ -111,7 +111,7 @@ static ProgramNgin* thisProgramNgin = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSMutableArray*)getDoTimesInstructions {
+- (NSMutableArray*)getDoInstructions {
     NSMutableArray* primatives = [NSMutableArray arrayWithCapacity:10];
     [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:MoveProgramInstruction], nil]];
     [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:TurnLeftProgramInstruction], nil]];

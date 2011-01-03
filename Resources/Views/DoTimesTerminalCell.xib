@@ -50,7 +50,7 @@
 							<object class="IBUILabel" id="1018901811">
 								<reference key="NSNextResponder" ref="880399814"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{62, 15}, {16, 29}}</string>
+								<string key="NSFrame">{{61, 15}, {16, 29}}</string>
 								<reference key="NSSuperview" ref="880399814"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -77,14 +77,14 @@
 							<object class="IBUILabel" id="232813037">
 								<reference key="NSNextResponder" ref="880399814"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{20, 62}, {57, 29}}</string>
+								<string key="NSFrame">{{61, 62}, {13, 29}}</string>
 								<reference key="NSSuperview" ref="880399814"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">   [</string>
+								<string key="IBUIText">[</string>
 								<reference key="IBUIFont" ref="156629361"/>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">1</int>
@@ -92,12 +92,13 @@
 								</object>
 								<reference key="IBUIHighlightedColor" ref="484102123"/>
 								<int key="IBUIBaselineAdjustment">1</int>
+								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 								<float key="IBUIMinimumFontSize">10</float>
 							</object>
 							<object class="IBUILabel" id="628532573">
 								<reference key="NSNextResponder" ref="880399814"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{134, 15}, {16, 29}}</string>
+								<string key="NSFrame">{{133, 15}, {16, 29}}</string>
 								<reference key="NSSuperview" ref="880399814"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -117,7 +118,7 @@
 							<object class="IBUILabel" id="224283388">
 								<reference key="NSNextResponder" ref="880399814"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{111, 62}, {16, 29}}</string>
+								<string key="NSFrame">{{110, 62}, {16, 29}}</string>
 								<reference key="NSSuperview" ref="880399814"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -157,7 +158,7 @@
 							<object class="IBUILabel" id="796491075">
 								<reference key="NSNextResponder" ref="880399814"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{137, 64}, {73, 29}}</string>
+								<string key="NSFrame">{{136, 64}, {73, 29}}</string>
 								<reference key="NSSuperview" ref="880399814"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -177,7 +178,7 @@
 							<object class="IBUILabel" id="383750505">
 								<reference key="NSNextResponder" ref="880399814"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{77, 17}, {60, 29}}</string>
+								<string key="NSFrame">{{76, 17}, {60, 29}}</string>
 								<reference key="NSSuperview" ref="880399814"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -193,12 +194,13 @@
 								</object>
 								<reference key="IBUIHighlightedColor" ref="484102123"/>
 								<int key="IBUIBaselineAdjustment">1</int>
+								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 								<float key="IBUIMinimumFontSize">10</float>
 							</object>
 							<object class="IBUILabel" id="603263582">
 								<reference key="NSNextResponder" ref="880399814"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{73, 65}, {40, 29}}</string>
+								<string key="NSFrame">{{72, 65}, {40, 29}}</string>
 								<reference key="NSSuperview" ref="880399814"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -303,6 +305,22 @@
 					</object>
 					<int key="connectionID">30</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">instructionOpenBracketLabel</string>
+						<reference key="source" ref="882791124"/>
+						<reference key="destination" ref="1018901811"/>
+					</object>
+					<int key="connectionID">31</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">timesOpenBracketLabel</string>
+						<reference key="source" ref="882791124"/>
+						<reference key="destination" ref="232813037"/>
+					</object>
+					<int key="connectionID">32</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -331,12 +349,12 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="1018901811"/>
 							<reference ref="383750505"/>
-							<reference ref="232813037"/>
 							<reference ref="224283388"/>
 							<reference ref="796491075"/>
 							<reference ref="628532573"/>
 							<reference ref="164852745"/>
 							<reference ref="603263582"/>
+							<reference ref="232813037"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -413,14 +431,14 @@
 					<string>UIResponder</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">AUGgAABCDAAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABCTAAAwrIAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">AUKqAABCDAAAA</bytes>
 					</object>
 					<string>DoTimesTerminalCell</string>
-					<string>{{674, 716}, {335, 115}}</string>
+					<string>{{44, 561}, {335, 115}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAwuIAAA</bytes>
@@ -467,7 +485,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">30</int>
+			<int key="maxID">32</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -481,13 +499,17 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>instructionClosingBracketLabel</string>
 							<string>instructionLabel</string>
+							<string>instructionOpenBracketLabel</string>
 							<string>numberLabel</string>
 							<string>promtLabel</string>
 							<string>timesClosingBracketLabel</string>
 							<string>timesLabel</string>
+							<string>timesOpenBracketLabel</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UILabel</string>
+							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
@@ -502,10 +524,12 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>instructionClosingBracketLabel</string>
 							<string>instructionLabel</string>
+							<string>instructionOpenBracketLabel</string>
 							<string>numberLabel</string>
 							<string>promtLabel</string>
 							<string>timesClosingBracketLabel</string>
 							<string>timesLabel</string>
+							<string>timesOpenBracketLabel</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -515,6 +539,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">instructionLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">instructionOpenBracketLabel</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
@@ -531,6 +559,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">timesLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">timesOpenBracketLabel</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 						</object>

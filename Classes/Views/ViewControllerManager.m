@@ -8,9 +8,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "ViewControllerManager.h"
-#import "TerminalViewController.h"
-#import "InstructionsViewController.h"
-#import "DoTimesEditViewController.h"
 #import "ProgramNgin.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -53,7 +50,6 @@ static ViewControllerManager* thisViewControllerManager = nil;
         self.terminalViewController = [TerminalViewController inView:_containerView];
     } 
     [_containerView addSubview:self.terminalViewController.view];
-    [self.terminalViewController viewWillAppear:NO];
     return self.terminalViewController;
 }
 
@@ -75,20 +71,16 @@ static ViewControllerManager* thisViewControllerManager = nil;
     [self.terminalViewController viewWillDisappear:NO];
 }
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)terminalViewSaveProgram {
-    [[ProgramNgin instance] saveProgram:self.terminalViewController.programListing];
-}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 // InstructionsViewController
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (InstructionsViewController*)showInstructionsView:(TerminalViewController*)_terminalViewController {
+- (InstructionsViewController*)showInstructionsView:(UIView*)_containerView withInstructionType:(InstructionType)_instructionType {
     if (self.instructionsViewController == nil) {
-        self.instructionsViewController = [InstructionsViewController inTerminalViewController:_terminalViewController];
+        self.instructionsViewController = [InstructionsViewController inView:_containerView];
     } 
-    [_terminalViewController.containerView addSubview:self.instructionsViewController.view];
-    [self.instructionsViewController viewWillAppear:NO];
+    self.instructionsViewController.instructionType = _instructionType;
+    [_containerView addSubview:self.instructionsViewController.view];
     return self.instructionsViewController;
 }
 
@@ -119,7 +111,6 @@ static ViewControllerManager* thisViewControllerManager = nil;
     } 
     self.doTimesEditViewController.terminalCell = _terminalCell;
     [_containerView addSubview:self.doTimesEditViewController.view];
-    [self.doTimesEditViewController viewWillAppear:NO];
     return self.doTimesEditViewController;
 }
 

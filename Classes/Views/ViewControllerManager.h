@@ -8,6 +8,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <UIKit/UIKit.h>
+#import "InstructionsViewController.h"
+#import "TerminalViewController.h"
+#import "DoTimesEditViewController.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class TerminalViewController;
@@ -35,10 +38,9 @@
 - (void)removeTerminalView;
 - (void)terminalViewWillAppear;
 - (void)terminalViewWillDisappear;
-- (void)terminalViewSaveProgram;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (InstructionsViewController*)showInstructionsView:(TerminalViewController*)_terminalViewController;
+- (InstructionsViewController*)showInstructionsView:(UIView*)_containerView withInstructionType:(InstructionType)_instructionType;
 - (void)removeInstructionsView;
 - (void)instructionsViewWillAppear;
 - (void)instructionsViewWillDisappear;

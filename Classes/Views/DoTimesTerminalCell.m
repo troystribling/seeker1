@@ -21,6 +21,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface DoTimesTerminalCell (PrivateAPI)
 
+- (CGSize)itemSize:(NSString*)_item;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,13 +32,22 @@
 @synthesize promtLabel;
 @synthesize timesLabel;
 @synthesize timesClosingBracketLabel;
+@synthesize timesOpenBracketLabel;
 @synthesize instructionClosingBracketLabel;
+@synthesize instructionOpenBracketLabel;
 @synthesize instructionLabel;
 @synthesize numberLabel;
 @synthesize instructionSet;
 
 //===================================================================================================================================
 #pragma mark DoTimesTerminalCell PrivateAPI
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGSize)itemSize:(NSString*)_item {
+    CGSize winSize = [[CCDirector sharedDirector] winSize];
+    CGSize textSize = {0.8 * winSize.width, 20000.0f};
+    return [_item sizeWithFont:[UIFont fontWithName:@"Courier" size:24.0] constrainedToSize:textSize lineBreakMode:UILineBreakModeWordWrap];
+}
 
 //===================================================================================================================================
 #pragma mark DoTimesTerminalCell
@@ -84,6 +95,7 @@
             [[ViewControllerManager instance] showDoTimesEditView:[[CCDirector sharedDirector] openGLView] forTerminalCell:self];
             break;
         case kDOTIMES_INSTRUCTION_TAG:
+            [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:DoTimesInstructionType];
             break;
         default:
             [super touchesBegan:touches withEvent:event];

@@ -97,8 +97,10 @@
             numberVal = [self.numberTextField.text intValue];
             [self.terminalCell.instructionSet replaceObjectAtIndex:2 withObject:[NSNumber numberWithInt:numberVal]];
             [self.view removeFromSuperview];
-            [[ViewControllerManager instance] terminalViewSaveProgram];
-            [[ViewControllerManager instance] terminalViewWillAppear];
+            ViewControllerManager* viewControllerManager = [ViewControllerManager instance];
+            TerminalViewController* terminalViewController = [viewControllerManager terminalViewController];
+            [[ProgramNgin instance] saveProgram:terminalViewController.programListing];
+            [viewControllerManager terminalViewWillAppear];
             break;
         default:
             [super touchesBegan:touches withEvent:event];

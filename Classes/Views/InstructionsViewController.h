@@ -10,6 +10,16 @@
 #import <UIKit/UIKit.h>
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+typedef enum tagInstructionType {
+    PrimitiveInstructionType,
+    DoTimesInstructionType,
+    DoWhileInstructionType,
+    DoWhilePredicateInstructionType,
+    DoUntilInstructionType,
+    DoUntilPredicateInstructionType,
+} InstructionType;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 @class TerminalViewController;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -17,17 +27,17 @@
     IBOutlet UITableView* instructionsView;
     UIView* containerView;
 	NSMutableArray* instructionsList;
-    TerminalViewController* terminalViewController;
+    InstructionType instructionType;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UITableView* instructionsView;
 @property (nonatomic, retain) UIView* containerView;
 @property (nonatomic, retain) NSMutableArray* instructionsList;
-@property (nonatomic, retain) TerminalViewController* terminalViewController;
+@property (nonatomic, assign) InstructionType instructionType;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (id)inTerminalViewController:(TerminalViewController*)_terminalViewController;
++ (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
 
 @end

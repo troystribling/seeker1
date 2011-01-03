@@ -8,7 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "InstructionsViewController.h"
-#import "TerminalViewController.h"
+#import "ViewControllerManager.h"
 #import "TerminalCellFactory.h"
 #import "CellUtils.h"
 #import "TerminalCell.h"
@@ -20,6 +20,11 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface InstructionsViewController (PrivateAPI)
 
+- (void)updatePrimitiveInstruction:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController;
+- (void)updateDoInstruction:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController;
+- (void)updateDoWhilePredicateInstruction:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController;
+- (void)updateDoUntilPredicateInstruction:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -27,21 +32,50 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize instructionsView;
+@synthesize instructionType;
 @synthesize containerView;
 @synthesize instructionsList;
-@synthesize terminalViewController;
 
 //===================================================================================================================================
 #pragma mark InstructionsViewController PrivateAPI
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)updatePrimitiveInstruction:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController {
+    if (_terminalViewController.selectedLine.row < [_terminalViewController.programListing count]) {
+        [_terminalViewController.programListing replaceObjectAtIndex:_terminalViewController.selectedLine.row withObject:_instructionSet];
+    } else {
+        [_terminalViewController.programListing addObject:_instructionSet];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)updateDoInstruction:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController {
+    NSMutableArray* terminalInstruction = [_terminalViewController.programListing objectAtIndex:_terminalViewController.selectedLine.row];
+    NSNumber* newInstruction = [_instructionSet objectAtIndex:0];
+    [terminalInstruction replaceObjectAtIndex:1 withObject:newInstruction];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)updateDoWhilePredicateInstruction:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController {
+    NSMutableArray* terminalInstruction = [_terminalViewController.programListing objectAtIndex:_terminalViewController.selectedLine.row];
+    NSNumber* newInstruction = [_instructionSet objectAtIndex:0];
+    [terminalInstruction replaceObjectAtIndex:2 withObject:newInstruction];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)updateDoUntilPredicateInstruction:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController {
+    NSMutableArray* terminalInstruction = [_terminalViewController.programListing objectAtIndex:_terminalViewController.selectedLine.row];
+    NSNumber* newInstruction = [_instructionSet objectAtIndex:0];
+    [terminalInstruction replaceObjectAtIndex:2 withObject:newInstruction];
+}
 
 //===================================================================================================================================
 #pragma mark InstructionsViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (id)inTerminalViewController:(TerminalViewController*)_terminalViewController {
++ (id)inView:(UIView*)_containerView {
     InstructionsViewController* viewController = 
-        [[InstructionsViewController alloc] initWithNibName:@"InstructionsViewController" bundle:nil inView:_terminalViewController.containerView];
-    viewController.terminalViewController = _terminalViewController;
+        [[InstructionsViewController alloc] initWithNibName:@"InstructionsViewController" bundle:nil inView:_containerView];
     return viewController;
 }
 
@@ -66,7 +100,29 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
-    self.instructionsList = [[ProgramNgin instance] getPrimativeInstructions];
+    switch (self.instructionType) {
+        case PrimitiveInstructionType:
+            self.instructionsList = [[ProgramNgin instance] getPrimitiveInstructions];
+            break;
+        case DoTimesInstructionType:
+            self.instructionsList = [[ProgramNgin instance] getDoInstructions];
+            break;
+        case DoWhileInstructionType:
+            self.instructionsList = [[ProgramNgin instance] getDoInstructions];
+            break;
+        case DoWhilePredicateInstructionType:
+            self.instructionsList = [[ProgramNgin instance] getDoWhilePredicates];
+            break;
+        case DoUntilInstructionType:
+            self.instructionsList = [[ProgramNgin instance] getDoInstructions];
+            break;
+        case DoUntilPredicateInstructionType:
+            self.instructionsList = [[ProgramNgin instance] getDoUntilPredicates];
+            break;
+        default:
+            break;
+    }
+    [self.instructionsView reloadData];
 	[super viewWillAppear:animated];
 }
 
@@ -150,15 +206,30 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString* instructions = [self.instructionsList objectAtIndex:indexPath.row];
-    if (self.terminalViewController.selectedLine.row < [self.terminalViewController.programListing count]) {
-        [self.terminalViewController.programListing replaceObjectAtIndex:self.terminalViewController.selectedLine.row withObject:instructions];
-    } else {
-        [self.terminalViewController.programListing addObject:instructions];
+    NSMutableArray* instructionSet = [self.instructionsList objectAtIndex:indexPath.row];
+    ViewControllerManager* viewControllerManager = [ViewControllerManager instance];
+    TerminalViewController* terminalViewController = [viewControllerManager terminalViewController];
+    switch (self.instructionType) {
+        case PrimitiveInstructionType:
+            [self updatePrimitiveInstruction:instructionSet forTerminal:terminalViewController];
+            break;
+        case DoTimesInstructionType:
+            [self updateDoInstruction:instructionSet forTerminal:terminalViewController];
+            break;
+        case DoWhileInstructionType:
+            [self updateDoInstruction:instructionSet forTerminal:terminalViewController];
+            break;
+        case DoWhilePredicateInstructionType:
+            break;
+        case DoUntilInstructionType:
+            [self updateDoInstruction:instructionSet forTerminal:terminalViewController];
+            break;
+        case DoUntilPredicateInstructionType:
+            break;
     }
-    [self.terminalViewController.programView reloadData];
-    NSIndexPath* bottomLine = [NSIndexPath indexPathForRow:(self.terminalViewController.selectedLine.row + 1) inSection:0];
-    [self.terminalViewController.programView scrollToRowAtIndexPath:bottomLine atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    [terminalViewController.programView reloadData];
+    NSIndexPath* bottomLine = [NSIndexPath indexPathForRow:(terminalViewController.selectedLine.row + 1) inSection:0];
+    [terminalViewController.programView scrollToRowAtIndexPath:bottomLine atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     [self.view removeFromSuperview];
 }
 
