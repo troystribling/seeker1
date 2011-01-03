@@ -17,9 +17,7 @@
     IBOutlet UILabel* promtLabel;
     IBOutlet UILabel* timesLabel;
     IBOutlet UILabel* timesClosingBracketLabel;
-    IBOutlet UILabel* timesOpenBracketLabel;
     IBOutlet UILabel* instructionClosingBracketLabel;
-    IBOutlet UILabel* instructionOpenBracketLabel;
     IBOutlet UILabel* instructionLabel;
     IBOutlet UILabel* numberLabel;
     NSMutableArray* instructionSet;
@@ -29,9 +27,7 @@
 @property (nonatomic, retain) UILabel* promtLabel;
 @property (nonatomic, retain) UILabel* timesLabel;
 @property (nonatomic, retain) UILabel* timesClosingBracketLabel;
-@property (nonatomic, retain) UILabel* timesOpenBracketLabel;
 @property (nonatomic, retain) UILabel* instructionClosingBracketLabel;
-@property (nonatomic, retain) UILabel* instructionOpenBracketLabel;
 @property (nonatomic, retain) UILabel* instructionLabel;
 @property (nonatomic, retain) UILabel* numberLabel;
 @property (nonatomic, retain) NSMutableArray* instructionSet;

@@ -32,9 +32,7 @@
 @synthesize promtLabel;
 @synthesize timesLabel;
 @synthesize timesClosingBracketLabel;
-@synthesize timesOpenBracketLabel;
 @synthesize instructionClosingBracketLabel;
-@synthesize instructionOpenBracketLabel;
 @synthesize instructionLabel;
 @synthesize numberLabel;
 @synthesize instructionSet;
@@ -57,12 +55,32 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (UITableViewCell*)tableView:(UITableView*)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet {
+
     DoTimesTerminalCell* cell = (DoTimesTerminalCell*)[CellUtils createCell:[DoTimesTerminalCell class] forTableView:tableView];
     cell.instructionLabel.userInteractionEnabled = YES;
     cell.numberLabel.userInteractionEnabled = YES;
-    cell.instructionLabel.text = [[ProgramNgin instance] instructionToString:[[_instructionSet objectAtIndex:1] intValue]];
-    cell.numberLabel.text = [NSString stringWithFormat:@"%d", [[_instructionSet objectAtIndex:2] intValue]];
+
+    NSString* instructionString = [[ProgramNgin instance] instructionToString:[[_instructionSet objectAtIndex:1] intValue]];
+    CGSize instructionSize = [cell itemSize:instructionString];
+    CGRect instructionRect = cell.instructionLabel.frame;
+    CGRect instructionClosingBracketRect = cell.instructionClosingBracketLabel.frame;
+    cell.instructionLabel.frame = CGRectMake(instructionRect.origin.x, instructionRect.origin.y, instructionRect.size.width, instructionRect.size.height);
+    cell.timesClosingBracketLabel.frame = CGRectMake(instructionClosingBracketRect.origin.x, instructionClosingBracketRect.origin.y, 
+                                                     instructionClosingBracketRect.size.width, instructionClosingBracketRect.size.height);
+    cell.instructionLabel.text = instructionString;
+
+    NSString* numberString = [NSString stringWithFormat:@"%d", [[_instructionSet objectAtIndex:2] intValue]];
+    CGSize numberSize = [cell itemSize:numberString];
+    CGRect numberRect = cell.numberLabel.frame; 
+    CGRect timesClosingBracketRect = cell.timesClosingBracketLabel.frame;
+    CGRect timesRect = cell.timesLabel.frame;
+    cell.numberLabel.frame = CGRectMake(numberRect.origin.x, numberRect.origin.y, numberRect.size.width, numberRect.size.height);
+    cell.timesClosingBracketLabel.frame = CGRectMake(timesClosingBracketRect.origin.x, timesClosingBracketRect.origin.y, 
+                                                     timesClosingBracketRect.size.width, timesClosingBracketRect.size.height);
+    cell.timesLabel.frame = CGRectMake(timesRect.origin.x, timesRect.origin.y, timesRect.size.width, timesRect.size.height);
+    cell.numberLabel.text = numberString;
     cell.instructionSet = _instructionSet;
+
     return cell;
 }
 

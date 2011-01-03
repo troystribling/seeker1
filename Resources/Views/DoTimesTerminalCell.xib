@@ -98,7 +98,7 @@
 							<object class="IBUILabel" id="628532573">
 								<reference key="NSNextResponder" ref="880399814"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{133, 15}, {16, 29}}</string>
+								<string key="NSFrame">{{132, 15}, {16, 29}}</string>
 								<reference key="NSSuperview" ref="880399814"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -118,7 +118,7 @@
 							<object class="IBUILabel" id="224283388">
 								<reference key="NSNextResponder" ref="880399814"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{110, 62}, {16, 29}}</string>
+								<string key="NSFrame">{{86, 62}, {16, 29}}</string>
 								<reference key="NSSuperview" ref="880399814"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -158,7 +158,7 @@
 							<object class="IBUILabel" id="796491075">
 								<reference key="NSNextResponder" ref="880399814"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{136, 64}, {73, 29}}</string>
+								<string key="NSFrame">{{105, 64}, {73, 29}}</string>
 								<reference key="NSSuperview" ref="880399814"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -200,7 +200,7 @@
 							<object class="IBUILabel" id="603263582">
 								<reference key="NSNextResponder" ref="880399814"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{72, 65}, {40, 29}}</string>
+								<string key="NSFrame">{{72, 65}, {18, 29}}</string>
 								<reference key="NSSuperview" ref="880399814"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -304,22 +304,6 @@
 						<reference key="destination" ref="383750505"/>
 					</object>
 					<int key="connectionID">30</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">instructionOpenBracketLabel</string>
-						<reference key="source" ref="882791124"/>
-						<reference key="destination" ref="1018901811"/>
-					</object>
-					<int key="connectionID">31</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">timesOpenBracketLabel</string>
-						<reference key="source" ref="882791124"/>
-						<reference key="destination" ref="232813037"/>
-					</object>
-					<int key="connectionID">32</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -499,17 +483,13 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>instructionClosingBracketLabel</string>
 							<string>instructionLabel</string>
-							<string>instructionOpenBracketLabel</string>
 							<string>numberLabel</string>
 							<string>promtLabel</string>
 							<string>timesClosingBracketLabel</string>
 							<string>timesLabel</string>
-							<string>timesOpenBracketLabel</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UILabel</string>
-							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
@@ -524,12 +504,10 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>instructionClosingBracketLabel</string>
 							<string>instructionLabel</string>
-							<string>instructionOpenBracketLabel</string>
 							<string>numberLabel</string>
 							<string>promtLabel</string>
 							<string>timesClosingBracketLabel</string>
 							<string>timesLabel</string>
-							<string>timesOpenBracketLabel</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -539,10 +517,6 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">instructionLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">instructionOpenBracketLabel</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
@@ -559,10 +533,6 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">timesLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">timesOpenBracketLabel</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 						</object>
