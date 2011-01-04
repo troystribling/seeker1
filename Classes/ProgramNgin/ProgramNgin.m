@@ -12,9 +12,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kLEVEL_FOR_ITERATIONS       1
-#define kLEVEL_FOR_WHILE_UNTIL      1
-#define kLEVEL_FOR_IF_THEN          1
-#define kLEVEL_FOR_IF_THEN_ELSE     1
+#define kLEVEL_FOR_UNTIL            1
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 static ProgramNgin* thisProgramNgin = nil;
@@ -59,8 +57,6 @@ static ProgramNgin* thisProgramNgin = nil;
                 break;
             case DoTimesProgramInstruction:
                 break;
-            case DoWhileProgramInstruction:
-                break;
             case DoUntilProgramInstruction:
                 break;
         }
@@ -103,10 +99,9 @@ static ProgramNgin* thisProgramNgin = nil;
                                                                [NSNumber numberWithInt:MoveProgramInstruction], 
                                                                [NSNumber numberWithInt:1], nil]];
     }
-//    if (level >= kLEVEL_FOR_WHILE_UNTIL) {
-//        [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:DoWhileProgramInstruction], nil]];
-//        [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:DoUntilProgramInstruction], nil]];
-//    }
+    if (level >= kLEVEL_FOR_UNTIL) {
+        [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:DoUntilProgramInstruction], nil]];
+    }
     return primatives;
 }
 
@@ -123,12 +118,8 @@ static ProgramNgin* thisProgramNgin = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSMutableArray*)getDoUntilPredicates {
     NSMutableArray* primatives = [NSMutableArray arrayWithCapacity:10];
-    return primatives;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (NSMutableArray*)getDoWhilePredicates {
-    NSMutableArray* primatives = [NSMutableArray arrayWithCapacity:10];
+    [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:SensorBinIsEmptyProgramPredicate], nil]];
+    [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:SampleBinIsFullProgramPredicate], nil]];
     return primatives;
 }
 
@@ -155,12 +146,24 @@ static ProgramNgin* thisProgramNgin = nil;
             break;
         case DoTimesProgramInstruction:
             break;
-        case DoWhileProgramInstruction:
-            break;
         case DoUntilProgramInstruction:
             break;
     }
     return instructionString;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSString*)predicateToString:(ProgramPredicate)_predicate {
+    NSString* predicateString = nil;
+    switch (_predicate) {
+        case SensorBinIsEmptyProgramPredicate:
+            predicateString = @"sensor bin empty";
+            break;
+        case SampleBinIsFullProgramPredicate:
+            predicateString = @"sample bin full";
+            break;
+    }
+    return predicateString;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

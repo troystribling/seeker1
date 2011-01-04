@@ -17,6 +17,7 @@
     IBOutlet UILabel* promtLabel;
     IBOutlet UILabel* instructionClosingBracketLabel;
     IBOutlet UILabel* instructionLabel;
+    IBOutlet UILabel* untilLabel;
     IBOutlet UILabel* predicateClosingBracketLabel;
     IBOutlet UILabel* predicateLabel;
     NSMutableArray* instructionSet;
@@ -26,6 +27,7 @@
 @property (nonatomic, retain) UILabel* promtLabel;
 @property (nonatomic, retain) UILabel* instructionClosingBracketLabel;
 @property (nonatomic, retain) UILabel* instructionLabel;
+@property (nonatomic, retain) UILabel* untilLabel;
 @property (nonatomic, retain) UILabel* predicateClosingBracketLabel;
 @property (nonatomic, retain) UILabel* predicateLabel;
 @property (nonatomic, retain) NSMutableArray* instructionSet;

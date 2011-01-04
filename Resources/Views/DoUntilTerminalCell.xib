@@ -118,7 +118,7 @@
 							<object class="IBUILabel" id="224283388">
 								<reference key="NSNextResponder" ref="880399814"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{93, 62}, {16, 29}}</string>
+								<string key="NSFrame">{{302, 62}, {16, 29}}</string>
 								<reference key="NSSuperview" ref="880399814"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -158,14 +158,14 @@
 							<object class="IBUILabel" id="796491075">
 								<reference key="NSNextResponder" ref="880399814"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{109, 64}, {87, 29}}</string>
+								<string key="NSFrame">{{149, 17}, {81, 29}}</string>
 								<reference key="NSSuperview" ref="880399814"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText"> times</string>
+								<string key="IBUIText"> until</string>
 								<reference key="IBUIFont" ref="156629361"/>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">1</int>
@@ -200,7 +200,7 @@
 							<object class="IBUILabel" id="603263582">
 								<reference key="NSNextResponder" ref="880399814"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{77, 65}, {15, 29}}</string>
+								<string key="NSFrame">{{70, 63}, {237, 29}}</string>
 								<reference key="NSSuperview" ref="880399814"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -208,7 +208,7 @@
 								<int key="IBUITag">1</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">1</string>
+								<string key="IBUIText">sensor bin empty</string>
 								<reference key="IBUIFont" ref="156629361"/>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">1</int>
@@ -251,20 +251,12 @@
 						<int key="NSID">2</int>
 					</object>
 				</object>
-				<string key="IBUIReuseIdentifier">DoTimesTerminalCell</string>
+				<string key="IBUIReuseIdentifier">DoUntilTerminalCell</string>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<object class="NSMutableArray" key="connectionRecords">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">timesLabel</string>
-						<reference key="source" ref="882791124"/>
-						<reference key="destination" ref="796491075"/>
-					</object>
-					<int key="connectionID">18</int>
-				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">promtLabel</string>
@@ -275,27 +267,27 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">numberLabel</string>
-						<reference key="source" ref="882791124"/>
-						<reference key="destination" ref="603263582"/>
-					</object>
-					<int key="connectionID">27</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">timesClosingBracketLabel</string>
-						<reference key="source" ref="882791124"/>
-						<reference key="destination" ref="224283388"/>
-					</object>
-					<int key="connectionID">28</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">instructionClosingBracketLabel</string>
 						<reference key="source" ref="882791124"/>
 						<reference key="destination" ref="628532573"/>
 					</object>
-					<int key="connectionID">29</int>
+					<int key="connectionID">33</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">predicateClosingBracketLabel</string>
+						<reference key="source" ref="882791124"/>
+						<reference key="destination" ref="224283388"/>
+					</object>
+					<int key="connectionID">34</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">untilLabel</string>
+						<reference key="source" ref="882791124"/>
+						<reference key="destination" ref="796491075"/>
+					</object>
+					<int key="connectionID">35</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -303,7 +295,15 @@
 						<reference key="source" ref="882791124"/>
 						<reference key="destination" ref="383750505"/>
 					</object>
-					<int key="connectionID">30</int>
+					<int key="connectionID">36</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">predicateLabel</string>
+						<reference key="source" ref="882791124"/>
+						<reference key="destination" ref="603263582"/>
+					</object>
+					<int key="connectionID">37</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -333,12 +333,12 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="1018901811"/>
 							<reference ref="383750505"/>
-							<reference ref="224283388"/>
-							<reference ref="796491075"/>
 							<reference ref="164852745"/>
-							<reference ref="603263582"/>
-							<reference ref="232813037"/>
 							<reference ref="628532573"/>
+							<reference ref="796491075"/>
+							<reference ref="232813037"/>
+							<reference ref="603263582"/>
+							<reference ref="224283388"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -415,13 +415,13 @@
 					<string>UIResponder</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABCTAAAwrIAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABDFQAAwrIAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">AUKqAABCDAAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABDlIAAwrYAAA</bytes>
 					</object>
-					<string>DoTimesTerminalCell</string>
+					<string>DoUntilTerminalCell</string>
 					<string>{{44, 561}, {320, 115}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -433,11 +433,11 @@
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABDAgAAwkQAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABCfAAAwpAAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABDZQAAwoQAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABDFQAAwjAAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -469,13 +469,13 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">32</int>
+			<int key="maxID">37</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
-					<string key="className">DoTimesTerminalCell</string>
+					<string key="className">DoUntilTerminalCell</string>
 					<string key="superclassName">UITableViewCell</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -483,10 +483,10 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>instructionClosingBracketLabel</string>
 							<string>instructionLabel</string>
-							<string>numberLabel</string>
+							<string>predicateClosingBracketLabel</string>
+							<string>predicateLabel</string>
 							<string>promtLabel</string>
-							<string>timesClosingBracketLabel</string>
-							<string>timesLabel</string>
+							<string>untilLabel</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -504,10 +504,10 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>instructionClosingBracketLabel</string>
 							<string>instructionLabel</string>
-							<string>numberLabel</string>
+							<string>predicateClosingBracketLabel</string>
+							<string>predicateLabel</string>
 							<string>promtLabel</string>
-							<string>timesClosingBracketLabel</string>
-							<string>timesLabel</string>
+							<string>untilLabel</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -520,7 +520,11 @@
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">numberLabel</string>
+								<string key="name">predicateClosingBracketLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">predicateLabel</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
@@ -528,18 +532,14 @@
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">timesClosingBracketLabel</string>
-								<string key="candidateClassName">UILabel</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">timesLabel</string>
+								<string key="name">untilLabel</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/Views/DoTimesTerminalCell.h</string>
+						<string key="minorKey">Classes/Views/DoUntilTerminalCell.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

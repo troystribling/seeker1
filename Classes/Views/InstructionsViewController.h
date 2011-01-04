@@ -13,8 +13,6 @@
 typedef enum tagInstructionType {
     PrimitiveInstructionType,
     DoTimesInstructionType,
-    DoWhileInstructionType,
-    DoWhilePredicateInstructionType,
     DoUntilInstructionType,
     DoUntilPredicateInstructionType,
 } InstructionType;

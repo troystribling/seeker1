@@ -32,6 +32,7 @@
 @synthesize promtLabel;
 @synthesize instructionClosingBracketLabel;
 @synthesize instructionLabel;
+@synthesize untilLabel;
 @synthesize predicateClosingBracketLabel;
 @synthesize predicateLabel;
 @synthesize instructionSet;
@@ -63,12 +64,15 @@
     CGSize instructionSize = [cell itemSize:instructionString];
     CGRect instructionRect = cell.instructionLabel.frame;
     CGRect instructionClosingBracketRect = cell.instructionClosingBracketLabel.frame;
+    CGRect untilRect = cell.untilLabel.frame;
     cell.instructionLabel.frame = CGRectMake(instructionRect.origin.x, instructionRect.origin.y, instructionSize.width, instructionRect.size.height);
     cell.instructionClosingBracketLabel.frame = CGRectMake(instructionRect.origin.x + instructionSize.width, instructionClosingBracketRect.origin.y, 
                                                            instructionClosingBracketRect.size.width, instructionClosingBracketRect.size.height);
+    cell.untilLabel.frame = CGRectMake(instructionRect.origin.x + instructionSize.width + instructionClosingBracketRect.size.width,
+                                       untilRect.origin.y, untilRect.size.width, untilRect.size.height);
     cell.instructionLabel.text = instructionString;
     
-    NSString* predicateString = [[ProgramNgin instance] instructionToString:[[_instructionSet objectAtIndex:2] intValue]];
+    NSString* predicateString = [[ProgramNgin instance] predicateToString:[[_instructionSet objectAtIndex:2] intValue]];
     CGSize predicateSize = [cell itemSize:predicateString];
     CGRect predicateRect = cell.predicateLabel.frame;
     CGRect predicateClosingBracketRect = cell.predicateClosingBracketLabel.frame;

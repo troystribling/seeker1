@@ -330,8 +330,6 @@
                 break;
             case DoTimesProgramInstruction:
                 break;
-            case DoWhileProgramInstruction:
-                break;
             case DoUntilProgramInstruction:
                 break;
         }

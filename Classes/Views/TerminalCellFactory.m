@@ -10,6 +10,7 @@
 #import "TerminalCellFactory.h"
 #import "TerminalCell.h"
 #import "DoTimesTerminalCell.h"
+#import "DoUntilTerminalCell.h"
 #import "ProgramNgin.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -46,9 +47,6 @@
         case DoTimesProgramInstruction:
             cellHeight = kTERMINAL_DO_TIMES_CELL_HEIGHT;
             break;
-        case DoWhileProgramInstruction:
-            cellHeight = kTERMINAL_DO_WHILE_CELL_HEIGHT;
-            break;
         case DoUntilProgramInstruction:
             cellHeight = kTERMINAL_DO_UNTIL_CELL_HEIGHT;
             break;
@@ -76,9 +74,8 @@
         case DoTimesProgramInstruction:
             tableCell = [DoTimesTerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
             break;
-        case DoWhileProgramInstruction:
-            break;
         case DoUntilProgramInstruction:
+            tableCell = [DoUntilTerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
             break;
     }
     return tableCell;
@@ -104,9 +101,8 @@
         case DoTimesProgramInstruction:
             tableCell = [DoTimesTerminalCell tableView:tableView listCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
             break;
-        case DoWhileProgramInstruction:
-            break;
         case DoUntilProgramInstruction:
+            tableCell = [DoUntilTerminalCell tableView:tableView listCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
             break;
     }
     return tableCell;

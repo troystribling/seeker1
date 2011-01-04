@@ -107,12 +107,6 @@
         case DoTimesInstructionType:
             self.instructionsList = [[ProgramNgin instance] getDoInstructions];
             break;
-        case DoWhileInstructionType:
-            self.instructionsList = [[ProgramNgin instance] getDoInstructions];
-            break;
-        case DoWhilePredicateInstructionType:
-            self.instructionsList = [[ProgramNgin instance] getDoWhilePredicates];
-            break;
         case DoUntilInstructionType:
             self.instructionsList = [[ProgramNgin instance] getDoInstructions];
             break;
@@ -215,11 +209,6 @@
             break;
         case DoTimesInstructionType:
             [self updateDoInstruction:instructionSet forTerminal:terminalViewController];
-            break;
-        case DoWhileInstructionType:
-            [self updateDoInstruction:instructionSet forTerminal:terminalViewController];
-            break;
-        case DoWhilePredicateInstructionType:
             break;
         case DoUntilInstructionType:
             [self updateDoInstruction:instructionSet forTerminal:terminalViewController];
