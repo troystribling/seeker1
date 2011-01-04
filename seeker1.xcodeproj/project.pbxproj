@@ -48,6 +48,8 @@
 		050D768C12AF0F6B005EF9BE /* terminal-launcher.png in Resources */ = {isa = PBXBuildFile; fileRef = 050D767112AF0F6B005EF9BE /* terminal-launcher.png */; };
 		050F795012AC670F0017BDE1 /* LauncherView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050F794F12AC670F0017BDE1 /* LauncherView.m */; };
 		0510EDD812BC680E00355F28 /* seeker-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0510EDD712BC680E00355F28 /* seeker-1.png */; };
+		0517EE2E12D2B400006CB4A9 /* DoUntilTerminalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0517EE2D12D2B400006CB4A9 /* DoUntilTerminalCell.m */; };
+		0517EE4912D2C17F006CB4A9 /* DoUntilTerminalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0517EE4812D2C17F006CB4A9 /* DoUntilTerminalCell.xib */; };
 		051806BA12C9903F00568813 /* menu-site.png in Resources */ = {isa = PBXBuildFile; fileRef = 051806B912C9903F00568813 /* menu-site.png */; };
 		051806ED12C997DB00568813 /* menu-empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 051806EC12C997DB00568813 /* menu-empty.png */; };
 		051AB7E912C028260020AC2D /* map-2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 051AB7E612C028260020AC2D /* map-2.tmx */; };
@@ -376,6 +378,9 @@
 		050F794E12AC670F0017BDE1 /* LauncherView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauncherView.h; sourceTree = "<group>"; };
 		050F794F12AC670F0017BDE1 /* LauncherView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LauncherView.m; sourceTree = "<group>"; };
 		0510EDD712BC680E00355F28 /* seeker-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "seeker-1.png"; sourceTree = "<group>"; };
+		0517EE2C12D2B400006CB4A9 /* DoUntilTerminalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoUntilTerminalCell.h; sourceTree = "<group>"; };
+		0517EE2D12D2B400006CB4A9 /* DoUntilTerminalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoUntilTerminalCell.m; sourceTree = "<group>"; };
+		0517EE4812D2C17F006CB4A9 /* DoUntilTerminalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoUntilTerminalCell.xib; sourceTree = "<group>"; };
 		051806B912C9903F00568813 /* menu-site.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-site.png"; sourceTree = "<group>"; };
 		051806EC12C997DB00568813 /* menu-empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-empty.png"; sourceTree = "<group>"; };
 		051AB7E612C028260020AC2D /* map-2.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-2.tmx"; sourceTree = "<group>"; };
@@ -849,6 +854,8 @@
 				0522D25112CBA29400E0530C /* DoTimesTerminalCell.m */,
 				052A05EC12CFCCBA005F1948 /* DoTimesEditViewController.h */,
 				052A05ED12CFCCBA005F1948 /* DoTimesEditViewController.m */,
+				0517EE2C12D2B400006CB4A9 /* DoUntilTerminalCell.h */,
+				0517EE2D12D2B400006CB4A9 /* DoUntilTerminalCell.m */,
 				050D764B12AF0E44005EF9BE /* InstructionsViewController.h */,
 				050D764C12AF0E44005EF9BE /* InstructionsViewController.m */,
 				0547A47E12AC388C00D2F0D1 /* TerminalCell.h */,
@@ -920,6 +927,7 @@
 			children = (
 				052A05FE12CFCFE6005F1948 /* DoTimesEditViewController.xib */,
 				0522D27312CBF17300E0530C /* DoTimesTerminalCell.xib */,
+				0517EE4812D2C17F006CB4A9 /* DoUntilTerminalCell.xib */,
 				050D765012AF0F5D005EF9BE /* InstructionsViewController.xib */,
 				0547A46612AC349400D2F0D1 /* TerminalViewController.xib */,
 				0547A48112AC38B100D2F0D1 /* TerminalCell.xib */,
@@ -1531,6 +1539,7 @@
 				052A2F1F12CEEA1D002EE6D1 /* menu-stop.png in Resources */,
 				052A05FF12CFCFE6005F1948 /* DoTimesEditViewController.xib in Resources */,
 				052A060B12CFD712005F1948 /* terminal-launcher-done.png in Resources */,
+				0517EE4912D2C17F006CB4A9 /* DoUntilTerminalCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1570,6 +1579,7 @@
 				0522D25212CBA29400E0530C /* DoTimesTerminalCell.m in Sources */,
 				05246DA212CD01B0000EB7AF /* TerminalCellFactory.m in Sources */,
 				052A05EE12CFCCBA005F1948 /* DoTimesEditViewController.m in Sources */,
+				0517EE2E12D2B400006CB4A9 /* DoUntilTerminalCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

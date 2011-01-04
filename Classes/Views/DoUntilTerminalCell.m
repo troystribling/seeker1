@@ -1,13 +1,13 @@
 //
-//  DoTimesTerminalCell.m
+//  DoUntilTerminalCell.m
 //  seeker1
 //
-//  Created by Troy Stribling on 12/29/10.
-//  Copyright 2010 imaginary products. All rights reserved.
+//  Created by Troy Stribling on 1/3/11.
+//  Copyright 2011 imaginary products. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "DoTimesTerminalCell.h"
+#import "DoUntilTerminalCell.h"
 #import "cocos2d.h"
 #import "TerminalViewController.h"
 #import "CellUtils.h"
@@ -15,30 +15,29 @@
 #import "ProgramNgin.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define kDOTIMES_NUMBER_TAG         1
-#define kDOTIMES_INSTRUCTION_TAG    2
+#define kDOUNTIL_INSTRUCTION_TAG    1
+#define kDOUNTIL_PREDICATE_TAG      2
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface DoTimesTerminalCell (PrivateAPI)
+@interface DoUntilTerminalCell (PrivateAPI)
 
 - (CGSize)itemSize:(NSString*)_item;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation DoTimesTerminalCell
+@implementation DoUntilTerminalCell
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize promtLabel;
-@synthesize timesLabel;
-@synthesize timesClosingBracketLabel;
 @synthesize instructionClosingBracketLabel;
 @synthesize instructionLabel;
-@synthesize numberLabel;
+@synthesize predicateClosingBracketLabel;
+@synthesize predicateLabel;
 @synthesize instructionSet;
 
 //===================================================================================================================================
-#pragma mark DoTimesTerminalCell PrivateAPI
+#pragma mark DoUntilTerminalCell PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGSize)itemSize:(NSString*)_item {
@@ -48,18 +47,18 @@
 }
 
 //===================================================================================================================================
-#pragma mark DoTimesTerminalCell
+#pragma mark DoUntilTerminalCell
 
 //===================================================================================================================================
 #pragma mark TrminalCellInterface
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (UITableViewCell*)tableView:(UITableView*)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet {
-
-    DoTimesTerminalCell* cell = (DoTimesTerminalCell*)[CellUtils createCell:[DoTimesTerminalCell class] forTableView:tableView];
+    
+    DoUntilTerminalCell* cell = (DoUntilTerminalCell*)[CellUtils createCell:[DoUntilTerminalCell class] forTableView:tableView];
     cell.instructionLabel.userInteractionEnabled = YES;
-    cell.numberLabel.userInteractionEnabled = YES;
-
+    cell.predicateLabel.userInteractionEnabled = YES;
+    
     NSString* instructionString = [[ProgramNgin instance] instructionToString:[[_instructionSet objectAtIndex:1] intValue]];
     CGSize instructionSize = [cell itemSize:instructionString];
     CGRect instructionRect = cell.instructionLabel.frame;
@@ -68,30 +67,27 @@
     cell.instructionClosingBracketLabel.frame = CGRectMake(instructionRect.origin.x + instructionSize.width, instructionClosingBracketRect.origin.y, 
                                                            instructionClosingBracketRect.size.width, instructionClosingBracketRect.size.height);
     cell.instructionLabel.text = instructionString;
-
-    NSString* numberString = [NSString stringWithFormat:@"%d", [[_instructionSet objectAtIndex:2] intValue]];
-    CGSize numberSize = [cell itemSize:numberString];
-    CGRect numberRect = cell.numberLabel.frame; 
-    CGRect timesClosingBracketRect = cell.timesClosingBracketLabel.frame;
-    CGRect timesRect = cell.timesLabel.frame;
-    cell.numberLabel.frame = CGRectMake(numberRect.origin.x, numberRect.origin.y, numberSize.width, numberRect.size.height);
-    cell.timesClosingBracketLabel.frame = CGRectMake(numberRect.origin.x + numberSize.width, timesClosingBracketRect.origin.y, 
-                                                     timesClosingBracketRect.size.width, timesClosingBracketRect.size.height);
-    cell.timesLabel.frame = CGRectMake(numberRect.origin.x + numberSize.width + timesClosingBracketRect.size.width, 
-                                       timesRect.origin.y, timesRect.size.width, timesRect.size.height);
-    cell.numberLabel.text = numberString;
-
+    
+    NSString* predicateString = [[ProgramNgin instance] instructionToString:[[_instructionSet objectAtIndex:2] intValue]];
+    CGSize predicateSize = [cell itemSize:predicateString];
+    CGRect predicateRect = cell.predicateLabel.frame;
+    CGRect predicateClosingBracketRect = cell.predicateClosingBracketLabel.frame;
+    cell.predicateLabel.frame = CGRectMake(predicateRect.origin.x, predicateRect.origin.y, predicateSize.width, predicateRect.size.height);
+    cell.predicateClosingBracketLabel.frame = CGRectMake(predicateRect.origin.x + predicateSize.width, predicateClosingBracketRect.origin.y, 
+                                                         predicateClosingBracketRect.size.width, predicateClosingBracketRect.size.height);
+    cell.predicateLabel.text = predicateString;
+    
     cell.instructionSet = _instructionSet;
-
+    
     return cell;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (UITableViewCell*)tableView:(UITableView*)tableView listCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet {
-    DoTimesTerminalCell* cell = (DoTimesTerminalCell*)[CellUtils createCell:[DoTimesTerminalCell class] forTableView:tableView];
+    DoUntilTerminalCell* cell = (DoUntilTerminalCell*)[CellUtils createCell:[DoUntilTerminalCell class] forTableView:tableView];
     cell.promtLabel.text = [NSString stringWithFormat:@"%d.", (indexPath.row + 1)];
     cell.instructionLabel.userInteractionEnabled = NO;
-    cell.numberLabel.userInteractionEnabled = NO;
+    cell.predicateLabel.userInteractionEnabled = NO;
     return cell;
 }
 
@@ -111,11 +107,11 @@
     UITouch* touch = [touches anyObject];
     NSInteger touchTag = touch.view.tag;
     switch (touchTag) {
-        case kDOTIMES_NUMBER_TAG:
-            [[ViewControllerManager instance] showDoTimesEditView:[[CCDirector sharedDirector] openGLView] forTerminalCell:self];
+        case kDOUNTIL_INSTRUCTION_TAG:
+            [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:DoUntilInstructionType];
             break;
-        case kDOTIMES_INSTRUCTION_TAG:
-            [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:DoTimesInstructionType];
+        case kDOUNTIL_PREDICATE_TAG:
+            [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:DoUntilPredicateInstructionType];
             break;
         default:
             [super touchesBegan:touches withEvent:event];
