@@ -50,6 +50,12 @@
         case DoUntilProgramInstruction:
             cellHeight = kTERMINAL_DO_UNTIL_CELL_HEIGHT;
             break;
+        case SensorBinEmptyPredicateProgramInstruction:
+            break;
+        case SampleBinFullPredicateProgramInstruction:
+            break;
+        case AtStationPredicateProgramInstruction:
+            break;
     }
     return cellHeight;
 }
@@ -77,6 +83,15 @@
         case DoUntilProgramInstruction:
             tableCell = [DoUntilTerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
             break;
+        case SensorBinEmptyPredicateProgramInstruction:
+            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            break;
+        case SampleBinFullPredicateProgramInstruction:
+            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            break;
+        case AtStationPredicateProgramInstruction:
+            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            break;
     }
     return tableCell;
 }
@@ -103,6 +118,15 @@
             break;
         case DoUntilProgramInstruction:
             tableCell = [DoUntilTerminalCell tableView:tableView listCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            break;
+        case SensorBinEmptyPredicateProgramInstruction:
+            tableCell = [TerminalCell tableView:tableView listCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            break;
+        case SampleBinFullPredicateProgramInstruction:
+            tableCell = [TerminalCell tableView:tableView listCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            break;
+        case AtStationPredicateProgramInstruction:
+            tableCell = [TerminalCell tableView:tableView listCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
             break;
     }
     return tableCell;

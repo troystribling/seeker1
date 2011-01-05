@@ -332,6 +332,8 @@
                 break;
             case DoUntilProgramInstruction:
                 break;
+            default:
+                break;
         }
     }
     if ([self isStationTile]) {

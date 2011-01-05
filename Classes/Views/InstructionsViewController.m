@@ -22,8 +22,7 @@
 
 - (void)updatePrimitiveInstruction:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController;
 - (void)updateDoInstruction:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController;
-- (void)updateDoWhilePredicateInstruction:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController;
-- (void)updateDoUntilPredicateInstruction:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController;
+- (void)updateDoUntilPredicate:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController;
 
 @end
 
@@ -42,7 +41,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)updatePrimitiveInstruction:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController {
     if (_terminalViewController.selectedLine.row < [_terminalViewController.programListing count]) {
-        [_terminalViewController.programListing replaceObjectAtIndex:_terminalViewController.selectedLine.row withObject:_instructionSet];
+        NSInteger row = _terminalViewController.selectedLine.row;
+        [_terminalViewController.programListing replaceObjectAtIndex:row withObject:_instructionSet];
     } else {
         [_terminalViewController.programListing addObject:_instructionSet];
     }
@@ -50,21 +50,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)updateDoInstruction:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController {
-    NSMutableArray* terminalInstruction = [_terminalViewController.programListing objectAtIndex:_terminalViewController.selectedLine.row];
+    NSInteger row = _terminalViewController.selectedLine.row;
+    NSMutableArray* terminalInstruction = [_terminalViewController.programListing objectAtIndex:row];
     NSNumber* newInstruction = [_instructionSet objectAtIndex:0];
     [terminalInstruction replaceObjectAtIndex:1 withObject:newInstruction];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)updateDoWhilePredicateInstruction:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController {
-    NSMutableArray* terminalInstruction = [_terminalViewController.programListing objectAtIndex:_terminalViewController.selectedLine.row];
-    NSNumber* newInstruction = [_instructionSet objectAtIndex:0];
-    [terminalInstruction replaceObjectAtIndex:2 withObject:newInstruction];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)updateDoUntilPredicateInstruction:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController {
-    NSMutableArray* terminalInstruction = [_terminalViewController.programListing objectAtIndex:_terminalViewController.selectedLine.row];
+- (void)updateDoUntilPredicate:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController {
+    NSInteger row = _terminalViewController.selectedLine.row;
+    NSMutableArray* terminalInstruction = [_terminalViewController.programListing objectAtIndex:row];
     NSNumber* newInstruction = [_instructionSet objectAtIndex:0];
     [terminalInstruction replaceObjectAtIndex:2 withObject:newInstruction];
 }
@@ -214,6 +209,7 @@
             [self updateDoInstruction:instructionSet forTerminal:terminalViewController];
             break;
         case DoUntilPredicateInstructionType:
+            [self updateDoUntilPredicate:instructionSet forTerminal:terminalViewController];            
             break;
     }
     [terminalViewController.programView reloadData];

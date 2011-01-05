@@ -15,8 +15,8 @@
 #import "ProgramNgin.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define kDOUNTIL_INSTRUCTION_TAG    1
-#define kDOUNTIL_PREDICATE_TAG      2
+#define kDOUNTIL_INSTRUCTION_TAG    2
+#define kDOUNTIL_PREDICATE_TAG      1
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface DoUntilTerminalCell (PrivateAPI)
@@ -44,7 +44,7 @@
 - (CGSize)itemSize:(NSString*)_item {
     CGSize winSize = [[CCDirector sharedDirector] winSize];
     CGSize textSize = {0.8 * winSize.width, 20000.0f};
-    return [_item sizeWithFont:[UIFont fontWithName:@"Courier" size:24.0] constrainedToSize:textSize lineBreakMode:UILineBreakModeWordWrap];
+    return [_item sizeWithFont:[UIFont fontWithName:@"Courier" size:22.0] constrainedToSize:textSize lineBreakMode:UILineBreakModeWordWrap];
 }
 
 //===================================================================================================================================
@@ -72,7 +72,7 @@
                                        untilRect.origin.y, untilRect.size.width, untilRect.size.height);
     cell.instructionLabel.text = instructionString;
     
-    NSString* predicateString = [[ProgramNgin instance] predicateToString:[[_instructionSet objectAtIndex:2] intValue]];
+    NSString* predicateString = [[ProgramNgin instance] instructionToString:[[_instructionSet objectAtIndex:2] intValue]];
     CGSize predicateSize = [cell itemSize:predicateString];
     CGRect predicateRect = cell.predicateLabel.frame;
     CGRect predicateClosingBracketRect = cell.predicateClosingBracketLabel.frame;

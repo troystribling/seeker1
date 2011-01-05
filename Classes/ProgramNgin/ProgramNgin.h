@@ -17,13 +17,10 @@ typedef enum tagProgramInstruction {
     GetSampleProgramInstruction,
     DoTimesProgramInstruction,
     DoUntilProgramInstruction,
+    SensorBinEmptyPredicateProgramInstruction,
+    SampleBinFullPredicateProgramInstruction,
+    AtStationPredicateProgramInstruction,
 } ProgramInstruction;
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-typedef enum tagProgramPredicate {
-    SensorBinIsEmptyProgramPredicate,
-    SampleBinIsFullProgramPredicate,
-} ProgramPredicate;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ProgramNgin : NSObject {
@@ -48,7 +45,6 @@ typedef enum tagProgramPredicate {
 - (NSMutableArray*)getDoUntilPredicates;
 - (NSMutableArray*)getSubroutines;
 - (NSString*)instructionToString:(ProgramInstruction)_instruction;
-- (NSString*)predicateToString:(ProgramPredicate)_predicate;
 - (void)loadProgram:(NSMutableArray*)_program;
 - (void)saveProgram:(NSMutableArray*)_program;
 - (void)deleteProgram;

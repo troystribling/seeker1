@@ -44,7 +44,7 @@
 - (CGSize)itemSize:(NSString*)_item {
     CGSize winSize = [[CCDirector sharedDirector] winSize];
     CGSize textSize = {0.8 * winSize.width, 20000.0f};
-    return [_item sizeWithFont:[UIFont fontWithName:@"Courier" size:24.0] constrainedToSize:textSize lineBreakMode:UILineBreakModeWordWrap];
+    return [_item sizeWithFont:[UIFont fontWithName:@"Courier" size:22.0] constrainedToSize:textSize lineBreakMode:UILineBreakModeWordWrap];
 }
 
 //===================================================================================================================================

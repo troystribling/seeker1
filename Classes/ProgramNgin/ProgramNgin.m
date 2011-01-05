@@ -59,6 +59,8 @@ static ProgramNgin* thisProgramNgin = nil;
                 break;
             case DoUntilProgramInstruction:
                 break;
+            default:
+                break;
         }
     }
 }
@@ -100,7 +102,9 @@ static ProgramNgin* thisProgramNgin = nil;
                                                                [NSNumber numberWithInt:1], nil]];
     }
     if (level >= kLEVEL_FOR_UNTIL) {
-        [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:DoUntilProgramInstruction], nil]];
+        [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:DoUntilProgramInstruction],
+                                                               [NSNumber numberWithInt:MoveProgramInstruction], 
+                                                               [NSNumber numberWithInt:SensorBinEmptyPredicateProgramInstruction], nil]];
     }
     return primatives;
 }
@@ -118,8 +122,9 @@ static ProgramNgin* thisProgramNgin = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSMutableArray*)getDoUntilPredicates {
     NSMutableArray* primatives = [NSMutableArray arrayWithCapacity:10];
-    [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:SensorBinIsEmptyProgramPredicate], nil]];
-    [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:SampleBinIsFullProgramPredicate], nil]];
+    [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:SensorBinEmptyPredicateProgramInstruction], nil]];
+    [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:SampleBinFullPredicateProgramInstruction], nil]];
+    [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:AtStationPredicateProgramInstruction], nil]];
     return primatives;
 }
 
@@ -148,22 +153,17 @@ static ProgramNgin* thisProgramNgin = nil;
             break;
         case DoUntilProgramInstruction:
             break;
+        case SensorBinEmptyPredicateProgramInstruction:
+            instructionString = @"sensor bin empty";
+            break;
+        case SampleBinFullPredicateProgramInstruction:
+            instructionString = @"sample bin full";
+            break;
+        case AtStationPredicateProgramInstruction:
+            instructionString = @"at station";
+            break;
     }
     return instructionString;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)predicateToString:(ProgramPredicate)_predicate {
-    NSString* predicateString = nil;
-    switch (_predicate) {
-        case SensorBinIsEmptyProgramPredicate:
-            predicateString = @"sensor bin empty";
-            break;
-        case SampleBinIsFullProgramPredicate:
-            predicateString = @"sample bin full";
-            break;
-    }
-    return predicateString;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
