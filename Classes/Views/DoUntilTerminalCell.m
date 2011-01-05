@@ -112,10 +112,10 @@
     NSInteger touchTag = touch.view.tag;
     switch (touchTag) {
         case kDOUNTIL_INSTRUCTION_TAG:
-            [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:DoUntilInstructionType];
+            [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:DoUntilInstructionType andInstructionSet:self.instructionSet];
             break;
         case kDOUNTIL_PREDICATE_TAG:
-            [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:DoUntilPredicateInstructionType];
+            [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:DoUntilPredicateInstructionType andInstructionSet:self.instructionSet];
             break;
         default:
             [super touchesBegan:touches withEvent:event];

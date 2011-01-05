@@ -41,6 +41,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (InstructionsViewController*)showInstructionsView:(UIView*)_containerView withInstructionType:(InstructionType)_instructionType;
+- (InstructionsViewController*)showInstructionsView:(UIView*)_containerView withInstructionType:(InstructionType)_instructionType andInstructionSet:(NSMutableArray*)_instructionSet;
 - (void)removeInstructionsView;
 - (void)instructionsViewWillAppear;
 - (void)instructionsViewWillDisappear;

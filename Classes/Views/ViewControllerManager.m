@@ -85,6 +85,17 @@ static ViewControllerManager* thisViewControllerManager = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (InstructionsViewController*)showInstructionsView:(UIView*)_containerView withInstructionType:(InstructionType)_instructionType andInstructionSet:(NSMutableArray*)_instructionSet {
+    if (self.instructionsViewController == nil) {
+        self.instructionsViewController = [InstructionsViewController inView:_containerView];
+    } 
+    self.instructionsViewController.instructionType = _instructionType;
+    self.instructionsViewController.selectedInstructionSet = _instructionSet;
+    [_containerView addSubview:self.instructionsViewController.view];
+    return self.instructionsViewController;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)removeInstructionsView {
     if (self.instructionsViewController) {
         [self.instructionsViewController viewWillDisappear:NO];

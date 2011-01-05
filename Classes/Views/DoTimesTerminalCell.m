@@ -115,7 +115,7 @@
             [[ViewControllerManager instance] showDoTimesEditView:[[CCDirector sharedDirector] openGLView] forTerminalCell:self];
             break;
         case kDOTIMES_INSTRUCTION_TAG:
-            [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:DoTimesInstructionType];
+            [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:DoTimesInstructionType andInstructionSet:self.instructionSet];
             break;
         default:
             [super touchesBegan:touches withEvent:event];

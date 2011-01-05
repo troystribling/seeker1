@@ -21,8 +21,8 @@
 @interface InstructionsViewController (PrivateAPI)
 
 - (void)updatePrimitiveInstruction:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController;
-- (void)updateDoInstruction:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController;
-- (void)updateDoUntilPredicate:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController;
+- (void)updateDoInstruction:(NSMutableArray*)_instructionSet;
+- (void)updateDoUntilPredicate:(NSMutableArray*)_instructionSet;
 
 @end
 
@@ -34,6 +34,7 @@
 @synthesize instructionType;
 @synthesize containerView;
 @synthesize instructionsList;
+@synthesize selectedInstructionSet;
 
 //===================================================================================================================================
 #pragma mark InstructionsViewController PrivateAPI
@@ -49,19 +50,15 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)updateDoInstruction:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController {
-    NSInteger row = _terminalViewController.selectedLine.row;
-    NSMutableArray* terminalInstruction = [_terminalViewController.programListing objectAtIndex:row];
+- (void)updateDoInstruction:(NSMutableArray*)_instructionSet {
     NSNumber* newInstruction = [_instructionSet objectAtIndex:0];
-    [terminalInstruction replaceObjectAtIndex:1 withObject:newInstruction];
+    [self.selectedInstructionSet replaceObjectAtIndex:1 withObject:newInstruction];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)updateDoUntilPredicate:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController {
-    NSInteger row = _terminalViewController.selectedLine.row;
-    NSMutableArray* terminalInstruction = [_terminalViewController.programListing objectAtIndex:row];
+- (void)updateDoUntilPredicate:(NSMutableArray*)_instructionSet {
     NSNumber* newInstruction = [_instructionSet objectAtIndex:0];
-    [terminalInstruction replaceObjectAtIndex:2 withObject:newInstruction];
+    [self.selectedInstructionSet replaceObjectAtIndex:2 withObject:newInstruction];
 }
 
 //===================================================================================================================================
@@ -203,18 +200,21 @@
             [self updatePrimitiveInstruction:instructionSet forTerminal:terminalViewController];
             break;
         case DoTimesInstructionType:
-            [self updateDoInstruction:instructionSet forTerminal:terminalViewController];
+            [self updateDoInstruction:instructionSet];
             break;
         case DoUntilInstructionType:
-            [self updateDoInstruction:instructionSet forTerminal:terminalViewController];
+            [self updateDoInstruction:instructionSet];
             break;
         case DoUntilPredicateInstructionType:
-            [self updateDoUntilPredicate:instructionSet forTerminal:terminalViewController];            
+            [self updateDoUntilPredicate:instructionSet];            
             break;
     }
     [terminalViewController.programView reloadData];
-    NSIndexPath* bottomLine = [NSIndexPath indexPathForRow:(terminalViewController.selectedLine.row + 1) inSection:0];
-    [terminalViewController.programView scrollToRowAtIndexPath:bottomLine atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    NSInteger selectedRow = terminalViewController.selectedLine.row;
+    if (selectedRow < ([terminalViewController.programListing count] + 1)) {
+        NSIndexPath* bottomLine = [NSIndexPath indexPathForRow:(selectedRow + 1) inSection:0];
+        [terminalViewController.programView scrollToRowAtIndexPath:bottomLine atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
     [self.view removeFromSuperview];
 }
 
