@@ -42,6 +42,7 @@ static ProgramNgin* thisProgramNgin = nil;
     [self.compiledProgram removeAllObjects];
     for (NSMutableArray* instructionSet in self.program) {
         ProgramInstruction instruction = [[instructionSet objectAtIndex:0] intValue];
+        ProgramInstruction doTimesInstruction;
         switch (instruction) {
             case MoveProgramInstruction:
                 [self.compiledProgram addObject:instructionSet];
@@ -56,6 +57,11 @@ static ProgramNgin* thisProgramNgin = nil;
                 [self.compiledProgram addObject:instructionSet];
                 break;
             case DoTimesProgramInstruction:
+                doTimesInstruction = [[instructionSet objectAtIndex:1] intValue];
+                NSInteger doTimesNumber = [[instructionSet objectAtIndex:2] intValue];
+                for (int i = 0; i < doTimesNumber; i++) {
+                    [self.compiledProgram addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:doTimesInstruction], nil]];
+                }
                 break;
             case DoUntilProgramInstruction:
                 break;
@@ -226,7 +232,7 @@ static ProgramNgin* thisProgramNgin = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSMutableArray*)nextInstruction {
     NSMutableArray* instruction = nil;
-    NSInteger codeLines = [self.program count];
+    NSInteger codeLines = [self.compiledProgram count];
     if (self.nextLine < codeLines - 1) {
         instruction = [self.compiledProgram objectAtIndex:self.nextLine];
         self.nextLine++;
