@@ -11,11 +11,10 @@
 #import "InstructionsViewController.h"
 #import "TerminalViewController.h"
 #import "DoTimesEditViewController.h"
+#import "CreateSubroutineViewController.h"
+#import "SubroutineViewController.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class TerminalViewController;
-@class InstructionsViewController;
-@class DoTimesEditViewController;
 @class DoTimesTerminalCell;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -23,12 +22,16 @@
     TerminalViewController* terminalViewController;
     InstructionsViewController* instructionsViewController;
     DoTimesEditViewController* doTimesEditViewController;
+    CreateSubroutineViewController* createSubroutineViewController;
+    SubroutineViewController* subroutineViewController;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) TerminalViewController* terminalViewController;
 @property (nonatomic, retain) InstructionsViewController* instructionsViewController;
 @property (nonatomic, retain) DoTimesEditViewController* doTimesEditViewController;
+@property (nonatomic, retain) CreateSubroutineViewController* createSubroutineViewController;
+@property (nonatomic, retain) SubroutineViewController* subroutineViewController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ViewControllerManager*)instance;
@@ -47,9 +50,21 @@
 - (void)instructionsViewWillDisappear;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (DoTimesEditViewController*)showDoTimesEditView:(UIView*)containerView forTerminalCell:(DoTimesTerminalCell*)_terminalCell;
+- (DoTimesEditViewController*)showDoTimesEditView:(UIView*)_containerView forTerminalCell:(DoTimesTerminalCell*)_terminalCell;
 - (void)removeDoTimesEditView;
 - (void)doTimesEditViewWillAppear;
 - (void)doTimesEditViewWillDisappear;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CreateSubroutineViewController*)showCreateSubroutineView:(UIView*)_containerView;
+- (void)removeCreateSubroutineView;
+- (void)createSubroutineViewWillAppear;
+- (void)createSubroutineViewWillDisappear;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CreateSubroutineViewController*)showSubroutineView:(UIView*)_containerView;
+- (void)removeSubroutineView;
+- (void)subroutineViewWillAppear;
+- (void)subroutineViewWillDisappear;
 
 @end

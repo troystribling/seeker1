@@ -16,6 +16,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kINSTRUCTIONS_LAUNCHER_BACK_TAG     1
+#define kINSTRUCTIONS_LAUNCHER_SUB_TAG      2
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface InstructionsViewController (PrivateAPI)
@@ -136,6 +137,9 @@
     NSInteger touchTag = touch.view.tag;
     switch (touchTag) {
         case kINSTRUCTIONS_LAUNCHER_BACK_TAG:
+            [self.view removeFromSuperview];
+            break;
+        case kINSTRUCTIONS_LAUNCHER_SUB_TAG:
             [self.view removeFromSuperview];
             break;
         default:

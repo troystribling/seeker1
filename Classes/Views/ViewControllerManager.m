@@ -25,6 +25,8 @@ static ViewControllerManager* thisViewControllerManager = nil;
 @synthesize terminalViewController;
 @synthesize instructionsViewController;
 @synthesize doTimesEditViewController;
+@synthesize createSubroutineViewController;
+@synthesize subroutineViewController;
 
 //===================================================================================================================================
 #pragma mark ViewControllerManager PrivateApi
@@ -141,6 +143,64 @@ static ViewControllerManager* thisViewControllerManager = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)doTimesEditViewWillDisappear {
     [self.doTimesEditViewController viewWillDisappear:NO];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// CreateSubroutineViewController
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CreateSubroutineViewController*)showCreateSubroutineView:(UIView*)_containerView {
+    if (self.createSubroutineViewController == nil) {
+        self.createSubroutineViewController = [CreateSubroutineViewController inView:_containerView];
+    } 
+    [_containerView addSubview:self.createSubroutineViewController.view];
+    return self.createSubroutineViewController;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeCreateSubroutineView {
+    if (self.createSubroutineViewController) {
+        [self.createSubroutineViewController viewWillDisappear:NO];
+        [self.createSubroutineViewController.view removeFromSuperview];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)createSubroutineViewWillAppear {
+    [self.createSubroutineViewController viewWillAppear:NO];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)createSubroutineViewWillDisappear {
+    [self.createSubroutineViewController viewWillDisappear:NO];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// SubroutineViewController
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (SubroutineViewController*)showSubroutineView:(UIView*)_containerView {
+    if (self.subroutineViewController == nil) {
+        self.subroutineViewController = [SubroutineViewController inView:_containerView];
+    } 
+    [_containerView addSubview:self.subroutineViewController.view];
+    return self.subroutineViewController;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeSubroutineView {
+    if (self.subroutineViewController) {
+        [self.subroutineViewController viewWillDisappear:NO];
+        [self.subroutineViewController.view removeFromSuperview];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)subroutineViewWillAppear {
+    [self.subroutineViewController viewWillAppear:NO];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)subroutineViewWillDisappear {
+    [self.subroutineViewController viewWillDisappear:NO];
 }
 
 @end
