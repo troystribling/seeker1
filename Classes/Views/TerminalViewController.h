@@ -10,7 +10,6 @@
 #import <UIKit/UIKit.h>
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class TouchImageView;
 @class MapScene;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +33,7 @@
 @property (nonatomic, retain) UIView* containerView;
 @property (nonatomic, retain) NSMutableArray* programListing;
 @property (nonatomic, retain) NSString* functionUpdate;
-@property (nonatomic, assign) NSIndexPath* selectedLine;
+@property (nonatomic, retain) NSIndexPath* selectedLine;
 @property (nonatomic, assign) BOOL editingEnabled;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

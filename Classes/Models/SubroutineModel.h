@@ -1,5 +1,5 @@
 //
-//  FunctionModel.h
+//  SubroutineModel.h
 //  seeker1
 //
 //  Created by Troy Stribling on 12/19/10.
@@ -13,31 +13,32 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface FunctionModel : NSObject {
+@interface SubroutineModel : NSObject {
     NSInteger pk;
     NSString* codeListing;
-    NSString* functionName;
+    NSString* subroutineName;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, assign) NSInteger pk;
 @property (nonatomic, retain) NSString* codeListing;
-@property (nonatomic, retain) NSString* functionName;
+@property (nonatomic, retain) NSString* subroutineName;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)insertFunction:(NSMutableArray*)_function withName:(NSString*)_name;
++ (void)insertSubroutine:(NSMutableArray*)_function withName:(NSString*)_name;
 + (NSInteger)count;
 + (void)drop;
 + (void)create;
 + (void)destroyAll;
-+ (FunctionModel*)findByName:(NSString*)_name;
++ (SubroutineModel*)findByName:(NSString*)_name;
 + (NSMutableArray*)findAll;
++ (NSMutableArray*)modelsToInstructions:(NSMutableArray*)_models;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;
 - (void)destroy;
 - (void)load;
 - (void)update;
-- (NSArray*)codeListingToArray;
+- (NSMutableArray*)codeListingToArray;
 
 @end

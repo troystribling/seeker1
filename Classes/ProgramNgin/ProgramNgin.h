@@ -17,6 +17,7 @@ typedef enum tagProgramInstruction {
     GetSampleProgramInstruction,
     DoTimesProgramInstruction,
     DoUntilProgramInstruction,
+    SubroutineProgramInstruction,
     SensorBinEmptyPredicateProgramInstruction,
     SampleBinFullPredicateProgramInstruction,
     AtStationPredicateProgramInstruction,

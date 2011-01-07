@@ -15,6 +15,7 @@ typedef enum tagInstructionType {
     DoTimesInstructionType,
     DoUntilInstructionType,
     DoUntilPredicateInstructionType,
+    SubroutineInstructionType,
 } InstructionType;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

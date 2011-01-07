@@ -7,16 +7,16 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "InstructionsViewController.h"
 #import "ViewControllerManager.h"
+#import "cocos2d.h"
 #import "TerminalCellFactory.h"
-#import "CellUtils.h"
+#import "SubroutineModel.h"
 #import "TerminalCell.h"
 #import "ProgramNgin.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kINSTRUCTIONS_LAUNCHER_BACK_TAG     1
-#define kINSTRUCTIONS_LAUNCHER_SUB_TAG      2
+#define kINSTRUCTIONS_LAUNCHER_SUBS_TAG     2
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface InstructionsViewController (PrivateAPI)
@@ -106,6 +106,9 @@
         case DoUntilPredicateInstructionType:
             self.instructionsList = [[ProgramNgin instance] getDoUntilPredicates];
             break;
+        case SubroutineInstructionType:
+            self.instructionsList = [SubroutineModel modelsToInstructions:[SubroutineModel findAll]];
+            break;            
         default:
             break;
     }
@@ -139,7 +142,7 @@
         case kINSTRUCTIONS_LAUNCHER_BACK_TAG:
             [self.view removeFromSuperview];
             break;
-        case kINSTRUCTIONS_LAUNCHER_SUB_TAG:
+        case kINSTRUCTIONS_LAUNCHER_SUBS_TAG:
             [self.view removeFromSuperview];
             break;
         default:
@@ -212,6 +215,10 @@
         case DoUntilPredicateInstructionType:
             [self updateDoUntilPredicate:instructionSet];            
             break;
+        case SubroutineInstructionType:
+            ;NSString* subroutineName = [instructionSet objectAtIndex:1];
+            [viewControllerManager showSubroutineView:[[CCDirector sharedDirector] openGLView] withName:subroutineName];
+            break;            
     }
     [terminalViewController.programView reloadData];
     NSInteger selectedRow = terminalViewController.selectedLine.row;

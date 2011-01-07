@@ -16,7 +16,7 @@
 		050D440012BEFF1400A0FE30 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 050D43FF12BEFF1400A0FE30 /* libsqlite3.dylib */; };
 		050D444012BEFFE700A0FE30 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 050D443F12BEFFE700A0FE30 /* UserModel.m */; };
 		050D444312BF000600A0FE30 /* ProgramModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 050D444212BF000600A0FE30 /* ProgramModel.m */; };
-		050D444612BF001300A0FE30 /* FunctionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 050D444512BF001300A0FE30 /* FunctionModel.m */; };
+		050D444612BF001300A0FE30 /* SubroutineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 050D444512BF001300A0FE30 /* SubroutineModel.m */; };
 		050D445E12BF05FE00A0FE30 /* seeker.db in Resources */ = {isa = PBXBuildFile; fileRef = 050D445D12BF05FE00A0FE30 /* seeker.db */; };
 		050D764E12AF0E44005EF9BE /* InstructionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 050D764C12AF0E44005EF9BE /* InstructionsViewController.m */; };
 		050D765112AF0F5D005EF9BE /* InstructionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050D765012AF0F5D005EF9BE /* InstructionsViewController.xib */; };
@@ -67,13 +67,13 @@
 		0522D27412CBF17300E0530C /* DoTimesTerminalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0522D27312CBF17300E0530C /* DoTimesTerminalCell.xib */; };
 		05246DA212CD01B0000EB7AF /* TerminalCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 05246DA112CD01B0000EB7AF /* TerminalCellFactory.m */; };
 		0527C52512A9A8B900DD4099 /* TermMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0527C52412A9A8B900DD4099 /* TermMenuView.m */; };
-		0527C57212A9C21100DD4099 /* TouchImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0527C57112A9C21100DD4099 /* TouchImageView.m */; };
 		0527E61412BD5F3D0039D55E /* red-seeker-1-east.png in Resources */ = {isa = PBXBuildFile; fileRef = 0527E61012BD5F3D0039D55E /* red-seeker-1-east.png */; };
 		0527E61512BD5F3D0039D55E /* red-seeker-1-north.png in Resources */ = {isa = PBXBuildFile; fileRef = 0527E61112BD5F3D0039D55E /* red-seeker-1-north.png */; };
 		0527E61612BD5F3D0039D55E /* red-seeker-1-south.png in Resources */ = {isa = PBXBuildFile; fileRef = 0527E61212BD5F3D0039D55E /* red-seeker-1-south.png */; };
 		0527E61712BD5F3D0039D55E /* red-seeker-1-west.png in Resources */ = {isa = PBXBuildFile; fileRef = 0527E61312BD5F3D0039D55E /* red-seeker-1-west.png */; };
 		0528CDB512909FE600F4078A /* Seeker1AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0528CDB412909FE600F4078A /* Seeker1AppDelegate.m */; };
 		0528CDB91290A00200F4078A /* MapScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0528CDB81290A00200F4078A /* MapScene.m */; };
+		05290C1E12D6C62500894B97 /* TouchImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05290C1D12D6C62500894B97 /* TouchImageView.m */; };
 		052A05EE12CFCCBA005F1948 /* DoTimesEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 052A05ED12CFCCBA005F1948 /* DoTimesEditViewController.m */; };
 		052A05FF12CFCFE6005F1948 /* DoTimesEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 052A05FE12CFCFE6005F1948 /* DoTimesEditViewController.xib */; };
 		052A060B12CFD712005F1948 /* terminal-launcher-done.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A060A12CFD712005F1948 /* terminal-launcher-done.png */; };
@@ -347,8 +347,8 @@
 		050D443F12BEFFE700A0FE30 /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		050D444112BF000600A0FE30 /* ProgramModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramModel.h; sourceTree = "<group>"; };
 		050D444212BF000600A0FE30 /* ProgramModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramModel.m; sourceTree = "<group>"; };
-		050D444412BF001300A0FE30 /* FunctionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FunctionModel.h; sourceTree = "<group>"; };
-		050D444512BF001300A0FE30 /* FunctionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FunctionModel.m; sourceTree = "<group>"; };
+		050D444412BF001300A0FE30 /* SubroutineModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubroutineModel.h; sourceTree = "<group>"; };
+		050D444512BF001300A0FE30 /* SubroutineModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubroutineModel.m; sourceTree = "<group>"; };
 		050D445D12BF05FE00A0FE30 /* seeker.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = seeker.db; sourceTree = SOURCE_ROOT; };
 		050D764B12AF0E44005EF9BE /* InstructionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstructionsViewController.h; sourceTree = "<group>"; };
 		050D764C12AF0E44005EF9BE /* InstructionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstructionsViewController.m; sourceTree = "<group>"; };
@@ -406,8 +406,6 @@
 		05246DA112CD01B0000EB7AF /* TerminalCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerminalCellFactory.m; sourceTree = "<group>"; };
 		0527C52312A9A8B900DD4099 /* TermMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermMenuView.h; sourceTree = "<group>"; };
 		0527C52412A9A8B900DD4099 /* TermMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermMenuView.m; sourceTree = "<group>"; };
-		0527C57012A9C21100DD4099 /* TouchImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchImageView.h; sourceTree = "<group>"; };
-		0527C57112A9C21100DD4099 /* TouchImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchImageView.m; sourceTree = "<group>"; };
 		0527E61012BD5F3D0039D55E /* red-seeker-1-east.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-seeker-1-east.png"; sourceTree = "<group>"; };
 		0527E61112BD5F3D0039D55E /* red-seeker-1-north.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-seeker-1-north.png"; sourceTree = "<group>"; };
 		0527E61212BD5F3D0039D55E /* red-seeker-1-south.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-seeker-1-south.png"; sourceTree = "<group>"; };
@@ -416,6 +414,8 @@
 		0528CDB412909FE600F4078A /* Seeker1AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Seeker1AppDelegate.m; sourceTree = "<group>"; };
 		0528CDB71290A00200F4078A /* MapScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapScene.h; sourceTree = "<group>"; };
 		0528CDB81290A00200F4078A /* MapScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapScene.m; sourceTree = "<group>"; };
+		05290C1C12D6C62500894B97 /* TouchImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchImageView.h; sourceTree = "<group>"; };
+		05290C1D12D6C62500894B97 /* TouchImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchImageView.m; sourceTree = "<group>"; };
 		052A05EC12CFCCBA005F1948 /* DoTimesEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoTimesEditViewController.h; sourceTree = "<group>"; };
 		052A05ED12CFCCBA005F1948 /* DoTimesEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoTimesEditViewController.m; sourceTree = "<group>"; };
 		052A05FE12CFCFE6005F1948 /* DoTimesEditViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoTimesEditViewController.xib; sourceTree = "<group>"; };
@@ -731,8 +731,8 @@
 		050D43D112BEFC6900A0FE30 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				050D444412BF001300A0FE30 /* FunctionModel.h */,
-				050D444512BF001300A0FE30 /* FunctionModel.m */,
+				050D444412BF001300A0FE30 /* SubroutineModel.h */,
+				050D444512BF001300A0FE30 /* SubroutineModel.m */,
 				050D444112BF000600A0FE30 /* ProgramModel.h */,
 				050D444212BF000600A0FE30 /* ProgramModel.m */,
 				05355F4112C3DCBA00CA770E /* LevelModel.h */,
@@ -920,8 +920,8 @@
 				053FBFC9129D8C45000BCBCF /* StatusDisplay.m */,
 				0527C52312A9A8B900DD4099 /* TermMenuView.h */,
 				0527C52412A9A8B900DD4099 /* TermMenuView.m */,
-				0527C57012A9C21100DD4099 /* TouchImageView.h */,
-				0527C57112A9C21100DD4099 /* TouchImageView.m */,
+				05290C1C12D6C62500894B97 /* TouchImageView.h */,
+				05290C1D12D6C62500894B97 /* TouchImageView.m */,
 				0547A4A812AC441200D2F0D1 /* ViewControllerManager.h */,
 				0547A4A912AC441200D2F0D1 /* ViewControllerManager.m */,
 			);
@@ -1577,7 +1577,6 @@
 				053FBFCA129D8C45000BCBCF /* StatusDisplay.m in Sources */,
 				0540119612A2B9B900CCC62D /* MainScene.m in Sources */,
 				0527C52512A9A8B900DD4099 /* TermMenuView.m in Sources */,
-				0527C57212A9C21100DD4099 /* TouchImageView.m in Sources */,
 				0547A46312AC33C700D2F0D1 /* TerminalViewController.m in Sources */,
 				0547A48012AC388C00D2F0D1 /* TerminalCell.m in Sources */,
 				0547A49E12AC3B0B00D2F0D1 /* CellUtils.m in Sources */,
@@ -1589,7 +1588,7 @@
 				050D43D412BEFC7D00A0FE30 /* SeekerDbi.m in Sources */,
 				050D444012BEFFE700A0FE30 /* UserModel.m in Sources */,
 				050D444312BF000600A0FE30 /* ProgramModel.m in Sources */,
-				050D444612BF001300A0FE30 /* FunctionModel.m in Sources */,
+				050D444612BF001300A0FE30 /* SubroutineModel.m in Sources */,
 				05355F3212C3DA8F00CA770E /* MissionsScene.m in Sources */,
 				05355F4312C3DCBA00CA770E /* LevelModel.m in Sources */,
 				050A9DB712C42C9C00FF1BA9 /* QuadsScene.m in Sources */,
@@ -1600,6 +1599,7 @@
 				0517EE2E12D2B400006CB4A9 /* DoUntilTerminalCell.m in Sources */,
 				05E4801C12D5411300E6B65E /* SubroutineViewController.m in Sources */,
 				05E4801F12D5414300E6B65E /* CreateSubroutineViewController.m in Sources */,
+				05290C1E12D6C62500894B97 /* TouchImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

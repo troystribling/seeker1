@@ -6,60 +6,196 @@
 //  Copyright 2011 imaginary products. All rights reserved.
 //
 
-#import "SubroutineViewController.h"
+//-----------------------------------------------------------------------------------------------------------------------------------
+#import "ViewControllerManager.h"
+#import "cocos2d.h"
+#import "SubroutineModel.h"
+#import "TerminalCell.h"
+#import "TerminalCellFactory.h"
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+#define kSUBROUTINE_LAUNCHER_BACK_TAG   1
+#define kSUBROUTINE_LAUNCHER_EDIT_TAG   2
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@interface SubroutineViewController (PrivateAPI)
+@end
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation SubroutineViewController
 
-// The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-/*
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization.
+//-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize subroutineView;
+@synthesize editImageView;
+@synthesize containerView;
+@synthesize subroutineListing;
+@synthesize selectedLine;
+@synthesize subroutineName;
+@synthesize editingEnabled;
+
+//===================================================================================================================================
+#pragma mark SubroutineViewController PrivateAPI
+
+//===================================================================================================================================
+#pragma mark SubroutineViewController
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (id)inView:(UIView*)_containerView {
+    return [[SubroutineViewController alloc] initWithNibName:@"SubroutineViewController" bundle:nil inView:_containerView];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView {
+    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
+        self.containerView = _containerView;
+        self.view.frame = self.containerView.frame;
+        self.editingEnabled = NO;
     }
     return self;
 }
-*/
 
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
+//===================================================================================================================================
+#pragma mark UIViewController
 
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
+    self.subroutineView.separatorColor = [UIColor blackColor];
     [super viewDidLoad];
 }
-*/
 
-/*
-// Override to allow orientations other than the default portrait orientation.
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)viewWillAppear:(BOOL)animated {
+    SubroutineModel* model = [SubroutineModel findByName:self.subroutineName];
+    if (model) {
+        self.subroutineListing = [model codeListingToArray];
+    }
+    [self.subroutineView reloadData];
+	[super viewWillAppear:animated];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations.
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-*/
 
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc. that aren't in use.
 }
 
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+//===================================================================================================================================
+#pragma mark UIResponder
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
+    UITouch* touch = [touches anyObject];
+    NSInteger touchTag = touch.view.tag;
+    switch (touchTag) {
+        case kSUBROUTINE_LAUNCHER_BACK_TAG:
+            [self.view removeFromSuperview];
+            [SubroutineModel insertSubroutine:self.subroutineListing withName:self.subroutineName];
+            break;
+        case kSUBROUTINE_LAUNCHER_EDIT_TAG:
+            if (self.editingEnabled) {
+                self.editingEnabled = NO;
+                self.editImageView.image = [UIImage imageNamed:@"terminal-launcher-edit.png"];
+                [self.subroutineView setEditing:NO animated:YES];
+            } else {
+                self.editingEnabled = YES;
+                self.editImageView.image = [UIImage imageNamed:@"terminal-launcher-editing.png"];
+                [self.subroutineView setEditing:YES animated:YES];
+            }
+            break;
+        default:
+            [super touchesBegan:touches withEvent:event];
+            break;
+    }
 }
 
+//===================================================================================================================================
+#pragma mark UITableViewDataSource
 
-- (void)dealloc {
-    [super dealloc];
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.subroutineListing count] + 1;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == [self.subroutineListing count]) {
+        return [TerminalCell tableView:tableView promptCellForRowAtIndexPath:indexPath];
+    } else {
+        NSMutableArray* instructionSet = [self.subroutineListing objectAtIndex:indexPath.row];
+        return [TerminalCellFactory tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:instructionSet];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger linesOfCode = [self.subroutineListing count];
+    if (indexPath.row == linesOfCode || linesOfCode == 1) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath*)indexPath {    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.subroutineListing removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+    }   
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath*)fromIndexPath toIndexPath:(NSIndexPath*)toIndexPath {
+    NSString* lineOfCode = [self.subroutineListing objectAtIndex:fromIndexPath.row];
+    [self.subroutineListing removeObjectAtIndex:fromIndexPath.row];
+    [self.subroutineListing insertObject:lineOfCode atIndex:toIndexPath.row];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger linesOfCode = [self.subroutineListing count];
+    if (indexPath.row == linesOfCode || linesOfCode == 1) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+//===================================================================================================================================
+#pragma mark UITableViewDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.selectedLine = indexPath;
+    [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:PrimitiveInstructionType];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
+    if (indexPath.row == [self.subroutineListing count]) {
+        return kTERMINAL_DEFAULT_CELL_HEIGHT;
+    } else {
+        NSMutableArray* instructionSet = [self.subroutineListing objectAtIndex:indexPath.row];
+        return [TerminalCellFactory tableView:tableView heightForRowWithInstructionSet:instructionSet];
+    }
+}
+
+//===================================================================================================================================
+#pragma mark NSObject
 
 @end

@@ -7,7 +7,7 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "TerminalViewController.h"
+#import "ViewControllerManager.h"
 #import "MapScene.h"
 #import "TermMenuView.h"
 #import "InstructionsViewController.h"
@@ -15,8 +15,6 @@
 #import "ProgramNgin.h"
 #import "TerminalCellFactory.h"
 #import "TerminalCell.h"
-#import "TouchImageView.h"
-#import "CellUtils.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kTERMINAL_LAUNCHER_BACK_TAG     1
@@ -25,11 +23,6 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TerminalViewController (PrivateAPI)
-
-- (void)keyboardWillShow:(NSNotification*)note;
-- (void)keyboardWillHide:(NSNotification*)note;
-- (void)doneButtonPressed:(NSNotification*)note;
-- (UIView*)findKeyboard;
 
 @end
 

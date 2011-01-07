@@ -1,5 +1,5 @@
 //
-//  FunctionModel.m
+//  SubroutineModel.m
 //  seeker1
 //
 //  Created by Troy Stribling on 12/19/10.
@@ -7,60 +7,68 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "FunctionModel.h"
+#import "SubroutineModel.h"
 #import "SeekerDbi.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface FunctionModel (PrivateAPI)
+@interface SubroutineModel (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation FunctionModel
+@implementation SubroutineModel
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize pk;
 @synthesize codeListing;
-@synthesize functionName;
+@synthesize subroutineName;
 
 //===================================================================================================================================
-#pragma mark FunctionModel
+#pragma mark SubroutineModel PrivateAPI
+
+//===================================================================================================================================
+#pragma mark SubroutineModel
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)insertFunction:(NSMutableArray*)_function withName:(NSString*)_name {
-    FunctionModel* function = [self findByName:_name];
++ (void)insertSubroutine:(NSMutableArray*)_function withName:(NSString*)_name {
+    SubroutineModel* function = [self findByName:_name];
     if (function) {
         function.codeListing = [_function componentsJoinedByString:@";"];
-        function.functionName = _name;
+        function.subroutineName = _name;
         [function update];
     } else {
-       function = [[[FunctionModel alloc] init] autorelease];
+       function = [[[SubroutineModel alloc] init] autorelease];
         function.codeListing = [_function componentsJoinedByString:@";"];
-        function.functionName = _name;
+        function.subroutineName = _name;
         [function insert];
     }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count {
-	return [[SeekerDbi instance]  selectIntExpression:@"SELECT COUNT(pk) FROM funtions"];
+	return [[SeekerDbi instance]  selectIntExpression:@"SELECT COUNT(pk) FROM subroutines"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)drop {
-	[[SeekerDbi instance]  updateWithStatement:@"DROP TABLE funtions"];
+	[[SeekerDbi instance]  updateWithStatement:@"DROP TABLE subroutines"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[SeekerDbi instance]  updateWithStatement:@"CREATE TABLE funtions (pk integer primary key, codeListing text, functionName text)"];
+	[[SeekerDbi instance]  updateWithStatement:@"CREATE TABLE subroutines (pk integer primary key, codeListing text, subroutineName text)"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (FunctionModel*)findByName:(NSString*)_name {
-	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM functions WHERE functionName = '%@'", _name];
-	FunctionModel* model = [[[FunctionModel alloc] init] autorelease];
-	[[SeekerDbi instance] selectForModel:[FunctionModel class] withStatement:selectStatement andOutputTo:model];
++ (void)destroyAll {
+	[[SeekerDbi instance]  updateWithStatement:@"DELETE FROM subroutines"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (SubroutineModel*)findByName:(NSString*)_name {
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM subroutines WHERE subroutineName = '%@'", _name];
+	SubroutineModel* model = [[[SubroutineModel alloc] init] autorelease];
+	[[SeekerDbi instance] selectForModel:[SubroutineModel class] withStatement:selectStatement andOutputTo:model];
     if (model.pk == 0) {
         model = nil;
     }
@@ -70,49 +78,50 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAll {
 	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
-	[[SeekerDbi instance] selectAllForModel:[FunctionModel class] withStatement:@"SELECT * FROM functions" andOutputTo:output];
+	[[SeekerDbi instance] selectAllForModel:[SubroutineModel class] withStatement:@"SELECT * FROM subroutines" andOutputTo:output];
 	return output;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)destroyAll {
-	[[SeekerDbi instance]  updateWithStatement:@"DELETE FROM funtions"];
++ (NSMutableArray*)modelsToInstructions:(NSMutableArray*)_models {
+	NSMutableArray* instructions = [NSMutableArray arrayWithCapacity:10];
+	for (NSMutableArray* model in _models) {
+    }
+    return instructions;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
     NSString* insertStatement;
-    insertStatement = [NSString stringWithFormat:@"INSERT INTO funtions (codeListing, functionName) values ('%@', '%@')", self.codeListing, self.functionName];	
+    insertStatement = [NSString stringWithFormat:@"INSERT INTO subroutines (codeListing, subroutineName) values ('%@', '%@')", self.codeListing, self.subroutineName];	
     [[SeekerDbi instance]  updateWithStatement:insertStatement];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)destroy {	
-	NSString* destroyStatement = [NSString stringWithFormat:@"DELETE FROM funtions WHERE pk = %d", self.pk];	
+	NSString* destroyStatement = [NSString stringWithFormat:@"DELETE FROM subroutines WHERE pk = %d", self.pk];	
 	[[SeekerDbi instance]  updateWithStatement:destroyStatement];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)load {
-    NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM funtions WHERE functionName = '%@'", self.functionName];
-	[[SeekerDbi instance] selectForModel:[FunctionModel class] withStatement:selectStatement andOutputTo:self];
+    NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM subroutines WHERE subroutineName = '%@'", self.subroutineName];
+	[[SeekerDbi instance] selectForModel:[SubroutineModel class] withStatement:selectStatement andOutputTo:self];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
-    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE funtions SET codeListing = '%@', functionName = '%@' WHERE pk = %d", self.codeListing, 
-                                 self.functionName, self.pk];
+    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE subroutines SET codeListing = '%@', subroutineName = '%@' WHERE pk = %d", self.codeListing, 
+                                 self.subroutineName, self.pk];
 	[[SeekerDbi instance] updateWithStatement:updateStatement];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSArray*)codeListingToArray {
-    return [self.codeListing componentsSeparatedByString:@";"];
+- (NSMutableArray*)codeListingToArray {
+    return [NSMutableArray arrayWithArray:[self.codeListing componentsSeparatedByString:@";"]];
 }
 
-//===================================================================================================================================
-#pragma mark FunctionModel PrivateAPI
 
 //===================================================================================================================================
 #pragma mark WebgnosusDbiDelegate
@@ -124,15 +133,15 @@
 	if (codeListingVal != nil) {		
 		self.codeListing = [[NSString alloc] initWithUTF8String:codeListingVal];
 	}
-	char* functionNameVal = (char*)sqlite3_column_text(statement, 2);
-	if (functionNameVal != nil) {		
-		self.functionName = [[NSString alloc] initWithUTF8String:functionNameVal];
+	char* subroutineNameVal = (char*)sqlite3_column_text(statement, 2);
+	if (subroutineNameVal != nil) {		
+		self.subroutineName = [[NSString alloc] initWithUTF8String:subroutineNameVal];
 	}
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)collectAllFromResult:(sqlite3_stmt*)result andOutputTo:(NSMutableArray*)output {
-	FunctionModel* model = [[FunctionModel alloc] init];
+	SubroutineModel* model = [[SubroutineModel alloc] init];
 	[model setAttributesWithStatement:result];
 	[output addObject:model];
     [model release];

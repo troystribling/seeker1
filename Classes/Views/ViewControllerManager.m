@@ -177,10 +177,11 @@ static ViewControllerManager* thisViewControllerManager = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 // SubroutineViewController
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (SubroutineViewController*)showSubroutineView:(UIView*)_containerView {
+- (SubroutineViewController*)showSubroutineView:(UIView*)_containerView withName:(NSString*)_subroutineName {
     if (self.subroutineViewController == nil) {
         self.subroutineViewController = [SubroutineViewController inView:_containerView];
     } 
+    self.subroutineViewController.subroutineName = _subroutineName;
     [_containerView addSubview:self.subroutineViewController.view];
     return self.subroutineViewController;
 }

@@ -61,6 +61,8 @@ static ProgramNgin* thisProgramNgin = nil;
                 break;
             case DoUntilProgramInstruction:
                 break;
+            case SubroutineProgramInstruction:
+                break;
             default:
                 break;
         }
@@ -154,6 +156,8 @@ static ProgramNgin* thisProgramNgin = nil;
         case DoTimesProgramInstruction:
             break;
         case DoUntilProgramInstruction:
+            break;
+        case SubroutineProgramInstruction:
             break;
         case SensorBinEmptyPredicateProgramInstruction:
             instructionString = @"sensor bin empty";

@@ -14,6 +14,9 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TerminalCell (PrivateAPI)
 
++ (NSString*)instructionToString:(NSMutableArray*)_instructionSet;
++ (UITableViewCell*)tableView:(UITableView*)tableView promptCellForRowAtIndexPath:(NSIndexPath*)indexPath;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -35,13 +38,25 @@
     return cell;
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSString*)instructionToString:(NSMutableArray*)_instructionSet {
+    ProgramInstruction instruction = [[_instructionSet objectAtIndex:0] intValue];
+    NSString* instructionString;
+    if (instruction == SubroutineProgramInstruction) {
+        instructionString = [_instructionSet objectAtIndex:1];
+    } else {
+        instructionString = [[ProgramNgin instance] instructionToString:instruction];
+    }
+    return instructionString;
+}
+
 //===================================================================================================================================
 #pragma mark TerminalCellInterface
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (UITableViewCell*)tableView:(UITableView*)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet {
     TerminalCell* cell = (TerminalCell*)[CellUtils createCell:[TerminalCell class] forTableView:tableView];
-    NSString* instructionString = [[ProgramNgin instance] instructionToString:[[_instructionSet objectAtIndex:0] intValue]];
+    NSString* instructionString = [self instructionToString:_instructionSet];
     cell.instructionLabel.text = [NSString stringWithFormat:@"~> %@", instructionString];
     return cell;
 }
@@ -49,13 +64,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (UITableViewCell*)tableView:(UITableView*)tableView listCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet {
     TerminalCell* cell = (TerminalCell*)[CellUtils createCell:[TerminalCell class] forTableView:tableView];
-    NSString* instructionString = [[ProgramNgin instance] instructionToString:[[_instructionSet objectAtIndex:0] intValue]];
+    NSString* instructionString = [self instructionToString:_instructionSet];
     cell.instructionLabel.text = [NSString stringWithFormat:@"%d. %@", (indexPath.row + 1), instructionString];
     return cell;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)enableUserInteraction {
 }
 
 //===================================================================================================================================

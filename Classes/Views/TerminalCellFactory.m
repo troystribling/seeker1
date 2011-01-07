@@ -50,6 +50,8 @@
         case DoUntilProgramInstruction:
             cellHeight = kTERMINAL_DO_UNTIL_CELL_HEIGHT;
             break;
+        case SubroutineProgramInstruction:
+            break;            
         case SensorBinEmptyPredicateProgramInstruction:
             break;
         case SampleBinFullPredicateProgramInstruction:
@@ -83,6 +85,9 @@
         case DoUntilProgramInstruction:
             tableCell = [DoUntilTerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
             break;
+        case SubroutineProgramInstruction:
+            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            break;            
         case SensorBinEmptyPredicateProgramInstruction:
             tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
             break;
@@ -119,6 +124,9 @@
         case DoUntilProgramInstruction:
             tableCell = [DoUntilTerminalCell tableView:tableView listCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
             break;
+        case SubroutineProgramInstruction:
+            tableCell = [TerminalCell tableView:tableView listCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            break;            
         case SensorBinEmptyPredicateProgramInstruction:
             tableCell = [TerminalCell tableView:tableView listCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
             break;
