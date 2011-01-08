@@ -12,7 +12,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 typedef enum tagInstructionType {
-    PrimitiveInstructionType,
+    TerminalPrimitiveInstructionType,
+    SubroutinePrimitiveInstructionType,
     DoTimesInstructionType,
     DoUntilInstructionType,
     DoUntilPredicateInstructionType,
@@ -20,7 +21,6 @@ typedef enum tagInstructionType {
 } InstructionType;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class TerminalViewController;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface InstructionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {

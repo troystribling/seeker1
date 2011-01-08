@@ -46,6 +46,15 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (SubroutineModel*)createSubroutineWithName:(NSString*)_name {
+    SubroutineModel* subroutineModel = [[[SubroutineModel alloc] init] autorelease];
+    subroutineModel.codeListing = nil;
+    subroutineModel.subroutineName = _name;
+    [subroutineModel insert];
+    return subroutineModel;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count {
 	return [[SeekerDbi instance]  selectIntExpression:@"SELECT COUNT(pk) FROM subroutines"];
 }
@@ -97,7 +106,7 @@
     NSMutableArray* instructionStrings = [NSMutableArray arrayWithCapacity:10];
     for (NSMutableArray* instructionSet in _instructionSets) {
         ProgramInstruction instruction = [[instructionSet objectAtIndex:0] intValue];
-        NSString* instructionString;
+        NSString* instructionString = nil;
         switch (instruction) {
             case MoveProgramInstruction:
                 instructionString = [NSString stringWithFormat:@"%d", instruction];
@@ -136,39 +145,41 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)codeListingToInstructions:(NSString*)_listing {
     NSMutableArray* instructions = [NSMutableArray arrayWithCapacity:10];
-    NSArray* subroutineStrings = [_listing componentsSeparatedByString:@"~"];
-    for (NSString* subroutineString in subroutineStrings) {
-        NSArray* instructionSet = [subroutineString componentsSeparatedByString:@"*"];
-        ProgramInstruction instruction = [[instructionSet objectAtIndex:0] intValue];
-        switch (instruction) {
-            case MoveProgramInstruction:
-                instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], nil];
-                break;
-            case TurnLeftProgramInstruction:
-                instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], nil];
-                break;
-            case PutSensorProgramInstruction:
-                instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], nil];
-                break;
-            case GetSampleProgramInstruction:
-                instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], nil];
-                break;
-            case DoTimesProgramInstruction:
-                instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], 
-                                [NSNumber numberWithInt:[[instructionSet objectAtIndex:1] intValue]],
-                                [NSNumber numberWithInt:[[instructionSet objectAtIndex:2] intValue]], nil];
-                break;
-            case DoUntilProgramInstruction:
-                instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], 
-                                [NSNumber numberWithInt:[[instructionSet objectAtIndex:1] intValue]],
-                                [NSNumber numberWithInt:[[instructionSet objectAtIndex:2] intValue]], nil];
-                break;
-            case SubroutineProgramInstruction:
-                instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], 
-                                [instructionSet objectAtIndex:1], nil];
-                break;
-            default:
-                break;
+    if (_listing) {
+        NSArray* subroutineStrings = [_listing componentsSeparatedByString:@"~"];
+        for (NSString* subroutineString in subroutineStrings) {
+            NSArray* instructionSet = [subroutineString componentsSeparatedByString:@"*"];
+            ProgramInstruction instruction = [[instructionSet objectAtIndex:0] intValue];
+            switch (instruction) {
+                case MoveProgramInstruction:
+                    instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], nil];
+                    break;
+                case TurnLeftProgramInstruction:
+                    instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], nil];
+                    break;
+                case PutSensorProgramInstruction:
+                    instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], nil];
+                    break;
+                case GetSampleProgramInstruction:
+                    instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], nil];
+                    break;
+                case DoTimesProgramInstruction:
+                    instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], 
+                                    [NSNumber numberWithInt:[[instructionSet objectAtIndex:1] intValue]],
+                                    [NSNumber numberWithInt:[[instructionSet objectAtIndex:2] intValue]], nil];
+                    break;
+                case DoUntilProgramInstruction:
+                    instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], 
+                                    [NSNumber numberWithInt:[[instructionSet objectAtIndex:1] intValue]],
+                                    [NSNumber numberWithInt:[[instructionSet objectAtIndex:2] intValue]], nil];
+                    break;
+                case SubroutineProgramInstruction:
+                    instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], 
+                                    [instructionSet objectAtIndex:1], nil];
+                    break;
+                default:
+                    break;
+            }
         }
     }
     return instructions;
@@ -178,7 +189,11 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
     NSString* insertStatement;
-    insertStatement = [NSString stringWithFormat:@"INSERT INTO subroutines (codeListing, subroutineName) values ('%@', '%@')", self.codeListing, self.subroutineName];	
+    if (self.codeListing) {
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO subroutines (codeListing, subroutineName) values ('%@', '%@')", self.codeListing, self.subroutineName];	
+    } else {
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO subroutines (subroutineName) values ('%@')", self.subroutineName];	
+    }
     [[SeekerDbi instance]  updateWithStatement:insertStatement];
 }
 
@@ -202,10 +217,9 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSMutableArray*)codeListingToArray {
-    return [NSMutableArray arrayWithArray:[self.codeListing componentsSeparatedByString:@";"]];
+- (NSMutableArray*)codeListingToInstrictions {
+    return [SubroutineModel codeListingToInstructions:self.codeListing];
 }
-
 
 //===================================================================================================================================
 #pragma mark WebgnosusDbiDelegate

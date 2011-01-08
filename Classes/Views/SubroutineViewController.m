@@ -27,6 +27,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize subroutineView;
 @synthesize editImageView;
+@synthesize subroutineNameLabel;
 @synthesize containerView;
 @synthesize subroutineListing;
 @synthesize selectedLine;
@@ -65,11 +66,17 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
+    self.subroutineNameLabel.text = [NSString stringWithFormat:@"%@:", self.subroutineName];
     SubroutineModel* model = [SubroutineModel findByName:self.subroutineName];
     if (model) {
-        self.subroutineListing = [model codeListingToArray];
+        self.subroutineListing = [model codeListingToInstrictions];
     }
     [self.subroutineView reloadData];
+    NSInteger selectedRow = self.selectedLine.row;
+    if ((selectedRow + 1) == [self.subroutineListing count]) {
+        NSIndexPath* bottomLine = [NSIndexPath indexPathForRow:[self.subroutineListing count] inSection:0];
+        [self.subroutineView scrollToRowAtIndexPath:bottomLine atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
 	[super viewWillAppear:animated];
 }
 
@@ -182,7 +189,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedLine = indexPath;
-    [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:PrimitiveInstructionType];
+    [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:SubroutinePrimitiveInstructionType];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

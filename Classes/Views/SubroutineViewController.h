@@ -15,6 +15,7 @@
 @interface SubroutineViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     IBOutlet UITableView* subroutineView;
     IBOutlet UIImageView* editImageView;
+    IBOutlet UILabel* subroutineNameLabel;
     UIView* containerView;
 	NSMutableArray* subroutineListing;
     NSIndexPath* selectedLine; 
@@ -25,6 +26,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UITableView* subroutineView;
 @property (nonatomic, retain) UIImageView* editImageView;
+@property (nonatomic, retain) UILabel* subroutineNameLabel;
 @property (nonatomic, retain) UIView* containerView;
 @property (nonatomic, retain) NSMutableArray* subroutineListing;
 @property (nonatomic, retain) NSIndexPath* selectedLine;

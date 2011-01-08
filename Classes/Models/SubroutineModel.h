@@ -26,6 +26,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)insertSubroutine:(NSMutableArray*)_function withName:(NSString*)_name;
++ (SubroutineModel*)createSubroutineWithName:(NSString*)_name;
 + (NSInteger)count;
 + (void)drop;
 + (void)create;
@@ -41,6 +42,6 @@
 - (void)destroy;
 - (void)load;
 - (void)update;
-- (NSMutableArray*)codeListingToArray;
+- (NSMutableArray*)codeListingToInstrictions;
 
 @end

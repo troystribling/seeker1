@@ -8,6 +8,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "CreateSubroutineViewController.h"
+#import "ViewControllerManager.h"
+#import "SubroutineModel.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kCREATE_SUBROUTINE_LAUNCHER_BACK_TAG    1
@@ -97,8 +99,20 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
-	return YES; 
+    NSString* subroutineName = self.nameTextField.text;
+    BOOL returnStatus = YES;
+    if ([subroutineName isEqualToString:@""]) {
+        returnStatus = NO;
+    } else if ([subroutineName rangeOfString:@"~"].location != NSNotFound) {
+        returnStatus = NO;
+    } else if ([subroutineName rangeOfString:@"*"].location != NSNotFound) {  
+        returnStatus = NO;
+    } else {
+        [SubroutineModel createSubroutineWithName:subroutineName];
+        [[ViewControllerManager instance] instructionsViewWillAppear];
+        [self.view removeFromSuperview];
+    }
+	return returnStatus; 
 }
 
 

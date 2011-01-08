@@ -22,7 +22,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface InstructionsViewController (PrivateAPI)
 
-- (void)updatePrimitiveInstruction:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController;
+- (void)updateTerminalPrimitiveInstruction:(NSMutableArray*)_instructionSet;
+- (void)updateSubroutinePrimitiveInstruction:(NSMutableArray*)_instructionSet;
 - (void)updateDoInstruction:(NSMutableArray*)_instructionSet;
 - (void)updateDoUntilPredicate:(NSMutableArray*)_instructionSet;
 
@@ -44,25 +45,41 @@
 #pragma mark InstructionsViewController PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)updatePrimitiveInstruction:(NSMutableArray*)_instructionSet forTerminal:(TerminalViewController*)_terminalViewController {
-    if (_terminalViewController.selectedLine.row < [_terminalViewController.programListing count]) {
-        NSInteger row = _terminalViewController.selectedLine.row;
-        [_terminalViewController.programListing replaceObjectAtIndex:row withObject:_instructionSet];
+- (void)updateTerminalPrimitiveInstruction:(NSMutableArray*)_instructionSet {
+    TerminalViewController* terminalViewController = [[ViewControllerManager instance] terminalViewController];
+    if (terminalViewController.selectedLine.row < [terminalViewController.programListing count]) {
+        NSInteger row = terminalViewController.selectedLine.row;
+        [terminalViewController.programListing replaceObjectAtIndex:row withObject:_instructionSet];
     } else {
-        [_terminalViewController.programListing addObject:_instructionSet];
+        [terminalViewController.programListing addObject:_instructionSet];
     }
+    [[ProgramNgin instance] saveProgram:terminalViewController.programListing];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)updateSubroutinePrimitiveInstruction:(NSMutableArray*)_instructionSet {
+    TerminalViewController* terminalViewController = [[ViewControllerManager instance] terminalViewController];
+    if (terminalViewController.selectedLine.row < [terminalViewController.programListing count]) {
+        NSInteger row = terminalViewController.selectedLine.row;
+        [terminalViewController.programListing replaceObjectAtIndex:row withObject:_instructionSet];
+    } else {
+        [terminalViewController.programListing addObject:_instructionSet];
+    }
+    [[ProgramNgin instance] saveProgram:terminalViewController.programListing];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)updateDoInstruction:(NSMutableArray*)_instructionSet {
     NSNumber* newInstruction = [_instructionSet objectAtIndex:0];
     [self.selectedInstructionSet replaceObjectAtIndex:1 withObject:newInstruction];
+    [[ProgramNgin instance] saveProgram:[[ViewControllerManager instance] terminalViewController].programListing];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)updateDoUntilPredicate:(NSMutableArray*)_instructionSet {
     NSNumber* newInstruction = [_instructionSet objectAtIndex:0];
     [self.selectedInstructionSet replaceObjectAtIndex:2 withObject:newInstruction];
+    [[ProgramNgin instance] saveProgram:[[ViewControllerManager instance] terminalViewController].programListing];
 }
 
 //===================================================================================================================================
@@ -99,11 +116,14 @@
     self.subroutineImageView.hidden = YES;
     self.addSubroutineImageView.hidden = YES;
     switch (self.instructionType) {
-        case PrimitiveInstructionType:
+        case TerminalPrimitiveInstructionType:
             self.instructionsList = [[ProgramNgin instance] getPrimitiveInstructions];
             if ([UserModel level] >= kLEVEL_FOR_SUBROUTINES) {
                 self.subroutineImageView.hidden = NO;
             }
+            break;
+        case SubroutinePrimitiveInstructionType:
+            self.instructionsList = [[ProgramNgin instance] getPrimitiveInstructions];
             break;
         case DoTimesInstructionType:
             self.instructionsList = [[ProgramNgin instance] getDoInstructions];
@@ -152,7 +172,7 @@
             [self.view removeFromSuperview];
             switch (self.instructionType) {
                 case SubroutineInstructionType:
-                    [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:PrimitiveInstructionType];
+                    [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:TerminalPrimitiveInstructionType];
                     break; 
                 default:
                     break;
@@ -221,31 +241,32 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSMutableArray* instructionSet = [self.instructionsList objectAtIndex:indexPath.row];
     ViewControllerManager* viewControllerManager = [ViewControllerManager instance];
-    TerminalViewController* terminalViewController = [viewControllerManager terminalViewController];
     NSString* subroutineName;
     switch (self.instructionType) {
-        case PrimitiveInstructionType:
-            [self updatePrimitiveInstruction:instructionSet forTerminal:terminalViewController];
+        case TerminalPrimitiveInstructionType:
+            [self updateTerminalPrimitiveInstruction:instructionSet];
+            [viewControllerManager terminalViewWillAppear];
+            break;
+        case SubroutinePrimitiveInstructionType:
+            [self updateSubroutinePrimitiveInstruction:instructionSet];
+            [viewControllerManager subroutineViewWillAppear];
             break;
         case DoTimesInstructionType:
             [self updateDoInstruction:instructionSet];
+            [viewControllerManager terminalViewWillAppear];
             break;
         case DoUntilInstructionType:
             [self updateDoInstruction:instructionSet];
+            [viewControllerManager terminalViewWillAppear];
             break;
         case DoUntilPredicateInstructionType:
             [self updateDoUntilPredicate:instructionSet];            
+            [viewControllerManager terminalViewWillAppear];
             break;
         case SubroutineInstructionType:
             subroutineName = [instructionSet objectAtIndex:1];
             [viewControllerManager showSubroutineView:[[CCDirector sharedDirector] openGLView] withName:subroutineName];
             break;            
-    }
-    [terminalViewController.programView reloadData];
-    NSInteger selectedRow = terminalViewController.selectedLine.row;
-    if (selectedRow < ([terminalViewController.programListing count] + 1)) {
-        NSIndexPath* bottomLine = [NSIndexPath indexPathForRow:(selectedRow + 1) inSection:0];
-        [terminalViewController.programView scrollToRowAtIndexPath:bottomLine atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
     [self.view removeFromSuperview];
 }

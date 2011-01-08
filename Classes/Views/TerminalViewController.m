@@ -56,6 +56,7 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.view.frame = self.containerView.frame;
+        self.selectedLine = [NSIndexPath indexPathForRow:0 inSection:0];
         self.editingEnabled = NO;
     }
     return self;
@@ -79,7 +80,12 @@
         self.runImageView.hidden = NO;
     }
     [self.programView reloadData];
-	[super viewWillAppear:animated];
+    NSInteger selectedRow = self.selectedLine.row;
+    if ((selectedRow + 1) == [self.programListing count]) {
+        NSIndexPath* bottomLine = [NSIndexPath indexPathForRow:[self.programListing count] inSection:0];
+        [self.programView scrollToRowAtIndexPath:bottomLine atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+    [super viewWillAppear:animated];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -197,7 +203,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedLine = indexPath;
-    [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:PrimitiveInstructionType];
+    [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:TerminalPrimitiveInstructionType];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
