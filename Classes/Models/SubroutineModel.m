@@ -31,17 +31,17 @@
 #pragma mark SubroutineModel
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)insertSubroutine:(NSMutableArray*)_function withName:(NSString*)_name {
-    SubroutineModel* subroutine = [self findByName:_name];
-    if (subroutine) {
-        subroutine.codeListing = [_function componentsJoinedByString:@";"];
-        subroutine.subroutineName = _name;
-        [subroutine update];
++ (void)insertSubroutine:(NSMutableArray*)_subroutine withName:(NSString*)_name {
+    SubroutineModel* subroutineModel = [self findByName:_name];
+    if (subroutineModel) {
+        subroutineModel.codeListing = [self instructionsToCodeListing:_subroutine];
+        subroutineModel.subroutineName = _name;
+        [subroutineModel update];
     } else {
-        subroutine = [[[SubroutineModel alloc] init] autorelease];
-        subroutine.codeListing = [_function componentsJoinedByString:@";"];
-        subroutine.subroutineName = _name;
-        [subroutine insert];
+        subroutineModel = [[[SubroutineModel alloc] init] autorelease];
+        subroutineModel.codeListing = [self instructionsToCodeListing:_subroutine];
+        subroutineModel.subroutineName = _name;
+        [subroutineModel insert];
     }
 }
 
@@ -85,10 +85,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)modelsToInstructions:(NSMutableArray*)_models {
-	NSMutableArray* instructions = [NSMutableArray arrayWithCapacity:10];
-	for (NSMutableArray* model in _models) {
+	NSMutableArray* instructionSets = [NSMutableArray arrayWithCapacity:10];
+	for (SubroutineModel* model in _models) {
+        [instructionSets addObject:[NSArray arrayWithObjects:[NSNumber numberWithInt:SubroutineProgramInstruction], model.subroutineName, nil]];
     }
-    return instructions;
+    return instructionSets;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -130,6 +131,47 @@
         [instructionStrings addObject:instructionString];
     }
     return [instructionStrings componentsJoinedByString:@"~"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSMutableArray*)codeListingToInstructions:(NSString*)_listing {
+    NSMutableArray* instructions = [NSMutableArray arrayWithCapacity:10];
+    NSArray* subroutineStrings = [_listing componentsSeparatedByString:@"~"];
+    for (NSString* subroutineString in subroutineStrings) {
+        NSArray* instructionSet = [subroutineString componentsSeparatedByString:@"*"];
+        ProgramInstruction instruction = [[instructionSet objectAtIndex:0] intValue];
+        switch (instruction) {
+            case MoveProgramInstruction:
+                instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], nil];
+                break;
+            case TurnLeftProgramInstruction:
+                instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], nil];
+                break;
+            case PutSensorProgramInstruction:
+                instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], nil];
+                break;
+            case GetSampleProgramInstruction:
+                instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], nil];
+                break;
+            case DoTimesProgramInstruction:
+                instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], 
+                                [NSNumber numberWithInt:[[instructionSet objectAtIndex:1] intValue]],
+                                [NSNumber numberWithInt:[[instructionSet objectAtIndex:2] intValue]], nil];
+                break;
+            case DoUntilProgramInstruction:
+                instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], 
+                                [NSNumber numberWithInt:[[instructionSet objectAtIndex:1] intValue]],
+                                [NSNumber numberWithInt:[[instructionSet objectAtIndex:2] intValue]], nil];
+                break;
+            case SubroutineProgramInstruction:
+                instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], 
+                                [instructionSet objectAtIndex:1], nil];
+                break;
+            default:
+                break;
+        }
+    }
+    return instructions;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
