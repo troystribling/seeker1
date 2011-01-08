@@ -97,6 +97,7 @@
 - (id)init {
 	if((self=[super init])) {
         self.counter = 0;
+        self.isTouchEnabled = YES;
         self.statusDisplay = [StatusDisplay createWithFile:@"empty-display.png"];
         [self.statusDisplay insert:self];
         [self.statusDisplay addTerminalText:@"~> boot"];
@@ -159,5 +160,10 @@
         [self insertConnection:@"connected"];
     }    
 }
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+-(void) ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent *)event {
+    [[CCDirector sharedDirector] replaceScene: [MainScene scene]];
+}    
 
 @end

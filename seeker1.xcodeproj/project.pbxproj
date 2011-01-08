@@ -48,6 +48,7 @@
 		050D768C12AF0F6B005EF9BE /* terminal-launcher.png in Resources */ = {isa = PBXBuildFile; fileRef = 050D767112AF0F6B005EF9BE /* terminal-launcher.png */; };
 		050F795012AC670F0017BDE1 /* LauncherView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050F794F12AC670F0017BDE1 /* LauncherView.m */; };
 		0510EDD812BC680E00355F28 /* seeker-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0510EDD712BC680E00355F28 /* seeker-1.png */; };
+		0514FB8512D8040100713A49 /* terminal-launcher-add-subroutine.png in Resources */ = {isa = PBXBuildFile; fileRef = 0514FB8412D8040100713A49 /* terminal-launcher-add-subroutine.png */; };
 		0517EE2E12D2B400006CB4A9 /* DoUntilTerminalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0517EE2D12D2B400006CB4A9 /* DoUntilTerminalCell.m */; };
 		0517EE4912D2C17F006CB4A9 /* DoUntilTerminalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0517EE4812D2C17F006CB4A9 /* DoUntilTerminalCell.xib */; };
 		051806BA12C9903F00568813 /* menu-site.png in Resources */ = {isa = PBXBuildFile; fileRef = 051806B912C9903F00568813 /* menu-site.png */; };
@@ -382,6 +383,7 @@
 		050F794E12AC670F0017BDE1 /* LauncherView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauncherView.h; sourceTree = "<group>"; };
 		050F794F12AC670F0017BDE1 /* LauncherView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LauncherView.m; sourceTree = "<group>"; };
 		0510EDD712BC680E00355F28 /* seeker-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "seeker-1.png"; sourceTree = "<group>"; };
+		0514FB8412D8040100713A49 /* terminal-launcher-add-subroutine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-add-subroutine.png"; sourceTree = "<group>"; };
 		0517EE2C12D2B400006CB4A9 /* DoUntilTerminalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoUntilTerminalCell.h; sourceTree = "<group>"; };
 		0517EE2D12D2B400006CB4A9 /* DoUntilTerminalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoUntilTerminalCell.m; sourceTree = "<group>"; };
 		0517EE4812D2C17F006CB4A9 /* DoUntilTerminalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoUntilTerminalCell.xib; sourceTree = "<group>"; };
@@ -802,12 +804,13 @@
 		050D766E12AF0F6B005EF9BE /* Terminal */ = {
 			isa = PBXGroup;
 			children = (
-				05E4801812D53FC000E6B65E /* terminal-launcher-subroutines.png */,
+				0514FB8412D8040100713A49 /* terminal-launcher-add-subroutine.png */,
 				050D766F12AF0F6B005EF9BE /* terminal-launcher-back.png */,
 				052A060A12CFD712005F1948 /* terminal-launcher-done.png */,
 				051C77C612B0A88300E41A23 /* terminal-launcher-editing.png */,
 				051C779512B091AC00E41A23 /* terminal-launcher-edit.png */,
 				050D767012AF0F6B005EF9BE /* terminal-launcher-run.png */,
+				05E4801812D53FC000E6B65E /* terminal-launcher-subroutines.png */,
 				050D767112AF0F6B005EF9BE /* terminal-launcher.png */,
 			);
 			path = Terminal;
@@ -1558,6 +1561,7 @@
 				0517EE4912D2C17F006CB4A9 /* DoUntilTerminalCell.xib in Resources */,
 				05E4801912D53FC000E6B65E /* terminal-launcher-subroutines.png in Resources */,
 				05E504DE12D587B7009308DA /* CreateSubroutineViewController.xib in Resources */,
+				0514FB8512D8040100713A49 /* terminal-launcher-add-subroutine.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

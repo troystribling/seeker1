@@ -33,6 +33,7 @@
 + (SubroutineModel*)findByName:(NSString*)_name;
 + (NSMutableArray*)findAll;
 + (NSMutableArray*)modelsToInstructions:(NSMutableArray*)_models;
++ (NSString*)instructionsToCodeListing:(NSMutableArray*)_instructionSets;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;

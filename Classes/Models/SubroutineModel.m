@@ -9,6 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "SubroutineModel.h"
 #import "SeekerDbi.h"
+#import "ProgramNgin.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface SubroutineModel (PrivateAPI)
@@ -31,16 +32,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)insertSubroutine:(NSMutableArray*)_function withName:(NSString*)_name {
-    SubroutineModel* function = [self findByName:_name];
-    if (function) {
-        function.codeListing = [_function componentsJoinedByString:@";"];
-        function.subroutineName = _name;
-        [function update];
+    SubroutineModel* subroutine = [self findByName:_name];
+    if (subroutine) {
+        subroutine.codeListing = [_function componentsJoinedByString:@";"];
+        subroutine.subroutineName = _name;
+        [subroutine update];
     } else {
-       function = [[[SubroutineModel alloc] init] autorelease];
-        function.codeListing = [_function componentsJoinedByString:@";"];
-        function.subroutineName = _name;
-        [function insert];
+        subroutine = [[[SubroutineModel alloc] init] autorelease];
+        subroutine.codeListing = [_function componentsJoinedByString:@";"];
+        subroutine.subroutineName = _name;
+        [subroutine insert];
     }
 }
 
@@ -88,6 +89,47 @@
 	for (NSMutableArray* model in _models) {
     }
     return instructions;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSString*)instructionsToCodeListing:(NSMutableArray*)_instructionSets {
+    NSMutableArray* instructionStrings = [NSMutableArray arrayWithCapacity:10];
+    for (NSMutableArray* instructionSet in _instructionSets) {
+        ProgramInstruction instruction = [[instructionSet objectAtIndex:0] intValue];
+        NSString* instructionString;
+        switch (instruction) {
+            case MoveProgramInstruction:
+                instructionString = [NSString stringWithFormat:@"%d", instruction];
+                break;
+            case TurnLeftProgramInstruction:
+                instructionString = [NSString stringWithFormat:@"%d", instruction];
+                break;
+            case PutSensorProgramInstruction:
+                instructionString = [NSString stringWithFormat:@"%d", instruction];
+                break;
+            case GetSampleProgramInstruction:
+                instructionString = [NSString stringWithFormat:@"%d", instruction];
+                break;
+            case DoTimesProgramInstruction:
+                instructionString = [NSString stringWithFormat:@"%d*%d*%d", instruction, 
+                                     [[instructionSet objectAtIndex:1] intValue], 
+                                     [[instructionSet objectAtIndex:2] intValue]];
+                break;
+            case DoUntilProgramInstruction:
+                instructionString = [NSString stringWithFormat:@"%d*%d*%d", instruction, 
+                                     [[instructionSet objectAtIndex:1] intValue], 
+                                     [[instructionSet objectAtIndex:2] intValue]];
+                break;
+            case SubroutineProgramInstruction:
+                instructionString = [NSString stringWithFormat:@"%d*%@", instruction, 
+                                     [[instructionSet objectAtIndex:1] stringValue]];
+                break;
+            default:
+                break;
+        }
+        [instructionStrings addObject:instructionString];
+    }
+    return [instructionStrings componentsJoinedByString:@"~"];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

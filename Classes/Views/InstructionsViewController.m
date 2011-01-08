@@ -15,8 +15,9 @@
 #import "ProgramNgin.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define kINSTRUCTIONS_LAUNCHER_BACK_TAG     1
-#define kINSTRUCTIONS_LAUNCHER_SUBS_TAG     2
+#define kINSTRUCTIONS_LAUNCHER_BACK_TAG         1
+#define kINSTRUCTIONS_LAUNCHER_SUBS_TAG         2
+#define kINSTRUCTIONS_LAUNCHER_ADD_SUB_TAG      3
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface InstructionsViewController (PrivateAPI)
@@ -32,6 +33,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize instructionsView;
+@synthesize subroutineImageView;
+@synthesize addSubroutineImageView;
 @synthesize instructionType;
 @synthesize containerView;
 @synthesize instructionsList;
@@ -93,9 +96,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
+    self.subroutineImageView.hidden = YES;
+    self.addSubroutineImageView.hidden = YES;
     switch (self.instructionType) {
         case PrimitiveInstructionType:
             self.instructionsList = [[ProgramNgin instance] getPrimitiveInstructions];
+            if ([UserModel level] >= kLEVEL_FOR_SUBROUTINES) {
+                self.subroutineImageView.hidden = NO;
+            }
             break;
         case DoTimesInstructionType:
             self.instructionsList = [[ProgramNgin instance] getDoInstructions];
@@ -108,6 +116,7 @@
             break;
         case SubroutineInstructionType:
             self.instructionsList = [SubroutineModel modelsToInstructions:[SubroutineModel findAll]];
+            self.addSubroutineImageView.hidden = NO;
             break;            
         default:
             break;
@@ -141,10 +150,21 @@
     switch (touchTag) {
         case kINSTRUCTIONS_LAUNCHER_BACK_TAG:
             [self.view removeFromSuperview];
+            switch (self.instructionType) {
+                case SubroutineInstructionType:
+                    [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:PrimitiveInstructionType];
+                    break; 
+                default:
+                    break;
+            }
             break;
         case kINSTRUCTIONS_LAUNCHER_SUBS_TAG:
             [self.view removeFromSuperview];
+            [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:SubroutineInstructionType];
             break;
+        case kINSTRUCTIONS_LAUNCHER_ADD_SUB_TAG:
+            [[ViewControllerManager instance] showCreateSubroutineView:[[CCDirector sharedDirector] openGLView]];
+            break;            
         default:
             [super touchesBegan:touches withEvent:event];
             break;
@@ -202,6 +222,7 @@
     NSMutableArray* instructionSet = [self.instructionsList objectAtIndex:indexPath.row];
     ViewControllerManager* viewControllerManager = [ViewControllerManager instance];
     TerminalViewController* terminalViewController = [viewControllerManager terminalViewController];
+    NSString* subroutineName;
     switch (self.instructionType) {
         case PrimitiveInstructionType:
             [self updatePrimitiveInstruction:instructionSet forTerminal:terminalViewController];
@@ -216,7 +237,7 @@
             [self updateDoUntilPredicate:instructionSet];            
             break;
         case SubroutineInstructionType:
-            ;NSString* subroutineName = [instructionSet objectAtIndex:1];
+            subroutineName = [instructionSet objectAtIndex:1];
             [viewControllerManager showSubroutineView:[[CCDirector sharedDirector] openGLView] withName:subroutineName];
             break;            
     }
