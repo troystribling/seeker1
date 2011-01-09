@@ -120,9 +120,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setAttributesWithStatement:(sqlite3_stmt*)statement {
 	self.pk = (int)sqlite3_column_int(statement, 0);
-	char* codeListingVal = (char*)sqlite3_column_text(statement, 1);
-	if (codeListingVal != nil) {		
-		self.codeListing = [[NSString alloc] initWithUTF8String:codeListingVal];
+	const char* codeListingVal = (const char*)sqlite3_column_text(statement, 1);
+	if (codeListingVal != NULL) {		
+		self.codeListing = [NSString stringWithUTF8String:codeListingVal];
 	}
 	self.level = (int)sqlite3_column_int(statement, 2);
 }

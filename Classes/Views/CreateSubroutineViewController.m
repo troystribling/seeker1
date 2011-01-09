@@ -58,6 +58,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
+    self.nameTextField.text = nil;
     [self.nameTextField becomeFirstResponder];
 	[super viewWillAppear:animated];
 }

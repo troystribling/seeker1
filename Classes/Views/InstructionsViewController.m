@@ -47,8 +47,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)updateTerminalPrimitiveInstruction:(NSMutableArray*)_instructionSet {
     TerminalViewController* terminalViewController = [[ViewControllerManager instance] terminalViewController];
-    if (terminalViewController.selectedLine.row < [terminalViewController.programListing count]) {
-        NSInteger row = terminalViewController.selectedLine.row;
+    NSInteger row = terminalViewController.selectedLine.row;
+    if (row < [terminalViewController.programListing count]) {
         [terminalViewController.programListing replaceObjectAtIndex:row withObject:_instructionSet];
     } else {
         [terminalViewController.programListing addObject:_instructionSet];
@@ -58,14 +58,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)updateSubroutinePrimitiveInstruction:(NSMutableArray*)_instructionSet {
-    TerminalViewController* terminalViewController = [[ViewControllerManager instance] terminalViewController];
-    if (terminalViewController.selectedLine.row < [terminalViewController.programListing count]) {
-        NSInteger row = terminalViewController.selectedLine.row;
-        [terminalViewController.programListing replaceObjectAtIndex:row withObject:_instructionSet];
+    SubroutineViewController* subroutineViewController = [[ViewControllerManager instance] subroutineViewController];
+    NSInteger row = subroutineViewController.selectedLine.row;
+    if (row < [subroutineViewController.subroutineListing count]) {
+        [subroutineViewController.subroutineListing replaceObjectAtIndex:row withObject:_instructionSet];
     } else {
-        [terminalViewController.programListing addObject:_instructionSet];
+        [subroutineViewController.subroutineListing addObject:_instructionSet];
     }
-    [[ProgramNgin instance] saveProgram:terminalViewController.programListing];
+    [SubroutineModel insertSubroutine:subroutineViewController.subroutineListing withName:subroutineViewController.subroutineName];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -212,14 +212,23 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return NO;
+    BOOL canEdit = NO;
+    if (self.instructionType == SubroutineInstructionType) {
+        canEdit = YES;
+    }
+    return canEdit;
 }
-
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath*)indexPath {    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
+    if (editingStyle == UITableViewCellEditingStyleDelete && self.instructionType == SubroutineInstructionType) {
+        NSMutableArray* instructionSet = [self.instructionsList objectAtIndex:indexPath.row];
+        [self.instructionsList removeObjectAtIndex:indexPath.row];
+        NSString* subroutineName = [instructionSet objectAtIndex:1]; 
+        SubroutineModel* model = [SubroutineModel findByName:subroutineName];
+        [model destroy];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView reloadData];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
     }   
 }
@@ -231,7 +240,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
+    return NO;
 }
 
 //===================================================================================================================================

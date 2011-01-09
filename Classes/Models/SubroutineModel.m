@@ -148,38 +148,40 @@
     if (_listing) {
         NSArray* subroutineStrings = [_listing componentsSeparatedByString:@"~"];
         for (NSString* subroutineString in subroutineStrings) {
-            NSArray* instructionSet = [subroutineString componentsSeparatedByString:@"*"];
-            ProgramInstruction instruction = [[instructionSet objectAtIndex:0] intValue];
+            NSArray* instructionSetStrings = [subroutineString componentsSeparatedByString:@"*"];
+            ProgramInstruction instruction = [[instructionSetStrings objectAtIndex:0] intValue];
+            NSMutableArray* instructionSet = nil;
             switch (instruction) {
                 case MoveProgramInstruction:
-                    instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], nil];
+                    instructionSet = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], nil];
                     break;
                 case TurnLeftProgramInstruction:
-                    instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], nil];
+                    instructionSet = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], nil];
                     break;
                 case PutSensorProgramInstruction:
-                    instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], nil];
+                    instructionSet = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], nil];
                     break;
                 case GetSampleProgramInstruction:
-                    instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], nil];
+                    instructionSet = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], nil];
                     break;
                 case DoTimesProgramInstruction:
-                    instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], 
-                                    [NSNumber numberWithInt:[[instructionSet objectAtIndex:1] intValue]],
-                                    [NSNumber numberWithInt:[[instructionSet objectAtIndex:2] intValue]], nil];
+                    instructionSet = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], 
+                                     [NSNumber numberWithInt:[[instructionSetStrings objectAtIndex:1] intValue]],
+                                     [NSNumber numberWithInt:[[instructionSetStrings objectAtIndex:2] intValue]], nil];
                     break;
                 case DoUntilProgramInstruction:
-                    instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], 
-                                    [NSNumber numberWithInt:[[instructionSet objectAtIndex:1] intValue]],
-                                    [NSNumber numberWithInt:[[instructionSet objectAtIndex:2] intValue]], nil];
+                    instructionSet = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], 
+                                     [NSNumber numberWithInt:[[instructionSetStrings objectAtIndex:1] intValue]],
+                                     [NSNumber numberWithInt:[[instructionSetStrings objectAtIndex:2] intValue]], nil];
                     break;
                 case SubroutineProgramInstruction:
-                    instructions = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], 
-                                    [instructionSet objectAtIndex:1], nil];
+                    instructionSet = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], 
+                                     [instructionSetStrings objectAtIndex:1], nil];
                     break;
                 default:
                     break;
             }
+            [instructions addObject:instructionSet];
         }
     }
     return instructions;
@@ -227,13 +229,13 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setAttributesWithStatement:(sqlite3_stmt*)statement {
 	self.pk = (int)sqlite3_column_int(statement, 0);
-	char* codeListingVal = (char*)sqlite3_column_text(statement, 1);
-	if (codeListingVal != nil) {		
-		self.codeListing = [[NSString alloc] initWithUTF8String:codeListingVal];
+	const char* codeListingVal = (const char* )sqlite3_column_text(statement, 1);
+	if (codeListingVal != NULL) {		
+		self.codeListing = [NSString stringWithUTF8String:codeListingVal];
 	}
-	char* subroutineNameVal = (char*)sqlite3_column_text(statement, 2);
-	if (subroutineNameVal != nil) {		
-		self.subroutineName = [[NSString alloc] initWithUTF8String:subroutineNameVal];
+	const char* subroutineNameVal = (const char* )sqlite3_column_text(statement, 2);
+	if (subroutineNameVal != NULL) {		
+		self.subroutineName = [NSString stringWithUTF8String:subroutineNameVal];
 	}
 }
 
