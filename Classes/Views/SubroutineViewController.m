@@ -14,7 +14,7 @@
 #import "TerminalCellFactory.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define kSUBROUTINE_LAUNCHER_BACK_TAG   1
+#define kSUBROUTINE_LAUNCHER_DONE_TAG   1
 #define kSUBROUTINE_LAUNCHER_EDIT_TAG   2
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -103,9 +103,10 @@
     UITouch* touch = [touches anyObject];
     NSInteger touchTag = touch.view.tag;
     switch (touchTag) {
-        case kSUBROUTINE_LAUNCHER_BACK_TAG:
+        case kSUBROUTINE_LAUNCHER_DONE_TAG:
             [self.view removeFromSuperview];
             [SubroutineModel insertSubroutine:self.subroutineListing withName:self.subroutineName];
+            [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:SubroutineInstructionType];
             break;
         case kSUBROUTINE_LAUNCHER_EDIT_TAG:
             if (self.editingEnabled) {

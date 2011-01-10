@@ -79,7 +79,7 @@
 						</object>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC40MDM5MjE1Njg2IDAuOTUyOTQxMTc2NSAwLjEwNTg4MjM1MjkAA</bytes>
+							<bytes key="NSRGB">MSAwLjg0MzEzNzI1NDkgMAA</bytes>
 						</object>
 						<object class="NSColor" key="IBUIHighlightedColor">
 							<int key="NSColorSpace">3</int>
@@ -100,18 +100,6 @@
 							<string key="NSResourceName">terminal-launcher.png</string>
 						</object>
 					</object>
-					<object class="IBUIImageView" id="312232493">
-						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{0, 12}, {120, 40}}</string>
-						<reference key="NSSuperview" ref="191373211"/>
-						<int key="IBUITag">1</int>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<object class="NSCustomResource" key="IBUIImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">terminal-launcher-back.png</string>
-						</object>
-					</object>
 					<object class="IBUIImageView" id="1049663981">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
@@ -122,6 +110,18 @@
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">terminal-launcher-edit.png</string>
+						</object>
+					</object>
+					<object class="IBUIImageView" id="953683095">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{0, 12}, {100, 40}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<int key="IBUITag">1</int>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">terminal-launcher-done.png</string>
 						</object>
 					</object>
 				</object>
@@ -200,9 +200,9 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="832698265"/>
 							<reference ref="936229374"/>
-							<reference ref="312232493"/>
 							<reference ref="1049663981"/>
 							<reference ref="923735128"/>
+							<reference ref="953683095"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -228,11 +228,6 @@
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">5</int>
-						<reference key="object" ref="312232493"/>
-						<reference key="parent" ref="191373211"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">6</int>
 						<reference key="object" ref="1049663981"/>
 						<reference key="parent" ref="191373211"/>
@@ -240,6 +235,11 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">12</int>
 						<reference key="object" ref="923735128"/>
+						<reference key="parent" ref="191373211"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">14</int>
+						<reference key="object" ref="953683095"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</object>
@@ -254,11 +254,11 @@
 					<string>1.IBPluginDependency</string>
 					<string>12.IBPluginDependency</string>
 					<string>12.IBViewBoundsToFrameTransform</string>
+					<string>14.IBPluginDependency</string>
+					<string>14.IBViewBoundsToFrameTransform</string>
 					<string>3.IBPluginDependency</string>
 					<string>4.IBPluginDependency</string>
 					<string>4.IBViewBoundsToFrameTransform</string>
-					<string>5.IBPluginDependency</string>
-					<string>5.IBViewBoundsToFrameTransform</string>
 					<string>6.IBPluginDependency</string>
 					<string>6.IBViewBoundsToFrameTransform</string>
 				</object>
@@ -266,20 +266,20 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>SubroutineViewController</string>
 					<string>UIResponder</string>
-					<string>{{807, 317}, {320, 480}}</string>
+					<string>{{557, 261}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAABBoAAAwtAAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<object class="NSAffineTransform">
+						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAwhgAAA</bytes>
+					</object>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAABC6AAAxG8AAA</bytes>
-					</object>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABCIAAAw0wAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -303,7 +303,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">13</int>
+			<int key="maxID">14</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -632,13 +632,13 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>terminal-launcher-back.png</string>
+				<string>terminal-launcher-done.png</string>
 				<string>terminal-launcher-edit.png</string>
 				<string>terminal-launcher.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{125, 40}</string>
+				<string>{100, 40}</string>
 				<string>{100, 40}</string>
 				<string>{320, 65}</string>
 			</object>

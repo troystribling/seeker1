@@ -40,6 +40,7 @@
 @synthesize containerView;
 @synthesize instructionsList;
 @synthesize subroutinesList;
+@synthesize selectedSubroutineName;
 @synthesize selectedInstructionSet;
 
 //===================================================================================================================================
@@ -128,6 +129,7 @@
             break;
         case SubroutinePrimitiveInstructionType:
             self.instructionsList = [[ProgramNgin instance] getPrimitiveInstructions];
+            self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAll]];
             break;
         case DoTimesInstructionType:
             self.instructionsList = [[ProgramNgin instance] getDoInstructions];
@@ -209,7 +211,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.instructionsList count];
+    if (section == 0) {
+        return [self.instructionsList count];
+    } else {
+        return [self.subroutinesList count];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -261,7 +267,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSMutableArray* instructionSet = [self.instructionsList objectAtIndex:indexPath.row];
+    NSMutableArray* instructionSet = nil;
+    if (indexPath.section == 0) {
+        instructionSet = [self.instructionsList objectAtIndex:indexPath.row];
+    } else {
+        instructionSet = [self.subroutinesList objectAtIndex:indexPath.row];
+    }
     ViewControllerManager* viewControllerManager = [ViewControllerManager instance];
     NSString* subroutineName;
     switch (self.instructionType) {
@@ -301,13 +312,19 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {  
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    UILabel* header = [[[UILabel alloc] drawTextInRect:CGRectMake(0.0, 0.0, screenRect.size.width, kTERMINAL_DEFAULT_CELL_HEIGHT)] autorelease];
-    header.font = [UIFont fontWithName:@"Courier" size:22.0];
-    if (section == 0) {
-       header.text = @"primitives" 
-    } else {
-        header.text = @"subroutines" 
+    UILabel* header = nil;
+    if ([self.subroutinesList count] > 0) {
+        CGRect screenRect = [[UIScreen mainScreen] bounds];
+        header = [[[UILabel alloc] initWithFrame:CGRectMake(0.0625 * screenRect.size.width, 0.0, screenRect.size.width, 
+                                                            kTERMINAL_DEFAULT_CELL_HEIGHT)] autorelease];
+        header.textColor = [UIColor colorWithRed:1.0 green:0.843 blue:0.0 alpha:1.0];
+        header.backgroundColor = [UIColor blackColor];
+        header.font = [UIFont fontWithName:@"Courier" size:22.0];
+        if (section == 0) {
+           header.text = @"primitives"; 
+        } else {
+            header.text = @"subroutines";
+        }
     }
     return header; 
 }

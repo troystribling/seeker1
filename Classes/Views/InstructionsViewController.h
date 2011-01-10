@@ -30,6 +30,7 @@ typedef enum tagInstructionType {
     UIView* containerView;
 	NSMutableArray* instructionsList;
     NSMutableArray* subroutinesList;
+    NSString* selectedSubroutineName;
     InstructionType instructionType;
 	NSMutableArray* selectedInstructionSet;
 }
@@ -41,6 +42,7 @@ typedef enum tagInstructionType {
 @property (nonatomic, retain) UIView* containerView;
 @property (nonatomic, retain) NSMutableArray* instructionsList;
 @property (nonatomic, retain) NSMutableArray* subroutinesList;
+@property (nonatomic, retain) NSString* selectedSubroutineName;
 @property (nonatomic, assign) InstructionType instructionType;
 @property (nonatomic, retain) NSMutableArray* selectedInstructionSet;
 

@@ -98,6 +98,17 @@ static ViewControllerManager* thisViewControllerManager = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (InstructionsViewController*)showInstructionsView:(UIView*)_containerView forSubroutine:(NSString*)_selectedSubroutineName {
+    if (self.instructionsViewController == nil) {
+        self.instructionsViewController = [InstructionsViewController inView:_containerView];
+    } 
+    self.instructionsViewController.instructionType = SubroutinePrimitiveInstructionType;
+    self.instructionsViewController.selectedSubroutineName = _selectedSubroutineName;
+    [_containerView addSubview:self.instructionsViewController.view];
+    return self.instructionsViewController;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)removeInstructionsView {
     if (self.instructionsViewController) {
         [self.instructionsViewController viewWillDisappear:NO];
