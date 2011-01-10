@@ -39,6 +39,7 @@
 @synthesize instructionType;
 @synthesize containerView;
 @synthesize instructionsList;
+@synthesize subroutinesList;
 @synthesize selectedInstructionSet;
 
 //===================================================================================================================================
@@ -98,6 +99,7 @@
         self.containerView = _containerView;
         self.view.frame = self.containerView.frame;
         self.instructionsList = [NSMutableArray arrayWithCapacity:10];
+        self.subroutinesList = [NSMutableArray arrayWithCapacity:10];
     }
     return self;
 }
@@ -115,9 +117,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     self.subroutineImageView.hidden = YES;
     self.addSubroutineImageView.hidden = YES;
+    [self.subroutinesList removeAllObjects];
     switch (self.instructionType) {
         case TerminalPrimitiveInstructionType:
             self.instructionsList = [[ProgramNgin instance] getPrimitiveInstructions];
+            self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAll]];
             if ([UserModel level] >= kLEVEL_FOR_SUBROUTINES) {
                 self.subroutineImageView.hidden = NO;
             }
@@ -196,7 +200,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    NSInteger sectionCount = 1;
+    if ([self.subroutinesList count] > 0) {
+        sectionCount = 2;
+    }
+    return sectionCount;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -206,7 +214,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSMutableArray* instructionSet = [self.instructionsList objectAtIndex:indexPath.row];
+    NSMutableArray* instructionSet = nil;
+    if (indexPath.section == 0) {
+        instructionSet = [self.instructionsList objectAtIndex:indexPath.row];
+    } else {
+        instructionSet = [self.subroutinesList objectAtIndex:indexPath.row];
+    }
     return [TerminalCellFactory tableView:tableView listCellForRowAtIndexPath:indexPath forInstructionSet:instructionSet];
 }
 
@@ -284,6 +297,29 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
     NSMutableArray* instructionSet = [self.instructionsList objectAtIndex:indexPath.row];
     return [TerminalCellFactory tableView:tableView heightForRowWithInstructionSet:instructionSet];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {  
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    UILabel* header = [[[UILabel alloc] drawTextInRect:CGRectMake(0.0, 0.0, screenRect.size.width, kTERMINAL_DEFAULT_CELL_HEIGHT)] autorelease];
+    header.font = [UIFont fontWithName:@"Courier" size:22.0];
+    if (section == 0) {
+       header.text = @"primitives" 
+    } else {
+        header.text = @"subroutines" 
+    }
+    return header; 
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGFloat)tableView:(UITableView*)tableView heightForHeaderInSection:(NSInteger)section {
+    return kTERMINAL_DEFAULT_CELL_HEIGHT;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGFloat)tableView:(UITableView*)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.0;
 }
 
 //===================================================================================================================================
