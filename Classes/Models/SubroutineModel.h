@@ -31,8 +31,9 @@
 + (void)drop;
 + (void)create;
 + (void)destroyAll;
-+ (SubroutineModel*)findByName:(NSString*)_name;
++ (SubroutineModel*)findByName:(NSString*)_subroutineName;
 + (NSMutableArray*)findAll;
++ (NSMutableArray*)findAllButName:(NSString*)_subroutineName;
 + (NSMutableArray*)modelsToInstructions:(NSMutableArray*)_models;
 + (NSString*)instructionsToCodeListing:(NSMutableArray*)_instructionSets;
 + (NSMutableArray*)codeListingToInstructions:(NSString*)_listing;

@@ -190,7 +190,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedLine = indexPath;
-    [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:SubroutinePrimitiveInstructionType];
+    [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] forSubroutine:self.subroutineName];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

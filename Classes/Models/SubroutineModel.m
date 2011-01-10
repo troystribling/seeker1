@@ -75,8 +75,8 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (SubroutineModel*)findByName:(NSString*)_name {
-	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM subroutines WHERE subroutineName = '%@'", _name];
++ (SubroutineModel*)findByName:(NSString*)_subroutineName {
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM subroutines WHERE subroutineName = '%@'", _subroutineName];
 	SubroutineModel* model = [[[SubroutineModel alloc] init] autorelease];
 	[[SeekerDbi instance] selectForModel:[SubroutineModel class] withStatement:selectStatement andOutputTo:model];
     if (model.pk == 0) {
@@ -90,6 +90,14 @@
 	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
 	[[SeekerDbi instance] selectAllForModel:[SubroutineModel class] withStatement:@"SELECT * FROM subroutines" andOutputTo:output];
 	return output;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSMutableArray*)findAllButName:(NSString*)_subroutineName {
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM subroutines WHERE subroutineName <> '%@'", _subroutineName];
+    NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
+    [[SeekerDbi instance] selectAllForModel:[SubroutineModel class] withStatement:selectStatement andOutputTo:output];
+    return output;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -132,7 +140,7 @@
                 break;
             case SubroutineProgramInstruction:
                 instructionString = [NSString stringWithFormat:@"%d*%@", instruction, 
-                                     [[instructionSet objectAtIndex:1] stringValue]];
+                                     [instructionSet objectAtIndex:1]];
                 break;
             default:
                 break;

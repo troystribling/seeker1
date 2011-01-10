@@ -129,7 +129,7 @@
             break;
         case SubroutinePrimitiveInstructionType:
             self.instructionsList = [[ProgramNgin instance] getPrimitiveInstructions];
-            self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAll]];
+            self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAllButName:self.selectedSubroutineName]];
             break;
         case DoTimesInstructionType:
             self.instructionsList = [[ProgramNgin instance] getDoInstructions];
@@ -189,6 +189,7 @@
             [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:SubroutineInstructionType];
             break;
         case kINSTRUCTIONS_LAUNCHER_ADD_SUB_TAG:
+            [self.view removeFromSuperview];
             [[ViewControllerManager instance] showCreateSubroutineView:[[CCDirector sharedDirector] openGLView]];
             break;            
         default:
@@ -312,26 +313,30 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {  
-    UILabel* header = nil;
-    if ([self.subroutinesList count] > 0) {
-        CGRect screenRect = [[UIScreen mainScreen] bounds];
-        header = [[[UILabel alloc] initWithFrame:CGRectMake(0.0625 * screenRect.size.width, 0.0, screenRect.size.width, 
-                                                            kTERMINAL_DEFAULT_CELL_HEIGHT)] autorelease];
-        header.textColor = [UIColor colorWithRed:1.0 green:0.843 blue:0.0 alpha:1.0];
-        header.backgroundColor = [UIColor blackColor];
-        header.font = [UIFont fontWithName:@"Courier" size:22.0];
-        if (section == 0) {
-           header.text = @"primitives"; 
-        } else {
-            header.text = @"subroutines";
-        }
+    UIView* headerView = [[[UIView alloc] init] autorelease];
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    UILabel* header = [[[UILabel alloc] initWithFrame:CGRectMake(0.0625 * screenRect.size.width, 0.0, 0.9375 * screenRect.size.width, 
+                                                                 kTERMINAL_DEFAULT_CELL_HEIGHT)] autorelease];
+    header.textColor = [UIColor colorWithRed:1.0 green:0.843 blue:0.0 alpha:1.0];
+    header.backgroundColor = [UIColor blackColor];
+    header.font = [UIFont fontWithName:@"Courier" size:22.0];
+    if (section == 0) {
+       header.text = @"primitives"; 
+    } else {
+        header.text = @"subroutines";
     }
-    return header; 
+    [headerView addSubview:header];
+    return headerView; 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGFloat)tableView:(UITableView*)tableView heightForHeaderInSection:(NSInteger)section {
-    return kTERMINAL_DEFAULT_CELL_HEIGHT;
+    if ([self.subroutinesList count] > 0) {
+        return kTERMINAL_DEFAULT_CELL_HEIGHT;
+    } else {
+        return 0;
+    }
+
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

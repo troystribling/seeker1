@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "CreateSubroutineViewController.h"
+#import "cocos2d.h"
 #import "ViewControllerManager.h"
 #import "SubroutineModel.h"
 
@@ -110,8 +111,8 @@
         returnStatus = NO;
     } else {
         [SubroutineModel createSubroutineWithName:subroutineName];
-        [[ViewControllerManager instance] instructionsViewWillAppear];
         [self.view removeFromSuperview];
+        [[ViewControllerManager instance] showSubroutineView:[[CCDirector sharedDirector] openGLView] withName:subroutineName];
     }
 	return returnStatus; 
 }
