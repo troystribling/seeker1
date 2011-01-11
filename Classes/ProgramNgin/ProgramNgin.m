@@ -9,6 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "ProgramNgin.h"
 #import "UserModel.h"
+#import "SubroutineModel.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 static ProgramNgin* thisProgramNgin = nil;
@@ -17,6 +18,8 @@ static ProgramNgin* thisProgramNgin = nil;
 @interface ProgramNgin (PrivateAPI)
 
 - (void)compile;
+- (void)compileSubrotine:(NSMutableArray*)_instructionSet;
+- (void)compileInstructionSet:(NSMutableArray*)_instrctionSet;
 
 @end
 
@@ -37,35 +40,51 @@ static ProgramNgin* thisProgramNgin = nil;
 - (void)compile {
     [self.compiledProgram removeAllObjects];
     for (NSMutableArray* instructionSet in self.program) {
-        ProgramInstruction instruction = [[instructionSet objectAtIndex:0] intValue];
-        ProgramInstruction doTimesInstruction;
-        switch (instruction) {
-            case MoveProgramInstruction:
-                [self.compiledProgram addObject:instructionSet];
-                break;
-            case TurnLeftProgramInstruction:
-                [self.compiledProgram addObject:instructionSet];
-                break;
-            case PutSensorProgramInstruction:
-                [self.compiledProgram addObject:instructionSet];
-                break;
-            case GetSampleProgramInstruction:
-                [self.compiledProgram addObject:instructionSet];
-                break;
-            case DoTimesProgramInstruction:
-                doTimesInstruction = [[instructionSet objectAtIndex:1] intValue];
-                NSInteger doTimesNumber = [[instructionSet objectAtIndex:2] intValue];
-                for (int i = 0; i < doTimesNumber; i++) {
-                    [self.compiledProgram addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:doTimesInstruction], nil]];
-                }
-                break;
-            case DoUntilProgramInstruction:
-                break;
-            case SubroutineProgramInstruction:
-                break;
-            default:
-                break;
-        }
+        [self compileInstructionSet:instructionSet];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)compileSubrotine:(NSMutableArray*)_instructionSet {
+    NSString* subroutineName = [_instructionSet objectAtIndex:1];
+    SubroutineModel* model = [SubroutineModel findByName:subroutineName];
+    NSMutableArray* subroutineInstructionSets = [model codeListingToInstrictions];
+    for (NSMutableArray* subroutineInstructionSet in subroutineInstructionSets) {
+        [self compileInstructionSet:subroutineInstructionSet];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)compileInstructionSet:(NSMutableArray*)_instrctionSet {
+    ProgramInstruction instruction = [[_instrctionSet objectAtIndex:0] intValue];
+    ProgramInstruction doTimesInstruction;
+    switch (instruction) {
+        case MoveProgramInstruction:
+            [self.compiledProgram addObject:_instrctionSet];
+            break;
+        case TurnLeftProgramInstruction:
+            [self.compiledProgram addObject:_instrctionSet];
+            break;
+        case PutSensorProgramInstruction:
+            [self.compiledProgram addObject:_instrctionSet];
+            break;
+        case GetSampleProgramInstruction:
+            [self.compiledProgram addObject:_instrctionSet];
+            break;
+        case DoTimesProgramInstruction:
+            doTimesInstruction = [[_instrctionSet objectAtIndex:1] intValue];
+            NSInteger doTimesNumber = [[_instrctionSet objectAtIndex:2] intValue];
+            for (int i = 0; i < doTimesNumber; i++) {
+                [self.compiledProgram addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:doTimesInstruction], nil]];
+            }
+            break;
+        case DoUntilProgramInstruction:
+            break;
+        case SubroutineProgramInstruction:
+            [self compileSubrotine:_instrctionSet];
+            break;
+        default:
+            break;
     }
 }
 
