@@ -23,10 +23,14 @@ typedef enum tagProgramInstruction {
     AtStationPredicateProgramInstruction,
 } ProgramInstruction;
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+@class SeekerSprite;
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ProgramNgin : NSObject {
     NSMutableArray* program;
     NSMutableArray* compiledProgram;
+    NSMutableArray* doUntilStack;
     BOOL programHalted;
     BOOL programRunning;
     NSInteger nextLine;
@@ -35,6 +39,7 @@ typedef enum tagProgramInstruction {
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) NSMutableArray* program;
 @property (nonatomic, retain) NSMutableArray* compiledProgram;
+@property (nonatomic, retain) NSMutableArray* doUntilStack;
 @property (nonatomic, assign) BOOL programHalted;
 @property (nonatomic, assign) BOOL programRunning;
 @property (nonatomic, assign) NSInteger nextLine;
@@ -55,6 +60,6 @@ typedef enum tagProgramInstruction {
 - (BOOL)programIsLoaded;
 - (BOOL)programIsRunning;
 - (BOOL)programIsHalted;
-- (NSMutableArray*)nextInstruction;
+- (NSMutableArray*)nextInstructionForItem:(NSDictionary*)_item terrain:(NSDictionary*)_terrrain sand:(NSDictionary*)_sand andSeeker:(SeekerSprite*)_seeker;
 
 @end

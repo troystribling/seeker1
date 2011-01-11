@@ -45,6 +45,7 @@ typedef enum tagMapID {
     CCTMXLayer* mapLayer;
     CCTMXLayer* terrainLayer;
     CCTMXLayer* itemsLayer;
+    CCTMXLayer* sandLayer;
     CCTMXObjectGroup* objectsLayer;
     CCSprite* crash;
     BOOL levelResetSeeker;
@@ -67,6 +68,7 @@ typedef enum tagMapID {
 @property (nonatomic, retain) CCTMXLayer* mapLayer;
 @property (nonatomic, retain) CCTMXLayer* terrainLayer;
 @property (nonatomic, retain) CCTMXLayer* itemsLayer;
+@property (nonatomic, retain) CCTMXLayer* sandLayer;
 @property (nonatomic, retain) CCTMXObjectGroup* objectsLayer;
 @property (nonatomic, assign) CCSprite* crash;
 @property (nonatomic, assign) BOOL levelResetSeeker;

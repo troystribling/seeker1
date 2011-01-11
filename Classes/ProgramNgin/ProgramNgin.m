@@ -10,6 +10,7 @@
 #import "ProgramNgin.h"
 #import "UserModel.h"
 #import "SubroutineModel.h"
+#import "SeekerSprite.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 static ProgramNgin* thisProgramNgin = nil;
@@ -20,6 +21,7 @@ static ProgramNgin* thisProgramNgin = nil;
 - (void)compile;
 - (void)compileSubrotine:(NSMutableArray*)_instructionSet;
 - (void)compileInstructionSet:(NSMutableArray*)_instrctionSet;
+- (NSMutableArray*)doUntilNextInstructionForItem:(NSDictionary*)_item terrain:(NSDictionary*)_terrrain sand:(NSDictionary*)_sand andSeeker:(SeekerSprite*)_seeker;
 
 @end
 
@@ -29,6 +31,7 @@ static ProgramNgin* thisProgramNgin = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize program;
 @synthesize compiledProgram;
+@synthesize doUntilStack;
 @synthesize programHalted;
 @synthesize programRunning;
 @synthesize nextLine;
@@ -88,6 +91,8 @@ static ProgramNgin* thisProgramNgin = nil;
     }
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+
 //===================================================================================================================================
 #pragma mark ProgramNgin
 
@@ -106,6 +111,7 @@ static ProgramNgin* thisProgramNgin = nil;
 	if((self=[super init])) {
         self.program = [NSMutableArray arrayWithCapacity:10];
         self.compiledProgram = [NSMutableArray arrayWithCapacity:10];
+        self.doUntilStack = [NSMutableArray arrayWithCapacity:10];
         self.nextLine = 0;
 	}
 	return self;
@@ -249,18 +255,23 @@ static ProgramNgin* thisProgramNgin = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSMutableArray*)nextInstruction {
+- (NSMutableArray*)nextInstructionForItem:(NSDictionary*)_item terrain:(NSDictionary*)_terrrain sand:(NSDictionary*)_sand andSeeker:(SeekerSprite*)_seeker {
     NSMutableArray* instruction = nil;
-    NSInteger codeLines = [self.compiledProgram count];
-    if (self.nextLine < codeLines - 1) {
-        instruction = [self.compiledProgram objectAtIndex:self.nextLine];
-        self.nextLine++;
-    } else if (self.nextLine == codeLines - 1) {
-        instruction = [self.compiledProgram objectAtIndex:self.nextLine];
-        self.nextLine = 0;
+    NSInteger stackDepth = [self.doUntilStack count];
+    if (stackDepth == 0) {
+        NSInteger codeLines = [self.compiledProgram count];
+        if (self.nextLine < codeLines - 1) {
+            instruction = [self.compiledProgram objectAtIndex:self.nextLine];
+            self.nextLine++;
+        } else if (self.nextLine == codeLines - 1) {
+            instruction = [self.compiledProgram objectAtIndex:self.nextLine];
+            self.nextLine = 0;
+        } else {
+            [self stopProgram];
+        }   
     } else {
-        [self stopProgram];
-    }   
+        instruction = [self doUntilNextInstructionForItem:_item terrain:_terrrain sand:_sand andSeeker:_seeker];
+    }
     return instruction;
 }
 

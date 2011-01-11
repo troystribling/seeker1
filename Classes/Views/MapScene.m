@@ -42,12 +42,12 @@
 - (NSDictionary*)getTileProperties:(CGPoint)_point forLayer:(CCTMXLayer*)_layer;
 - (CGPoint)getSeekerTile;
 - (CGFloat)tileUsedEnergy;
-- (BOOL)isItemTileType:(NSString*)_itemType;
-- (BOOL)isStationTile;
+- (BOOL)isItemTile:(NSDictionary*)_itemProperties ofType:(NSString*)_itemType;
+- (BOOL)isStationTile:(NSDictionary*)_itemProperties;
 - (void)move;
 - (void)moveMapTo:(CGPoint)_point withDuration:(CGFloat)_duration;
-- (void)putSensor;
-- (void)getSample;
+- (void)putSensor:(NSDictionary*)_properties atPoint:(CGPoint)_point;
+- (void)getSample:(NSDictionary*)_properties atPoint:(CGPoint)_point;
 // display parameter updates
 - (void)updateEnergy;
 - (void)updateSensorCount;
@@ -88,6 +88,7 @@
 @synthesize mapLayer;
 @synthesize terrainLayer;
 @synthesize itemsLayer;
+@synthesize sandLayer;
 @synthesize objectsLayer;
 @synthesize crash;
 @synthesize levelResetSeeker;
@@ -143,6 +144,7 @@
     self.mapLayer = [map layerNamed:@"map"];
     self.terrainLayer = [map layerNamed:@"terrain"];
     self.itemsLayer = [map layerNamed:@"items"];
+    self.sandLayer = [map layerNamed:@"sand"];
     self.objectsLayer = [map objectGroupNamed:@"objects"];
     self.startSite = [self.objectsLayer objectNamed:@"startSite"];
     return map;
@@ -313,7 +315,11 @@
 - (void)executeSeekerInstruction:(ccTime)dt {
     NSMutableArray* instructionSet = nil;
     ProgramNgin* ngin = [ProgramNgin instance];
-    if ((instructionSet = [ngin nextInstruction])) {
+    CGPoint seekerTile = [self getSeekerTile];
+    NSDictionary* itemProperties = [self getTileProperties:seekerTile forLayer:self.itemsLayer];
+    NSDictionary* terrainProperties = [self getTileProperties:seekerTile forLayer:self.terrainLayer];
+    NSDictionary* sandProperties = [self getTileProperties:seekerTile forLayer:self.sandLayer];
+    if ((instructionSet = [ngin nextInstructionForItem:itemProperties terrain:terrainProperties sand:sandProperties andSeeker:self.seeker1])) {
         ProgramInstruction instruction = [[instructionSet objectAtIndex:0] intValue];
         switch (instruction) {
             case MoveProgramInstruction:
@@ -323,10 +329,10 @@
                 [self.seeker1 turnLeft];
                 break;
             case PutSensorProgramInstruction:
-                [self putSensor];
+                [self putSensor:itemProperties atPoint:seekerTile];
                 break;
             case GetSampleProgramInstruction:
-                [self getSample];
+                [self getSample:itemProperties atPoint:seekerTile];
                 break;
             case DoTimesProgramInstruction:
                 break;
@@ -336,7 +342,7 @@
                 break;
         }
     }
-    if ([self isStationTile]) {
+    if ([self isStationTile:itemProperties]) {
         [self.seeker1 emptySampleBin];
         [self.seeker1 loadSensorBin];
     }
@@ -386,12 +392,10 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)isItemTileType:(NSString*)_itemType {
+- (BOOL)isItemTile:(NSDictionary*)_itemProperties ofType:(NSString*)_itemType {
     BOOL status = NO;
-    CGPoint seekerTile = [self getSeekerTile];
-    NSDictionary* itemProperties = [self getTileProperties:seekerTile forLayer:self.itemsLayer];
-    if (itemProperties) {
-        NSString* itemID = [itemProperties valueForKey:@"itemID"];
+    if (_itemProperties) {
+        NSString* itemID = [_itemProperties valueForKey:@"itemID"];
         if ([itemID isEqualToString:_itemType]) {
             status = YES;
         }            
@@ -400,8 +404,8 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)isStationTile {
-    return [self isItemTileType:@"station"];
+- (BOOL)isStationTile:(NSDictionary*)_itemProperties {
+    return [self isItemTile:_itemProperties ofType:@"station"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -437,16 +441,14 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)putSensor {
+- (void)putSensor:(NSDictionary*)_properties atPoint:(CGPoint)_point {
     ProgramNgin* ngin = [ProgramNgin instance];
-    CGPoint seekerTile = [self getSeekerTile];
-    NSDictionary* properties = [self getTileProperties:seekerTile forLayer:self.itemsLayer];
-    if (properties) {
-        NSString* itemID = [properties valueForKey:@"itemID"];
+    if (_properties) {
+        NSString* itemID = [_properties valueForKey:@"itemID"];
         if ([itemID isEqualToString:@"sensorSite"]) {   
             if ([self.seeker1 putSensor]) {
-                [self.itemsLayer removeTileAt:seekerTile];
-                [self.itemsLayer setTileGID:kMAP_SENSOR_GID at:seekerTile];
+                [self.itemsLayer removeTileAt:_point];
+                [self.itemsLayer setTileGID:kMAP_SENSOR_GID at:_point];
                 [self updateSensorCount];
             } else {
                 [ngin haltProgram];
@@ -466,15 +468,13 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)getSample {
+- (void)getSample:(NSDictionary*)_properties atPoint:(CGPoint)_point {
     ProgramNgin* ngin = [ProgramNgin instance];
-    CGPoint seekerTile = [self getSeekerTile];
-    NSDictionary* properties = [self getTileProperties:seekerTile forLayer:self.itemsLayer];
-    if (properties) {
-        NSString* itemID = [properties valueForKey:@"itemID"];
+    if (_properties) {
+        NSString* itemID = [_properties valueForKey:@"itemID"];
         if ([itemID isEqualToString:@"sample"]) {        
             if ([self.seeker1 getSample]) {
-                [self.itemsLayer removeTileAt:seekerTile];
+                [self.itemsLayer removeTileAt:_point];
                 [self updateSampleCount];
             } else {
                 [ngin haltProgram];
