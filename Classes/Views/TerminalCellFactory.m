@@ -52,6 +52,8 @@
             break;
         case SubroutineProgramInstruction:
             break;            
+        case PathBlockedPredicateProgramInstruction:
+            break;
         case SensorBinEmptyPredicateProgramInstruction:
             break;
         case SampleBinFullPredicateProgramInstruction:
@@ -88,6 +90,9 @@
         case SubroutineProgramInstruction:
             tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
             break;            
+        case PathBlockedPredicateProgramInstruction:
+            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            break;
         case SensorBinEmptyPredicateProgramInstruction:
             tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
             break;
@@ -127,6 +132,9 @@
         case SubroutineProgramInstruction:
             tableCell = [TerminalCell tableView:tableView listCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
             break;            
+        case PathBlockedPredicateProgramInstruction:
+            tableCell = [TerminalCell tableView:tableView listCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            break;
         case SensorBinEmptyPredicateProgramInstruction:
             tableCell = [TerminalCell tableView:tableView listCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
             break;

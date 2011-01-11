@@ -23,6 +23,11 @@ static ProgramNgin* thisProgramNgin = nil;
 - (void)compileInstructionSet:(NSMutableArray*)_instrctionSet;
 - (NSMutableArray*)doUntilNextInstructionForItem:(NSDictionary*)_item terrain:(NSDictionary*)_terrrain sand:(NSDictionary*)_sand andSeeker:(SeekerSprite*)_seeker;
 
+- (BOOL)pathBlocked:(NSDictionary*)_terrrain;
+- (BOOL)sensorBinEmpty:(SeekerSprite*)_seeker;
+- (BOOL)sampleBinFull:(SeekerSprite*)_seeker;
+- (BOOL)atStation:(NSDictionary*)_terrrain;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -32,6 +37,7 @@ static ProgramNgin* thisProgramNgin = nil;
 @synthesize program;
 @synthesize compiledProgram;
 @synthesize doUntilStack;
+@synthesize doUntilStackLine;
 @synthesize programHalted;
 @synthesize programRunning;
 @synthesize nextLine;
@@ -82,6 +88,8 @@ static ProgramNgin* thisProgramNgin = nil;
             }
             break;
         case DoUntilProgramInstruction:
+            [self.doUntilStack insertObject:_instrctionSet atIndex:0];
+            [self.doUntilStackLine insertObject:[NSNumber numberWithInt:0] atIndex:0];
             break;
         case SubroutineProgramInstruction:
             [self compileSubrotine:_instrctionSet];
@@ -92,6 +100,52 @@ static ProgramNgin* thisProgramNgin = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (NSMutableArray*)doUntilNextInstructionForItem:(NSDictionary*)_item terrain:(NSDictionary*)_terrrain sand:(NSDictionary*)_sand andSeeker:(SeekerSprite*)_seeker {
+    NSMutableArray* instructionSet = [self.doUntilStack objectAtIndex:0];
+    NSMutableArray* instruction = [instructionSet objectAtIndex:1];
+    ProgramInstruction predicateInstruction = [[instructionSet objectAtIndex:2] intValue];
+    BOOL predicateTrue = YES;
+    switch (predicateInstruction) {
+        case PathBlockedPredicateProgramInstruction:
+            predicateTrue = [self pathBlocked:_terrrain];
+            break;
+        case SensorBinEmptyPredicateProgramInstruction:
+            predicateTrue = [self sensorBinEmpty:_seeker];
+            break;
+        case SampleBinFullPredicateProgramInstruction:
+            predicateTrue = [self sampleBinFull:_seeker];
+            break;
+        case AtStationPredicateProgramInstruction:
+            predicateTrue = [self atStation:_item];
+            break;
+        default:
+            break;
+    }
+    if (predicateTrue) {
+    } else {
+    }
+    return instruction;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)pathBlocked:(NSDictionary*)_terrrain {
+    return YES;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)sensorBinEmpty:(SeekerSprite*)_seeker {
+    return YES;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)sampleBinFull:(SeekerSprite*)_seeker {
+    return YES;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)atStation:(NSDictionary*)_item {
+    return YES;
+}
 
 //===================================================================================================================================
 #pragma mark ProgramNgin
@@ -133,7 +187,7 @@ static ProgramNgin* thisProgramNgin = nil;
     if (level >= kLEVEL_FOR_UNTIL) {
         [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:DoUntilProgramInstruction],
                                                                [NSNumber numberWithInt:MoveProgramInstruction], 
-                                                               [NSNumber numberWithInt:SensorBinEmptyPredicateProgramInstruction], nil]];
+                                                               [NSNumber numberWithInt:PathBlockedPredicateProgramInstruction], nil]];
     }
     return primatives;
 }
@@ -183,6 +237,9 @@ static ProgramNgin* thisProgramNgin = nil;
         case DoUntilProgramInstruction:
             break;
         case SubroutineProgramInstruction:
+            break;
+        case PathBlockedPredicateProgramInstruction:
+            instructionString = @"path blocked";
             break;
         case SensorBinEmptyPredicateProgramInstruction:
             instructionString = @"sensor bin empty";
