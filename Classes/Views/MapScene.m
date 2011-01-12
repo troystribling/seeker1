@@ -650,6 +650,7 @@
         self.levelCompleted = NO;
         self.nextLevel = NO;
         [self.statusDisplay insert:self];
+        [[ProgramNgin instance] deleteProgram];
         [self initLevel];
         [self schedule:@selector(nextFrame:)];
 	}

@@ -19,8 +19,8 @@ static ProgramNgin* thisProgramNgin = nil;
 @interface ProgramNgin (PrivateAPI)
 
 - (void)compile;
-- (void)compileSubrotine:(NSMutableArray*)_instructionSet;
-- (void)compileInstructionSet:(NSMutableArray*)_instrctionSet;
+- (void)compileSubrotine:(NSMutableArray*)_instructionSet to:(NSMutableArray*)_program;
+- (void)compileInstructionSet:(NSMutableArray*)_instrctionSet to:(NSMutableArray*)_program;
 - (NSMutableArray*)doUntilNextInstructionForItem:(NSDictionary*)_item terrain:(NSDictionary*)_terrrain sand:(NSDictionary*)_sand andSeeker:(SeekerSprite*)_seeker;
 - (BOOL)pathBlocked:(NSDictionary*)_terrrain;
 - (BOOL)sensorBinEmpty:(SeekerSprite*)_seeker;
@@ -48,55 +48,57 @@ static ProgramNgin* thisProgramNgin = nil;
 - (void)compile {
     [self.compiledProgram removeAllObjects];
     for (NSMutableArray* instructionSet in self.program) {
-        [self compileInstructionSet:instructionSet];
+        [self compileInstructionSet:instructionSet to:self.compiledProgram];
     }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)compileSubrotine:(NSMutableArray*)_instructionSet {
+- (void)compileSubrotine:(NSMutableArray*)_instructionSet to:(NSMutableArray*)_program {
     NSString* subroutineName = [_instructionSet objectAtIndex:1];
     SubroutineModel* model = [SubroutineModel findByName:subroutineName];
     NSMutableArray* subroutineInstructionSets = [model codeListingToInstrictions];
     for (NSMutableArray* subroutineInstructionSet in subroutineInstructionSets) {
-        [self compileInstructionSet:subroutineInstructionSet];
+        [self compileInstructionSet:subroutineInstructionSet to:_program];
     }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)compileInstructionSet:(NSMutableArray*)_instrctionSet {
+- (void)compileInstructionSet:(NSMutableArray*)_instrctionSet to:(NSMutableArray*)_program {
     ProgramInstruction instruction = [[_instrctionSet objectAtIndex:0] intValue];
     NSMutableArray* doTimesInstructionSet;
     switch (instruction) {
         case MoveProgramInstruction:
-            [self.compiledProgram addObject:_instrctionSet];
+            [_program addObject:_instrctionSet];
             break;
         case TurnLeftProgramInstruction:
-            [self.compiledProgram addObject:_instrctionSet];
+            [_program addObject:_instrctionSet];
             break;
         case PutSensorProgramInstruction:
-            [self.compiledProgram addObject:_instrctionSet];
+            [_program addObject:_instrctionSet];
             break;
         case GetSampleProgramInstruction:
-            [self.compiledProgram addObject:_instrctionSet];
+            [_program addObject:_instrctionSet];
             break;
         case DoTimesProgramInstruction:
             doTimesInstructionSet = [_instrctionSet objectAtIndex:1];
             ProgramInstruction doTimesInstruction = [[doTimesInstructionSet objectAtIndex:0] intValue];
             NSInteger doTimesNumber = [[_instrctionSet objectAtIndex:2] intValue];
             if (doTimesInstruction == SubroutineProgramInstruction) {
+                for (int i = 0; i < doTimesNumber; i++) {
+                    [self compileSubrotine:doTimesInstructionSet to:_program];
+                }
             } else {
                 for (int i = 0; i < doTimesNumber; i++) {
-                    [self.compiledProgram addObject:doTimesInstructionSet];
+                    [_program addObject:doTimesInstructionSet];
                 }
             }
-
             break;
         case DoUntilProgramInstruction:
             [self.doUntilStack insertObject:_instrctionSet atIndex:0];
             [self.doUntilStackLine insertObject:[NSNumber numberWithInt:0] atIndex:0];
             break;
         case SubroutineProgramInstruction:
-            [self compileSubrotine:_instrctionSet];
+            [self compileSubrotine:_instrctionSet to:_program];
             break;
         default:
             break;

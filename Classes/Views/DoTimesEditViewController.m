@@ -61,8 +61,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
     [self.numberTextField becomeFirstResponder]; 
-    NSString* number = [NSString stringWithFormat:@"%d", [[self.terminalCell.instructionSet objectAtIndex:2] intValue]];
-    self.numberTextField.text = number;
+    self.numberTextField.text = @"";
 	[super viewWillAppear:animated];
 }
 
