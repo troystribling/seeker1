@@ -89,6 +89,7 @@
     switch (touchTag) {
         case kCREATE_SUBROUTINE_LAUNCHER_BACK_TAG:
             [self.view removeFromSuperview];
+            [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:SubroutineInstructionType];
             break;
         default:
             [super touchesBegan:touches withEvent:event];
