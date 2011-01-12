@@ -60,7 +60,7 @@
     cell.instructionLabel.userInteractionEnabled = YES;
     cell.predicateLabel.userInteractionEnabled = YES;
     
-    NSString* instructionString = [[ProgramNgin instance] instructionToString:[[_instructionSet objectAtIndex:1] intValue]];
+    NSString* instructionString = [[ProgramNgin instance] iteratedInstructionString:_instructionSet];
     CGSize instructionSize = [cell itemSize:instructionString];
     CGRect instructionRect = cell.instructionLabel.frame;
     CGRect instructionClosingBracketRect = cell.instructionClosingBracketLabel.frame;

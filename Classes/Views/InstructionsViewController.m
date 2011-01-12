@@ -72,8 +72,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)updateDoInstruction:(NSMutableArray*)_instructionSet {
-    NSNumber* newInstruction = [_instructionSet objectAtIndex:0];
-    [self.selectedInstructionSet replaceObjectAtIndex:1 withObject:newInstruction];
+    [self.selectedInstructionSet replaceObjectAtIndex:1 withObject:_instructionSet];
     [[ProgramNgin instance] saveProgram:[[ViewControllerManager instance] terminalViewController].programListing];
 }
 
@@ -133,9 +132,11 @@
             break;
         case DoTimesInstructionType:
             self.instructionsList = [[ProgramNgin instance] getDoInstructions];
+            self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAllButName:self.selectedSubroutineName]];
             break;
         case DoUntilInstructionType:
             self.instructionsList = [[ProgramNgin instance] getDoInstructions];
+            self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAllButName:self.selectedSubroutineName]];
             break;
         case DoUntilPredicateInstructionType:
             self.instructionsList = [[ProgramNgin instance] getDoUntilPredicates];

@@ -22,7 +22,6 @@ static ProgramNgin* thisProgramNgin = nil;
 - (void)compileSubrotine:(NSMutableArray*)_instructionSet;
 - (void)compileInstructionSet:(NSMutableArray*)_instrctionSet;
 - (NSMutableArray*)doUntilNextInstructionForItem:(NSDictionary*)_item terrain:(NSDictionary*)_terrrain sand:(NSDictionary*)_sand andSeeker:(SeekerSprite*)_seeker;
-
 - (BOOL)pathBlocked:(NSDictionary*)_terrrain;
 - (BOOL)sensorBinEmpty:(SeekerSprite*)_seeker;
 - (BOOL)sampleBinFull:(SeekerSprite*)_seeker;
@@ -66,7 +65,7 @@ static ProgramNgin* thisProgramNgin = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)compileInstructionSet:(NSMutableArray*)_instrctionSet {
     ProgramInstruction instruction = [[_instrctionSet objectAtIndex:0] intValue];
-    ProgramInstruction doTimesInstruction;
+    NSMutableArray* doTimesInstructionSet;
     switch (instruction) {
         case MoveProgramInstruction:
             [self.compiledProgram addObject:_instrctionSet];
@@ -81,11 +80,16 @@ static ProgramNgin* thisProgramNgin = nil;
             [self.compiledProgram addObject:_instrctionSet];
             break;
         case DoTimesProgramInstruction:
-            doTimesInstruction = [[_instrctionSet objectAtIndex:1] intValue];
+            doTimesInstructionSet = [_instrctionSet objectAtIndex:1];
+            ProgramInstruction doTimesInstruction = [[doTimesInstructionSet objectAtIndex:0] intValue];
             NSInteger doTimesNumber = [[_instrctionSet objectAtIndex:2] intValue];
-            for (int i = 0; i < doTimesNumber; i++) {
-                [self.compiledProgram addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:doTimesInstruction], nil]];
+            if (doTimesInstruction == SubroutineProgramInstruction) {
+            } else {
+                for (int i = 0; i < doTimesNumber; i++) {
+                    [self.compiledProgram addObject:doTimesInstructionSet];
+                }
             }
+
             break;
         case DoUntilProgramInstruction:
             [self.doUntilStack insertObject:_instrctionSet atIndex:0];
@@ -181,12 +185,12 @@ static ProgramNgin* thisProgramNgin = nil;
     NSInteger level = [UserModel level];
     if (level >= kLEVEL_FOR_ITERATIONS) {
         [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:DoTimesProgramInstruction], 
-                                                               [NSNumber numberWithInt:MoveProgramInstruction], 
+                                                               [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:MoveProgramInstruction], nil], 
                                                                [NSNumber numberWithInt:1], nil]];
     }
     if (level >= kLEVEL_FOR_UNTIL) {
         [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:DoUntilProgramInstruction],
-                                                               [NSNumber numberWithInt:MoveProgramInstruction], 
+                                                               [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:MoveProgramInstruction], nil], 
                                                                [NSNumber numberWithInt:PathBlockedPredicateProgramInstruction], nil]];
     }
     return primatives;
@@ -249,6 +253,26 @@ static ProgramNgin* thisProgramNgin = nil;
             break;
         case AtStationPredicateProgramInstruction:
             instructionString = @"at station";
+            break;
+    }
+    return instructionString;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSString*)iteratedInstructionString:(NSMutableArray*)_instructionSet {
+    NSString* instructionString = nil;
+    ProgramInstruction instruction = [[[_instructionSet objectAtIndex:1] objectAtIndex:0] intValue];
+    switch (instruction) {
+        case MoveProgramInstruction:
+        case TurnLeftProgramInstruction:
+        case PutSensorProgramInstruction:
+        case GetSampleProgramInstruction:
+            instructionString = [self instructionToString:instruction];
+            break;
+        case SubroutineProgramInstruction:
+            instructionString = [[_instructionSet objectAtIndex:1] objectAtIndex:1];
+            break;
+        default:
             break;
     }
     return instructionString;

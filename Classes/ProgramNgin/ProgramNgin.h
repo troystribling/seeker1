@@ -54,6 +54,7 @@ typedef enum tagProgramInstruction {
 - (NSMutableArray*)getDoUntilPredicates;
 - (NSMutableArray*)getSubroutines;
 - (NSString*)instructionToString:(ProgramInstruction)_instruction;
+- (NSString*)iteratedInstructionString:(NSMutableArray*)_instructionSet;
 - (void)loadProgram:(NSMutableArray*)_program;
 - (void)saveProgram:(NSMutableArray*)_program;
 - (void)deleteProgram;
