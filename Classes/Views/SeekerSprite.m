@@ -128,7 +128,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGPoint)positionDeltaAlongBearing:(CGSize)_delta {
-    CGPoint bearingDelta;
+    CGPoint bearingDelta = CGPointMake(0.0, 0.0);
     switch(self.bearing) {
         case NorthSeekerBearing:
             bearingDelta = CGPointMake(0.0, _delta.height);

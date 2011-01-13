@@ -26,6 +26,7 @@ static ProgramNgin* thisProgramNgin = nil;
 - (BOOL)sensorBinEmpty:(SeekerSprite*)_seeker;
 - (BOOL)sampleBinFull:(SeekerSprite*)_seeker;
 - (BOOL)atStation:(NSDictionary*)_terrrain;
+- (NSMutableArray*)nextInstruction;
 
 @end
 
@@ -108,7 +109,7 @@ static ProgramNgin* thisProgramNgin = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSMutableArray*)doUntilNextInstructionForItem:(NSDictionary*)_item terrain:(NSDictionary*)_terrrain sand:(NSDictionary*)_sand andSeeker:(SeekerSprite*)_seeker {
     NSMutableArray* instructionSet = [self.doUntilStack objectAtIndex:0];
-    NSMutableArray* instruction = [instructionSet objectAtIndex:1];
+    NSMutableArray* instruction = nil;
     ProgramInstruction predicateInstruction = [[instructionSet objectAtIndex:2] intValue];
     BOOL predicateTrue = YES;
     switch (predicateInstruction) {
@@ -127,8 +128,25 @@ static ProgramNgin* thisProgramNgin = nil;
         default:
             break;
     }
-    if (predicateTrue) {
-    } else {
+    if (!predicateTrue) {
+        NSMutableArray* doInstructionSet = [instructionSet objectAtIndex:1];
+        ProgramInstruction doInstruction = [[doInstructionSet objectAtIndex:0] intValue];
+        switch (doInstruction) {
+            case MoveProgramInstruction:
+            case TurnLeftProgramInstruction:
+            case PutSensorProgramInstruction:
+            case GetSampleProgramInstruction:
+                instruction = doInstructionSet;
+                break;
+            case DoTimesProgramInstruction:
+                break;
+            case DoUntilProgramInstruction:
+                break;
+            case SubroutineProgramInstruction:
+                break;
+            default:
+                break;
+        }
     }
     return instruction;
 }
@@ -151,6 +169,22 @@ static ProgramNgin* thisProgramNgin = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)atStation:(NSDictionary*)_item {
     return YES;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSMutableArray*)nextInstruction {
+    NSMutableArray* instruction = nil;
+    NSInteger codeLines = [self.compiledProgram count];
+    if (self.nextLine < codeLines - 1) {
+        instruction = [self.compiledProgram objectAtIndex:self.nextLine];
+        self.nextLine++;
+    } else if (self.nextLine == codeLines - 1) {
+        instruction = [self.compiledProgram objectAtIndex:self.nextLine];
+        self.nextLine = 0;
+    } else {
+        [self stopProgram];
+    }
+    return instruction;
 }
 
 //===================================================================================================================================
@@ -239,11 +273,8 @@ static ProgramNgin* thisProgramNgin = nil;
             instructionString = @"get sample";
             break;
         case DoTimesProgramInstruction:
-            break;
         case DoUntilProgramInstruction:
-            break;
         case SubroutineProgramInstruction:
-            break;
         case PathBlockedPredicateProgramInstruction:
             instructionString = @"path blocked";
             break;
@@ -283,7 +314,6 @@ static ProgramNgin* thisProgramNgin = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadProgram:(NSMutableArray*)_program {
     [self saveProgram:_program];
-    [self compile];
     [self runProgram];
 }
 
@@ -299,6 +329,7 @@ static ProgramNgin* thisProgramNgin = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)runProgram {
+    [self compile];
     self.nextLine = 0;
     self.programRunning = YES;
     self.programHalted = NO;
@@ -342,18 +373,9 @@ static ProgramNgin* thisProgramNgin = nil;
     NSMutableArray* instruction = nil;
     NSInteger stackDepth = [self.doUntilStack count];
     if (stackDepth == 0) {
-        NSInteger codeLines = [self.compiledProgram count];
-        if (self.nextLine < codeLines - 1) {
-            instruction = [self.compiledProgram objectAtIndex:self.nextLine];
-            self.nextLine++;
-        } else if (self.nextLine == codeLines - 1) {
-            instruction = [self.compiledProgram objectAtIndex:self.nextLine];
-            self.nextLine = 0;
-        } else {
-            [self stopProgram];
-        }   
-    } else {
-        instruction = [self doUntilNextInstructionForItem:_item terrain:_terrrain sand:_sand andSeeker:_seeker];
+        instruction = [self nextInstruction];
+    } else if (!(instruction = [self doUntilNextInstructionForItem:_item terrain:_terrrain sand:_sand andSeeker:_seeker])) {
+        instruction = [self nextInstruction];
     }
     return instruction;
 }
