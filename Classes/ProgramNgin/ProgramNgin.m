@@ -48,6 +48,8 @@ static ProgramNgin* thisProgramNgin = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)compile {
     [self.compiledProgram removeAllObjects];
+    [self.doUntilStack removeAllObjects];
+    [self.doUntilStackLine removeAllObjects];
     for (NSMutableArray* instructionSet in self.program) {
         [self compileInstructionSet:instructionSet to:self.compiledProgram];
     }
@@ -153,7 +155,14 @@ static ProgramNgin* thisProgramNgin = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)pathBlocked:(NSDictionary*)_terrrain {
-    return YES;
+    BOOL isBlocked = NO;
+    if (_terrrain) {
+        NSString* mapID = [_terrrain valueForKey:@"mapID"];
+        if ([mapID isEqualToString:@"up-1"]) {
+            isBlocked = YES;
+        } 
+    } 
+    return isBlocked;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -245,6 +254,7 @@ static ProgramNgin* thisProgramNgin = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSMutableArray*)getDoUntilPredicates {
     NSMutableArray* primatives = [NSMutableArray arrayWithCapacity:10];
+    [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:PathBlockedPredicateProgramInstruction], nil]];
     [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:SensorBinEmptyPredicateProgramInstruction], nil]];
     [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:SampleBinFullPredicateProgramInstruction], nil]];
     [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:AtStationPredicateProgramInstruction], nil]];
@@ -369,7 +379,7 @@ static ProgramNgin* thisProgramNgin = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSMutableArray*)nextInstructionForItem:(NSDictionary*)_item terrain:(NSDictionary*)_terrrain sand:(NSDictionary*)_sand andSeeker:(SeekerSprite*)_seeker {
+- (NSMutableArray*)nextInstructionForItem:(NSDictionary*)_item terrain:(NSMutableArray*)_terrrain sand:(NSMutableArray*)_sand andSeeker:(SeekerSprite*)_seeker {
     NSMutableArray* instruction = nil;
     NSInteger stackDepth = [self.doUntilStack count];
     if (stackDepth == 0) {

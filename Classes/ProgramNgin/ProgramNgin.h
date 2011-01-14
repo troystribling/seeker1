@@ -64,6 +64,6 @@ typedef enum tagProgramInstruction {
 - (BOOL)programIsLoaded;
 - (BOOL)programIsRunning;
 - (BOOL)programIsHalted;
-- (NSMutableArray*)nextInstructionForItem:(NSDictionary*)_item terrain:(NSDictionary*)_terrrain sand:(NSDictionary*)_sand andSeeker:(SeekerSprite*)_seeker;
+- (NSMutableArray*)nextInstructionForItem:(NSDictionary*)_item terrain:(NSMutableArray*)_terrrain sand:(NSMutableArray*)_sand andSeeker:(SeekerSprite*)_seeker;
 
 @end

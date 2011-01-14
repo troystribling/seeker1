@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1056</int>
-		<string key="IBDocument.SystemVersion">10H574</string>
+		<string key="IBDocument.SystemVersion">10J567</string>
 		<string key="IBDocument.InterfaceBuilderVersion">823</string>
 		<string key="IBDocument.AppKitVersion">1038.35</string>
-		<string key="IBDocument.HIToolboxVersion">461.00</string>
+		<string key="IBDocument.HIToolboxVersion">462.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			<string key="NS.object.0">132</string>
@@ -118,7 +118,7 @@
 							<object class="IBUILabel" id="224283388">
 								<reference key="NSNextResponder" ref="880399814"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{289, 62}, {15, 29}}</string>
+								<string key="NSFrame">{{235, 62}, {15, 29}}</string>
 								<reference key="NSSuperview" ref="880399814"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -204,7 +204,7 @@
 							<object class="IBUILabel" id="603263582">
 								<reference key="NSNextResponder" ref="880399814"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{76, 63}, {213, 29}}</string>
+								<string key="NSFrame">{{76, 63}, {159, 29}}</string>
 								<reference key="NSSuperview" ref="880399814"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -212,7 +212,7 @@
 								<int key="IBUITag">1</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">sensor bin empty</string>
+								<string key="IBUIText">path blocked</string>
 								<reference key="IBUIFont" ref="987108983"/>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">1</int>
