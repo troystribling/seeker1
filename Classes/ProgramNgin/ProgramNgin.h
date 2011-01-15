@@ -25,7 +25,7 @@ typedef enum tagProgramInstruction {
 } ProgramInstruction;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class SeekerSprite;
+@class MapScene;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ProgramNgin : NSObject {
@@ -64,6 +64,6 @@ typedef enum tagProgramInstruction {
 - (BOOL)programIsLoaded;
 - (BOOL)programIsRunning;
 - (BOOL)programIsHalted;
-- (NSMutableArray*)nextInstructionForItem:(NSDictionary*)_item terrain:(NSMutableArray*)_terrrain sand:(NSMutableArray*)_sand andSeeker:(SeekerSprite*)_seeker;
+- (NSMutableArray*)nextInstruction:(MapScene*)_mapScene forPosition:(CGPoint)_position;
 
 @end

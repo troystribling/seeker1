@@ -10,7 +10,7 @@
 #import "ProgramNgin.h"
 #import "UserModel.h"
 #import "SubroutineModel.h"
-#import "SeekerSprite.h"
+#import "MapScene.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 static ProgramNgin* thisProgramNgin = nil;
@@ -21,11 +21,11 @@ static ProgramNgin* thisProgramNgin = nil;
 - (void)compile;
 - (void)compileSubrotine:(NSMutableArray*)_instructionSet to:(NSMutableArray*)_program;
 - (void)compileInstructionSet:(NSMutableArray*)_instrctionSet to:(NSMutableArray*)_program;
-- (NSMutableArray*)doUntilNextInstructionForItem:(NSDictionary*)_item terrain:(NSDictionary*)_terrrain sand:(NSDictionary*)_sand andSeeker:(SeekerSprite*)_seeker;
-- (BOOL)pathBlocked:(NSDictionary*)_terrrain;
-- (BOOL)sensorBinEmpty:(SeekerSprite*)_seeker;
-- (BOOL)sampleBinFull:(SeekerSprite*)_seeker;
-- (BOOL)atStation:(NSDictionary*)_terrrain;
+- (NSMutableArray*)doUntilNextInstruction:(MapScene*)_mapScene forPosition:(CGPoint)_position;
+- (BOOL)pathBlocked:(MapScene*)_mapScene forPosition:(CGPoint)_position;
+- (BOOL)sensorBinEmpty:(MapScene*)_mapScene forPosition:(CGPoint)_position;
+- (BOOL)sampleBinFull:(MapScene*)_mapScene forPosition:(CGPoint)_position;
+- (BOOL)atStation:(MapScene*)_mapScene forPosition:(CGPoint)_position;
 - (NSMutableArray*)nextInstruction;
 
 @end
@@ -109,23 +109,23 @@ static ProgramNgin* thisProgramNgin = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSMutableArray*)doUntilNextInstructionForItem:(NSDictionary*)_item terrain:(NSDictionary*)_terrrain sand:(NSDictionary*)_sand andSeeker:(SeekerSprite*)_seeker {
+- (NSMutableArray*)doUntilNextInstruction:(MapScene*)_mapScene forPosition:(CGPoint)_position {
     NSMutableArray* instructionSet = [self.doUntilStack objectAtIndex:0];
     NSMutableArray* instruction = nil;
     ProgramInstruction predicateInstruction = [[instructionSet objectAtIndex:2] intValue];
     BOOL predicateTrue = YES;
     switch (predicateInstruction) {
         case PathBlockedPredicateProgramInstruction:
-            predicateTrue = [self pathBlocked:_terrrain];
+            predicateTrue = [self pathBlocked:_mapScene forPosition:_position];
             break;
         case SensorBinEmptyPredicateProgramInstruction:
-            predicateTrue = [self sensorBinEmpty:_seeker];
+            predicateTrue = [self sensorBinEmpty:_mapScene forPosition:_position];
             break;
         case SampleBinFullPredicateProgramInstruction:
-            predicateTrue = [self sampleBinFull:_seeker];
+            predicateTrue = [self sampleBinFull:_mapScene forPosition:_position];
             break;
         case AtStationPredicateProgramInstruction:
-            predicateTrue = [self atStation:_item];
+            predicateTrue = [self atStation:_mapScene forPosition:_position];
             break;
         default:
             break;
@@ -154,10 +154,11 @@ static ProgramNgin* thisProgramNgin = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)pathBlocked:(NSDictionary*)_terrrain {
+- (BOOL)pathBlocked:(MapScene*)_mapScene forPosition:(CGPoint)_position {
     BOOL isBlocked = NO;
-    if (_terrrain) {
-        NSString* mapID = [_terrrain valueForKey:@"mapID"];
+    NSDictionary* terrain = [_mapScene getTileProperties:_position forLayer:_mapScene.terrainLayer];
+    if (terrain) {
+        NSString* mapID = [terrain valueForKey:@"mapID"];
         if ([mapID isEqualToString:@"up-1"]) {
             isBlocked = YES;
         } 
@@ -166,17 +167,17 @@ static ProgramNgin* thisProgramNgin = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)sensorBinEmpty:(SeekerSprite*)_seeker {
+- (BOOL)sensorBinEmpty:(MapScene*)_mapScene forPosition:(CGPoint)_position {
     return YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)sampleBinFull:(SeekerSprite*)_seeker {
+- (BOOL)sampleBinFull:(MapScene*)_mapScene forPosition:(CGPoint)_position {
     return YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)atStation:(NSDictionary*)_item {
+- (BOOL)atStation:(MapScene*)_mapScene forPosition:(CGPoint)_position {
     return YES;
 }
 
@@ -379,12 +380,12 @@ static ProgramNgin* thisProgramNgin = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSMutableArray*)nextInstructionForItem:(NSDictionary*)_item terrain:(NSMutableArray*)_terrrain sand:(NSMutableArray*)_sand andSeeker:(SeekerSprite*)_seeker {
+- (NSMutableArray*)nextInstruction:(MapScene*)_mapScene forPosition:(CGPoint)_position {
     NSMutableArray* instruction = nil;
     NSInteger stackDepth = [self.doUntilStack count];
     if (stackDepth == 0) {
         instruction = [self nextInstruction];
-    } else if (!(instruction = [self doUntilNextInstructionForItem:_item terrain:_terrrain sand:_sand andSeeker:_seeker])) {
+    } else if (!(instruction = [self doUntilNextInstruction:_mapScene forPosition:_position])) {
         instruction = [self nextInstruction];
     }
     return instruction;

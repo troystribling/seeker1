@@ -39,8 +39,7 @@
 - (BOOL)shouldMoveMap:(CGPoint)_delta;
 - (BOOL)moveIsInPlayingArea:(CGPoint)_delta;
 - (void)executeSeekerInstruction:(ccTime)dt;
-- (NSDictionary*)getTileProperties:(CGPoint)_point forLayer:(CCTMXLayer*)_layer;
-- (CGPoint)getSeekerTile;
+- (void)updatePathsForPosition:(CGPoint)_position;
 - (CGFloat)tileUsedEnergy;
 - (BOOL)isItemTile:(NSDictionary*)_itemProperties ofType:(NSString*)_itemType;
 - (BOOL)isStationTile:(NSDictionary*)_itemProperties;
@@ -79,11 +78,15 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize seeker1;
 @synthesize statusDisplay;
+@synthesize startSite;
+@synthesize seekerPath;
+@synthesize itemsPath;
+@synthesize terrainPath;
+@synthesize sandPath;
+@synthesize level;
+@synthesize menu;
 @synthesize screenCenter;
 @synthesize tileMapSize;
-@synthesize level;
-@synthesize startSite;
-@synthesize menu;
 @synthesize tileMap;
 @synthesize mapLayer;
 @synthesize terrainLayer;
@@ -119,6 +122,7 @@
     CGSize tileMapTileSize = self.tileMap.tileSize;
     self.tileMapSize = CGSizeMake(tileMapTiles.width*tileMapTileSize.width, tileMapTiles.height*tileMapTileSize.height);
     [self centerTileMapOnStartPoint];
+    [self.seekerPath removeAllObjects];
     [self initTerminalItems];
     [self.menu mapInitItems];
     [self addChild:self.tileMap z:-1 tag:kMAP];
@@ -317,9 +321,7 @@
     ProgramNgin* ngin = [ProgramNgin instance];
     CGPoint seekerTile = [self getSeekerTile];
     NSDictionary* itemProperties = [self getTileProperties:seekerTile forLayer:self.itemsLayer];
-    NSDictionary* terrainProperties = [self getTileProperties:seekerTile forLayer:self.terrainLayer];
-    NSDictionary* sandProperties = [self getTileProperties:seekerTile forLayer:self.sandLayer];
-    if ((instructionSet = [ngin nextInstructionForItem:itemProperties terrain:terrainProperties sand:sandProperties andSeeker:self.seeker1])) {
+    if ((instructionSet = [ngin nextInstruction:self forPosition:seekerTile])) {
         ProgramInstruction instruction = [[instructionSet objectAtIndex:0] intValue];
         switch (instruction) {
             case MoveProgramInstruction:
@@ -367,6 +369,16 @@
 - (CGPoint)getSeekerTile {
     CGPoint seekerTile = [self tileCoordsToTile:[self screenCoordsToTileCoords:seeker1.position]];
     return CGPointMake((int)seekerTile.x, (int)seekerTile.y);
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)updatePathsForPosition:(CGPoint)_position {
+    NSDictionary* itemsProperties = [self getTileProperties:_position forLayer:self.itemsLayer];
+    [self.itemsPath addObject:itemsProperties];
+    NSDictionary* terrainProperties = [self getTileProperties:_position forLayer:self.terrainLayer];
+    [self.itemsPath addObject:terrainProperties];
+    NSDictionary* sandProperties = [self getTileProperties:_position forLayer:self.sandLayer];
+    [self.itemsPath addObject:sandProperties];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -422,6 +434,8 @@
             } else {
                 [self.seeker1 moveBy:self.tileMap.tileSize];
             }
+            CGPoint seekerTile = [self getSeekerTile];
+            [self updatePathsForPosition:seekerTile];
         } else {
             [ngin haltProgram];
             [LevelModel incompleteLevel:self.level withScore:[self.seeker1 score]];
@@ -640,6 +654,10 @@
         self.isTouchEnabled = YES;
 		CGSize screenSize = [[CCDirector sharedDirector] winSize];
 		self.screenCenter = CGPointMake(screenSize.width/2, screenSize.height/2);
+        self.seekerPath = [NSMutableArray arrayWithCapacity:10];
+        self.itemsPath = [NSMutableArray arrayWithCapacity:10];
+        self.terrainPath = [NSMutableArray arrayWithCapacity:10];
+        self.sandPath = [NSMutableArray arrayWithCapacity:10];
         self.statusDisplay = [StatusDisplay create];
         self.menu = [TermMenuView create];
         self.menu.mapScene = self;

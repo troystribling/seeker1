@@ -37,6 +37,10 @@ typedef enum tagMapID {
     SeekerSprite* seeker1;
     StatusDisplay* statusDisplay;
     NSMutableDictionary* startSite;
+    NSMutableArray* seekerPath;
+    NSMutableArray* itemsPath;
+    NSMutableArray* terrainPath;
+    NSMutableArray* sandPath;
     NSInteger level;
     TermMenuView* menu;
     CGPoint screenCenter;
@@ -59,7 +63,11 @@ typedef enum tagMapID {
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) SeekerSprite* seeker1;
 @property (nonatomic, retain) StatusDisplay* statusDisplay;
-@property (nonatomic, assign) NSMutableDictionary* startSite;
+@property (nonatomic, retain) NSMutableDictionary* startSite;
+@property (nonatomic, retain) NSMutableArray* seekerPath;
+@property (nonatomic, retain) NSMutableArray* itemsPath;
+@property (nonatomic, retain) NSMutableArray* terrainPath;
+@property (nonatomic, retain) NSMutableArray* sandPath;
 @property (nonatomic, assign) NSInteger level;
 @property (nonatomic, retain) TermMenuView* menu;
 @property (nonatomic, assign) CGPoint screenCenter;
@@ -83,5 +91,9 @@ typedef enum tagMapID {
 - (void)addResetTerminalItems;
 - (void)addRunTerminalItems;
 - (void)resetLevel;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSDictionary*)getTileProperties:(CGPoint)_point forLayer:(CCTMXLayer*)_layer;
+- (CGPoint)getSeekerTile;
 
 @end
