@@ -31,8 +31,6 @@ typedef enum tagProgramInstruction {
 @interface ProgramNgin : NSObject {
     NSMutableArray* program;
     NSMutableArray* compiledProgram;
-    NSMutableArray* doUntilStack;
-    NSMutableArray* doUntilStackLine;
     BOOL programHalted;
     BOOL programRunning;
     NSInteger nextLine;
@@ -41,8 +39,6 @@ typedef enum tagProgramInstruction {
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) NSMutableArray* program;
 @property (nonatomic, retain) NSMutableArray* compiledProgram;
-@property (nonatomic, retain) NSMutableArray* doUntilStack;
-@property (nonatomic, retain) NSMutableArray* doUntilStackLine;
 @property (nonatomic, assign) BOOL programHalted;
 @property (nonatomic, assign) BOOL programRunning;
 @property (nonatomic, assign) NSInteger nextLine;

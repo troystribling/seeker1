@@ -22,11 +22,12 @@ static ProgramNgin* thisProgramNgin = nil;
 - (void)compileSubrotine:(NSMutableArray*)_instructionSet to:(NSMutableArray*)_program;
 - (void)compileInstructionSet:(NSMutableArray*)_instrctionSet to:(NSMutableArray*)_program;
 - (NSMutableArray*)doUntilNextInstruction:(MapScene*)_mapScene;
+- (NSMutableArray*)popInstruction:(MapScene*)_mapScene;
+// predicates
 - (BOOL)pathBlocked:(MapScene*)_mapScene;
 - (BOOL)sensorBinEmpty:(MapScene*)_mapScene;
 - (BOOL)sampleBinFull:(MapScene*)_mapScene;
 - (BOOL)atStation:(MapScene*)_mapScene;
-- (NSMutableArray*)nextInstruction;
 
 @end
 
@@ -36,8 +37,6 @@ static ProgramNgin* thisProgramNgin = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize program;
 @synthesize compiledProgram;
-@synthesize doUntilStack;
-@synthesize doUntilStackLine;
 @synthesize programHalted;
 @synthesize programRunning;
 @synthesize nextLine;
@@ -48,8 +47,6 @@ static ProgramNgin* thisProgramNgin = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)compile {
     [self.compiledProgram removeAllObjects];
-    [self.doUntilStack removeAllObjects];
-    [self.doUntilStackLine removeAllObjects];
     for (NSMutableArray* instructionSet in self.program) {
         [self compileInstructionSet:instructionSet to:self.compiledProgram];
     }
@@ -97,8 +94,12 @@ static ProgramNgin* thisProgramNgin = nil;
             }
             break;
         case DoUntilProgramInstruction:
-            [self.doUntilStack insertObject:_instrctionSet atIndex:0];
-            [self.doUntilStackLine insertObject:[NSNumber numberWithInt:0] atIndex:0];
+            [_program addObject:_instrctionSet];
+            NSMutableArray* doUntilInstructionSets = [NSMutableArray arrayWithCapacity:10];
+            NSMutableArray* doInstructionSet = [_instrctionSet objectAtIndex:1];
+            [self compileInstructionSet:doInstructionSet to:doUntilInstructionSets];
+            [_instrctionSet addObject:doUntilInstructionSets];
+            [_instrctionSet addObject:[NSNumber numberWithInt:0]];
             break;
         case SubroutineProgramInstruction:
             [self compileSubrotine:_instrctionSet to:_program];
@@ -110,8 +111,8 @@ static ProgramNgin* thisProgramNgin = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSMutableArray*)doUntilNextInstruction:(MapScene*)_mapScene {
-    NSMutableArray* instructionSet = [self.doUntilStack objectAtIndex:0];
     NSMutableArray* instruction = nil;
+    NSMutableArray* instructionSet = [self.compiledProgram objectAtIndex:self.nextLine];
     ProgramInstruction predicateInstruction = [[instructionSet objectAtIndex:2] intValue];
     BOOL predicateTrue = YES;
     switch (predicateInstruction) {
@@ -131,7 +132,9 @@ static ProgramNgin* thisProgramNgin = nil;
             break;
     }
     if (!predicateTrue) {
-        NSMutableArray* doInstructionSet = [instructionSet objectAtIndex:1];
+        NSInteger doInstructionLineNumber = [[instructionSet objectAtIndex:4] intValue];
+        NSInteger doInstructionLines = [[instructionSet objectAtIndex:3] count];
+        NSMutableArray* doInstructionSet = [[instructionSet objectAtIndex:3] objectAtIndex:doInstructionLineNumber];
         ProgramInstruction doInstruction = [[doInstructionSet objectAtIndex:0] intValue];
         switch (doInstruction) {
             case MoveProgramInstruction:
@@ -149,9 +152,33 @@ static ProgramNgin* thisProgramNgin = nil;
             default:
                 break;
         }
+    } 
+    return instruction;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSMutableArray*)popInstruction:(MapScene*)_mapScene {
+    NSMutableArray* instruction = nil;
+    ProgramInstruction doInstruction = [[self.compiledProgram objectAtIndex:self.nextLine] objectAtIndex:0];
+    switch (doInstruction) {
+        case MoveProgramInstruction:
+        case TurnLeftProgramInstruction:
+        case PutSensorProgramInstruction:
+        case GetSampleProgramInstruction:
+            instruction = [self.compiledProgram objectAtIndex:self.nextLine];
+            self.nextLine++;
+            break;
+        case DoUntilProgramInstruction:
+            instruction = [self doUntilNextInstruction:_mapScene];
+            break;
+        default:
+            break;
     }
     return instruction;
 }
+
+//===================================================================================================================================
+#pragma mark ProgramNgin Predicates
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)pathBlocked:(MapScene*)_mapScene {
@@ -186,22 +213,6 @@ static ProgramNgin* thisProgramNgin = nil;
     return YES;
 }
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (NSMutableArray*)nextInstruction {
-    NSMutableArray* instruction = nil;
-    NSInteger codeLines = [self.compiledProgram count];
-    if (self.nextLine < codeLines - 1) {
-        instruction = [self.compiledProgram objectAtIndex:self.nextLine];
-        self.nextLine++;
-    } else if (self.nextLine == codeLines - 1) {
-        instruction = [self.compiledProgram objectAtIndex:self.nextLine];
-        self.nextLine = 0;
-    } else {
-        [self stopProgram];
-    }
-    return instruction;
-}
-
 //===================================================================================================================================
 #pragma mark ProgramNgin
 
@@ -220,7 +231,6 @@ static ProgramNgin* thisProgramNgin = nil;
 	if((self=[super init])) {
         self.program = [NSMutableArray arrayWithCapacity:10];
         self.compiledProgram = [NSMutableArray arrayWithCapacity:10];
-        self.doUntilStack = [NSMutableArray arrayWithCapacity:10];
         self.nextLine = 0;
 	}
 	return self;
@@ -387,13 +397,11 @@ static ProgramNgin* thisProgramNgin = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSMutableArray*)nextInstruction:(MapScene*)_mapScene {
     NSMutableArray* instruction = nil;
-    NSInteger stackDepth = [self.doUntilStack count];
-    if (stackDepth == 0) {
-        instruction = [self nextInstruction];
-    } else if (!(instruction = [self doUntilNextInstruction:_mapScene])) {
-        instruction = [self nextInstruction];
-    }
-    return instruction;
+    NSInteger codeLines = [self.compiledProgram count];
+    instruction = [self popInstruction:_mapScene];
+    if (self.nextLine >= codeLines - 1) {
+        self.nextLine = 0;
+    } 
 }
 
 @end
