@@ -96,5 +96,8 @@ typedef enum tagMapID {
 - (NSDictionary*)getTileProperties:(CGPoint)_point forLayer:(CCTMXLayer*)_layer;
 - (CGPoint)getSeekerTile;
 - (BOOL)positionIsInPlayingArea:(CGPoint)_position;
+- (CGPoint)moveDelta;
+- (CGPoint)nextPositionForDelta:(CGPoint)_delta;
+- (CGPoint)nextPosition;
 
 @end

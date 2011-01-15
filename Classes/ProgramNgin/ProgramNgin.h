@@ -64,6 +64,6 @@ typedef enum tagProgramInstruction {
 - (BOOL)programIsLoaded;
 - (BOOL)programIsRunning;
 - (BOOL)programIsHalted;
-- (NSMutableArray*)nextInstruction:(MapScene*)_mapScene forPosition:(CGPoint)_position;
+- (NSMutableArray*)nextInstruction:(MapScene*)_mapScene;
 
 @end

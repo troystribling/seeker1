@@ -21,11 +21,11 @@ static ProgramNgin* thisProgramNgin = nil;
 - (void)compile;
 - (void)compileSubrotine:(NSMutableArray*)_instructionSet to:(NSMutableArray*)_program;
 - (void)compileInstructionSet:(NSMutableArray*)_instrctionSet to:(NSMutableArray*)_program;
-- (NSMutableArray*)doUntilNextInstruction:(MapScene*)_mapScene forPosition:(CGPoint)_position;
-- (BOOL)pathBlocked:(MapScene*)_mapScene forPosition:(CGPoint)_position;
-- (BOOL)sensorBinEmpty:(MapScene*)_mapScene forPosition:(CGPoint)_position;
-- (BOOL)sampleBinFull:(MapScene*)_mapScene forPosition:(CGPoint)_position;
-- (BOOL)atStation:(MapScene*)_mapScene forPosition:(CGPoint)_position;
+- (NSMutableArray*)doUntilNextInstruction:(MapScene*)_mapScene;
+- (BOOL)pathBlocked:(MapScene*)_mapScene;
+- (BOOL)sensorBinEmpty:(MapScene*)_mapScene;
+- (BOOL)sampleBinFull:(MapScene*)_mapScene;
+- (BOOL)atStation:(MapScene*)_mapScene;
 - (NSMutableArray*)nextInstruction;
 
 @end
@@ -109,23 +109,23 @@ static ProgramNgin* thisProgramNgin = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSMutableArray*)doUntilNextInstruction:(MapScene*)_mapScene forPosition:(CGPoint)_position {
+- (NSMutableArray*)doUntilNextInstruction:(MapScene*)_mapScene {
     NSMutableArray* instructionSet = [self.doUntilStack objectAtIndex:0];
     NSMutableArray* instruction = nil;
     ProgramInstruction predicateInstruction = [[instructionSet objectAtIndex:2] intValue];
     BOOL predicateTrue = YES;
     switch (predicateInstruction) {
         case PathBlockedPredicateProgramInstruction:
-            predicateTrue = [self pathBlocked:_mapScene forPosition:_position];
+            predicateTrue = [self pathBlocked:_mapScene];
             break;
         case SensorBinEmptyPredicateProgramInstruction:
-            predicateTrue = [self sensorBinEmpty:_mapScene forPosition:_position];
+            predicateTrue = [self sensorBinEmpty:_mapScene];
             break;
         case SampleBinFullPredicateProgramInstruction:
-            predicateTrue = [self sampleBinFull:_mapScene forPosition:_position];
+            predicateTrue = [self sampleBinFull:_mapScene];
             break;
         case AtStationPredicateProgramInstruction:
-            predicateTrue = [self atStation:_mapScene forPosition:_position];
+            predicateTrue = [self atStation:_mapScene];
             break;
         default:
             break;
@@ -154,10 +154,11 @@ static ProgramNgin* thisProgramNgin = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)pathBlocked:(MapScene*)_mapScene forPosition:(CGPoint)_position {
+- (BOOL)pathBlocked:(MapScene*)_mapScene {
     BOOL isBlocked = NO;
-    if ([_mapScene positionIsInPlayingArea:_position]) {
-        NSDictionary* terrain = [_mapScene getTileProperties:_position forLayer:_mapScene.terrainLayer];
+    CGPoint position = [_mapScene nextPosition];
+    if ([_mapScene positionIsInPlayingArea:position]) {
+        NSDictionary* terrain = [_mapScene getTileProperties:position forLayer:_mapScene.terrainLayer];
         if (terrain) {
             NSString* mapID = [terrain valueForKey:@"mapID"];
             if ([mapID isEqualToString:@"up-1"]) {
@@ -171,17 +172,17 @@ static ProgramNgin* thisProgramNgin = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)sensorBinEmpty:(MapScene*)_mapScene forPosition:(CGPoint)_position {
+- (BOOL)sensorBinEmpty:(MapScene*)_mapScene {
     return YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)sampleBinFull:(MapScene*)_mapScene forPosition:(CGPoint)_position {
+- (BOOL)sampleBinFull:(MapScene*)_mapScene {
     return YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)atStation:(MapScene*)_mapScene forPosition:(CGPoint)_position {
+- (BOOL)atStation:(MapScene*)_mapScene {
     return YES;
 }
 
@@ -384,12 +385,12 @@ static ProgramNgin* thisProgramNgin = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSMutableArray*)nextInstruction:(MapScene*)_mapScene forPosition:(CGPoint)_position {
+- (NSMutableArray*)nextInstruction:(MapScene*)_mapScene {
     NSMutableArray* instruction = nil;
     NSInteger stackDepth = [self.doUntilStack count];
     if (stackDepth == 0) {
         instruction = [self nextInstruction];
-    } else if (!(instruction = [self doUntilNextInstruction:_mapScene forPosition:_position])) {
+    } else if (!(instruction = [self doUntilNextInstruction:_mapScene])) {
         instruction = [self nextInstruction];
     }
     return instruction;

@@ -37,7 +37,7 @@
 - (CGPoint)tileCoordsToTile:(CGPoint)point;
 // program instructions
 - (BOOL)shouldMoveMap:(CGPoint)_delta;
-- (BOOL)moveIsInPlayingArea:(CGPoint)_delta;
+- (BOOL)moveIsInPlayingAreaForData:(CGPoint)_delta;
 - (void)executeSeekerInstruction:(ccTime)dt;
 - (void)updatePathsForPosition:(CGPoint)_position;
 - (CGFloat)tileUsedEnergy;
@@ -303,9 +303,8 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)moveIsInPlayingArea:(CGPoint)_delta {
-    CGPoint newPosition = ccpAdd([self screenCoordsToTileCoords:self.seeker1.position], CGPointMake(_delta.x, -_delta.y));
-    CGPoint tilePosition = [self tileCoordsToTile:newPosition];
+- (BOOL)moveIsInPlayingAreaForData:(CGPoint)_delta {
+    CGPoint tilePosition = [self nextPositionForDelta:_delta];
     return [self positionIsInPlayingArea:tilePosition];
 }
 
@@ -315,7 +314,7 @@
     ProgramNgin* ngin = [ProgramNgin instance];
     CGPoint seekerTile = [self getSeekerTile];
     NSDictionary* itemProperties = [self getTileProperties:seekerTile forLayer:self.itemsLayer];
-    if ((instructionSet = [ngin nextInstruction:self forPosition:seekerTile])) {
+    if ((instructionSet = [ngin nextInstruction:self])) {
         ProgramInstruction instruction = [[instructionSet objectAtIndex:0] intValue];
         switch (instruction) {
             case MoveProgramInstruction:
@@ -401,8 +400,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)move {
     ProgramNgin* ngin = [ProgramNgin instance];
-    CGPoint delta = [self.seeker1 positionDeltaAlongBearing:self.tileMap.tileSize];
-    if ([self moveIsInPlayingArea:delta]) {
+    CGPoint delta = [self moveDelta];
+    if ([self moveIsInPlayingAreaForData:delta]) {
         CGFloat usedEnergy = [self tileUsedEnergy];
         if ([self.seeker1 useEnergy:usedEnergy]) {
             [self updateEnergy];
@@ -721,5 +720,22 @@
     return YES;
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGPoint)moveDelta {
+    return [self.seeker1 positionDeltaAlongBearing:self.tileMap.tileSize];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGPoint)nextPositionForDelta:(CGPoint)_delta {
+    CGPoint newPosition = ccpAdd([self screenCoordsToTileCoords:self.seeker1.position], CGPointMake(_delta.x, -_delta.y));
+    return [self tileCoordsToTile:newPosition];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGPoint)nextPosition {
+    CGPoint delta = [self moveDelta];
+    CGPoint newPosition = ccpAdd([self screenCoordsToTileCoords:self.seeker1.position], CGPointMake(delta.x, -delta.y));
+    return [self tileCoordsToTile:newPosition];
+}
 
 @end
