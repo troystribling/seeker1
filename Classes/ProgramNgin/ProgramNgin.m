@@ -156,13 +156,17 @@ static ProgramNgin* thisProgramNgin = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)pathBlocked:(MapScene*)_mapScene forPosition:(CGPoint)_position {
     BOOL isBlocked = NO;
-    NSDictionary* terrain = [_mapScene getTileProperties:_position forLayer:_mapScene.terrainLayer];
-    if (terrain) {
-        NSString* mapID = [terrain valueForKey:@"mapID"];
-        if ([mapID isEqualToString:@"up-1"]) {
-            isBlocked = YES;
+    if ([_mapScene positionIsInPlayingArea:_position]) {
+        NSDictionary* terrain = [_mapScene getTileProperties:_position forLayer:_mapScene.terrainLayer];
+        if (terrain) {
+            NSString* mapID = [terrain valueForKey:@"mapID"];
+            if ([mapID isEqualToString:@"up-1"]) {
+                isBlocked = YES;
+            } 
         } 
-    } 
+    } else {
+        isBlocked = YES;
+    }
     return isBlocked;
 }
 

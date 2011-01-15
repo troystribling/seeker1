@@ -306,13 +306,7 @@
 - (BOOL)moveIsInPlayingArea:(CGPoint)_delta {
     CGPoint newPosition = ccpAdd([self screenCoordsToTileCoords:self.seeker1.position], CGPointMake(_delta.x, -_delta.y));
     CGPoint tilePosition = [self tileCoordsToTile:newPosition];
-    CGSize tiles = self.tileMap.mapSize; 
-    if (tilePosition.x < kMAP_EDGE_BUFFER || tilePosition.x > (tiles.width - kMAP_EDGE_BUFFER)) {
-        return NO;
-    } else if (tilePosition.y < (kMAP_EDGE_BUFFER + 1) || tilePosition.y > (tiles.height - kMAP_EDGE_BUFFER)) {
-        return NO;
-    }
-    return YES;
+    return [self positionIsInPlayingArea:tilePosition];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -353,22 +347,6 @@
         [LevelModel completeLevel:self.level withScore:[self.seeker1 score]];
         [self levelCompletedAnimation];
     }
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (NSDictionary*)getTileProperties:(CGPoint)_point forLayer:(CCTMXLayer*)_layer {
-    NSDictionary* properties = nil;
-    int tileGID = [self.itemsLayer tileGIDAt:CGPointMake(_point.x, _point.y)];
-    if (tileGID != 0) {
-        properties = [self.tileMap propertiesForGID:tileGID];
-    }
-    return properties;
-}
-  
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (CGPoint)getSeekerTile {
-    CGPoint seekerTile = [self tileCoordsToTile:[self screenCoordsToTileCoords:seeker1.position]];
-    return CGPointMake((int)seekerTile.x, (int)seekerTile.y);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -715,5 +693,33 @@
 - (void)resetLevel {
     self.levelResetMap = YES;
 }
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSDictionary*)getTileProperties:(CGPoint)_point forLayer:(CCTMXLayer*)_layer {
+    NSDictionary* properties = nil;
+    int tileGID = [self.itemsLayer tileGIDAt:CGPointMake(_point.x, _point.y)];
+    if (tileGID != 0) {
+        properties = [self.tileMap propertiesForGID:tileGID];
+    }
+    return properties;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGPoint)getSeekerTile {
+    CGPoint seekerTile = [self tileCoordsToTile:[self screenCoordsToTileCoords:seeker1.position]];
+    return CGPointMake((int)seekerTile.x, (int)seekerTile.y);
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)positionIsInPlayingArea:(CGPoint)_position {
+    CGSize tiles = self.tileMap.mapSize; 
+    if (_position.x < kMAP_EDGE_BUFFER || _position.x > (tiles.width - kMAP_EDGE_BUFFER)) {
+        return NO;
+    } else if (_position.y < (kMAP_EDGE_BUFFER + 1) || _position.y > (tiles.height - kMAP_EDGE_BUFFER)) {
+        return NO;
+    }
+    return YES;
+}
+
 
 @end
