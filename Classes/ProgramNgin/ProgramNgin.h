@@ -33,7 +33,7 @@ typedef enum tagProgramInstruction {
     NSMutableArray* compiledProgram;
     BOOL programHalted;
     BOOL programRunning;
-    NSInteger nextLine;
+    NSInteger codeLine;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ typedef enum tagProgramInstruction {
 @property (nonatomic, retain) NSMutableArray* compiledProgram;
 @property (nonatomic, assign) BOOL programHalted;
 @property (nonatomic, assign) BOOL programRunning;
-@property (nonatomic, assign) NSInteger nextLine;
+@property (nonatomic, assign) NSInteger codeLine;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ProgramNgin*)instance;
