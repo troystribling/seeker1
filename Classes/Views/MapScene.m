@@ -29,7 +29,6 @@
 // reset
 - (void)resetMap;
 - (void)resetSeekerStartPosition;
-- (CGPoint)getTile:(CGPoint)_tileCoords;
 // coordinate transforms
 - (CGPoint)getPointFromObjectPropertiesInScreenCoords:(NSDictionary*)dict;
 - (CGPoint)getPointFromObjectPropertiesInTileCoords:(NSDictionary*)dict;
@@ -39,8 +38,9 @@
 - (BOOL)shouldMoveMap:(CGPoint)_delta;
 - (BOOL)moveIsInPlayingAreaForData:(CGPoint)_delta;
 - (void)executeSeekerInstruction:(ccTime)dt;
-- (void)updatePathsForPosition:(CGPoint)_position;
+- (void)updatePathForPosition:(CGPoint)_position;
 - (CGFloat)tileUsedEnergy;
+- (BOOL)terrainClear;
 - (BOOL)isItemTile:(NSDictionary*)_itemProperties ofType:(NSString*)_itemType;
 - (BOOL)isStationTile:(NSDictionary*)_itemProperties;
 - (void)move;
@@ -54,6 +54,7 @@
 // seeker crash
 - (void)crashHitMapBoundary;
 - (void)crashNoEnergy;
+- (void)crashTerrain;
 - (void)crashSensorBinEmpty;
 - (void)crashNoSensorSiteAtPosition;
 - (void)crashSensorSiteAtPositionMissed;
@@ -80,9 +81,6 @@
 @synthesize statusDisplay;
 @synthesize startSite;
 @synthesize seekerPath;
-@synthesize itemsPath;
-@synthesize terrainPath;
-@synthesize sandPath;
 @synthesize level;
 @synthesize menu;
 @synthesize screenCenter;
@@ -225,13 +223,6 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (CGPoint)getTile:(CGPoint)_tileCoords {
-    CGPoint tile = [self tileCoordsToTile:_tileCoords];
-    return CGPointMake((int)tile.x, (int)tile.y);
-}
-
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 // coordinate transforms
 //-----------------------------------------------------------------------------------------------------------------------------------
 #pragma mark coordinate transforms
@@ -262,7 +253,7 @@
 - (CGPoint)tileCoordsToTile:(CGPoint)_point {
 	CGFloat tileWidth = self.tileMap.tileSize.width;
 	CGFloat tileHeight = self.tileMap.tileSize.height;	
-	return CGPointMake(_point.x/tileWidth, _point.y/tileHeight);
+	return CGPointMake((int)(_point.x/tileWidth), (int)(_point.y/tileHeight));
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -349,35 +340,36 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)updatePathsForPosition:(CGPoint)_position {
-    NSDictionary* itemsProperties = [self getTileProperties:_position forLayer:self.itemsLayer];
-    [self.itemsPath addObject:itemsProperties];
-    NSDictionary* terrainProperties = [self getTileProperties:_position forLayer:self.terrainLayer];
-    [self.itemsPath addObject:terrainProperties];
-    NSDictionary* sandProperties = [self getTileProperties:_position forLayer:self.sandLayer];
-    [self.itemsPath addObject:sandProperties];
+- (void)updatePathForPosition:(CGPoint)_position {
+    [self.seekerPath addObject:[NSValue valueWithCGPoint:_position]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGFloat)tileUsedEnergy {
     CGFloat usedEnergy = 1.0;
+    return usedEnergy;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)terrainClear {
+    BOOL status = YES;
     CGPoint seekerTile = [self getSeekerTile];
     NSDictionary* mapProperties = [self getTileProperties:seekerTile forLayer:self.terrainLayer];
     if (mapProperties) {
         NSString* mapID = [mapProperties valueForKey:@"mapID"];
         if ([mapID isEqualToString:@"up-1"]) {
-            usedEnergy = -1.0;
+            status = NO;
         } else if ([mapID isEqualToString:@"up-2"]) {
-            usedEnergy = 0.8;
+            status = NO;
         } else if ([mapID isEqualToString:@"up-3"]) {
-            usedEnergy = 0.6;
+            status = NO;
         } else if ([mapID isEqualToString:@"up-4"]) {
-            usedEnergy = 0.4;
+            status = NO;
         } else if ([mapID isEqualToString:@"up-5"]) {
-            usedEnergy = 0.2;
+            status = NO;
         }
     } 
-    return usedEnergy;
+    return status;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -405,14 +397,20 @@
         CGFloat usedEnergy = [self tileUsedEnergy];
         if ([self.seeker1 useEnergy:usedEnergy]) {
             [self updateEnergy];
-            if ([self shouldMoveMap:delta]) {
-                CGPoint mapPosition = ccpAdd(CGPointMake(-delta.x, -delta.y), self.tileMap.position);
-                [self moveMapTo:mapPosition withDuration:1.0];
+            if ([self terrainClear]) {
+                if ([self shouldMoveMap:delta]) {
+                    CGPoint mapPosition = ccpAdd(CGPointMake(-delta.x, -delta.y), self.tileMap.position);
+                    [self moveMapTo:mapPosition withDuration:1.0];
+                } else {
+                    [self.seeker1 moveBy:self.tileMap.tileSize];
+                }
+                CGPoint seekerTile = [self getSeekerTile];
+                [self updatePathForPosition:seekerTile];
             } else {
-                [self.seeker1 moveBy:self.tileMap.tileSize];
+                [ngin haltProgram];
+                [LevelModel incompleteLevel:self.level withScore:[self.seeker1 score]];
+                [self crashTerrain];
             }
-            CGPoint seekerTile = [self getSeekerTile];
-            [self updatePathsForPosition:seekerTile];
         } else {
             [ngin haltProgram];
             [LevelModel incompleteLevel:self.level withScore:[self.seeker1 score]];
@@ -526,6 +524,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)crashTerrain {
+    [self fadeToRed];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashSensorBinEmpty {
     [self fadeToRed];
 }
@@ -632,9 +635,6 @@
 		CGSize screenSize = [[CCDirector sharedDirector] winSize];
 		self.screenCenter = CGPointMake(screenSize.width/2, screenSize.height/2);
         self.seekerPath = [NSMutableArray arrayWithCapacity:10];
-        self.itemsPath = [NSMutableArray arrayWithCapacity:10];
-        self.terrainPath = [NSMutableArray arrayWithCapacity:10];
-        self.sandPath = [NSMutableArray arrayWithCapacity:10];
         self.statusDisplay = [StatusDisplay create];
         self.menu = [TermMenuView create];
         self.menu.mapScene = self;
@@ -696,7 +696,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSDictionary*)getTileProperties:(CGPoint)_point forLayer:(CCTMXLayer*)_layer {
     NSDictionary* properties = nil;
-    int tileGID = [self.itemsLayer tileGIDAt:CGPointMake(_point.x, _point.y)];
+    int tileGID = [_layer tileGIDAt:CGPointMake(_point.x, _point.y)];
     if (tileGID != 0) {
         properties = [self.tileMap propertiesForGID:tileGID];
     }
@@ -705,8 +705,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGPoint)getSeekerTile {
-    CGPoint seekerTile = [self tileCoordsToTile:[self screenCoordsToTileCoords:seeker1.position]];
-    return CGPointMake((int)seekerTile.x, (int)seekerTile.y);
+    return [self tileCoordsToTile:[self screenCoordsToTileCoords:seeker1.position]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -714,7 +713,7 @@
     CGSize tiles = self.tileMap.mapSize; 
     if (_position.x < kMAP_EDGE_BUFFER || _position.x > (tiles.width - kMAP_EDGE_BUFFER - 1)) {
         return NO;
-    } else if (_position.y < (kMAP_EDGE_BUFFER + 1) || _position.y > (tiles.height - kMAP_EDGE_BUFFER)) {
+    } else if (_position.y < (kMAP_EDGE_BUFFER + 1) || _position.y > (tiles.height - kMAP_EDGE_BUFFER - 1)) {
         return NO;
     }
     return YES;

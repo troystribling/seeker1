@@ -38,9 +38,6 @@ typedef enum tagMapID {
     StatusDisplay* statusDisplay;
     NSMutableDictionary* startSite;
     NSMutableArray* seekerPath;
-    NSMutableArray* itemsPath;
-    NSMutableArray* terrainPath;
-    NSMutableArray* sandPath;
     NSInteger level;
     TermMenuView* menu;
     CGPoint screenCenter;
@@ -65,9 +62,6 @@ typedef enum tagMapID {
 @property (nonatomic, retain) StatusDisplay* statusDisplay;
 @property (nonatomic, retain) NSMutableDictionary* startSite;
 @property (nonatomic, retain) NSMutableArray* seekerPath;
-@property (nonatomic, retain) NSMutableArray* itemsPath;
-@property (nonatomic, retain) NSMutableArray* terrainPath;
-@property (nonatomic, retain) NSMutableArray* sandPath;
 @property (nonatomic, assign) NSInteger level;
 @property (nonatomic, retain) TermMenuView* menu;
 @property (nonatomic, assign) CGPoint screenCenter;

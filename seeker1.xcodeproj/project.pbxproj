@@ -53,8 +53,8 @@
 		0517EE4912D2C17F006CB4A9 /* DoUntilTerminalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0517EE4812D2C17F006CB4A9 /* DoUntilTerminalCell.xib */; };
 		051806BA12C9903F00568813 /* menu-site.png in Resources */ = {isa = PBXBuildFile; fileRef = 051806B912C9903F00568813 /* menu-site.png */; };
 		051806ED12C997DB00568813 /* menu-empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 051806EC12C997DB00568813 /* menu-empty.png */; };
+		0518629112E3F7220001DA3E /* map-3.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 0518629012E3F7220001DA3E /* map-3.tmx */; };
 		051AB7E912C028260020AC2D /* map-2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 051AB7E612C028260020AC2D /* map-2.tmx */; };
-		051AB7EA12C028260020AC2D /* map-3.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 051AB7E712C028260020AC2D /* map-3.tmx */; };
 		051AB7EB12C028260020AC2D /* map-4.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 051AB7E812C028260020AC2D /* map-4.tmx */; };
 		051C779612B091AC00E41A23 /* terminal-launcher-edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 051C779512B091AC00E41A23 /* terminal-launcher-edit.png */; };
 		051C77C712B0A88300E41A23 /* terminal-launcher-editing.png in Resources */ = {isa = PBXBuildFile; fileRef = 051C77C612B0A88300E41A23 /* terminal-launcher-editing.png */; };
@@ -390,8 +390,8 @@
 		0517EE4812D2C17F006CB4A9 /* DoUntilTerminalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoUntilTerminalCell.xib; sourceTree = "<group>"; };
 		051806B912C9903F00568813 /* menu-site.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-site.png"; sourceTree = "<group>"; };
 		051806EC12C997DB00568813 /* menu-empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-empty.png"; sourceTree = "<group>"; };
+		0518629012E3F7220001DA3E /* map-3.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-3.tmx"; sourceTree = "<group>"; };
 		051AB7E612C028260020AC2D /* map-2.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-2.tmx"; sourceTree = "<group>"; };
-		051AB7E712C028260020AC2D /* map-3.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-3.tmx"; sourceTree = "<group>"; };
 		051AB7E812C028260020AC2D /* map-4.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-4.tmx"; sourceTree = "<group>"; };
 		051C779512B091AC00E41A23 /* terminal-launcher-edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-edit.png"; sourceTree = "<group>"; };
 		051C77C612B0A88300E41A23 /* terminal-launcher-editing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-editing.png"; sourceTree = "<group>"; };
@@ -724,7 +724,7 @@
 				051E5895129B7CF000A5440E /* items.png */,
 				050CC74E1296011000974B8F /* map-1.tmx */,
 				051AB7E612C028260020AC2D /* map-2.tmx */,
-				051AB7E712C028260020AC2D /* map-3.tmx */,
+				0518629012E3F7220001DA3E /* map-3.tmx */,
 				051AB7E812C028260020AC2D /* map-4.tmx */,
 				050CC74F1296011000974B8F /* map.plist */,
 				050CC7501296011000974B8F /* map.png */,
@@ -1541,7 +1541,6 @@
 				0527E61712BD5F3D0039D55E /* red-seeker-1-west.png in Resources */,
 				050D445E12BF05FE00A0FE30 /* seeker.db in Resources */,
 				051AB7E912C028260020AC2D /* map-2.tmx in Resources */,
-				051AB7EA12C028260020AC2D /* map-3.tmx in Resources */,
 				051AB7EB12C028260020AC2D /* map-4.tmx in Resources */,
 				0521EF6D12C5637B0078C77C /* elysium.png in Resources */,
 				0521EF6E12C5637B0078C77C /* memnonia.png in Resources */,
@@ -1566,6 +1565,7 @@
 				05E504DE12D587B7009308DA /* CreateSubroutineViewController.xib in Resources */,
 				0514FB8512D8040100713A49 /* terminal-launcher-add-subroutine.png in Resources */,
 				051FB85E12D8DBEF006702D0 /* SubroutineViewController.xib in Resources */,
+				0518629112E3F7220001DA3E /* map-3.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

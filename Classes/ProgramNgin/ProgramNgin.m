@@ -446,13 +446,11 @@ static ProgramNgin* thisProgramNgin = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSMutableArray*)nextInstruction:(MapScene*)_mapScene {
-    NSMutableArray* instruction = nil;
     NSInteger codeLines = [self.compiledProgram count];
-    instruction = [self getInstructionSet:_mapScene];
     if (self.codeLine > codeLines - 1) {
         self.codeLine = 0;
     } 
-    return instruction;
+    return [self getInstructionSet:_mapScene];
 }
 
 @end
