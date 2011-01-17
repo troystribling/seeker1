@@ -124,7 +124,11 @@ static ProgramNgin* thisProgramNgin = nil;
     NSMutableArray* doInstructionSet = [_instructionSet objectAtIndex:1];
     [_instructionSet addObject:doUntilInstructionSets];
     [_instructionSet addObject:[NSNumber numberWithInt:0]];
-    [_instructionSet addObject:_parent];
+    if (_parent) {
+        [_instructionSet addObject:_parent];
+    } else {
+        [_instructionSet addObject:[NSNumber numberWithInt:0]];
+    }
     [_program addObject:_instructionSet];
     [self compileInstructionSet:doInstructionSet forParentInstructionSet:_parent toProgram:doUntilInstructionSets];
 }
@@ -196,7 +200,7 @@ static ProgramNgin* thisProgramNgin = nil;
                 break;
         }
     } else {
-        if (parent) {
+        if ([parent isKindOfClass:[NSMutableArray class]]) {
             [self incrementLineCounter:parent];
         } else {
             self.codeLine++;

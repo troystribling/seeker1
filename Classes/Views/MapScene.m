@@ -712,7 +712,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)positionIsInPlayingArea:(CGPoint)_position {
     CGSize tiles = self.tileMap.mapSize; 
-    if (_position.x < kMAP_EDGE_BUFFER || _position.x > (tiles.width - kMAP_EDGE_BUFFER)) {
+    if (_position.x < kMAP_EDGE_BUFFER || _position.x > (tiles.width - kMAP_EDGE_BUFFER - 1)) {
         return NO;
     } else if (_position.y < (kMAP_EDGE_BUFFER + 1) || _position.y > (tiles.height - kMAP_EDGE_BUFFER)) {
         return NO;
