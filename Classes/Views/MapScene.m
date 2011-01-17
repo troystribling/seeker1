@@ -353,7 +353,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)terrainClear {
     BOOL status = YES;
-    CGPoint seekerTile = [self getSeekerTile];
+    CGPoint seekerTile = [self nextPosition];
     NSDictionary* mapProperties = [self getTileProperties:seekerTile forLayer:self.terrainLayer];
     if (mapProperties) {
         NSString* mapID = [mapProperties valueForKey:@"mapID"];

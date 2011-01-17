@@ -132,11 +132,11 @@
             break;
         case DoTimesInstructionType:
             self.instructionsList = [[ProgramNgin instance] getDoInstructions];
-            self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAllButName:self.selectedSubroutineName]];
+            self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAll]];
             break;
         case DoUntilInstructionType:
             self.instructionsList = [[ProgramNgin instance] getDoInstructions];
-            self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAllButName:self.selectedSubroutineName]];
+            self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAll]];
             break;
         case DoUntilPredicateInstructionType:
             self.instructionsList = [[ProgramNgin instance] getDoUntilPredicates];

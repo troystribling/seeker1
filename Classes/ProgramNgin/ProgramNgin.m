@@ -205,7 +205,7 @@ static ProgramNgin* thisProgramNgin = nil;
         } else {
             self.codeLine++;
         }
-        exeInstruction = [self getInstructionSet:_mapScene];
+        exeInstruction = [self nextInstruction:_mapScene];
     }    
     return exeInstruction;
 }
