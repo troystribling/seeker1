@@ -134,8 +134,9 @@
                                      [[instructionSet objectAtIndex:2] intValue]];
                 break;
             case DoUntilProgramInstruction:
+                NSMutableArray* doTimesInstruction = [instructionSet objectAtIndex:1];
                 instructionString = [NSString stringWithFormat:@"%d*%d*%d", instruction, 
-                                     [[instructionSet objectAtIndex:1] intValue], 
+                                     [intValue], 
                                      [[instructionSet objectAtIndex:2] intValue]];
                 break;
             case SubroutineProgramInstruction:

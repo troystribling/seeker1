@@ -735,14 +735,14 @@
 		050D43D112BEFC6900A0FE30 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				050D444412BF001300A0FE30 /* SubroutineModel.h */,
-				050D444512BF001300A0FE30 /* SubroutineModel.m */,
 				050D444112BF000600A0FE30 /* ProgramModel.h */,
 				050D444212BF000600A0FE30 /* ProgramModel.m */,
 				05355F4112C3DCBA00CA770E /* LevelModel.h */,
 				05355F4212C3DCBA00CA770E /* LevelModel.m */,
 				050D43D212BEFC7D00A0FE30 /* SeekerDbi.h */,
 				050D43D312BEFC7D00A0FE30 /* SeekerDbi.m */,
+				050D444412BF001300A0FE30 /* SubroutineModel.h */,
+				050D444512BF001300A0FE30 /* SubroutineModel.m */,
 				050D443E12BEFFE700A0FE30 /* UserModel.h */,
 				050D443F12BEFFE700A0FE30 /* UserModel.m */,
 			);

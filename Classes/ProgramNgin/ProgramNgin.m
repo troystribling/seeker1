@@ -24,6 +24,7 @@ static ProgramNgin* thisProgramNgin = nil;
 - (void)compileSubrotineInstructionSet:(NSMutableArray*)_instructionSet forParentInstructionSet:(NSMutableArray*)_parent toProgram:(NSMutableArray*)_program;
 - (void)compileDoTimesInstructionSet:(NSMutableArray*)_instructionSet forParentInstructionSet:(NSMutableArray*)_parent toProgram:(NSMutableArray*)_program;
 - (void)compileDoUntilInstructionSet:(NSMutableArray*)_instructionSet forParentInstructionSet:(NSMutableArray*)_parent toProgram:(NSMutableArray*)_program;
+- (void)resetMaxCallStackDepth:(NSInteger)_depth;
 // execution
 - (NSMutableArray*)getInstructionSet:(MapScene*)_mapScene;
 - (NSMutableArray*)doUntilNextInstruction:(MapScene*)_mapScene forInstructionSet:(NSMutableArray*)_instructionSet;
@@ -45,6 +46,8 @@ static ProgramNgin* thisProgramNgin = nil;
 @synthesize programHalted;
 @synthesize programRunning;
 @synthesize codeLine;
+@synthesize callStackDepth;
+@synthesize maxCallStackDepth;
 
 //===================================================================================================================================
 #pragma mark ProgramNgin Compile
@@ -55,6 +58,7 @@ static ProgramNgin* thisProgramNgin = nil;
     for (NSMutableArray* instructionSet in self.program) {
         [self compileInstructionSet:instructionSet forParentInstructionSet:nil toProgram:self.compiledProgram];
     }
+    self.maxCallStackDepth = [self.compiledProgram count];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -131,6 +135,12 @@ static ProgramNgin* thisProgramNgin = nil;
     }
     [_program addObject:_instructionSet];
     [self compileInstructionSet:doInstructionSet forParentInstructionSet:_parent toProgram:doUntilInstructionSets];
+    [self resetMaxCallStackDepth:[doUntilInstructionSets count]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)resetMaxCallStackDepth:(NSInteger)_depth {
+    self.maxCallStackDepth = MAX(_depth, self.maxCallStackDepth);
 }
 
 //===================================================================================================================================
@@ -205,7 +215,10 @@ static ProgramNgin* thisProgramNgin = nil;
         } else {
             self.codeLine++;
         }
-        exeInstruction = [self nextInstruction:_mapScene];
+        if (self.callStackDepth < self.maxCallStackDepth) {
+            self.callStackDepth++;
+            exeInstruction = [self nextInstruction:_mapScene];
+        }
     }    
     return exeInstruction;
 }
@@ -276,6 +289,8 @@ static ProgramNgin* thisProgramNgin = nil;
         self.program = [NSMutableArray arrayWithCapacity:10];
         self.compiledProgram = [NSMutableArray arrayWithCapacity:10];
         self.codeLine = 0;
+        self.callStackDepth = 0;
+        self.maxCallStackDepth = 0;
 	}
 	return self;
 }
@@ -450,7 +465,9 @@ static ProgramNgin* thisProgramNgin = nil;
     if (self.codeLine > codeLines - 1) {
         self.codeLine = 0;
     } 
-    return [self getInstructionSet:_mapScene];
+    NSMutableArray* instructionSet = [self getInstructionSet:_mapScene];
+    self.callStackDepth = 0;
+    return instructionSet;
 }
 
 @end

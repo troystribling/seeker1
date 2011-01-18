@@ -47,6 +47,7 @@
 - (void)moveMapTo:(CGPoint)_point withDuration:(CGFloat)_duration;
 - (void)putSensor:(NSDictionary*)_properties atPoint:(CGPoint)_point;
 - (void)getSample:(NSDictionary*)_properties atPoint:(CGPoint)_point;
+- (void)halt;
 // display parameter updates
 - (void)updateEnergy;
 - (void)updateSensorCount;
@@ -54,6 +55,7 @@
 // seeker crash
 - (void)crashHitMapBoundary;
 - (void)crashNoEnergy;
+- (void)crashProgram;
 - (void)crashTerrain;
 - (void)crashSensorBinEmpty;
 - (void)crashNoSensorSiteAtPosition;
@@ -327,6 +329,9 @@
             default:
                 break;
         }
+    } else {
+        [self halt];
+        [self crashProgram];
     }
     if ([self isStationTile:itemProperties]) {
         [self.seeker1 emptySampleBin];
@@ -391,7 +396,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)move {
-    ProgramNgin* ngin = [ProgramNgin instance];
     CGPoint delta = [self moveDelta];
     if ([self moveIsInPlayingAreaForData:delta]) {
         CGFloat usedEnergy = [self tileUsedEnergy];
@@ -407,18 +411,15 @@
                 CGPoint seekerTile = [self getSeekerTile];
                 [self updatePathForPosition:seekerTile];
             } else {
-                [ngin haltProgram];
-                [LevelModel incompleteLevel:self.level withScore:[self.seeker1 score]];
+                [self halt];
                 [self crashTerrain];
             }
         } else {
-            [ngin haltProgram];
-            [LevelModel incompleteLevel:self.level withScore:[self.seeker1 score]];
+            [self halt];
             [self crashNoEnergy];
         }
     } else {
-        [ngin haltProgram];
-        [LevelModel incompleteLevel:self.level withScore:[self.seeker1 score]];
+        [self halt];
         [self crashHitMapBoundary];
     }
 }
@@ -431,7 +432,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)putSensor:(NSDictionary*)_properties atPoint:(CGPoint)_point {
-    ProgramNgin* ngin = [ProgramNgin instance];
     if (_properties) {
         NSString* itemID = [_properties valueForKey:@"itemID"];
         if ([itemID isEqualToString:@"sensorSite"]) {   
@@ -440,25 +440,21 @@
                 [self.itemsLayer setTileGID:kMAP_SENSOR_GID at:_point];
                 [self updateSensorCount];
             } else {
-                [ngin haltProgram];
-                [LevelModel incompleteLevel:self.level withScore:[self.seeker1 score]];
+                [self halt];
                 [self crashSensorBinEmpty];
             }
         } else {
-            [ngin haltProgram];
-            [LevelModel incompleteLevel:self.level withScore:[self.seeker1 score]];
+            [self halt];
             [self crashNoSensorSiteAtPosition];
         }
     } else {
-        [ngin haltProgram];
-        [LevelModel incompleteLevel:self.level withScore:[self.seeker1 score]];
+        [self halt];
         [self crashNoSensorSiteAtPosition];
     }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)getSample:(NSDictionary*)_properties atPoint:(CGPoint)_point {
-    ProgramNgin* ngin = [ProgramNgin instance];
     if (_properties) {
         NSString* itemID = [_properties valueForKey:@"itemID"];
         if ([itemID isEqualToString:@"sample"]) {        
@@ -466,20 +462,23 @@
                 [self.itemsLayer removeTileAt:_point];
                 [self updateSampleCount];
             } else {
-                [ngin haltProgram];
-                [LevelModel incompleteLevel:self.level withScore:[self.seeker1 score]];
+                [self halt];
                 [self crashSampleBinFull];
             }
         } else {        
-            [ngin haltProgram];
-            [LevelModel incompleteLevel:self.level withScore:[self.seeker1 score]];
+            [self halt];
             [self crashNoSampleAtPosition];
         }
-    } else {        
-        [ngin haltProgram];
-        [LevelModel incompleteLevel:self.level withScore:[self.seeker1 score]];
+    } else {  
+        [self halt];
         [self crashNoSampleAtPosition];
     }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)halt {
+    [[ProgramNgin instance] haltProgram];
+    [LevelModel incompleteLevel:self.level withScore:[self.seeker1 score]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -520,6 +519,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashNoEnergy {
+    [self fadeToRed];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)crashProgram {
     [self fadeToRed];
 }
 
