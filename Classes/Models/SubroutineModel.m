@@ -14,6 +14,9 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface SubroutineModel (PrivateAPI)
 
++ (NSString*)doInstructionsToCodeListing:(NSMutableArray*)_instructionSet;
++ (NSMutableArray*)codeListingToDoInstructions:(NSArray*)_instructionSetStrings;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -26,6 +29,44 @@
 
 //===================================================================================================================================
 #pragma mark SubroutineModel PrivateAPI
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSString*)doInstructionsToCodeListing:(NSMutableArray*)_instructionSet {
+    ProgramInstruction instruction = [[_instructionSet objectAtIndex:0] intValue];
+    NSString* instructionString = nil;
+    switch (instruction) {
+        case MoveProgramInstruction:
+        case TurnLeftProgramInstruction:
+        case PutSensorProgramInstruction:
+        case GetSampleProgramInstruction:
+            instructionString = [NSString stringWithFormat:@"%d", instruction];
+            break;
+        case SubroutineProgramInstruction:
+            instructionString = [NSString stringWithFormat:@"%d*%@", instruction, 
+                                 [_instructionSet objectAtIndex:1]];
+            break;
+        default:
+            break;
+    }
+    return instructionString;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSMutableArray*)codeListingToDoInstructions:(NSArray*)_instructionSetStrings {
+    NSMutableArray* instructionSet = [NSMutableArray arrayWithCapacity:10];
+    ProgramInstruction doIntruction = [[_instructionSetStrings objectAtIndex:1] intValue];
+    if (doIntruction == SubroutineProgramInstruction) {
+        instructionSet = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:doIntruction], 
+                          [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:[[_instructionSetStrings objectAtIndex:1] intValue]],
+                                                           [_instructionSetStrings objectAtIndex:2], nil],
+                          [NSNumber numberWithInt:[[_instructionSetStrings objectAtIndex:3] intValue]], nil];
+    } else {
+        instructionSet = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:doIntruction], 
+                          [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:[[_instructionSetStrings objectAtIndex:1] intValue]], nil],
+                          [NSNumber numberWithInt:[[_instructionSetStrings objectAtIndex:2] intValue]], nil];
+    }
+    return instructionSet;
+}
 
 //===================================================================================================================================
 #pragma mark SubroutineModel
@@ -129,14 +170,13 @@
                 instructionString = [NSString stringWithFormat:@"%d", instruction];
                 break;
             case DoTimesProgramInstruction:
-                instructionString = [NSString stringWithFormat:@"%d*%d*%d", instruction, 
-                                     [[instructionSet objectAtIndex:1] intValue], 
+                instructionString = [NSString stringWithFormat:@"%d*%@*%d", instruction, 
+                                     [self doInstructionsToCodeListing:[instructionSet objectAtIndex:1]], 
                                      [[instructionSet objectAtIndex:2] intValue]];
                 break;
             case DoUntilProgramInstruction:
-                NSMutableArray* doTimesInstruction = [instructionSet objectAtIndex:1];
-                instructionString = [NSString stringWithFormat:@"%d*%d*%d", instruction, 
-                                     [intValue], 
+                instructionString = [NSString stringWithFormat:@"%d*%@*%d", instruction, 
+                                     [self doInstructionsToCodeListing:[instructionSet objectAtIndex:1]], 
                                      [[instructionSet objectAtIndex:2] intValue]];
                 break;
             case SubroutineProgramInstruction:
@@ -174,14 +214,10 @@
                     instructionSet = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], nil];
                     break;
                 case DoTimesProgramInstruction:
-                    instructionSet = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], 
-                                     [NSNumber numberWithInt:[[instructionSetStrings objectAtIndex:1] intValue]],
-                                     [NSNumber numberWithInt:[[instructionSetStrings objectAtIndex:2] intValue]], nil];
+                    instructionSet = [self codeListingToDoInstructions:instructionSetStrings];
                     break;
                 case DoUntilProgramInstruction:
-                    instructionSet = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], 
-                                     [NSNumber numberWithInt:[[instructionSetStrings objectAtIndex:1] intValue]],
-                                     [NSNumber numberWithInt:[[instructionSetStrings objectAtIndex:2] intValue]], nil];
+                    instructionSet = [self codeListingToDoInstructions:instructionSetStrings];
                     break;
                 case SubroutineProgramInstruction:
                     instructionSet = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:instruction], 
