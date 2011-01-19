@@ -55,9 +55,10 @@
 #pragma mark TrminalCellInterface
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UITableViewCell*)tableView:(UITableView*)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet {
++ (UITableViewCell*)tableView:(UITableView*)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet andParentType:(TerminalCellParentType)_parentType{
 
     DoTimesTerminalCell* cell = (DoTimesTerminalCell*)[CellUtils createCell:[DoTimesTerminalCell class] forTableView:tableView];
+    cell.parentType = _parentType;
     cell.instructionLabel.userInteractionEnabled = YES;
     cell.numberLabel.userInteractionEnabled = YES;
 
@@ -116,7 +117,7 @@
             [[ViewControllerManager instance] showDoTimesEditView:[[CCDirector sharedDirector] openGLView] forTerminalCell:self];
             break;
         case kDOTIMES_INSTRUCTION_TAG:
-            if (self.parentType == TerminalDoTimesType) {
+            if (self.parentType == TerminalTerminalCellParentType) {
                 [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:TerminalDoTimesInstructionType andInstructionSet:self.instructionSet];
             } else {
                 [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:SubroutineDoTimesInstructionType andInstructionSet:self.instructionSet];

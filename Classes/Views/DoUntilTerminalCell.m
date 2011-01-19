@@ -55,9 +55,10 @@
 #pragma mark TrminalCellInterface
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UITableViewCell*)tableView:(UITableView*)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet {
++ (UITableViewCell*)tableView:(UITableView*)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet andParentType:(TerminalCellParentType)_parentType {
     
     DoUntilTerminalCell* cell = (DoUntilTerminalCell*)[CellUtils createCell:[DoUntilTerminalCell class] forTableView:tableView];
+    cell.parentType = _parentType;
     cell.instructionLabel.userInteractionEnabled = YES;
     cell.predicateLabel.userInteractionEnabled = YES;
     
@@ -113,14 +114,14 @@
     NSInteger touchTag = touch.view.tag;
     switch (touchTag) {
         case kDOUNTIL_INSTRUCTION_TAG:
-            if (self.parentType == TerminalDoUntilType) {
+            if (self.parentType == TerminalTerminalCellParentType) {
                 [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:TerminalDoUntilInstructionType andInstructionSet:self.instructionSet];
             } else {
                 [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:SubroutineDoUntilInstructionType andInstructionSet:self.instructionSet];
             }
             break;
         case kDOUNTIL_PREDICATE_TAG:
-            if (self.parentType == TerminalDoUntilType) {
+            if (self.parentType == TerminalTerminalCellParentType) {
                 [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:TerminalDoUntilPredicateInstructionType andInstructionSet:self.instructionSet];
             } else {
                 [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:SubroutineDoUntilPredicateInstructionType andInstructionSet:self.instructionSet];

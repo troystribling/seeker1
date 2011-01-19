@@ -98,7 +98,7 @@
             [self.terminalCell.instructionSet replaceObjectAtIndex:2 withObject:[NSNumber numberWithInt:numberVal]];
             [self.view removeFromSuperview];
             ViewControllerManager* viewControllerManager = [ViewControllerManager instance];
-            if (self.terminalCell.parentType == TerminalDoTimesType) {
+            if (self.terminalCell.parentType == TerminalTerminalCellParentType) {
                 TerminalViewController* terminalViewController = [viewControllerManager terminalViewController];
                 [[ProgramNgin instance] saveProgram:terminalViewController.programListing];
                 [viewControllerManager terminalViewWillAppear];

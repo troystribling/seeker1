@@ -54,7 +54,7 @@
 #pragma mark TerminalCellInterface
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UITableViewCell*)tableView:(UITableView*)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet {
++ (UITableViewCell*)tableView:(UITableView*)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet andParentType:(TerminalCellParentType)_parentType{
     TerminalCell* cell = (TerminalCell*)[CellUtils createCell:[TerminalCell class] forTableView:tableView];
     NSString* instructionString = [self instructionToString:_instructionSet];
     cell.instructionLabel.text = [NSString stringWithFormat:@"~> %@", instructionString];

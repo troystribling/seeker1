@@ -12,12 +12,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-typedef enum tagDoUntilType {
-    TerminalDoUntilType,
-    SubroutineDoUntilType,
-} DoUntilType;
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface DoUntilTerminalCell : UITableViewCell <TerminalCellInterface> {
     IBOutlet UILabel* promtLabel;
@@ -27,7 +21,7 @@ typedef enum tagDoUntilType {
     IBOutlet UILabel* predicateClosingBracketLabel;
     IBOutlet UILabel* predicateLabel;
     NSMutableArray* instructionSet;
-    DoUntilType parentType;
+    TerminalCellParentType parentType;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -38,7 +32,7 @@ typedef enum tagDoUntilType {
 @property (nonatomic, retain) UILabel* predicateClosingBracketLabel;
 @property (nonatomic, retain) UILabel* predicateLabel;
 @property (nonatomic, retain) NSMutableArray* instructionSet;
-@property (nonatomic, retain) DoUntilType parentType;
+@property (nonatomic, assign) TerminalCellParentType parentType;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

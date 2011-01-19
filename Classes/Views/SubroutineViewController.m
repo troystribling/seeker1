@@ -144,7 +144,7 @@
         return [TerminalCell tableView:tableView promptCellForRowAtIndexPath:indexPath];
     } else {
         NSMutableArray* instructionSet = [self.subroutineListing objectAtIndex:indexPath.row];
-        return [TerminalCellFactory tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:instructionSet];
+        return [TerminalCellFactory tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:instructionSet andParentType:SubroutineTerminalCellParentType];
     }
 }
 

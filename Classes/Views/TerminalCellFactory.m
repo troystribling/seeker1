@@ -65,42 +65,42 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UITableViewCell*)tableView:(UITableView*)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet {
++ (UITableViewCell*)tableView:(UITableView*)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet andParentType:(TerminalCellParentType)_parentType {
     UITableViewCell* tableCell = nil;
     ProgramInstruction instruction = [[_instructionSet objectAtIndex:0] intValue];
     switch (instruction) {
         case MoveProgramInstruction:
-            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet andParentType:_parentType];
             break;
         case TurnLeftProgramInstruction:
-            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet andParentType:_parentType];
             break;
         case PutSensorProgramInstruction:
-            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet andParentType:_parentType];
             break;
         case GetSampleProgramInstruction:
-            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet andParentType:_parentType];
             break;
         case DoTimesProgramInstruction:
-            tableCell = [DoTimesTerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            tableCell = [DoTimesTerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet andParentType:_parentType];
             break;
         case DoUntilProgramInstruction:
-            tableCell = [DoUntilTerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            tableCell = [DoUntilTerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet andParentType:_parentType];
             break;
         case SubroutineProgramInstruction:
-            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet andParentType:_parentType];
             break;            
         case PathBlockedPredicateProgramInstruction:
-            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet andParentType:_parentType];
             break;
         case SensorBinEmptyPredicateProgramInstruction:
-            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet andParentType:_parentType];
             break;
         case SampleBinFullPredicateProgramInstruction:
-            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet andParentType:_parentType];
             break;
         case AtStationPredicateProgramInstruction:
-            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet andParentType:_parentType];
             break;
     }
     return tableCell;

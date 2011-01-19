@@ -9,12 +9,19 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <Foundation/Foundation.h>
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+typedef enum tagTerminalCellParentType {
+    TerminalTerminalCellParentType,
+    SubroutineTerminalCellParentType,
+} TerminalCellParentType;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @protocol TerminalCellInterface <NSObject>
 
 @required
 
-+ (UITableViewCell*)tableView:(UITableView *)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet;
++ (UITableViewCell*)tableView:(UITableView *)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet andParentType:(TerminalCellParentType)_parentType;
 + (UITableViewCell*)tableView:(UITableView *)tableView listCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet;
 
 @end
@@ -28,7 +35,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (CGFloat)tableView:(UITableView *)tableView heightForRowWithInstructionSet:(NSMutableArray*)_instructionSet;
-+ (UITableViewCell*)tableView:(UITableView *)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet;
++ (UITableViewCell*)tableView:(UITableView *)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet andParentType:(TerminalCellParentType)_parentType;
 + (UITableViewCell*)tableView:(UITableView *)tableView listCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet;
 
 @end
