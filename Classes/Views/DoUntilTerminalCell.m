@@ -36,6 +36,7 @@
 @synthesize predicateClosingBracketLabel;
 @synthesize predicateLabel;
 @synthesize instructionSet;
+@synthesize parentType;
 
 //===================================================================================================================================
 #pragma mark DoUntilTerminalCell PrivateAPI
@@ -112,10 +113,18 @@
     NSInteger touchTag = touch.view.tag;
     switch (touchTag) {
         case kDOUNTIL_INSTRUCTION_TAG:
-            [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:DoUntilInstructionType andInstructionSet:self.instructionSet];
+            if (self.parentType == TerminalDoUntilType) {
+                [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:TerminalDoUntilInstructionType andInstructionSet:self.instructionSet];
+            } else {
+                [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:SubroutineDoUntilInstructionType andInstructionSet:self.instructionSet];
+            }
             break;
         case kDOUNTIL_PREDICATE_TAG:
-            [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:DoUntilPredicateInstructionType andInstructionSet:self.instructionSet];
+            if (self.parentType == TerminalDoUntilType) {
+                [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:TerminalDoUntilPredicateInstructionType andInstructionSet:self.instructionSet];
+            } else {
+                [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:SubroutineDoUntilPredicateInstructionType andInstructionSet:self.instructionSet];
+            }
             break;
         default:
             [super touchesBegan:touches withEvent:event];

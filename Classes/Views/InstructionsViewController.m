@@ -24,8 +24,9 @@
 
 - (void)updateTerminalPrimitiveInstruction:(NSMutableArray*)_instructionSet;
 - (void)updateSubroutinePrimitiveInstruction:(NSMutableArray*)_instructionSet;
-- (void)updateDoInstruction:(NSMutableArray*)_instructionSet;
-- (void)updateDoUntilPredicate:(NSMutableArray*)_instructionSet;
+- (void)updateTerminalDoInstruction:(NSMutableArray*)_instructionSet;
+- (void)updateSubroutineDoInstruction:(NSMutableArray*)_instructionSet;
+- (void)updateTerminalDoUntilPredicate:(NSMutableArray*)_instructionSet;
 
 @end
 
@@ -71,16 +72,31 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)updateDoInstruction:(NSMutableArray*)_instructionSet {
+- (void)updateTerminalDoInstruction:(NSMutableArray*)_instructionSet {
     [self.selectedInstructionSet replaceObjectAtIndex:1 withObject:_instructionSet];
     [[ProgramNgin instance] saveProgram:[[ViewControllerManager instance] terminalViewController].programListing];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)updateDoUntilPredicate:(NSMutableArray*)_instructionSet {
+- (void)updateSubroutineDoInstruction:(NSMutableArray*)_instructionSet {
+    SubroutineViewController* subroutineViewController = [[ViewControllerManager instance] subroutineViewController];
+    [self.selectedInstructionSet replaceObjectAtIndex:1 withObject:_instructionSet];
+    [SubroutineModel insertSubroutine:subroutineViewController.subroutineListing withName:subroutineViewController.subroutineName];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)updateTerminalDoUntilPredicate:(NSMutableArray*)_instructionSet {
     NSNumber* newInstruction = [_instructionSet objectAtIndex:0];
     [self.selectedInstructionSet replaceObjectAtIndex:2 withObject:newInstruction];
     [[ProgramNgin instance] saveProgram:[[ViewControllerManager instance] terminalViewController].programListing];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)updateSubroutineDoUntilPredicate:(NSMutableArray*)_instructionSet {
+    SubroutineViewController* subroutineViewController = [[ViewControllerManager instance] subroutineViewController];
+    NSNumber* newInstruction = [_instructionSet objectAtIndex:0];
+    [self.selectedInstructionSet replaceObjectAtIndex:2 withObject:newInstruction];
+    [SubroutineModel insertSubroutine:subroutineViewController.subroutineListing withName:subroutineViewController.subroutineName];
 }
 
 //===================================================================================================================================
@@ -130,15 +146,18 @@
             self.instructionsList = [[ProgramNgin instance] getPrimitiveInstructions];
             self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAllButName:self.selectedSubroutineName]];
             break;
-        case DoTimesInstructionType:
+        case TerminalDoTimesInstructionType:
+        case SubroutineDoTimesInstructionType:
             self.instructionsList = [[ProgramNgin instance] getDoInstructions];
             self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAll]];
             break;
-        case DoUntilInstructionType:
+        case TerminalDoUntilInstructionType:
+        case SubroutineDoUntilInstructionType:
             self.instructionsList = [[ProgramNgin instance] getDoInstructions];
             self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAll]];
             break;
-        case DoUntilPredicateInstructionType:
+        case TerminalDoUntilPredicateInstructionType:
+        case SubroutineDoUntilPredicateInstructionType:
             self.instructionsList = [[ProgramNgin instance] getDoUntilPredicates];
             break;
         case SubroutineInstructionType:
@@ -286,17 +305,29 @@
             [self updateSubroutinePrimitiveInstruction:instructionSet];
             [viewControllerManager subroutineViewWillAppear];
             break;
-        case DoTimesInstructionType:
-            [self updateDoInstruction:instructionSet];
+        case TerminalDoTimesInstructionType:
+            [self updateTerminalDoInstruction:instructionSet];
             [viewControllerManager terminalViewWillAppear];
             break;
-        case DoUntilInstructionType:
-            [self updateDoInstruction:instructionSet];
+        case SubroutineDoTimesInstructionType:
+            [self updateSubroutineDoInstruction:instructionSet];
+            [viewControllerManager subroutineViewWillAppear];
+            break;
+        case TerminalDoUntilInstructionType:
+            [self updateTerminalDoInstruction:instructionSet];
             [viewControllerManager terminalViewWillAppear];
             break;
-        case DoUntilPredicateInstructionType:
-            [self updateDoUntilPredicate:instructionSet];            
+        case SubroutineDoUntilInstructionType:
+            [self updateSubroutineDoInstruction:instructionSet];
+            [viewControllerManager subroutineViewWillAppear];
+            break;
+        case TerminalDoUntilPredicateInstructionType:
+            [self updateTerminalDoUntilPredicate:instructionSet];            
             [viewControllerManager terminalViewWillAppear];
+            break;
+        case SubroutineDoUntilPredicateInstructionType:
+            [self updateSubroutineDoUntilPredicate:instructionSet];            
+            [viewControllerManager subroutineViewWillAppear];
             break;
         case SubroutineInstructionType:
             subroutineName = [instructionSet objectAtIndex:1];
@@ -322,7 +353,7 @@
     header.backgroundColor = [UIColor blackColor];
     header.font = [UIFont fontWithName:@"Courier" size:22.0];
     if (section == 0) {
-       header.text = @"primitives"; 
+        header.text = @"primitives"; 
     } else {
         header.text = @"subroutines";
     }

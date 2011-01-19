@@ -56,14 +56,14 @@
     NSMutableArray* instructionSet = [NSMutableArray arrayWithCapacity:10];
     ProgramInstruction doIntruction = [[_instructionSetStrings objectAtIndex:1] intValue];
     if (doIntruction == SubroutineProgramInstruction) {
-        instructionSet = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:doIntruction], 
-                          [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:[[_instructionSetStrings objectAtIndex:1] intValue]],
-                                                           [_instructionSetStrings objectAtIndex:2], nil],
-                          [NSNumber numberWithInt:[[_instructionSetStrings objectAtIndex:3] intValue]], nil];
+        instructionSet = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:[[_instructionSetStrings objectAtIndex:0] intValue]], 
+                            [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:doIntruction],
+                                                             [_instructionSetStrings objectAtIndex:2], nil],
+                            [NSNumber numberWithInt:[[_instructionSetStrings objectAtIndex:3] intValue]], nil];
     } else {
-        instructionSet = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:doIntruction], 
-                          [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:[[_instructionSetStrings objectAtIndex:1] intValue]], nil],
-                          [NSNumber numberWithInt:[[_instructionSetStrings objectAtIndex:2] intValue]], nil];
+        instructionSet = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:[[_instructionSetStrings objectAtIndex:0] intValue]], 
+                            [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:doIntruction], nil],
+                            [NSNumber numberWithInt:[[_instructionSetStrings objectAtIndex:2] intValue]], nil];
     }
     return instructionSet;
 }

@@ -12,6 +12,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+typedef enum tagDoTimesType {
+    TerminalDoTimesType,
+    SubroutineDoTimesType,
+} DoTimesType;
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface DoTimesTerminalCell : UITableViewCell <TerminalCellInterface> {
     IBOutlet UILabel* promtLabel;
@@ -21,6 +27,7 @@
     IBOutlet UILabel* instructionLabel;
     IBOutlet UILabel* numberLabel;
     NSMutableArray* instructionSet;
+    DoTimesType parentType;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -31,6 +38,7 @@
 @property (nonatomic, retain) UILabel* instructionLabel;
 @property (nonatomic, retain) UILabel* numberLabel;
 @property (nonatomic, retain) NSMutableArray* instructionSet;
+@property (nonatomic, retain) DoTimesType parentType;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

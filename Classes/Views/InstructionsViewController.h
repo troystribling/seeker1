@@ -14,9 +14,12 @@
 typedef enum tagInstructionType {
     TerminalPrimitiveInstructionType,
     SubroutinePrimitiveInstructionType,
-    DoTimesInstructionType,
-    DoUntilInstructionType,
-    DoUntilPredicateInstructionType,
+    TerminalDoTimesInstructionType,
+    SubroutineDoTimesInstructionType,
+    TerminalDoUntilInstructionType,
+    SubroutineDoUntilInstructionType,
+    TerminalDoUntilPredicateInstructionType,
+    SubroutineDoUntilPredicateInstructionType,
     SubroutineInstructionType,
 } InstructionType;
 

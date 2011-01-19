@@ -36,6 +36,7 @@
 @synthesize instructionLabel;
 @synthesize numberLabel;
 @synthesize instructionSet;
+@synthesize parentType;
 
 //===================================================================================================================================
 #pragma mark DoTimesTerminalCell PrivateAPI
@@ -115,7 +116,11 @@
             [[ViewControllerManager instance] showDoTimesEditView:[[CCDirector sharedDirector] openGLView] forTerminalCell:self];
             break;
         case kDOTIMES_INSTRUCTION_TAG:
-            [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:DoTimesInstructionType andInstructionSet:self.instructionSet];
+            if (self.parentType == TerminalDoTimesType) {
+                [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:TerminalDoTimesInstructionType andInstructionSet:self.instructionSet];
+            } else {
+                [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:SubroutineDoTimesInstructionType andInstructionSet:self.instructionSet];
+            }
             break;
         default:
             [super touchesBegan:touches withEvent:event];

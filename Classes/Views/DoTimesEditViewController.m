@@ -10,6 +10,7 @@
 #import "DoTimesEditViewController.h"
 #import "DoTimesTerminalCell.h"
 #import "ViewControllerManager.h"
+#import "SubroutineModel.h"
 #import "ProgramNgin.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -97,9 +98,15 @@
             [self.terminalCell.instructionSet replaceObjectAtIndex:2 withObject:[NSNumber numberWithInt:numberVal]];
             [self.view removeFromSuperview];
             ViewControllerManager* viewControllerManager = [ViewControllerManager instance];
-            TerminalViewController* terminalViewController = [viewControllerManager terminalViewController];
-            [[ProgramNgin instance] saveProgram:terminalViewController.programListing];
-            [viewControllerManager terminalViewWillAppear];
+            if (self.terminalCell.parentType == TerminalDoTimesType) {
+                TerminalViewController* terminalViewController = [viewControllerManager terminalViewController];
+                [[ProgramNgin instance] saveProgram:terminalViewController.programListing];
+                [viewControllerManager terminalViewWillAppear];
+            } else {
+                SubroutineViewController* subroutineViewController = [viewControllerManager subroutineViewController];
+                [SubroutineModel insertSubroutine:subroutineViewController.subroutineListing withName:subroutineViewController.subroutineName];
+                [viewControllerManager subroutineViewWillAppear];
+            }
             break;
         default:
             [super touchesBegan:touches withEvent:event];
