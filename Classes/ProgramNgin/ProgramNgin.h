@@ -22,6 +22,8 @@ typedef enum tagProgramInstruction {
     SensorBinEmptyPredicateProgramInstruction,
     SampleBinFullPredicateProgramInstruction,
     AtStationPredicateProgramInstruction,
+    AtSampleProgramInstruction,
+    AtSensorSiteProgramInstruction,
 } ProgramInstruction;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

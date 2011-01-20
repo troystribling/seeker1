@@ -11,6 +11,7 @@
 #import "UserModel.h"
 #import "SubroutineModel.h"
 #import "MapScene.h"
+#import "SeekerSprite.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 static ProgramNgin* thisProgramNgin = nil;
@@ -30,10 +31,13 @@ static ProgramNgin* thisProgramNgin = nil;
 - (NSMutableArray*)doUntilNextInstruction:(MapScene*)_mapScene forInstructionSet:(NSMutableArray*)_instructionSet;
 - (void)incrementLineCounter:(NSMutableArray*)_instructionSet;
 // predicates
+- (BOOL)hasItem:(MapScene*)_mapScene withValue:(NSString*)_value;
 - (BOOL)pathBlocked:(MapScene*)_mapScene;
 - (BOOL)sensorBinEmpty:(MapScene*)_mapScene;
 - (BOOL)sampleBinFull:(MapScene*)_mapScene;
 - (BOOL)atStation:(MapScene*)_mapScene;
+- (BOOL)atSample:(MapScene*)_mapScene;
+- (BOOL)atSensorSite:(MapScene*)_mapScene;
 
 @end
 
@@ -186,6 +190,12 @@ static ProgramNgin* thisProgramNgin = nil;
         case AtStationPredicateProgramInstruction:
             predicateTrue = [self atStation:_mapScene];
             break;
+        case AtSampleProgramInstruction:
+            predicateTrue = [self atSample:_mapScene];
+            break;
+        case AtSensorSiteProgramInstruction:
+            predicateTrue = [self atSensorSite:_mapScene];
+            break;
         default:
             break;
     }
@@ -238,36 +248,60 @@ static ProgramNgin* thisProgramNgin = nil;
 #pragma mark ProgramNgin Predicates
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)hasItem:(MapScene*)_mapScene withValue:(NSString*)_value {
+    BOOL status = NO;
+    CGPoint position = [_mapScene getSeekerTile];
+    NSDictionary* item = [_mapScene getTileProperties:position forLayer:_mapScene.itemsLayer];
+    if (item) {
+        NSString* itemID = [item valueForKey:@"itemID"];
+        if ([itemID isEqualToString:_value]) {
+            status = YES;
+        } 
+    } 
+    return status;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)pathBlocked:(MapScene*)_mapScene {
-    BOOL isBlocked = NO;
+    BOOL status = NO;
     CGPoint position = [_mapScene nextPosition];
     if ([_mapScene positionIsInPlayingArea:position]) {
         NSDictionary* terrain = [_mapScene getTileProperties:position forLayer:_mapScene.terrainLayer];
         if (terrain) {
             NSString* mapID = [terrain valueForKey:@"mapID"];
             if ([mapID isEqualToString:@"up-1"]) {
-                isBlocked = YES;
+                status = YES;
             } 
         } 
     } else {
-        isBlocked = YES;
+        status = YES;
     }
-    return isBlocked;
+    return status;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)sensorBinEmpty:(MapScene*)_mapScene {
-    return YES;
+    return [_mapScene.seeker1 isSensorBinEmpty];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)sampleBinFull:(MapScene*)_mapScene {
-    return YES;
+    return [_mapScene.seeker1 isSampleBinFull];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)atStation:(MapScene*)_mapScene {
-    return YES;
+    return [self hasItem:_mapScene withValue:@"station"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)atSample:(MapScene*)_mapScene {
+    return [self hasItem:_mapScene withValue:@"sample"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)atSensorSite:(MapScene*)_mapScene {
+    return [self hasItem:_mapScene withValue:@"sample"];
 }
 
 //===================================================================================================================================
@@ -336,6 +370,8 @@ static ProgramNgin* thisProgramNgin = nil;
     [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:SensorBinEmptyPredicateProgramInstruction], nil]];
     [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:SampleBinFullPredicateProgramInstruction], nil]];
     [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:AtStationPredicateProgramInstruction], nil]];
+    [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:AtSampleProgramInstruction], nil]];
+    [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:AtSensorSiteProgramInstruction], nil]];
     return primatives;
 }
 
@@ -374,6 +410,12 @@ static ProgramNgin* thisProgramNgin = nil;
             break;
         case AtStationPredicateProgramInstruction:
             instructionString = @"at station";
+            break;
+        case AtSampleProgramInstruction:
+            instructionString = @"at sample";
+            break;
+        case AtSensorSiteProgramInstruction:
+            instructionString = @"at sensor site";
             break;
     }
     return instructionString;

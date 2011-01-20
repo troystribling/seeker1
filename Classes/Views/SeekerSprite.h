@@ -69,6 +69,8 @@ typedef enum tagSeekerBearing {
 - (BOOL)putSensor;
 - (void)loadSensorBin;
 - (BOOL)isLevelCompleted;
+- (BOOL)isSensorBinEmpty;
+- (BOOL)isSampleBinFull;
 - (NSInteger)score;
 // rotate
 - (void)rotate:(CGFloat)_angle;
