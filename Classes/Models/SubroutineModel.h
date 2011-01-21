@@ -35,8 +35,6 @@
 + (NSMutableArray*)findAll;
 + (NSMutableArray*)findAllButName:(NSString*)_subroutineName;
 + (NSMutableArray*)modelsToInstructions:(NSMutableArray*)_models;
-+ (NSString*)instructionsToCodeListing:(NSMutableArray*)_instructionSets;
-+ (NSMutableArray*)codeListingToInstructions:(NSString*)_listing;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;

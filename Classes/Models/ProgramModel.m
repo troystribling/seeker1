@@ -9,6 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "ProgramModel.h"
 #import "SeekerDbi.h"
+#import "CodeModel.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ProgramModel (PrivateAPI)
@@ -22,6 +23,7 @@
 @synthesize pk;
 @synthesize level;
 @synthesize codeListing;
+@synthesize updatedAt;
 
 //===================================================================================================================================
 #pragma mark ProgramModel
@@ -30,13 +32,15 @@
 + (void)insertProgram:(NSMutableArray*)_program forLevel:(NSInteger)_level {
     ProgramModel* program = [self findByLevel:_level];
     if (program) {
-        program.codeListing = [_program componentsJoinedByString:@";"];
+        program.codeListing = [CodeModel instructionsToCodeListing:_program];
         program.level = _level;
+        program.updatedAt = [NSDate date];
         [program update];
     } else {
         program = [[[ProgramModel alloc] init] autorelease];
-        program.codeListing = [_program componentsJoinedByString:@";"];
+        program.codeListing = [CodeModel instructionsToCodeListing:_program];
         program.level = _level;
+        program.updatedAt = [NSDate date];
         [program insert];
     }
 }
@@ -53,7 +57,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[SeekerDbi instance]  updateWithStatement:@"CREATE TABLE programs (pk integer primary key, codeListing text, level integer)"];
+	[[SeekerDbi instance]  updateWithStatement:@"CREATE TABLE programs (pk integer primary key, codeListing text, level integer, updatedAt text)"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -83,7 +87,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
     NSString* insertStatement;
-    insertStatement = [NSString stringWithFormat:@"INSERT INTO programs (codeListing, level) values ('%@', %d)", self.codeListing, self.level];	
+    insertStatement = [NSString stringWithFormat:@"INSERT INTO programs (codeListing, level, updatedAt) values ('%@', %d, '%@')", 
+                       self.codeListing, self.level, [self updatedAtAsString]];	
     [[SeekerDbi instance]  updateWithStatement:insertStatement];
 }
 
@@ -101,14 +106,22 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
-    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE funtions SET codeListing = '%@', level = %d WHERE pk = %d", self.codeListing, 
-                                 self.level, self.pk];
+    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE programs SET codeListing = '%@', level = %d, updatedAt = '%@' WHERE pk = %d", 
+                                 self.codeListing, self.level, [self updatedAtAsString], self.pk];
 	[[SeekerDbi instance] updateWithStatement:updateStatement];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSArray*)codeListingToArray {
-    return [self.codeListing componentsSeparatedByString:@";"];
+- (NSArray*)codeListingToInstrictions {
+    return [CodeModel codeListingToInstructions:self.codeListing];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSString*)updatedAtAsString {
+    NSDateFormatter *df = [[[NSDateFormatter alloc] init] autorelease];
+    [df setDateFormat:@"yyyy-MM-dd hh:mm:ss zzz"];
+    NSString* dateString = [df stringFromDate:self.updatedAt];
+    return dateString;
 }
 
 //===================================================================================================================================
@@ -125,6 +138,12 @@
 		self.codeListing = [NSString stringWithUTF8String:codeListingVal];
 	}
 	self.level = (int)sqlite3_column_int(statement, 2);
+    char* updatedAtVal = (char*)sqlite3_column_text(statement, 3);
+    if (updatedAtVal != nil) {		
+        NSDateFormatter *df = [[[NSDateFormatter alloc] init] autorelease];
+        [df setDateFormat:@"yyyy-MM-dd hh:mm:ss zzz"];
+        self.updatedAt = [df dateFromString:[NSString stringWithCString:updatedAtVal encoding:NSUTF8StringEncoding]];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

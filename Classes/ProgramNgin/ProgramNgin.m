@@ -10,6 +10,7 @@
 #import "ProgramNgin.h"
 #import "UserModel.h"
 #import "SubroutineModel.h"
+#import "ProgramModel.h"
 #import "MapScene.h"
 #import "SeekerSprite.h"
 
@@ -453,6 +454,7 @@ static ProgramNgin* thisProgramNgin = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)saveProgram:(NSMutableArray*)_program {
     self.program = [NSMutableArray arrayWithArray:_program];
+    [ProgramModel insertProgram:_program forLevel:[UserModel level]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

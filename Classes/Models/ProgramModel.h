@@ -17,12 +17,14 @@
     NSInteger pk;
     NSInteger level;
     NSString* codeListing;
+    NSDate* updatedAt;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, assign) NSInteger pk;
 @property (nonatomic, assign) NSInteger level;
 @property (nonatomic, retain) NSString* codeListing;
+@property (nonatomic, retain) NSDate* updatedAt;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)insertProgram:(NSMutableArray*)_program forLevel:(NSInteger)_level;
@@ -38,6 +40,7 @@
 - (void)destroy;
 - (void)load;
 - (void)update;
-- (NSArray*)codeListingToArray;
+- (NSArray*)codeListingToInstrictions;
+- (NSString*)updatedAtAsString;
 
 @end

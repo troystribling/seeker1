@@ -105,6 +105,7 @@
 		0547A4B912AC4FD000D2F0D1 /* NSObjectExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0547A4B812AC4FD000D2F0D1 /* NSObjectExtension.m */; };
 		0547A4C112AC509700D2F0D1 /* ProgramNgin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0547A4C012AC509700D2F0D1 /* ProgramNgin.m */; };
 		0556B81D129C603B00B5F8FB /* SeekerSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 0556B81C129C603B00B5F8FB /* SeekerSprite.m */; };
+		05B81AAA12E9067A00BAC631 /* CodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B81AA912E9067A00BAC631 /* CodeModel.m */; };
 		05E4801912D53FC000E6B65E /* terminal-launcher-subroutines.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E4801812D53FC000E6B65E /* terminal-launcher-subroutines.png */; };
 		05E4801C12D5411300E6B65E /* SubroutineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4801B12D5411300E6B65E /* SubroutineViewController.m */; };
 		05E4801F12D5414300E6B65E /* CreateSubroutineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4801E12D5414300E6B65E /* CreateSubroutineViewController.m */; };
@@ -462,6 +463,8 @@
 		0547A4C012AC509700D2F0D1 /* ProgramNgin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramNgin.m; sourceTree = "<group>"; };
 		0556B81B129C603B00B5F8FB /* SeekerSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeekerSprite.h; sourceTree = "<group>"; };
 		0556B81C129C603B00B5F8FB /* SeekerSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeekerSprite.m; sourceTree = "<group>"; };
+		05B81AA812E9067A00BAC631 /* CodeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeModel.h; sourceTree = "<group>"; };
+		05B81AA912E9067A00BAC631 /* CodeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeModel.m; sourceTree = "<group>"; };
 		05E4801812D53FC000E6B65E /* terminal-launcher-subroutines.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-subroutines.png"; sourceTree = "<group>"; };
 		05E4801A12D5411300E6B65E /* SubroutineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubroutineViewController.h; sourceTree = "<group>"; };
 		05E4801B12D5411300E6B65E /* SubroutineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubroutineViewController.m; sourceTree = "<group>"; };
@@ -735,6 +738,8 @@
 		050D43D112BEFC6900A0FE30 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				05B81AA812E9067A00BAC631 /* CodeModel.h */,
+				05B81AA912E9067A00BAC631 /* CodeModel.m */,
 				050D444112BF000600A0FE30 /* ProgramModel.h */,
 				050D444212BF000600A0FE30 /* ProgramModel.m */,
 				05355F4112C3DCBA00CA770E /* LevelModel.h */,
@@ -1608,6 +1613,7 @@
 				05E4801C12D5411300E6B65E /* SubroutineViewController.m in Sources */,
 				05E4801F12D5414300E6B65E /* CreateSubroutineViewController.m in Sources */,
 				05290C1E12D6C62500894B97 /* TouchImageView.m in Sources */,
+				05B81AAA12E9067A00BAC631 /* CodeModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
