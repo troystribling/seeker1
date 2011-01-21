@@ -121,6 +121,7 @@
     [self.seekerPath removeAllObjects];
     ProgramModel* model = [ProgramModel findByLevel:self.level];
     if (model) {
+        [[ProgramNgin instance] saveProgram:[model codeListingToInstrictions]];
         [self addRunTerminalItems];
         [self.menu addRunItems];
     } else {

@@ -106,6 +106,8 @@
 		0547A4C112AC509700D2F0D1 /* ProgramNgin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0547A4C012AC509700D2F0D1 /* ProgramNgin.m */; };
 		0556B81D129C603B00B5F8FB /* SeekerSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 0556B81C129C603B00B5F8FB /* SeekerSprite.m */; };
 		05B81AAA12E9067A00BAC631 /* CodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B81AA912E9067A00BAC631 /* CodeModel.m */; };
+		05B81B7312E9492300BAC631 /* RespositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B81B7212E9492300BAC631 /* RespositoryViewController.m */; };
+		05B81B7512E949C300BAC631 /* RepositoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05B81B7412E949C300BAC631 /* RepositoryViewController.xib */; };
 		05E4801912D53FC000E6B65E /* terminal-launcher-subroutines.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E4801812D53FC000E6B65E /* terminal-launcher-subroutines.png */; };
 		05E4801C12D5411300E6B65E /* SubroutineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4801B12D5411300E6B65E /* SubroutineViewController.m */; };
 		05E4801F12D5414300E6B65E /* CreateSubroutineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4801E12D5414300E6B65E /* CreateSubroutineViewController.m */; };
@@ -465,6 +467,9 @@
 		0556B81C129C603B00B5F8FB /* SeekerSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeekerSprite.m; sourceTree = "<group>"; };
 		05B81AA812E9067A00BAC631 /* CodeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeModel.h; sourceTree = "<group>"; };
 		05B81AA912E9067A00BAC631 /* CodeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeModel.m; sourceTree = "<group>"; };
+		05B81B7112E9492300BAC631 /* RespositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RespositoryViewController.h; sourceTree = "<group>"; };
+		05B81B7212E9492300BAC631 /* RespositoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RespositoryViewController.m; sourceTree = "<group>"; };
+		05B81B7412E949C300BAC631 /* RepositoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RepositoryViewController.xib; sourceTree = "<group>"; };
 		05E4801812D53FC000E6B65E /* terminal-launcher-subroutines.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-subroutines.png"; sourceTree = "<group>"; };
 		05E4801A12D5411300E6B65E /* SubroutineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubroutineViewController.h; sourceTree = "<group>"; };
 		05E4801B12D5411300E6B65E /* SubroutineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubroutineViewController.m; sourceTree = "<group>"; };
@@ -881,6 +886,8 @@
 				0517EE2D12D2B400006CB4A9 /* DoUntilTerminalCell.m */,
 				050D764B12AF0E44005EF9BE /* InstructionsViewController.h */,
 				050D764C12AF0E44005EF9BE /* InstructionsViewController.m */,
+				05B81B7112E9492300BAC631 /* RespositoryViewController.h */,
+				05B81B7212E9492300BAC631 /* RespositoryViewController.m */,
 				05E4801A12D5411300E6B65E /* SubroutineViewController.h */,
 				05E4801B12D5411300E6B65E /* SubroutineViewController.m */,
 				0547A47E12AC388C00D2F0D1 /* TerminalCell.h */,
@@ -955,6 +962,7 @@
 				0522D27312CBF17300E0530C /* DoTimesTerminalCell.xib */,
 				0517EE4812D2C17F006CB4A9 /* DoUntilTerminalCell.xib */,
 				050D765012AF0F5D005EF9BE /* InstructionsViewController.xib */,
+				05B81B7412E949C300BAC631 /* RepositoryViewController.xib */,
 				051FB85D12D8DBEF006702D0 /* SubroutineViewController.xib */,
 				0547A46612AC349400D2F0D1 /* TerminalViewController.xib */,
 				0547A48112AC38B100D2F0D1 /* TerminalCell.xib */,
@@ -1571,6 +1579,7 @@
 				0514FB8512D8040100713A49 /* terminal-launcher-add-subroutine.png in Resources */,
 				051FB85E12D8DBEF006702D0 /* SubroutineViewController.xib in Resources */,
 				0518629112E3F7220001DA3E /* map-3.tmx in Resources */,
+				05B81B7512E949C300BAC631 /* RepositoryViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1614,6 +1623,7 @@
 				05E4801F12D5414300E6B65E /* CreateSubroutineViewController.m in Sources */,
 				05290C1E12D6C62500894B97 /* TouchImageView.m in Sources */,
 				05B81AAA12E9067A00BAC631 /* CodeModel.m in Sources */,
+				05B81B7312E9492300BAC631 /* RespositoryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
