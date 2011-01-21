@@ -8,13 +8,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "MapScene.h"
+#import "UserModel.h"
+#import "LevelModel.h"
+#import "ProgramModel.h"
 #import "TermMenuView.h"
 #import "SeekerSprite.h"
 #import "StatusDisplay.h"
 #import "ProgramNgin.h"
 #import "TouchUtils.h"
-#import "UserModel.h"
-#import "LevelModel.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapScene (PrivateAPI)
@@ -110,21 +111,22 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initLevel {
-//#define kDEBUG_LEVEL 2
-#ifdef kDEBUG_LEVEL   
-    self.level = kDEBUG_LEVEL;
-#else    
     self.level = [UserModel level];
     [LevelModel insertForLevel:self.level];
-#endif    
     self.tileMap = [self initMap];
     CGSize tileMapTiles = self.tileMap.mapSize;
     CGSize tileMapTileSize = self.tileMap.tileSize;
     self.tileMapSize = CGSizeMake(tileMapTiles.width*tileMapTileSize.width, tileMapTiles.height*tileMapTileSize.height);
     [self centerTileMapOnStartPoint];
     [self.seekerPath removeAllObjects];
-    [self initTerminalItems];
-    [self.menu mapInitItems];
+    ProgramModel* model = [ProgramModel findByLevel:self.level];
+    if (model) {
+        [self addRunTerminalItems];
+        [self.menu addRunItems];
+    } else {
+        [self initTerminalItems];
+        [self.menu mapInitItems];
+    }
     [self addChild:self.tileMap z:-1 tag:kMAP];
     self.levelInitSeeker = YES;
 }
@@ -132,9 +134,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initNextLevel {
     self.nextLevel = NO;
-#ifndef kDEBUG_LEVEL    
     [UserModel nextLevel];
-#endif    
     [self.tileMap removeFromParentAndCleanup:YES];
     [self.seeker1 removeFromParentAndCleanup:YES];
     [[ProgramNgin instance] deleteProgram];

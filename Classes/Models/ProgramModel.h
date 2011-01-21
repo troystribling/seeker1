@@ -40,7 +40,7 @@
 - (void)destroy;
 - (void)load;
 - (void)update;
-- (NSArray*)codeListingToInstrictions;
+- (NSMutableArray*)codeListingToInstrictions;
 - (NSString*)updatedAtAsString;
 
 @end

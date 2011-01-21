@@ -112,7 +112,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSArray*)codeListingToInstrictions {
+- (NSMutableArray*)codeListingToInstrictions {
     return [CodeModel codeListingToInstructions:self.codeListing];
 }
 

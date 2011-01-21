@@ -8,11 +8,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "ViewControllerManager.h"
+#import "ProgramNgin.h"
+#import "ProgramModel.h"
 #import "MapScene.h"
 #import "TermMenuView.h"
 #import "InstructionsViewController.h"
 #import "ViewControllerManager.h"
-#import "ProgramNgin.h"
 #import "TerminalCellFactory.h"
 #import "TerminalCell.h"
 
@@ -73,7 +74,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
-    self.programListing = [NSMutableArray arrayWithArray:[ProgramNgin instance].program];
+    ProgramModel* model = [ProgramModel findByLevel:[UserModel level]];
+    if (model) {
+        self.programListing = [model codeListingToInstrictions];
+    } else {
+        self.programListing = [NSMutableArray arrayWithArray:[ProgramNgin instance].program];
+    }
     if ([[ProgramNgin instance] programIsHalted] || [[ProgramNgin instance] programIsRunning]) {
        self.runImageView.hidden = YES;
     } else {
