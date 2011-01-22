@@ -208,16 +208,13 @@
     NSString* itemName = _menuItem.viewName;
     [self removeFromSuperview];
     if ([itemName isEqualToString:@"term"]) {
-        TerminalViewController* viewController = [[ViewControllerManager instance] showTerminalView:[[CCDirector sharedDirector] openGLView]];
-        viewController.mapScene = self.mapScene;
+        [[ViewControllerManager instance] showTerminalView:[[CCDirector sharedDirector] openGLView] launchedFromMap:YES];
     } else if ([itemName isEqualToString:@"main"]) {
         [[CCDirector sharedDirector] replaceScene: [MainScene scene]];
     } else if ([itemName isEqualToString:@"site"]) {
         [[CCDirector sharedDirector] replaceScene: [QuadsScene scene]];
     } else if ([itemName isEqualToString:@"run"]) {
         [[ProgramNgin instance] runProgram];
-        [self.mapScene addResetTerminalItems];
-        [self addResetItems];
     } else if ([itemName isEqualToString:@"rset"]) {
         [[ProgramNgin instance] stopProgram];
         [self.mapScene resetLevel];

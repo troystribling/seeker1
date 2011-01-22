@@ -186,7 +186,7 @@
         [self.menu hideMenu];
     } else if ([self missionIsUnlocked:mission]) {
         [UserModel setLevel:[self missionToLevel:mission]];
-        [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
+        [[CCDirector sharedDirector] replaceScene:[MapScene scene]];
     }
 }    
 

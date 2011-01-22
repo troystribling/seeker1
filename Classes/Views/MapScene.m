@@ -54,6 +54,7 @@
 - (void)updateSensorCount;
 - (void)updateSampleCount;
 // seeker crash
+- (void)crashCompleted;
 - (void)crashHitMapBoundary;
 - (void)crashNoEnergy;
 - (void)crashProgram;
@@ -121,7 +122,10 @@
     [self.seekerPath removeAllObjects];
     ProgramModel* model = [ProgramModel findByLevel:self.level];
     if (model) {
-        [[ProgramNgin instance] saveProgram:[model codeListingToInstrictions]];
+        ProgramNgin* ngin = [ProgramNgin instance];
+        NSMutableArray* programListing = [model codeListingToInstrictions];
+        [ngin saveProgram:programListing];
+        [ngin loadProgram:programListing];
         [self addRunTerminalItems];
         [self.menu addRunItems];
     } else {
@@ -304,6 +308,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)executeSeekerInstruction:(ccTime)dt {
+    [self addResetTerminalItems];
+    [self.menu addResetItems];
     NSMutableArray* instructionSet = nil;
     ProgramNgin* ngin = [ProgramNgin instance];
     CGPoint seekerTile = [self getSeekerTile];
@@ -574,8 +580,8 @@
     self.crash = [[[CCSprite alloc] initWithFile:seekerName] autorelease];  
     self.crash.opacity = 0;
     self.crash.position = self.seeker1.position;
-	[self.crash runAction:[CCFadeIn actionWithDuration:1.0]];
     [self addChild:self.crash];
+	[self.crash runAction:[CCFadeIn actionWithDuration:1.0]];
     self.levelCrash = YES;
 }
 
@@ -667,12 +673,12 @@
         ProgramNgin* ngin = [ProgramNgin instance];
         if (self.levelInitSeeker) {
             [self setSeekerStartPosition];
+        } else if (self.levelCrash) {
+            [self crashCompleted];
         } else if (self.levelResetMap) {
             [self resetMap];
         } else if (self.levelResetSeeker) {
             [self resetSeekerStartPosition];
-        } else if (self.levelCrash) {
-            [self crashCompleted];
         } else if (self.levelCompleted) {
             [self runLevelCompletedAnimation];
         } else if (self.nextLevel) {

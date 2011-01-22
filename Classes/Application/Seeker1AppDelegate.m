@@ -70,7 +70,7 @@
 	[CCTexture2D setDefaultAlphaPixelFormat:kTexture2DPixelFormat_RGBA8888];	
 	
     // startup scene
-	[[CCDirector sharedDirector] runWithScene: [BootScene scene]];
+	[[CCDirector sharedDirector] runWithScene:[BootScene scene]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

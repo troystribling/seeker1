@@ -8,10 +8,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "cocos2d.h"
+#import "ProgramNgin.h"
 #import "ViewControllerManager.h"
 #import "RepositoryViewController.h"
 #import "RepositoryCell.h"
-#import "TerminalCellFactory.h"
+#import "TerminalViewController.h"
 #import "ProgramModel.h"
 #import "UserModel.h"
 
@@ -135,7 +136,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ProgramModel* model = [self.programsList objectAtIndex:indexPath.row];
     [UserModel setLevel:model.level];
-    [[ViewControllerManager instance] showTerminalView:[[CCDirector sharedDirector] openGLView]];
+    [[ViewControllerManager instance] showTerminalView:[[CCDirector sharedDirector] openGLView] launchedFromMap:NO];
+    [self.view removeFromSuperview];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

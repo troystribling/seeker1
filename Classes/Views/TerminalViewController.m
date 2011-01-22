@@ -34,11 +34,11 @@
 @synthesize programView;
 @synthesize editImageView;
 @synthesize runImageView;
-@synthesize mapScene;
 @synthesize containerView;
 @synthesize programListing;
 @synthesize functionUpdate;
 @synthesize selectedLine;
+@synthesize launchedFromMap;
 @synthesize editingEnabled;
 
 //===================================================================================================================================
@@ -75,12 +75,13 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
     ProgramModel* model = [ProgramModel findByLevel:[UserModel level]];
+    ProgramNgin* ngin = [ProgramNgin instance];
     if (model) {
         self.programListing = [model codeListingToInstrictions];
     } else {
         self.programListing = [NSMutableArray arrayWithArray:[ProgramNgin instance].program];
     }
-    if ([[ProgramNgin instance] programIsHalted] || [[ProgramNgin instance] programIsRunning]) {
+    if ([ngin programIsHalted] || [ngin programIsRunning]) {
        self.runImageView.hidden = YES;
     } else {
         self.runImageView.hidden = NO;
@@ -116,15 +117,22 @@
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
     UITouch* touch = [touches anyObject];
     NSInteger touchTag = touch.view.tag;
+    ProgramNgin* ngin = [ProgramNgin instance];
     switch (touchTag) {
         case kTERMINAL_LAUNCHER_BACK_TAG:
+            if (!self.launchedFromMap) {
+                [[ViewControllerManager instance] showRepositoryView:[[CCDirector sharedDirector] openGLView]];
+            }
             [self.view removeFromSuperview];
-            [[ProgramNgin instance] saveProgram:self.programListing];
+            [ngin saveProgram:self.programListing];
             break;
         case kTERMINAL_LAUNCHER_RUN_TAG:
-            [[ProgramNgin instance] loadProgram:self.programListing];
-            [self.mapScene addResetTerminalItems];
-            [self.mapScene.menu addResetItems];
+            if (!self.launchedFromMap) {
+                [[CCDirector sharedDirector] replaceScene:[MapScene scene]];
+            }
+            [ngin saveProgram:self.programListing];
+            [ngin loadProgram:self.programListing];
+            [ngin runProgram];
             [self.view removeFromSuperview];
             break;
         case kTERMINAL_LAUNCHER_EDIT_TAG:

@@ -48,10 +48,11 @@ static ViewControllerManager* thisViewControllerManager = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 // TerminalViewController
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (TerminalViewController*)showTerminalView:(UIView*)_containerView {
+- (TerminalViewController*)showTerminalView:(UIView*)_containerView launchedFromMap:(BOOL)_launchedFromMap {
     if (self.terminalViewController == nil) {
         self.terminalViewController = [TerminalViewController inView:_containerView];
     } 
+    self.terminalViewController.launchedFromMap = _launchedFromMap;
     [_containerView addSubview:self.terminalViewController.view];
     return self.terminalViewController;
 }
@@ -73,7 +74,6 @@ static ViewControllerManager* thisViewControllerManager = nil;
 - (void)terminalViewWillDisappear {
     [self.terminalViewController viewWillDisappear:NO];
 }
-
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 // InstructionsViewController

@@ -40,7 +40,7 @@
 + (ViewControllerManager*)instance;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (TerminalViewController*)showTerminalView:(UIView*)_containerView;
+- (TerminalViewController*)showTerminalView:(UIView*)_containerView launchedFromMap:(BOOL)_launchedFromMap;
 - (void)removeTerminalView;
 - (void)terminalViewWillAppear;
 - (void)terminalViewWillDisappear;
