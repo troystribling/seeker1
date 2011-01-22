@@ -27,6 +27,7 @@ static ViewControllerManager* thisViewControllerManager = nil;
 @synthesize doTimesEditViewController;
 @synthesize createSubroutineViewController;
 @synthesize subroutineViewController;
+@synthesize repositoryViewController;
 
 //===================================================================================================================================
 #pragma mark ViewControllerManager PrivateApi
@@ -213,6 +214,35 @@ static ViewControllerManager* thisViewControllerManager = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)subroutineViewWillDisappear {
     [self.subroutineViewController viewWillDisappear:NO];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// RepositoryViewController
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (RepositoryViewController*)showRepositoryView:(UIView*)_containerView {
+    if (self.repositoryViewController == nil) {
+        self.repositoryViewController = [RepositoryViewController inView:_containerView];
+    } 
+    [_containerView addSubview:self.repositoryViewController.view];
+    return self.repositoryViewController;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeRepositoryView {
+    if (self.repositoryViewController) {
+        [self.repositoryViewController viewWillDisappear:NO];
+        [self.repositoryViewController.view removeFromSuperview];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)repositoryViewWillAppear {
+    [self.repositoryViewController viewWillAppear:NO];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)repositoryViewWillDisappear {
+    [self.repositoryViewController viewWillDisappear:NO];
 }
 
 @end

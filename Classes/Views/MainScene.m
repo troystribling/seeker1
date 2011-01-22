@@ -10,6 +10,7 @@
 #import "MainScene.h"
 #import "QuadsScene.h"
 #import "StatusDisplay.h"
+#import "ViewControllerManager.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MainScene (PrivateAPI)
@@ -17,7 +18,7 @@
 - (void)buildMenu;
 - (void)mission;
 - (void)configure;
-- (void)gameCenter;
+- (void)stats;
 - (void)tutorial;
 
 @end
@@ -50,7 +51,7 @@
     statsLabel.color = ccc3(103,243,27);
     CCMenuItemLabel* statsItem = [CCMenuItemLabel itemWithLabel:statsLabel
                                                             target:self
-                                                            selector:@selector(gameCenter)];
+                                                            selector:@selector(stats)];
     statsItem.anchorPoint = CGPointMake(0.0, 0.0);
     CCLabel* repositoryLabel = [CCLabel labelWithString:@"4. repository" fontName:@"Courier" fontSize:26];
     repositoryLabel.color = ccc3(103,243,27);
@@ -80,7 +81,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)gameCenter {
+- (void)stats {
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -89,6 +90,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)repository {
+    [[ViewControllerManager instance] showRepositoryView:[[CCDirector sharedDirector] openGLView]];
 }
 
 //===================================================================================================================================

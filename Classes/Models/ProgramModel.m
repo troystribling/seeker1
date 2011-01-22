@@ -119,7 +119,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSString*)updatedAtAsString {
     NSDateFormatter *df = [[[NSDateFormatter alloc] init] autorelease];
-    [df setDateFormat:@"yyyy-MM-dd hh:mm:ss zzz"];
+    [df setDateFormat:@"yyyy-MM-dd hh:mm"];
     NSString* dateString = [df stringFromDate:self.updatedAt];
     return dateString;
 }
@@ -141,7 +141,7 @@
     char* updatedAtVal = (char*)sqlite3_column_text(statement, 3);
     if (updatedAtVal != nil) {		
         NSDateFormatter *df = [[[NSDateFormatter alloc] init] autorelease];
-        [df setDateFormat:@"yyyy-MM-dd hh:mm:ss zzz"];
+        [df setDateFormat:@"yyyy-MM-dd hh:mm"];
         self.updatedAt = [df dateFromString:[NSString stringWithCString:updatedAtVal encoding:NSUTF8StringEncoding]];
     }
 }

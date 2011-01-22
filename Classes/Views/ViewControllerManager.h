@@ -13,6 +13,7 @@
 #import "DoTimesEditViewController.h"
 #import "CreateSubroutineViewController.h"
 #import "SubroutineViewController.h"
+#import "RepositoryViewController.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class DoTimesTerminalCell;
@@ -24,6 +25,7 @@
     DoTimesEditViewController* doTimesEditViewController;
     CreateSubroutineViewController* createSubroutineViewController;
     SubroutineViewController* subroutineViewController;
+    RepositoryViewController* repositoryViewController;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -32,6 +34,7 @@
 @property (nonatomic, retain) DoTimesEditViewController* doTimesEditViewController;
 @property (nonatomic, retain) CreateSubroutineViewController* createSubroutineViewController;
 @property (nonatomic, retain) SubroutineViewController* subroutineViewController;
+@property (nonatomic, retain) RepositoryViewController* repositoryViewController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ViewControllerManager*)instance;
@@ -67,5 +70,11 @@
 - (void)removeSubroutineView;
 - (void)subroutineViewWillAppear;
 - (void)subroutineViewWillDisappear;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (RepositoryViewController*)showRepositoryView:(UIView*)_containerView;
+- (void)removeRepositoryView;
+- (void)repositoryViewWillAppear;
+- (void)repositoryViewWillDisappear;
 
 @end
