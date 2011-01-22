@@ -74,6 +74,11 @@
 - (void)initTerminalItems;
 - (void)addResetTerminalItems;
 - (void)addRunTerminalItems;
+// move map on touch
+- (void)onTouchMoveMapUp;
+- (void)onTouchMoveMapDown;
+- (void)onTouchMoveMapLeft;
+- (void)onTouchMoveMapRight;
 
 @end
 
@@ -88,6 +93,8 @@
 @synthesize level;
 @synthesize menu;
 @synthesize screenCenter;
+@synthesize firstTouch;
+@synthesize onTouchMoveDelta;
 @synthesize tileMapSize;
 @synthesize tileMap;
 @synthesize mapLayer;
@@ -99,9 +106,12 @@
 @synthesize levelResetSeeker;
 @synthesize levelResetMap;
 @synthesize levelInitSeeker;
+@synthesize levelInitialized;
 @synthesize levelCrash;
 @synthesize levelCompleted;
 @synthesize nextLevel;
+@synthesize movingMapOnTouch;
+@synthesize ignoreTouches;
 
 //===================================================================================================================================
 #pragma mark MapScene PrivateAPI
@@ -168,6 +178,7 @@
     CGPoint startPoint = [self getPointFromObjectPropertiesInScreenCoords:self.startSite];
     NSString* bearing = [self.startSite valueForKey:@"bearing"];
     [self.seeker1 setToStartPoint:startPoint withBearing:bearing];
+    self.levelInitialized = YES;
     [self addChild:self.seeker1];
 }
 
@@ -605,8 +616,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 // menu
 //-----------------------------------------------------------------------------------------------------------------------------------
-
 #pragma mark menu
+
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initTerminalItems {
     [self.statusDisplay addTerminalText:@"~> main"];
@@ -626,6 +637,43 @@
     [self.statusDisplay addTerminalText:@"~> main"];
     [self.statusDisplay addTerminalText:@"~> term"];
     [self.statusDisplay addTerminalText:@"~> run"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// move map on touch
+//-----------------------------------------------------------------------------------------------------------------------------------
+#pragma mark move map on touch
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)onTouchMoveMapUp {
+    self.onTouchMoveDelta = CGPointMake(0.0, -self.screenCenter.y);
+    self.movingMapOnTouch = YES;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)onTouchMoveMapDown {
+    self.onTouchMoveDelta = CGPointMake(0.0, self.screenCenter.y);
+    self.movingMapOnTouch = YES;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)onTouchMoveMapLeft {
+    self.onTouchMoveDelta = CGPointMake(self.screenCenter.x, 0.0);
+    self.movingMapOnTouch = YES;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)onTouchMoveMapRight {
+    self.onTouchMoveDelta = CGPointMake(-self.screenCenter.x, 0.0);
+    self.movingMapOnTouch = YES;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)onTouchMoveMap {
+    CGPoint tileMapOffset = self.tileMap.position;
+    CGPoint newTileMapOffset = ccpAdd(tileMapOffset, self.onTouchMoveDelta);
+    [self moveMapTo:newTileMapOffset withDuration:1.0];
+    self.movingMapOnTouch = NO;
 }
 
 //===================================================================================================================================
@@ -652,9 +700,12 @@
         self.levelResetSeeker = NO;
         self.levelResetMap = NO;
         self.levelInitSeeker = NO;
+        self.levelInitialized = NO;
         self.levelCrash = NO;
         self.levelCompleted = NO;
         self.nextLevel = NO;
+        self.movingMapOnTouch = NO;
+        self.ignoreTouches = YES;
         [self.statusDisplay insert:self];
         [[ProgramNgin instance] deleteProgram];
         [self initLevel];
@@ -673,6 +724,9 @@
         ProgramNgin* ngin = [ProgramNgin instance];
         if (self.levelInitSeeker) {
             [self setSeekerStartPosition];
+        } else if (self.levelInitialized) {
+            self.ignoreTouches = NO;
+            self.levelInitialized = NO;
         } else if (self.levelCrash) {
             [self crashCompleted];
         } else if (self.levelResetMap) {
@@ -683,6 +737,8 @@
             [self runLevelCompletedAnimation];
         } else if (self.nextLevel) {
             [self initNextLevel];
+        } else if (self.movingMapOnTouch) {
+            [self onTouchMoveMap];
         } else if ([ngin programIsRunning]) {
             [self executeSeekerInstruction:dt];
         }
@@ -690,12 +746,37 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
--(void) ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	CGPoint touchLocation = [TouchUtils locationFromTouches:touches]; 
-    if ([self.menu isInMenuRect:touchLocation]) {
-        [self.menu showMenu];
-    } else if (self.menu.menuIsOpen) {
-        [self.menu hideMenu];
+-(void) ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent *)event {
+	self.firstTouch = [TouchUtils locationFromTouches:touches]; 
+}    
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+-(void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (!self.ignoreTouches) {
+        CGPoint touchLocation = [TouchUtils locationFromTouches:touches]; 
+        if ([self.menu isInMenuRect:touchLocation]) {
+            [self.menu showMenu];
+        } else if (self.menu.menuIsOpen) {
+            [self.menu hideMenu];
+        } else {
+            CGPoint touchDelta = ccpSub(touchLocation, self.firstTouch);
+            if (abs(touchDelta.y) > 10 || abs(touchDelta.x) > 10) {
+                if (abs(touchDelta.y) > abs(touchDelta.x)) {
+                    if (touchDelta.y > 0) {
+                        [self onTouchMoveMapUp];
+                    } else {
+                        [self onTouchMoveMapDown];
+                    }
+                } else {
+                    if (touchDelta.x > 0) {
+                        [self onTouchMoveMapRight];
+                    } else {
+                        [self onTouchMoveMapLeft];
+                    }
+                }
+
+            }
+        }
     }
 }    
 

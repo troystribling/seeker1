@@ -41,6 +41,8 @@ typedef enum tagMapID {
     NSInteger level;
     TermMenuView* menu;
     CGPoint screenCenter;
+    CGPoint firstTouch;
+    CGPoint onTouchMoveDelta;
     CGSize tileMapSize;
     CCTMXTiledMap* tileMap;
     CCTMXLayer* mapLayer;
@@ -53,8 +55,11 @@ typedef enum tagMapID {
     BOOL levelResetMap;
     BOOL levelCrash;
     BOOL levelInitSeeker;
+    BOOL levelInitialized;
     BOOL levelCompleted;
     BOOL nextLevel;
+    BOOL movingMapOnTouch;
+    BOOL ignoreTouches;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -65,6 +70,8 @@ typedef enum tagMapID {
 @property (nonatomic, assign) NSInteger level;
 @property (nonatomic, retain) TermMenuView* menu;
 @property (nonatomic, assign) CGPoint screenCenter;
+@property (nonatomic, assign) CGPoint firstTouch;
+@property (nonatomic, assign) CGPoint onTouchMoveDelta;
 @property (nonatomic, assign) CGSize tileMapSize;
 @property (nonatomic, retain) CCTMXTiledMap* tileMap;
 @property (nonatomic, retain) CCTMXLayer* mapLayer;
@@ -77,8 +84,11 @@ typedef enum tagMapID {
 @property (nonatomic, assign) BOOL levelResetMap;
 @property (nonatomic, assign) BOOL levelCrash;
 @property (nonatomic, assign) BOOL levelInitSeeker;
+@property (nonatomic, assign) BOOL levelInitialized;
 @property (nonatomic, assign) BOOL levelCompleted;
 @property (nonatomic, assign) BOOL nextLevel;
+@property (nonatomic, assign) BOOL movingMapOnTouch;
+@property (nonatomic, assign) BOOL ignoreTouches;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)scene;
