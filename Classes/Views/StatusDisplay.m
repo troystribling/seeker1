@@ -109,7 +109,7 @@
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     CGRect rect = self.textureRect;
     self.position = CGPointMake(0.0f, screenSize.height-rect.size.height);
-    [_layer addChild:self];
+    [_layer addChild:self z:10];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

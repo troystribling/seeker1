@@ -79,6 +79,8 @@
 - (void)onTouchMoveMapDown;
 - (void)onTouchMoveMapLeft;
 - (void)onTouchMoveMapRight;
+- (void)onTouchMoveMap;
+- (CGPoint)onTouchMoveDeltaToPlayingArea;
 
 @end
 
@@ -179,7 +181,7 @@
     NSString* bearing = [self.startSite valueForKey:@"bearing"];
     [self.seeker1 setToStartPoint:startPoint withBearing:bearing];
     self.levelInitialized = YES;
-    [self addChild:self.seeker1];
+    [self addChild:self.seeker1 z:0];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -646,34 +648,46 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)onTouchMoveMapUp {
-    self.onTouchMoveDelta = CGPointMake(0.0, -self.screenCenter.y);
-    self.movingMapOnTouch = YES;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onTouchMoveMapDown {
     self.onTouchMoveDelta = CGPointMake(0.0, self.screenCenter.y);
     self.movingMapOnTouch = YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onTouchMoveMapLeft {
-    self.onTouchMoveDelta = CGPointMake(self.screenCenter.x, 0.0);
+- (void)onTouchMoveMapDown {
+    self.onTouchMoveDelta = CGPointMake(0.0, -self.screenCenter.y);
     self.movingMapOnTouch = YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onTouchMoveMapRight {
+- (void)onTouchMoveMapLeft {
     self.onTouchMoveDelta = CGPointMake(-self.screenCenter.x, 0.0);
     self.movingMapOnTouch = YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)onTouchMoveMapRight {
+    self.onTouchMoveDelta = CGPointMake(self.screenCenter.x, 0.0);
+    self.movingMapOnTouch = YES;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)onTouchMoveMap {
-    CGPoint tileMapOffset = self.tileMap.position;
-    CGPoint newTileMapOffset = ccpAdd(tileMapOffset, self.onTouchMoveDelta);
-    [self moveMapTo:newTileMapOffset withDuration:1.0];
+    CGPoint tileMapPosition = self.tileMap.position;
+    CGPoint delta = [self onTouchMoveDeltaToPlayingArea];
+    CGPoint newTileMapPosition = ccpAdd(tileMapPosition, delta);
+    [self.seeker1 runAction:[CCMoveBy actionWithDuration:1.0 position:delta]];
+    [self moveMapTo:newTileMapPosition withDuration:1.0];
     self.movingMapOnTouch = NO;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGPoint)onTouchMoveDeltaToPlayingArea {
+    CGPoint newTileMapPosition = ccpAdd(self.tileMap.position, self.onTouchMoveDelta);
+    CGFloat xPos = MIN(0.0, newTileMapPosition.x);
+    xPos = MAX(xPos, -(self.tileMapSize.width -1));
+    CGFloat yPos = MIN(0.0, newTileMapPosition.y);
+    yPos = MAX(yPos, -(self.tileMapSize.height -1));
+    return ccpSub(CGPointMake(xPos, yPos), self.tileMap.position);
 }
 
 //===================================================================================================================================
