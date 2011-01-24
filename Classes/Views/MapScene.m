@@ -17,6 +17,9 @@
 #import "ProgramNgin.h"
 #import "TouchUtils.h"
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+#define MAP_PAN_DURATION    0.25
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapScene (PrivateAPI)
 
@@ -27,6 +30,7 @@
 - (void)initStatusDisplay;
 - (CCTMXTiledMap*)initMap;
 - (void)centerTileMapOnStartPoint;
+- (void)centerOnSeekerPosition;
 // reset
 - (void)resetMap;
 - (void)resetSeekerStartPosition;
@@ -35,6 +39,7 @@
 - (CGPoint)getPointFromObjectPropertiesInTileCoords:(NSDictionary*)dict;
 - (CGPoint)screenCoordsToTileCoords:(CGPoint)_point;
 - (CGPoint)tileCoordsToTile:(CGPoint)point;
+- (void)centerTileMapOnPoint:(CGPoint)_point;
 // program instructions
 - (BOOL)shouldMoveMap:(CGPoint)_delta;
 - (BOOL)moveIsInPlayingAreaForData:(CGPoint)_delta;
@@ -113,6 +118,7 @@
 @synthesize levelCompleted;
 @synthesize nextLevel;
 @synthesize movingMapOnTouch;
+@synthesize centeringOnSeekerPosition;
 @synthesize ignoreTouches;
 
 //===================================================================================================================================
@@ -195,18 +201,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)centerTileMapOnStartPoint {
     CGPoint startPoint = [self getPointFromObjectPropertiesInTileCoords:self.startSite];
-    CGPoint mapTranslation = ccpSub(self.screenCenter, startPoint);
-    if (startPoint.x < self.screenCenter.x) {
-        mapTranslation.x = 0.0;
-    } else if ((self.tileMapSize.width - startPoint.x) < self.screenCenter.x) {
-        mapTranslation.x = self.tileMapSize.width - 2.0*self.screenCenter.x;
-    } 
-    if (startPoint.y < self.screenCenter.y) {
-        mapTranslation.y = 0.0;
-    } else if ((self.tileMapSize.height - startPoint.y) < self.screenCenter.y) {
-        mapTranslation.y = self.tileMapSize.height - 2.0*self.screenCenter.y;
-    }  
-    [self moveMapTo:CGPointMake(mapTranslation.x, mapTranslation.y) withDuration:1.0];
+    [self centerTileMapOnPoint:startPoint];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -274,6 +269,22 @@
 	CGFloat tileWidth = self.tileMap.tileSize.width;
 	CGFloat tileHeight = self.tileMap.tileSize.height;	
 	return CGPointMake((int)(_point.x/tileWidth), (int)(_point.y/tileHeight));
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)centerTileMapOnPoint:(CGPoint)_point {
+    CGPoint mapTranslation = ccpSub(self.screenCenter, _point);
+    if (_point.x < self.screenCenter.x) {
+        mapTranslation.x = 0.0;
+    } else if ((self.tileMapSize.width - _point.x) < self.screenCenter.x) {
+        mapTranslation.x = self.tileMapSize.width - 2.0*self.screenCenter.x;
+    } 
+    if (_point.y < self.screenCenter.y) {
+        mapTranslation.y = 0.0;
+    } else if ((self.tileMapSize.height - _point.y) < self.screenCenter.y) {
+        mapTranslation.y = self.tileMapSize.height - 2.0*self.screenCenter.y;
+    }  
+    [self moveMapTo:CGPointMake(mapTranslation.x, mapTranslation.y) withDuration:1.0];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -648,25 +659,25 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)onTouchMoveMapUp {
-    self.onTouchMoveDelta = CGPointMake(0.0, self.screenCenter.y);
+    self.onTouchMoveDelta = CGPointMake(0.0, 1.5*self.screenCenter.y);
     self.movingMapOnTouch = YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)onTouchMoveMapDown {
-    self.onTouchMoveDelta = CGPointMake(0.0, -self.screenCenter.y);
+    self.onTouchMoveDelta = CGPointMake(0.0, -1.5*self.screenCenter.y);
     self.movingMapOnTouch = YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)onTouchMoveMapLeft {
-    self.onTouchMoveDelta = CGPointMake(-self.screenCenter.x, 0.0);
+    self.onTouchMoveDelta = CGPointMake(-1.5*self.screenCenter.x, 0.0);
     self.movingMapOnTouch = YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)onTouchMoveMapRight {
-    self.onTouchMoveDelta = CGPointMake(self.screenCenter.x, 0.0);
+    self.onTouchMoveDelta = CGPointMake(1.5*self.screenCenter.x, 0.0);
     self.movingMapOnTouch = YES;
 }
 
@@ -675,8 +686,12 @@
     CGPoint tileMapPosition = self.tileMap.position;
     CGPoint delta = [self onTouchMoveDeltaToPlayingArea];
     CGPoint newTileMapPosition = ccpAdd(tileMapPosition, delta);
-    [self.seeker1 runAction:[CCMoveBy actionWithDuration:1.0 position:delta]];
-    [self moveMapTo:newTileMapPosition withDuration:1.0];
+    if ([self.seeker1 parent]) {
+        [self.seeker1 runAction:[CCMoveBy actionWithDuration:MAP_PAN_DURATION position:delta]];
+    } else if (self.crash) {
+        [self.crash runAction:[CCMoveBy actionWithDuration:MAP_PAN_DURATION position:delta]];
+    }
+    [self moveMapTo:newTileMapPosition withDuration:MAP_PAN_DURATION];
     self.movingMapOnTouch = NO;
 }
 
@@ -688,6 +703,13 @@
     CGFloat yPos = MIN(0.0, newTileMapPosition.y);
     yPos = MAX(yPos, -(self.tileMapSize.height -1));
     return ccpSub(CGPointMake(xPos, yPos), self.tileMap.position);
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)centerOnSeekerPosition {
+    CGPoint seekerPosition = [self screenCoordsToTileCoords:self.seeker1.position];
+    [self centerTileMapOnPoint:CGPointMake(seekerPosition.x, tileMapSize.height - seekerPosition.y)];
+    self.centeringOnSeekerPosition = NO;
 }
 
 //===================================================================================================================================
@@ -719,6 +741,7 @@
         self.levelCompleted = NO;
         self.nextLevel = NO;
         self.movingMapOnTouch = NO;
+        self.centeringOnSeekerPosition = NO;
         self.ignoreTouches = YES;
         [self.statusDisplay insert:self];
         [[ProgramNgin instance] deleteProgram];
@@ -753,6 +776,8 @@
             [self initNextLevel];
         } else if (self.movingMapOnTouch) {
             [self onTouchMoveMap];
+        } else if (self.centeringOnSeekerPosition) {
+            [self centerOnSeekerPosition];
         } else if ([ngin programIsRunning]) {
             [self executeSeekerInstruction:dt];
         }
@@ -761,11 +786,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 -(void) ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent *)event {
-	self.firstTouch = [TouchUtils locationFromTouches:touches]; 
+    if (!self.ignoreTouches) {
+        self.firstTouch = [TouchUtils locationFromTouches:touches]; 
+    }
 }    
 
 //-----------------------------------------------------------------------------------------------------------------------------------
--(void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+-(void) ccTouchesEnded:(NSSet*)touches withEvent:(UIEvent *)event {
     if (!self.ignoreTouches) {
         CGPoint touchLocation = [TouchUtils locationFromTouches:touches]; 
         if ([self.menu isInMenuRect:touchLocation]) {
@@ -773,6 +800,7 @@
         } else if (self.menu.menuIsOpen) {
             [self.menu hideMenu];
         } else {
+            NSInteger numberOfTouches = [[touches anyObject] tapCount];
             CGPoint touchDelta = ccpSub(touchLocation, self.firstTouch);
             if (abs(touchDelta.y) > 10 || abs(touchDelta.x) > 10) {
                 if (abs(touchDelta.y) > abs(touchDelta.x)) {
@@ -789,6 +817,8 @@
                     }
                 }
 
+            } else if (numberOfTouches == 2) {
+                self.centeringOnSeekerPosition = YES;
             }
         }
     }
@@ -811,7 +841,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGPoint)getSeekerTile {
-    return [self tileCoordsToTile:[self screenCoordsToTileCoords:seeker1.position]];
+    return [self tileCoordsToTile:[self screenCoordsToTileCoords:self.seeker1.position]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
