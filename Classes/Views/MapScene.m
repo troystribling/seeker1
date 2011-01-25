@@ -39,7 +39,7 @@
 - (CGPoint)getPointFromObjectPropertiesInTileCoords:(NSDictionary*)dict;
 - (CGPoint)screenCoordsToTileCoords:(CGPoint)_point;
 - (CGPoint)tileCoordsToTile:(CGPoint)point;
-- (void)centerTileMapOnPoint:(CGPoint)_point;
+- (CGPoint)tileMapTranslatedToPoint:(CGPoint)_point;
 // program instructions
 - (BOOL)shouldMoveMap:(CGPoint)_delta;
 - (BOOL)moveIsInPlayingAreaForData:(CGPoint)_delta;
@@ -86,6 +86,7 @@
 - (void)onTouchMoveMapRight;
 - (void)onTouchMoveMap;
 - (CGPoint)onTouchMoveDeltaToPlayingArea;
+- (void)centerOnSeekerPosition;
 
 @end
 
@@ -201,7 +202,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)centerTileMapOnStartPoint {
     CGPoint startPoint = [self getPointFromObjectPropertiesInTileCoords:self.startSite];
-    [self centerTileMapOnPoint:startPoint];
+    CGPoint mapTranslated = [self tileMapTranslatedToPoint:startPoint];
+    [self moveMapTo:mapTranslated withDuration:1.0];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -261,7 +263,7 @@
 - (CGPoint)screenCoordsToTileCoords:(CGPoint)_screenPoint {
     CGPoint tileMapPos = self.tileMap.position;
     CGPoint screenCoords = ccpSub(_screenPoint, tileMapPos);
-	return CGPointMake(screenCoords.x, tileMapSize.height - screenCoords.y);
+	return CGPointMake(screenCoords.x, self.tileMapSize.height - screenCoords.y);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -272,19 +274,19 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)centerTileMapOnPoint:(CGPoint)_point {
-    CGPoint mapTranslation = ccpSub(self.screenCenter, _point);
+- (CGPoint)tileMapTranslatedToPoint:(CGPoint)_point {
+    CGPoint mapTranslated = ccpSub(self.screenCenter, _point);
     if (_point.x < self.screenCenter.x) {
-        mapTranslation.x = 0.0;
+        mapTranslated.x = 0.0;
     } else if ((self.tileMapSize.width - _point.x) < self.screenCenter.x) {
-        mapTranslation.x = self.tileMapSize.width - 2.0*self.screenCenter.x;
+        mapTranslated.x = - (self.tileMapSize.width - 2.0 * self.screenCenter.x);
     } 
     if (_point.y < self.screenCenter.y) {
-        mapTranslation.y = 0.0;
+        mapTranslated.y = 0.0;
     } else if ((self.tileMapSize.height - _point.y) < self.screenCenter.y) {
-        mapTranslation.y = self.tileMapSize.height - 2.0*self.screenCenter.y;
-    }  
-    [self moveMapTo:CGPointMake(mapTranslation.x, mapTranslation.y) withDuration:1.0];
+        mapTranslated.y = - (self.tileMapSize.height - 2.0 * self.screenCenter.y);
+    } 
+    return mapTranslated;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -699,16 +701,24 @@
 - (CGPoint)onTouchMoveDeltaToPlayingArea {
     CGPoint newTileMapPosition = ccpAdd(self.tileMap.position, self.onTouchMoveDelta);
     CGFloat xPos = MIN(0.0, newTileMapPosition.x);
-    xPos = MAX(xPos, -(self.tileMapSize.width -1));
+    xPos = MAX(xPos, -(self.tileMapSize.width - 2.0*self.screenCenter.x - 1.0));
     CGFloat yPos = MIN(0.0, newTileMapPosition.y);
-    yPos = MAX(yPos, -(self.tileMapSize.height -1));
+    yPos = MAX(yPos, -(self.tileMapSize.height - 2.0*self.screenCenter.y - 1.0));
     return ccpSub(CGPointMake(xPos, yPos), self.tileMap.position);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)centerOnSeekerPosition {
     CGPoint seekerPosition = [self screenCoordsToTileCoords:self.seeker1.position];
-    [self centerTileMapOnPoint:CGPointMake(seekerPosition.x, tileMapSize.height - seekerPosition.y)];
+    CGPoint mapPosition = self.tileMap.position;
+    CGPoint mapTranslated = [self tileMapTranslatedToPoint:CGPointMake(seekerPosition.x, self.tileMapSize.height - seekerPosition.y)];
+    CGPoint seekerDelta = ccpSub(mapTranslated, mapPosition);
+    if ([self.seeker1 parent]) {
+        [self.seeker1 runAction:[CCMoveBy actionWithDuration:MAP_PAN_DURATION position:seekerDelta]];
+    } else if (self.crash) {
+        [self.crash runAction:[CCMoveBy actionWithDuration:MAP_PAN_DURATION position:seekerDelta]];
+    }
+    [self moveMapTo:mapTranslated withDuration:MAP_PAN_DURATION];
     self.centeringOnSeekerPosition = NO;
 }
 
