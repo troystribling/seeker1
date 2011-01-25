@@ -711,14 +711,20 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)centerOnSeekerPosition {
-    CGPoint seekerPosition = [self screenCoordsToTileCoords:self.seeker1.position];
+    CGFloat duration = 0.0;
+    CGPoint mapTranslated = CGPointMake(0.0, 0.0);
     CGPoint mapPosition = self.tileMap.position;
-    CGPoint mapTranslated = [self tileMapTranslatedToPoint:CGPointMake(seekerPosition.x, self.tileMapSize.height - seekerPosition.y)];
-    CGPoint delta = ccpSub(mapTranslated, mapPosition);
-    CGFloat duration = [self panDuration:delta];
     if ([self.seeker1 parent]) {
+        CGPoint seekerPosition = [self screenCoordsToTileCoords:self.seeker1.position];
+        mapTranslated = [self tileMapTranslatedToPoint:CGPointMake(seekerPosition.x, self.tileMapSize.height - seekerPosition.y)];
+        CGPoint delta = ccpSub(mapTranslated, mapPosition);
+        duration = [self panDuration:delta];
         [self.seeker1 runAction:[CCMoveBy actionWithDuration:duration position:delta]];
     } else if (self.crash) {
+        CGPoint crashPosition = [self screenCoordsToTileCoords:self.crash.position];
+        mapTranslated = [self tileMapTranslatedToPoint:CGPointMake(crashPosition.x, self.tileMapSize.height - crashPosition.y)];
+        CGPoint delta = ccpSub(mapTranslated, mapPosition);
+        duration = [self panDuration:delta];
         [self.crash runAction:[CCMoveBy actionWithDuration:duration position:delta]];
     }
     [self moveMapTo:mapTranslated withDuration:duration];
