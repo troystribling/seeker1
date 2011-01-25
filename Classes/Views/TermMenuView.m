@@ -8,6 +8,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "TermMenuView.h"
+#import "UserModel.h"
+#import "ProgramModel.h"
 #import "cocos2d.h"
 #import "MainScene.h"
 #import "MapScene.h"
@@ -206,6 +208,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)imageTouched:(TouchImageView*)_menuItem {
     NSString* itemName = _menuItem.viewName;
+    ProgramNgin* ngin = [ProgramNgin instance];
     [self removeFromSuperview];
     if ([itemName isEqualToString:@"term"]) {
         [[ViewControllerManager instance] showTerminalView:[[CCDirector sharedDirector] openGLView] launchedFromMap:YES];
@@ -214,9 +217,11 @@
     } else if ([itemName isEqualToString:@"site"]) {
         [[CCDirector sharedDirector] replaceScene: [QuadsScene scene]];
     } else if ([itemName isEqualToString:@"run"]) {
-        [[ProgramNgin instance] runProgram];
+        ProgramModel* model = [ProgramModel findByLevel:[UserModel level]];
+        [ngin loadProgram:[model codeListingToInstrictions]];
+        [ngin runProgram];
     } else if ([itemName isEqualToString:@"rset"]) {
-        [[ProgramNgin instance] stopProgram];
+        [ngin stopProgram];
         [self.mapScene resetLevel];
         [self.mapScene addRunTerminalItems];
         [self addRunItems];
