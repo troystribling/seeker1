@@ -302,7 +302,7 @@ static ProgramNgin* thisProgramNgin = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)atSensorSite:(MapScene*)_mapScene {
-    return [self hasItem:_mapScene withValue:@"sample"];
+    return [self hasItem:_mapScene withValue:@"sensorSite"];
 }
 
 //===================================================================================================================================
