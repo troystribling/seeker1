@@ -60,6 +60,8 @@
             tableCell = [TerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet andParentType:_parentType];
             break;
         case DoTimesProgramInstruction:
+            tableCell = [DoTimesTerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet andParentType:_parentType];
+            break;
         case DoUntilProgramInstruction:
             tableCell = [DoUntilTerminalCell tableView:tableView terminalCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet andParentType:_parentType];
             break;
@@ -88,6 +90,8 @@
             tableCell = [TerminalCell tableView:tableView listCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
             break;
         case DoTimesProgramInstruction:
+            tableCell = [DoTimesTerminalCell tableView:tableView listCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
+            break;
         case DoUntilProgramInstruction:
             tableCell = [DoUntilTerminalCell tableView:tableView listCellForRowAtIndexPath:indexPath forInstructionSet:_instructionSet];
             break;

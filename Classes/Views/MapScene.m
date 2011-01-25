@@ -18,7 +18,7 @@
 #import "TouchUtils.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define MAP_PAN_DURATION    0.25
+#define MAP_INVERSE_PAN_VELOCITY    0.001
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapScene (PrivateAPI)
@@ -87,6 +87,7 @@
 - (void)onTouchMoveMap;
 - (CGPoint)onTouchMoveDeltaToPlayingArea;
 - (void)centerOnSeekerPosition;
+- (CGFloat)panDuration:(CGPoint)_delta;
 
 @end
 
@@ -688,12 +689,13 @@
     CGPoint tileMapPosition = self.tileMap.position;
     CGPoint delta = [self onTouchMoveDeltaToPlayingArea];
     CGPoint newTileMapPosition = ccpAdd(tileMapPosition, delta);
+    CGFloat duration = [self panDuration:delta];
     if ([self.seeker1 parent]) {
-        [self.seeker1 runAction:[CCMoveBy actionWithDuration:MAP_PAN_DURATION position:delta]];
+        [self.seeker1 runAction:[CCMoveBy actionWithDuration:duration position:delta]];
     } else if (self.crash) {
-        [self.crash runAction:[CCMoveBy actionWithDuration:MAP_PAN_DURATION position:delta]];
+        [self.crash runAction:[CCMoveBy actionWithDuration:duration position:delta]];
     }
-    [self moveMapTo:newTileMapPosition withDuration:MAP_PAN_DURATION];
+    [self moveMapTo:newTileMapPosition withDuration:duration];
     self.movingMapOnTouch = NO;
 }
 
@@ -712,14 +714,21 @@
     CGPoint seekerPosition = [self screenCoordsToTileCoords:self.seeker1.position];
     CGPoint mapPosition = self.tileMap.position;
     CGPoint mapTranslated = [self tileMapTranslatedToPoint:CGPointMake(seekerPosition.x, self.tileMapSize.height - seekerPosition.y)];
-    CGPoint seekerDelta = ccpSub(mapTranslated, mapPosition);
+    CGPoint delta = ccpSub(mapTranslated, mapPosition);
+    CGFloat duration = [self panDuration:delta];
     if ([self.seeker1 parent]) {
-        [self.seeker1 runAction:[CCMoveBy actionWithDuration:MAP_PAN_DURATION position:seekerDelta]];
+        [self.seeker1 runAction:[CCMoveBy actionWithDuration:duration position:delta]];
     } else if (self.crash) {
-        [self.crash runAction:[CCMoveBy actionWithDuration:MAP_PAN_DURATION position:seekerDelta]];
+        [self.crash runAction:[CCMoveBy actionWithDuration:duration position:delta]];
     }
-    [self moveMapTo:mapTranslated withDuration:MAP_PAN_DURATION];
+    [self moveMapTo:mapTranslated withDuration:duration];
     self.centeringOnSeekerPosition = NO;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGFloat)panDuration:(CGPoint)_delta {
+    CGFloat distance = sqrt(pow(_delta.x, 2.0) + pow(_delta.y, 2.0));
+    return distance * MAP_INVERSE_PAN_VELOCITY;
 }
 
 //===================================================================================================================================
