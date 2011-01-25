@@ -827,7 +827,7 @@
         } else {
             NSInteger numberOfTouches = [[touches anyObject] tapCount];
             CGPoint touchDelta = ccpSub(touchLocation, self.firstTouch);
-            if (abs(touchDelta.y) > 10 || abs(touchDelta.x) > 10) {
+            if (abs(touchDelta.y) > 20 || abs(touchDelta.x) > 20) {
                 if (abs(touchDelta.y) > abs(touchDelta.x)) {
                     if (touchDelta.y > 0) {
                         [self onTouchMoveMapUp];
