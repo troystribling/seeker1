@@ -9,6 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "LevelModel.h"
 #import "SeekerDbi.h"
+#import "SeekerSprite.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface LevelModel (PrivateAPI)
@@ -92,21 +93,29 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)completeLevel:(NSInteger)_level withScore:(NSInteger)_score {
++ (void)completeLevel:(NSInteger)_level forSeeker:(SeekerSprite*)_seeker {
     LevelModel* model = [self findByLevel:_level];
     if (model) {
         model.completed = YES;
-        model.score = _score;
+        model.score = [_seeker score];
+        model.samplesReturned = _seeker.samplesReturned;
+        model.samplesCollected = _seeker.samplesCollected;
+        model.sensorsPlaced = _seeker.sensorsPlaced;
+        model.energyBonus = _seeker.energy;
         [model update];
     }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)incompleteLevel:(NSInteger)_level withScore:(NSInteger)_score {
++ (void)incompleteLevel:(NSInteger)_level forSeeker:(SeekerSprite*)_seeker {
     LevelModel* model = [self findByLevel:_level];
     if (model) {
-        model.score = _score;
         model.completed = NO;
+        model.score = [_seeker score];
+        model.samplesReturned = _seeker.samplesReturned;
+        model.samplesCollected = _seeker.samplesCollected;
+        model.sensorsPlaced = _seeker.sensorsPlaced;
+        model.energyBonus = _seeker.energy;
         [model update];
     }
 }

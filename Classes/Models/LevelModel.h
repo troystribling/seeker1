@@ -11,6 +11,7 @@
 
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@class SeekerSprite;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface LevelModel : NSObject {
@@ -45,8 +46,8 @@
 + (NSMutableArray*)findAllByQudrangle:(NSInteger)_quad;
 + (NSMutableArray*)findAll;
 + (void)insertForLevel:(NSInteger)_level;
-+ (void)completeLevel:(NSInteger)_level withScore:(NSInteger)_score;
-+ (void)incompleteLevel:(NSInteger)_level withScore:(NSInteger)_score;
++ (void)completeLevel:(NSInteger)_level forSeeker:(SeekerSprite*)_seeker;
++ (void)incompleteLevel:(NSInteger)_level forSeeker:(SeekerSprite*)_seeker;
 + (BOOL)levelCompleted:(NSInteger)_level;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

@@ -363,7 +363,7 @@
     }
     if ([self.seeker1 isLevelCompleted]) {
         [[ProgramNgin instance] stopProgram];
-        [LevelModel completeLevel:self.level withScore:[self.seeker1 score]];
+        [LevelModel completeLevel:self.level forSeeker:self.seeker1];
         [self levelCompletedAnimation];
     }
 }
@@ -502,7 +502,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)halt {
     [[ProgramNgin instance] haltProgram];
-    [LevelModel incompleteLevel:self.level withScore:[self.seeker1 score]];
+    [LevelModel incompleteLevel:self.level forSeeker:self.seeker1];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -534,6 +534,7 @@
 - (void)crashCompleted {
     self.levelCrash = NO;
     [self.seeker1 removeFromParentAndCleanup:YES];
+    [[CCDirector sharedDirector] replaceScene: [EndOfLevelScene scene]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
