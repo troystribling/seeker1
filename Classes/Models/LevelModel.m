@@ -24,6 +24,10 @@
 @synthesize quadrangle;
 @synthesize completed;
 @synthesize score;
+@synthesize samplesReturned;
+@synthesize samplesCollected;
+@synthesize sensorsPlaced;
+@synthesize energyBonus;
 
 //===================================================================================================================================
 #pragma mark LevelModel
@@ -40,7 +44,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[SeekerDbi instance]  updateWithStatement:@"CREATE TABLE levels (pk integer primary key, level integer, completed integer, score integer, quadrangle integer)"];
+	[[SeekerDbi instance]  updateWithStatement:@"CREATE TABLE levels (pk integer primary key, level integer, completed integer, score integer, quadrangle integer, samplesReturned integer, samplesCollected integer, sensorsPlaced integer, energyBonus integer)"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -107,12 +111,18 @@
     }
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (BOOL)levelCompleted:(NSInteger)_level {
+    LevelModel* model = [self findByLevel:_level];
+    return model.completed;
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
     NSString* insertStatement;
-    insertStatement = [NSString stringWithFormat:@"INSERT INTO levels (level, completed, score, quadrangle) values (%d, %d, %d, %d)", 
-                        self.level, [self completedAsInteger], self.quadrangle, self.score];	
+    insertStatement = [NSString stringWithFormat:@"INSERT INTO levels (level, completed, score, quadrangle, samplesReturned, samplesCollected, sensorsPlaced, energyBonus) values (%d, %d, %d, %d, %d, %d, %d, %d)", 
+                        self.level, [self completedAsInteger], self.score, self.quadrangle, self.samplesReturned, self.samplesCollected, self.sensorsPlaced, self.energyBonus];	
     [[SeekerDbi instance]  updateWithStatement:insertStatement];
 }
 
@@ -129,8 +139,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
-    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE levels SET level = %d, completed = %d, score = %d, quadrangle = %d WHERE pk = %d", self.level, 
-                                    [self completedAsInteger], self.score, self.quadrangle, self.pk];
+    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE levels SET level = %d, completed = %d, score = %d, quadrangle = %d, samplesReturned = %d, samplesCollected = %d, sensorsPlaced = %d, energyBonus = %d WHERE pk = %d", self.level, 
+                                    [self completedAsInteger], self.score, self.quadrangle, self.samplesReturned, self.samplesCollected, self.sensorsPlaced, self.energyBonus, self.pk];
 	[[SeekerDbi instance]  updateWithStatement:updateStatement];
 }
 
@@ -161,6 +171,10 @@
 	[self setCompletedAsInteger:(int)sqlite3_column_int(statement, 2)];
 	self.score = (int)sqlite3_column_int(statement, 3);
 	self.quadrangle = (int)sqlite3_column_int(statement, 4);
+	self.samplesReturned = (int)sqlite3_column_int(statement, 5);
+	self.samplesCollected = (int)sqlite3_column_int(statement, 6);
+	self.sensorsPlaced = (int)sqlite3_column_int(statement, 7);
+	self.energyBonus = (int)sqlite3_column_int(statement, 8);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

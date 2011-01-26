@@ -108,7 +108,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
     NSString* insertStatement;
-    insertStatement = [NSString stringWithFormat:@"INSERT INTO users (level, quadrangle) values (%d, %d)", self.level, self.quadrangle];	
+    insertStatement = [NSString stringWithFormat:@"INSERT INTO users (level, quadrangle) values (%d, %d)", 
+                       self.level, self.quadrangle];	
     [[SeekerDbi instance]  updateWithStatement:insertStatement];
 }
 

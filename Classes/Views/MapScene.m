@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "MapScene.h"
+#import "EndOfLevelScene.h"
 #import "UserModel.h"
 #import "LevelModel.h"
 #import "ProgramModel.h"
@@ -25,7 +26,6 @@
 
 // inialize
 - (void)initLevel;
-- (void)initNextLevel;
 - (void)setSeekerStartPosition;
 - (void)initStatusDisplay;
 - (CCTMXTiledMap*)initMap;
@@ -154,16 +154,6 @@
     }
     [self addChild:self.tileMap z:-1 tag:kMAP];
     self.levelInitSeeker = YES;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)initNextLevel {
-    self.nextLevel = NO;
-    [UserModel nextLevel];
-    [self.tileMap removeFromParentAndCleanup:YES];
-    [self.seeker1 removeFromParentAndCleanup:YES];
-    [[ProgramNgin instance] deleteProgram];
-    [self initLevel];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -798,7 +788,7 @@
         } else if (self.levelCompleted) {
             [self runLevelCompletedAnimation];
         } else if (self.nextLevel) {
-            [self initNextLevel];
+            [[CCDirector sharedDirector] replaceScene: [EndOfLevelScene scene]];
         } else if (self.movingMapOnTouch) {
             [self onTouchMoveMap];
         } else if (self.centeringOnSeekerPosition) {

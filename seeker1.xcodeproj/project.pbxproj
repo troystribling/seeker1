@@ -53,6 +53,7 @@
 		0514FB8512D8040100713A49 /* terminal-launcher-add-subroutine.png in Resources */ = {isa = PBXBuildFile; fileRef = 0514FB8412D8040100713A49 /* terminal-launcher-add-subroutine.png */; };
 		0517EE2E12D2B400006CB4A9 /* DoUntilTerminalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0517EE2D12D2B400006CB4A9 /* DoUntilTerminalCell.m */; };
 		0517EE4912D2C17F006CB4A9 /* DoUntilTerminalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0517EE4812D2C17F006CB4A9 /* DoUntilTerminalCell.xib */; };
+		0518052D12EFA4A400952699 /* EndOfLevelScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0518052C12EFA4A400952699 /* EndOfLevelScene.m */; };
 		051806BA12C9903F00568813 /* menu-site.png in Resources */ = {isa = PBXBuildFile; fileRef = 051806B912C9903F00568813 /* menu-site.png */; };
 		051806ED12C997DB00568813 /* menu-empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 051806EC12C997DB00568813 /* menu-empty.png */; };
 		0518629112E3F7220001DA3E /* map-3.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 0518629012E3F7220001DA3E /* map-3.tmx */; };
@@ -396,6 +397,8 @@
 		0517EE2C12D2B400006CB4A9 /* DoUntilTerminalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoUntilTerminalCell.h; sourceTree = "<group>"; };
 		0517EE2D12D2B400006CB4A9 /* DoUntilTerminalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoUntilTerminalCell.m; sourceTree = "<group>"; };
 		0517EE4812D2C17F006CB4A9 /* DoUntilTerminalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoUntilTerminalCell.xib; sourceTree = "<group>"; };
+		0518052B12EFA4A400952699 /* EndOfLevelScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndOfLevelScene.h; sourceTree = "<group>"; };
+		0518052C12EFA4A400952699 /* EndOfLevelScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndOfLevelScene.m; sourceTree = "<group>"; };
 		051806B912C9903F00568813 /* menu-site.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-site.png"; sourceTree = "<group>"; };
 		051806EC12C997DB00568813 /* menu-empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-empty.png"; sourceTree = "<group>"; };
 		0518629012E3F7220001DA3E /* map-3.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-3.tmx"; sourceTree = "<group>"; };
@@ -934,6 +937,8 @@
 				0522D27112CBF09400E0530C /* Terminal */,
 				050B277F1290C82400CC6149 /* BootScene.h */,
 				050B27801290C82400CC6149 /* BootScene.m */,
+				0518052B12EFA4A400952699 /* EndOfLevelScene.h */,
+				0518052C12EFA4A400952699 /* EndOfLevelScene.m */,
 				0540119412A2B9B900CCC62D /* MainScene.h */,
 				0540119512A2B9B900CCC62D /* MainScene.m */,
 				0528CDB71290A00200F4078A /* MapScene.h */,
@@ -1634,6 +1639,7 @@
 				05B81AAA12E9067A00BAC631 /* CodeModel.m in Sources */,
 				05B81B7312E9492300BAC631 /* RepositoryViewController.m in Sources */,
 				050DD34912EA6F6E00FDBC11 /* RepositoryCell.m in Sources */,
+				0518052D12EFA4A400952699 /* EndOfLevelScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

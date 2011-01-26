@@ -154,7 +154,7 @@
 + (id)scene {
 	CCScene *scene = [CCScene node];
 	MissionsScene* layer = [MissionsScene node];
-	[scene addChild: layer];
+	[scene addChild:layer];
 	return scene;
 }
 
