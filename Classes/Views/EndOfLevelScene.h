@@ -12,6 +12,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class StatusDisplay;
+@class LevelModel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface EndOfLevelScene : CCLayer {
@@ -24,7 +25,7 @@
     CCLabel* levelCompletedBonusLabel;
     CCLabel* totalScoreLabel;
     NSInteger counter;
-    BOOL levelCompleted;
+    LevelModel* level;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -37,7 +38,7 @@
 @property (nonatomic, retain) CCLabel* levelCompletedBonusLabel;
 @property (nonatomic, retain) CCLabel* totalScoreLabel;
 @property (nonatomic, assign) NSInteger counter;
-@property (nonatomic, assign) BOOL levelCompleted;
+@property (nonatomic, retain) LevelModel* level;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)scene;

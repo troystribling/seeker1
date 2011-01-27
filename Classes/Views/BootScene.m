@@ -11,6 +11,22 @@
 #import "StatusDisplay.h"
 #import "MainScene.h"
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+#define kSTARTUP_TICKS  400
+#define kBOOT_TICK_1    20
+#define kBOOT_TICK_2    40
+#define kBOOT_TICK_3    60
+#define kBOOT_TICK_4    80
+#define kBOOT_TICK_5    100
+#define kBOOT_TICK_6    120
+#define kBOOT_TICK_7    130
+#define kBOOT_TICK_8    140
+#define kBOOT_TICK_9    150
+#define kBOOT_TICK_10   160
+#define kBOOT_TICK_11   170
+#define kBOOT_TICK_12   210
+#define kBOOT_TICK_13   250
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface BootScene (PrivateAPI)
 
