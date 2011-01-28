@@ -65,7 +65,7 @@
     CCLabel* titleLabel = [CCLabel labelWithString:@"Mission Completed" fontName:@"Courier" fontSize:26];
     titleLabel.position = CGPointMake(20.0f, 361.0f);
     titleLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
-    titleLabel.color = ccc3(58,176,222);    
+    titleLabel.color = ccc3(103,243,27);    
     [self addChild:titleLabel];
 }
 
@@ -133,7 +133,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertCompletedTotalScoreLabel {
-    NSString* totalScoreString = [NSString stringWithFormat:@"Total Score and Bonus     2*%d=%d", self.level.score/2, self.level.score];
+    NSString* totalScoreString = [NSString stringWithFormat:@"Total Score and Bonus     2*%d = %d", self.level.score/2, self.level.score];
     CCLabel* totalScoreLabel = [CCLabel labelWithString:totalScoreString dimensions:CGSizeMake(300, 60) 
                                               alignment:UITextAlignmentLeft fontName:@"Courier" fontSize:20];
     totalScoreLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
@@ -163,12 +163,12 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertMissionCompletedMenu {
     CCLabel* againLabel = [CCLabel labelWithString:@"<Again" fontName:@"Courier" fontSize:26];
-    againLabel.color = ccc3(58,176,222);
+    againLabel.color = ccc3(103,243,27);
     CCMenuItemLabel* againItem = [CCMenuItemLabel itemWithLabel:againLabel
                                                          target:self
                                                          selector:@selector(againMission)];
     CCLabel* skipLabel = [CCLabel labelWithString:@"Next>" fontName:@"Courier" fontSize:26];
-    skipLabel.color = ccc3(58,176,222);
+    skipLabel.color = ccc3(103,243,27);
     CCMenuItemLabel* skipItem = [CCMenuItemLabel itemWithLabel:skipLabel
                                                         target:self
                                                       selector:@selector(nextMission)];

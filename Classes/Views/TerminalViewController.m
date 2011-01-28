@@ -11,6 +11,7 @@
 #import "ProgramNgin.h"
 #import "ProgramModel.h"
 #import "MapScene.h"
+#import "UploadScene.h"
 #import "TermMenuView.h"
 #import "InstructionsViewController.h"
 #import "ViewControllerManager.h"
@@ -127,12 +128,9 @@
             [ngin saveProgram:self.programListing];
             break;
         case kTERMINAL_LAUNCHER_RUN_TAG:
-            if (!self.launchedFromMap) {
-                [[CCDirector sharedDirector] replaceScene:[MapScene scene]];
-            }
             [ngin saveProgram:self.programListing];
             [ngin loadProgram:self.programListing];
-            [ngin runProgram];
+            [[CCDirector sharedDirector] replaceScene: [UploadScene scene]];
             [self.view removeFromSuperview];
             break;
         case kTERMINAL_LAUNCHER_EDIT_TAG:
