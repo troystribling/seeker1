@@ -15,8 +15,15 @@
 #import "ProgramNgin.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define kDOUNTIL_INSTRUCTION_TAG    2
-#define kDOUNTIL_PREDICATE_TAG      1
+#define kDOUNTIL_INSTRUCTION_TAG            2
+#define kDOUNTIL_PREDICATE_TAG              1
+#define kDOUNTIL_PREDICATE_OFFSET           76
+#define kDOUNTIL_PREDICATE_MAX_WIDTH        206
+#define kDOUNTIL_PREDICATE_EDIT_MAX_WIDTH   166
+#define kDOUNTIL_VERB_BUFFER                96
+#define kDOUNTIL_VERB_OFFSET                76
+#define kDOUNTIL_VERB_MAX_WIDTH             128
+#define kDOUNTIL_VERB_EDIT_MAX_WIDTH        68
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface DoUntilTerminalCell (PrivateAPI)
