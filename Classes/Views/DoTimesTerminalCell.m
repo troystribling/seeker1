@@ -15,13 +15,18 @@
 #import "ProgramNgin.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define kDOTIMES_NUMBER_TAG         1
-#define kDOTIMES_INSTRUCTION_TAG    2
+#define kDOTIMES_NUMBER_TAG                     1
+#define kDOTIMES_INSTRUCTION_TAG                2
+#define kDOTIMES_INSTRUCTION_MAX_WIDTH          206
+#define kDOTIMES_INSTRUCTION_EDIT_MAX_WIDTH     125
+#define kDOTIMES_NUMBER_MAX_WIDTH               128
+#define kDOTIMES_NUMBER_EDIT_MAX_WIDTH          40
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface DoTimesTerminalCell (PrivateAPI)
 
 - (CGSize)itemSize:(NSString*)_item;
+- (void)setItemsContrainedToInstructionWidth:(NSInteger)_maxInstructionWidth andNumberWidth:(NSInteger)_maxNumberWidth;
 
 @end
 
@@ -48,6 +53,42 @@
     return [_item sizeWithFont:[UIFont fontWithName:@"Courier" size:22.0] constrainedToSize:textSize lineBreakMode:UILineBreakModeWordWrap];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setItemsContrainedToInstructionWidth:(NSInteger)_maxInstructionWidth andNumberWidth:(NSInteger)_maxNumberWidth {
+    // set instruction rect
+    NSString* instructionString = [[ProgramNgin instance] iteratedInstructionString:self.instructionSet];
+    CGSize instructionSize = [self itemSize:instructionString];
+    CGRect instructionRect = self.instructionLabel.frame;
+    instructionRect.size.width = MIN(instructionSize.width, _maxInstructionWidth);    
+
+    // get bracket rect
+    CGRect instructionClosingBracketRect = self.instructionClosingBracketLabel.frame;
+
+    // set instruction rectangles and string
+    self.instructionLabel.frame = instructionRect;
+    self.instructionClosingBracketLabel.frame = CGRectMake(instructionRect.origin.x + instructionRect.size.width, instructionClosingBracketRect.origin.y, 
+                                                           instructionClosingBracketRect.size.width, instructionClosingBracketRect.size.height);
+    self.instructionLabel.text = instructionString;
+    
+    // set number rect
+    NSString* numberString = [NSString stringWithFormat:@"%d", [[self.instructionSet objectAtIndex:2] intValue]];
+    CGSize numberSize = [self itemSize:numberString];
+    CGRect numberRect = self.numberLabel.frame; 
+    numberRect.size.width = MIN(numberSize.width, _maxNumberWidth);    
+
+    // get bracket and times rect
+    CGRect timesClosingBracketRect = self.timesClosingBracketLabel.frame;
+    CGRect timesRect = self.timesLabel.frame;
+
+    // set number rectangles and string
+    self.numberLabel.frame = numberRect;
+    self.timesClosingBracketLabel.frame = CGRectMake(numberRect.origin.x + numberRect.size.width, timesClosingBracketRect.origin.y, 
+                                                     timesClosingBracketRect.size.width, timesClosingBracketRect.size.height);
+    self.timesLabel.frame = CGRectMake(numberRect.origin.x + numberRect.size.width + timesClosingBracketRect.size.width, 
+                                       timesRect.origin.y, timesRect.size.width, timesRect.size.height);
+    self.numberLabel.text = numberString;
+}
+
 //===================================================================================================================================
 #pragma mark DoTimesTerminalCell
 
@@ -58,33 +99,11 @@
 + (UITableViewCell*)tableView:(UITableView*)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet andParentType:(TerminalCellParentType)_parentType{
 
     DoTimesTerminalCell* cell = (DoTimesTerminalCell*)[CellUtils createCell:[DoTimesTerminalCell class] forTableView:tableView];
+    cell.instructionSet = _instructionSet;
     cell.parentType = _parentType;
     cell.instructionLabel.userInteractionEnabled = YES;
     cell.numberLabel.userInteractionEnabled = YES;
-
-    NSString* instructionString = [[ProgramNgin instance] iteratedInstructionString:_instructionSet];
-    CGSize instructionSize = [cell itemSize:instructionString];
-    CGRect instructionRect = cell.instructionLabel.frame;
-    CGRect instructionClosingBracketRect = cell.instructionClosingBracketLabel.frame;
-    cell.instructionLabel.frame = CGRectMake(instructionRect.origin.x, instructionRect.origin.y, instructionSize.width, instructionRect.size.height);
-    cell.instructionClosingBracketLabel.frame = CGRectMake(instructionRect.origin.x + instructionSize.width, instructionClosingBracketRect.origin.y, 
-                                                           instructionClosingBracketRect.size.width, instructionClosingBracketRect.size.height);
-    cell.instructionLabel.text = instructionString;
-
-    NSString* numberString = [NSString stringWithFormat:@"%d", [[_instructionSet objectAtIndex:2] intValue]];
-    CGSize numberSize = [cell itemSize:numberString];
-    CGRect numberRect = cell.numberLabel.frame; 
-    CGRect timesClosingBracketRect = cell.timesClosingBracketLabel.frame;
-    CGRect timesRect = cell.timesLabel.frame;
-    cell.numberLabel.frame = CGRectMake(numberRect.origin.x, numberRect.origin.y, numberSize.width, numberRect.size.height);
-    cell.timesClosingBracketLabel.frame = CGRectMake(numberRect.origin.x + numberSize.width, timesClosingBracketRect.origin.y, 
-                                                     timesClosingBracketRect.size.width, timesClosingBracketRect.size.height);
-    cell.timesLabel.frame = CGRectMake(numberRect.origin.x + numberSize.width + timesClosingBracketRect.size.width, 
-                                       timesRect.origin.y, timesRect.size.width, timesRect.size.height);
-    cell.numberLabel.text = numberString;
-
-    cell.instructionSet = _instructionSet;
-
+    [cell setItemsContrainedToInstructionWidth:kDOTIMES_INSTRUCTION_MAX_WIDTH andNumberWidth:kDOTIMES_NUMBER_MAX_WIDTH];        
     return cell;
 }
 
@@ -102,14 +121,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
-//    CGRect instructionRect = self.instructionLabel.frame;
-//    if (editing) {
-//        instructionRect.size.width = kTERMINAL_INSTRUCTION_EDIT_WIDTH;
-//    } else {
-//        instructionRect.size.width = kTERMINAL_INSTRUCTION_WIDTH;
-//    }
-//    self.instructionLabel.frame = instructionRect;
-//    [super setEditing:editing animated:animated];
+    if (editing) {
+        [self setItemsContrainedToInstructionWidth:kDOTIMES_INSTRUCTION_EDIT_MAX_WIDTH andNumberWidth:kDOTIMES_NUMBER_EDIT_MAX_WIDTH];        
+    } else {
+        [self setItemsContrainedToInstructionWidth:kDOTIMES_INSTRUCTION_MAX_WIDTH andNumberWidth:kDOTIMES_NUMBER_MAX_WIDTH];        
+    }
+    [super setEditing:editing animated:animated];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

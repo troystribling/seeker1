@@ -13,7 +13,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kTERMINAL_INSTRUCTION_WIDTH         280
-#define kTERMINAL_INSTRUCTION_EDIT_WIDTH    240 
+#define kTERMINAL_INSTRUCTION_EDIT_WIDTH    200 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TerminalCell (PrivateAPI)

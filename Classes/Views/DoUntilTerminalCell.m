@@ -17,18 +17,16 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kDOUNTIL_INSTRUCTION_TAG            2
 #define kDOUNTIL_PREDICATE_TAG              1
-#define kDOUNTIL_PREDICATE_OFFSET           76
 #define kDOUNTIL_PREDICATE_MAX_WIDTH        206
-#define kDOUNTIL_PREDICATE_EDIT_MAX_WIDTH   166
-#define kDOUNTIL_VERB_BUFFER                96
-#define kDOUNTIL_VERB_OFFSET                76
-#define kDOUNTIL_VERB_MAX_WIDTH             128
-#define kDOUNTIL_VERB_EDIT_MAX_WIDTH        68
+#define kDOUNTIL_PREDICATE_EDIT_MAX_WIDTH   125
+#define kDOUNTIL_INSTRUCTION_MAX_WIDTH      128
+#define kDOUNTIL_INSTRUCTION_EDIT_MAX_WIDTH 40
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface DoUntilTerminalCell (PrivateAPI)
 
 - (CGSize)itemSize:(NSString*)_item;
+- (void)setItemsContrainedToInstructionWidth:(NSInteger)_maxInstructionWidth andPredicateWidth:(NSInteger)_maxPredicateWidth;
 
 @end
 
@@ -55,43 +53,56 @@
     return [_item sizeWithFont:[UIFont fontWithName:@"Courier" size:22.0] constrainedToSize:textSize lineBreakMode:UILineBreakModeWordWrap];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setItemsContrainedToInstructionWidth:(NSInteger)_maxInstructionWidth andPredicateWidth:(NSInteger)_maxPredicateWidth {
+    // set instruction rect
+    NSString* instructionString = [[ProgramNgin instance] iteratedInstructionString:self.instructionSet];
+    CGSize instructionSize = [self itemSize:instructionString];
+    CGRect instructionRect = self.instructionLabel.frame;
+    instructionRect.size.width = MIN(instructionSize.width, _maxInstructionWidth);    
+
+    // get bracket and until rect
+    CGRect instructionClosingBracketRect = self.instructionClosingBracketLabel.frame;
+    CGRect untilRect = self.untilLabel.frame;
+
+    // set instruction rectangles and string
+    self.instructionLabel.frame = instructionRect;
+    self.instructionClosingBracketLabel.frame = CGRectMake(instructionRect.origin.x + instructionRect.size.width, instructionClosingBracketRect.origin.y, 
+                                                           instructionClosingBracketRect.size.width, instructionClosingBracketRect.size.height);
+    self.untilLabel.frame = CGRectMake(instructionRect.origin.x + instructionRect.size.width + instructionClosingBracketRect.size.width,
+                                       untilRect.origin.y, untilRect.size.width, untilRect.size.height);
+    self.instructionLabel.text = instructionString;
+    
+    // set predicate rect
+    NSString* predicateString = [[ProgramNgin instance] instructionToString:[[self.instructionSet objectAtIndex:2] intValue]];
+    CGSize predicateSize = [self itemSize:predicateString];
+    CGRect predicateRect = self.predicateLabel.frame;
+    predicateRect.size.width = MIN(predicateSize.width, _maxPredicateWidth);
+    
+    // get bracket rect
+    CGRect predicateClosingBracketRect = self.predicateClosingBracketLabel.frame;
+
+    // set predicate rectangles and strings
+    self.predicateLabel.frame = predicateRect;
+    self.predicateClosingBracketLabel.frame = CGRectMake(predicateRect.origin.x + predicateRect.size.width, predicateClosingBracketRect.origin.y, 
+                                                         predicateClosingBracketRect.size.width, predicateClosingBracketRect.size.height);
+    self.predicateLabel.text = predicateString;
+}
+
 //===================================================================================================================================
 #pragma mark DoUntilTerminalCell
 
 //===================================================================================================================================
-#pragma mark TrminalCellInterface
+#pragma mark TerminalCellInterface
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UITableViewCell*)tableView:(UITableView*)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet andParentType:(TerminalCellParentType)_parentType {
-    
++ (UITableViewCell*)tableView:(UITableView*)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet andParentType:(TerminalCellParentType)_parentType {    
     DoUntilTerminalCell* cell = (DoUntilTerminalCell*)[CellUtils createCell:[DoUntilTerminalCell class] forTableView:tableView];
+    cell.instructionSet = _instructionSet;
     cell.parentType = _parentType;
     cell.instructionLabel.userInteractionEnabled = YES;
     cell.predicateLabel.userInteractionEnabled = YES;
-    
-    NSString* instructionString = [[ProgramNgin instance] iteratedInstructionString:_instructionSet];
-    CGSize instructionSize = [cell itemSize:instructionString];
-    CGRect instructionRect = cell.instructionLabel.frame;
-    CGRect instructionClosingBracketRect = cell.instructionClosingBracketLabel.frame;
-    CGRect untilRect = cell.untilLabel.frame;
-    cell.instructionLabel.frame = CGRectMake(instructionRect.origin.x, instructionRect.origin.y, instructionSize.width, instructionRect.size.height);
-    cell.instructionClosingBracketLabel.frame = CGRectMake(instructionRect.origin.x + instructionSize.width, instructionClosingBracketRect.origin.y, 
-                                                           instructionClosingBracketRect.size.width, instructionClosingBracketRect.size.height);
-    cell.untilLabel.frame = CGRectMake(instructionRect.origin.x + instructionSize.width + instructionClosingBracketRect.size.width,
-                                       untilRect.origin.y, untilRect.size.width, untilRect.size.height);
-    cell.instructionLabel.text = instructionString;
-    
-    NSString* predicateString = [[ProgramNgin instance] instructionToString:[[_instructionSet objectAtIndex:2] intValue]];
-    CGSize predicateSize = [cell itemSize:predicateString];
-    CGRect predicateRect = cell.predicateLabel.frame;
-    CGRect predicateClosingBracketRect = cell.predicateClosingBracketLabel.frame;
-    cell.predicateLabel.frame = CGRectMake(predicateRect.origin.x, predicateRect.origin.y, predicateSize.width, predicateRect.size.height);
-    cell.predicateClosingBracketLabel.frame = CGRectMake(predicateRect.origin.x + predicateSize.width, predicateClosingBracketRect.origin.y, 
-                                                         predicateClosingBracketRect.size.width, predicateClosingBracketRect.size.height);
-    cell.predicateLabel.text = predicateString;
-    
-    cell.instructionSet = _instructionSet;
-    
+    [cell setItemsContrainedToInstructionWidth:kDOUNTIL_INSTRUCTION_MAX_WIDTH andPredicateWidth:kDOUNTIL_PREDICATE_MAX_WIDTH];        
     return cell;
 }
 
@@ -109,14 +120,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
-    //    CGRect instructionRect = self.instructionLabel.frame;
-    //    if (editing) {
-    //        instructionRect.size.width = kTERMINAL_INSTRUCTION_EDIT_WIDTH;
-    //    } else {
-    //        instructionRect.size.width = kTERMINAL_INSTRUCTION_WIDTH;
-    //    }
-    //    self.instructionLabel.frame = instructionRect;
-    //    [super setEditing:editing animated:animated];
+    if (editing) {
+        [self setItemsContrainedToInstructionWidth:kDOUNTIL_INSTRUCTION_EDIT_MAX_WIDTH andPredicateWidth:kDOUNTIL_PREDICATE_EDIT_MAX_WIDTH];        
+    } else {
+        [self setItemsContrainedToInstructionWidth:kDOUNTIL_INSTRUCTION_MAX_WIDTH andPredicateWidth:kDOUNTIL_PREDICATE_MAX_WIDTH];        
+    }
+    [super setEditing:editing animated:animated];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
