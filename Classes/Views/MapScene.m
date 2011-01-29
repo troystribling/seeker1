@@ -20,6 +20,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define MAP_INVERSE_PAN_VELOCITY    0.001
+#define END_OF_LEVEL_COUNT          50
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapScene (PrivateAPI)
@@ -100,6 +101,7 @@
 @synthesize startSite;
 @synthesize seekerPath;
 @synthesize level;
+@synthesize endOfMissionCounter;
 @synthesize menu;
 @synthesize screenCenter;
 @synthesize firstTouch;
@@ -759,6 +761,7 @@
         self.movingMapOnTouch = NO;
         self.centeringOnSeekerPosition = NO;
         self.ignoreTouches = YES;
+        self.endOfMissionCounter = 0;
         [self.statusDisplay insert:self];
         [[ProgramNgin instance] deleteProgram];
         [self initLevel];
@@ -788,8 +791,10 @@
             [self resetSeekerStartPosition];
         } else if (self.levelCompleted) {
             [self runLevelCompletedAnimation];
-        } else if (self.nextLevel) {
+        } else if (self.endOfMissionCounter == END_OF_LEVEL_COUNT) {
             [[CCDirector sharedDirector] replaceScene: [EndOfLevelScene scene]];
+        } else if (self.nextLevel) {
+            self.endOfMissionCounter++;
         } else if (self.movingMapOnTouch) {
             [self onTouchMoveMap];
         } else if (self.centeringOnSeekerPosition) {

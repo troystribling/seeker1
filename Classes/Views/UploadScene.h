@@ -16,11 +16,15 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface UploadScene : CCLayer {
     StatusDisplay* statusDisplay;
+    CCLabel* percentUploadLabel;
+    CCLabel* uploadProgressLabel;
     NSInteger counter;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) StatusDisplay* statusDisplay;
+@property (nonatomic, retain) CCLabel* percentUploadLabel;
+@property (nonatomic, retain) CCLabel* uploadProgressLabel;
 @property (nonatomic, assign) NSInteger counter;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

@@ -65,7 +65,7 @@
     CCLabel* titleLabel = [CCLabel labelWithString:@"Mission Completed" fontName:@"Courier" fontSize:26];
     titleLabel.position = CGPointMake(20.0f, 361.0f);
     titleLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
-    titleLabel.color = ccc3(103,243,27);    
+    titleLabel.color = ccc3(255,255,0);    
     [self addChild:titleLabel];
 }
 
@@ -226,7 +226,8 @@
         }
         self.statusDisplay = [StatusDisplay createWithFile:@"empty-display.png"];
         [self.statusDisplay insert:self];
-        [self.statusDisplay addTerminalText:@"~>"];
+        [self.statusDisplay addTerminalText:@"~> samc"];
+        [self.statusDisplay test];
         [self schedule:@selector(nextFrame:)];
     }
 	return self;
@@ -237,24 +238,35 @@
     self.counter++;
     if (self.counter == kEND_OF_LEVEL_TICK_1) {
         [self insertSamplesCollectedLabel];
+        [self.statusDisplay addTerminalText:@"~> samr"];
+        [self.statusDisplay clear];
     } else if (self.counter == kEND_OF_LEVEL_TICK_2) {
         [self insertSamplesReturnedLabel];
+        [self.statusDisplay addTerminalText:@"~> sen"];
+        [self.statusDisplay test];
     } else if (self.counter == kEND_OF_LEVEL_TICK_3) {
         [self insertSensorsPlacedLabel];
+        [self.statusDisplay addTerminalText:@"~> eng"];
+        [self.statusDisplay clear];
     } else if (self.counter == kEND_OF_LEVEL_TICK_4) {
         [self insertEnergyBonusLabel];
+        [self.statusDisplay addTerminalText:@"~> tot"];
+        [self.statusDisplay test];
     } else if (self.counter == kEND_OF_LEVEL_TICK_5) {
         if (self.level.completed) {
             [self insertCompletedTotalScoreLabel];
         } else {
             [self insertFailedTotalScoreLabel];
         }
+        [self.statusDisplay addTerminalText:@"~> menu"];
+        [self.statusDisplay clear];
     } else if (self.counter == kEND_OF_LEVEL_TICK_6) {
         if (self.level.completed) {
             [self insertMissionCompletedMenu];
         } else {
             [self insertMissionFailedMenu];
         }
+        [self.statusDisplay test];
     }    
 }
 

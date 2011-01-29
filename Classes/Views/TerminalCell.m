@@ -11,6 +11,10 @@
 #import "CellUtils.h"
 #import "ProgramNgin.h"
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+#define kTERMINAL_INSTRUCTION_WIDTH         280
+#define kTERMINAL_INSTRUCTION_EDIT_WIDTH    240 
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TerminalCell (PrivateAPI)
 
@@ -71,6 +75,18 @@
 
 //===================================================================================================================================
 #pragma mark TerminalCell
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    CGRect instructionRect = self.instructionLabel.frame;
+    if (editing) {
+        instructionRect.size.width = kTERMINAL_INSTRUCTION_EDIT_WIDTH;
+    } else {
+        instructionRect.size.width = kTERMINAL_INSTRUCTION_WIDTH;
+    }
+    self.instructionLabel.frame = instructionRect;
+    [super setEditing:editing animated:animated];
+}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {    

@@ -101,6 +101,18 @@
 #pragma mark DoTimesTerminalCell
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    //    CGRect instructionRect = self.instructionLabel.frame;
+    //    if (editing) {
+    //        instructionRect.size.width = kTERMINAL_INSTRUCTION_EDIT_WIDTH;
+    //    } else {
+    //        instructionRect.size.width = kTERMINAL_INSTRUCTION_WIDTH;
+    //    }
+    //    self.instructionLabel.frame = instructionRect;
+    //    [super setEditing:editing animated:animated];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {    
     [super setSelected:selected animated:animated];
 }
