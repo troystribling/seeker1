@@ -213,7 +213,6 @@
             [[ViewControllerManager instance] showCreateSubroutineView:[[CCDirector sharedDirector] openGLView]];
             break;            
         default:
-            [super touchesBegan:touches withEvent:event];
             break;
     }
 }
