@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "ViewControllerManager.h"
+#import "CellUtils.h"
 #import "TutorialIndexCell.h"
 #import "TutorialIndexViewController.h"
 
@@ -45,7 +46,7 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.view.frame = self.containerView.frame;
-        self.tutorialsList = [NSArray arrayWithObjects:"1. get started", "2. times loop", "3. subroutines", "4. until loop", nil];
+        self.tutorialsList = [NSArray arrayWithObjects:@"1. get started", @"2. times loop", @"3. subroutines", @"4. until loop", nil];
     }
     return self;
 }
@@ -55,7 +56,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
-    self.instructionsView.separatorColor = [UIColor blackColor];
+    self.tutorialsView.separatorColor = [UIColor blackColor];
     [super viewDidLoad];
 }
 

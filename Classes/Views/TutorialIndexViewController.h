@@ -15,13 +15,13 @@
 @interface TutorialIndexViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     IBOutlet UITableView* tutorialsView;
     UIView* containerView;
-	NSMutableArray* tutorialsList;
+	NSArray* tutorialsList;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UITableView* tutorialsView;
 @property (nonatomic, retain) UIView* containerView;
-@property (nonatomic, retain) NSMutableArray* tutorialsList;
+@property (nonatomic, retain) NSArray* tutorialsList;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)inView:(UIView*)_containerView;

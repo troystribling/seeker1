@@ -110,6 +110,9 @@
 + (UITableViewCell*)tableView:(UITableView*)tableView listCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet {
     DoUntilTerminalCell* cell = (DoUntilTerminalCell*)[CellUtils createCell:[DoUntilTerminalCell class] forTableView:tableView];
     cell.promtLabel.text = [NSString stringWithFormat:@"%d.", (indexPath.row + 1)];
+    cell.instructionSet = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:DoUntilProgramInstruction],
+                                                           [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:MoveProgramInstruction], nil], 
+                                                           [NSNumber numberWithInt:PathBlockedPredicateProgramInstruction], nil];
     cell.instructionLabel.userInteractionEnabled = NO;
     cell.predicateLabel.userInteractionEnabled = NO;
     return cell;

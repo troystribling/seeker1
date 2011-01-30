@@ -97,7 +97,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (UITableViewCell*)tableView:(UITableView*)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet andParentType:(TerminalCellParentType)_parentType{
-
     DoTimesTerminalCell* cell = (DoTimesTerminalCell*)[CellUtils createCell:[DoTimesTerminalCell class] forTableView:tableView];
     cell.instructionSet = _instructionSet;
     cell.parentType = _parentType;
@@ -110,6 +109,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (UITableViewCell*)tableView:(UITableView*)tableView listCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet {
     DoTimesTerminalCell* cell = (DoTimesTerminalCell*)[CellUtils createCell:[DoTimesTerminalCell class] forTableView:tableView];
+    cell.instructionSet = [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:DoTimesProgramInstruction], 
+                                                           [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:MoveProgramInstruction], nil], 
+                                                           [NSNumber numberWithInt:1], nil];
     cell.promtLabel.text = [NSString stringWithFormat:@"%d.", (indexPath.row + 1)];
     cell.instructionLabel.userInteractionEnabled = NO;
     cell.numberLabel.userInteractionEnabled = NO;

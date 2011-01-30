@@ -995,8 +995,8 @@
 				051FB85D12D8DBEF006702D0 /* SubroutineViewController.xib */,
 				0547A46612AC349400D2F0D1 /* TerminalViewController.xib */,
 				0547A48112AC38B100D2F0D1 /* TerminalCell.xib */,
-				058912C712F4D5B9005870C0 /* TutorialIndexViewController.xib */,
 				058912D212F4E27D005870C0 /* TutorialIndexCell.xib */,
+				058912C712F4D5B9005870C0 /* TutorialIndexViewController.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
