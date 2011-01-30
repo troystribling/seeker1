@@ -14,6 +14,7 @@
 #import "CreateSubroutineViewController.h"
 #import "SubroutineViewController.h"
 #import "RepositoryViewController.h"
+#import "TutorialIndexViewController.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class DoTimesTerminalCell;
@@ -26,6 +27,7 @@
     CreateSubroutineViewController* createSubroutineViewController;
     SubroutineViewController* subroutineViewController;
     RepositoryViewController* repositoryViewController;
+    TutorialIndexViewController* tutorialIndexViewController;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -35,6 +37,7 @@
 @property (nonatomic, retain) CreateSubroutineViewController* createSubroutineViewController;
 @property (nonatomic, retain) SubroutineViewController* subroutineViewController;
 @property (nonatomic, retain) RepositoryViewController* repositoryViewController;
+@property (nonatomic, retain) TutorialIndexViewController* tutorialIndexViewController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ViewControllerManager*)instance;
@@ -76,5 +79,11 @@
 - (void)removeRepositoryView;
 - (void)repositoryViewWillAppear;
 - (void)repositoryViewWillDisappear;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (TutorialIndexViewController*)showTutorialIndexView:(UIView*)_containerView;
+- (void)removeTutorialIndexView;
+- (void)tutorialIndexViewWillAppear;
+- (void)tutorialIndexViewWillDisappear;
 
 @end

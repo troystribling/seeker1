@@ -28,6 +28,7 @@ static ViewControllerManager* thisViewControllerManager = nil;
 @synthesize createSubroutineViewController;
 @synthesize subroutineViewController;
 @synthesize repositoryViewController;
+@synthesize tutorialIndexViewController;
 
 //===================================================================================================================================
 #pragma mark ViewControllerManager PrivateApi
@@ -243,6 +244,35 @@ static ViewControllerManager* thisViewControllerManager = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)repositoryViewWillDisappear {
     [self.repositoryViewController viewWillDisappear:NO];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// TutorialIndexViewController
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (TutorialIndexViewController*)showTutorialIndexView:(UIView*)_containerView {
+    if (self.tutorialIndexViewController == nil) {
+        self.tutorialIndexViewController = [TutorialIndexViewController inView:_containerView];
+    } 
+    [_containerView addSubview:self.tutorialIndexViewController.view];
+    return self.tutorialIndexViewController;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeTutorialIndexView {
+    if (self.tutorialIndexViewController) {
+        [self.tutorialIndexViewController viewWillDisappear:NO];
+        [self.tutorialIndexViewController.view removeFromSuperview];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)tutorialIndexViewWillAppear {
+    [self.tutorialIndexViewController viewWillAppear:NO];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)tutorialIndexViewWillDisappear {
+    [self.tutorialIndexViewController viewWillDisappear:NO];
 }
 
 @end
