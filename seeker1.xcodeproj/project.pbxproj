@@ -68,6 +68,11 @@
 		0521EF6D12C5637B0078C77C /* elysium.png in Resources */ = {isa = PBXBuildFile; fileRef = 0521EF6A12C5637B0078C77C /* elysium.png */; };
 		0521EF6E12C5637B0078C77C /* memnonia.png in Resources */ = {isa = PBXBuildFile; fileRef = 0521EF6B12C5637B0078C77C /* memnonia.png */; };
 		0521EF6F12C5637B0078C77C /* tharsis.png in Resources */ = {isa = PBXBuildFile; fileRef = 0521EF6C12C5637B0078C77C /* tharsis.png */; };
+		05227E3812F64DF500923DEA /* get-started.png in Resources */ = {isa = PBXBuildFile; fileRef = 05227E3712F64DF500923DEA /* get-started.png */; };
+		05227E3B12F64E7700923DEA /* TutorialSectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05227E3A12F64E7700923DEA /* TutorialSectionViewController.m */; };
+		05227E4112F6589400923DEA /* terminal-launcher-exit.png in Resources */ = {isa = PBXBuildFile; fileRef = 05227E3F12F6589400923DEA /* terminal-launcher-exit.png */; };
+		05227E4212F6589400923DEA /* terminal-launcher-next.png in Resources */ = {isa = PBXBuildFile; fileRef = 05227E4012F6589400923DEA /* terminal-launcher-next.png */; };
+		05227E8412F675AF00923DEA /* TutorialSectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05227E8312F675AF00923DEA /* TutorialSectionViewController.xib */; };
 		0522D25212CBA29400E0530C /* DoTimesTerminalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0522D25112CBA29400E0530C /* DoTimesTerminalCell.m */; };
 		0522D27412CBF17300E0530C /* DoTimesTerminalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0522D27312CBF17300E0530C /* DoTimesTerminalCell.xib */; };
 		05246DA212CD01B0000EB7AF /* TerminalCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 05246DA112CD01B0000EB7AF /* TerminalCellFactory.m */; };
@@ -86,6 +91,7 @@
 		052A2F1D12CEEA1D002EE6D1 /* menu-miss.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A2F1A12CEEA1D002EE6D1 /* menu-miss.png */; };
 		052A2F1E12CEEA1D002EE6D1 /* menu-rset.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A2F1B12CEEA1D002EE6D1 /* menu-rset.png */; };
 		052A2F1F12CEEA1D002EE6D1 /* menu-stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A2F1C12CEEA1D002EE6D1 /* menu-stop.png */; };
+		052CC3F012F5F61800F5D862 /* game-objects.png in Resources */ = {isa = PBXBuildFile; fileRef = 052CC3EF12F5F61800F5D862 /* game-objects.png */; };
 		0532CF2012C6979E00DB92D8 /* TouchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0532CF1F12C6979E00DB92D8 /* TouchUtils.m */; };
 		0532CF7012C6BA5A00DB92D8 /* mission-locked.png in Resources */ = {isa = PBXBuildFile; fileRef = 0532CF6E12C6BA5A00DB92D8 /* mission-locked.png */; };
 		0532CF7112C6BA5A00DB92D8 /* mission-complete.png in Resources */ = {isa = PBXBuildFile; fileRef = 0532CF6F12C6BA5A00DB92D8 /* mission-complete.png */; };
@@ -419,6 +425,12 @@
 		0521EF6A12C5637B0078C77C /* elysium.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = elysium.png; sourceTree = "<group>"; };
 		0521EF6B12C5637B0078C77C /* memnonia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = memnonia.png; sourceTree = "<group>"; };
 		0521EF6C12C5637B0078C77C /* tharsis.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tharsis.png; sourceTree = "<group>"; };
+		05227E3712F64DF500923DEA /* get-started.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "get-started.png"; sourceTree = "<group>"; };
+		05227E3912F64E7700923DEA /* TutorialSectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialSectionViewController.h; sourceTree = "<group>"; };
+		05227E3A12F64E7700923DEA /* TutorialSectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialSectionViewController.m; sourceTree = "<group>"; };
+		05227E3F12F6589400923DEA /* terminal-launcher-exit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-exit.png"; sourceTree = "<group>"; };
+		05227E4012F6589400923DEA /* terminal-launcher-next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-next.png"; sourceTree = "<group>"; };
+		05227E8312F675AF00923DEA /* TutorialSectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorialSectionViewController.xib; sourceTree = "<group>"; };
 		0522D25012CBA29400E0530C /* DoTimesTerminalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoTimesTerminalCell.h; sourceTree = "<group>"; };
 		0522D25112CBA29400E0530C /* DoTimesTerminalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoTimesTerminalCell.m; sourceTree = "<group>"; };
 		0522D27312CBF17300E0530C /* DoTimesTerminalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoTimesTerminalCell.xib; sourceTree = "<group>"; };
@@ -444,6 +456,7 @@
 		052A2F1A12CEEA1D002EE6D1 /* menu-miss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-miss.png"; sourceTree = "<group>"; };
 		052A2F1B12CEEA1D002EE6D1 /* menu-rset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-rset.png"; sourceTree = "<group>"; };
 		052A2F1C12CEEA1D002EE6D1 /* menu-stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-stop.png"; sourceTree = "<group>"; };
+		052CC3EF12F5F61800F5D862 /* game-objects.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "game-objects.png"; sourceTree = "<group>"; };
 		0532CF1E12C6979E00DB92D8 /* TouchUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchUtils.h; sourceTree = "<group>"; };
 		0532CF1F12C6979E00DB92D8 /* TouchUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchUtils.m; sourceTree = "<group>"; };
 		0532CF6E12C6BA5A00DB92D8 /* mission-locked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mission-locked.png"; sourceTree = "<group>"; };
@@ -788,6 +801,7 @@
 				0510EDD612BC680E00355F28 /* Seeker */,
 				050D765C12AF0F6B005EF9BE /* StatusDisplay */,
 				050D766E12AF0F6B005EF9BE /* Terminal */,
+				052CC3EE12F5F61800F5D862 /* Tutorial */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -842,7 +856,9 @@
 				052A060A12CFD712005F1948 /* terminal-launcher-done.png */,
 				051C77C612B0A88300E41A23 /* terminal-launcher-editing.png */,
 				051C779512B091AC00E41A23 /* terminal-launcher-edit.png */,
+				05227E3F12F6589400923DEA /* terminal-launcher-exit.png */,
 				050D767012AF0F6B005EF9BE /* terminal-launcher-run.png */,
+				05227E4012F6589400923DEA /* terminal-launcher-next.png */,
 				05E4801812D53FC000E6B65E /* terminal-launcher-subroutines.png */,
 				050D767112AF0F6B005EF9BE /* terminal-launcher.png */,
 			);
@@ -973,6 +989,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		052CC3EE12F5F61800F5D862 /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				05227E3712F64DF500923DEA /* get-started.png */,
+				052CC3EF12F5F61800F5D862 /* game-objects.png */,
+			);
+			path = Tutorial;
+			sourceTree = "<group>";
+		};
 		054012B812A30FF600CCC62D /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -997,6 +1022,7 @@
 				0547A48112AC38B100D2F0D1 /* TerminalCell.xib */,
 				058912D212F4E27D005870C0 /* TutorialIndexCell.xib */,
 				058912C712F4D5B9005870C0 /* TutorialIndexViewController.xib */,
+				05227E8312F675AF00923DEA /* TutorialSectionViewController.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1017,6 +1043,8 @@
 				058912CB12F4DD0C005870C0 /* TutorialIndexCell.m */,
 				058912A812F4CE0D005870C0 /* TutorialIndexViewController.h */,
 				058912A912F4CE0D005870C0 /* TutorialIndexViewController.m */,
+				05227E3912F64E7700923DEA /* TutorialSectionViewController.h */,
+				05227E3A12F64E7700923DEA /* TutorialSectionViewController.m */,
 			);
 			name = Tutorial;
 			sourceTree = "<group>";
@@ -1625,6 +1653,11 @@
 				050DD33B12EA6F0D00FDBC11 /* RepositoryCell.xib in Resources */,
 				058912C812F4D5B9005870C0 /* TutorialIndexViewController.xib in Resources */,
 				058912D312F4E27D005870C0 /* TutorialIndexCell.xib in Resources */,
+				052CC3F012F5F61800F5D862 /* game-objects.png in Resources */,
+				05227E3812F64DF500923DEA /* get-started.png in Resources */,
+				05227E4112F6589400923DEA /* terminal-launcher-exit.png in Resources */,
+				05227E4212F6589400923DEA /* terminal-launcher-next.png in Resources */,
+				05227E8412F675AF00923DEA /* TutorialSectionViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1674,6 +1707,7 @@
 				0594C24212F27ED700CB1418 /* UploadScene.m in Sources */,
 				058912AA12F4CE0D005870C0 /* TutorialIndexViewController.m in Sources */,
 				058912CC12F4DD0C005870C0 /* TutorialIndexCell.m in Sources */,
+				05227E3B12F64E7700923DEA /* TutorialSectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

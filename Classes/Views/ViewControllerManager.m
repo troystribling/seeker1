@@ -29,6 +29,7 @@ static ViewControllerManager* thisViewControllerManager = nil;
 @synthesize subroutineViewController;
 @synthesize repositoryViewController;
 @synthesize tutorialIndexViewController;
+@synthesize tutorialSectionViewController;
 
 //===================================================================================================================================
 #pragma mark ViewControllerManager PrivateApi
@@ -273,6 +274,37 @@ static ViewControllerManager* thisViewControllerManager = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tutorialIndexViewWillDisappear {
     [self.tutorialIndexViewController viewWillDisappear:NO];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// TutorialSectionViewController
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (TutorialSectionViewController*)showTutorialSectionView:(UIView*)_containerView withImages:(NSArray*)_tutorialList{
+    if (self.tutorialSectionViewController == nil) {
+        self.tutorialSectionViewController = [TutorialSectionViewController inView:_containerView];
+    } 
+    self.tutorialSectionViewController.tutorialList = _tutorialList;
+    [_containerView addSubview:self.tutorialSectionViewController.view];
+    [self tutorialSectionViewWillAppear];
+    return self.tutorialSectionViewController;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeTutorialSectionView {
+    if (self.tutorialSectionViewController) {
+        [self.tutorialSectionViewController viewWillDisappear:NO];
+        [self.tutorialSectionViewController.view removeFromSuperview];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)tutorialSectionViewWillAppear {
+    [self.tutorialSectionViewController viewWillAppear:NO];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)tutorialSectionViewWillDisappear {
+    [self.tutorialSectionViewController viewWillDisappear:NO];
 }
 
 @end

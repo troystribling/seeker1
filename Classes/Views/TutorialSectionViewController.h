@@ -1,8 +1,8 @@
 //
-//  TutorialIndexViewController.h
+//  TutorialSectionViewController.h
 //  seeker1
 //
-//  Created by Troy Stribling on 1/29/11.
+//  Created by Troy Stribling on 1/30/11.
 //  Copyright 2011 imaginary products. All rights reserved.
 //
 
@@ -12,16 +12,20 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface TutorialIndexViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
-    IBOutlet UITableView* tutorialsView;
+@interface TutorialSectionViewController : UIViewController {
+    IBOutlet UIImageView* tutorialView;
+    IBOutlet UIImageView* nextView;
+    NSArray* tutorialList;
     UIView* containerView;
-	NSMutableArray* tutorialsList;
+    NSInteger selectedTutorial;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) UITableView* tutorialsView;
+@property (nonatomic, retain) UIImageView* tutorialView;
+@property (nonatomic, retain) UIImageView* nextView;
+@property (nonatomic, retain) NSArray* tutorialList;
 @property (nonatomic, retain) UIView* containerView;
-@property (nonatomic, retain) NSMutableArray* tutorialsList;
+@property (nonatomic, assign) NSInteger selectedTutorial;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)inView:(UIView*)_containerView;

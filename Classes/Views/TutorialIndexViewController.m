@@ -11,6 +11,7 @@
 #import "CellUtils.h"
 #import "TutorialIndexCell.h"
 #import "TutorialIndexViewController.h"
+#import "UserModel.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kTUTORIAL_INDEX_LAUNCHER_BACK_TAG   1
@@ -46,7 +47,6 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.view.frame = self.containerView.frame;
-        self.tutorialsList = [NSArray arrayWithObjects:@"1. get started", @"2. times loop", @"3. subroutines", @"4. until loop", nil];
     }
     return self;
 }
@@ -62,6 +62,20 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
+    self.tutorialsList = [NSMutableArray arrayWithObjects:@"1. get started", nil];
+    NSInteger level = [UserModel level];
+    if (level == kLEVEL_FOR_ITERATIONS) {
+        [self.tutorialsList addObject:@"2. times loop"];
+    }
+    if (level == kLEVEL_FOR_BINS) {
+        [self.tutorialsList addObject: @"3. sensor/sample bins"];
+    }
+    if (level == kLEVEL_FOR_SUBROUTINES) {
+        [self.tutorialsList addObject: @"4. subroutines"];
+    }
+    if (level == kLEVEL_FOR_UNTIL) {
+        [self.tutorialsList addObject: @"5. until loop"];
+    }
 	[super viewWillAppear:animated];
 }
 
@@ -140,6 +154,24 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    ViewControllerManager * viewMgr = [ViewControllerManager instance];
+    switch (indexPath.row) {
+        case 0:
+            [viewMgr showTutorialSectionView:self.view withImages:[NSArray arrayWithObjects:@"get-started.png", @"game-objects.png", nil]];
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+        default:
+            break;
+    }    
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
