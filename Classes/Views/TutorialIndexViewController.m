@@ -68,7 +68,7 @@
         [self.tutorialsList addObject:@"2. times loop"];
     }
     if (level == kLEVEL_FOR_BINS) {
-        [self.tutorialsList addObject: @"3. sensor/sample bins"];
+        [self.tutorialsList addObject: @"3. rover bins"];
     }
     if (level == kLEVEL_FOR_SUBROUTINES) {
         [self.tutorialsList addObject: @"4. subroutines"];
