@@ -157,7 +157,9 @@
     ViewControllerManager * viewMgr = [ViewControllerManager instance];
     switch (indexPath.row) {
         case 0:
-            [viewMgr showTutorialSectionView:self.view withImages:[NSArray arrayWithObjects:@"get-started.png", @"game-objects.png", nil]];
+            [viewMgr showTutorialSectionView:self.view withImages:[NSArray arrayWithObjects:@"get-started.png",
+                                                                   @"game-objects.png", @"status-display.png", @"program-game-board.png",
+                                                                   @"open-terminal-game-board.png", @"write-program.png", @"completed-program.png", nil]];
             break;
         case 1:
             break;

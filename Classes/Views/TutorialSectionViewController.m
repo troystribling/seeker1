@@ -101,14 +101,18 @@
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
     UITouch* touch = [touches anyObject];
     NSInteger touchTag = touch.view.tag;
+    self.nextView.hidden = NO;
     switch (touchTag) {
         case kTUTORIAL_SECTION_LAUNCHER_BACK_TAG:
             if (self.selectedTutorial == 1) {
                 [self.view removeFromSuperview];
+            } else if (self.selectedTutorial == 0) { 
+                self.selectedTutorial = [self.tutorialList count] - 2;
+                [self loadTutorial];
             } else {
-                self.selectedTutorial--;
+                self.selectedTutorial -= 2;
+                [self loadTutorial];
             }
-            [self loadTutorial];
             break;
         case kTUTORIAL_SECTION_LAUNCHER_EXIT_TAG:
             [self.view removeFromSuperview];
