@@ -123,6 +123,11 @@
 		058912C812F4D5B9005870C0 /* TutorialIndexViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058912C712F4D5B9005870C0 /* TutorialIndexViewController.xib */; };
 		058912CC12F4DD0C005870C0 /* TutorialIndexCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 058912CB12F4DD0C005870C0 /* TutorialIndexCell.m */; };
 		058912D312F4E27D005870C0 /* TutorialIndexCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058912D212F4E27D005870C0 /* TutorialIndexCell.xib */; };
+		0594276C12FA5AB4005026F7 /* create-edit-subroutines.png in Resources */ = {isa = PBXBuildFile; fileRef = 0594276712FA5AB4005026F7 /* create-edit-subroutines.png */; };
+		0594276D12FA5AB4005026F7 /* list-subroutines.png in Resources */ = {isa = PBXBuildFile; fileRef = 0594276812FA5AB4005026F7 /* list-subroutines.png */; };
+		0594276E12FA5AB4005026F7 /* predicates.png in Resources */ = {isa = PBXBuildFile; fileRef = 0594276912FA5AB4005026F7 /* predicates.png */; };
+		0594276F12FA5AB4005026F7 /* times-loop.png in Resources */ = {isa = PBXBuildFile; fileRef = 0594276A12FA5AB4005026F7 /* times-loop.png */; };
+		0594277012FA5AB4005026F7 /* until-loop.png in Resources */ = {isa = PBXBuildFile; fileRef = 0594276B12FA5AB4005026F7 /* until-loop.png */; };
 		0594C24212F27ED700CB1418 /* UploadScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0594C24112F27ED700CB1418 /* UploadScene.m */; };
 		05B81AAA12E9067A00BAC631 /* CodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B81AA912E9067A00BAC631 /* CodeModel.m */; };
 		05B81B7312E9492300BAC631 /* RepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B81B7212E9492300BAC631 /* RepositoryViewController.m */; };
@@ -507,6 +512,11 @@
 		058912CA12F4DD0C005870C0 /* TutorialIndexCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialIndexCell.h; sourceTree = "<group>"; };
 		058912CB12F4DD0C005870C0 /* TutorialIndexCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialIndexCell.m; sourceTree = "<group>"; };
 		058912D212F4E27D005870C0 /* TutorialIndexCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorialIndexCell.xib; sourceTree = "<group>"; };
+		0594276712FA5AB4005026F7 /* create-edit-subroutines.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "create-edit-subroutines.png"; sourceTree = "<group>"; };
+		0594276812FA5AB4005026F7 /* list-subroutines.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list-subroutines.png"; sourceTree = "<group>"; };
+		0594276912FA5AB4005026F7 /* predicates.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = predicates.png; sourceTree = "<group>"; };
+		0594276A12FA5AB4005026F7 /* times-loop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "times-loop.png"; sourceTree = "<group>"; };
+		0594276B12FA5AB4005026F7 /* until-loop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "until-loop.png"; sourceTree = "<group>"; };
 		0594C24012F27ED700CB1418 /* UploadScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadScene.h; sourceTree = "<group>"; };
 		0594C24112F27ED700CB1418 /* UploadScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadScene.m; sourceTree = "<group>"; };
 		05B81AA812E9067A00BAC631 /* CodeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeModel.h; sourceTree = "<group>"; };
@@ -1002,13 +1012,18 @@
 		052CC3EE12F5F61800F5D862 /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
-				0558413812F900EB00E506D4 /* completed-program.png */,
 				05227E3712F64DF500923DEA /* get-started.png */,
 				052CC3EF12F5F61800F5D862 /* game-objects.png */,
-				0558413912F900EB00E506D4 /* open-terminal-game-board.png */,
-				0558413A12F900EB00E506D4 /* program-game-board.png */,
 				0558413B12F900EB00E506D4 /* status-display.png */,
+				0558413A12F900EB00E506D4 /* program-game-board.png */,
+				0558413912F900EB00E506D4 /* open-terminal-game-board.png */,
 				0558413C12F900EB00E506D4 /* write-program.png */,
+				0594276A12FA5AB4005026F7 /* times-loop.png */,
+				0594276B12FA5AB4005026F7 /* until-loop.png */,
+				0594276912FA5AB4005026F7 /* predicates.png */,
+				0594276712FA5AB4005026F7 /* create-edit-subroutines.png */,
+				0594276812FA5AB4005026F7 /* list-subroutines.png */,
+				0558413812F900EB00E506D4 /* completed-program.png */,
 			);
 			path = Tutorial;
 			sourceTree = "<group>";
@@ -1678,6 +1693,11 @@
 				0558413F12F900EB00E506D4 /* program-game-board.png in Resources */,
 				0558414012F900EB00E506D4 /* status-display.png in Resources */,
 				0558414112F900EB00E506D4 /* write-program.png in Resources */,
+				0594276C12FA5AB4005026F7 /* create-edit-subroutines.png in Resources */,
+				0594276D12FA5AB4005026F7 /* list-subroutines.png in Resources */,
+				0594276E12FA5AB4005026F7 /* predicates.png in Resources */,
+				0594276F12FA5AB4005026F7 /* times-loop.png in Resources */,
+				0594277012FA5AB4005026F7 /* until-loop.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
