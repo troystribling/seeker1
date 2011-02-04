@@ -67,14 +67,14 @@
     if (level == kLEVEL_FOR_ITERATIONS) {
         [self.tutorialsList addObject:@"2. times loop"];
     }
-    if (level == kLEVEL_FOR_BINS) {
-        [self.tutorialsList addObject: @"3. rover bins"];
-    }
     if (level == kLEVEL_FOR_SUBROUTINES) {
-        [self.tutorialsList addObject: @"4. subroutines"];
+        [self.tutorialsList addObject: @"3. subroutines"];
     }
     if (level == kLEVEL_FOR_UNTIL) {
-        [self.tutorialsList addObject: @"5. until loop"];
+        [self.tutorialsList addObject: @"4. until loop"];
+    }
+    if (level == kLEVEL_FOR_BINS) {
+        [self.tutorialsList addObject: @"5. rover bins"];
     }
 	[super viewWillAppear:animated];
 }
@@ -159,17 +159,21 @@
         case 0:
             [viewMgr showTutorialSectionView:self.view withImages:[NSArray arrayWithObjects:@"get-started.png",
                                                                    @"game-objects.png", @"status-display.png", @"program-game-board.png",
-                                                                   @"open-terminal-game-board.png", @"write-program.png", @"completed-program.png", nil]];
+                                                                   @"open-terminal-game-board.png", @"write-program.png", 
+                                                                   @"add-program-instruction.png", @"completed-program.png", nil]];
             break;
         case 1:
+            [viewMgr showTutorialSectionView:self.view withImages:[NSArray arrayWithObjects:@"times-loop.png", nil]];
             break;
         case 2:
+            [viewMgr showTutorialSectionView:self.view withImages:[NSArray arrayWithObjects:@"list-subroutines.png", 
+                                                                   @"create-edit-subroutines.png", nil]];
             break;
         case 3:
+            [viewMgr showTutorialSectionView:self.view withImages:[NSArray arrayWithObjects:@"until-loop.png", @"predicates.png", nil]];
             break;
         case 4:
-            break;
-        case 5:
+            [viewMgr showTutorialSectionView:self.view withImages:[NSArray arrayWithObjects:@"rover-bins.png", nil]];
             break;
         default:
             break;

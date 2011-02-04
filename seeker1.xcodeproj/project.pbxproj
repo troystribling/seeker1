@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		050125F312FBAAE800D0B43B /* add-program-instruction.png in Resources */ = {isa = PBXBuildFile; fileRef = 050125F212FBAAE800D0B43B /* add-program-instruction.png */; };
+		050125F512FBAAF400D0B43B /* rover-bins.png in Resources */ = {isa = PBXBuildFile; fileRef = 050125F412FBAAF400D0B43B /* rover-bins.png */; };
 		050A9DB712C42C9C00FF1BA9 /* QuadsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 050A9DB612C42C9C00FF1BA9 /* QuadsScene.m */; };
 		050B27811290C82400CC6149 /* BootScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 050B27801290C82400CC6149 /* BootScene.m */; };
 		050CC7511296011000974B8F /* map-1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 050CC74E1296011000974B8F /* map-1.tmx */; };
@@ -362,6 +364,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		050125F212FBAAE800D0B43B /* add-program-instruction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-program-instruction.png"; sourceTree = "<group>"; };
+		050125F412FBAAF400D0B43B /* rover-bins.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rover-bins.png"; sourceTree = "<group>"; };
 		050A9DB512C42C9C00FF1BA9 /* QuadsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuadsScene.h; sourceTree = "<group>"; };
 		050A9DB612C42C9C00FF1BA9 /* QuadsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuadsScene.m; sourceTree = "<group>"; };
 		050B277F1290C82400CC6149 /* BootScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BootScene.h; sourceTree = "<group>"; };
@@ -1018,12 +1022,14 @@
 				0558413A12F900EB00E506D4 /* program-game-board.png */,
 				0558413912F900EB00E506D4 /* open-terminal-game-board.png */,
 				0558413C12F900EB00E506D4 /* write-program.png */,
+				050125F212FBAAE800D0B43B /* add-program-instruction.png */,
+				0558413812F900EB00E506D4 /* completed-program.png */,
 				0594276A12FA5AB4005026F7 /* times-loop.png */,
+				0594276812FA5AB4005026F7 /* list-subroutines.png */,
+				0594276712FA5AB4005026F7 /* create-edit-subroutines.png */,
+				050125F412FBAAF400D0B43B /* rover-bins.png */,
 				0594276B12FA5AB4005026F7 /* until-loop.png */,
 				0594276912FA5AB4005026F7 /* predicates.png */,
-				0594276712FA5AB4005026F7 /* create-edit-subroutines.png */,
-				0594276812FA5AB4005026F7 /* list-subroutines.png */,
-				0558413812F900EB00E506D4 /* completed-program.png */,
 			);
 			path = Tutorial;
 			sourceTree = "<group>";
@@ -1698,6 +1704,8 @@
 				0594276E12FA5AB4005026F7 /* predicates.png in Resources */,
 				0594276F12FA5AB4005026F7 /* times-loop.png in Resources */,
 				0594277012FA5AB4005026F7 /* until-loop.png in Resources */,
+				050125F312FBAAE800D0B43B /* add-program-instruction.png in Resources */,
+				050125F512FBAAF400D0B43B /* rover-bins.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
