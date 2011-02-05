@@ -18,6 +18,8 @@
 @interface TutorialSectionViewController (PrivateAPI)
 
 - (void)loadTutorial;
+- (void)nextTutorial;
+- (void)previousTutorial;
 
 @end
 
@@ -38,9 +40,21 @@
 - (void)loadTutorial {
     NSString* tutorialName = [self.tutorialList objectAtIndex:self.selectedTutorial];
     self.tutorialView.image = [UIImage imageNamed:tutorialName];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)nextTutorial {
     self.selectedTutorial++; 
     if (self.selectedTutorial == [self.tutorialList count]) {
         self.selectedTutorial = 0;
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)previousTutorial {
+    self.selectedTutorial--; 
+    if (self.selectedTutorial == -1) {
+        self.selectedTutorial = [self.tutorialList count] - 1;
     }
 }
 
@@ -77,6 +91,11 @@
     self.selectedTutorial = 0;
     [self loadTutorial];
 	[super viewWillAppear:animated];
+    if ([self.tutorialList count] > 1) {
+        self.nextView.hidden = NO;
+    } else {
+        self.nextView.hidden = YES;
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -101,16 +120,17 @@
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
     UITouch* touch = [touches anyObject];
     NSInteger touchTag = touch.view.tag;
-    self.nextView.hidden = NO;
+    if ([self.tutorialList count] > 1) {
+        self.nextView.hidden = NO;
+    } else {
+        self.nextView.hidden = YES;
+    }
     switch (touchTag) {
         case kTUTORIAL_SECTION_LAUNCHER_BACK_TAG:
-            if (self.selectedTutorial == 1) {
+            if (self.selectedTutorial == 0) {
                 [self.view removeFromSuperview];
-            } else if (self.selectedTutorial == 0) { 
-                self.selectedTutorial = [self.tutorialList count] - 2;
-                [self loadTutorial];
             } else {
-                self.selectedTutorial -= 2;
+                [self previousTutorial];
                 [self loadTutorial];
             }
             break;
@@ -118,10 +138,11 @@
             [self.view removeFromSuperview];
             break;
         case kTUTORIAL_SECTION_LAUNCHER_NEXT_TAG:
+            [self nextTutorial];
             [self loadTutorial];
-            if (self.selectedTutorial == 0) {
+            if (self.selectedTutorial == ([self.tutorialList count] - 1)) {
                 self.nextView.hidden = YES;
-            }
+            } 
             break;
         default:
             break;
