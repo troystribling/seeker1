@@ -26,6 +26,10 @@
 #define kBOOT_TICK_11   170
 #define kBOOT_TICK_12   210
 #define kBOOT_TICK_13   250
+#define kBOOT_TOP_YPOS  370.0
+#define kBOOT_DELTA     40.0
+#define kBOOT_LOGO_YPOS 20.0
+#define kBOOT_XPOS      20.0
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface BootScene (PrivateAPI)
@@ -56,7 +60,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertBootingLabel {
     self.bootingLabel = [CCLabel labelWithString:@"Booting" fontName:@"Courier" fontSize:24];
-    self.bootingLabel.position = CGPointMake(20.0f, 361.0f);
+    self.bootingLabel.position = CGPointMake(kBOOT_XPOS, kBOOT_TOP_YPOS);
     self.bootingLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     self.bootingLabel.color = ccc3(103,243,27);
     [self addChild:self.bootingLabel];
@@ -65,7 +69,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertProductLabel {
     self.productLabel = [CCLabel labelWithString:@"imaginaryProducts.com" fontName:@"Courier" fontSize:22];
-    self.productLabel.position = CGPointMake(20.0f, 20.0f);
+    self.productLabel.position = CGPointMake(kBOOT_XPOS, kBOOT_LOGO_YPOS);
     self.productLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     self.productLabel.color = ccc3(103,243,27);
     [self addChild:self.productLabel];
@@ -74,7 +78,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertPOST:(NSString*)_post {
     self.post = [CCLabel labelWithString:_post fontName:@"Courier" fontSize:24];
-    self.post.position = CGPointMake(20.0f, 361.0f);
+    self.post.position = CGPointMake(kBOOT_XPOS, kBOOT_TOP_YPOS);
     self.post.anchorPoint = CGPointMake(0.0f, 0.0f);
     self.post.color = ccc3(103,243,27);
     [self addChild:self.post];
@@ -83,7 +87,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertConsole:(NSString*)_console {
     self.console = [CCLabel labelWithString:_console fontName:@"Courier" fontSize:24];
-    self.console.position = CGPointMake(20.0f, 321.0f);
+    self.console.position = CGPointMake(kBOOT_XPOS, kBOOT_TOP_YPOS - kBOOT_DELTA);
     self.console.anchorPoint = CGPointMake(0.0f, 0.0f);
     self.console.color = ccc3(103,243,27);
     [self addChild:self.console];
@@ -92,7 +96,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertConnection:(NSString*)_connection {
     self.connection = [CCLabel labelWithString:_connection fontName:@"Courier" fontSize:24];
-    self.connection.position = CGPointMake(20.0f, 281.0f);
+    self.connection.position = CGPointMake(kBOOT_XPOS, kBOOT_TOP_YPOS - 2.0 * kBOOT_DELTA);
     self.connection.anchorPoint = CGPointMake(0.0f, 0.0f);
     self.connection.color = ccc3(103,243,27);
     [self addChild:self.connection];

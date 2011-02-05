@@ -35,31 +35,31 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)buildMenu {
-    CCLabel* missionLabel = [CCLabel labelWithString:@"1. mission sites" fontName:@"Courier" fontSize:26];
+    CCLabel* missionLabel = [CCLabel labelWithString:@"1. mission sites" fontName:@"Courier" fontSize:24];
     missionLabel.color = ccc3(103,243,27);
     CCMenuItemLabel* missionItem = [CCMenuItemLabel itemWithLabel:missionLabel
                                                         target:self
                                                         selector:@selector(mission)];
     missionItem.anchorPoint = CGPointMake(0.0, 0.0);
-    CCLabel* settingsLabel = [CCLabel labelWithString:@"2. settings" fontName:@"Courier" fontSize:26];
+    CCLabel* settingsLabel = [CCLabel labelWithString:@"2. settings" fontName:@"Courier" fontSize:24];
     settingsLabel.color = ccc3(103,243,27);
     CCMenuItemLabel* settingsItem = [CCMenuItemLabel itemWithLabel:settingsLabel
                                                         target:self
                                                         selector:@selector(configure)];
     settingsItem.anchorPoint = CGPointMake(0.0, 0.0);
-    CCLabel* statsLabel = [CCLabel labelWithString:@"3. stats" fontName:@"Courier" fontSize:26];
+    CCLabel* statsLabel = [CCLabel labelWithString:@"3. stats" fontName:@"Courier" fontSize:24];
     statsLabel.color = ccc3(103,243,27);
     CCMenuItemLabel* statsItem = [CCMenuItemLabel itemWithLabel:statsLabel
                                                             target:self
                                                             selector:@selector(stats)];
     statsItem.anchorPoint = CGPointMake(0.0, 0.0);
-    CCLabel* repositoryLabel = [CCLabel labelWithString:@"4. repository" fontName:@"Courier" fontSize:26];
+    CCLabel* repositoryLabel = [CCLabel labelWithString:@"4. repository" fontName:@"Courier" fontSize:24];
     repositoryLabel.color = ccc3(103,243,27);
     CCMenuItemLabel* repositoryItem = [CCMenuItemLabel itemWithLabel:repositoryLabel
                                                        target:self
                                                        selector:@selector(repository)];
     repositoryItem.anchorPoint = CGPointMake(0.0, 0.0);
-    CCLabel* tutorialLabel = [CCLabel labelWithString:@"5. tutorial" fontName:@"Courier" fontSize:26];
+    CCLabel* tutorialLabel = [CCLabel labelWithString:@"5. tutorial" fontName:@"Courier" fontSize:24];
     tutorialLabel.color = ccc3(103,243,27);
     CCMenuItemLabel* tutorialItem = [CCMenuItemLabel itemWithLabel:tutorialLabel
                                                       target:self
@@ -67,7 +67,7 @@
     tutorialItem.anchorPoint = CGPointMake(0.0, 0.0);
     self.startMenu = [CCMenu menuWithItems:missionItem, settingsItem, statsItem, repositoryItem, tutorialItem, nil];
     [self.startMenu alignItemsVerticallyWithPadding:20.0];
-    self.startMenu.position = CGPointMake(20.0f, 255.0f);
+    self.startMenu.position = CGPointMake(20.0f, 275.0f);
     [self addChild:self.startMenu];
 }
 
