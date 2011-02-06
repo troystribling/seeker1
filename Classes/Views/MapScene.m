@@ -534,6 +534,16 @@
         mapInt = 2;
     } else if ([_mapID isEqualToString:@"up-5"]) {
         mapInt = 1;
+    } else if ([_mapID isEqualToString:@"down-1"]) {
+        mapInt =  -5;
+    } else if ([_mapID isEqualToString:@"down-2"]) {
+        mapInt =  -4;
+    } else if ([_mapID isEqualToString:@"down-3"]) {
+        mapInt = -3;
+    } else if ([_mapID isEqualToString:@"down-4"]) {
+        mapInt = -2;
+    } else if ([_mapID isEqualToString:@"down-5"]) {
+        mapInt = -1;
     }
     return mapInt;
 }

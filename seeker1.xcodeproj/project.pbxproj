@@ -79,6 +79,7 @@
 		0522D27412CBF17300E0530C /* DoTimesTerminalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0522D27312CBF17300E0530C /* DoTimesTerminalCell.xib */; };
 		05246DA212CD01B0000EB7AF /* TerminalCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 05246DA112CD01B0000EB7AF /* TerminalCellFactory.m */; };
 		0527C52512A9A8B900DD4099 /* TermMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0527C52412A9A8B900DD4099 /* TermMenuView.m */; };
+		0527D45812FF3EC700AF6A0F /* pan-game-board.png in Resources */ = {isa = PBXBuildFile; fileRef = 0527D45712FF3EC700AF6A0F /* pan-game-board.png */; };
 		0527E61412BD5F3D0039D55E /* red-seeker-1-east.png in Resources */ = {isa = PBXBuildFile; fileRef = 0527E61012BD5F3D0039D55E /* red-seeker-1-east.png */; };
 		0527E61512BD5F3D0039D55E /* red-seeker-1-north.png in Resources */ = {isa = PBXBuildFile; fileRef = 0527E61112BD5F3D0039D55E /* red-seeker-1-north.png */; };
 		0527E61612BD5F3D0039D55E /* red-seeker-1-south.png in Resources */ = {isa = PBXBuildFile; fileRef = 0527E61212BD5F3D0039D55E /* red-seeker-1-south.png */; };
@@ -453,6 +454,7 @@
 		05246DA112CD01B0000EB7AF /* TerminalCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerminalCellFactory.m; sourceTree = "<group>"; };
 		0527C52312A9A8B900DD4099 /* TermMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermMenuView.h; sourceTree = "<group>"; };
 		0527C52412A9A8B900DD4099 /* TermMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermMenuView.m; sourceTree = "<group>"; };
+		0527D45712FF3EC700AF6A0F /* pan-game-board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pan-game-board.png"; sourceTree = "<group>"; };
 		0527E61012BD5F3D0039D55E /* red-seeker-1-east.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-seeker-1-east.png"; sourceTree = "<group>"; };
 		0527E61112BD5F3D0039D55E /* red-seeker-1-north.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-seeker-1-north.png"; sourceTree = "<group>"; };
 		0527E61212BD5F3D0039D55E /* red-seeker-1-south.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-seeker-1-south.png"; sourceTree = "<group>"; };
@@ -1020,6 +1022,7 @@
 			children = (
 				05227E3712F64DF500923DEA /* get-started.png */,
 				052CC3EF12F5F61800F5D862 /* game-objects.png */,
+				0527D45712FF3EC700AF6A0F /* pan-game-board.png */,
 				0558413B12F900EB00E506D4 /* status-display.png */,
 				0558413A12F900EB00E506D4 /* program-game-board.png */,
 				0558413912F900EB00E506D4 /* open-terminal-game-board.png */,
@@ -1710,6 +1713,7 @@
 				050125F312FBAAE800D0B43B /* add-program-instruction.png in Resources */,
 				050125F512FBAAF400D0B43B /* rover-bins.png in Resources */,
 				053CD81212FDD26C00410FC8 /* subroutines.png in Resources */,
+				0527D45812FF3EC700AF6A0F /* pan-game-board.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
