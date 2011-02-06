@@ -19,12 +19,12 @@
 #import "TouchUtils.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define kMAP_INVERSE_PAN_SPEED   0.001
-#define kEND_OF_LEVEL_COUNT      50
-#define kSEEKER_DELTA_SPEED      5
-#define kSEEKER_DELTA_ENERGY     2
-#define kSEEKER_DELTA_ENERGY_MIN 1
-#define kSEEKER_DELTA_ENERGY_MAX 4
+#define kMAP_INVERSE_PAN_SPEED      0.001
+#define kEND_OF_LEVEL_COUNT         50
+#define kSEEKER_DELTA_SPEED         5
+#define kSEEKER_DELTA_ENERGY        2
+#define kSEEKER_DELTA_ENERGY_MIN    1
+#define kSEEKER_DELTA_ENERGY_MAX    4
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapScene (PrivateAPI)
@@ -396,9 +396,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)speedDelta:(NSInteger)_gradient {
-    NSInteger delta = kSEEKER_DELTA_SPEED;
+    NSInteger delta = 0;
     if (_gradient < 0) {
-        delta = -delta;
+        delta = -kSEEKER_DELTA_SPEED;
+    } else if (_gradient > 0) {
+        delta = kSEEKER_DELTA_SPEED;
     }
     return delta;
 }
@@ -941,7 +943,7 @@
 - (NSInteger)terrainGradient {
     NSInteger currentTerrain = 0;
     NSInteger nextTerrain = 0;
-    CGPoint currentSeekerTile = self.seeker1.position;
+    CGPoint currentSeekerTile = [self getSeekerTile];
     CGPoint nextSeekerTile = [self nextPosition];
     NSDictionary* currentTerrainProperties = [self getTileProperties:currentSeekerTile forLayer:self.terrainLayer];
     NSDictionary* nextTerrainProperties = [self getTileProperties:nextSeekerTile forLayer:self.terrainLayer];

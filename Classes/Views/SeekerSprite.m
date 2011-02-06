@@ -12,10 +12,11 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 // seeker capacities
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define kSEEKER_SENSOR_BIN_SIZE     2
-#define kSEEKER_SAMPLE_BIN_SIZE     2
-#define kSEEKER_GRID_DISTANCE       10.0
-#define kSEEKER_BASE_SPEED          15
+#define kSEEKER_SENSOR_BIN_SIZE             2
+#define kSEEKER_SAMPLE_BIN_SIZE             2
+#define kSEEKER_GRID_DISTANCE               15.0
+#define kSEEKER_BASE_SPEED                  15
+#define kSEEKER_ROTATION_DURATION_PER_QUAD  0.4f
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface SeekerSprite (PrivateAPI)
@@ -175,7 +176,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)turnLeft {
     self.bearing = [self leftFromBearing];
-    [self runAction:[CCRotateBy actionWithDuration:kSEEKER_GRID_DISTANCE/self.speed angle:-90.0]];
+    [self runAction:[CCRotateBy actionWithDuration:kSEEKER_ROTATION_DURATION_PER_QUAD angle:-90.0]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -262,7 +263,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)rotate:(CGFloat)_angle {
-    [self runAction:[CCRotateBy actionWithDuration:kSEEKER_GRID_DISTANCE/self.speed angle:_angle]];
+    CGFloat duration = fabs(kSEEKER_ROTATION_DURATION_PER_QUAD * _angle / 90.0f);
+    [self runAction:[CCRotateBy actionWithDuration:duration angle:_angle]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
