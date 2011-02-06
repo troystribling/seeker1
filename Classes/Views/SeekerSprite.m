@@ -14,7 +14,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kSEEKER_SENSOR_BIN_SIZE     2
 #define kSEEKER_SAMPLE_BIN_SIZE     2
-#define kSEEKER_BASE_SPEED          10.0
+#define kSEEKER_GRID_DISTANCE       10.0
+#define kSEEKER_BASE_SPEED          15
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface SeekerSprite (PrivateAPI)
@@ -103,6 +104,7 @@
     self.samplesReturned = 0;
     self.sampleBin = 0;
     self.sensorsPlaced = 0;
+    self.speed = 0;
     self.samplesRemaining = self.sampleSites;
     self.sensorsRemaining = self.sensorSites;
     [self emptySampleBin];
@@ -143,7 +145,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)moveBy:(CGSize)_delta {
     CGPoint deltaBearing = [self positionDeltaAlongBearing:_delta];
-    [self runAction:[CCMoveBy actionWithDuration:kSEEKER_BASE_SPEED/self.speed position:deltaBearing]];
+    [self runAction:[CCMoveBy actionWithDuration:kSEEKER_GRID_DISTANCE/self.speed position:deltaBearing]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -155,9 +157,25 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)changeSpeed:(CGFloat)_deltaSpeed {
+    BOOL validSpeed = YES;
+    if (_deltaSpeed == 0) {
+        self.speed  = kSEEKER_BASE_SPEED;
+    } else {
+        self.speed += _deltaSpeed;
+    }
+    if (self.speed == kSEEKER_MAX_SPEED) {
+        validSpeed = NO;
+    } else if (self.speed == kSEEKER_MIN_SPEED) {
+        validSpeed = NO;
+    }
+    return validSpeed;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)turnLeft {
     self.bearing = [self leftFromBearing];
-    [self runAction:[CCRotateBy actionWithDuration:kSEEKER_BASE_SPEED/self.speed angle:-90.0]];
+    [self runAction:[CCRotateBy actionWithDuration:kSEEKER_GRID_DISTANCE/self.speed angle:-90.0]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -189,6 +207,11 @@
     }
     return status;
 }
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// utils
+//-----------------------------------------------------------------------------------------------------------------------------------
+#pragma mark utils
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadSensorBin {
@@ -227,7 +250,6 @@
     return (self.sensorBin == 0);
 }
 
-
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)isSampleBinFull {
     return (self.sampleBin == kSEEKER_SAMPLE_BIN_SIZE);
@@ -240,7 +262,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)rotate:(CGFloat)_angle {
-    [self runAction:[CCRotateBy actionWithDuration:kSEEKER_BASE_SPEED/self.speed angle:_angle]];
+    [self runAction:[CCRotateBy actionWithDuration:kSEEKER_GRID_DISTANCE/self.speed angle:_angle]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -325,7 +347,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithFile:(NSString *)_filename {
 	if((self=[super initWithFile:_filename])) {
-        self.speed = 10;
         self.anchorPoint = CGPointMake(0.5f, 0.5f);
 	}
 	return self;

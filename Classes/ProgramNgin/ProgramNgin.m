@@ -264,19 +264,12 @@ static ProgramNgin* thisProgramNgin = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)pathBlocked:(MapScene*)_mapScene {
-    BOOL status = NO;
+    BOOL status = YES;
     CGPoint position = [_mapScene nextPosition];
-    if ([_mapScene positionIsInPlayingArea:position]) {
-        NSDictionary* terrain = [_mapScene getTileProperties:position forLayer:_mapScene.terrainLayer];
-        if (terrain) {
-            NSString* mapID = [terrain valueForKey:@"mapID"];
-            if ([mapID isEqualToString:@"up-1"]) {
-                status = YES;
-            } 
-        } 
-    } else {
-        status = YES;
-    }
+    NSInteger gradient = [_mapScene terrainGradient];
+    if ([_mapScene positionIsInPlayingArea:position] && [_mapScene isTerrainClear:gradient]) {
+        status = NO;
+    } 
     return status;
 }
 

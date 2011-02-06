@@ -103,6 +103,8 @@ typedef enum tagMapID {
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSDictionary*)getTileProperties:(CGPoint)_point forLayer:(CCTMXLayer*)_layer;
 - (CGPoint)getSeekerTile;
+- (NSInteger)terrainGradient;
+- (BOOL)isTerrainClear:(NSInteger)_gradient;
 - (BOOL)positionIsInPlayingArea:(CGPoint)_position;
 - (CGPoint)moveDelta;
 - (CGPoint)nextPositionForDelta:(CGPoint)_delta;

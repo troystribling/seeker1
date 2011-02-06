@@ -166,7 +166,7 @@
             [viewMgr showTutorialSectionView:self.view withImages:[NSArray arrayWithObjects:@"times-loop.png", nil]];
             break;
         case 2:
-            [viewMgr showTutorialSectionView:self.view withImages:[NSArray arrayWithObjects:@"list-subroutines.png", 
+            [viewMgr showTutorialSectionView:self.view withImages:[NSArray arrayWithObjects:@"subroutines.png", @"list-subroutines.png", 
                                                                    @"create-edit-subroutines.png", nil]];
             break;
         case 3:

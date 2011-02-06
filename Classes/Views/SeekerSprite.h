@@ -19,12 +19,14 @@ typedef enum tagSeekerBearing {
 } SeekerBearing;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+#define kSEEKER_MIN_SPEED           0
+#define kSEEKER_MAX_SPEED           30
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface SeekerSprite : CCSprite {
     SeekerBearing bearing;
-    CGFloat energyTotal;
-    CGFloat energy;
+    NSInteger energyTotal;
+    NSInteger energy;
     NSInteger sampleSites;
     NSInteger sampleBin;
     NSInteger samplesCollected;
@@ -39,8 +41,8 @@ typedef enum tagSeekerBearing {
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, assign) SeekerBearing bearing;
-@property (nonatomic, assign) CGFloat energyTotal;
-@property (nonatomic, assign) CGFloat energy;
+@property (nonatomic, assign) NSInteger energyTotal;
+@property (nonatomic, assign) NSInteger energy;
 @property (nonatomic, assign) NSInteger sampleSites;
 @property (nonatomic, assign) NSInteger sampleBin;
 @property (nonatomic, assign) NSInteger samplesCollected;
@@ -63,10 +65,12 @@ typedef enum tagSeekerBearing {
 - (CGPoint)nextPositionForDelta:(CGSize)_delta;
 - (void)moveBy:(CGSize)_delta;
 - (BOOL)useEnergy:(CGFloat)_deltaEnergy;
+- (BOOL)changeSpeed:(CGFloat)_deltaSpeed;
 - (void)turnLeft;
 - (BOOL)getSample;
 - (void)emptySampleBin;
 - (BOOL)putSensor;
+// utils
 - (void)loadSensorBin;
 - (BOOL)isLevelCompleted;
 - (BOOL)isSensorBinEmpty;

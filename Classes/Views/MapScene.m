@@ -19,8 +19,12 @@
 #import "TouchUtils.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define MAP_INVERSE_PAN_VELOCITY    0.001
-#define END_OF_LEVEL_COUNT          50
+#define kMAP_INVERSE_PAN_SPEED   0.001
+#define kEND_OF_LEVEL_COUNT      50
+#define kSEEKER_DELTA_SPEED      5
+#define kSEEKER_DELTA_ENERGY     2
+#define kSEEKER_DELTA_ENERGY_MIN 1
+#define kSEEKER_DELTA_ENERGY_MAX 4
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapScene (PrivateAPI)
@@ -46,8 +50,8 @@
 - (BOOL)moveIsInPlayingAreaForData:(CGPoint)_delta;
 - (void)executeSeekerInstruction:(ccTime)dt;
 - (void)updatePathForPosition:(CGPoint)_position;
-- (CGFloat)tileUsedEnergy;
-- (BOOL)terrainClear;
+- (CGFloat)useEnergy:(NSInteger)_gradient;
+- (NSInteger)speedDelta:(NSInteger)_gradient;
 - (BOOL)isItemTile:(NSDictionary*)_itemProperties ofType:(NSString*)_itemType;
 - (BOOL)isStationTile:(NSDictionary*)_itemProperties;
 - (void)move;
@@ -55,14 +59,18 @@
 - (void)putSensor:(NSDictionary*)_properties atPoint:(CGPoint)_point;
 - (void)getSample:(NSDictionary*)_properties atPoint:(CGPoint)_point;
 - (void)halt;
+- (NSInteger)mapIDToInteger:(NSString*)_mapID;
 // display parameter updates
 - (void)updateEnergy;
+- (void)updateSpeed;
 - (void)updateSensorCount;
 - (void)updateSampleCount;
 // seeker crash
 - (void)crashCompleted;
 - (void)crashHitMapBoundary;
 - (void)crashNoEnergy;
+- (void)crashSpeedHigh;
+- (void)crashSpeedLow;
 - (void)crashProgram;
 - (void)crashTerrain;
 - (void)crashSensorBinEmpty;
@@ -376,31 +384,23 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (CGFloat)tileUsedEnergy {
-    CGFloat usedEnergy = 1.0;
-    return usedEnergy;
+- (CGFloat)useEnergy:(NSInteger)_gradient {
+    CGFloat delta = kSEEKER_DELTA_ENERGY;
+    if (_gradient < 0) {
+        delta = kSEEKER_DELTA_ENERGY_MIN;
+    } else if (_gradient > 0) {
+        delta = kSEEKER_DELTA_ENERGY_MAX;
+    }
+    return delta;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)terrainClear {
-    BOOL status = YES;
-    CGPoint seekerTile = [self nextPosition];
-    NSDictionary* mapProperties = [self getTileProperties:seekerTile forLayer:self.terrainLayer];
-    if (mapProperties) {
-        NSString* mapID = [mapProperties valueForKey:@"mapID"];
-        if ([mapID isEqualToString:@"up-1"]) {
-            status = NO;
-        } else if ([mapID isEqualToString:@"up-2"]) {
-            status = NO;
-        } else if ([mapID isEqualToString:@"up-3"]) {
-            status = NO;
-        } else if ([mapID isEqualToString:@"up-4"]) {
-            status = NO;
-        } else if ([mapID isEqualToString:@"up-5"]) {
-            status = NO;
-        }
-    } 
-    return status;
+- (NSInteger)speedDelta:(NSInteger)_gradient {
+    NSInteger delta = kSEEKER_DELTA_SPEED;
+    if (_gradient < 0) {
+        delta = -delta;
+    }
+    return delta;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -424,21 +424,33 @@
 - (void)move {
     CGPoint delta = [self moveDelta];
     if ([self moveIsInPlayingAreaForData:delta]) {
-        CGFloat usedEnergy = [self tileUsedEnergy];
+        NSInteger gradient = [self terrainGradient];
+        CGFloat usedEnergy = [self useEnergy:gradient];
         if ([self.seeker1 useEnergy:usedEnergy]) {
-            [self updateEnergy];
-            if ([self terrainClear]) {
-                if ([self shouldMoveMap:delta]) {
-                    CGPoint mapPosition = ccpAdd(CGPointMake(-delta.x, -delta.y), self.tileMap.position);
-                    [self moveMapTo:mapPosition withDuration:1.0];
+            NSInteger deltaSpeed = [self speedDelta:gradient];
+            if ([self.seeker1 changeSpeed:deltaSpeed]) {
+                [self updateEnergy];
+                [self updateSpeed];
+                if ([self isTerrainClear:gradient]) {
+                    if ([self shouldMoveMap:delta]) {
+                        CGPoint mapPosition = ccpAdd(CGPointMake(-delta.x, -delta.y), self.tileMap.position);
+                        [self moveMapTo:mapPosition withDuration:1.0];
+                    } else {
+                        [self.seeker1 moveBy:self.tileMap.tileSize];
+                    }
+                    CGPoint seekerTile = [self getSeekerTile];
+                    [self updatePathForPosition:seekerTile];
                 } else {
-                    [self.seeker1 moveBy:self.tileMap.tileSize];
+                    [self halt];
+                    [self crashTerrain];
                 }
-                CGPoint seekerTile = [self getSeekerTile];
-                [self updatePathForPosition:seekerTile];
             } else {
                 [self halt];
-                [self crashTerrain];
+                if (self.seeker1.speed == kSEEKER_MAX_SPEED) {
+                    [self crashSpeedHigh];
+                } else {
+                    [self crashSpeedLow];
+                }
             }
         } else {
             [self halt];
@@ -508,13 +520,35 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (NSInteger)mapIDToInteger:(NSString*)_mapID {
+    NSInteger mapInt = 0;
+    if ([_mapID isEqualToString:@"up-1"]) {
+        mapInt =  5;
+    } else if ([_mapID isEqualToString:@"up-2"]) {
+        mapInt =  4;
+    } else if ([_mapID isEqualToString:@"up-3"]) {
+        mapInt = 3;
+    } else if ([_mapID isEqualToString:@"up-4"]) {
+        mapInt = 2;
+    } else if ([_mapID isEqualToString:@"up-5"]) {
+        mapInt = 1;
+    }
+    return mapInt;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 // display parameter updates
 //-----------------------------------------------------------------------------------------------------------------------------------
 #pragma mark display parameter updates
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)updateEnergy {
-    [self.statusDisplay setDigits:(int)(self.seeker1.energy + 0.001) forDisplay:EnergyDisplayType]; 
+    [self.statusDisplay setDigits:self.seeker1.energy forDisplay:EnergyDisplayType]; 
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)updateSpeed {
+    [self.statusDisplay setDigits:self.seeker1.speed forDisplay:SpeedDisplayType]; 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -546,6 +580,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashNoEnergy {
+    [self fadeToRed];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)crashSpeedHigh {
+    [self fadeToRed];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)crashSpeedLow {
     [self fadeToRed];
 }
 
@@ -727,7 +771,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGFloat)panDuration:(CGPoint)_delta {
     CGFloat distance = sqrt(pow(_delta.x, 2.0) + pow(_delta.y, 2.0));
-    return distance * MAP_INVERSE_PAN_VELOCITY;
+    return distance * kMAP_INVERSE_PAN_SPEED;
 }
 
 //===================================================================================================================================
@@ -791,7 +835,7 @@
             [self resetSeekerStartPosition];
         } else if (self.levelCompleted) {
             [self runLevelCompletedAnimation];
-        } else if (self.endOfMissionCounter == END_OF_LEVEL_COUNT) {
+        } else if (self.endOfMissionCounter == kEND_OF_LEVEL_COUNT) {
             [[CCDirector sharedDirector] replaceScene: [EndOfLevelScene scene]];
         } else if (self.nextLevel) {
             self.endOfMissionCounter++;
@@ -837,7 +881,6 @@
                         [self onTouchMoveMapLeft];
                     }
                 }
-
             } else if (numberOfTouches == 2) {
                 self.centeringOnSeekerPosition = YES;
             }
@@ -892,6 +935,35 @@
     CGPoint delta = [self moveDelta];
     CGPoint newPosition = ccpAdd([self screenCoordsToTileCoords:self.seeker1.position], CGPointMake(delta.x, -delta.y));
     return [self tileCoordsToTile:newPosition];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSInteger)terrainGradient {
+    NSInteger currentTerrain = 0;
+    NSInteger nextTerrain = 0;
+    CGPoint currentSeekerTile = self.seeker1.position;
+    CGPoint nextSeekerTile = [self nextPosition];
+    NSDictionary* currentTerrainProperties = [self getTileProperties:currentSeekerTile forLayer:self.terrainLayer];
+    NSDictionary* nextTerrainProperties = [self getTileProperties:nextSeekerTile forLayer:self.terrainLayer];
+    if (currentTerrainProperties) {
+        NSString* currentTerrainID = [currentTerrainProperties valueForKey:@"mapID"];
+        currentTerrain = [self mapIDToInteger:currentTerrainID];
+    }
+    if (nextTerrainProperties) {
+        NSString* nextTerrainID = [nextTerrainProperties valueForKey:@"mapID"];
+        nextTerrain = [self mapIDToInteger:nextTerrainID];
+    }
+    NSInteger gradient = nextTerrain - currentTerrain;
+    return gradient;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)isTerrainClear:(NSInteger)_gradient {
+    BOOL isClear = YES;
+    if (_gradient < -1 && _gradient > 1) {
+        isClear = NO; 
+    }
+    return isClear;
 }
 
 @end

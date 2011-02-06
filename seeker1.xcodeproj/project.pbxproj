@@ -102,6 +102,7 @@
 		0532CF7712C6BDD900DB92D8 /* tharsis-locked.png in Resources */ = {isa = PBXBuildFile; fileRef = 0532CF7612C6BDD900DB92D8 /* tharsis-locked.png */; };
 		05355F3212C3DA8F00CA770E /* MissionsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 05355F3112C3DA8F00CA770E /* MissionsScene.m */; };
 		05355F4312C3DCBA00CA770E /* LevelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05355F4212C3DCBA00CA770E /* LevelModel.m */; };
+		053CD81212FDD26C00410FC8 /* subroutines.png in Resources */ = {isa = PBXBuildFile; fileRef = 053CD81112FDD26C00410FC8 /* subroutines.png */; };
 		053FBFCA129D8C45000BCBCF /* StatusDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 053FBFC9129D8C45000BCBCF /* StatusDisplay.m */; };
 		0540119612A2B9B900CCC62D /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0540119512A2B9B900CCC62D /* MainScene.m */; };
 		054012BB12A30FF600CCC62D /* Apple ][.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 054012B912A30FF600CCC62D /* Apple ][.ttf */; };
@@ -482,6 +483,7 @@
 		05355F3112C3DA8F00CA770E /* MissionsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionsScene.m; sourceTree = "<group>"; };
 		05355F4112C3DCBA00CA770E /* LevelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelModel.h; sourceTree = "<group>"; };
 		05355F4212C3DCBA00CA770E /* LevelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelModel.m; sourceTree = "<group>"; };
+		053CD81112FDD26C00410FC8 /* subroutines.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = subroutines.png; sourceTree = "<group>"; };
 		053FBFC8129D8C44000BCBCF /* StatusDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusDisplay.h; sourceTree = "<group>"; };
 		053FBFC9129D8C45000BCBCF /* StatusDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusDisplay.m; sourceTree = "<group>"; };
 		0540119412A2B9B900CCC62D /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScene.h; sourceTree = "<group>"; };
@@ -1025,6 +1027,7 @@
 				050125F212FBAAE800D0B43B /* add-program-instruction.png */,
 				0558413812F900EB00E506D4 /* completed-program.png */,
 				0594276A12FA5AB4005026F7 /* times-loop.png */,
+				053CD81112FDD26C00410FC8 /* subroutines.png */,
 				0594276812FA5AB4005026F7 /* list-subroutines.png */,
 				0594276712FA5AB4005026F7 /* create-edit-subroutines.png */,
 				050125F412FBAAF400D0B43B /* rover-bins.png */,
@@ -1706,6 +1709,7 @@
 				0594277012FA5AB4005026F7 /* until-loop.png in Resources */,
 				050125F312FBAAE800D0B43B /* add-program-instruction.png in Resources */,
 				050125F512FBAAF400D0B43B /* rover-bins.png in Resources */,
+				053CD81212FDD26C00410FC8 /* subroutines.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
