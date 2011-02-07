@@ -120,6 +120,7 @@
   <object name="startSite" x="150" y="1830">
    <properties>
     <property name="bearing" value="south"/>
+    <property name="codeLines" value="4"/>
     <property name="energy" value="300"/>
     <property name="sampleSites" value="0"/>
     <property name="sensorSites" value="1"/>

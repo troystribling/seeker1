@@ -7,14 +7,10 @@
     <property name="mapID" value="empty"/>
     <property name="mapID" value="empty"/>
     <property name="mapID" value="empty"/>
-    <property name="mapID" value="empty"/>
-    <property name="mapID" value="empty"/>
    </properties>
   </tile>
   <tile id="1">
    <properties>
-    <property name="mapID" value="down-1"/>
-    <property name="mapID" value="down-1"/>
     <property name="mapID" value="down-1"/>
     <property name="mapID" value="down-1"/>
     <property name="mapID" value="down-1"/>
@@ -25,14 +21,10 @@
     <property name="mapID" value="down-2"/>
     <property name="mapID" value="down-2"/>
     <property name="mapID" value="down-2"/>
-    <property name="mapID" value="down-2"/>
-    <property name="mapID" value="down-2"/>
    </properties>
   </tile>
   <tile id="3">
    <properties>
-    <property name="mapID" value="down-3"/>
-    <property name="mapID" value="down-3"/>
     <property name="mapID" value="down-3"/>
     <property name="mapID" value="down-3"/>
     <property name="mapID" value="down-3"/>
@@ -43,14 +35,10 @@
     <property name="mapID" value="down-4"/>
     <property name="mapID" value="down-4"/>
     <property name="mapID" value="down-4"/>
-    <property name="mapID" value="down-4"/>
-    <property name="mapID" value="down-4"/>
    </properties>
   </tile>
   <tile id="5">
    <properties>
-    <property name="mapID" value="down-5"/>
-    <property name="mapID" value="down-5"/>
     <property name="mapID" value="down-5"/>
     <property name="mapID" value="down-5"/>
     <property name="mapID" value="down-5"/>
@@ -61,14 +49,10 @@
     <property name="mapID" value="up-1"/>
     <property name="mapID" value="up-1"/>
     <property name="mapID" value="up-1"/>
-    <property name="mapID" value="up-1"/>
-    <property name="mapID" value="up-1"/>
    </properties>
   </tile>
   <tile id="7">
    <properties>
-    <property name="mapID" value="up-2"/>
-    <property name="mapID" value="up-2"/>
     <property name="mapID" value="up-2"/>
     <property name="mapID" value="up-2"/>
     <property name="mapID" value="up-2"/>
@@ -79,8 +63,6 @@
     <property name="mapID" value="up-3"/>
     <property name="mapID" value="up-3"/>
     <property name="mapID" value="up-3"/>
-    <property name="mapID" value="up-3"/>
-    <property name="mapID" value="up-3"/>
    </properties>
   </tile>
   <tile id="9">
@@ -88,14 +70,10 @@
     <property name="mapID" value="up-4"/>
     <property name="mapID" value="up-4"/>
     <property name="mapID" value="up-4"/>
-    <property name="mapID" value="up-4"/>
-    <property name="mapID" value="up-4"/>
    </properties>
   </tile>
   <tile id="10">
    <properties>
-    <property name="mapID" value="up-5"/>
-    <property name="mapID" value="up-5"/>
     <property name="mapID" value="up-5"/>
     <property name="mapID" value="up-5"/>
     <property name="mapID" value="up-5"/>
@@ -109,14 +87,10 @@
     <property name="itemID" value="station"/>
     <property name="itemID" value="station"/>
     <property name="itemID" value="station"/>
-    <property name="itemID" value="station"/>
-    <property name="itemID" value="station"/>
    </properties>
   </tile>
   <tile id="1">
    <properties>
-    <property name="itemID" value="sensorSite"/>
-    <property name="itemID" value="sensorSite"/>
     <property name="itemID" value="sensorSite"/>
     <property name="itemID" value="sensorSite"/>
     <property name="itemID" value="sensorSite"/>
@@ -127,14 +101,10 @@
     <property name="itemID" value="station"/>
     <property name="itemID" value="station"/>
     <property name="itemID" value="station"/>
-    <property name="itemID" value="station"/>
-    <property name="itemID" value="station"/>
    </properties>
   </tile>
   <tile id="9">
    <properties>
-    <property name="itemID" value="sensor"/>
-    <property name="itemID" value="sensor"/>
     <property name="itemID" value="sensor"/>
     <property name="itemID" value="sensor"/>
     <property name="itemID" value="sensor"/>
@@ -145,14 +115,10 @@
     <property name="itemID" value="station"/>
     <property name="itemID" value="station"/>
     <property name="itemID" value="station"/>
-    <property name="itemID" value="station"/>
-    <property name="itemID" value="station"/>
    </properties>
   </tile>
   <tile id="17">
    <properties>
-    <property name="itemID" value="sample"/>
-    <property name="itemID" value="sample"/>
     <property name="itemID" value="sample"/>
     <property name="itemID" value="sample"/>
     <property name="itemID" value="sample"/>
@@ -163,24 +129,22 @@
     <property name="itemID" value="station"/>
     <property name="itemID" value="station"/>
     <property name="itemID" value="station"/>
-    <property name="itemID" value="station"/>
-    <property name="itemID" value="station"/>
    </properties>
   </tile>
  </tileset>
  <layer name="map" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3OoQEAAAwCIP3/6T2xYCDQaZICAAA8ysBh0QEmaDxpgA0AAA==
+   H4sIAAAAAAAAA+3DQQ0AAAwDoat/01OxHySsmqqqqu8PfyLpGIANAAA=
   </data>
  </layer>
  <layer name="terrain" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3BMQEAAADCoPVPbQsvoAAAAHgYHkvUGYANAAA=
+   H4sIAAAAAAAAA+3OsQkAAAgEse/cf2MHsBMshGSA4xIAAGCrHvev35ka5OCFK4ANAAA=
   </data>
  </layer>
  <layer name="items" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA2NgGAWjYBSMglEwCkbBKBgFo2AUkAokgViQhuZrArEiDc2nNRCC0koD6orBBwAysU4TgA0AAA==
+   H4sIAAAAAAAAA2NgGAWjYBSMglEwCkbBKBgFo2AUkAokgViQhuZrArEiDc2HASU62DEKEAAArKGJ1YANAAA=
   </data>
  </layer>
  <layer name="sand" width="24" height="36">
@@ -192,7 +156,7 @@
   <object name="startSite" x="150" y="1830">
    <properties>
     <property name="bearing" value="south"/>
-    <property name="energy" value="5"/>
+    <property name="energy" value="500"/>
     <property name="sampleSites" value="1"/>
     <property name="sensorSites" value="0"/>
    </properties>

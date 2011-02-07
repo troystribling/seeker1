@@ -25,6 +25,8 @@ typedef enum tagSeekerBearing {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface SeekerSprite : CCSprite {
     SeekerBearing bearing;
+    NSInteger expectedCodeLines;
+    NSInteger codeLines;
     NSInteger energyTotal;
     NSInteger energy;
     NSInteger sampleSites;
@@ -41,6 +43,8 @@ typedef enum tagSeekerBearing {
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, assign) SeekerBearing bearing;
+@property (nonatomic, assign) NSInteger expectedCodeLines;
+@property (nonatomic, assign) NSInteger codeLines;
 @property (nonatomic, assign) NSInteger energyTotal;
 @property (nonatomic, assign) NSInteger energy;
 @property (nonatomic, assign) NSInteger sampleSites;

@@ -51,6 +51,7 @@ static ProgramNgin* thisProgramNgin = nil;
 @synthesize programHalted;
 @synthesize programRunning;
 @synthesize codeLine;
+@synthesize codeLines;
 @synthesize callStackDepth;
 @synthesize maxCallStackDepth;
 
@@ -59,6 +60,7 @@ static ProgramNgin* thisProgramNgin = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)compile {
+    self.codeLines = 0;
     [self.compiledProgram removeAllObjects];
     for (NSMutableArray* instructionSet in self.program) {
         [self compileInstructionSet:instructionSet forParentInstructionSet:nil toProgram:self.compiledProgram];
@@ -72,21 +74,27 @@ static ProgramNgin* thisProgramNgin = nil;
     switch (instruction) {
         case MoveProgramInstruction:
             [_program addObject:_instructionSet];
+            self.codeLines++;
             break;
         case TurnLeftProgramInstruction:
             [_program addObject:_instructionSet];
+            self.codeLines++;
             break;
         case PutSensorProgramInstruction:
             [_program addObject:_instructionSet];
+            self.codeLines++;
             break;
         case GetSampleProgramInstruction:
             [_program addObject:_instructionSet];
+            self.codeLines++;
             break;
         case DoTimesProgramInstruction:
             [self compileDoTimesInstructionSet:_instructionSet forParentInstructionSet:_parent toProgram:_program];
+            self.codeLines++;
            break;
         case DoUntilProgramInstruction:
             [self compileDoUntilInstructionSet:_instructionSet forParentInstructionSet:_parent toProgram:_program];
+            self.codeLines++;
             break;
         case SubroutineProgramInstruction:
             [self compileSubrotineInstructionSet:_instructionSet forParentInstructionSet:_parent toProgram:_program];
@@ -496,8 +504,8 @@ static ProgramNgin* thisProgramNgin = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSMutableArray*)nextInstruction:(MapScene*)_mapScene {
-    NSInteger codeLines = [self.compiledProgram count];
-    if (self.codeLine > codeLines - 1) {
+    NSInteger compiledCodeLines = [self.compiledProgram count];
+    if (self.codeLine > compiledCodeLines - 1) {
         self.codeLine = 0;
     } 
     NSMutableArray* instructionSet = [self getInstructionSet:_mapScene];

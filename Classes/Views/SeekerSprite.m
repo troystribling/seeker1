@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "SeekerSprite.h"
+#import "ProgramNgin.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 // seeker capacities
@@ -30,6 +31,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize bearing;
+@synthesize expectedCodeLines;
+@synthesize codeLines;
 @synthesize energyTotal;
 @synthesize energy;
 @synthesize sampleSites;
@@ -99,6 +102,7 @@
 - (void)initParams:(NSDictionary*)_site {
     self.energyTotal = [[_site valueForKey:@"energy"] intValue];
     self.energy = self.energyTotal;
+    self.expectedCodeLines = [[_site valueForKey:@"codeLines"] intValue];
     self.sensorSites = [[_site valueForKey:@"sensorSites"] intValue];
     self.sampleSites = [[_site valueForKey:@"sampleSites"] intValue];
     self.samplesCollected = 0;
@@ -236,13 +240,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)score {
-    NSInteger totalScore = kPOINTS_PER_OBJECT * (self.samplesReturned + self.samplesCollected + self.sensorsPlaced);
-    if (self.energy > 0) {
-        totalScore += kPOINTS_PER_ENERGY_UNIT * self.energy;
-    }
+    NSInteger totalScore = kPOINTS_PER_OBJECT * (self.samplesReturned + self.sensorsPlaced);
     if ([self isLevelCompleted]) {
         totalScore = 2 * totalScore;
     }
+    self.codeLines = [ProgramNgin instance].codeLines;
+    NSInteger deltaCodeLines = self.codeLines - self.expectedCodeLines;
+    if (deltaCodeLines < 0) {
+        deltaCodeLines = 0;
+    }
+    totalScore -= kPOINTS_PER_CODE_LINE * deltaCodeLines;
     return totalScore;
 }
 

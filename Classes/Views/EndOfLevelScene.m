@@ -19,17 +19,15 @@
 #define kEND_OF_LEVEL_TICK_3    120
 #define kEND_OF_LEVEL_TICK_4    160
 #define kEND_OF_LEVEL_TICK_5    200
-#define kEND_OF_LEVEL_TICK_6    240
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface EndOfLevelScene (PrivateAPI)
 
 - (void)insertFailedTitleLabel;
 - (void)insertCompletedTitleLabel;
-- (void)insertSamplesCollectedLabel;
 - (void)insertSamplesReturnedLabel;
 - (void)insertSensorsPlacedLabel;
-- (void)insertEnergyBonusLabel;
+- (void)insertCodeReviewLabel;
 - (void)insertFailedTotalScoreLabel;
 - (void)insertCompletedTotalScoreLabel;
 - (void)insertMissionFailedMenu;
@@ -70,26 +68,13 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)insertSamplesCollectedLabel {
-    NSInteger samplesCollectedScore = self.level.samplesCollected * kPOINTS_PER_OBJECT;
-    NSString* samplesCollectedString = [NSString stringWithFormat:@"Samples Collected   %d*%d = %d", 
-                                       self.level.samplesCollected, kPOINTS_PER_OBJECT, samplesCollectedScore];
-    CCLabel* samplesReturnedLabel = [CCLabel labelWithString:samplesCollectedString dimensions:CGSizeMake(250, 60) 
-                                               alignment:UITextAlignmentLeft fontName:@"Courier" fontSize:20];
-    samplesReturnedLabel.position = CGPointMake(20.0f, 290.0f);
-    samplesReturnedLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
-    samplesReturnedLabel.color = ccc3(103,243,27);
-    [self addChild:samplesReturnedLabel];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertSamplesReturnedLabel {
     NSInteger samplesReturnedScore = self.level.samplesReturned * kPOINTS_PER_OBJECT;
     NSString* samplesReturnedString = [NSString stringWithFormat:@"Samples Returned     %d*%d = %d", 
                                        self.level.samplesReturned, kPOINTS_PER_OBJECT, samplesReturnedScore];
     CCLabel* samplesReturnedLabel = [CCLabel labelWithString:samplesReturnedString dimensions:CGSizeMake(250, 60) 
                                                    alignment:UITextAlignmentLeft fontName:@"Courier" fontSize:20];
-    samplesReturnedLabel.position = CGPointMake(20.0f, 230.0f);
+    samplesReturnedLabel.position = CGPointMake(20.0f, 290.0f);
     samplesReturnedLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     samplesReturnedLabel.color = ccc3(103,243,27);
     [self addChild:samplesReturnedLabel];
@@ -102,23 +87,27 @@
                                        self.level.sensorsPlaced, kPOINTS_PER_OBJECT, sensorsPlacedScore];
     CCLabel* sensorsPlacedLabel = [CCLabel labelWithString:sensorsPlacedString dimensions:CGSizeMake(250, 60) 
                                                alignment:UITextAlignmentLeft fontName:@"Courier" fontSize:20];
-    sensorsPlacedLabel.position = CGPointMake(20.0f, 170.0f);
+    sensorsPlacedLabel.position = CGPointMake(20.0f, 230.0f);
     sensorsPlacedLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     sensorsPlacedLabel.color = ccc3(103,243,27);
     [self addChild:sensorsPlacedLabel];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)insertEnergyBonusLabel {
-    NSInteger energyBounusScore = self.level.energyBonus * kPOINTS_PER_ENERGY_UNIT;
-    NSString* sensorsPlacedString = [NSString stringWithFormat:@"Energy Bonus      %d*%d = %d", 
-                                     self.level.energyBonus, kPOINTS_PER_ENERGY_UNIT, energyBounusScore];
-    CCLabel* energyBonusLabel = [CCLabel labelWithString:sensorsPlacedString dimensions:CGSizeMake(250, 60) 
-                                             alignment:UITextAlignmentLeft fontName:@"Courier" fontSize:20];
-    energyBonusLabel.position = CGPointMake(20.0f, 110.0f);
-    energyBonusLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
-    energyBonusLabel.color = ccc3(103,243,27);
-    [self addChild:energyBonusLabel];
+- (void)insertCodeReviewLabel {
+    NSInteger deltaCodeLines = self.level.codeLines - self.level.expectedCodeLines;
+    if (deltaCodeLines < 0) {
+        deltaCodeLines = 0;
+    }    
+    NSInteger codeReviewScore = deltaCodeLines * kPOINTS_PER_CODE_LINE;
+    NSString* codeReviewString = [NSString stringWithFormat:@"Code Review Penalty     %d*%d = %d", 
+                                    deltaCodeLines, kPOINTS_PER_CODE_LINE, codeReviewScore];
+    CCLabel* codeReviewLabel = [CCLabel labelWithString:codeReviewString dimensions:CGSizeMake(250, 60) 
+                                              alignment:UITextAlignmentLeft fontName:@"Courier" fontSize:20];
+    codeReviewLabel.position = CGPointMake(20.0f, 170.0f);
+    codeReviewLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
+    codeReviewLabel.color = ccc3(204,51,0);
+    [self addChild:codeReviewLabel];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -127,7 +116,7 @@
     CCLabel* totalScoreLabel = [CCLabel labelWithString:totalScoreString fontName:@"Courier" fontSize:20];
     totalScoreLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     totalScoreLabel.color = ccc3(255,255,0);
-    totalScoreLabel.position = CGPointMake(20.0f, 85.0f);
+    totalScoreLabel.position = CGPointMake(20.0f, 140.0f);
     [self addChild:totalScoreLabel];
 }
 
@@ -138,7 +127,7 @@
                                               alignment:UITextAlignmentLeft fontName:@"Courier" fontSize:20];
     totalScoreLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     totalScoreLabel.color = ccc3(255,255,0);
-    totalScoreLabel.position = CGPointMake(20.0f, 50.0f);
+    totalScoreLabel.position = CGPointMake(20.0f, 110.0f);
     [self addChild:totalScoreLabel];
 }
 
@@ -226,7 +215,7 @@
         }
         self.statusDisplay = [StatusDisplay createWithFile:@"empty-display.png"];
         [self.statusDisplay insert:self];
-        [self.statusDisplay addTerminalText:@"~> samc"];
+        [self.statusDisplay addTerminalText:@"~> sam"];
         [self.statusDisplay test];
         [self schedule:@selector(nextFrame:)];
     }
@@ -237,22 +226,18 @@
 - (void) nextFrame:(ccTime)dt {
     self.counter++;
     if (self.counter == kEND_OF_LEVEL_TICK_1) {
-        [self insertSamplesCollectedLabel];
-        [self.statusDisplay addTerminalText:@"~> samr"];
-        [self.statusDisplay clear];
-    } else if (self.counter == kEND_OF_LEVEL_TICK_2) {
         [self insertSamplesReturnedLabel];
         [self.statusDisplay addTerminalText:@"~> sen"];
         [self.statusDisplay test];
-    } else if (self.counter == kEND_OF_LEVEL_TICK_3) {
+    } else if (self.counter == kEND_OF_LEVEL_TICK_2) {
         [self insertSensorsPlacedLabel];
-        [self.statusDisplay addTerminalText:@"~> eng"];
+        [self.statusDisplay addTerminalText:@"~> code"];
         [self.statusDisplay clear];
-    } else if (self.counter == kEND_OF_LEVEL_TICK_4) {
-        [self insertEnergyBonusLabel];
+    } else if (self.counter == kEND_OF_LEVEL_TICK_3) {
+        [self insertCodeReviewLabel];
         [self.statusDisplay addTerminalText:@"~> tot"];
         [self.statusDisplay test];
-    } else if (self.counter == kEND_OF_LEVEL_TICK_5) {
+    } else if (self.counter == kEND_OF_LEVEL_TICK_4) {
         if (self.level.completed) {
             [self insertCompletedTotalScoreLabel];
         } else {
@@ -260,7 +245,7 @@
         }
         [self.statusDisplay addTerminalText:@"~> menu"];
         [self.statusDisplay clear];
-    } else if (self.counter == kEND_OF_LEVEL_TICK_6) {
+    } else if (self.counter == kEND_OF_LEVEL_TICK_5) {
         if (self.level.completed) {
             [self insertMissionCompletedMenu];
         } else {

@@ -26,9 +26,9 @@
 @synthesize completed;
 @synthesize score;
 @synthesize samplesReturned;
-@synthesize samplesCollected;
 @synthesize sensorsPlaced;
-@synthesize energyBonus;
+@synthesize expectedCodeLines;
+@synthesize codeLines;
 
 //===================================================================================================================================
 #pragma mark LevelModel
@@ -45,7 +45,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[SeekerDbi instance]  updateWithStatement:@"CREATE TABLE levels (pk integer primary key, level integer, completed integer, score integer, quadrangle integer, samplesReturned integer, samplesCollected integer, sensorsPlaced integer, energyBonus integer)"];
+	[[SeekerDbi instance]  updateWithStatement:@"CREATE TABLE levels (pk integer primary key, level integer, completed integer, score integer, quadrangle integer, samplesReturned integer, sensorsPlaced integer, expectedCodeLines integer, codeLines integer)"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -99,9 +99,9 @@
         model.completed = YES;
         model.score = [_seeker score];
         model.samplesReturned = _seeker.samplesReturned;
-        model.samplesCollected = _seeker.samplesCollected;
         model.sensorsPlaced = _seeker.sensorsPlaced;
-        model.energyBonus = _seeker.energy;
+        model.expectedCodeLines = _seeker.expectedCodeLines;
+        model.codeLines = _seeker.codeLines;
         [model update];
     }
 }
@@ -113,9 +113,9 @@
         model.completed = NO;
         model.score = [_seeker score];
         model.samplesReturned = _seeker.samplesReturned;
-        model.samplesCollected = _seeker.samplesCollected;
         model.sensorsPlaced = _seeker.sensorsPlaced;
-        model.energyBonus = _seeker.energy;
+        model.expectedCodeLines = _seeker.expectedCodeLines;
+        model.codeLines = _seeker.codeLines;
         [model update];
     }
 }
@@ -130,8 +130,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
     NSString* insertStatement;
-    insertStatement = [NSString stringWithFormat:@"INSERT INTO levels (level, completed, score, quadrangle, samplesReturned, samplesCollected, sensorsPlaced, energyBonus) values (%d, %d, %d, %d, %d, %d, %d, %d)", 
-                        self.level, [self completedAsInteger], self.score, self.quadrangle, self.samplesReturned, self.samplesCollected, self.sensorsPlaced, self.energyBonus];	
+    insertStatement = [NSString stringWithFormat:@"INSERT INTO levels (level, completed, score, quadrangle, samplesReturned, sensorsPlaced, expectedCodeLines, codeLines) values (%d, %d, %d, %d, %d, %d, %d, %d)", 
+                        self.level, [self completedAsInteger], self.score, self.quadrangle, self.samplesReturned, self.sensorsPlaced, self.expectedCodeLines, self.codeLines];	
     [[SeekerDbi instance]  updateWithStatement:insertStatement];
 }
 
@@ -148,8 +148,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
-    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE levels SET level = %d, completed = %d, score = %d, quadrangle = %d, samplesReturned = %d, samplesCollected = %d, sensorsPlaced = %d, energyBonus = %d WHERE pk = %d", self.level, 
-                                    [self completedAsInteger], self.score, self.quadrangle, self.samplesReturned, self.samplesCollected, self.sensorsPlaced, self.energyBonus, self.pk];
+    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE levels SET level = %d, completed = %d, score = %d, quadrangle = %d, samplesReturned = %d, sensorsPlaced = %d, expectedCodeLines = %d, codeLines = %d WHERE pk = %d", self.level, 
+                                    [self completedAsInteger], self.score, self.quadrangle, self.samplesReturned, self.sensorsPlaced, self.expectedCodeLines, self.codeLines, self.pk];
 	[[SeekerDbi instance]  updateWithStatement:updateStatement];
 }
 
@@ -181,9 +181,9 @@
 	self.score = (int)sqlite3_column_int(statement, 3);
 	self.quadrangle = (int)sqlite3_column_int(statement, 4);
 	self.samplesReturned = (int)sqlite3_column_int(statement, 5);
-	self.samplesCollected = (int)sqlite3_column_int(statement, 6);
-	self.sensorsPlaced = (int)sqlite3_column_int(statement, 7);
-	self.energyBonus = (int)sqlite3_column_int(statement, 8);
+	self.sensorsPlaced = (int)sqlite3_column_int(statement, 6);
+	self.expectedCodeLines = (int)sqlite3_column_int(statement, 7);
+	self.codeLines = (int)sqlite3_column_int(statement, 8);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

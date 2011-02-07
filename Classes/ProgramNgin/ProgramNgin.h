@@ -36,6 +36,7 @@ typedef enum tagProgramInstruction {
     BOOL programHalted;
     BOOL programRunning;
     NSInteger codeLine;
+    NSInteger codeLines;
     NSInteger callStackDepth;
     NSInteger maxCallStackDepth;
 }
@@ -46,6 +47,7 @@ typedef enum tagProgramInstruction {
 @property (nonatomic, assign) BOOL programHalted;
 @property (nonatomic, assign) BOOL programRunning;
 @property (nonatomic, assign) NSInteger codeLine;
+@property (nonatomic, assign) NSInteger codeLines;
 @property (nonatomic, assign) NSInteger callStackDepth;
 @property (nonatomic, assign) NSInteger maxCallStackDepth;
 

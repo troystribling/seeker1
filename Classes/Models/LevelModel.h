@@ -21,9 +21,9 @@
     BOOL completed;
     NSInteger score;
     NSInteger samplesReturned;
-    NSInteger samplesCollected;
     NSInteger sensorsPlaced;
-    NSInteger energyBonus;
+    NSInteger expectedCodeLines;
+    NSInteger codeLines;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -33,9 +33,9 @@
 @property (nonatomic, assign) BOOL completed;
 @property (nonatomic, assign) NSInteger score;
 @property (nonatomic, assign) NSInteger samplesReturned;
-@property (nonatomic, assign) NSInteger samplesCollected;
 @property (nonatomic, assign) NSInteger sensorsPlaced;
-@property (nonatomic, assign) NSInteger energyBonus;
+@property (nonatomic, assign) NSInteger expectedCodeLines;
+@property (nonatomic, assign) NSInteger codeLines;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
