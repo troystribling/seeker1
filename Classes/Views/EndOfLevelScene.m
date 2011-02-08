@@ -104,17 +104,21 @@
     } 
     NSInteger codeScore = (int)(100.0*(float)(expScore)/(float)self.level.codeScore);
     NSInteger codeReviewScore = deltaCodeScore * kPOINTS_PER_CODE_LINE;
-    NSString* codeReviewString = [NSString stringWithFormat:@"Code Review: %d%%     Penalty          %d*%d = %d", 
-                                        codeScore, deltaCodeScore, kPOINTS_PER_CODE_LINE, codeReviewScore];
-    CCLabel* codeReviewLabel = [CCLabel labelWithString:codeReviewString dimensions:CGSizeMake(250, 90) 
-                                              alignment:UITextAlignmentLeft fontName:@"Courier" fontSize:20];
-    codeReviewLabel.position = CGPointMake(20.0f, 140.0f);
-    codeReviewLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
+    CCLabel* codeReviewLabel;
     if (deltaCodeScore == 0) {        
+        NSString* codeReviewString = [NSString stringWithFormat:@"Code Review: %d%%", codeScore];
+        codeReviewLabel = [CCLabel labelWithString:codeReviewString fontName:@"Courier" fontSize:20];
+        codeReviewLabel.position = CGPointMake(20.0f, 205.0f);
         codeReviewLabel.color = ccc3(103,243,27);
     } else {
+        NSString* codeReviewString = [NSString stringWithFormat:@"Code Review: %d%%     Penalty          %d*%d = %d", 
+                                      codeScore, deltaCodeScore, kPOINTS_PER_CODE_LINE, codeReviewScore];
+        codeReviewLabel = [CCLabel labelWithString:codeReviewString dimensions:CGSizeMake(250, 90) 
+                                         alignment:UITextAlignmentLeft fontName:@"Courier" fontSize:20];
+        codeReviewLabel.position = CGPointMake(20.0f, 140.0f);
         codeReviewLabel.color = ccc3(204,51,0);
     }
+    codeReviewLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     [self addChild:codeReviewLabel];
 }
 
@@ -130,13 +134,18 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertCompletedTotalScoreLabel {
+    NSInteger deltaCodeScore = self.level.codeScore - self.level.expectedCodeScore;
     NSInteger bonus = (self.level.sensorsPlaced + self.level.samplesReturned) * kPOINTS_PER_OBJECT;
     NSString* totalScoreString = [NSString stringWithFormat:@"Bonus: %d           Total Score: %d", bonus, self.level.score];
     CCLabel* totalScoreLabel = [CCLabel labelWithString:totalScoreString dimensions:CGSizeMake(300, 60) 
                                               alignment:UITextAlignmentLeft fontName:@"Courier" fontSize:20];
     totalScoreLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     totalScoreLabel.color = ccc3(255,255,0);
-    totalScoreLabel.position = CGPointMake(20.0f, 80.0f);
+    if (deltaCodeScore == 0) {
+        totalScoreLabel.position = CGPointMake(20.0f, 130.0f);
+    } else {
+        totalScoreLabel.position = CGPointMake(20.0f, 85.0f);
+    }
     [self addChild:totalScoreLabel];
 }
 
