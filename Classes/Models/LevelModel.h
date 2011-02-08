@@ -22,8 +22,8 @@
     NSInteger score;
     NSInteger samplesReturned;
     NSInteger sensorsPlaced;
-    NSInteger expectedCodeLines;
-    NSInteger codeLines;
+    NSInteger expectedCodeScore;
+    NSInteger codeScore;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -34,8 +34,8 @@
 @property (nonatomic, assign) NSInteger score;
 @property (nonatomic, assign) NSInteger samplesReturned;
 @property (nonatomic, assign) NSInteger sensorsPlaced;
-@property (nonatomic, assign) NSInteger expectedCodeLines;
-@property (nonatomic, assign) NSInteger codeLines;
+@property (nonatomic, assign) NSInteger expectedCodeScore;
+@property (nonatomic, assign) NSInteger codeScore;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;

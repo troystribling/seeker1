@@ -31,8 +31,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize bearing;
-@synthesize expectedCodeLines;
-@synthesize codeLines;
+@synthesize expectedCodeScore;
+@synthesize codeScore;
 @synthesize energyTotal;
 @synthesize energy;
 @synthesize sampleSites;
@@ -102,7 +102,7 @@
 - (void)initParams:(NSDictionary*)_site {
     self.energyTotal = [[_site valueForKey:@"energy"] intValue];
     self.energy = self.energyTotal;
-    self.expectedCodeLines = [[_site valueForKey:@"codeLines"] intValue];
+    self.expectedCodeScore = [[_site valueForKey:@"expectedCodeScore"] intValue];
     self.sensorSites = [[_site valueForKey:@"sensorSites"] intValue];
     self.sampleSites = [[_site valueForKey:@"sampleSites"] intValue];
     self.samplesCollected = 0;
@@ -243,13 +243,13 @@
     NSInteger totalScore = kPOINTS_PER_OBJECT * (self.samplesReturned + self.sensorsPlaced);
     if ([self isLevelCompleted]) {
         totalScore = 2 * totalScore;
+        self.codeScore = [ProgramNgin instance].codeScore;
+        NSInteger deltaCodeLines = self.codeScore - self.expectedCodeScore;
+        if (deltaCodeLines < 0) {
+            deltaCodeLines = 0;
+        }
+        totalScore -= kPOINTS_PER_CODE_LINE * deltaCodeLines;
     }
-    self.codeLines = [ProgramNgin instance].codeLines;
-    NSInteger deltaCodeLines = self.codeLines - self.expectedCodeLines;
-    if (deltaCodeLines < 0) {
-        deltaCodeLines = 0;
-    }
-    totalScore -= kPOINTS_PER_CODE_LINE * deltaCodeLines;
     return totalScore;
 }
 

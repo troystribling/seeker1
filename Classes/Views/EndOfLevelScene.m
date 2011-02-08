@@ -12,6 +12,7 @@
 #import "UserModel.h"
 #import "LevelModel.h"
 #import "StatusDisplay.h"
+#import "ProgramNgin.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kEND_OF_LEVEL_TICK_1    40
@@ -95,18 +96,25 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertCodeReviewLabel {
-    NSInteger deltaCodeLines = self.level.codeLines - self.level.expectedCodeLines;
-    if (deltaCodeLines < 0) {
-        deltaCodeLines = 0;
-    }    
-    NSInteger codeReviewScore = deltaCodeLines * kPOINTS_PER_CODE_LINE;
-    NSString* codeReviewString = [NSString stringWithFormat:@"Code Review Penalty     %d*%d = %d", 
-                                    deltaCodeLines, kPOINTS_PER_CODE_LINE, codeReviewScore];
-    CCLabel* codeReviewLabel = [CCLabel labelWithString:codeReviewString dimensions:CGSizeMake(250, 60) 
+    NSInteger deltaCodeScore = self.level.codeScore - self.level.expectedCodeScore;
+    NSInteger expScore = self.level.expectedCodeScore;
+    if (deltaCodeScore < 0) {
+        deltaCodeScore = 0;
+        expScore = self.level.codeScore;
+    } 
+    NSInteger codeScore = (int)(100.0*(float)(expScore)/(float)self.level.codeScore);
+    NSInteger codeReviewScore = deltaCodeScore * kPOINTS_PER_CODE_LINE;
+    NSString* codeReviewString = [NSString stringWithFormat:@"Code Review: %d%%     Penalty          %d*%d = %d", 
+                                        codeScore, deltaCodeScore, kPOINTS_PER_CODE_LINE, codeReviewScore];
+    CCLabel* codeReviewLabel = [CCLabel labelWithString:codeReviewString dimensions:CGSizeMake(250, 90) 
                                               alignment:UITextAlignmentLeft fontName:@"Courier" fontSize:20];
-    codeReviewLabel.position = CGPointMake(20.0f, 170.0f);
+    codeReviewLabel.position = CGPointMake(20.0f, 140.0f);
     codeReviewLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
-    codeReviewLabel.color = ccc3(204,51,0);
+    if (deltaCodeScore == 0) {        
+        codeReviewLabel.color = ccc3(103,243,27);
+    } else {
+        codeReviewLabel.color = ccc3(204,51,0);
+    }
     [self addChild:codeReviewLabel];
 }
 
@@ -116,18 +124,19 @@
     CCLabel* totalScoreLabel = [CCLabel labelWithString:totalScoreString fontName:@"Courier" fontSize:20];
     totalScoreLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     totalScoreLabel.color = ccc3(255,255,0);
-    totalScoreLabel.position = CGPointMake(20.0f, 140.0f);
+    totalScoreLabel.position = CGPointMake(20.0f, 200.0f);
     [self addChild:totalScoreLabel];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertCompletedTotalScoreLabel {
-    NSString* totalScoreString = [NSString stringWithFormat:@"Total Score and Bonus     2*%d = %d", self.level.score/2, self.level.score];
+    NSInteger bonus = (self.level.sensorsPlaced + self.level.samplesReturned) * kPOINTS_PER_OBJECT;
+    NSString* totalScoreString = [NSString stringWithFormat:@"Bonus: %d           Total Score: %d", bonus, self.level.score];
     CCLabel* totalScoreLabel = [CCLabel labelWithString:totalScoreString dimensions:CGSizeMake(300, 60) 
                                               alignment:UITextAlignmentLeft fontName:@"Courier" fontSize:20];
     totalScoreLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     totalScoreLabel.color = ccc3(255,255,0);
-    totalScoreLabel.position = CGPointMake(20.0f, 110.0f);
+    totalScoreLabel.position = CGPointMake(20.0f, 80.0f);
     [self addChild:totalScoreLabel];
 }
 
@@ -169,6 +178,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)redoMission {
+    [ProgramNgin instance].programHalted = NO;
     [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
 }
 
@@ -231,27 +241,34 @@
         [self.statusDisplay test];
     } else if (self.counter == kEND_OF_LEVEL_TICK_2) {
         [self insertSensorsPlacedLabel];
-        [self.statusDisplay addTerminalText:@"~> code"];
+        if (self.level.completed) {
+            [self.statusDisplay addTerminalText:@"~> code"];
+        } else {
+            [self.statusDisplay addTerminalText:@"~> tot"];
+        }
         [self.statusDisplay clear];
     } else if (self.counter == kEND_OF_LEVEL_TICK_3) {
-        [self insertCodeReviewLabel];
-        [self.statusDisplay addTerminalText:@"~> tot"];
+        if (self.level.completed) {
+            [self insertCodeReviewLabel];
+            [self.statusDisplay addTerminalText:@"~> tot"];
+        } else {
+            [self insertFailedTotalScoreLabel];
+            [self.statusDisplay addTerminalText:@"~> menu"];
+        }
         [self.statusDisplay test];
     } else if (self.counter == kEND_OF_LEVEL_TICK_4) {
         if (self.level.completed) {
             [self insertCompletedTotalScoreLabel];
+            [self.statusDisplay addTerminalText:@"~> menu"];
         } else {
-            [self insertFailedTotalScoreLabel];
+            [self insertMissionFailedMenu];
         }
-        [self.statusDisplay addTerminalText:@"~> menu"];
         [self.statusDisplay clear];
     } else if (self.counter == kEND_OF_LEVEL_TICK_5) {
         if (self.level.completed) {
             [self insertMissionCompletedMenu];
-        } else {
-            [self insertMissionFailedMenu];
-        }
-        [self.statusDisplay test];
+            [self.statusDisplay test];
+        } 
     }    
 }
 

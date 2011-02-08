@@ -114,7 +114,7 @@
         [self.uploadProgressLabel setString:@"====================>"];
         [self.statusDisplay setTest:SensorDisplayType];
     } else if (self.counter == kUPLOAD_TICK_9) {
-        [self.percentUploadLabel setString:@"upload 100% (0.5b/s)"];
+        [self.percentUploadLabel setString:@"upload 100% (0.5kb/s)"];
         [self.uploadProgressLabel setString:@"======================>"];
         [self.statusDisplay setTest:SampleDisplayType];
         [self.statusDisplay addTerminalText:@"~> run"];
