@@ -13,8 +13,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 // seeker capacities
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define kSEEKER_SENSOR_BIN_SIZE             2
-#define kSEEKER_SAMPLE_BIN_SIZE             2
+#define kSEEKER_SENSOR_BIN_SIZE             5
+#define kSEEKER_SAMPLE_BIN_SIZE             5
 #define kSEEKER_GRID_DISTANCE               15.0
 #define kSEEKER_BASE_SPEED                  15
 #define kSEEKER_ROTATION_DURATION_PER_QUAD  0.4f

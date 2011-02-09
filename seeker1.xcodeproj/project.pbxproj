@@ -126,6 +126,15 @@
 		0558413F12F900EB00E506D4 /* program-game-board.png in Resources */ = {isa = PBXBuildFile; fileRef = 0558413A12F900EB00E506D4 /* program-game-board.png */; };
 		0558414012F900EB00E506D4 /* status-display.png in Resources */ = {isa = PBXBuildFile; fileRef = 0558413B12F900EB00E506D4 /* status-display.png */; };
 		0558414112F900EB00E506D4 /* write-program.png in Resources */ = {isa = PBXBuildFile; fileRef = 0558413C12F900EB00E506D4 /* write-program.png */; };
+		05663F611302343C008AA1DC /* map-8.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F5F1302343C008AA1DC /* map-8.tmx */; };
+		05663F621302343C008AA1DC /* map-9.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F601302343C008AA1DC /* map-9.tmx */; };
+		05663F65130239D4008AA1DC /* map-10.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F63130239D4008AA1DC /* map-10.tmx */; };
+		05663F66130239D4008AA1DC /* map-11.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F64130239D4008AA1DC /* map-11.tmx */; };
+		05663F6E13023E59008AA1DC /* map-12.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F6D13023E59008AA1DC /* map-12.tmx */; };
+		05663F7213024DFA008AA1DC /* map-13.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F7113024DFA008AA1DC /* map-13.tmx */; };
+		05663F84130251BA008AA1DC /* map-14.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F83130251BA008AA1DC /* map-14.tmx */; };
+		05663F9113025B5E008AA1DC /* map-15.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F9013025B5E008AA1DC /* map-15.tmx */; };
+		05663F9313025EC9008AA1DC /* map-16.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F9213025EC9008AA1DC /* map-16.tmx */; };
 		058912AA12F4CE0D005870C0 /* TutorialIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 058912A912F4CE0D005870C0 /* TutorialIndexViewController.m */; };
 		058912C812F4D5B9005870C0 /* TutorialIndexViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058912C712F4D5B9005870C0 /* TutorialIndexViewController.xib */; };
 		058912CC12F4DD0C005870C0 /* TutorialIndexCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 058912CB12F4DD0C005870C0 /* TutorialIndexCell.m */; };
@@ -520,6 +529,15 @@
 		0558413A12F900EB00E506D4 /* program-game-board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "program-game-board.png"; sourceTree = "<group>"; };
 		0558413B12F900EB00E506D4 /* status-display.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-display.png"; sourceTree = "<group>"; };
 		0558413C12F900EB00E506D4 /* write-program.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write-program.png"; sourceTree = "<group>"; };
+		05663F5F1302343C008AA1DC /* map-8.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-8.tmx"; sourceTree = "<group>"; };
+		05663F601302343C008AA1DC /* map-9.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-9.tmx"; sourceTree = "<group>"; };
+		05663F63130239D4008AA1DC /* map-10.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-10.tmx"; sourceTree = "<group>"; };
+		05663F64130239D4008AA1DC /* map-11.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-11.tmx"; sourceTree = "<group>"; };
+		05663F6D13023E59008AA1DC /* map-12.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-12.tmx"; sourceTree = "<group>"; };
+		05663F7113024DFA008AA1DC /* map-13.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-13.tmx"; sourceTree = "<group>"; };
+		05663F83130251BA008AA1DC /* map-14.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-14.tmx"; sourceTree = "<group>"; };
+		05663F9013025B5E008AA1DC /* map-15.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-15.tmx"; sourceTree = "<group>"; };
+		05663F9213025EC9008AA1DC /* map-16.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-16.tmx"; sourceTree = "<group>"; };
 		058912A812F4CE0D005870C0 /* TutorialIndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialIndexViewController.h; sourceTree = "<group>"; };
 		058912A912F4CE0D005870C0 /* TutorialIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialIndexViewController.m; sourceTree = "<group>"; };
 		058912C712F4D5B9005870C0 /* TutorialIndexViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorialIndexViewController.xib; sourceTree = "<group>"; };
@@ -805,6 +823,15 @@
 				05197CD21301044C006DEC15 /* map-5.tmx */,
 				05197CD6130105FA006DEC15 /* map-6.tmx */,
 				05197CD81301067B006DEC15 /* map-7.tmx */,
+				05663F5F1302343C008AA1DC /* map-8.tmx */,
+				05663F601302343C008AA1DC /* map-9.tmx */,
+				05663F63130239D4008AA1DC /* map-10.tmx */,
+				05663F64130239D4008AA1DC /* map-11.tmx */,
+				05663F6D13023E59008AA1DC /* map-12.tmx */,
+				05663F7113024DFA008AA1DC /* map-13.tmx */,
+				05663F83130251BA008AA1DC /* map-14.tmx */,
+				05663F9013025B5E008AA1DC /* map-15.tmx */,
+				05663F9213025EC9008AA1DC /* map-16.tmx */,
 				050CC74F1296011000974B8F /* map.plist */,
 				050CC7501296011000974B8F /* map.png */,
 			);
@@ -1726,6 +1753,15 @@
 				05197CD31301044C006DEC15 /* map-5.tmx in Resources */,
 				05197CD7130105FA006DEC15 /* map-6.tmx in Resources */,
 				05197CD91301067B006DEC15 /* map-7.tmx in Resources */,
+				05663F611302343C008AA1DC /* map-8.tmx in Resources */,
+				05663F621302343C008AA1DC /* map-9.tmx in Resources */,
+				05663F65130239D4008AA1DC /* map-10.tmx in Resources */,
+				05663F66130239D4008AA1DC /* map-11.tmx in Resources */,
+				05663F6E13023E59008AA1DC /* map-12.tmx in Resources */,
+				05663F7213024DFA008AA1DC /* map-13.tmx in Resources */,
+				05663F84130251BA008AA1DC /* map-14.tmx in Resources */,
+				05663F9113025B5E008AA1DC /* map-15.tmx in Resources */,
+				05663F9313025EC9008AA1DC /* map-16.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
