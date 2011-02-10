@@ -103,12 +103,12 @@
  </layer>
  <layer name="terrain" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3OIQ4AAAwCMdz+/+P5uUmS1pwjJAAAtJvTpv3m7/C1lPqq9YANAAA=
+   H4sIAAAAAAAAA+3PsQkAAAgDQTv339hesFQQ7gb4kAgAAJjlQXtjozc3f1xu8FsBUVQ+DYANAAA=
   </data>
  </layer>
  <layer name="items" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA2NgGAWjYBSMglEwCkbBKBgFowA3UEKjh6od1AaSQCxIQ/M1gViRhuaPgoEBAHI10biADQAA
+   H4sIAAAAAAAAA2NgGAWjYBSMglEwCkbBKBgFo2DggBIdzKaFHZJALIjFLmoBTSBWpLKZo2DgAQCor59NgA0AAA==
   </data>
  </layer>
  <layer name="sand" width="24" height="36">

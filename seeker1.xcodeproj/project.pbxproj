@@ -120,6 +120,13 @@
 		0547A4AA12AC441200D2F0D1 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0547A4A912AC441200D2F0D1 /* ViewControllerManager.m */; };
 		0547A4B912AC4FD000D2F0D1 /* NSObjectExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0547A4B812AC4FD000D2F0D1 /* NSObjectExtension.m */; };
 		0547A4C112AC509700D2F0D1 /* ProgramNgin.m in Sources */ = {isa = PBXBuildFile; fileRef = 0547A4C012AC509700D2F0D1 /* ProgramNgin.m */; };
+		0547E575130366D600E32962 /* map-17.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 0547E574130366D600E32962 /* map-17.tmx */; };
+		0547E58F13036E3A00E32962 /* map-18.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 0547E58E13036E3A00E32962 /* map-18.tmx */; };
+		0547E591130371C600E32962 /* map-19.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 0547E590130371C600E32962 /* map-19.tmx */; };
+		0547E5A2130397AF00E32962 /* map-20.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 0547E5A0130397AF00E32962 /* map-20.tmx */; };
+		0547E5A3130397AF00E32962 /* map-21.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 0547E5A1130397AF00E32962 /* map-21.tmx */; };
+		0547E5AB13039A4400E32962 /* map-22.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 0547E5AA13039A4400E32962 /* map-22.tmx */; };
+		0547E5AF1303B1EE00E32962 /* map-23.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 0547E5AE1303B1EE00E32962 /* map-23.tmx */; };
 		0556B81D129C603B00B5F8FB /* SeekerSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 0556B81C129C603B00B5F8FB /* SeekerSprite.m */; };
 		0558413D12F900EB00E506D4 /* completed-program.png in Resources */ = {isa = PBXBuildFile; fileRef = 0558413812F900EB00E506D4 /* completed-program.png */; };
 		0558413E12F900EB00E506D4 /* open-terminal-game-board.png in Resources */ = {isa = PBXBuildFile; fileRef = 0558413912F900EB00E506D4 /* open-terminal-game-board.png */; };
@@ -522,6 +529,13 @@
 		0547A4B812AC4FD000D2F0D1 /* NSObjectExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObjectExtension.m; sourceTree = "<group>"; };
 		0547A4BF12AC509700D2F0D1 /* ProgramNgin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramNgin.h; sourceTree = "<group>"; };
 		0547A4C012AC509700D2F0D1 /* ProgramNgin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramNgin.m; sourceTree = "<group>"; };
+		0547E574130366D600E32962 /* map-17.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-17.tmx"; sourceTree = "<group>"; };
+		0547E58E13036E3A00E32962 /* map-18.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-18.tmx"; sourceTree = "<group>"; };
+		0547E590130371C600E32962 /* map-19.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-19.tmx"; sourceTree = "<group>"; };
+		0547E5A0130397AF00E32962 /* map-20.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-20.tmx"; sourceTree = "<group>"; };
+		0547E5A1130397AF00E32962 /* map-21.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-21.tmx"; sourceTree = "<group>"; };
+		0547E5AA13039A4400E32962 /* map-22.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-22.tmx"; sourceTree = "<group>"; };
+		0547E5AE1303B1EE00E32962 /* map-23.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-23.tmx"; sourceTree = "<group>"; };
 		0556B81B129C603B00B5F8FB /* SeekerSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeekerSprite.h; sourceTree = "<group>"; };
 		0556B81C129C603B00B5F8FB /* SeekerSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeekerSprite.m; sourceTree = "<group>"; };
 		0558413812F900EB00E506D4 /* completed-program.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "completed-program.png"; sourceTree = "<group>"; };
@@ -832,6 +846,13 @@
 				05663F83130251BA008AA1DC /* map-14.tmx */,
 				05663F9013025B5E008AA1DC /* map-15.tmx */,
 				05663F9213025EC9008AA1DC /* map-16.tmx */,
+				0547E574130366D600E32962 /* map-17.tmx */,
+				0547E58E13036E3A00E32962 /* map-18.tmx */,
+				0547E590130371C600E32962 /* map-19.tmx */,
+				0547E5A0130397AF00E32962 /* map-20.tmx */,
+				0547E5A1130397AF00E32962 /* map-21.tmx */,
+				0547E5AA13039A4400E32962 /* map-22.tmx */,
+				0547E5AE1303B1EE00E32962 /* map-23.tmx */,
 				050CC74F1296011000974B8F /* map.plist */,
 				050CC7501296011000974B8F /* map.png */,
 			);
@@ -1762,6 +1783,13 @@
 				05663F84130251BA008AA1DC /* map-14.tmx in Resources */,
 				05663F9113025B5E008AA1DC /* map-15.tmx in Resources */,
 				05663F9313025EC9008AA1DC /* map-16.tmx in Resources */,
+				0547E575130366D600E32962 /* map-17.tmx in Resources */,
+				0547E58F13036E3A00E32962 /* map-18.tmx in Resources */,
+				0547E591130371C600E32962 /* map-19.tmx in Resources */,
+				0547E5A2130397AF00E32962 /* map-20.tmx in Resources */,
+				0547E5A3130397AF00E32962 /* map-21.tmx in Resources */,
+				0547E5AB13039A4400E32962 /* map-22.tmx in Resources */,
+				0547E5AF1303B1EE00E32962 /* map-23.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

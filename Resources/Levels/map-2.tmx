@@ -121,7 +121,7 @@
    <properties>
     <property name="bearing" value="south"/>
     <property name="expectedCodeScore" value="4"/>
-    <property name="energy" value="5"/>
+    <property name="energy" value="500"/>
     <property name="sampleSites" value="1"/>
     <property name="sensorSites" value="0"/>
    </properties>
