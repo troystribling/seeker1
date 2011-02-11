@@ -169,9 +169,9 @@
     } else {
         self.speed += _deltaSpeed;
     }
-    if (self.speed == kSEEKER_MAX_SPEED) {
+    if (self.speed >= kSEEKER_MAX_SPEED) {
         validSpeed = NO;
-    } else if (self.speed == kSEEKER_MIN_SPEED) {
+    } else if (self.speed <= kSEEKER_MIN_SPEED) {
         validSpeed = NO;
     }
     return validSpeed;
@@ -189,7 +189,7 @@
     self.samplesCollected++;
     self.sampleBin++;
     self.samplesRemaining--;
-    if (self.sampleBin > kSEEKER_SAMPLE_BIN_SIZE) {
+    if (self.sampleBin >= kSEEKER_SAMPLE_BIN_SIZE) {
         status = NO;
     }
     return status;
@@ -207,7 +207,7 @@
     self.sensorsPlaced++;
     self.sensorBin--;
     self.sensorsRemaining--;
-    if (self.sensorBin < 0) {
+    if (self.sensorBin <= 0) {
         status = NO;
     }
     return status;
