@@ -51,6 +51,10 @@
 		050DD33B12EA6F0D00FDBC11 /* RepositoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050DD33A12EA6F0D00FDBC11 /* RepositoryCell.xib */; };
 		050DD34912EA6F6E00FDBC11 /* RepositoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 050DD34812EA6F6E00FDBC11 /* RepositoryCell.m */; };
 		050F795012AC670F0017BDE1 /* LauncherView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050F794F12AC670F0017BDE1 /* LauncherView.m */; };
+		0510D4F813062DB40073A9BE /* map-29.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 0510D4F713062DB40073A9BE /* map-29.tmx */; };
+		0510D4FF1306310D0073A9BE /* map-30.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 0510D4FE1306310D0073A9BE /* map-30.tmx */; };
+		0510D501130632AB0073A9BE /* map-31.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 0510D500130632AB0073A9BE /* map-31.tmx */; };
+		0510D503130634B80073A9BE /* map-32.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 0510D502130634B80073A9BE /* map-32.tmx */; };
 		0510EDD812BC680E00355F28 /* seeker-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0510EDD712BC680E00355F28 /* seeker-1.png */; };
 		0514FB8512D8040100713A49 /* terminal-launcher-add-subroutine.png in Resources */ = {isa = PBXBuildFile; fileRef = 0514FB8412D8040100713A49 /* terminal-launcher-add-subroutine.png */; };
 		0517EE2E12D2B400006CB4A9 /* DoUntilTerminalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0517EE2D12D2B400006CB4A9 /* DoUntilTerminalCell.m */; };
@@ -443,6 +447,10 @@
 		050DD34812EA6F6E00FDBC11 /* RepositoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepositoryCell.m; sourceTree = "<group>"; };
 		050F794E12AC670F0017BDE1 /* LauncherView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauncherView.h; sourceTree = "<group>"; };
 		050F794F12AC670F0017BDE1 /* LauncherView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LauncherView.m; sourceTree = "<group>"; };
+		0510D4F713062DB40073A9BE /* map-29.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-29.tmx"; sourceTree = "<group>"; };
+		0510D4FE1306310D0073A9BE /* map-30.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-30.tmx"; sourceTree = "<group>"; };
+		0510D500130632AB0073A9BE /* map-31.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-31.tmx"; sourceTree = "<group>"; };
+		0510D502130634B80073A9BE /* map-32.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-32.tmx"; sourceTree = "<group>"; };
 		0510EDD712BC680E00355F28 /* seeker-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "seeker-1.png"; sourceTree = "<group>"; };
 		0514FB8412D8040100713A49 /* terminal-launcher-add-subroutine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-add-subroutine.png"; sourceTree = "<group>"; };
 		0517EE2C12D2B400006CB4A9 /* DoUntilTerminalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoUntilTerminalCell.h; sourceTree = "<group>"; };
@@ -868,6 +876,10 @@
 				05BC6C9E1304EF0B00873259 /* map-26.tmx */,
 				05BC6CA01304F25600873259 /* map-27.tmx */,
 				05BC6CA71305083000873259 /* map-28.tmx */,
+				0510D4F713062DB40073A9BE /* map-29.tmx */,
+				0510D4FE1306310D0073A9BE /* map-30.tmx */,
+				0510D500130632AB0073A9BE /* map-31.tmx */,
+				0510D502130634B80073A9BE /* map-32.tmx */,
 				050CC74F1296011000974B8F /* map.plist */,
 				050CC7501296011000974B8F /* map.png */,
 			);
@@ -1810,6 +1822,10 @@
 				05BC6C9F1304EF0B00873259 /* map-26.tmx in Resources */,
 				05BC6CA11304F25600873259 /* map-27.tmx in Resources */,
 				05BC6CA81305083000873259 /* map-28.tmx in Resources */,
+				0510D4F813062DB40073A9BE /* map-29.tmx in Resources */,
+				0510D4FF1306310D0073A9BE /* map-30.tmx in Resources */,
+				0510D501130632AB0073A9BE /* map-31.tmx in Resources */,
+				0510D503130634B80073A9BE /* map-32.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
