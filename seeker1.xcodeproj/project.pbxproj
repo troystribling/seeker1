@@ -164,6 +164,10 @@
 		05BC6C9F1304EF0B00873259 /* map-26.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05BC6C9E1304EF0B00873259 /* map-26.tmx */; };
 		05BC6CA11304F25600873259 /* map-27.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05BC6CA01304F25600873259 /* map-27.tmx */; };
 		05BC6CA81305083000873259 /* map-28.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05BC6CA71305083000873259 /* map-28.tmx */; };
+		05BE944B1306E72500AAAA1F /* map-33.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05BE944A1306E72500AAAA1F /* map-33.tmx */; };
+		05BE9450130705A000AAAA1F /* map-34.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05BE944F130705A000AAAA1F /* map-34.tmx */; };
+		05BE94551307181900AAAA1F /* map-35.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05BE94541307181900AAAA1F /* map-35.tmx */; };
+		05BE945A13072FA500AAAA1F /* map-36.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05BE945913072FA500AAAA1F /* map-36.tmx */; };
 		05E4801912D53FC000E6B65E /* terminal-launcher-subroutines.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E4801812D53FC000E6B65E /* terminal-launcher-subroutines.png */; };
 		05E4801C12D5411300E6B65E /* SubroutineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4801B12D5411300E6B65E /* SubroutineViewController.m */; };
 		05E4801F12D5414300E6B65E /* CreateSubroutineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4801E12D5414300E6B65E /* CreateSubroutineViewController.m */; };
@@ -588,6 +592,10 @@
 		05BC6C9E1304EF0B00873259 /* map-26.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-26.tmx"; sourceTree = "<group>"; };
 		05BC6CA01304F25600873259 /* map-27.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-27.tmx"; sourceTree = "<group>"; };
 		05BC6CA71305083000873259 /* map-28.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-28.tmx"; sourceTree = "<group>"; };
+		05BE944A1306E72500AAAA1F /* map-33.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-33.tmx"; sourceTree = "<group>"; };
+		05BE944F130705A000AAAA1F /* map-34.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-34.tmx"; sourceTree = "<group>"; };
+		05BE94541307181900AAAA1F /* map-35.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-35.tmx"; sourceTree = "<group>"; };
+		05BE945913072FA500AAAA1F /* map-36.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-36.tmx"; sourceTree = "<group>"; };
 		05E4801812D53FC000E6B65E /* terminal-launcher-subroutines.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-subroutines.png"; sourceTree = "<group>"; };
 		05E4801A12D5411300E6B65E /* SubroutineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubroutineViewController.h; sourceTree = "<group>"; };
 		05E4801B12D5411300E6B65E /* SubroutineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubroutineViewController.m; sourceTree = "<group>"; };
@@ -880,6 +888,10 @@
 				0510D4FE1306310D0073A9BE /* map-30.tmx */,
 				0510D500130632AB0073A9BE /* map-31.tmx */,
 				0510D502130634B80073A9BE /* map-32.tmx */,
+				05BE944A1306E72500AAAA1F /* map-33.tmx */,
+				05BE944F130705A000AAAA1F /* map-34.tmx */,
+				05BE94541307181900AAAA1F /* map-35.tmx */,
+				05BE945913072FA500AAAA1F /* map-36.tmx */,
 				050CC74F1296011000974B8F /* map.plist */,
 				050CC7501296011000974B8F /* map.png */,
 			);
@@ -1826,6 +1838,10 @@
 				0510D4FF1306310D0073A9BE /* map-30.tmx in Resources */,
 				0510D501130632AB0073A9BE /* map-31.tmx in Resources */,
 				0510D503130634B80073A9BE /* map-32.tmx in Resources */,
+				05BE944B1306E72500AAAA1F /* map-33.tmx in Resources */,
+				05BE9450130705A000AAAA1F /* map-34.tmx in Resources */,
+				05BE94551307181900AAAA1F /* map-35.tmx in Resources */,
+				05BE945A13072FA500AAAA1F /* map-36.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
