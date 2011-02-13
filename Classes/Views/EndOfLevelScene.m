@@ -188,11 +188,14 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)redoMission {
     [ProgramNgin instance].programHalted = NO;
+    [ProgramNgin instance].programRunning = NO;
     [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)skipMission {
+    [ProgramNgin instance].programHalted = NO;
+    [ProgramNgin instance].programRunning = NO;
     [UserModel nextLevel];
     [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
 }

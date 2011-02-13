@@ -32,10 +32,10 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 // level thresholds
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define kLEVEL_FOR_ITERATIONS   1
-#define kLEVEL_FOR_UNTIL        1
-#define kLEVEL_FOR_SUBROUTINES  1
-#define kLEVEL_FOR_BINS         1
+#define kLEVEL_FOR_SUBROUTINES  12
+#define kLEVEL_FOR_ITERATIONS   18
+#define kLEVEL_FOR_UNTIL        24
+#define kLEVEL_FOR_BINS         30
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 // missions 

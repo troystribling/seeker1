@@ -58,7 +58,7 @@
     NSInteger missionHeight = (self.screenSize.height - displayOffset) / kMISSIONS_ROWS;
     NSInteger missionColumn = _position.x / missionWidth;
     NSInteger missionRow = (self.screenSize.height - displayOffset - 0.5 * missionHeight - _position.y) / missionHeight;
-    return missionRow + missionColumn;
+    return kMISSIONS_PER_ROW * missionRow + missionColumn;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -185,7 +185,8 @@
     } else if (self.menu.menuIsOpen) {
         [self.menu hideMenu];
     } else if ([self missionIsUnlocked:mission]) {
-        [UserModel setLevel:[self missionToLevel:mission]];
+        NSInteger level = [self missionToLevel:mission];
+        [UserModel setLevel:level];
         [[CCDirector sharedDirector] replaceScene:[MapScene scene]];
     }
 }    
