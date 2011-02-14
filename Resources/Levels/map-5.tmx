@@ -5,20 +5,44 @@
   <tile id="0">
    <properties>
     <property name="mapID" value="empty"/>
+    <property name="mapID" value="empty"/>
+    <property name="mapID" value="empty"/>
+    <property name="mapID" value="empty"/>
+    <property name="mapID" value="empty"/>
+    <property name="mapID" value="empty"/>
+    <property name="mapID" value="empty"/>
    </properties>
   </tile>
   <tile id="1">
    <properties>
+    <property name="mapID" value="down-1"/>
+    <property name="mapID" value="down-1"/>
+    <property name="mapID" value="down-1"/>
+    <property name="mapID" value="down-1"/>
+    <property name="mapID" value="down-1"/>
+    <property name="mapID" value="down-1"/>
     <property name="mapID" value="down-1"/>
    </properties>
   </tile>
   <tile id="2">
    <properties>
     <property name="mapID" value="down-2"/>
+    <property name="mapID" value="down-2"/>
+    <property name="mapID" value="down-2"/>
+    <property name="mapID" value="down-2"/>
+    <property name="mapID" value="down-2"/>
+    <property name="mapID" value="down-2"/>
+    <property name="mapID" value="down-2"/>
    </properties>
   </tile>
   <tile id="3">
    <properties>
+    <property name="mapID" value="down-3"/>
+    <property name="mapID" value="down-3"/>
+    <property name="mapID" value="down-3"/>
+    <property name="mapID" value="down-3"/>
+    <property name="mapID" value="down-3"/>
+    <property name="mapID" value="down-3"/>
     <property name="mapID" value="down-3"/>
    </properties>
   </tile>
@@ -98,7 +122,7 @@
  </tileset>
  <layer name="map" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3QoREAAAgDsXb/pVkAhUJExP99kxQAADjJg4aPfNkNyHtYM4ANAAA=
+   H4sIAAAAAAAAA+3DQQ0AAAwDoat/01OxHySsmqqqqu8PfyLpGIANAAA=
   </data>
  </layer>
  <layer name="terrain" width="24" height="36">

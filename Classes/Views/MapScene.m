@@ -97,6 +97,10 @@
 - (CGPoint)onTouchMoveDeltaToPlayingArea;
 - (void)centerOnSeekerPosition;
 - (CGFloat)panDuration:(CGPoint)_delta;
+// zoom map
+- (void)onTouchZoomMap;
+- (void)onTouchZoomMapIn;
+- (void)onTouchZoomMapOut;
 
 @end
 
@@ -132,6 +136,7 @@
 @synthesize movingMapOnTouch;
 @synthesize centeringOnSeekerPosition;
 @synthesize ignoreTouches;
+@synthesize mapZoomedIn;
 
 //===================================================================================================================================
 #pragma mark MapScene PrivateAPI
@@ -786,6 +791,32 @@
     return distance * kMAP_INVERSE_PAN_SPEED;
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+// zoom map
+//-----------------------------------------------------------------------------------------------------------------------------------
+#pragma mark zoom map
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)onTouchZoomMap {
+    if (self.mapZoomedIn) {
+        [self onTouchZoomMapOut];
+        self.mapZoomedIn = NO;
+    } else {
+        [self onTouchZoomMapIn];
+        self.mapZoomedIn = YES;
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)onTouchZoomMapIn {
+    [self.tileMap runAction:[CCScaleTo actionWithDuration:1.0 scale:0.50]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)onTouchZoomMapOut {
+    [self.tileMap runAction:[CCScaleTo actionWithDuration:1.0 scale:1.0]];
+}
+
 //===================================================================================================================================
 #pragma mark MapScene
 
@@ -817,6 +848,7 @@
         self.movingMapOnTouch = NO;
         self.centeringOnSeekerPosition = NO;
         self.ignoreTouches = YES;
+        self.mapZoomedIn = NO;
         self.endOfMissionCounter = 0;
         [self.statusDisplay insert:self];
         [[ProgramNgin instance] deleteProgram];
@@ -895,6 +927,8 @@
                 }
             } else if (numberOfTouches == 2) {
                 self.centeringOnSeekerPosition = YES;
+            } else if (numberOfTouches == 3) {
+                [self onTouchZoomMap];
             }
         }
     }

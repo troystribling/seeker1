@@ -262,7 +262,7 @@
         [self.menu hideMenu];
     } else {
         CGPoint touchDelta = ccpSub(touchLocation, self.firstTouch);
-        if (abs(touchDelta.y) < 10) {
+        if (abs(touchDelta.y) < 20) {
             if ([self displayedQuadIsUnlocked]) {
                 [[CCDirector sharedDirector] replaceScene:[MissionsScene scene]];
             }

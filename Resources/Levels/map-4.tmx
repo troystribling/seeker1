@@ -98,7 +98,7 @@
  </tileset>
  <layer name="map" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3OoQEAAAwCIP3/6T2xYCDQaZICAAA8ysBh0QEmaDxpgA0AAA==
+   H4sIAAAAAAAAA+3DQQ0AAAwDoat/01OxHySsmqqqqu8PfyLpGIANAAA=
   </data>
  </layer>
  <layer name="terrain" width="24" height="36">
