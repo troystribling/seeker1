@@ -62,6 +62,7 @@ typedef enum tagMapID {
     BOOL movingMapOnTouch;
     BOOL centeringOnSeekerPosition;
     BOOL ignoreTouches;
+    BOOL zoomMap;
     BOOL mapZoomedIn;
 }
 
@@ -94,6 +95,7 @@ typedef enum tagMapID {
 @property (nonatomic, assign) BOOL movingMapOnTouch;
 @property (nonatomic, assign) BOOL centeringOnSeekerPosition;
 @property (nonatomic, assign) BOOL ignoreTouches;
+@property (nonatomic, assign) BOOL zoomMap;
 @property (nonatomic, assign) BOOL mapZoomedIn;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

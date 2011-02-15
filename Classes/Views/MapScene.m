@@ -136,6 +136,7 @@
 @synthesize movingMapOnTouch;
 @synthesize centeringOnSeekerPosition;
 @synthesize ignoreTouches;
+@synthesize zoomMap;
 @synthesize mapZoomedIn;
 
 //===================================================================================================================================
@@ -798,6 +799,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)onTouchZoomMap {
+    self.zoomMap = NO;
     if (self.mapZoomedIn) {
         [self onTouchZoomMapOut];
         self.mapZoomedIn = NO;
@@ -810,11 +812,13 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)onTouchZoomMapIn {
     [self.tileMap runAction:[CCScaleTo actionWithDuration:1.0 scale:0.50]];
+    [self.seeker1 runAction:[CCScaleTo actionWithDuration:1.0 scale:0.50]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)onTouchZoomMapOut {
     [self.tileMap runAction:[CCScaleTo actionWithDuration:1.0 scale:1.0]];
+    [self.seeker1 runAction:[CCScaleTo actionWithDuration:1.0 scale:1.0]];
 }
 
 //===================================================================================================================================
@@ -849,6 +853,7 @@
         self.centeringOnSeekerPosition = NO;
         self.ignoreTouches = YES;
         self.mapZoomedIn = NO;
+        self.zoomMap = NO;
         self.endOfMissionCounter = 0;
         [self.statusDisplay insert:self];
         [[ProgramNgin instance] deleteProgram];
@@ -885,6 +890,8 @@
             self.endOfMissionCounter++;
         } else if (self.movingMapOnTouch) {
             [self onTouchMoveMap];
+        } else if (self.zoomMap) {
+            [self onTouchZoomMap];
         } else if (self.centeringOnSeekerPosition) {
             [self centerOnSeekerPosition];
         } else if ([ngin programIsRunning]) {
@@ -928,7 +935,7 @@
             } else if (numberOfTouches == 2) {
                 self.centeringOnSeekerPosition = YES;
             } else if (numberOfTouches == 3) {
-                [self onTouchZoomMap];
+                self.zoomMap = YES;
             }
         }
     }

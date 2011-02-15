@@ -16,6 +16,7 @@
     IBOutlet UITableView* programView;
     IBOutlet UIImageView* editImageView;
     IBOutlet UIImageView* runImageView;
+    IBOutlet UISlider* opacitySlider;
     UIView* containerView;
 	NSMutableArray* programListing;
     NSString* functionUpdate;
@@ -28,6 +29,7 @@
 @property (nonatomic, retain) UITableView* programView;
 @property (nonatomic, retain) UIImageView* editImageView;
 @property (nonatomic, retain) UIImageView* runImageView;
+@property (nonatomic, retain) UISlider* opacitySlider;
 @property (nonatomic, retain) UIView* containerView;
 @property (nonatomic, retain) NSMutableArray* programListing;
 @property (nonatomic, retain) NSString* functionUpdate;
@@ -38,5 +40,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)inView:(UIView*)_view;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
+- (IBAction)opacityValueChanged:(id)sender; 
 
 @end

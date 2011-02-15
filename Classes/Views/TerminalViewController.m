@@ -22,6 +22,8 @@
 #define kTERMINAL_LAUNCHER_BACK_TAG     1
 #define kTERMINAL_LAUNCHER_RUN_TAG      2
 #define kTERMINAL_LAUNCHER_EDIT_TAG     3
+#define kALPHA_MIN                      0.5
+#define kALPHA_DELTA                    0.25
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TerminalViewController (PrivateAPI)
@@ -35,6 +37,7 @@
 @synthesize programView;
 @synthesize editImageView;
 @synthesize runImageView;
+@synthesize opacitySlider;
 @synthesize containerView;
 @synthesize programListing;
 @synthesize functionUpdate;
@@ -60,9 +63,19 @@
         self.view.frame = self.containerView.frame;
         self.selectedLine = [NSIndexPath indexPathForRow:0 inSection:0];
         self.editingEnabled = NO;
+        UIImage* stetchLeftTrack = [[UIImage imageNamed:@"slider-left.png"] stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0];
+        UIImage* stetchRightTrack = [[UIImage imageNamed:@"slider-right.png"] stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0];
+        [self.opacitySlider setMinimumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
+        [self.opacitySlider setMaximumTrackImage:stetchRightTrack forState:UIControlStateNormal];
     }
     return self;
 }
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (IBAction)opacityValueChanged:(UISlider*)sender {  
+    CGFloat alphaValue = [sender value];
+    self.view.alpha = kALPHA_MIN + kALPHA_DELTA * alphaValue; 
+}  
 
 //===================================================================================================================================
 #pragma mark UIViewController
