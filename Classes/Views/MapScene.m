@@ -20,6 +20,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kMAP_INVERSE_PAN_SPEED      0.001
+#define kMAP_ZOOM_FACTOR            0.5
+#define kMAP_ZOOM_DURATION          1.0
 #define kEND_OF_LEVEL_COUNT         50
 #define kSEEKER_DELTA_SPEED         5
 #define kSEEKER_DELTA_ENERGY        2
@@ -43,6 +45,7 @@
 - (CGPoint)getPointFromObjectPropertiesInScreenCoords:(NSDictionary*)dict;
 - (CGPoint)getPointFromObjectPropertiesInTileCoords:(NSDictionary*)dict;
 - (CGPoint)screenCoordsToTileCoords:(CGPoint)_point;
+- (CGPoint)tileCoordsToScreenCoords:(CGPoint)_tilePoint;
 - (CGPoint)tileCoordsToTile:(CGPoint)point;
 - (CGPoint)tileMapTranslatedToPoint:(CGPoint)_point;
 // program instructions
@@ -274,6 +277,13 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (CGPoint)tileCoordsToScreenCoords:(CGPoint)_tilePoint {
+    CGPoint tileMapPos = self.tileMap.position;
+    CGPoint inverted = CGPointMake(0.5*_tilePoint.x, 0.5*(_tilePoint.y - self.tileMapSize.height));
+    return ccpAdd(inverted, tileMapPos);
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (CGPoint)tileCoordsToTile:(CGPoint)_point {
 	CGFloat tileWidth = self.tileMap.tileSize.width;
 	CGFloat tileHeight = self.tileMap.tileSize.height;	
@@ -444,7 +454,7 @@
                         CGPoint mapPosition = ccpAdd(CGPointMake(-delta.x, -delta.y), self.tileMap.position);
                         [self moveMapTo:mapPosition withDuration:1.0];
                     } else {
-                        [self.seeker1 moveBy:self.tileMap.tileSize];
+                        [self.seeker1 moveBy:delta];
                     }
                     CGPoint seekerTile = [self getSeekerTile];
                     [self updatePathForPosition:seekerTile];
@@ -811,14 +821,20 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)onTouchZoomMapIn {
-    [self.tileMap runAction:[CCScaleTo actionWithDuration:1.0 scale:0.50]];
-    [self.seeker1 runAction:[CCScaleTo actionWithDuration:1.0 scale:0.50]];
+    CGPoint spos = self.seeker1.position;
+    CGPoint mapPos = self.tileMap.position;
+    CGPoint seekerTileCoords = [self screenCoordsToTileCoords:self.seeker1.position];
+    CGPoint newSeekerScreenCoords = [self tileCoordsToScreenCoords:seekerTileCoords];
+    [self.tileMap runAction:[CCScaleTo actionWithDuration:kMAP_ZOOM_DURATION scale:kMAP_ZOOM_FACTOR]];
+    [self.seeker1 runAction:[CCScaleTo actionWithDuration:kMAP_ZOOM_DURATION scale:kMAP_ZOOM_FACTOR]];
+    [self.seeker1 runAction:[CCMoveTo actionWithDuration:kMAP_ZOOM_DURATION position:newSeekerScreenCoords]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)onTouchZoomMapOut {
-    [self.tileMap runAction:[CCScaleTo actionWithDuration:1.0 scale:1.0]];
-    [self.seeker1 runAction:[CCScaleTo actionWithDuration:1.0 scale:1.0]];
+    CGPoint seekerTileCoords = [self screenCoordsToTileCoords:self.seeker1.position];
+    [self.tileMap runAction:[CCScaleTo actionWithDuration:kMAP_ZOOM_DURATION scale:1.0]];
+    [self.seeker1 runAction:[CCScaleTo actionWithDuration:kMAP_ZOOM_DURATION scale:1.0]];
 }
 
 //===================================================================================================================================
@@ -974,7 +990,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGPoint)moveDelta {
-    return [self.seeker1 positionDeltaAlongBearing:self.tileMap.tileSize];
+    CGSize moveSize = self.tileMap.tileSize;
+    if (self.mapZoomedIn) {
+        moveSize = CGSizeMake(kMAP_ZOOM_FACTOR * moveSize.width, kMAP_ZOOM_FACTOR * moveSize.height);
+    }    
+    return [self.seeker1 positionDeltaAlongBearing:moveSize];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

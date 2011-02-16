@@ -67,7 +67,7 @@ typedef enum tagSeekerBearing {
 // instructions
 - (CGPoint)positionDeltaAlongBearing:(CGSize)_delta;
 - (CGPoint)nextPositionForDelta:(CGSize)_delta;
-- (void)moveBy:(CGSize)_delta;
+- (void)moveBy:(CGPoint)_delta;
 - (BOOL)useEnergy:(CGFloat)_deltaEnergy;
 - (BOOL)changeSpeed:(CGFloat)_deltaSpeed;
 - (void)turnLeft;

@@ -148,9 +148,8 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)moveBy:(CGSize)_delta {
-    CGPoint deltaBearing = [self positionDeltaAlongBearing:_delta];
-    [self runAction:[CCMoveBy actionWithDuration:kSEEKER_GRID_DISTANCE/self.speed position:deltaBearing]];
+- (void)moveBy:(CGPoint)_delta {
+    [self runAction:[CCMoveBy actionWithDuration:kSEEKER_GRID_DISTANCE/self.speed position:_delta]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
