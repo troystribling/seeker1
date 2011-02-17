@@ -45,7 +45,6 @@
 - (CGPoint)getPointFromObjectPropertiesInScreenCoords:(NSDictionary*)dict;
 - (CGPoint)getPointFromObjectPropertiesInTileCoords:(NSDictionary*)dict;
 - (CGPoint)screenCoordsToTileCoords:(CGPoint)_point;
-- (CGPoint)tileCoordsToScreenCoords:(CGPoint)_tilePoint;
 - (CGPoint)tileCoordsToTile:(CGPoint)point;
 - (CGPoint)tileMapTranslatedToPoint:(CGPoint)_point;
 // program instructions
@@ -104,6 +103,7 @@
 - (void)onTouchZoomMap;
 - (void)onTouchZoomMapIn;
 - (void)onTouchZoomMapOut;
+- (CGPoint)zoomScreenCoords:(CGPoint)_tilePoint;
 
 @end
 
@@ -274,13 +274,6 @@
     CGPoint tileMapPos = self.tileMap.position;
     CGPoint screenCoords = ccpSub(_screenPoint, tileMapPos);
 	return CGPointMake(screenCoords.x, self.tileMapSize.height - screenCoords.y);
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (CGPoint)tileCoordsToScreenCoords:(CGPoint)_tilePoint {
-    CGPoint tileMapPos = self.tileMap.position;
-    CGPoint inverted = CGPointMake(0.5*_tilePoint.x, 0.5*(_tilePoint.y - self.tileMapSize.height));
-    return ccpAdd(inverted, tileMapPos);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -811,20 +804,17 @@
 - (void)onTouchZoomMap {
     self.zoomMap = NO;
     if (self.mapZoomedIn) {
-        [self onTouchZoomMapOut];
         self.mapZoomedIn = NO;
+        [self onTouchZoomMapOut];
     } else {
-        [self onTouchZoomMapIn];
         self.mapZoomedIn = YES;
+        [self onTouchZoomMapIn];
     }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)onTouchZoomMapIn {
-    CGPoint spos = self.seeker1.position;
-    CGPoint mapPos = self.tileMap.position;
-    CGPoint seekerTileCoords = [self screenCoordsToTileCoords:self.seeker1.position];
-    CGPoint newSeekerScreenCoords = [self tileCoordsToScreenCoords:seekerTileCoords];
+    CGPoint newSeekerScreenCoords = [self zoomScreenCoords:self.seeker1.position];
     [self.tileMap runAction:[CCScaleTo actionWithDuration:kMAP_ZOOM_DURATION scale:kMAP_ZOOM_FACTOR]];
     [self.seeker1 runAction:[CCScaleTo actionWithDuration:kMAP_ZOOM_DURATION scale:kMAP_ZOOM_FACTOR]];
     [self.seeker1 runAction:[CCMoveTo actionWithDuration:kMAP_ZOOM_DURATION position:newSeekerScreenCoords]];
@@ -832,9 +822,20 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)onTouchZoomMapOut {
-    CGPoint seekerTileCoords = [self screenCoordsToTileCoords:self.seeker1.position];
     [self.tileMap runAction:[CCScaleTo actionWithDuration:kMAP_ZOOM_DURATION scale:1.0]];
     [self.seeker1 runAction:[CCScaleTo actionWithDuration:kMAP_ZOOM_DURATION scale:1.0]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGPoint)zoomScreenCoords:(CGPoint)_tilePoint {
+    CGPoint tileCoords = [self screenCoordsToTileCoords:_tilePoint];
+    CGPoint glCoords = CGPointMake(tileCoords.x, self.tileMapSize.height - tileCoords.y);
+    if (self.mapZoomedIn) {
+        glCoords = CGPointMake(kMAP_ZOOM_FACTOR * glCoords.x, kMAP_ZOOM_FACTOR * glCoords.y);
+    } else {
+        glCoords = CGPointMake(glCoords.x / kMAP_ZOOM_FACTOR, glCoords.y / kMAP_ZOOM_FACTOR);
+    }
+    return ccpAdd(glCoords, self.tileMap.position);
 }
 
 //===================================================================================================================================
