@@ -19,6 +19,7 @@
 #import "TouchUtils.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+#define kMAP_EDGE_BUFFER            0
 #define kMAP_INVERSE_PAN_SPEED      0.001
 #define kMAP_ZOOM_FACTOR            0.5
 #define kMAP_ZOOM_DURATION          1.0
@@ -323,41 +324,55 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)shouldMoveMap:(CGPoint)_delta {
-    CGSize tileMapTiles = self.tileMap.mapSize;
-    CGSize tileMapTileSize = self.tileMap.tileSize;
-    CGSize screenMapTileSize = CGSizeMake(tileMapTileSize.width, tileMapTileSize.height);
+    CGSize tileMapTileSize = self.tileMapSize;
     if (self.mapZoomedIn) {
         _delta = CGPointMake(_delta.x / kMAP_ZOOM_FACTOR, _delta.y / kMAP_ZOOM_FACTOR);
-        screenMapTileSize = CGSizeMake(kMAP_ZOOM_FACTOR * tileMapTileSize.width, kMAP_ZOOM_FACTOR * tileMapTileSize.height);
+        tileMapTileSize = CGSizeMake(kMAP_ZOOM_FACTOR * tileMapTileSize.width, kMAP_ZOOM_FACTOR * tileMapTileSize.height);
     }        
-    CGPoint newPosition = ccpAdd([self screenCoordsToTileCoords:self.seeker1.position], CGPointMake(_delta.x, -_delta.y));
-    newPosition = CGPointMake(newPosition.x / tileMapTileSize.width, newPosition.y / tileMapTileSize.height);
-    CGPoint seekerScreen = CGPointMake((self.seeker1.position.x + 0.5)/ screenMapTileSize.width, (self.seeker1.position.y  + 0.5)/ screenMapTileSize.height);
-    CGPoint zCenter = CGPointMake((self.screenCenter.x + 0.5)/ screenMapTileSize.width, (self.screenCenter.y  + 0.5)/ screenMapTileSize.height);
-    if (self.seeker1.bearing == WestSeekerBearing) {        
-        if ((int)(newPosition.x - zCenter.x) <= 0) {
-            return NO;
-        } else if ((int)(zCenter.x - seekerScreen.x) <= 0) {
-            return NO;
-        }
-    } else if (self.seeker1.bearing == EastSeekerBearing) {
-        if ((int)(tileMapTiles.width - newPosition.x - zCenter.x) <= 0) {
-            return NO;
-        } else if ((int)(zCenter.x - seekerScreen.x) >= 0) {
-            return NO;
-        }
-    } else if (self.seeker1.bearing == NorthSeekerBearing) {
-        if ((int)(newPosition.y - zCenter.y)<= 0) {
-            return NO;
-        } else if ((zCenter.y - seekerScreen.y) >= 0) {
-            return NO;
-        }
-    } else if (self.seeker1.bearing == SouthSeekerBearing) {
-        if ((int)(tileMapTiles.height - newPosition.y - zCenter.y) <= 0) {
-            return NO;
-        } else if ((int)(zCenter.y - seekerScreen.y) <= 0) {
-            return NO;
-        }
+    CGPoint newMapPosition = ccpAdd(CGPointMake(-_delta.x, -_delta.y), self.tileMap.position);
+    CGPoint newSeekerTilePosition = ccpAdd([self screenCoordsToTileCoords:self.seeker1.position], CGPointMake(_delta.x, -_delta.y));
+    CGPoint newSeekerScreenPosition = [self tileCoordsToScreenCoords:newSeekerTilePosition];
+    CGPoint center = self.screenCenter;
+    if (self.seeker1.bearing == WestSeekerBearing) {
+         if (newMapPosition.x > 0) {
+             return NO;
+         } else if ((newMapPosition.x + tileMapTileSize.width) < 0) {
+             return NO;
+         } else if ((newSeekerTilePosition.x - center.x) <= 0) {
+             return NO;
+         } else if ((center.x - newSeekerScreenPosition.x) <= 0) {
+             return NO;
+         }
+     } else if (self.seeker1.bearing == EastSeekerBearing) {
+         if (newMapPosition.x > 0) {
+             return NO;
+         } else if ((newMapPosition.x + tileMapTileSize.width) < 0) {
+             return NO;
+         } else if ((tileMapTileSize.width - newSeekerTilePosition.x - center.x) <= 0) {
+             return NO;
+         } else if ((newSeekerScreenPosition.x - center.x) <= 0) {
+             return NO;
+         }
+     } else if (self.seeker1.bearing == NorthSeekerBearing) {
+         if (newMapPosition.y > 0) {
+             return NO;
+         } else if ((newMapPosition.y + tileMapTileSize.height) < 0) {
+             return NO;
+         } else if ((newSeekerTilePosition.y - center.y) <= 0) {
+             return NO;
+         } else if ((newSeekerScreenPosition.y - center.y) <= 0) {
+             return NO;
+         }
+     } else if (self.seeker1.bearing == SouthSeekerBearing) {
+         if (newMapPosition.y > 0) {
+             return NO;
+         } else if ((newMapPosition.y + tileMapTileSize.height) < 0) {
+             return NO;
+         } else if ((tileMapTileSize.height - newSeekerTilePosition.y - center.y) <= 0) {
+             return NO;
+         } else if ((center.y - newSeekerScreenPosition.y) <= 0) {
+             return NO;
+         }
     }
     return YES;
 }
@@ -1030,9 +1045,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)positionIsInPlayingArea:(CGPoint)_position {
     CGSize tiles = self.tileMap.mapSize; 
-    if (_position.x < kMAP_EDGE_BUFFER || _position.x > (tiles.width - kMAP_EDGE_BUFFER - 1)) {
+    if (_position.x <= kMAP_EDGE_BUFFER || _position.x >= (tiles.width - kMAP_EDGE_BUFFER - 1)) {
         return NO;
-    } else if (_position.y < (kMAP_EDGE_BUFFER + 1) || _position.y > (tiles.height - kMAP_EDGE_BUFFER - 1)) {
+    } else if (_position.y <= (kMAP_EDGE_BUFFER + 1) || _position.y >= (tiles.height - kMAP_EDGE_BUFFER - 1)) {
         return NO;
     }
     return YES;
