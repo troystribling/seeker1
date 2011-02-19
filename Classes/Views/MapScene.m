@@ -48,7 +48,6 @@
 - (CGPoint)tileCoordsToScreenCoords:(CGPoint)_tilePoint;
 - (CGPoint)tileCoordsToTile:(CGPoint)point;
 - (CGPoint)tileMapTranslatedToPoint:(CGPoint)_point;
-- (CGPoint)zoomedScreenCenter;
 // program instructions
 - (BOOL)shouldMoveMap:(CGPoint)_delta;
 - (BOOL)moveIsInPlayingAreaForData:(CGPoint)_delta;
@@ -299,28 +298,22 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGPoint)tileMapTranslatedToPoint:(CGPoint)_point {
-    CGPoint zScreenCenter = [self zoomedScreenCenter];
-    CGPoint mapTranslated = ccpSub(zScreenCenter, _point);
-    if (_point.x < zScreenCenter.x) {
-        mapTranslated.x = 0.0;
-    } else if ((self.tileMapSize.width - _point.x) < zScreenCenter.x) {
-        mapTranslated.x = - (self.tileMapSize.width - 2.0 * zScreenCenter.x);
-    } 
-    if (_point.y < zScreenCenter.y) {
-        mapTranslated.y = 0.0;
-    } else if ((self.tileMapSize.height - _point.y) < zScreenCenter.y) {
-        mapTranslated.y = - (self.tileMapSize.height - 2.0 * zScreenCenter.y);
-    } 
-    return mapTranslated;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (CGPoint)zoomedScreenCenter {
     CGPoint zCenter = self.screenCenter;
     if (self.mapZoomedIn) {
         zCenter = CGPointMake(zCenter.x / kMAP_ZOOM_FACTOR, zCenter.y / kMAP_ZOOM_FACTOR);
     }
-    return zCenter;
+    CGPoint mapTranslated = ccpSub(zCenter, _point);
+    if (_point.x < zCenter.x) {
+        mapTranslated.x = 0.0;
+    } else if ((self.tileMapSize.width - _point.x) < zCenter.x) {
+        mapTranslated.x = - (self.tileMapSize.width - 2.0 * zCenter.x);
+    } 
+    if (_point.y < zCenter.y) {
+        mapTranslated.y = 0.0;
+    } else if ((self.tileMapSize.height - _point.y) < zCenter.y) {
+        mapTranslated.y = - (self.tileMapSize.height - 2.0 * zCenter.y);
+    } 
+    return mapTranslated;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -330,31 +323,39 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)shouldMoveMap:(CGPoint)_delta {
+    CGSize tileMapTiles = self.tileMap.mapSize;
+    CGSize tileMapTileSize = self.tileMap.tileSize;
+    CGSize screenMapTileSize = CGSizeMake(tileMapTileSize.width, tileMapTileSize.height);
+    if (self.mapZoomedIn) {
+        _delta = CGPointMake(_delta.x / kMAP_ZOOM_FACTOR, _delta.y / kMAP_ZOOM_FACTOR);
+        screenMapTileSize = CGSizeMake(kMAP_ZOOM_FACTOR * tileMapTileSize.width, kMAP_ZOOM_FACTOR * tileMapTileSize.height);
+    }        
     CGPoint newPosition = ccpAdd([self screenCoordsToTileCoords:self.seeker1.position], CGPointMake(_delta.x, -_delta.y));
-    CGPoint seekerScreen = self.seeker1.position;
-    CGPoint zScreenCenter = [self zoomedScreenCenter];
+    newPosition = CGPointMake(newPosition.x / tileMapTileSize.width, newPosition.y / tileMapTileSize.height);
+    CGPoint seekerScreen = CGPointMake((self.seeker1.position.x + 0.5)/ screenMapTileSize.width, (self.seeker1.position.y  + 0.5)/ screenMapTileSize.height);
+    CGPoint zCenter = CGPointMake((self.screenCenter.x + 0.5)/ screenMapTileSize.width, (self.screenCenter.y  + 0.5)/ screenMapTileSize.height);
     if (self.seeker1.bearing == WestSeekerBearing) {        
-        if (newPosition.x < zScreenCenter.x) {
+        if ((int)(newPosition.x - zCenter.x) <= 0) {
             return NO;
-        } else if ((zScreenCenter.x - seekerScreen.x) < 0) {
+        } else if ((int)(zCenter.x - seekerScreen.x) <= 0) {
             return NO;
         }
     } else if (self.seeker1.bearing == EastSeekerBearing) {
-        if ((self.tileMapSize.width - newPosition.x) < zScreenCenter.x) {
+        if ((int)(tileMapTiles.width - newPosition.x - zCenter.x) <= 0) {
             return NO;
-        } else if ((zScreenCenter.x - seekerScreen.x) > 0) {
+        } else if ((int)(zCenter.x - seekerScreen.x) >= 0) {
             return NO;
         }
     } else if (self.seeker1.bearing == NorthSeekerBearing) {
-        if (newPosition.y < zScreenCenter.y) {
+        if ((int)(newPosition.y - zCenter.y)<= 0) {
             return NO;
-        } else if ((zScreenCenter.y - seekerScreen.y) > 0) {
+        } else if ((zCenter.y - seekerScreen.y) >= 0) {
             return NO;
         }
     } else if (self.seeker1.bearing == SouthSeekerBearing) {
-        if ((self.tileMapSize.height - newPosition.y) < zScreenCenter.y) {
+        if ((int)(tileMapTiles.height - newPosition.y - zCenter.y) <= 0) {
             return NO;
-        } else if ((zScreenCenter.y - seekerScreen.y) < 0) {
+        } else if ((int)(zCenter.y - seekerScreen.y) <= 0) {
             return NO;
         }
     }
@@ -745,25 +746,25 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)onTouchMoveMapUp {
-    self.onTouchMoveDelta = CGPointMake(0.0, 1.5*[self zoomedScreenCenter].y);
+    self.onTouchMoveDelta = CGPointMake(0.0, 1.5*self.screenCenter.y);
     self.movingMapOnTouch = YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)onTouchMoveMapDown {
-    self.onTouchMoveDelta = CGPointMake(0.0, -1.5*[self zoomedScreenCenter].y);
+    self.onTouchMoveDelta = CGPointMake(0.0, -1.5*self.screenCenter.y);
     self.movingMapOnTouch = YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)onTouchMoveMapLeft {
-    self.onTouchMoveDelta = CGPointMake(-1.5*[self zoomedScreenCenter].x, 0.0);
+    self.onTouchMoveDelta = CGPointMake(-1.5*self.screenCenter.x, 0.0);
     self.movingMapOnTouch = YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)onTouchMoveMapRight {
-    self.onTouchMoveDelta = CGPointMake(1.5*[self zoomedScreenCenter].x, 0.0);
+    self.onTouchMoveDelta = CGPointMake(1.5*self.screenCenter.x, 0.0);
     self.movingMapOnTouch = YES;
 }
 
@@ -784,13 +785,19 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGPoint)onTouchMoveDeltaToPlayingArea {
-    CGPoint zScreenCenter = [self zoomedScreenCenter];
-    CGPoint newTileMapPosition = ccpAdd(self.tileMap.position, self.onTouchMoveDelta);
+    CGPoint zCenter = self.screenCenter;
+    CGSize zTileMapSize = self.tileMapSize;
+    CGPoint tileMapPosition = self.tileMap.position;
+    CGPoint newTileMapPosition = ccpAdd(tileMapPosition, self.onTouchMoveDelta);
+    if (self.mapZoomedIn) {
+        zTileMapSize = CGSizeMake(kMAP_ZOOM_FACTOR * zTileMapSize.width, kMAP_ZOOM_FACTOR * zTileMapSize.height);
+    }        
     CGFloat xPos = MIN(0.0, newTileMapPosition.x);
-    xPos = MAX(xPos, -(self.tileMapSize.width - 2.0*zScreenCenter.x - 1.0));
+    xPos = MAX(xPos, -(zTileMapSize.width - 2.0*zCenter.x - 1.0));
     CGFloat yPos = MIN(0.0, newTileMapPosition.y);
-    yPos = MAX(yPos, -(self.tileMapSize.height - 2.0*zScreenCenter.y - 1.0));
-    return ccpSub(CGPointMake(xPos, yPos), self.tileMap.position);
+    yPos = MAX(yPos, -(zTileMapSize.height - 2.0*zCenter.y - 1.0));
+    CGPoint moveDelta = ccpSub(CGPointMake(xPos, yPos), tileMapPosition);
+    return moveDelta;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -991,9 +998,9 @@
                         [self onTouchMoveMapLeft];
                     }
                 }
-            } else if (numberOfTouches == 2) {
+            } else if (numberOfTouches == 1) {
                 self.centeringOnSeekerPosition = YES;
-            } else if (numberOfTouches == 3) {
+            } else if (numberOfTouches == 2) {
                 self.zoomMap = YES;
             }
         }
