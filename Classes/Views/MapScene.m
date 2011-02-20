@@ -1108,7 +1108,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)isTerrainClear:(NSInteger)_gradient {
     BOOL isClear = YES;
-    if (_gradient < -1 && _gradient > 1) {
+    if (_gradient < -1 || _gradient > 1) {
         isClear = NO; 
     }
     return isClear;

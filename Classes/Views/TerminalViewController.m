@@ -23,7 +23,8 @@
 #define kTERMINAL_LAUNCHER_RUN_TAG      2
 #define kTERMINAL_LAUNCHER_EDIT_TAG     3
 #define kALPHA_MIN                      0.5
-#define kALPHA_DELTA                    0.25
+#define kALPHA_MAX                      0.65
+#define kALPHA_DELTA                    0.15
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TerminalViewController (PrivateAPI)
@@ -103,7 +104,7 @@
         self.runImageView.hidden = NO;
     }
     if (self.launchedFromMap) {
-        self.view.alpha = 0.75;
+        self.view.alpha = kALPHA_MAX;
         self.programView.frame = CGRectMake(0.0, 105.0, 320.0, 375.0);
         self.opacityImage.hidden = NO;
         self.opacitySlider.hidden = NO;
