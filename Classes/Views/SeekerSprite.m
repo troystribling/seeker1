@@ -112,6 +112,7 @@
     self.speed = 0;
     self.samplesRemaining = self.sampleSites;
     self.sensorsRemaining = self.sensorSites;
+    self.scale = 1.0;
     [self emptySampleBin];
     [self loadSensorBin];
 }

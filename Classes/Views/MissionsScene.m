@@ -14,6 +14,7 @@
 #import "TouchUtils.h"
 #import "MapScene.h"
 #import "TermMenuView.h"
+#import "ProgramNgin.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -186,6 +187,8 @@
         [self.menu hideMenu];
     } else if ([self missionIsUnlocked:mission]) {
         NSInteger level = [self missionToLevel:mission];
+        [ProgramNgin instance].programHalted = NO;
+        [ProgramNgin instance].programRunning = NO;
         [UserModel setLevel:level];
         [[CCDirector sharedDirector] replaceScene:[MapScene scene]];
     }

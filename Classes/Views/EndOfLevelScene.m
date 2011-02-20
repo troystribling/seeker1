@@ -203,11 +203,15 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)againMission {
+    [ProgramNgin instance].programHalted = NO;
+    [ProgramNgin instance].programRunning = NO;
     [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)nextMission {
+    [ProgramNgin instance].programHalted = NO;
+    [ProgramNgin instance].programRunning = NO;
     [UserModel nextLevel];
     [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
 }

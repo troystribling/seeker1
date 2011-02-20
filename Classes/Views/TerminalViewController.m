@@ -100,6 +100,13 @@
     } else {
         self.runImageView.hidden = NO;
     }
+    if (self.launchedFromMap) {
+        self.view.alpha = 0.75;
+        self.programView.frame = CGRectMake(0.0, 105.0, 320.0, 375.0);
+    } else {
+        self.view.alpha = 1.0;
+        self.programView.frame = CGRectMake(0.0, 105.0, 320.0, 415.0);
+    }
     [self.programView reloadData];
     NSInteger selectedRow = self.selectedLine.row;
     if ((selectedRow + 1) == [self.programListing count]) {
