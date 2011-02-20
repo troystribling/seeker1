@@ -17,6 +17,8 @@
     IBOutlet UIImageView* editImageView;
     IBOutlet UIImageView* runImageView;
     IBOutlet UISlider* opacitySlider;
+    IBOutlet UIImageView* opacityImage;
+    IBOutlet UILabel* opacityLabel;
     UIView* containerView;
 	NSMutableArray* programListing;
     NSString* functionUpdate;
@@ -30,6 +32,8 @@
 @property (nonatomic, retain) UIImageView* editImageView;
 @property (nonatomic, retain) UIImageView* runImageView;
 @property (nonatomic, retain) UISlider* opacitySlider;
+@property (nonatomic, retain) UIImageView* opacityImage;
+@property (nonatomic, retain) UILabel* opacityLabel;
 @property (nonatomic, retain) UIView* containerView;
 @property (nonatomic, retain) NSMutableArray* programListing;
 @property (nonatomic, retain) NSString* functionUpdate;

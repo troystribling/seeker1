@@ -38,6 +38,8 @@
 @synthesize editImageView;
 @synthesize runImageView;
 @synthesize opacitySlider;
+@synthesize opacityImage;
+@synthesize opacityLabel;
 @synthesize containerView;
 @synthesize programListing;
 @synthesize functionUpdate;
@@ -103,9 +105,15 @@
     if (self.launchedFromMap) {
         self.view.alpha = 0.75;
         self.programView.frame = CGRectMake(0.0, 105.0, 320.0, 375.0);
+        self.opacityImage.hidden = NO;
+        self.opacitySlider.hidden = NO;
+        self.opacityLabel.hidden = NO;
     } else {
         self.view.alpha = 1.0;
-        self.programView.frame = CGRectMake(0.0, 105.0, 320.0, 415.0);
+        self.programView.frame = CGRectMake(0.0, 65.0, 320.0, 415.0);
+        self.opacityImage.hidden = YES;
+        self.opacitySlider.hidden = YES;
+        self.opacityLabel.hidden = YES;
     }
     [self.programView reloadData];
     NSInteger selectedRow = self.selectedLine.row;
