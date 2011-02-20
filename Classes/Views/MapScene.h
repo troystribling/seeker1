@@ -110,7 +110,8 @@ typedef enum tagMapID {
 - (NSInteger)terrainGradient;
 - (BOOL)isTerrainClear:(NSInteger)_gradient;
 - (BOOL)positionIsInPlayingArea:(CGPoint)_position;
-- (CGPoint)moveDelta;
+- (CGPoint)moveDeltaTileCoords;
+- (CGPoint)moveDeltaScreenCoords:(CGPoint)_delta;
 - (CGPoint)nextPositionForDelta:(CGPoint)_delta;
 - (CGPoint)nextPosition;
 

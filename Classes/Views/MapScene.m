@@ -51,7 +51,7 @@
 - (CGPoint)tileMapTranslatedToPoint:(CGPoint)_point;
 // program instructions
 - (BOOL)shouldMoveMap:(CGPoint)_delta;
-- (BOOL)moveIsInPlayingAreaForData:(CGPoint)_delta;
+- (BOOL)moveIsInPlayingAreaForDelta:(CGPoint)_delta;
 - (void)executeSeekerInstruction:(ccTime)dt;
 - (void)updatePathForPosition:(CGPoint)_position;
 - (CGFloat)useEnergy:(NSInteger)_gradient;
@@ -326,7 +326,6 @@
 - (BOOL)shouldMoveMap:(CGPoint)_delta {
     CGSize tileMapTileSize = self.tileMapSize;
     if (self.mapZoomedIn) {
-        _delta = CGPointMake(_delta.x / kMAP_ZOOM_FACTOR, _delta.y / kMAP_ZOOM_FACTOR);
         tileMapTileSize = CGSizeMake(kMAP_ZOOM_FACTOR * tileMapTileSize.width, kMAP_ZOOM_FACTOR * tileMapTileSize.height);
     }        
     CGPoint newMapPosition = ccpAdd(CGPointMake(-_delta.x, -_delta.y), self.tileMap.position);
@@ -378,7 +377,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)moveIsInPlayingAreaForData:(CGPoint)_delta {
+- (BOOL)moveIsInPlayingAreaForDelta:(CGPoint)_delta {
     CGPoint tilePosition = [self nextPositionForDelta:_delta];
     return [self positionIsInPlayingArea:tilePosition];
 }
@@ -474,8 +473,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)move {
-    CGPoint delta = [self moveDelta];
-    if ([self moveIsInPlayingAreaForData:delta]) {
+    CGPoint deltaTileCoords = [self moveDeltaTileCoords];
+    if ([self moveIsInPlayingAreaForDelta:deltaTileCoords]) {
         NSInteger gradient = [self terrainGradient];
         CGFloat usedEnergy = [self useEnergy:gradient];
         if ([self.seeker1 useEnergy:usedEnergy]) {
@@ -484,11 +483,12 @@
                 [self updateEnergy];
                 [self updateSpeed];
                 if ([self isTerrainClear:gradient]) {
-                    if ([self shouldMoveMap:delta]) {
-                        CGPoint mapPosition = ccpAdd(CGPointMake(-delta.x, -delta.y), self.tileMap.position);
+                    CGPoint deltaScreenCoords = [self moveDeltaScreenCoords:deltaTileCoords];
+                    if ([self shouldMoveMap:deltaTileCoords]) {
+                        CGPoint mapPosition = ccpAdd(CGPointMake(-deltaScreenCoords.x, -deltaScreenCoords.y), self.tileMap.position);
                         [self moveMapTo:mapPosition withDuration:1.0];
                     } else {
-                        [self.seeker1 moveBy:delta];
+                        [self.seeker1 moveBy:deltaScreenCoords];
                     }
                     CGPoint seekerTile = [self getSeekerTile];
                     [self updatePathForPosition:seekerTile];
@@ -703,8 +703,13 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)fadeToRed {
     NSString* seekerName = [NSString stringWithFormat:@"red-seeker-1-%@.png", [self.seeker1 bearingToString]];
-    self.crash = [[[CCSprite alloc] initWithFile:seekerName] autorelease];  
-    self.crash.opacity = 0;
+    self.crash = [[[CCSprite alloc] initWithFile:seekerName] autorelease]; 
+    if (self.mapZoomedIn) {
+        self.crash.scale = kMAP_ZOOM_FACTOR;
+    } else {
+        self.crash.scale = 1.0;
+    }
+    self.crash.opacity = 0.0;
     self.crash.position = self.seeker1.position;
     [self addChild:self.crash];
 	[self.crash runAction:[CCFadeIn actionWithDuration:1.0]];
@@ -1054,12 +1059,17 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (CGPoint)moveDelta {
+- (CGPoint)moveDeltaTileCoords {
     CGSize moveSize = self.tileMap.tileSize;
-    if (self.mapZoomedIn) {
-        moveSize = CGSizeMake(kMAP_ZOOM_FACTOR * moveSize.width, kMAP_ZOOM_FACTOR * moveSize.height);
-    }    
     return [self.seeker1 positionDeltaAlongBearing:moveSize];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGPoint)moveDeltaScreenCoords:(CGPoint)_delta {
+    if (self.mapZoomedIn) {
+        _delta = CGPointMake(kMAP_ZOOM_FACTOR * _delta.x, kMAP_ZOOM_FACTOR * _delta.y);
+    }    
+    return _delta;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -1070,7 +1080,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGPoint)nextPosition {
-    CGPoint delta = [self moveDelta];
+    CGPoint delta = [self moveDeltaTileCoords];
     CGPoint newPosition = ccpAdd([self screenCoordsToTileCoords:self.seeker1.position], CGPointMake(delta.x, -delta.y));
     return [self tileCoordsToTile:newPosition];
 }
