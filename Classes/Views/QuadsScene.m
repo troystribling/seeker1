@@ -197,13 +197,13 @@
     NSInteger score = [self totalScore:_quad];
     CGSize spriteSize = _sprite.contentSize;
 
-    CCLabel* scoreLable = [CCLabel labelWithString:[NSString stringWithFormat:@"Score:     %d", score] fontName:@"Courier" fontSize:18];
+    CCLabel* scoreLable = [CCLabel labelWithString:[NSString stringWithFormat:@"Score:     %d", score] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_MISSION];
     scoreLable.anchorPoint = CGPointMake(0.0, 0.0);
     scoreLable.position = CGPointMake(0.115*spriteSize.width, -0.07*spriteSize.height);
     scoreLable.color = ccc3(103,243,27); 
     [_sprite addChild:scoreLable];
 
-    CCLabel* perCompLable = [CCLabel labelWithString:[NSString stringWithFormat:@"Completed: %d%%", perComp] fontName:@"Courier" fontSize:18];
+    CCLabel* perCompLable = [CCLabel labelWithString:[NSString stringWithFormat:@"Completed: %d%%", perComp] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_MISSION];
     perCompLable.anchorPoint = CGPointMake(0.0, 0.0);
     perCompLable.position = CGPointMake(0.115*spriteSize.width, -0.135*spriteSize.height);
     perCompLable.color = ccc3(103,243,27); 

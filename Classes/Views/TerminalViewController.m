@@ -66,6 +66,7 @@
         self.view.frame = self.containerView.frame;
         self.selectedLine = [NSIndexPath indexPathForRow:0 inSection:0];
         self.editingEnabled = NO;
+        self.opacityLabel.font = [UIFont fontWithName:kGLOBAL_FONT size:kGLOBAL_FONT_SIZE];
         UIImage* stetchLeftTrack = [[UIImage imageNamed:@"slider-left.png"] stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0];
         UIImage* stetchRightTrack = [[UIImage imageNamed:@"slider-right.png"] stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0];
         [self.opacitySlider setMinimumTrackImage:stetchLeftTrack forState:UIControlStateNormal];

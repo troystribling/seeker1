@@ -59,7 +59,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertBootingLabel {
-    self.bootingLabel = [CCLabel labelWithString:@"Booting" fontName:@"Courier" fontSize:24];
+    self.bootingLabel = [CCLabel labelWithString:@"Booting" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     self.bootingLabel.position = CGPointMake(kBOOT_XPOS, kBOOT_TOP_YPOS);
     self.bootingLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     self.bootingLabel.color = ccc3(103,243,27);
@@ -68,7 +68,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertProductLabel {
-    self.productLabel = [CCLabel labelWithString:@"imaginaryProducts.com" fontName:@"Courier" fontSize:22];
+    self.productLabel = [CCLabel labelWithString:@"imaginaryProducts.com" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     self.productLabel.position = CGPointMake(kBOOT_XPOS, kBOOT_LOGO_YPOS);
     self.productLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     self.productLabel.color = ccc3(103,243,27);
@@ -77,7 +77,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertPOST:(NSString*)_post {
-    self.post = [CCLabel labelWithString:_post fontName:@"Courier" fontSize:24];
+    self.post = [CCLabel labelWithString:_post fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     self.post.position = CGPointMake(kBOOT_XPOS, kBOOT_TOP_YPOS);
     self.post.anchorPoint = CGPointMake(0.0f, 0.0f);
     self.post.color = ccc3(103,243,27);
@@ -86,7 +86,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertConsole:(NSString*)_console {
-    self.console = [CCLabel labelWithString:_console fontName:@"Courier" fontSize:24];
+    self.console = [CCLabel labelWithString:_console fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     self.console.position = CGPointMake(kBOOT_XPOS, kBOOT_TOP_YPOS - kBOOT_DELTA);
     self.console.anchorPoint = CGPointMake(0.0f, 0.0f);
     self.console.color = ccc3(103,243,27);
@@ -95,7 +95,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertConnection:(NSString*)_connection {
-    self.connection = [CCLabel labelWithString:_connection fontName:@"Courier" fontSize:24];
+    self.connection = [CCLabel labelWithString:_connection fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     self.connection.position = CGPointMake(kBOOT_XPOS, kBOOT_TOP_YPOS - 2.0 * kBOOT_DELTA);
     self.connection.anchorPoint = CGPointMake(0.0f, 0.0f);
     self.connection.color = ccc3(103,243,27);

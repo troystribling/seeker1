@@ -159,6 +159,10 @@
 		0594276F12FA5AB4005026F7 /* times-loop.png in Resources */ = {isa = PBXBuildFile; fileRef = 0594276A12FA5AB4005026F7 /* times-loop.png */; };
 		0594277012FA5AB4005026F7 /* until-loop.png in Resources */ = {isa = PBXBuildFile; fileRef = 0594276B12FA5AB4005026F7 /* until-loop.png */; };
 		0594C24212F27ED700CB1418 /* UploadScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0594C24112F27ED700CB1418 /* UploadScene.m */; };
+		05A2A97E1312E55000B71F38 /* PF Tempesta Seven Condensed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 05A2A97B1312E55000B71F38 /* PF Tempesta Seven Condensed.ttf */; };
+		05A2A97F1312E55000B71F38 /* Volter (Goldfish).ttf in Resources */ = {isa = PBXBuildFile; fileRef = 05A2A97C1312E55000B71F38 /* Volter (Goldfish).ttf */; };
+		05A2AA091312F72600B71F38 /* C&C Red Alert (INET).ttf in Resources */ = {isa = PBXBuildFile; fileRef = 05A2AA071312F72600B71F38 /* C&C Red Alert (INET).ttf */; };
+		05A2AA0A1312F72600B71F38 /* Silkscreen.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 05A2AA081312F72600B71F38 /* Silkscreen.ttf */; };
 		05B81AAA12E9067A00BAC631 /* CodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B81AA912E9067A00BAC631 /* CodeModel.m */; };
 		05B81B7312E9492300BAC631 /* RepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B81B7212E9492300BAC631 /* RepositoryViewController.m */; };
 		05B81B7512E949C300BAC631 /* RepositoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05B81B7412E949C300BAC631 /* RepositoryViewController.xib */; };
@@ -588,6 +592,10 @@
 		0594276B12FA5AB4005026F7 /* until-loop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "until-loop.png"; sourceTree = "<group>"; };
 		0594C24012F27ED700CB1418 /* UploadScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadScene.h; sourceTree = "<group>"; };
 		0594C24112F27ED700CB1418 /* UploadScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadScene.m; sourceTree = "<group>"; };
+		05A2A97B1312E55000B71F38 /* PF Tempesta Seven Condensed.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PF Tempesta Seven Condensed.ttf"; sourceTree = "<group>"; };
+		05A2A97C1312E55000B71F38 /* Volter (Goldfish).ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Volter (Goldfish).ttf"; sourceTree = "<group>"; };
+		05A2AA071312F72600B71F38 /* C&C Red Alert (INET).ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "C&C Red Alert (INET).ttf"; sourceTree = "<group>"; };
+		05A2AA081312F72600B71F38 /* Silkscreen.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Silkscreen.ttf; sourceTree = "<group>"; };
 		05B81AA812E9067A00BAC631 /* CodeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeModel.h; sourceTree = "<group>"; };
 		05B81AA912E9067A00BAC631 /* CodeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodeModel.m; sourceTree = "<group>"; };
 		05B81B7112E9492300BAC631 /* RepositoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepositoryViewController.h; sourceTree = "<group>"; };
@@ -1149,7 +1157,11 @@
 			isa = PBXGroup;
 			children = (
 				054012B912A30FF600CCC62D /* Apple ][.ttf */,
+				05A2AA071312F72600B71F38 /* C&C Red Alert (INET).ttf */,
+				05A2A97B1312E55000B71F38 /* PF Tempesta Seven Condensed.ttf */,
 				054012BA12A30FF600CCC62D /* Retroville NC.ttf */,
+				05A2AA081312F72600B71F38 /* Silkscreen.ttf */,
+				05A2A97C1312E55000B71F38 /* Volter (Goldfish).ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -1854,6 +1866,10 @@
 				05132D3A130A2FF3005AF7CD /* slider-left.png in Resources */,
 				05132D3B130A2FF3005AF7CD /* slider-right.png in Resources */,
 				05132D52130A3ECF005AF7CD /* slider-background.png in Resources */,
+				05A2A97E1312E55000B71F38 /* PF Tempesta Seven Condensed.ttf in Resources */,
+				05A2A97F1312E55000B71F38 /* Volter (Goldfish).ttf in Resources */,
+				05A2AA091312F72600B71F38 /* C&C Red Alert (INET).ttf in Resources */,
+				05A2AA0A1312F72600B71F38 /* Silkscreen.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

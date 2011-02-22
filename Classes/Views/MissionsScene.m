@@ -127,7 +127,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addMissionLabel:(NSInteger)_mission toSprite:(CCSprite*)_sprite {
-    CCLabel* missionLable = [CCLabel labelWithString:[NSString stringWithFormat:@"%d", _mission + 1] fontName:@"Courier" fontSize:26];
+    CCLabel* missionLable = [CCLabel labelWithString:[NSString stringWithFormat:@"%d", _mission + 1] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
     CGSize missionSize = [self missionSize];
     missionLable.anchorPoint = CGPointMake(0.5, 0.5);
     missionLable.position = CGPointMake(0.285*missionSize.width, 0.31*missionSize.height);
@@ -139,7 +139,7 @@
 - (void)addMissionScore:(NSInteger)_mission toSprite:(CCSprite*)_sprite {
     LevelModel* levelModel = [LevelModel findByLevel:[self missionToLevel:_mission]];
     if ([levelModel score] > 0) {
-        CCLabel* missionScore = [CCLabel labelWithString:[NSString stringWithFormat:@"%d", [levelModel score]] fontName:@"Courier" fontSize:16];
+        CCLabel* missionScore = [CCLabel labelWithString:[NSString stringWithFormat:@"%d", [levelModel score]] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_MISSION];
         CGSize missionSize = [self missionSize];
         missionScore.anchorPoint = CGPointMake(0.5, 0.5);
         missionScore.position = CGPointMake(0.29*missionSize.width, -0.06*missionSize.height);
