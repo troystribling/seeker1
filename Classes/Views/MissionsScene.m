@@ -111,10 +111,12 @@
     CCSprite* sprite = nil;
     if ([self missionIsUnlocked:_mission]) {
         LevelModel* levelModel = [LevelModel findByLevel:[self missionToLevel:_mission]];
-        if (levelModel.completed) {
+        if (levelModel.codeScore <= levelModel.expectedCodeScore && levelModel.completed) {
             sprite = [[[CCSprite alloc] initWithFile:@"mission-complete.png"] autorelease];
-        } else {
+        } else if (levelModel.completed) {
             sprite = [[[CCSprite alloc] initWithFile:@"mission-incomplete.png"] autorelease];
+        } else {
+            sprite = [[[CCSprite alloc] initWithFile:@"mission-failed.png"] autorelease];
         }
         [self addMissionLabel:_mission toSprite:sprite];
         [self addMissionScore:_mission toSprite:sprite];

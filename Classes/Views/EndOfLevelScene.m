@@ -77,7 +77,7 @@
                                                    alignment:UITextAlignmentLeft fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     samplesReturnedLabel.position = CGPointMake(20.0f, 290.0f);
     samplesReturnedLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
-    samplesReturnedLabel.color = ccc3(103,243,27);
+    samplesReturnedLabel.color = kCCLABEL_FONT_COLOR;
     [self addChild:samplesReturnedLabel];
 }
 
@@ -90,7 +90,7 @@
                                                alignment:UITextAlignmentLeft fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     sensorsPlacedLabel.position = CGPointMake(20.0f, 230.0f);
     sensorsPlacedLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
-    sensorsPlacedLabel.color = ccc3(103,243,27);
+    sensorsPlacedLabel.color = kCCLABEL_FONT_COLOR;
     [self addChild:sensorsPlacedLabel];
 }
 
@@ -109,7 +109,7 @@
         NSString* codeReviewString = [NSString stringWithFormat:@"Code Review: %d%%", codeScore];
         codeReviewLabel = [CCLabel labelWithString:codeReviewString fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
         codeReviewLabel.position = CGPointMake(20.0f, 205.0f);
-        codeReviewLabel.color = ccc3(103,243,27);
+        codeReviewLabel.color = kCCLABEL_FONT_COLOR;
     } else {
         NSString* codeReviewString = [NSString stringWithFormat:@"Code Review: %d%%     Penalty          %d*%d = %d", 
                                       codeScore, deltaCodeScore, kPOINTS_PER_CODE_LINE, codeReviewScore];
@@ -175,7 +175,7 @@
                                                          target:self
                                                          selector:@selector(againMission)];
     CCLabel* skipLabel = [CCLabel labelWithString:@"Next>" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
-    skipLabel.color = ccc3(103,243,27);
+    skipLabel.color = kCCLABEL_FONT_COLOR;
     CCMenuItemLabel* skipItem = [CCMenuItemLabel itemWithLabel:skipLabel
                                                         target:self
                                                       selector:@selector(nextMission)];

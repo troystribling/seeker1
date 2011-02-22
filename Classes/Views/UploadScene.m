@@ -61,13 +61,13 @@
         self.percentUploadLabel = [CCLabel labelWithString:@"upload  0%  (2Kb/s)" fontName:@"Courier" fontSize:20];
         self.percentUploadLabel.position = CGPointMake(20.0f, 375.0f);
         self.percentUploadLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
-        self.percentUploadLabel.color = ccc3(103,243,27);
+        self.percentUploadLabel.color = kCCLABEL_FONT_COLOR;
         [self addChild:self.percentUploadLabel];
 
         self.uploadProgressLabel = [CCLabel labelWithString:@"=>" fontName:@"Courier" fontSize:20];
         self.uploadProgressLabel.position = CGPointMake(20.0f, 350.0f);
         self.uploadProgressLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
-        self.uploadProgressLabel.color = ccc3(103,243,27);
+        self.uploadProgressLabel.color = kCCLABEL_FONT_COLOR;
         [self addChild:self.uploadProgressLabel];
 
         self.statusDisplay = [StatusDisplay createWithFile:@"empty-display.png"];

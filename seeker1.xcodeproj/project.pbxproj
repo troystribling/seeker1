@@ -115,6 +115,7 @@
 		0532CF7712C6BDD900DB92D8 /* tharsis-locked.png in Resources */ = {isa = PBXBuildFile; fileRef = 0532CF7612C6BDD900DB92D8 /* tharsis-locked.png */; };
 		05355F3212C3DA8F00CA770E /* MissionsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 05355F3112C3DA8F00CA770E /* MissionsScene.m */; };
 		05355F4312C3DCBA00CA770E /* LevelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05355F4212C3DCBA00CA770E /* LevelModel.m */; };
+		053B0870131378DF005F4075 /* mission-failed.png in Resources */ = {isa = PBXBuildFile; fileRef = 053B086F131378DF005F4075 /* mission-failed.png */; };
 		053CD81212FDD26C00410FC8 /* subroutines.png in Resources */ = {isa = PBXBuildFile; fileRef = 053CD81112FDD26C00410FC8 /* subroutines.png */; };
 		053FBFCA129D8C45000BCBCF /* StatusDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 053FBFC9129D8C45000BCBCF /* StatusDisplay.m */; };
 		0540119612A2B9B900CCC62D /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0540119512A2B9B900CCC62D /* MainScene.m */; };
@@ -538,6 +539,7 @@
 		05355F3112C3DA8F00CA770E /* MissionsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionsScene.m; sourceTree = "<group>"; };
 		05355F4112C3DCBA00CA770E /* LevelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelModel.h; sourceTree = "<group>"; };
 		05355F4212C3DCBA00CA770E /* LevelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelModel.m; sourceTree = "<group>"; };
+		053B086F131378DF005F4075 /* mission-failed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mission-failed.png"; sourceTree = "<group>"; };
 		053CD81112FDD26C00410FC8 /* subroutines.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = subroutines.png; sourceTree = "<group>"; };
 		053FBFC8129D8C44000BCBCF /* StatusDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusDisplay.h; sourceTree = "<group>"; };
 		053FBFC9129D8C45000BCBCF /* StatusDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusDisplay.m; sourceTree = "<group>"; };
@@ -1042,6 +1044,7 @@
 		0521EF6912C5637B0078C77C /* Missions */ = {
 			isa = PBXGroup;
 			children = (
+				053B086F131378DF005F4075 /* mission-failed.png */,
 				0521EF6A12C5637B0078C77C /* elysium.png */,
 				0532CF7212C6BD7800DB92D8 /* elysium-locked.png */,
 				0521EF6B12C5637B0078C77C /* memnonia.png */,
@@ -1878,6 +1881,7 @@
 				05A2AA0A1312F72600B71F38 /* Silkscreen.ttf in Resources */,
 				051849921313406900D8E961 /* lcd phone.ttf in Resources */,
 				051849E6131348A200D8E961 /* Supertext 01.ttf in Resources */,
+				053B0870131378DF005F4075 /* mission-failed.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -62,7 +62,7 @@
     self.bootingLabel = [CCLabel labelWithString:@"Booting" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     self.bootingLabel.position = CGPointMake(kBOOT_XPOS, kBOOT_TOP_YPOS);
     self.bootingLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
-    self.bootingLabel.color = ccc3(103,243,27);
+    self.bootingLabel.color = kCCLABEL_FONT_COLOR;
     [self addChild:self.bootingLabel];
 }
 
@@ -71,7 +71,7 @@
     self.productLabel = [CCLabel labelWithString:@"imaginaryProducts.com" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     self.productLabel.position = CGPointMake(kBOOT_XPOS, kBOOT_LOGO_YPOS);
     self.productLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
-    self.productLabel.color = ccc3(103,243,27);
+    self.productLabel.color = kCCLABEL_FONT_COLOR;
     [self addChild:self.productLabel];
 }
 
@@ -80,7 +80,7 @@
     self.post = [CCLabel labelWithString:_post fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     self.post.position = CGPointMake(kBOOT_XPOS, kBOOT_TOP_YPOS);
     self.post.anchorPoint = CGPointMake(0.0f, 0.0f);
-    self.post.color = ccc3(103,243,27);
+    self.post.color = kCCLABEL_FONT_COLOR;
     [self addChild:self.post];
 }
 
@@ -89,7 +89,7 @@
     self.console = [CCLabel labelWithString:_console fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     self.console.position = CGPointMake(kBOOT_XPOS, kBOOT_TOP_YPOS - kBOOT_DELTA);
     self.console.anchorPoint = CGPointMake(0.0f, 0.0f);
-    self.console.color = ccc3(103,243,27);
+    self.console.color = kCCLABEL_FONT_COLOR;
     [self addChild:self.console];
 }
 
@@ -98,7 +98,7 @@
     self.connection = [CCLabel labelWithString:_connection fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     self.connection.position = CGPointMake(kBOOT_XPOS, kBOOT_TOP_YPOS - 2.0 * kBOOT_DELTA);
     self.connection.anchorPoint = CGPointMake(0.0f, 0.0f);
-    self.connection.color = ccc3(103,243,27);
+    self.connection.color = kCCLABEL_FONT_COLOR;
     [self addChild:self.connection];
 }
 

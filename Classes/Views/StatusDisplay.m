@@ -198,7 +198,7 @@
         [self.terminalText removeObjectAtIndex:0];
     }
     CCLabel* textLabel = [CCLabel labelWithString:_text fontName:kTERM_FONT fontSize:kTERM_FONT_SIZE];
-    textLabel.color = ccc3(103,243,27);
+    textLabel.color = kTERMINAL_FONT_COLOR;
     textLabel.anchorPoint = CGPointMake(0.0, 0.0);
     [self.terminalText addObject:textLabel];
     [self writeDisplay];

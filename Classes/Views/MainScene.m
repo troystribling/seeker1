@@ -36,31 +36,31 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)buildMenu {
     CCLabel* missionLabel = [CCLabel labelWithString:@"1. mission sites" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
-    missionLabel.color = ccc3(103,243,27);
+    missionLabel.color = kCCLABEL_FONT_COLOR;
     CCMenuItemLabel* missionItem = [CCMenuItemLabel itemWithLabel:missionLabel
                                                         target:self
                                                         selector:@selector(mission)];
     missionItem.anchorPoint = CGPointMake(0.0, 0.0);
     CCLabel* settingsLabel = [CCLabel labelWithString:@"2. settings" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
-    settingsLabel.color = ccc3(103,243,27);
+    settingsLabel.color = kCCLABEL_FONT_COLOR;
     CCMenuItemLabel* settingsItem = [CCMenuItemLabel itemWithLabel:settingsLabel
                                                         target:self
                                                         selector:@selector(configure)];
     settingsItem.anchorPoint = CGPointMake(0.0, 0.0);
     CCLabel* statsLabel = [CCLabel labelWithString:@"3. stats" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
-    statsLabel.color = ccc3(103,243,27);
+    statsLabel.color = kCCLABEL_FONT_COLOR;
     CCMenuItemLabel* statsItem = [CCMenuItemLabel itemWithLabel:statsLabel
                                                             target:self
                                                             selector:@selector(stats)];
     statsItem.anchorPoint = CGPointMake(0.0, 0.0);
     CCLabel* repositoryLabel = [CCLabel labelWithString:@"4. repository" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
-    repositoryLabel.color = ccc3(103,243,27);
+    repositoryLabel.color = kCCLABEL_FONT_COLOR;
     CCMenuItemLabel* repositoryItem = [CCMenuItemLabel itemWithLabel:repositoryLabel
                                                        target:self
                                                        selector:@selector(repository)];
     repositoryItem.anchorPoint = CGPointMake(0.0, 0.0);
     CCLabel* tutorialLabel = [CCLabel labelWithString:@"5. tutorial" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
-    tutorialLabel.color = ccc3(103,243,27);
+    tutorialLabel.color = kCCLABEL_FONT_COLOR;
     CCMenuItemLabel* tutorialItem = [CCMenuItemLabel itemWithLabel:tutorialLabel
                                                       target:self
                                                       selector:@selector(tutorial)];

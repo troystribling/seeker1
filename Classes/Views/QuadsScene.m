@@ -200,13 +200,13 @@
     CCLabel* scoreLable = [CCLabel labelWithString:[NSString stringWithFormat:@"Score:     %d", score] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_MISSION];
     scoreLable.anchorPoint = CGPointMake(0.0, 0.0);
     scoreLable.position = CGPointMake(0.115*spriteSize.width, -0.07*spriteSize.height);
-    scoreLable.color = ccc3(103,243,27); 
+    scoreLable.color = kCCLABEL_FONT_COLOR; 
     [_sprite addChild:scoreLable];
 
     CCLabel* perCompLable = [CCLabel labelWithString:[NSString stringWithFormat:@"Completed: %d%%", perComp] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_MISSION];
     perCompLable.anchorPoint = CGPointMake(0.0, 0.0);
     perCompLable.position = CGPointMake(0.115*spriteSize.width, -0.135*spriteSize.height);
-    perCompLable.color = ccc3(103,243,27); 
+    perCompLable.color = kCCLABEL_FONT_COLOR; 
     [_sprite addChild:perCompLable];
 }
 

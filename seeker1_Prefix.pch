@@ -55,6 +55,8 @@
 #define kTERM_FONT                      @"Courier"
 #define kTERM_FONT_SIZE                 12.0
 #define kGLOBAL_FONT                    @"Courier"
-#define kGLOBAL_FONT_SIZE               20.0
-#define kGLOBAL_FONT_SIZE_LARGE         24.0
+#define kGLOBAL_FONT_SIZE               22.0
+#define kGLOBAL_FONT_SIZE_LARGE         26.0
 #define kGLOBAL_FONT_SIZE_MISSION       14.0
+#define kCCLABEL_FONT_COLOR             ccc3(0,210,0)
+#define kTERMINAL_FONT_COLOR            ccc3(93,223,27)
