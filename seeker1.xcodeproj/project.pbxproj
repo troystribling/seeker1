@@ -65,6 +65,8 @@
 		0518052D12EFA4A400952699 /* EndOfLevelScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0518052C12EFA4A400952699 /* EndOfLevelScene.m */; };
 		051806BA12C9903F00568813 /* menu-site.png in Resources */ = {isa = PBXBuildFile; fileRef = 051806B912C9903F00568813 /* menu-site.png */; };
 		051806ED12C997DB00568813 /* menu-empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 051806EC12C997DB00568813 /* menu-empty.png */; };
+		051849921313406900D8E961 /* lcd phone.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 051849911313406900D8E961 /* lcd phone.ttf */; };
+		051849E6131348A200D8E961 /* Supertext 01.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 051849E5131348A200D8E961 /* Supertext 01.ttf */; };
 		05197CD1130103BB006DEC15 /* map-4.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05197CD0130103BB006DEC15 /* map-4.tmx */; };
 		05197CD31301044C006DEC15 /* map-5.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05197CD21301044C006DEC15 /* map-5.tmx */; };
 		05197CD7130105FA006DEC15 /* map-6.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05197CD6130105FA006DEC15 /* map-6.tmx */; };
@@ -474,6 +476,8 @@
 		0518052C12EFA4A400952699 /* EndOfLevelScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndOfLevelScene.m; sourceTree = "<group>"; };
 		051806B912C9903F00568813 /* menu-site.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-site.png"; sourceTree = "<group>"; };
 		051806EC12C997DB00568813 /* menu-empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-empty.png"; sourceTree = "<group>"; };
+		051849911313406900D8E961 /* lcd phone.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "lcd phone.ttf"; sourceTree = "<group>"; };
+		051849E5131348A200D8E961 /* Supertext 01.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Supertext 01.ttf"; sourceTree = "<group>"; };
 		05197CD0130103BB006DEC15 /* map-4.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-4.tmx"; sourceTree = "<group>"; };
 		05197CD21301044C006DEC15 /* map-5.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-5.tmx"; sourceTree = "<group>"; };
 		05197CD6130105FA006DEC15 /* map-6.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-6.tmx"; sourceTree = "<group>"; };
@@ -1159,8 +1163,10 @@
 				054012B912A30FF600CCC62D /* Apple ][.ttf */,
 				05A2AA071312F72600B71F38 /* C&C Red Alert (INET).ttf */,
 				05A2A97B1312E55000B71F38 /* PF Tempesta Seven Condensed.ttf */,
+				051849911313406900D8E961 /* lcd phone.ttf */,
 				054012BA12A30FF600CCC62D /* Retroville NC.ttf */,
 				05A2AA081312F72600B71F38 /* Silkscreen.ttf */,
+				051849E5131348A200D8E961 /* Supertext 01.ttf */,
 				05A2A97C1312E55000B71F38 /* Volter (Goldfish).ttf */,
 			);
 			path = Fonts;
@@ -1870,6 +1876,8 @@
 				05A2A97F1312E55000B71F38 /* Volter (Goldfish).ttf in Resources */,
 				05A2AA091312F72600B71F38 /* C&C Red Alert (INET).ttf in Resources */,
 				05A2AA0A1312F72600B71F38 /* Silkscreen.ttf in Resources */,
+				051849921313406900D8E961 /* lcd phone.ttf in Resources */,
+				051849E6131348A200D8E961 /* Supertext 01.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

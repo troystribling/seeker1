@@ -5,10 +5,12 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Apple ][.ttf</string>
+		<string>lcd phone.ttf</string>
 		<string>Silkscreen.ttf</string>
 		<string>Retroville NC.ttf</string>
 		<string>C&amp;C Red Alert (INET).ttf</string>
 		<string>FFF Atlantis Condensed.ttf</string>
+		<string>Supertext 01.ttf</string>
 		<string>PF Tempesta Seven Condensed.ttf</string>
 		<string>Volter (Goldfish).ttf</string>
 	</array>

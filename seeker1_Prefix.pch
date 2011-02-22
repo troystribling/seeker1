@@ -52,8 +52,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 // fonts 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define kGLOBAL_FONT                    @"C&C Red Alert (INET)"
-#define kGLOBAL_FONT_SIZE               26.0
-#define kGLOBAL_FONT_SIZE_TERM          10.0
-#define kGLOBAL_FONT_SIZE_LARGE         30.0
-#define kGLOBAL_FONT_SIZE_MISSION       18.0
+#define kTERM_FONT                      @"Courier"
+#define kTERM_FONT_SIZE                 12.0
+#define kGLOBAL_FONT                    @"Courier"
+#define kGLOBAL_FONT_SIZE               20.0
+#define kGLOBAL_FONT_SIZE_LARGE         24.0
+#define kGLOBAL_FONT_SIZE_MISSION       14.0

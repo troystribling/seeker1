@@ -197,10 +197,10 @@
     if ([self.terminalText count] > 2) {
         [self.terminalText removeObjectAtIndex:0];
     }
-    CCLabel* _textLabel = [CCLabel labelWithString:_text fontName:@"Courier" fontSize:12];
-    _textLabel.color = ccc3(103,243,27);
-    _textLabel.anchorPoint = CGPointMake(0.0, 0.0);
-    [self.terminalText addObject:_textLabel];
+    CCLabel* textLabel = [CCLabel labelWithString:_text fontName:kTERM_FONT fontSize:kTERM_FONT_SIZE];
+    textLabel.color = ccc3(103,243,27);
+    textLabel.anchorPoint = CGPointMake(0.0, 0.0);
+    [self.terminalText addObject:textLabel];
     [self writeDisplay];
 }
 
