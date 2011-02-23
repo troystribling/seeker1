@@ -105,7 +105,10 @@
         self.runImageView.hidden = NO;
     }
     if (self.launchedFromMap) {
-        self.view.alpha = kALPHA_MAX;
+        if (self.view.alpha > kALPHA_MAX) {
+            self.view.alpha = kALPHA_MAX;
+            self.opacitySlider.value = 1.0;
+        }
         self.programView.frame = CGRectMake(0.0, 105.0, 320.0, 375.0);
         self.opacityImage.hidden = NO;
         self.opacitySlider.hidden = NO;

@@ -65,7 +65,7 @@
 								</object>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC40MDM5MjE1Njg2IDAuOTUyOTQxMTc2NSAwLjEwNTg4MjM1MjkAA</bytes>
+									<bytes key="NSRGB">MCAwLjY2NjY2NjY2NjcgMAA</bytes>
 								</object>
 								<object class="NSColor" key="IBUIHighlightedColor" id="545271973">
 									<int key="NSColorSpace">3</int>
@@ -92,7 +92,7 @@
 								<reference key="IBUIFont" ref="295814241"/>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC40MDM5MjE1Njg2IDAuOTUyOTQxMTc2NSAwLjEwNTg4MjM1MjkAA</bytes>
+									<bytes key="NSRGB">MCAwLjY2NjY2NjY2NjcgMAA</bytes>
 								</object>
 								<reference key="IBUIHighlightedColor" ref="545271973"/>
 								<int key="IBUIBaselineAdjustment">1</int>

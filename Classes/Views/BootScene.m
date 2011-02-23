@@ -123,6 +123,7 @@
         [self.statusDisplay addTerminalText:@"~> boot"];
         [self.statusDisplay addTerminalText:@"~>"];
         [self insertBootingLabel];
+        [self insertProductLabel];
         [self schedule:@selector(nextFrame:)];
     }
 	return self;
@@ -135,7 +136,6 @@
         [[CCDirector sharedDirector] replaceScene: [MainScene scene]];
     } else if (self.counter == kBOOT_TICK_1) {
         [self.bootingLabel setString:@"Booting."];
-        [self insertProductLabel];
     } else if (self.counter == kBOOT_TICK_2) {
         [self.bootingLabel setString:@"Booting.."];
     } else if (self.counter == kBOOT_TICK_3) {
