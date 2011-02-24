@@ -95,7 +95,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)insertCodeReviewLabel {
+- (void)insertCodeScoreLabel {
     NSInteger deltaCodeScore = self.level.codeScore - self.level.expectedCodeScore;
     NSInteger expScore = self.level.expectedCodeScore;
     if (deltaCodeScore < 0) {
@@ -103,23 +103,23 @@
         expScore = self.level.codeScore;
     } 
     NSInteger codeScore = (int)(100.0*(float)(expScore)/(float)self.level.codeScore);
-    NSInteger codeReviewScore = deltaCodeScore * kPOINTS_PER_CODE_LINE;
-    CCLabel* codeReviewLabel;
+    NSInteger codeScorePoints = deltaCodeScore * kPOINTS_PER_CODE_LINE;
+    CCLabel* codeScoreLabel;
     if (deltaCodeScore == 0) {        
-        NSString* codeReviewString = [NSString stringWithFormat:@"Code Review: %d%%", codeScore];
-        codeReviewLabel = [CCLabel labelWithString:codeReviewString fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
-        codeReviewLabel.position = CGPointMake(20.0f, 205.0f);
-        codeReviewLabel.color = kCCLABEL_FONT_COLOR;
+        NSString* codeScoreString = [NSString stringWithFormat:@"Code Score: %d%%", codeScore];
+        codeScoreLabel = [CCLabel labelWithString:codeScoreString fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
+        codeScoreLabel.position = CGPointMake(20.0f, 205.0f);
+        codeScoreLabel.color = kCCLABEL_FONT_COLOR;
     } else {
-        NSString* codeReviewString = [NSString stringWithFormat:@"Code Review: %d%%     Penalty          %d*%d = %d", 
-                                      codeScore, deltaCodeScore, kPOINTS_PER_CODE_LINE, codeReviewScore];
-        codeReviewLabel = [CCLabel labelWithString:codeReviewString dimensions:CGSizeMake(250, 90) 
+        NSString* codeScoreString = [NSString stringWithFormat:@"Code Score: %d%%     Penalty          %d*%d = %d", 
+                                      codeScore, deltaCodeScore, kPOINTS_PER_CODE_LINE, codeScorePoints];
+        codeScoreLabel = [CCLabel labelWithString:codeScoreString dimensions:CGSizeMake(250, 90) 
                                          alignment:UITextAlignmentLeft fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
-        codeReviewLabel.position = CGPointMake(20.0f, 140.0f);
-        codeReviewLabel.color = ccc3(204,51,0);
+        codeScoreLabel.position = CGPointMake(20.0f, 140.0f);
+        codeScoreLabel.color = ccc3(204,51,0);
     }
-    codeReviewLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
-    [self addChild:codeReviewLabel];
+    codeScoreLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
+    [self addChild:codeScoreLabel];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

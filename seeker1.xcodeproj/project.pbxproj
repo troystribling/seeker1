@@ -178,6 +178,7 @@
 		05BE9450130705A000AAAA1F /* map-34.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05BE944F130705A000AAAA1F /* map-34.tmx */; };
 		05BE94551307181900AAAA1F /* map-35.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05BE94541307181900AAAA1F /* map-35.tmx */; };
 		05BE945A13072FA500AAAA1F /* map-36.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05BE945913072FA500AAAA1F /* map-36.tmx */; };
+		05D4EEED13161BA400954E03 /* mission-not-played.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D4EEEC13161BA400954E03 /* mission-not-played.png */; };
 		05E4801912D53FC000E6B65E /* terminal-launcher-subroutines.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E4801812D53FC000E6B65E /* terminal-launcher-subroutines.png */; };
 		05E4801C12D5411300E6B65E /* SubroutineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4801B12D5411300E6B65E /* SubroutineViewController.m */; };
 		05E4801F12D5414300E6B65E /* CreateSubroutineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4801E12D5414300E6B65E /* CreateSubroutineViewController.m */; };
@@ -616,6 +617,7 @@
 		05BE944F130705A000AAAA1F /* map-34.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-34.tmx"; sourceTree = "<group>"; };
 		05BE94541307181900AAAA1F /* map-35.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-35.tmx"; sourceTree = "<group>"; };
 		05BE945913072FA500AAAA1F /* map-36.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-36.tmx"; sourceTree = "<group>"; };
+		05D4EEEC13161BA400954E03 /* mission-not-played.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mission-not-played.png"; sourceTree = "<group>"; };
 		05E4801812D53FC000E6B65E /* terminal-launcher-subroutines.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-subroutines.png"; sourceTree = "<group>"; };
 		05E4801A12D5411300E6B65E /* SubroutineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubroutineViewController.h; sourceTree = "<group>"; };
 		05E4801B12D5411300E6B65E /* SubroutineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubroutineViewController.m; sourceTree = "<group>"; };
@@ -1044,14 +1046,15 @@
 		0521EF6912C5637B0078C77C /* Missions */ = {
 			isa = PBXGroup;
 			children = (
-				053B086F131378DF005F4075 /* mission-failed.png */,
 				0521EF6A12C5637B0078C77C /* elysium.png */,
 				0532CF7212C6BD7800DB92D8 /* elysium-locked.png */,
 				0521EF6B12C5637B0078C77C /* memnonia.png */,
+				0532CF6F12C6BA5A00DB92D8 /* mission-complete.png */,
+				053B086F131378DF005F4075 /* mission-failed.png */,
 				0532CF7312C6BD7800DB92D8 /* memnonia-locked.png */,
 				0532CF6E12C6BA5A00DB92D8 /* mission-locked.png */,
 				0542036912CA715700F48FE4 /* mission-incomplete.png */,
-				0532CF6F12C6BA5A00DB92D8 /* mission-complete.png */,
+				05D4EEEC13161BA400954E03 /* mission-not-played.png */,
 				0521EF6C12C5637B0078C77C /* tharsis.png */,
 				0532CF7612C6BDD900DB92D8 /* tharsis-locked.png */,
 			);
@@ -1882,6 +1885,7 @@
 				051849921313406900D8E961 /* lcd phone.ttf in Resources */,
 				051849E6131348A200D8E961 /* Supertext 01.ttf in Resources */,
 				053B0870131378DF005F4075 /* mission-failed.png in Resources */,
+				05D4EEED13161BA400954E03 /* mission-not-played.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
