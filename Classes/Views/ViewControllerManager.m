@@ -30,6 +30,7 @@ static ViewControllerManager* thisViewControllerManager = nil;
 @synthesize repositoryViewController;
 @synthesize tutorialIndexViewController;
 @synthesize tutorialSectionViewController;
+@synthesize tutorialIntroductionViewController;
 
 //===================================================================================================================================
 #pragma mark ViewControllerManager PrivateApi
@@ -279,11 +280,11 @@ static ViewControllerManager* thisViewControllerManager = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 // TutorialSectionViewController
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (TutorialSectionViewController*)showTutorialSectionView:(UIView*)_containerView withImages:(NSArray*)_tutorialList{
+- (TutorialSectionViewController*)showTutorialSectionView:(UIView*)_containerView withSectionID:(TutorialSectionID)_sectionID {
     if (self.tutorialSectionViewController == nil) {
         self.tutorialSectionViewController = [TutorialSectionViewController inView:_containerView];
     } 
-    self.tutorialSectionViewController.tutorialList = _tutorialList;
+    [self.tutorialSectionViewController setTutorialSection:_sectionID];
     [_containerView addSubview:self.tutorialSectionViewController.view];
     [self tutorialSectionViewWillAppear];
     return self.tutorialSectionViewController;
@@ -305,6 +306,37 @@ static ViewControllerManager* thisViewControllerManager = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tutorialSectionViewWillDisappear {
     [self.tutorialSectionViewController viewWillDisappear:NO];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// TutorialIntroductionViewController
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (TutorialIntroductionViewController*)showTutorialIntroductionView:(UIView*)_containerView withFeatureID:(UnlockedFeatureID)_featureID {
+    if (self.tutorialIntroductionViewController == nil) {
+        self.tutorialIntroductionViewController = [TutorialIntroductionViewController inView:_containerView];
+    } 
+    [self.tutorialIntroductionViewController setSelectedFeature:_featureID];
+    [_containerView addSubview:self.tutorialIntroductionViewController.view];
+    [self tutorialIntroductionViewWillAppear];
+    return self.tutorialIntroductionViewController;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeTutorialIntroductionView {
+    if (self.tutorialIntroductionViewController) {
+        [self.tutorialIntroductionViewController viewWillDisappear:NO];
+        [self.tutorialIntroductionViewController.view removeFromSuperview];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)tutorialIntroductionViewWillAppear {
+    [self.tutorialIntroductionViewController viewWillAppear:NO];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)tutorialIntroductionViewWillDisappear {
+    [self.tutorialIntroductionViewController viewWillDisappear:NO];
 }
 
 @end

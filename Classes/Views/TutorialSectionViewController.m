@@ -29,6 +29,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize tutorialView;
 @synthesize nextView;
+@synthesize sectionList;
 @synthesize tutorialList;
 @synthesize containerView;
 @synthesize selectedTutorial;
@@ -73,11 +74,24 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.view.frame = self.containerView.frame;
-        self.tutorialList = [NSMutableArray arrayWithCapacity:10];
+        self.sectionList = [NSMutableArray arrayWithObjects:[NSArray arrayWithObjects:@"get-started.png", @"game-objects.png", 
+                                                                @"pan-game-board.png", @"status-display.png", @"program-game-board.png",
+                                                                @"open-terminal-game-board.png", @"write-program.png", 
+                                                                @"add-program-instruction.png", @"completed-program.png", nil],
+                                                             [NSArray arrayWithObjects:@"subroutines.png", @"list-subroutines.png", 
+                                                                @"create-edit-subroutines.png", nil],
+                                                             [NSArray arrayWithObjects:@"times-loop.png", nil],
+                                                             [NSArray arrayWithObjects:@"until-loop.png", @"predicates.png", nil],
+                                                             [NSArray arrayWithObjects:@"rover-bins.png", nil], nil];
     }
     return self;
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setTutorialSection:(TutorialSectionID)_sectionID {
+    self.tutorialList = [self.sectionList objectAtIndex:_sectionID];
+}
+                                        
 //===================================================================================================================================
 #pragma mark UIViewController
 

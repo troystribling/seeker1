@@ -170,7 +170,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertMissionCompletedMenu {
     CCLabel* againLabel = [CCLabel labelWithString:@"<Again" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
-    againLabel.color = ccc3(103,243,27);
+    againLabel.color = kCCLABEL_FONT_COLOR;
     CCMenuItemLabel* againItem = [CCMenuItemLabel itemWithLabel:againLabel
                                                          target:self
                                                          selector:@selector(againMission)];

@@ -157,23 +157,19 @@
     ViewControllerManager * viewMgr = [ViewControllerManager instance];
     switch (indexPath.row) {
         case 0:
-            [viewMgr showTutorialSectionView:self.view withImages:[NSArray arrayWithObjects:@"get-started.png", @"game-objects.png", 
-                                                                   @"pan-game-board.png", @"status-display.png", @"program-game-board.png",
-                                                                   @"open-terminal-game-board.png", @"write-program.png", 
-                                                                   @"add-program-instruction.png", @"completed-program.png", nil]];
+            [viewMgr showTutorialSectionView:self.view withSectionID:GettingStartedTutorialSectionID];
             break;
         case 1:
-            [viewMgr showTutorialSectionView:self.view withImages:[NSArray arrayWithObjects:@"times-loop.png", nil]];
+            [viewMgr showTutorialSectionView:self.view withSectionID:SubroutinesTutorialSectionID];
             break;
         case 2:
-            [viewMgr showTutorialSectionView:self.view withImages:[NSArray arrayWithObjects:@"subroutines.png", @"list-subroutines.png", 
-                                                                   @"create-edit-subroutines.png", nil]];
+            [viewMgr showTutorialSectionView:self.view withSectionID:TimesLoopTutorialSectionID];
             break;
         case 3:
-            [viewMgr showTutorialSectionView:self.view withImages:[NSArray arrayWithObjects:@"until-loop.png", @"predicates.png", nil]];
+            [viewMgr showTutorialSectionView:self.view withSectionID:UntilLoopTutorialSectionID];
             break;
         case 4:
-            [viewMgr showTutorialSectionView:self.view withImages:[NSArray arrayWithObjects:@"rover-bins.png", nil]];
+            [viewMgr showTutorialSectionView:self.view withSectionID:RoverBinsTutorialSectionID];
             break;
         default:
             break;

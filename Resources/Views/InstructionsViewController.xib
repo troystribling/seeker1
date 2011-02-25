@@ -99,7 +99,7 @@
 					<object class="IBUIImageView" id="425954349">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{0, 12}, {125, 40}}</string>
+						<string key="NSFrame">{{0, 12}, {120, 40}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<int key="IBUITag">1</int>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -259,7 +259,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>InstructionsViewController</string>
 					<string>UIResponder</string>
-					<string>{{-1212, -166}, {320, 480}}</string>
+					<string>{{36, 293}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">

@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "Seeker1AppDelegate.h"
+#import "ViewControllerManager.h"
 #import "SeekerDbi.h"
 #import "cocos2d.h"
 #import "BootScene.h"

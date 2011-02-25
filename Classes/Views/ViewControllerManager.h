@@ -16,6 +16,7 @@
 #import "RepositoryViewController.h"
 #import "TutorialIndexViewController.h"
 #import "TutorialSectionViewController.h"
+#import "TutorialIntroductionViewController.h"
  
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class DoTimesTerminalCell;
@@ -30,6 +31,7 @@
     RepositoryViewController* repositoryViewController;
     TutorialIndexViewController* tutorialIndexViewController;
     TutorialSectionViewController* tutorialSectionViewController;
+    TutorialIntroductionViewController *tutorialIntroductionViewController;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -41,6 +43,7 @@
 @property (nonatomic, retain) RepositoryViewController* repositoryViewController;
 @property (nonatomic, retain) TutorialIndexViewController* tutorialIndexViewController;
 @property (nonatomic, retain) TutorialSectionViewController* tutorialSectionViewController;
+@property (nonatomic, retain) TutorialIntroductionViewController *tutorialIntroductionViewController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ViewControllerManager*)instance;
@@ -90,9 +93,15 @@
 - (void)tutorialIndexViewWillDisappear;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (TutorialSectionViewController*)showTutorialSectionView:(UIView*)_containerView withImages:(NSArray*)_imageList;
+- (TutorialSectionViewController*)showTutorialSectionView:(UIView*)_containerView withSectionID:(TutorialSectionID)_sectionID;
 - (void)removeTutorialSectionView;
 - (void)tutorialSectionViewWillAppear;
 - (void)tutorialSectionViewWillDisappear;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (TutorialIntroductionViewController*)showTutorialIntroductionView:(UIView*)_containerView withFeatureID:(UnlockedFeatureID)_featureID;
+- (void)removeTutorialIntroductionView;
+- (void)tutorialIntroductionViewWillAppear;
+- (void)tutorialIntroductionViewWillDisappear;
 
 @end
