@@ -66,8 +66,8 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)setSelectedFeature:(UnlockedFeatureID)_featureID {
-    self.selectedFeatureList = [self.featureList objectAtIndex:_featureID];
+- (void)setTutorialIntroduction:(TutorialIntroductionID)_introductionID {
+    self.selectedFeatureList = [self.featureList objectAtIndex:_introductionID];
 }
 
 //===================================================================================================================================

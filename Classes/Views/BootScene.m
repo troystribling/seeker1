@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "BootScene.h"
+#import "ViewControllerManager.h"
 #import "StatusDisplay.h"
 #import "MainScene.h"
 
@@ -39,6 +40,7 @@
 - (void)insertPOST:(NSString*)_post;
 - (void)insertConsole:(NSString*)_console;
 - (void)insertConnection:(NSString*)_connection;
+- (void)showGetStartedIntroduction;
 
 @end
 
@@ -102,6 +104,11 @@
     [self addChild:self.connection];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)showGetStartedIntroduction {
+    [[ViewControllerManager instance] showTutorialIntroductionView:[[CCDirector sharedDirector] openGLView] withIntroductionID:GetStartedTutorialIntroductionID];
+}
+
 //===================================================================================================================================
 #pragma mark BootScene
 
@@ -134,6 +141,7 @@
     self.counter++;
     if (self.counter > kSTARTUP_TICKS) {
         [[CCDirector sharedDirector] replaceScene: [MainScene scene]];
+        [self showGetStartedIntroduction];
     } else if (self.counter == kBOOT_TICK_1) {
         [self.bootingLabel setString:@"Booting."];
     } else if (self.counter == kBOOT_TICK_2) {
@@ -184,6 +192,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 -(void) ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent *)event {
     [[CCDirector sharedDirector] replaceScene: [MainScene scene]];
+    [self showGetStartedIntroduction];
 }    
 
 @end

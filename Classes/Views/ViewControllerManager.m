@@ -282,7 +282,7 @@ static ViewControllerManager* thisViewControllerManager = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (TutorialSectionViewController*)showTutorialSectionView:(UIView*)_containerView withSectionID:(TutorialSectionID)_sectionID {
     if (self.tutorialSectionViewController == nil) {
-        self.tutorialSectionViewController = [TutorialSectionViewController inView:_containerView];
+        self.tutorialSectionViewController = [TutorialIntroductionViewController inView:_containerView];
     } 
     [self.tutorialSectionViewController setTutorialSection:_sectionID];
     [_containerView addSubview:self.tutorialSectionViewController.view];
@@ -311,11 +311,11 @@ static ViewControllerManager* thisViewControllerManager = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 // TutorialIntroductionViewController
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (TutorialIntroductionViewController*)showTutorialIntroductionView:(UIView*)_containerView withFeatureID:(UnlockedFeatureID)_featureID {
+- (TutorialIntroductionViewController*)showTutorialIntroductionView:(UIView*)_containerView withIntroductionID:(TutorialIntroductionID)_introductionID {
     if (self.tutorialIntroductionViewController == nil) {
         self.tutorialIntroductionViewController = [TutorialIntroductionViewController inView:_containerView];
     } 
-    [self.tutorialIntroductionViewController setSelectedFeature:_featureID];
+    [self.tutorialIntroductionViewController setTutorialIntroduction:_introductionID];
     [_containerView addSubview:self.tutorialIntroductionViewController.view];
     [self tutorialIntroductionViewWillAppear];
     return self.tutorialIntroductionViewController;

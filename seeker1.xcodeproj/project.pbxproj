@@ -88,6 +88,7 @@
 		05227E8412F675AF00923DEA /* TutorialSectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05227E8312F675AF00923DEA /* TutorialSectionViewController.xib */; };
 		0522D25212CBA29400E0530C /* DoTimesTerminalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0522D25112CBA29400E0530C /* DoTimesTerminalCell.m */; };
 		0522D27412CBF17300E0530C /* DoTimesTerminalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0522D27312CBF17300E0530C /* DoTimesTerminalCell.xib */; };
+		05242E0413188E4900E59909 /* TutorialIntroductionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05242E0313188E4900E59909 /* TutorialIntroductionViewController.xib */; };
 		05246DA212CD01B0000EB7AF /* TerminalCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 05246DA112CD01B0000EB7AF /* TerminalCellFactory.m */; };
 		0527C52512A9A8B900DD4099 /* TermMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0527C52412A9A8B900DD4099 /* TermMenuView.m */; };
 		0527D45812FF3EC700AF6A0F /* pan-game-board.png in Resources */ = {isa = PBXBuildFile; fileRef = 0527D45712FF3EC700AF6A0F /* pan-game-board.png */; };
@@ -505,6 +506,7 @@
 		0522D25012CBA29400E0530C /* DoTimesTerminalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoTimesTerminalCell.h; sourceTree = "<group>"; };
 		0522D25112CBA29400E0530C /* DoTimesTerminalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoTimesTerminalCell.m; sourceTree = "<group>"; };
 		0522D27312CBF17300E0530C /* DoTimesTerminalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoTimesTerminalCell.xib; sourceTree = "<group>"; };
+		05242E0313188E4900E59909 /* TutorialIntroductionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorialIntroductionViewController.xib; sourceTree = "<group>"; };
 		05246DA012CD01B0000EB7AF /* TerminalCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerminalCellFactory.h; sourceTree = "<group>"; };
 		05246DA112CD01B0000EB7AF /* TerminalCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerminalCellFactory.m; sourceTree = "<group>"; };
 		0527C52312A9A8B900DD4099 /* TermMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermMenuView.h; sourceTree = "<group>"; };
@@ -1196,6 +1198,7 @@
 				0547A48112AC38B100D2F0D1 /* TerminalCell.xib */,
 				058912D212F4E27D005870C0 /* TutorialIndexCell.xib */,
 				058912C712F4D5B9005870C0 /* TutorialIndexViewController.xib */,
+				05242E0313188E4900E59909 /* TutorialIntroductionViewController.xib */,
 				05227E8312F675AF00923DEA /* TutorialSectionViewController.xib */,
 			);
 			path = Views;
@@ -1891,6 +1894,7 @@
 				051849E6131348A200D8E961 /* Supertext 01.ttf in Resources */,
 				053B0870131378DF005F4075 /* mission-failed.png in Resources */,
 				05D4EEED13161BA400954E03 /* mission-not-played.png in Resources */,
+				05242E0413188E4900E59909 /* TutorialIntroductionViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

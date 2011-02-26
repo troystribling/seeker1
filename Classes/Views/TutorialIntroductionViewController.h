@@ -10,12 +10,13 @@
 #import <UIKit/UIKit.h>
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-typedef enum unlockedFeatureID {
-    SubroutinesUnlockedFeatureID,
-    TimesLoopUnlockedFeatureID,
-    UntilLoopUnlockedFeatureID,
-    RoverBinsUnlockedFeatureID
-} UnlockedFeatureID;
+typedef enum tutorialIntroductionID {
+    GetStartedTutorialIntroductionID,
+    SubroutinesTutorialIntroductionID,
+    TimesLoopTutorialIntroductionID,
+    UntilLoopTutorialIntroductionID,
+    RoverBinsTutorialIntroductionID
+} TutorialIntroductionID;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TutorialIntroductionViewController : UIViewController {
@@ -36,6 +37,6 @@ typedef enum unlockedFeatureID {
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
-- (void)setSelectedFeature:(UnlockedFeatureID)_featureID;
+- (void)setTutorialIntroduction:(TutorialIntroductionID)_introductionID;
 
 @end
