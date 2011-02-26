@@ -282,7 +282,7 @@ static ViewControllerManager* thisViewControllerManager = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (TutorialSectionViewController*)showTutorialSectionView:(UIView*)_containerView withSectionID:(TutorialSectionID)_sectionID {
     if (self.tutorialSectionViewController == nil) {
-        self.tutorialSectionViewController = [TutorialIntroductionViewController inView:_containerView];
+        self.tutorialSectionViewController = [TutorialSectionViewController inView:_containerView];
     } 
     [self.tutorialSectionViewController setTutorialSection:_sectionID];
     [_containerView addSubview:self.tutorialSectionViewController.view];

@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "ViewControllerManager.h"
+#import "cocos2d.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kFEATURE_UNLOCK_LAUNCHER_DONE_TAG       1
@@ -109,15 +110,15 @@
     NSInteger touchTag = touch.view.tag;
     switch (touchTag) {
         case kFEATURE_UNLOCK_LAUNCHER_DONE_TAG:
-            [self.view removeFromSuperview];
             break;
         case kFEATURE_UNLOCK_LAUNCHER_TUTORIAL_TAG:
             ;TutorialSectionID sectionID = [[self.selectedFeatureList objectAtIndex:2] intValue];
-            [[ViewControllerManager instance] showTutorialSectionView:self.view withSectionID:sectionID];
+            [[ViewControllerManager instance] showTutorialSectionView:[[CCDirector sharedDirector] openGLView] withSectionID:sectionID];
             break;
         default:
             break;
     }
+    [self.view removeFromSuperview];
 }
 
 @end
