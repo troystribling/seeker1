@@ -13,7 +13,6 @@
 #import "UserModel.h"
 #import "TouchUtils.h"
 #import "MapScene.h"
-#import "TermMenuView.h"
 #import "ProgramNgin.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -42,7 +41,6 @@
 @synthesize quadrangle;
 @synthesize levelsUnlocked;
 @synthesize screenSize;
-@synthesize menu;
 
 //===================================================================================================================================
 #pragma mark MissionsScene PrivateAPI
@@ -129,7 +127,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addMissionLabel:(NSInteger)_mission toSprite:(CCSprite*)_sprite {
-    CCLabel* missionLable = [CCLabel labelWithString:[NSString stringWithFormat:@"%d", _mission + 1] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
+    CCLabel* missionLable = [CCLabel labelWithString:[NSString stringWithFormat:@"%d", [self missionToLevel:_mission]] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
     CGSize missionSize = [self missionSize];
     missionLable.anchorPoint = CGPointMake(0.5, 0.5);
     missionLable.position = CGPointMake(0.285*missionSize.width, 0.31*missionSize.height);
@@ -168,12 +166,7 @@
         self.isTouchEnabled = YES;
         self.statusDisplay = [StatusDisplay create];
         [self.statusDisplay insert:self];
-        [self.statusDisplay addTerminalText:@"~> main"];
-        [self.statusDisplay addTerminalText:@"~> site"];
-        [self.statusDisplay addTerminalText:@"~>"];
         [self.statusDisplay test];
-        self.menu = [TermMenuView create];
-        [self.menu missionsInitItems];
         [self loadMissions];
     }
 	return self;
@@ -183,11 +176,7 @@
 -(void) ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent *)event {
 	CGPoint touchLocation = [TouchUtils locationFromTouches:touches];
     NSInteger mission = [self positionToMission:touchLocation];
-    if ([self.menu isInMenuRect:touchLocation]) {
-        [self.menu showMenu];
-    } else if (self.menu.menuIsOpen) {
-        [self.menu hideMenu];
-    } else if ([self missionIsUnlocked:mission]) {
+    if ([self missionIsUnlocked:mission]) {
         NSInteger level = [self missionToLevel:mission];
         [ProgramNgin instance].programHalted = NO;
         [ProgramNgin instance].programRunning = NO;

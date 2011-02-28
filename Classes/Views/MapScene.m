@@ -12,11 +12,12 @@
 #import "UserModel.h"
 #import "LevelModel.h"
 #import "ProgramModel.h"
-#import "TermMenuView.h"
 #import "SeekerSprite.h"
 #import "StatusDisplay.h"
 #import "ProgramNgin.h"
 #import "TouchUtils.h"
+#import "ViewControllerManager.h"
+#import "MainScene.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kMAP_EDGE_BUFFER            0
@@ -69,6 +70,7 @@
 - (void)updateSpeed;
 - (void)updateSensorCount;
 - (void)updateSampleCount;
+- (void)updateLevel;
 // seeker crash
 - (void)crashCompleted;
 - (void)crashHitMapBoundary;
@@ -89,9 +91,12 @@
 - (void)runLevelCompletedAnimation;
 - (void)levelCompletedAnimation;
 // menu
-- (void)initTerminalItems;
-- (void)addResetTerminalItems;
-- (void)addRunTerminalItems;
+- (void)insertMenu;
+- (void)mapMenu;
+- (void)mapTerm;
+- (void)mapSubs;
+- (void)mapStop;
+- (void)mapRun;    
 // move map on touch
 - (void)onTouchMoveMapUp;
 - (void)onTouchMoveMapDown;
@@ -107,6 +112,8 @@
 - (void)onTouchZoomMapOut;
 - (CGPoint)zoomInScreenCoords:(CGPoint)_screenPoint;
 - (CGPoint)zoomOutScreenCoords:(CGPoint)_screenPoint;
+// utils
+- (BOOL)acceptTouches:(CGPoint)_touchLocation;
 
 @end
 
@@ -120,7 +127,6 @@
 @synthesize seekerPath;
 @synthesize level;
 @synthesize endOfMissionCounter;
-@synthesize menu;
 @synthesize screenCenter;
 @synthesize firstTouch;
 @synthesize onTouchMoveDelta;
@@ -132,6 +138,7 @@
 @synthesize sandLayer;
 @synthesize objectsLayer;
 @synthesize crash;
+@synthesize menu;
 @synthesize levelResetSeeker;
 @synthesize levelResetMap;
 @synthesize levelInitSeeker;
@@ -141,9 +148,9 @@
 @synthesize nextLevel;
 @synthesize movingMapOnTouch;
 @synthesize centeringOnSeekerPosition;
-@synthesize ignoreTouches;
 @synthesize zoomMap;
 @synthesize mapZoomedIn;
+@synthesize canTouch;
 
 //===================================================================================================================================
 #pragma mark MapScene PrivateAPI
@@ -168,13 +175,9 @@
         NSMutableArray* programListing = [model codeListingToInstrictions];
         [ngin saveProgram:programListing];
         [ngin loadProgram:programListing];
-        [self addRunTerminalItems];
-        [self.menu addRunItems];
-    } else {
-        [self initTerminalItems];
-        [self.menu mapInitItems];
     }
     [self addChild:self.tileMap z:-1 tag:kMAP];
+    [self insertMenu];
     self.levelInitSeeker = YES;
 }
 
@@ -210,6 +213,7 @@
     [self.statusDisplay setDigits:self.seeker1.speed forDisplay:SpeedDisplayType];
     [self.statusDisplay setDigits:self.seeker1.sensorSites forDisplay:SensorDisplayType];
     [self.statusDisplay setDigits:self.seeker1.sampleSites forDisplay:SampleDisplayType];
+    [self.statusDisplay setDigits:self.level forDisplay:LevelDisplayType]; 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -239,6 +243,8 @@
     self.tileMap = newTileMap;
     [self centerTileMapOnStartPoint];
     [self initStatusDisplay];
+    [self.menu removeFromParentAndCleanup:YES];
+    [self insertMenu];
     [self.seeker1 initParams:self.startSite];
     self.levelResetSeeker = YES;
 }
@@ -384,8 +390,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)executeSeekerInstruction:(ccTime)dt {
-    [self addResetTerminalItems];
-    [self.menu addResetItems];
     NSMutableArray* instructionSet = nil;
     ProgramNgin* ngin = [ProgramNgin instance];
     CGPoint seekerTile = [self getSeekerTile];
@@ -447,9 +451,9 @@
 - (NSInteger)speedDelta:(NSInteger)_gradient {
     NSInteger delta = 0;
     if (_gradient < 0) {
-        delta = -kSEEKER_DELTA_SPEED;
-    } else if (_gradient > 0) {
         delta = kSEEKER_DELTA_SPEED;
+    } else if (_gradient > 0) {
+        delta = -kSEEKER_DELTA_SPEED;
     }
     return delta;
 }
@@ -624,6 +628,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)updateLevel {
+    [self.statusDisplay setDigits:self.level forDisplay:LevelDisplayType]; 
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 // seeker crashes
 //-----------------------------------------------------------------------------------------------------------------------------------
 #pragma mark seeker crashes
@@ -739,24 +748,54 @@
 #pragma mark menu
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)initTerminalItems {
-    [self.statusDisplay addTerminalText:@"~> main"];
-    [self.statusDisplay addTerminalText:@"~> term"];
-    [self.statusDisplay addTerminalText:@"~>"];
+- (void)insertMenu {
+    CCSprite* menuUnselected = [CCSprite spriteWithFile:@"map-menu.png"];
+    CCSprite* menuSelected = [CCSprite spriteWithFile:@"map-menu-selected.png"];
+    CCMenuItemSprite* menuItem = [CCMenuItemSprite itemFromNormalSprite:menuUnselected selectedSprite:menuSelected target:self selector:@selector(mapMenu)];
+    CCSprite* termUnselected = [CCSprite spriteWithFile:@"map-term.png"];
+    CCSprite* termSelected = [CCSprite spriteWithFile:@"map-term-selected.png"];
+    CCMenuItemSprite* termItem = [CCMenuItemSprite itemFromNormalSprite:termUnselected selectedSprite:termSelected target:self selector:@selector(mapTerm)];
+    if ([UserModel level] >= kLEVEL_FOR_SUBROUTINES) {
+        CCSprite* subsUnselected = [CCSprite spriteWithFile:@"map-subs.png"];
+        CCSprite* subsSelected = [CCSprite spriteWithFile:@"map-subs-selected.png"];
+        CCMenuItemSprite* subsItem = [CCMenuItemSprite itemFromNormalSprite:subsUnselected selectedSprite:subsSelected target:self selector:@selector(mapSubs)];
+        self.menu = [CCMenu menuWithItems:menuItem, termItem, subsItem, nil];
+    } else {
+        self.menu = [CCMenu menuWithItems:menuItem, termItem, nil];
+    }
+    [self.menu alignItemsHorizontallyWithPadding:0.0];
+    self.menu.position = CGPointMake(160.0f, 395.0f);
+    [self addChild:menu];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addResetTerminalItems {
-    [self.statusDisplay addTerminalText:@"~> main"];
-    [self.statusDisplay addTerminalText:@"~> term"];
-    [self.statusDisplay addTerminalText:@"~> rset"];
+- (void)mapMenu {
+    [[CCDirector sharedDirector] replaceScene: [MainScene scene]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addRunTerminalItems {
-    [self.statusDisplay addTerminalText:@"~> main"];
-    [self.statusDisplay addTerminalText:@"~> term"];
-    [self.statusDisplay addTerminalText:@"~> run"];
+- (void)mapTerm {
+    [[ViewControllerManager instance] showTerminalView:[[CCDirector sharedDirector] openGLView] launchedFromMap:YES];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)mapSubs {
+    [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:SubroutineInstructionType];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)mapStop {
+    ProgramNgin* ngin = [ProgramNgin instance];
+    [ngin stopProgram];
+    [self resetLevel];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)mapRun {
+    ProgramNgin* ngin = [ProgramNgin instance];
+    ProgramModel* model = [ProgramModel findByLevel:[UserModel level]];
+    [ngin loadProgram:[model codeListingToInstrictions]];
+    [ngin runProgram];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -908,6 +947,18 @@
 }
 
 //===================================================================================================================================
+#pragma mark utils
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)acceptTouches:(CGPoint)_touchLocation {
+    BOOL accept = NO;
+    if (self.canTouch) {
+        accept = YES;
+    }
+    return accept;
+}
+                       
+//===================================================================================================================================
 #pragma mark MapScene
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -926,8 +977,6 @@
 		self.screenCenter = CGPointMake(screenSize.width/2, screenSize.height/2);
         self.seekerPath = [NSMutableArray arrayWithCapacity:10];
         self.statusDisplay = [StatusDisplay create];
-        self.menu = [TermMenuView create];
-        self.menu.mapScene = self;
         self.levelResetSeeker = NO;
         self.levelResetMap = NO;
         self.levelInitSeeker = NO;
@@ -937,9 +986,9 @@
         self.nextLevel = NO;
         self.movingMapOnTouch = NO;
         self.centeringOnSeekerPosition = NO;
-        self.ignoreTouches = YES;
         self.mapZoomedIn = NO;
         self.zoomMap = NO;
+        self.canTouch = NO;
         self.endOfMissionCounter = 0;
         [self.statusDisplay insert:self];
         [[ProgramNgin instance] deleteProgram];
@@ -960,7 +1009,7 @@
         if (self.levelInitSeeker) {
             [self setSeekerStartPosition];
         } else if (self.levelInitialized) {
-            self.ignoreTouches = NO;
+            self.canTouch = YES;
             self.levelInitialized = NO;
         } else if (self.levelCrash) {
             [self crashCompleted];
@@ -988,41 +1037,36 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 -(void) ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent *)event {
-    if (!self.ignoreTouches) {
+    CGPoint touchLocation = [TouchUtils locationFromTouches:touches]; 
+    if ([self acceptTouches:touchLocation]) {
         self.firstTouch = [TouchUtils locationFromTouches:touches]; 
     }
 }    
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 -(void) ccTouchesEnded:(NSSet*)touches withEvent:(UIEvent *)event {
-    if (!self.ignoreTouches) {
-        CGPoint touchLocation = [TouchUtils locationFromTouches:touches]; 
-        if ([self.menu isInMenuRect:touchLocation]) {
-            [self.menu showMenu];
-        } else if (self.menu.menuIsOpen) {
-            [self.menu hideMenu];
-        } else {
-            NSInteger numberOfTouches = [[touches anyObject] tapCount];
-            CGPoint touchDelta = ccpSub(touchLocation, self.firstTouch);
-            if (abs(touchDelta.y) > 20 || abs(touchDelta.x) > 20) {
-                if (abs(touchDelta.y) > abs(touchDelta.x)) {
-                    if (touchDelta.y > 0) {
-                        [self onTouchMoveMapUp];
-                    } else {
-                        [self onTouchMoveMapDown];
-                    }
+    CGPoint touchLocation = [TouchUtils locationFromTouches:touches]; 
+    if ([self acceptTouches:touchLocation]) {
+        NSInteger numberOfTouches = [[touches anyObject] tapCount];
+        CGPoint touchDelta = ccpSub(touchLocation, self.firstTouch);
+        if (abs(touchDelta.y) > 20 || abs(touchDelta.x) > 20) {
+            if (abs(touchDelta.y) > abs(touchDelta.x)) {
+                if (touchDelta.y > 0) {
+                    [self onTouchMoveMapUp];
                 } else {
-                    if (touchDelta.x > 0) {
-                        [self onTouchMoveMapRight];
-                    } else {
-                        [self onTouchMoveMapLeft];
-                    }
+                    [self onTouchMoveMapDown];
                 }
-            } else if (numberOfTouches == 1) {
-                self.centeringOnSeekerPosition = YES;
-            } else if (numberOfTouches == 2) {
-                self.zoomMap = YES;
+            } else {
+                if (touchDelta.x > 0) {
+                    [self onTouchMoveMapRight];
+                } else {
+                    [self onTouchMoveMapLeft];
+                }
             }
+        } else if (numberOfTouches == 1) {
+            self.centeringOnSeekerPosition = YES;
+        } else if (numberOfTouches == 2) {
+            self.zoomMap = YES;
         }
     }
 }    

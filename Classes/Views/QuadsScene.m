@@ -12,7 +12,6 @@
 #import "TouchUtils.h"
 #import "LevelModel.h"
 #import "MissionsScene.h"
-#import "TermMenuView.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kQUAD_IMAGE_YDELTA  75.0f
@@ -45,7 +44,6 @@
 @synthesize displayedQuad;
 @synthesize screenCenter;
 @synthesize firstTouch;
-@synthesize menu;
 
 //===================================================================================================================================
 #pragma mark QuadsScene PrivateAPI
@@ -233,12 +231,8 @@
         [self addQuadStats:TharsisQuadType toSprite:self.tharsisSprite];
         self.statusDisplay = [StatusDisplay create];
         [self.statusDisplay insert:self];
-        [self.statusDisplay addTerminalText:@"~> main"];
-        [self.statusDisplay addTerminalText:@"~>"];
         [self.statusDisplay test];
         [self initQuads];
-        self.menu = [TermMenuView create];
-        [self.menu quadsInitItems];
         [self schedule:@selector(nextFrame:)];
     }
 	return self;
@@ -256,21 +250,15 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 -(void) ccTouchesEnded:(NSSet*)touches withEvent:(UIEvent *)event {
 	CGPoint touchLocation = [TouchUtils locationFromTouches:touches];
-    if ([self.menu isInMenuRect:self.firstTouch]) {
-        [self.menu showMenu];
-    } else if (self.menu.menuIsOpen) {
-        [self.menu hideMenu];
-    } else {
-        CGPoint touchDelta = ccpSub(touchLocation, self.firstTouch);
-        if (abs(touchDelta.y) < 20) {
-            if ([self displayedQuadIsUnlocked]) {
-                [[CCDirector sharedDirector] replaceScene:[MissionsScene scene]];
-            }
-        } else if (touchDelta.y < 0) {
-            [self backwardQuads];
-        } else {
-            [self fowardQuads];
+    CGPoint touchDelta = ccpSub(touchLocation, self.firstTouch);
+    if (abs(touchDelta.y) < 20) {
+        if ([self displayedQuadIsUnlocked]) {
+            [[CCDirector sharedDirector] replaceScene:[MissionsScene scene]];
         }
+    } else if (touchDelta.y < 0) {
+        [self backwardQuads];
+    } else {
+        [self fowardQuads];
     }
 }    
 

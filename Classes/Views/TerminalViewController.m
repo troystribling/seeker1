@@ -12,7 +12,6 @@
 #import "ProgramModel.h"
 #import "MapScene.h"
 #import "UploadScene.h"
-#import "TermMenuView.h"
 #import "InstructionsViewController.h"
 #import "ViewControllerManager.h"
 #import "TerminalCellFactory.h"
@@ -22,9 +21,6 @@
 #define kTERMINAL_LAUNCHER_BACK_TAG     1
 #define kTERMINAL_LAUNCHER_RUN_TAG      2
 #define kTERMINAL_LAUNCHER_EDIT_TAG     3
-#define kALPHA_MIN                      0.5
-#define kALPHA_MAX                      0.65
-#define kALPHA_DELTA                    0.15
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TerminalViewController (PrivateAPI)

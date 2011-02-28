@@ -342,7 +342,7 @@ static ProgramNgin* thisProgramNgin = nil;
     [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:PutSensorProgramInstruction], nil]];
     [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:GetSampleProgramInstruction], nil]];
     NSInteger level = [UserModel level];
-    if (level >= kLEVEL_FOR_ITERATIONS) {
+    if (level >= kLEVEL_FOR_TIMES) {
         [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:DoTimesProgramInstruction], 
                                                                [NSMutableArray arrayWithObjects:[NSNumber numberWithInt:MoveProgramInstruction], nil], 
                                                                [NSNumber numberWithInt:1], nil]];

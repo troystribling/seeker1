@@ -84,18 +84,6 @@
 							<string key="NSResourceName">terminal-launcher-add-subroutine.png</string>
 						</object>
 					</object>
-					<object class="IBUIImageView" id="98070331">
-						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{200, 12}, {120, 40}}</string>
-						<reference key="NSSuperview" ref="191373211"/>
-						<int key="IBUITag">2</int>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<object class="NSCustomResource" key="IBUIImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">terminal-launcher-subroutines.png</string>
-						</object>
-					</object>
 					<object class="IBUIImageView" id="425954349">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
@@ -158,14 +146,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">subroutineImageView</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="98070331"/>
-					</object>
-					<int key="connectionID">13</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">addSubroutineImageView</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="303322841"/>
@@ -190,7 +170,6 @@
 							<reference ref="379768596"/>
 							<reference ref="1008204223"/>
 							<reference ref="425954349"/>
-							<reference ref="98070331"/>
 							<reference ref="303322841"/>
 						</object>
 						<reference key="parent" ref="0"/>
@@ -225,11 +204,6 @@
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">12</int>
-						<reference key="object" ref="98070331"/>
-						<reference key="parent" ref="191373211"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">14</int>
 						<reference key="object" ref="303322841"/>
 						<reference key="parent" ref="191373211"/>
@@ -248,8 +222,6 @@
 					<string>10.IBViewBoundsToFrameTransform</string>
 					<string>11.IBPluginDependency</string>
 					<string>11.IBViewBoundsToFrameTransform</string>
-					<string>12.IBPluginDependency</string>
-					<string>12.IBViewBoundsToFrameTransform</string>
 					<string>14.IBPluginDependency</string>
 					<string>14.IBViewBoundsToFrameTransform</string>
 					<string>4.IBPluginDependency</string>
@@ -259,7 +231,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>InstructionsViewController</string>
 					<string>UIResponder</string>
-					<string>{{36, 293}, {320, 480}}</string>
+					<string>{{542, 279}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -268,10 +240,6 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAABCIAAAw5IAAA</bytes>
-					</object>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABDSAAAwkgAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -363,13 +331,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">Classes/Utils/NSObjectExtension.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/Views/TouchImageView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -622,14 +583,12 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>terminal-launcher-add-subroutine.png</string>
 				<string>terminal-launcher-back.png</string>
-				<string>terminal-launcher-subroutines.png</string>
 				<string>terminal-launcher.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{120, 40}</string>
 				<string>{125, 40}</string>
-				<string>{120, 40}</string>
 				<string>{320, 65}</string>
 			</object>
 		</object>

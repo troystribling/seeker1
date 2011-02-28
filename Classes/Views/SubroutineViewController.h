@@ -16,6 +16,7 @@
     IBOutlet UITableView* subroutineView;
     IBOutlet UIImageView* editImageView;
     IBOutlet UILabel* subroutineNameLabel;
+    IBOutlet UISlider* opacitySlider;
     UIView* containerView;
 	NSMutableArray* subroutineListing;
     NSIndexPath* selectedLine; 
@@ -27,6 +28,7 @@
 @property (nonatomic, retain) UITableView* subroutineView;
 @property (nonatomic, retain) UIImageView* editImageView;
 @property (nonatomic, retain) UILabel* subroutineNameLabel;
+@property (nonatomic, retain) UISlider* opacitySlider;
 @property (nonatomic, retain) UIView* containerView;
 @property (nonatomic, retain) NSMutableArray* subroutineListing;
 @property (nonatomic, retain) NSIndexPath* selectedLine;
@@ -36,5 +38,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)inView:(UIView*)_view;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
+- (IBAction)opacityValueChanged:(id)sender; 
 
 @end

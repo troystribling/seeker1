@@ -22,6 +22,11 @@
 @synthesize pk;
 @synthesize level;
 @synthesize quadrangle;
+@synthesize getStartedShown;
+@synthesize subroutinesShown;
+@synthesize timesLoopShown;
+@synthesize untilLoopShown;
+@synthesize roverBinsShown;
 
 //===================================================================================================================================
 #pragma mark UserModel
@@ -38,7 +43,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[SeekerDbi instance]  updateWithStatement:@"CREATE TABLE users (pk integer primary key, level integer, quadrangle integer)"];
+	[[SeekerDbi instance]  updateWithStatement:@"CREATE TABLE users (pk integer primary key, level integer, quadrangle integer, getStartedShown integer, subroutinesShown integer, timesLoopShown integer, untilLoopShown integer, roverBinsShown integer)"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -97,10 +102,66 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (void)tutorialWasShown:(TutorialSectionID)_sectionID {
+    UserModel* user = [self findFirst];
+    switch (_sectionID) {
+        case GettingStartedTutorialSectionID:
+            user.getStartedShown = YES;
+            break;
+        case SubroutinesTutorialSectionID:
+            user.subroutinesShown = YES;
+            break;
+        case TimesLoopTutorialSectionID:
+            user.timesLoopShown = YES;
+            break;
+        case UntilLoopTutorialSectionID:
+            user.untilLoopShown = YES;
+            break;
+        case RoverBinsTutorialSectionID:
+            user.roverBinsShown = YES;
+            break;
+        default:
+            break;
+    }
+    [user update];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (BOOL)wasTutorialShown:(TutorialSectionID)_sectionID {
+    UserModel* user = [self findFirst];
+    BOOL wasShown = NO;
+    switch (_sectionID) {
+        case GettingStartedTutorialSectionID:
+            wasShown = user.getStartedShown;
+            break;
+        case SubroutinesTutorialSectionID:
+            wasShown = user.subroutinesShown;
+            break;
+        case TimesLoopTutorialSectionID:
+            wasShown = user.timesLoopShown;
+            break;
+        case UntilLoopTutorialSectionID:
+            wasShown = user.untilLoopShown;
+            break;
+        case RoverBinsTutorialSectionID:
+            wasShown = user.roverBinsShown;
+            break;
+        default:
+            break;
+    }
+    return wasShown;;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (void)insert {
     UserModel* user = [[[UserModel alloc] init] autorelease];
     user.level = 1;
     user.quadrangle = 0;
+    user.getStartedShown = NO;
+    user.subroutinesShown = NO;
+    user.timesLoopShown = NO;
+    user.untilLoopShown = NO;
+    user.roverBinsShown = NO;
     [user insert];
 }
 
@@ -108,8 +169,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
     NSString* insertStatement;
-    insertStatement = [NSString stringWithFormat:@"INSERT INTO users (level, quadrangle) values (%d, %d)", 
-                       self.level, self.quadrangle];	
+    insertStatement = [NSString stringWithFormat:@"INSERT INTO users (level, quadrangle, getStartedShown, subroutinesShown, timesLoopShown, untilLoopShown, roverBinsShown) values (%d, %d, %d, %d, %d, %d, %d)", 
+                       self.level, self.quadrangle, [self getStartedShownAsInteger], [self subroutinesShownAsInteger], [self timesLoopShownAsInteger], [self untilLoopShownAsInteger], [self roverBinsShownAsInteger]];	
     [[SeekerDbi instance]  updateWithStatement:insertStatement];
 }
 
@@ -126,9 +187,79 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
-    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE users SET level = %d, quadrangle = %d WHERE pk = %d", 
-                                 self.level, self.quadrangle, self.pk];
+    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE users SET level = %d, quadrangle = %d, getStartedShown = %d, subroutinesShown = %d, timesLoopShown = %d, untilLoopShown = %d, roverBinsShown = %d WHERE pk = %d", 
+                                 self.level, self.quadrangle, [self getStartedShownAsInteger], [self subroutinesShownAsInteger], [self timesLoopShownAsInteger], [self untilLoopShownAsInteger], [self roverBinsShownAsInteger], self.pk];
 	[[SeekerDbi instance]  updateWithStatement:updateStatement];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSInteger)getStartedShownAsInteger {
+	return self.getStartedShown == YES ? 1 : 0;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setGetStartedShownAsInteger:(NSInteger)_value {
+	if (_value == 1) {
+		self.getStartedShown = YES; 
+	} else {
+		self.getStartedShown = NO;
+	};
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSInteger)subroutinesShownAsInteger {
+	return self.subroutinesShown == YES ? 1 : 0;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setSubroutinesShownAsInteger:(NSInteger)_value {
+	if (_value == 1) {
+		self.subroutinesShown = YES; 
+	} else {
+		self.subroutinesShown = NO;
+	};
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSInteger)timesLoopShownAsInteger {
+	return self.timesLoopShown == YES ? 1 : 0;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setTimesLoopShownAsInteger:(NSInteger)_value {
+	if (_value == 1) {
+		self.timesLoopShown = YES; 
+	} else {
+		self.timesLoopShown = NO;
+	};
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSInteger)untilLoopShownAsInteger {
+	return self.untilLoopShown == YES ? 1 : 0;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setUntilLoopShownAsInteger:(NSInteger)_value {
+	if (_value == 1) {
+		self.untilLoopShown = YES; 
+	} else {
+		self.untilLoopShown = NO;
+	};
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSInteger)roverBinsShownAsInteger {
+	return self.roverBinsShown == YES ? 1 : 0;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setRoverBinsShownAsInteger:(NSInteger)_value {
+	if (_value == 1) {
+		self.roverBinsShown = YES; 
+	} else {
+		self.roverBinsShown = NO;
+	};
 }
 
 //===================================================================================================================================
@@ -142,6 +273,11 @@
 	self.pk = (int)sqlite3_column_int(statement, 0);
 	self.level = (int)sqlite3_column_int(statement, 1);
     self.quadrangle = (int)sqlite3_column_int(statement, 2);
+	[self setGetStartedShown:(int)sqlite3_column_int(statement, 3)];
+	[self setSubroutinesShownAsInteger:(int)sqlite3_column_int(statement, 4)];
+	[self setTimesLoopShownAsInteger:(int)sqlite3_column_int(statement, 5)];
+	[self setUntilLoopShownAsInteger:(int)sqlite3_column_int(statement, 6)];
+	[self setRoverBinsShownAsInteger:(int)sqlite3_column_int(statement, 7)];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

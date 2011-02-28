@@ -13,6 +13,7 @@
 #import "LevelModel.h"
 #import "StatusDisplay.h"
 #import "ProgramNgin.h"
+#import "ViewControllerManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kEND_OF_LEVEL_TICK_1    40
@@ -28,7 +29,7 @@
 - (void)insertCompletedTitleLabel;
 - (void)insertSamplesReturnedLabel;
 - (void)insertSensorsPlacedLabel;
-- (void)insertCodeReviewLabel;
+- (void)insertCodeScoreLabel;
 - (void)insertFailedTotalScoreLabel;
 - (void)insertCompletedTotalScoreLabel;
 - (void)insertMissionFailedMenu;
@@ -36,6 +37,7 @@
 - (void)skipMission;
 - (void)againMission;
 - (void)nextMission;
+- (void)nextLevel;
 
 @end
 
@@ -196,7 +198,7 @@
 - (void)skipMission {
     [ProgramNgin instance].programHalted = NO;
     [ProgramNgin instance].programRunning = NO;
-    [UserModel nextLevel];
+    [self nextLevel];
     [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
 }
 
@@ -212,8 +214,33 @@
 - (void)nextMission {
     [ProgramNgin instance].programHalted = NO;
     [ProgramNgin instance].programRunning = NO;
-    [UserModel nextLevel];
+    [self nextLevel];
     [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)nextLevel {   
+    TutorialSectionID sectionID = GettingStartedTutorialSectionID;
+    switch ([UserModel nextLevel]) {
+        case kLEVEL_FOR_SUBROUTINES:
+            sectionID = SubroutinesTutorialSectionID;
+            break;
+        case kLEVEL_FOR_TIMES:
+            sectionID = TimesLoopTutorialSectionID;
+            break;
+        case kLEVEL_FOR_UNTIL:
+            sectionID = UntilLoopTutorialSectionID;
+            break;
+        case kLEVEL_FOR_BINS:
+            sectionID = RoverBinsTutorialSectionID;
+            break;
+        default:
+            break;
+    }
+    if (sectionID != GettingStartedTutorialSectionID) {
+        [[ViewControllerManager instance] showTutorialIntroductionView:[[CCDirector sharedDirector] openGLView] withSectionID:sectionID];
+        [UserModel tutorialWasShown:sectionID];
+    }
 }
 
 //===================================================================================================================================
@@ -241,7 +268,6 @@
         }
         self.statusDisplay = [StatusDisplay createWithFile:@"empty-display.png"];
         [self.statusDisplay insert:self];
-        [self.statusDisplay addTerminalText:@"~> sam"];
         [self.statusDisplay test];
         [self schedule:@selector(nextFrame:)];
     }
@@ -253,29 +279,20 @@
     self.counter++;
     if (self.counter == kEND_OF_LEVEL_TICK_1) {
         [self insertSamplesReturnedLabel];
-        [self.statusDisplay addTerminalText:@"~> sen"];
         [self.statusDisplay test];
     } else if (self.counter == kEND_OF_LEVEL_TICK_2) {
         [self insertSensorsPlacedLabel];
-        if (self.level.completed) {
-            [self.statusDisplay addTerminalText:@"~> code"];
-        } else {
-            [self.statusDisplay addTerminalText:@"~> tot"];
-        }
         [self.statusDisplay clear];
     } else if (self.counter == kEND_OF_LEVEL_TICK_3) {
         if (self.level.completed) {
-            [self insertCodeReviewLabel];
-            [self.statusDisplay addTerminalText:@"~> tot"];
+            [self insertCodeScoreLabel];
         } else {
             [self insertFailedTotalScoreLabel];
-            [self.statusDisplay addTerminalText:@"~> menu"];
         }
         [self.statusDisplay test];
     } else if (self.counter == kEND_OF_LEVEL_TICK_4) {
         if (self.level.completed) {
             [self insertCompletedTotalScoreLabel];
-            [self.statusDisplay addTerminalText:@"~> menu"];
         } else {
             [self insertMissionFailedMenu];
         }
@@ -291,7 +308,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 -(void) ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent *)event {
     if (self.level.completed) {
-        [UserModel nextLevel];
+        [self nextLevel];
     }
     [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
 }    

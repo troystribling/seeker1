@@ -64,7 +64,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     self.tutorialsList = [NSMutableArray arrayWithObjects:@"1. get started", nil];
     NSInteger level = [UserModel level];
-    if (level == kLEVEL_FOR_ITERATIONS) {
+    if (level == kLEVEL_FOR_TIMES) {
         [self.tutorialsList addObject:@"2. times loop"];
     }
     if (level == kLEVEL_FOR_SUBROUTINES) {

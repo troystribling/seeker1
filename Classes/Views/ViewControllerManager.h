@@ -99,7 +99,7 @@
 - (void)tutorialSectionViewWillDisappear;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (TutorialIntroductionViewController*)showTutorialIntroductionView:(UIView*)_containerView withIntroductionID:(TutorialIntroductionID)_introductionID;
+- (TutorialIntroductionViewController*)showTutorialIntroductionView:(UIView*)_containerView withSectionID:(TutorialSectionID)_sectionID;
 - (void)removeTutorialIntroductionView;
 - (void)tutorialIntroductionViewWillAppear;
 - (void)tutorialIntroductionViewWillDisappear;

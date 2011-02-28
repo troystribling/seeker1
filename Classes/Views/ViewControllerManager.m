@@ -311,11 +311,11 @@ static ViewControllerManager* thisViewControllerManager = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 // TutorialIntroductionViewController
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (TutorialIntroductionViewController*)showTutorialIntroductionView:(UIView*)_containerView withIntroductionID:(TutorialIntroductionID)_introductionID {
+- (TutorialIntroductionViewController*)showTutorialIntroductionView:(UIView*)_containerView withSectionID:(TutorialSectionID)_sectionID {
     if (self.tutorialIntroductionViewController == nil) {
         self.tutorialIntroductionViewController = [TutorialIntroductionViewController inView:_containerView];
     } 
-    [self.tutorialIntroductionViewController setTutorialIntroduction:_introductionID];
+    [self.tutorialIntroductionViewController setTutorialIntroduction:_sectionID];
     [_containerView addSubview:self.tutorialIntroductionViewController.view];
     [self tutorialIntroductionViewWillAppear];
     return self.tutorialIntroductionViewController;

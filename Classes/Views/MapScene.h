@@ -30,7 +30,6 @@ typedef enum tagMapID {
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class SeekerSprite;
 @class StatusDisplay;
-@class TermMenuView;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapScene : CCLayer {
@@ -40,7 +39,6 @@ typedef enum tagMapID {
     NSMutableArray* seekerPath;
     NSInteger level;
     NSInteger endOfMissionCounter;
-    TermMenuView* menu;
     CGPoint screenCenter;
     CGPoint firstTouch;
     CGPoint onTouchMoveDelta;
@@ -52,6 +50,7 @@ typedef enum tagMapID {
     CCTMXLayer* sandLayer;
     CCTMXObjectGroup* objectsLayer;
     CCSprite* crash;
+    CCMenu* menu;
     BOOL levelResetSeeker;
     BOOL levelResetMap;
     BOOL levelCrash;
@@ -61,9 +60,9 @@ typedef enum tagMapID {
     BOOL nextLevel;
     BOOL movingMapOnTouch;
     BOOL centeringOnSeekerPosition;
-    BOOL ignoreTouches;
     BOOL zoomMap;
     BOOL mapZoomedIn;
+    BOOL canTouch;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -73,7 +72,6 @@ typedef enum tagMapID {
 @property (nonatomic, retain) NSMutableArray* seekerPath;
 @property (nonatomic, assign) NSInteger level;
 @property (nonatomic, assign) NSInteger endOfMissionCounter;
-@property (nonatomic, retain) TermMenuView* menu;
 @property (nonatomic, assign) CGPoint screenCenter;
 @property (nonatomic, assign) CGPoint firstTouch;
 @property (nonatomic, assign) CGPoint onTouchMoveDelta;
@@ -84,7 +82,8 @@ typedef enum tagMapID {
 @property (nonatomic, retain) CCTMXLayer* itemsLayer;
 @property (nonatomic, retain) CCTMXLayer* sandLayer;
 @property (nonatomic, retain) CCTMXObjectGroup* objectsLayer;
-@property (nonatomic, assign) CCSprite* crash;
+@property (nonatomic, retain) CCSprite* crash;
+@property (nonatomic, retain) CCMenu* menu;
 @property (nonatomic, assign) BOOL levelResetSeeker;
 @property (nonatomic, assign) BOOL levelResetMap;
 @property (nonatomic, assign) BOOL levelCrash;
@@ -94,14 +93,12 @@ typedef enum tagMapID {
 @property (nonatomic, assign) BOOL nextLevel;
 @property (nonatomic, assign) BOOL movingMapOnTouch;
 @property (nonatomic, assign) BOOL centeringOnSeekerPosition;
-@property (nonatomic, assign) BOOL ignoreTouches;
 @property (nonatomic, assign) BOOL zoomMap;
 @property (nonatomic, assign) BOOL mapZoomedIn;
+@property (nonatomic, assign) BOOL canTouch;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)scene;
-- (void)addResetTerminalItems;
-- (void)addRunTerminalItems;
 - (void)resetLevel;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

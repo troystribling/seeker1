@@ -9,34 +9,23 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <UIKit/UIKit.h>
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-typedef enum tutorialIntroductionID {
-    GetStartedTutorialIntroductionID,
-    SubroutinesTutorialIntroductionID,
-    TimesLoopTutorialIntroductionID,
-    UntilLoopTutorialIntroductionID,
-    RoverBinsTutorialIntroductionID
-} TutorialIntroductionID;
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TutorialIntroductionViewController : UIViewController {
-    IBOutlet UILabel* featureLabel;
-    IBOutlet UILabel* descriptionLabel;
+    IBOutlet UIImageView* selectedFeature;
     UIView* containerView;
     NSArray* featureList;
-    NSArray* selectedFeatureList;
+    TutorialSectionID sectionID;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) UILabel* featureLabel;
-@property (nonatomic, retain) UILabel* descriptionLabel;
+@property (nonatomic, retain) UIImageView* selectedFeature;
 @property (nonatomic, retain) UIView* containerView;
 @property (nonatomic, retain) NSArray* featureList;
-@property (nonatomic, retain) NSArray* selectedFeatureList;
+@property (nonatomic, assign) TutorialSectionID sectionID;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)inView:(UIView*)_containerView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
-- (void)setTutorialIntroduction:(TutorialIntroductionID)_introductionID;
+- (void)setTutorialIntroduction:(TutorialSectionID)_sectionID;
 
 @end

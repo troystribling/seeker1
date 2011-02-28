@@ -9,6 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
+#import "TutorialSectionViewController.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -17,13 +18,22 @@
     NSInteger pk;
     NSInteger level;
     NSInteger quadrangle;
-    BOOL advanceLevel;
+    BOOL getStartedShown;
+    BOOL subroutinesShown;
+    BOOL timesLoopShown;
+    BOOL untilLoopShown;
+    BOOL roverBinsShown;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, assign) NSInteger pk;
 @property (nonatomic, assign) NSInteger level;
 @property (nonatomic, assign) NSInteger quadrangle;
+@property (nonatomic, assign) BOOL getStartedShown;
+@property (nonatomic, assign) BOOL subroutinesShown;
+@property (nonatomic, assign) BOOL timesLoopShown;
+@property (nonatomic, assign) BOOL untilLoopShown;
+@property (nonatomic, assign) BOOL roverBinsShown;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
@@ -36,6 +46,8 @@
 + (NSInteger)level;
 + (NSInteger)nextQuadrangle;
 + (NSInteger)quadrangle;
++ (void)tutorialWasShown:(TutorialSectionID)_sectionID;
++ (BOOL)wasTutorialShown:(TutorialSectionID)_sectionID;
 + (void)insert;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -43,5 +55,15 @@
 - (void)destroy;
 - (void)load;
 - (void)update;
+- (NSInteger)getStartedShownAsInteger;
+- (void)setGetStartedShownAsInteger:(NSInteger)_value;
+- (NSInteger)subroutinesShownAsInteger;
+- (void)setSubroutinesShownAsInteger:(NSInteger)_value;
+- (NSInteger)timesLoopShownAsInteger;
+- (void)setTimesLoopShownAsInteger:(NSInteger)_value;
+- (NSInteger)untilLoopShownAsInteger;
+- (void)setUntilLoopShownAsInteger:(NSInteger)_value;
+- (NSInteger)roverBinsShownAsInteger;
+- (void)setRoverBinsShownAsInteger:(NSInteger)_value;
 
 @end

@@ -11,10 +11,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kDISPLAY_DIGIT_DELTA    22.0f
-#define kENERGY_XPOS            3.0f
-#define kSPEED_XPOS             81.0f
-#define kSENSOR_XPOS            136.0f
-#define kSAMPLE_XPOS            191.0f
+#define kLEVEL_XPOS             17.0f
+#define kSPEED_XPOS             74.0f
+#define kENERGY_XPOS            127.0f
+#define kSENSOR_XPOS            203.0f
+#define kSAMPLE_XPOS            255.0f
 #define kDIGIT_YPOS             6.0f
 #define kTERMINAL_XPOS          250.0f
 #define kTERMINAL_YPOS          37.0f
@@ -25,7 +26,6 @@
 
 - (void)removeDigits:(NSMutableArray*)_digits;
 - (CCSprite*)insertImage:(UIImage*)_image atPostion:(float)_position withKey:(NSString*)_key;
-- (void)writeDisplay;
 
 @end
 
@@ -39,11 +39,12 @@
 @synthesize speedDigits;
 @synthesize sensorDigits;
 @synthesize sampleDigits;
+@synthesize levelDigits;
 @synthesize energyPosition;
 @synthesize speedPosition;
 @synthesize samplePosition;
 @synthesize sensorPosition;
-@synthesize terminalText;
+@synthesize levelPosition;
 
 //===================================================================================================================================
 #pragma mark StatusDisplay PrivateAPI
@@ -65,16 +66,6 @@
     return digitSprite;
 }
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)writeDisplay {
-    CGPoint basePoint = CGPointMake(kTERMINAL_XPOS, kTERMINAL_YPOS);
-    for (int i = 0; i < [self.terminalText count]; i++) {
-        CCLabel* _text = [self.terminalText objectAtIndex:i];
-        _text.position = CGPointMake(basePoint.x, basePoint.y-i*kTERMINAL_YOFFSET);
-        [self addChild:_text];
-    }
-}
-
 //===================================================================================================================================
 #pragma mark StatusDisplay
 
@@ -94,6 +85,7 @@
     [self removeDigits:self.speedDigits];
     [self removeDigits:self.sensorDigits];
     [self removeDigits:self.sampleDigits];
+    [self removeDigits:self.levelDigits];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -102,6 +94,7 @@
     [self setTest:SpeedDisplayType];
     [self setTest:SensorDisplayType];
     [self setTest:SampleDisplayType];
+    [self setTest:LevelDisplayType];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -133,6 +126,10 @@
             [self.sampleDigits addObject:[self insertImage:self.testDigitImage atPostion:kSAMPLE_XPOS withKey:@"test"]];
             [self.sampleDigits addObject:[self insertImage:self.testDigitImage atPostion:(kSAMPLE_XPOS+kDISPLAY_DIGIT_DELTA) withKey:@"test"]];
             break;
+        case LevelDisplayType:
+            [self.sampleDigits addObject:[self insertImage:self.testDigitImage atPostion:kLEVEL_XPOS withKey:@"test"]];
+            [self.sampleDigits addObject:[self insertImage:self.testDigitImage atPostion:(kLEVEL_XPOS+kDISPLAY_DIGIT_DELTA) withKey:@"test"]];
+            break;
     }
 }
                                         
@@ -163,6 +160,10 @@
             [self.sampleDigits addObject:[self insertImage:[self.digitImages objectAtIndex:tensDigit] atPostion:kSAMPLE_XPOS withKey:tensDigitKey]];
             [self.sampleDigits addObject:[self insertImage:[self.digitImages objectAtIndex:onesDigit] atPostion:(kSAMPLE_XPOS+kDISPLAY_DIGIT_DELTA) withKey:onesDigitKey]];
             break;
+        case LevelDisplayType:
+            [self.sampleDigits addObject:[self insertImage:[self.digitImages objectAtIndex:tensDigit] atPostion:kLEVEL_XPOS withKey:tensDigitKey]];
+            [self.sampleDigits addObject:[self insertImage:[self.digitImages objectAtIndex:onesDigit] atPostion:(kLEVEL_XPOS+kDISPLAY_DIGIT_DELTA) withKey:onesDigitKey]];
+            break;
     }
 }
 
@@ -181,27 +182,10 @@
         case SampleDisplayType:
             [self removeDigits:self.sampleDigits];
             break;
+        case LevelDisplayType:
+            [self removeDigits:self.levelDigits];
+            break;
     }
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)clearTerminal {
-    for (CCLabel* _text in self.terminalText) {
-        [_text removeFromParentAndCleanup:YES];
-    }
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addTerminalText:(NSString*)_text {
-    [self clearTerminal];
-    if ([self.terminalText count] > 2) {
-        [self.terminalText removeObjectAtIndex:0];
-    }
-    CCLabel* textLabel = [CCLabel labelWithString:_text fontName:kTERM_FONT fontSize:kTERM_FONT_SIZE];
-    textLabel.color = kTERMINAL_FONT_COLOR;
-    textLabel.anchorPoint = CGPointMake(0.0, 0.0);
-    [self.terminalText addObject:textLabel];
-    [self writeDisplay];
 }
 
 //===================================================================================================================================
@@ -221,7 +205,7 @@
         self.speedDigits = [NSMutableArray arrayWithCapacity:2];
         self.sensorDigits = [NSMutableArray arrayWithCapacity:2];
         self.sampleDigits = [NSMutableArray arrayWithCapacity:2];
-        self.terminalText = [NSMutableArray arrayWithCapacity:3];
+        self.levelDigits = [NSMutableArray arrayWithCapacity:2];
         for (int i = 0; i < 10; i++) {
             NSString* imageFile = [NSString stringWithFormat:@"LCD-%d.png", i];
             UIImage* digitImage = [UIImage imageNamed:imageFile];

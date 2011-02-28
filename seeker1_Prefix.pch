@@ -31,8 +31,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 // level thresholds
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define kLEVEL_FOR_SUBROUTINES  12
-#define kLEVEL_FOR_ITERATIONS   18
+#define kLEVEL_FOR_SUBROUTINES  2
+#define kLEVEL_FOR_TIMES        18
 #define kLEVEL_FOR_UNTIL        24
 #define kLEVEL_FOR_BINS         30
 
@@ -60,3 +60,10 @@
 #define kGLOBAL_FONT_SIZE_MISSION       14.0
 #define kCCLABEL_FONT_COLOR             ccc3(0,210,0)
 #define kTERMINAL_FONT_COLOR            ccc3(93,223,27)
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// opacity 
+//-----------------------------------------------------------------------------------------------------------------------------------
+#define kALPHA_MIN                      0.5
+#define kALPHA_MAX                      0.60
+#define kALPHA_DELTA                    0.10

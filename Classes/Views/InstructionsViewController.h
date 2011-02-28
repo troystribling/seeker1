@@ -28,7 +28,6 @@ typedef enum tagInstructionType {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface InstructionsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     IBOutlet UITableView* instructionsView;
-    IBOutlet UIImageView* subroutineImageView;
     IBOutlet UIImageView* addSubroutineImageView;
     UIView* containerView;
 	NSMutableArray* instructionsList;
@@ -40,7 +39,6 @@ typedef enum tagInstructionType {
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UITableView* instructionsView;
-@property (nonatomic, retain) UIImageView* subroutineImageView;
 @property (nonatomic, retain) UIImageView* addSubroutineImageView;
 @property (nonatomic, retain) UIView* containerView;
 @property (nonatomic, retain) NSMutableArray* instructionsList;

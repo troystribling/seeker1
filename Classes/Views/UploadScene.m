@@ -72,7 +72,6 @@
 
         self.statusDisplay = [StatusDisplay createWithFile:@"empty-display.png"];
         [self.statusDisplay insert:self];
-        [self.statusDisplay addTerminalText:@"~> up"];
         [self schedule:@selector(nextFrame:)];
     }
 	return self;
@@ -117,7 +116,6 @@
         [self.percentUploadLabel setString:@"upload 100% (0.5kb/s)"];
         [self.uploadProgressLabel setString:@"======================>"];
         [self.statusDisplay setTest:SampleDisplayType];
-        [self.statusDisplay addTerminalText:@"~> run"];
     } else if (self.counter == kUPLOAD_TICK_10) {
         [[ProgramNgin instance] runProgram];
         [[CCDirector sharedDirector] replaceScene: [MapScene scene]];

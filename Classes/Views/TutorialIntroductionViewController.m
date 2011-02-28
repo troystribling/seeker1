@@ -11,7 +11,7 @@
 #import "cocos2d.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define kFEATURE_UNLOCK_LAUNCHER_DONE_TAG       1
+#define kFEATURE_UNLOCK_LAUNCHER_EXIT_TAG       1
 #define kFEATURE_UNLOCK_LAUNCHER_TUTORIAL_TAG   2
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -23,11 +23,10 @@
 @implementation TutorialIntroductionViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize featureLabel;
-@synthesize descriptionLabel;
 @synthesize containerView;
 @synthesize featureList;
-@synthesize selectedFeatureList;
+@synthesize selectedFeature;
+@synthesize sectionID;
 
 //===================================================================================================================================
 #pragma mark TutorialIntroductionViewController PrivateAPI
@@ -47,28 +46,17 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.view.frame = self.containerView.frame;
-        self.featureList = [NSMutableArray arrayWithObjects:[NSArray arrayWithObjects:@"get started", 
-                                                                @"with a brief introduction", 
-                                                                [NSNumber numberWithInt:GettingStartedTutorialSectionID], nil],
-                                                            [NSArray arrayWithObjects:@"subroutines unlocked", 
-                                                                @"with subroutines code can be reused and programs shortened", 
-                                                                [NSNumber numberWithInt:SubroutinesTutorialSectionID], nil],
-                                                            [NSArray arrayWithObjects:@"times loop unlocked", 
-                                                                @"with a times loop instructions and subroutines can be executed multiple times", 
-                                                                [NSNumber numberWithInt:TimesLoopTutorialSectionID], nil],
-                                                            [NSArray arrayWithObjects:@"until loop unlocked", 
-                                                                @"with an until loop instructions and subroutines can be executed until a condition is satisfied", 
-                                                                [NSNumber numberWithInt:UntilLoopTutorialSectionID], nil],
-                                                            [NSArray arrayWithObjects:@"rover bin predicates unlocked", 
-                                                                @"with the rover bin predicates instructions and subroutines can be executed until the sample bin is full or the sensor bin is empty", 
-                                                                [NSNumber numberWithInt:RoverBinsTutorialSectionID], nil], nil];
+        self.featureList = [NSMutableArray arrayWithObjects:@"get-started-introduction.png", @"subroutines-unlock.png",
+                                                            @"times-loop-unlocked.png", @"until-loop-unlocked.png",
+                                                            @"rover-bins-unlocked.png",nil];
     }
     return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)setTutorialIntroduction:(TutorialIntroductionID)_introductionID {
-    self.selectedFeatureList = [self.featureList objectAtIndex:_introductionID];
+- (void)setTutorialIntroduction:(TutorialSectionID)_sectionID {
+    self.sectionID = _sectionID;
+    self.selectedFeature.image = [UIImage imageNamed:[self.featureList objectAtIndex:_sectionID]];
 }
 
 //===================================================================================================================================
@@ -81,8 +69,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
-    self.featureLabel.text = [self.selectedFeatureList objectAtIndex:0];
-    self.descriptionLabel.text = [self.selectedFeatureList objectAtIndex:1];
 	[super viewWillAppear:animated];
 }
 
@@ -109,11 +95,10 @@
     UITouch* touch = [touches anyObject];
     NSInteger touchTag = touch.view.tag;
     switch (touchTag) {
-        case kFEATURE_UNLOCK_LAUNCHER_DONE_TAG:
+        case kFEATURE_UNLOCK_LAUNCHER_EXIT_TAG:
             break;
         case kFEATURE_UNLOCK_LAUNCHER_TUTORIAL_TAG:
-            ;TutorialSectionID sectionID = [[self.selectedFeatureList objectAtIndex:2] intValue];
-            [[ViewControllerManager instance] showTutorialSectionView:[[CCDirector sharedDirector] openGLView] withSectionID:sectionID];
+            [[ViewControllerManager instance] showTutorialSectionView:[[CCDirector sharedDirector] openGLView] withSectionID:self.sectionID];
             break;
         default:
             break;

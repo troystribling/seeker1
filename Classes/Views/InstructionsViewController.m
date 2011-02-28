@@ -16,7 +16,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kINSTRUCTIONS_LAUNCHER_BACK_TAG         1
-#define kINSTRUCTIONS_LAUNCHER_SUBS_TAG         2
 #define kINSTRUCTIONS_LAUNCHER_ADD_SUB_TAG      3
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -35,7 +34,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize instructionsView;
-@synthesize subroutineImageView;
 @synthesize addSubroutineImageView;
 @synthesize instructionType;
 @synthesize containerView;
@@ -131,15 +129,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
-    self.subroutineImageView.hidden = YES;
     self.addSubroutineImageView.hidden = YES;
     [self.subroutinesList removeAllObjects];
     switch (self.instructionType) {
         case TerminalPrimitiveInstructionType:
             self.instructionsList = [[ProgramNgin instance] getPrimitiveInstructions];
-            self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAll]];
             if ([UserModel level] >= kLEVEL_FOR_SUBROUTINES) {
-                self.subroutineImageView.hidden = NO;
+                self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAll]];
             }
             break;
         case SubroutinePrimitiveInstructionType:
@@ -147,11 +143,15 @@
             self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAllButName:self.selectedSubroutineName]];
             break;
         case TerminalDoTimesInstructionType:
+            self.instructionsList = [[ProgramNgin instance] getDoInstructions];
+            break;
         case SubroutineDoTimesInstructionType:
             self.instructionsList = [[ProgramNgin instance] getDoInstructions];
             self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAll]];
             break;
         case TerminalDoUntilInstructionType:
+            self.instructionsList = [[ProgramNgin instance] getDoInstructions];
+            break;
         case SubroutineDoUntilInstructionType:
             self.instructionsList = [[ProgramNgin instance] getDoInstructions];
             self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAll]];
@@ -196,17 +196,6 @@
     switch (touchTag) {
         case kINSTRUCTIONS_LAUNCHER_BACK_TAG:
             [self.view removeFromSuperview];
-            switch (self.instructionType) {
-                case SubroutineInstructionType:
-                    [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:TerminalPrimitiveInstructionType];
-                    break; 
-                default:
-                    break;
-            }
-            break;
-        case kINSTRUCTIONS_LAUNCHER_SUBS_TAG:
-            [self.view removeFromSuperview];
-            [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:SubroutineInstructionType];
             break;
         case kINSTRUCTIONS_LAUNCHER_ADD_SUB_TAG:
             [self.view removeFromSuperview];

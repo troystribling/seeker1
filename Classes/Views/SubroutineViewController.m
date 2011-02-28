@@ -28,6 +28,7 @@
 @synthesize subroutineView;
 @synthesize editImageView;
 @synthesize subroutineNameLabel;
+@synthesize opacitySlider;
 @synthesize containerView;
 @synthesize subroutineListing;
 @synthesize selectedLine;
@@ -51,9 +52,19 @@
         self.containerView = _containerView;
         self.view.frame = self.containerView.frame;
         self.editingEnabled = NO;
+        UIImage* stetchLeftTrack = [[UIImage imageNamed:@"slider-left.png"] stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0];
+        UIImage* stetchRightTrack = [[UIImage imageNamed:@"slider-right.png"] stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0];
+        [self.opacitySlider setMinimumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
+        [self.opacitySlider setMaximumTrackImage:stetchRightTrack forState:UIControlStateNormal];
     }
     return self;
 }
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (IBAction)opacityValueChanged:(UISlider*)sender {  
+    CGFloat alphaValue = [sender value];
+    self.view.alpha = kALPHA_MIN + kALPHA_DELTA * alphaValue; 
+}  
 
 //===================================================================================================================================
 #pragma mark UIViewController
@@ -76,6 +87,10 @@
     if ((selectedRow + 1) == [self.subroutineListing count]) {
         NSIndexPath* bottomLine = [NSIndexPath indexPathForRow:[self.subroutineListing count] inSection:0];
         [self.subroutineView scrollToRowAtIndexPath:bottomLine atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+    if (self.view.alpha > kALPHA_MAX) {
+        self.view.alpha = kALPHA_MAX;
+        self.opacitySlider.value = 1.0;
     }
 	[super viewWillAppear:animated];
 }
