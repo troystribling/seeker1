@@ -39,6 +39,7 @@ typedef enum tagSeekerBearing {
     NSInteger sensorsPlaced;
     NSInteger sensorsRemaining;
     NSInteger speed;
+    BOOL idle;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -57,6 +58,7 @@ typedef enum tagSeekerBearing {
 @property (nonatomic, assign) NSInteger sensorsPlaced;
 @property (nonatomic, assign) NSInteger sensorsRemaining;
 @property (nonatomic, assign) NSInteger speed;
+@property (nonatomic, assign) BOOL idle;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 // initialize/reset

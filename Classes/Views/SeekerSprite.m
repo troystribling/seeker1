@@ -45,6 +45,7 @@
 @synthesize sensorsPlaced;
 @synthesize sensorsRemaining;
 @synthesize speed;
+@synthesize idle;
 
 //===================================================================================================================================
 #pragma mark SeekerSprite PrivateAPI
@@ -113,6 +114,7 @@
     self.samplesRemaining = self.sampleSites;
     self.sensorsRemaining = self.sensorSites;
     self.scale = 1.0;
+    self.idle = YES;
     [self emptySampleBin];
     [self loadSensorBin];
 }
@@ -164,6 +166,10 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)changeSpeed:(CGFloat)_deltaSpeed {
     BOOL validSpeed = YES;
+    if (self.idle) {
+        self.speed  = kSEEKER_BASE_SPEED;
+        self.idle = NO;
+    }
     if (_deltaSpeed == 0) {
         self.speed  = kSEEKER_BASE_SPEED;
     } else {
