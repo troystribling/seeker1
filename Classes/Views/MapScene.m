@@ -93,7 +93,7 @@
 // menu
 - (void)insertMenu;
 - (void)mapMenu;
-- (void)mapTerm;
+- (void)mapProg;
 - (void)mapSubs;
 - (void)mapStop;
 - (void)mapRun;    
@@ -173,7 +173,6 @@
     if (model) {
         ProgramNgin* ngin = [ProgramNgin instance];
         NSMutableArray* programListing = [model codeListingToInstrictions];
-        [ngin saveProgram:programListing];
         [ngin loadProgram:programListing];
     }
     [self addChild:self.tileMap z:-1 tag:kMAP];
@@ -752,16 +751,39 @@
     CCSprite* menuUnselected = [CCSprite spriteWithFile:@"map-menu.png"];
     CCSprite* menuSelected = [CCSprite spriteWithFile:@"map-menu-selected.png"];
     CCMenuItemSprite* menuItem = [CCMenuItemSprite itemFromNormalSprite:menuUnselected selectedSprite:menuSelected target:self selector:@selector(mapMenu)];
-    CCSprite* termUnselected = [CCSprite spriteWithFile:@"map-term.png"];
-    CCSprite* termSelected = [CCSprite spriteWithFile:@"map-term-selected.png"];
-    CCMenuItemSprite* termItem = [CCMenuItemSprite itemFromNormalSprite:termUnselected selectedSprite:termSelected target:self selector:@selector(mapTerm)];
-    if ([UserModel level] >= kLEVEL_FOR_SUBROUTINES) {
-        CCSprite* subsUnselected = [CCSprite spriteWithFile:@"map-subs.png"];
-        CCSprite* subsSelected = [CCSprite spriteWithFile:@"map-subs-selected.png"];
-        CCMenuItemSprite* subsItem = [CCMenuItemSprite itemFromNormalSprite:subsUnselected selectedSprite:subsSelected target:self selector:@selector(mapSubs)];
-        self.menu = [CCMenu menuWithItems:menuItem, termItem, subsItem, nil];
+    CCSprite* progUnselected = [CCSprite spriteWithFile:@"map-prog.png"];
+    CCSprite* progSelected = [CCSprite spriteWithFile:@"map-prog-selected.png"];
+    CCMenuItemSprite* progItem = [CCMenuItemSprite itemFromNormalSprite:progUnselected selectedSprite:progSelected target:self selector:@selector(mapProg)];
+    CCSprite* subsUnselected = [CCSprite spriteWithFile:@"map-subs.png"];
+    CCSprite* subsSelected = [CCSprite spriteWithFile:@"map-subs-selected.png"];
+    CCMenuItemSprite* subsItem = [CCMenuItemSprite itemFromNormalSprite:subsUnselected selectedSprite:subsSelected target:self selector:@selector(mapSubs)];
+    CCSprite* stopUnselected = [CCSprite spriteWithFile:@"map-stop.png"];
+    CCSprite* stopSelected = [CCSprite spriteWithFile:@"map-stop-selected.png"];
+    CCMenuItemSprite* stopItem = [CCMenuItemSprite itemFromNormalSprite:stopUnselected selectedSprite:stopSelected target:self selector:@selector(mapStop)];
+    CCSprite* runUnselected = [CCSprite spriteWithFile:@"map-run.png"];
+    CCSprite* runSelected = [CCSprite spriteWithFile:@"map-run-selected.png"];
+    CCMenuItemSprite* runItem = [CCMenuItemSprite itemFromNormalSprite:runUnselected selectedSprite:runSelected target:self selector:@selector(mapRun)];
+    ProgramNgin* ngin = [ProgramNgin instance];
+    if ([ngin programIsLoaded]) {
+        if ([ngin programIsHalted] || [ngin programIsRunning]) {
+            if ([UserModel level] >= kLEVEL_FOR_SUBROUTINES) {
+               self.menu = [CCMenu menuWithItems:menuItem, progItem, subsItem, stopItem, nil];
+            } else {
+                self.menu = [CCMenu menuWithItems:menuItem, progItem, stopItem, nil];
+            }
+        } else {
+            if ([UserModel level] >= kLEVEL_FOR_SUBROUTINES) {
+                self.menu = [CCMenu menuWithItems:menuItem, progItem, subsItem, runItem, nil];
+            } else {
+                self.menu = [CCMenu menuWithItems:menuItem, progItem, runItem, nil];
+            }
+        }
     } else {
-        self.menu = [CCMenu menuWithItems:menuItem, termItem, nil];
+        if ([UserModel level] >= kLEVEL_FOR_SUBROUTINES) {
+            self.menu = [CCMenu menuWithItems:menuItem, progItem, subsItem, nil];
+        } else {
+            self.menu = [CCMenu menuWithItems:menuItem, progItem, nil];
+        }
     }
     [self.menu alignItemsHorizontallyWithPadding:0.0];
     self.menu.position = CGPointMake(160.0f, 395.0f);
@@ -774,7 +796,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)mapTerm {
+- (void)mapProg {
     [[ViewControllerManager instance] showTerminalView:[[CCDirector sharedDirector] openGLView] launchedFromMap:YES];
 }
 
@@ -785,17 +807,15 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)mapStop {
-    ProgramNgin* ngin = [ProgramNgin instance];
-    [ngin stopProgram];
+    [[ProgramNgin instance] stopProgram];
     [self resetLevel];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)mapRun {
-    ProgramNgin* ngin = [ProgramNgin instance];
-    ProgramModel* model = [ProgramModel findByLevel:[UserModel level]];
-    [ngin loadProgram:[model codeListingToInstrictions]];
-    [ngin runProgram];
+    [[ProgramNgin instance] runProgram];
+    [self.menu removeFromParentAndCleanup:YES];
+    [self insertMenu];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -952,7 +972,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)acceptTouches:(CGPoint)_touchLocation {
     BOOL accept = NO;
-    if (self.canTouch) {
+    CGSize statusDisplaySize = self.statusDisplay.contentSize;
+    CGFloat touchDelta = 2.0*self.screenCenter.y - _touchLocation.y;
+    if (self.canTouch && touchDelta > statusDisplaySize.height) {
         accept = YES;
     }
     return accept;
