@@ -155,28 +155,28 @@
         [self.bootingLabel setString:@"Booting....."];
     } else if (self.counter == kBOOT_TICK_6) {
         [self.bootingLabel removeFromParentAndCleanup:YES];
-        [self.statusDisplay setTest:EnergyDisplayType];
+        [self.statusDisplay setTest:LevelDisplayType];
         [self insertPOST:@"POST    [start]"];
     } else if (self.counter == kBOOT_TICK_7) {
         [self.statusDisplay setTest:SpeedDisplayType];
     } else if (self.counter == kBOOT_TICK_8) {
-        [self.statusDisplay setTest:SensorDisplayType];
+        [self.statusDisplay setTest:EnergyDisplayType];
     } else if (self.counter == kBOOT_TICK_9) {
-        [self.statusDisplay setTest:SampleDisplayType];
+        [self.statusDisplay setTest:SensorDisplayType];
     } else if (self.counter == kBOOT_TICK_10) {
-        [self.statusDisplay clear];
+        [self.statusDisplay setTest:SampleDisplayType];
     } else if (self.counter == kBOOT_TICK_11) {
-        [self.statusDisplay test];
+        [self.statusDisplay clear];
         [self.post removeFromParentAndCleanup:YES];
         [self insertPOST:@"POST    [OK]"];
         [self insertConsole:@"console [start]"];
     } else if (self.counter == kBOOT_TICK_12) {
-        [self.statusDisplay clear];
+        [self.statusDisplay test];
         [self.console removeFromParentAndCleanup:YES];
         [self insertConsole:@"console [started]"];
         [self insertConnection:@"connecting"];
     } else if (self.counter == kBOOT_TICK_13) {
-        [self.statusDisplay test];
+        [self.statusDisplay clear];
         [self.connection removeFromParentAndCleanup:YES];
         [self insertConnection:@"connected"];
     }    

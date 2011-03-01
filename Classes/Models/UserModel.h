@@ -45,6 +45,7 @@
 + (void)setLevel:(NSInteger)_level;
 + (NSInteger)level;
 + (NSInteger)nextQuadrangle;
++ (void)setQuadrangle:(NSInteger)_quad;
 + (NSInteger)quadrangle;
 + (void)tutorialWasShown:(TutorialSectionID)_sectionID;
 + (BOOL)wasTutorialShown:(TutorialSectionID)_sectionID;

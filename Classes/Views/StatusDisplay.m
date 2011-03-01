@@ -11,15 +11,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kDISPLAY_DIGIT_DELTA    22.0f
-#define kLEVEL_XPOS             17.0f
-#define kSPEED_XPOS             74.0f
-#define kENERGY_XPOS            127.0f
-#define kSENSOR_XPOS            203.0f
-#define kSAMPLE_XPOS            255.0f
+#define kLEVEL_XPOS             12.0f
+#define kSPEED_XPOS             69.0f
+#define kENERGY_XPOS            126.0f
+#define kSENSOR_XPOS            204.0f
+#define kSAMPLE_XPOS            260.0f
 #define kDIGIT_YPOS             6.0f
-#define kTERMINAL_XPOS          250.0f
-#define kTERMINAL_YPOS          37.0f
-#define kTERMINAL_YOFFSET       13.0f
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface StatusDisplay (PrivateAPI)
@@ -81,19 +78,19 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)clear {
+    [self removeDigits:self.sampleDigits];
+    [self removeDigits:self.sensorDigits];
     [self removeDigits:self.energyDigits];
     [self removeDigits:self.speedDigits];
-    [self removeDigits:self.sensorDigits];
-    [self removeDigits:self.sampleDigits];
     [self removeDigits:self.levelDigits];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)test {
+    [self setTest:SampleDisplayType];
+    [self setTest:SensorDisplayType];
     [self setTest:EnergyDisplayType];
     [self setTest:SpeedDisplayType];
-    [self setTest:SensorDisplayType];
-    [self setTest:SampleDisplayType];
     [self setTest:LevelDisplayType];
 }
 
@@ -127,8 +124,8 @@
             [self.sampleDigits addObject:[self insertImage:self.testDigitImage atPostion:(kSAMPLE_XPOS+kDISPLAY_DIGIT_DELTA) withKey:@"test"]];
             break;
         case LevelDisplayType:
-            [self.sampleDigits addObject:[self insertImage:self.testDigitImage atPostion:kLEVEL_XPOS withKey:@"test"]];
-            [self.sampleDigits addObject:[self insertImage:self.testDigitImage atPostion:(kLEVEL_XPOS+kDISPLAY_DIGIT_DELTA) withKey:@"test"]];
+            [self.levelDigits addObject:[self insertImage:self.testDigitImage atPostion:kLEVEL_XPOS withKey:@"test"]];
+            [self.levelDigits addObject:[self insertImage:self.testDigitImage atPostion:(kLEVEL_XPOS+kDISPLAY_DIGIT_DELTA) withKey:@"test"]];
             break;
     }
 }
@@ -161,8 +158,8 @@
             [self.sampleDigits addObject:[self insertImage:[self.digitImages objectAtIndex:onesDigit] atPostion:(kSAMPLE_XPOS+kDISPLAY_DIGIT_DELTA) withKey:onesDigitKey]];
             break;
         case LevelDisplayType:
-            [self.sampleDigits addObject:[self insertImage:[self.digitImages objectAtIndex:tensDigit] atPostion:kLEVEL_XPOS withKey:tensDigitKey]];
-            [self.sampleDigits addObject:[self insertImage:[self.digitImages objectAtIndex:onesDigit] atPostion:(kLEVEL_XPOS+kDISPLAY_DIGIT_DELTA) withKey:onesDigitKey]];
+            [self.levelDigits addObject:[self insertImage:[self.digitImages objectAtIndex:tensDigit] atPostion:kLEVEL_XPOS withKey:tensDigitKey]];
+            [self.levelDigits addObject:[self insertImage:[self.digitImages objectAtIndex:onesDigit] atPostion:(kLEVEL_XPOS+kDISPLAY_DIGIT_DELTA) withKey:onesDigitKey]];
             break;
     }
 }

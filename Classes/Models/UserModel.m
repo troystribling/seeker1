@@ -96,6 +96,13 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (void)setQuadrangle:(NSInteger)_quad {
+    UserModel* user = [self findFirst];
+    user.quadrangle = _quad;
+    [user update];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)quadrangle {
     UserModel* user = [self findFirst];
     return user.quadrangle;

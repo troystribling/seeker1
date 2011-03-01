@@ -83,7 +83,7 @@
     if (self.counter == kUPLOAD_TICK_1) {
         [self.percentUploadLabel setString:@"upload 10%  (1.0Kb/s)"];
         [self.uploadProgressLabel setString:@"===>"];
-        [self.statusDisplay setTest:EnergyDisplayType];
+        [self.statusDisplay setTest:LevelDisplayType];
     } else if (self.counter == kUPLOAD_TICK_2) {
         [self.percentUploadLabel setString:@"upload 20%  (0.8Kb/s)"];
         [self.uploadProgressLabel setString:@"====>"];
@@ -91,31 +91,31 @@
     } else if (self.counter == kUPLOAD_TICK_3) {
         [self.percentUploadLabel setString:@"upload 30%  (1.2Kb/s)"];
         [self.uploadProgressLabel setString:@"======>"];
-        [self.statusDisplay setTest:SensorDisplayType];
+        [self.statusDisplay setTest:EnergyDisplayType];
     } else if (self.counter == kUPLOAD_TICK_4) {
         [self.percentUploadLabel setString:@"upload 40%  (1.5Kb/s)"];
         [self.uploadProgressLabel setString:@"=========>"];
-        [self.statusDisplay setTest:SampleDisplayType];
+        [self.statusDisplay setTest:SensorDisplayType];
     } else if (self.counter == kUPLOAD_TICK_5) {
         [self.percentUploadLabel setString:@"upload 60%  (1.2Kb/s)"];
         [self.uploadProgressLabel setString:@"===========>"];
-        [self.statusDisplay clear];
+        [self.statusDisplay setTest:SampleDisplayType];
     } else if (self.counter == kUPLOAD_TICK_6) {
         [self.percentUploadLabel setString:@"upload 70%  (1.8Kb/s)"];
         [self.uploadProgressLabel setString:@"=============>"];
-        [self.statusDisplay setTest:EnergyDisplayType];
+        [self.statusDisplay clear];
     } else if (self.counter == kUPLOAD_TICK_7) {
         [self.percentUploadLabel setString:@"upload 80%  (2.0Kb/s)"];
         [self.uploadProgressLabel setString:@"================>"];
-        [self.statusDisplay setTest:SpeedDisplayType];
+        [self.statusDisplay setTest:LevelDisplayType];
     } else if (self.counter == kUPLOAD_TICK_8) {
         [self.percentUploadLabel setString:@"upload 90%  (2.1Kb/s)"];
         [self.uploadProgressLabel setString:@"====================>"];
-        [self.statusDisplay setTest:SensorDisplayType];
+        [self.statusDisplay setTest:SpeedDisplayType];
     } else if (self.counter == kUPLOAD_TICK_9) {
         [self.percentUploadLabel setString:@"upload 100% (0.5kb/s)"];
         [self.uploadProgressLabel setString:@"======================>"];
-        [self.statusDisplay setTest:SampleDisplayType];
+        [self.statusDisplay setTest:EnergyDisplayType];
     } else if (self.counter == kUPLOAD_TICK_10) {
         [[ProgramNgin instance] runProgram];
         [[CCDirector sharedDirector] replaceScene: [MapScene scene]];

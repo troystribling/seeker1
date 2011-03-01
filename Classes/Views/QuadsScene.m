@@ -11,6 +11,7 @@
 #import "StatusDisplay.h"
 #import "TouchUtils.h"
 #import "LevelModel.h"
+#import "UserModel.h"
 #import "MissionsScene.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -253,6 +254,7 @@
     CGPoint touchDelta = ccpSub(touchLocation, self.firstTouch);
     if (abs(touchDelta.y) < 20) {
         if ([self displayedQuadIsUnlocked]) {
+            [UserModel setQuadrangle:self.displayedQuad];
             [[CCDirector sharedDirector] replaceScene:[MissionsScene scene]];
         }
     } else if (touchDelta.y < 0) {

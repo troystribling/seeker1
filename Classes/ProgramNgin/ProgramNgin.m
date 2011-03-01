@@ -452,6 +452,7 @@ static ProgramNgin* thisProgramNgin = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadProgram:(NSMutableArray*)_program {
     self.program = [NSMutableArray arrayWithArray:_program];
+    [self compile];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -466,7 +467,6 @@ static ProgramNgin* thisProgramNgin = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)runProgram {
-    [self compile];
     self.codeLine = 0;
     self.programRunning = YES;
     self.programHalted = NO;
