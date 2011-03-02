@@ -108,9 +108,13 @@
 - (CCSprite*)getMissionSprite:(NSInteger)_mission {
     CCSprite* sprite = nil;
     if ([self missionIsUnlocked:_mission]) {
-        LevelModel* levelModel = [LevelModel findByLevel:[self missionToLevel:_mission]];
+        NSInteger maxLevel = [LevelModel maxLevel];
+        NSInteger level = [self missionToLevel:_mission];
+        LevelModel* levelModel = [LevelModel findByLevel:level];
         if (levelModel.codeScore <= levelModel.expectedCodeScore && levelModel.completed) {
             sprite = [[[CCSprite alloc] initWithFile:@"mission-complete.png"] autorelease];
+        } else if (level == maxLevel) {
+            sprite = [[[CCSprite alloc] initWithFile:@"mission-not-played.png"] autorelease];
         } else if (levelModel.completed) {
             sprite = [[[CCSprite alloc] initWithFile:@"mission-incomplete.png"] autorelease];
         } else {

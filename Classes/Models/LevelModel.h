@@ -45,6 +45,7 @@
 + (LevelModel*)findByLevel:(NSInteger)_level;
 + (NSMutableArray*)findAllByQudrangle:(NSInteger)_quad;
 + (NSMutableArray*)findAll;
++ (NSInteger)maxLevel;
 + (void)insertForLevel:(NSInteger)_level;
 + (void)completeLevel:(NSInteger)_level forSeeker:(SeekerSprite*)_seeker;
 + (void)incompleteLevel:(NSInteger)_level forSeeker:(SeekerSprite*)_seeker;

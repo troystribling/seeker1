@@ -75,6 +75,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (NSInteger)maxLevel {
+	return [[SeekerDbi instance]  selectIntExpression:@"SELECT MAX(level) FROM levels"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (void)destroyAll {
 	[[SeekerDbi instance]  updateWithStatement:@"DELETE FROM levels"];
 }

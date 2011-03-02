@@ -47,8 +47,8 @@
         self.containerView = _containerView;
         self.view.frame = self.containerView.frame;
         self.featureList = [NSMutableArray arrayWithObjects:@"get-started-introduction.png", @"subroutines-unlock.png",
-                                                            @"times-loop-unlocked.png", @"until-loop-unlocked.png",
-                                                            @"rover-bins-unlocked.png",nil];
+                                                            @"times-loop-unlock.png", @"until-loop-unlock.png",
+                                                            @"rover-bins-unlock.png",nil];
     }
     return self;
 }

@@ -141,7 +141,6 @@
 		0558413D12F900EB00E506D4 /* completed-program.png in Resources */ = {isa = PBXBuildFile; fileRef = 0558413812F900EB00E506D4 /* completed-program.png */; };
 		0558413E12F900EB00E506D4 /* open-terminal-game-board.png in Resources */ = {isa = PBXBuildFile; fileRef = 0558413912F900EB00E506D4 /* open-terminal-game-board.png */; };
 		0558413F12F900EB00E506D4 /* program-game-board.png in Resources */ = {isa = PBXBuildFile; fileRef = 0558413A12F900EB00E506D4 /* program-game-board.png */; };
-		0558414012F900EB00E506D4 /* status-display.png in Resources */ = {isa = PBXBuildFile; fileRef = 0558413B12F900EB00E506D4 /* status-display.png */; };
 		0558414112F900EB00E506D4 /* write-program.png in Resources */ = {isa = PBXBuildFile; fileRef = 0558413C12F900EB00E506D4 /* write-program.png */; };
 		05663F611302343C008AA1DC /* map-8.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F5F1302343C008AA1DC /* map-8.tmx */; };
 		05663F621302343C008AA1DC /* map-9.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F601302343C008AA1DC /* map-9.tmx */; };
@@ -579,7 +578,6 @@
 		0558413812F900EB00E506D4 /* completed-program.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "completed-program.png"; sourceTree = "<group>"; };
 		0558413912F900EB00E506D4 /* open-terminal-game-board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open-terminal-game-board.png"; sourceTree = "<group>"; };
 		0558413A12F900EB00E506D4 /* program-game-board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "program-game-board.png"; sourceTree = "<group>"; };
-		0558413B12F900EB00E506D4 /* status-display.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-display.png"; sourceTree = "<group>"; };
 		0558413C12F900EB00E506D4 /* write-program.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write-program.png"; sourceTree = "<group>"; };
 		05663F5F1302343C008AA1DC /* map-8.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-8.tmx"; sourceTree = "<group>"; };
 		05663F601302343C008AA1DC /* map-9.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-9.tmx"; sourceTree = "<group>"; };
@@ -1161,20 +1159,19 @@
 			children = (
 				05E40FAA13197AD900DE6344 /* get-started-introduction.png */,
 				052CC3EF12F5F61800F5D862 /* game-objects.png */,
-				05227E3712F64DF500923DEA /* objective.png */,
 				0527D45712FF3EC700AF6A0F /* pan-game-board.png */,
-				0558413B12F900EB00E506D4 /* status-display.png */,
+				05227E3712F64DF500923DEA /* objective.png */,
 				0558413A12F900EB00E506D4 /* program-game-board.png */,
 				0558413912F900EB00E506D4 /* open-terminal-game-board.png */,
 				0558413C12F900EB00E506D4 /* write-program.png */,
 				050125F212FBAAE800D0B43B /* add-program-instruction.png */,
 				0558413812F900EB00E506D4 /* completed-program.png */,
-				05E40FB413198F0500DE6344 /* times-loop-unlock.png */,
-				0594276A12FA5AB4005026F7 /* times-loop.png */,
 				05E40FB313198F0500DE6344 /* subroutines-unlock.png */,
 				053CD81112FDD26C00410FC8 /* subroutines.png */,
 				0594276812FA5AB4005026F7 /* list-subroutines.png */,
 				0594276712FA5AB4005026F7 /* create-edit-subroutines.png */,
+				05E40FB413198F0500DE6344 /* times-loop-unlock.png */,
+				0594276A12FA5AB4005026F7 /* times-loop.png */,
 				05E40FB513198F0500DE6344 /* until-loop-unlock.png */,
 				0594276B12FA5AB4005026F7 /* until-loop.png */,
 				0594276912FA5AB4005026F7 /* predicates.png */,
@@ -1845,7 +1842,6 @@
 				0558413D12F900EB00E506D4 /* completed-program.png in Resources */,
 				0558413E12F900EB00E506D4 /* open-terminal-game-board.png in Resources */,
 				0558413F12F900EB00E506D4 /* program-game-board.png in Resources */,
-				0558414012F900EB00E506D4 /* status-display.png in Resources */,
 				0558414112F900EB00E506D4 /* write-program.png in Resources */,
 				0594276C12FA5AB4005026F7 /* create-edit-subroutines.png in Resources */,
 				0594276D12FA5AB4005026F7 /* list-subroutines.png in Resources */,

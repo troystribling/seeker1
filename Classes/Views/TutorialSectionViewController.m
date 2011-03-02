@@ -74,8 +74,8 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.view.frame = self.containerView.frame;
-        self.sectionList = [NSMutableArray arrayWithObjects:[NSArray arrayWithObjects:@"game-objects.png", @"objective.png", 
-                                                                @"pan-game-board.png", @"status-display.png", @"program-game-board.png",
+        self.sectionList = [NSMutableArray arrayWithObjects:[NSArray arrayWithObjects:@"game-objects.png", @"pan-game-board.png", 
+                                                                @"objective.png", @"program-game-board.png",
                                                                 @"open-terminal-game-board.png", @"write-program.png", 
                                                                 @"add-program-instruction.png", @"completed-program.png", nil],
                                                              [NSArray arrayWithObjects:@"subroutines.png", @"list-subroutines.png", 
@@ -134,11 +134,6 @@
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
     UITouch* touch = [touches anyObject];
     NSInteger touchTag = touch.view.tag;
-    if ([self.tutorialList count] > 1) {
-        self.nextView.hidden = NO;
-    } else {
-        self.nextView.hidden = YES;
-    }
     switch (touchTag) {
         case kTUTORIAL_SECTION_LAUNCHER_BACK_TAG:
             if (self.selectedTutorial == 0) {
