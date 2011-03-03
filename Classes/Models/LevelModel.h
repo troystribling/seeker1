@@ -24,6 +24,8 @@
     NSInteger sensorsPlaced;
     NSInteger expectedCodeScore;
     NSInteger codeScore;
+    NSString* errorCode;
+    NSString* errorMsg;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -36,6 +38,8 @@
 @property (nonatomic, assign) NSInteger sensorsPlaced;
 @property (nonatomic, assign) NSInteger expectedCodeScore;
 @property (nonatomic, assign) NSInteger codeScore;
+@property (nonatomic, assign) NSString* errorCode;
+@property (nonatomic, assign) NSString* errorMsg;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
@@ -50,6 +54,7 @@
 + (void)completeLevel:(NSInteger)_level forSeeker:(SeekerSprite*)_seeker;
 + (void)incompleteLevel:(NSInteger)_level forSeeker:(SeekerSprite*)_seeker;
 + (BOOL)levelCompleted:(NSInteger)_level;
++ (void)setLevel:(NSInteger)_level errorCode:(NSString*)_errCode andMessage:(NSString*)_errMsg;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;

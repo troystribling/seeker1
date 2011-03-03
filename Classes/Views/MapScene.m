@@ -20,6 +20,28 @@
 #import "MainScene.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+#define kERROR_CODE_HIT_MAP_BOUNDARY        @"A-1654"
+#define kERROR_MSG_HIT_MAP_BOUNDARY         @"Map Boundary Reached"
+#define kERROR_CODE_NO_ENERGY               @"E-7854"
+#define kERROR_MSG_NO_ENERGY                @"Energy Depleted"
+#define kERROR_CODE_SPEED_HIGH              @"S-2025"
+#define kERROR_MSG_SPEED_HIGH               @"Above Maximum Speed"
+#define kERROR_CODE_SPEED_LOW               @"S-2026"
+#define kERROR_MSG_SPEED_LOW                @"Below Minimum Speed"
+#define kERROR_CODE_PROGRAM_CRASH           @"P-1357"
+#define kERROR_MSG_PROGRAM_CRASH            @"Program Error"
+#define kERROR_CODE_TERRRAIN                @"T-6667"
+#define kERROR_MSG_TERRRAIN                 @"Above Maximum Terrain Gradient"
+#define kERROR_CODE_SENSOR_BIN_EMPTY        @"B-1236"
+#define kERROR_MSG_SENSOR_BIN_EMPTY         @"Sensor Bin Empty"
+#define kERROR_CODE_EXPECTED_SENSOR         @"S-8924"
+#define kERROR_MSG_EXPECTED_SENSOR          @"Expected Sensor at Location"
+#define kERROR_CODE_SAMPLE_BIN_FULL         @"B-248"
+#define kERROR_MSG_SAMPLE_BIN_FULL          @"Sample Bin Full"
+#define kERROR_CODE_EXPECTED_SAMPLE         @"S-3336"
+#define kERROR_MSG_EXPECTED_SAMPLE          @"Expected Sample at Location"
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 #define kMAP_EDGE_BUFFER            0
 #define kMAP_INVERSE_PAN_SPEED      0.001
 #define kMAP_ZOOM_FACTOR            0.5
@@ -81,10 +103,8 @@
 - (void)crashTerrain;
 - (void)crashSensorBinEmpty;
 - (void)crashNoSensorSiteAtPosition;
-- (void)crashSensorSiteAtPositionMissed;
 - (void)crashSampleBinFull;
 - (void)crashNoSampleAtPosition;
-- (void)crashSampleAtPositionMissed;
 // crash animations
 - (void)fadeToRed;
 // level completed animations
@@ -645,61 +665,61 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashHitMapBoundary {
+    [LevelModel setLevel:self.level errorCode:kERROR_CODE_HIT_MAP_BOUNDARY andMessage:kERROR_MSG_HIT_MAP_BOUNDARY];
     [self fadeToRed];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashNoEnergy {
+    [LevelModel setLevel:self.level errorCode:kERROR_CODE_NO_ENERGY andMessage:kERROR_MSG_NO_ENERGY];
     [self fadeToRed];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashSpeedHigh {
+    [LevelModel setLevel:self.level errorCode:kERROR_CODE_SPEED_HIGH andMessage:kERROR_MSG_SPEED_HIGH];
     [self fadeToRed];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashSpeedLow {
+    [LevelModel setLevel:self.level errorCode:kERROR_CODE_SPEED_LOW andMessage:kERROR_MSG_SPEED_LOW];
     [self fadeToRed];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashProgram {
+    [LevelModel setLevel:self.level errorCode:kERROR_CODE_PROGRAM_CRASH andMessage:kERROR_MSG_PROGRAM_CRASH];
     [self fadeToRed];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashTerrain {
+    [LevelModel setLevel:self.level errorCode:kERROR_CODE_TERRRAIN andMessage:kERROR_MSG_TERRRAIN];
     [self fadeToRed];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashSensorBinEmpty {
+    [LevelModel setLevel:self.level errorCode:kERROR_CODE_SENSOR_BIN_EMPTY andMessage:kERROR_MSG_SENSOR_BIN_EMPTY];
     [self fadeToRed];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashNoSensorSiteAtPosition {
-    [self fadeToRed];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)crashSensorSiteAtPositionMissed {
+    [LevelModel setLevel:self.level errorCode:kERROR_CODE_EXPECTED_SENSOR andMessage:kERROR_MSG_EXPECTED_SENSOR];
     [self fadeToRed];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashSampleBinFull {
+    [LevelModel setLevel:self.level errorCode:kERROR_CODE_SAMPLE_BIN_FULL andMessage:kERROR_MSG_SAMPLE_BIN_FULL];
     [self fadeToRed];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashNoSampleAtPosition {
-    [self fadeToRed];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)crashSampleAtPositionMissed {
+    [LevelModel setLevel:self.level errorCode:kERROR_CODE_EXPECTED_SAMPLE andMessage:kERROR_MSG_EXPECTED_SAMPLE];
     [self fadeToRed];
 }
 

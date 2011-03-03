@@ -27,8 +27,8 @@
 
 - (void)insertFailedTitleLabel;
 - (void)insertCompletedTitleLabel;
-- (void)insertSamplesReturnedLabel;
-- (void)insertSensorsPlacedLabel;
+- (void)insertSamplesReturnedLabel:(CGPoint)_position;
+- (void)insertSensorsPlacedLabel:(CGPoint)_position;
 - (void)insertCodeScoreLabel;
 - (void)insertFailedTotalScoreLabel;
 - (void)insertCompletedTotalScoreLabel;
@@ -57,8 +57,19 @@
     CCLabel* titleLabel = [CCLabel labelWithString:@"Mission Failure" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
     titleLabel.position = CGPointMake(20.0f, 361.0f);
     titleLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
-    titleLabel.color = ccc3(204,51,0);    
+    titleLabel.color = ccc3(255,255,0); 
     [self addChild:titleLabel];
+    CCLabel* errorMsgLabel = [CCLabel labelWithString:self.level.errorMsg fontName:kGLOBAL_FONT fontSize:18.0];
+    errorMsgLabel.position = CGPointMake(20.0f, 340.0f);
+    errorMsgLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
+    errorMsgLabel.color = ccc3(204,51,0);    
+    [self addChild:errorMsgLabel];
+    NSString* errorCodeString = [NSString stringWithFormat:@"Error Code: %@", self.level.errorCode];
+    CCLabel* errorCodeLabel = [CCLabel labelWithString:errorCodeString fontName:kGLOBAL_FONT fontSize:18.0];
+    errorCodeLabel.position = CGPointMake(20.0f, 320.0f);
+    errorCodeLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
+    errorCodeLabel.color = ccc3(204,51,0);    
+    [self addChild:errorCodeLabel];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -71,26 +82,26 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)insertSamplesReturnedLabel {
+- (void)insertSamplesReturnedLabel:(CGPoint)_position {
     NSInteger samplesReturnedScore = self.level.samplesReturned * kPOINTS_PER_OBJECT;
     NSString* samplesReturnedString = [NSString stringWithFormat:@"Samples Returned     %d*%d = %d", 
                                        self.level.samplesReturned, kPOINTS_PER_OBJECT, samplesReturnedScore];
     CCLabel* samplesReturnedLabel = [CCLabel labelWithString:samplesReturnedString dimensions:CGSizeMake(250, 60) 
                                                    alignment:UITextAlignmentLeft fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
-    samplesReturnedLabel.position = CGPointMake(20.0f, 290.0f);
+    samplesReturnedLabel.position = _position;
     samplesReturnedLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     samplesReturnedLabel.color = kCCLABEL_FONT_COLOR;
     [self addChild:samplesReturnedLabel];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)insertSensorsPlacedLabel {
+- (void)insertSensorsPlacedLabel:(CGPoint)_position {
     NSInteger sensorsPlacedScore = self.level.sensorsPlaced * kPOINTS_PER_OBJECT;
     NSString* sensorsPlacedString = [NSString stringWithFormat:@"Sensors Placed       %d*%d = %d", 
                                        self.level.sensorsPlaced, kPOINTS_PER_OBJECT, sensorsPlacedScore];
     CCLabel* sensorsPlacedLabel = [CCLabel labelWithString:sensorsPlacedString dimensions:CGSizeMake(250, 60) 
                                                alignment:UITextAlignmentLeft fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
-    sensorsPlacedLabel.position = CGPointMake(20.0f, 230.0f);
+    sensorsPlacedLabel.position = _position;
     sensorsPlacedLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     sensorsPlacedLabel.color = kCCLABEL_FONT_COLOR;
     [self addChild:sensorsPlacedLabel];
@@ -130,7 +141,7 @@
     CCLabel* totalScoreLabel = [CCLabel labelWithString:totalScoreString fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     totalScoreLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     totalScoreLabel.color = ccc3(255,255,0);
-    totalScoreLabel.position = CGPointMake(20.0f, 200.0f);
+    totalScoreLabel.position = CGPointMake(20.0f, 170.0f);
     [self addChild:totalScoreLabel];
 }
 
@@ -278,10 +289,18 @@
 - (void) nextFrame:(ccTime)dt {
     self.counter++;
     if (self.counter == kEND_OF_LEVEL_TICK_1) {
-        [self insertSamplesReturnedLabel];
+        if (self.level.completed) {
+            [self insertSamplesReturnedLabel:CGPointMake(20.0f, 290.0f)];
+        } else {
+            [self insertSamplesReturnedLabel:CGPointMake(20.0f, 250.0f)];
+        }
         [self.statusDisplay test];
     } else if (self.counter == kEND_OF_LEVEL_TICK_2) {
-        [self insertSensorsPlacedLabel];
+        if (self.level.completed) {
+            [self insertSensorsPlacedLabel:CGPointMake(20.0f, 230.0f)];
+        } else {
+            [self insertSensorsPlacedLabel:CGPointMake(20.0f, 190.0f)];
+        }
         [self.statusDisplay clear];
     } else if (self.counter == kEND_OF_LEVEL_TICK_3) {
         if (self.level.completed) {

@@ -29,6 +29,8 @@
 @synthesize sensorsPlaced;
 @synthesize expectedCodeScore;
 @synthesize codeScore;
+@synthesize errorCode;
+@synthesize errorMsg;
 
 //===================================================================================================================================
 #pragma mark LevelModel
@@ -45,7 +47,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[SeekerDbi instance]  updateWithStatement:@"CREATE TABLE levels (pk integer primary key, level integer, completed integer, score integer, quadrangle integer, samplesReturned integer, sensorsPlaced integer, expectedCodeScore integer, codeScore integer)"];
+	[[SeekerDbi instance]  updateWithStatement:@"CREATE TABLE levels (pk integer primary key, level integer, completed integer, score integer, quadrangle integer, samplesReturned integer, sensorsPlaced integer, expectedCodeScore integer, codeScore integer, errorCode text, errorMsg text)"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -131,12 +133,22 @@
     return model.completed;
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)setLevel:(NSInteger)_level errorCode:(NSString*)_errCode andMessage:(NSString*)_errMsg {
+    LevelModel* model = [self findByLevel:_level];
+    if (model) {
+        model.errorCode = _errCode;
+        model.errorMsg = _errMsg;
+        [model update];
+    }
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
     NSString* insertStatement;
-    insertStatement = [NSString stringWithFormat:@"INSERT INTO levels (level, completed, score, quadrangle, samplesReturned, sensorsPlaced, expectedCodeScore, codeScore) values (%d, %d, %d, %d, %d, %d, %d, %d)", 
-                        self.level, [self completedAsInteger], self.score, self.quadrangle, self.samplesReturned, self.sensorsPlaced, self.expectedCodeScore, self.codeScore];	
+    insertStatement = [NSString stringWithFormat:@"INSERT INTO levels (level, completed, score, quadrangle, samplesReturned, sensorsPlaced, expectedCodeScore, codeScore, errorCode, errorMsg) values (%d, %d, %d, %d, %d, %d, %d, %d, '%@', '%@')", 
+                        self.level, [self completedAsInteger], self.score, self.quadrangle, self.samplesReturned, self.sensorsPlaced, self.expectedCodeScore, self.codeScore, self.errorCode, self.errorMsg];	
     [[SeekerDbi instance]  updateWithStatement:insertStatement];
 }
 
@@ -153,8 +165,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
-    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE levels SET level = %d, completed = %d, score = %d, quadrangle = %d, samplesReturned = %d, sensorsPlaced = %d, expectedCodeScore = %d, codeScore = %d WHERE pk = %d", self.level, 
-                                    [self completedAsInteger], self.score, self.quadrangle, self.samplesReturned, self.sensorsPlaced, self.expectedCodeScore, self.codeScore, self.pk];
+    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE levels SET level = %d, completed = %d, score = %d, quadrangle = %d, samplesReturned = %d, sensorsPlaced = %d, expectedCodeScore = %d, codeScore = %d, errorCode = '%@', errorMsg = '%@' WHERE pk = %d", self.level, 
+                                    [self completedAsInteger], self.score, self.quadrangle, self.samplesReturned, self.sensorsPlaced, self.expectedCodeScore, self.codeScore, self.errorCode, self.errorMsg, self.pk];
 	[[SeekerDbi instance]  updateWithStatement:updateStatement];
 }
 
@@ -189,6 +201,14 @@
 	self.sensorsPlaced = (int)sqlite3_column_int(statement, 6);
 	self.expectedCodeScore = (int)sqlite3_column_int(statement, 7);
 	self.codeScore = (int)sqlite3_column_int(statement, 8);
+	const char* errorCodeVal = (const char*)sqlite3_column_text(statement, 9);
+	if (errorCodeVal != NULL) {		
+		self.errorCode = [NSString stringWithUTF8String:errorCodeVal];
+	}
+	const char* errorMsgVal = (const char*)sqlite3_column_text(statement, 10);
+	if (errorMsgVal != NULL) {		
+		self.errorMsg = [NSString stringWithUTF8String:errorMsgVal];
+	}
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
