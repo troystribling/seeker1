@@ -141,8 +141,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addMissionScore:(NSInteger)_mission toSprite:(CCSprite*)_sprite {
-    LevelModel* levelModel = [LevelModel findByLevel:[self missionToLevel:_mission]];
-    if ([levelModel score] > 0) {
+    NSInteger maxLevel = [LevelModel maxLevel];
+    NSInteger level = [self missionToLevel:_mission];
+    LevelModel* levelModel = [LevelModel findByLevel:level];
+    if ([levelModel completed] && level != maxLevel) {
         CCLabel* missionScore = [CCLabel labelWithString:[NSString stringWithFormat:@"%d", [levelModel score]] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_MISSION];
         CGSize missionSize = [self missionSize];
         missionScore.anchorPoint = CGPointMake(0.5, 0.5);

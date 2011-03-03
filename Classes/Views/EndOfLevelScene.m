@@ -54,20 +54,18 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertFailedTitleLabel {
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
     CCLabel* titleLabel = [CCLabel labelWithString:@"Mission Failure" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
-    titleLabel.position = CGPointMake(20.0f, 361.0f);
-    titleLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
-    titleLabel.color = ccc3(255,255,0); 
+    titleLabel.position = CGPointMake(screenSize.width/2.0, 380.0f);
+    titleLabel.color = ccc3(204,51,0); 
     [self addChild:titleLabel];
     CCLabel* errorMsgLabel = [CCLabel labelWithString:self.level.errorMsg fontName:kGLOBAL_FONT fontSize:18.0];
-    errorMsgLabel.position = CGPointMake(20.0f, 340.0f);
-    errorMsgLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
+    errorMsgLabel.position = CGPointMake(screenSize.width/2.0, 347.0f);
     errorMsgLabel.color = ccc3(204,51,0);    
     [self addChild:errorMsgLabel];
     NSString* errorCodeString = [NSString stringWithFormat:@"Error Code: %@", self.level.errorCode];
     CCLabel* errorCodeLabel = [CCLabel labelWithString:errorCodeString fontName:kGLOBAL_FONT fontSize:18.0];
-    errorCodeLabel.position = CGPointMake(20.0f, 320.0f);
-    errorCodeLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
+    errorCodeLabel.position = CGPointMake(screenSize.width/2.0, 327.0f);
     errorCodeLabel.color = ccc3(204,51,0);    
     [self addChild:errorCodeLabel];
 }
@@ -75,9 +73,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertCompletedTitleLabel {
     CCLabel* titleLabel = [CCLabel labelWithString:@"Mission Completed" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
-    titleLabel.position = CGPointMake(20.0f, 361.0f);
-    titleLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
+    titleLabel.position = CGPointMake(20.0, 360.0f);
     titleLabel.color = ccc3(255,255,0);    
+    titleLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     [self addChild:titleLabel];
 }
 
@@ -121,14 +119,14 @@
     if (deltaCodeScore == 0) {        
         NSString* codeScoreString = [NSString stringWithFormat:@"Code Score: %d%%", codeScore];
         codeScoreLabel = [CCLabel labelWithString:codeScoreString fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
-        codeScoreLabel.position = CGPointMake(20.0f, 205.0f);
+        codeScoreLabel.position = CGPointMake(20.0f, 208.0f);
         codeScoreLabel.color = kCCLABEL_FONT_COLOR;
     } else {
         NSString* codeScoreString = [NSString stringWithFormat:@"Code Score: %d%%     Penalty          %d*%d = %d", 
                                       codeScore, deltaCodeScore, kPOINTS_PER_CODE_LINE, codeScorePoints];
         codeScoreLabel = [CCLabel labelWithString:codeScoreString dimensions:CGSizeMake(250, 90) 
                                          alignment:UITextAlignmentLeft fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
-        codeScoreLabel.position = CGPointMake(20.0f, 140.0f);
+        codeScoreLabel.position = CGPointMake(20.0f, 143.0f);
         codeScoreLabel.color = ccc3(204,51,0);
     }
     codeScoreLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
@@ -136,28 +134,17 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)insertFailedTotalScoreLabel {
-    NSString* totalScoreString = [NSString stringWithFormat:@"Total Score: %d", self.level.score];
-    CCLabel* totalScoreLabel = [CCLabel labelWithString:totalScoreString fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
-    totalScoreLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
-    totalScoreLabel.color = ccc3(255,255,0);
-    totalScoreLabel.position = CGPointMake(20.0f, 170.0f);
-    [self addChild:totalScoreLabel];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertCompletedTotalScoreLabel {
     NSInteger deltaCodeScore = self.level.codeScore - self.level.expectedCodeScore;
-    NSInteger bonus = (self.level.sensorsPlaced + self.level.samplesReturned) * kPOINTS_PER_OBJECT;
-    NSString* totalScoreString = [NSString stringWithFormat:@"Bonus: %d           Total Score: %d", bonus, self.level.score];
+    NSString* totalScoreString = [NSString stringWithFormat:@"Total Score: %d", self.level.score];
     CCLabel* totalScoreLabel = [CCLabel labelWithString:totalScoreString dimensions:CGSizeMake(300, 60) 
                                               alignment:UITextAlignmentLeft fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     totalScoreLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     totalScoreLabel.color = ccc3(255,255,0);
     if (deltaCodeScore == 0) {
-        totalScoreLabel.position = CGPointMake(20.0f, 130.0f);
+        totalScoreLabel.position = CGPointMake(20.0f, 138.0f);
     } else {
-        totalScoreLabel.position = CGPointMake(20.0f, 85.0f);
+        totalScoreLabel.position = CGPointMake(20.0f, 82.0f);
     }
     [self addChild:totalScoreLabel];
 }
@@ -290,30 +277,24 @@
     self.counter++;
     if (self.counter == kEND_OF_LEVEL_TICK_1) {
         if (self.level.completed) {
-            [self insertSamplesReturnedLabel:CGPointMake(20.0f, 290.0f)];
-        } else {
-            [self insertSamplesReturnedLabel:CGPointMake(20.0f, 250.0f)];
+            [self insertSamplesReturnedLabel:CGPointMake(20.0f, 295.0f)];
         }
         [self.statusDisplay test];
     } else if (self.counter == kEND_OF_LEVEL_TICK_2) {
         if (self.level.completed) {
-            [self insertSensorsPlacedLabel:CGPointMake(20.0f, 230.0f)];
-        } else {
-            [self insertSensorsPlacedLabel:CGPointMake(20.0f, 190.0f)];
+            [self insertSensorsPlacedLabel:CGPointMake(20.0f, 235.0f)];
         }
         [self.statusDisplay clear];
     } else if (self.counter == kEND_OF_LEVEL_TICK_3) {
         if (self.level.completed) {
             [self insertCodeScoreLabel];
         } else {
-            [self insertFailedTotalScoreLabel];
+            [self insertMissionFailedMenu];
         }
         [self.statusDisplay test];
     } else if (self.counter == kEND_OF_LEVEL_TICK_4) {
         if (self.level.completed) {
             [self insertCompletedTotalScoreLabel];
-        } else {
-            [self insertMissionFailedMenu];
         }
         [self.statusDisplay clear];
     } else if (self.counter == kEND_OF_LEVEL_TICK_5) {

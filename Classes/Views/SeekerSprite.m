@@ -248,7 +248,6 @@
 - (NSInteger)score {
     NSInteger totalScore = kPOINTS_PER_OBJECT * (self.samplesReturned + self.sensorsPlaced);
     if ([self isLevelCompleted]) {
-        totalScore = 2 * totalScore;
         self.codeScore = [ProgramNgin instance].codeScore;
         NSInteger deltaCodeLines = self.codeScore - self.expectedCodeScore;
         if (deltaCodeLines < 0) {
