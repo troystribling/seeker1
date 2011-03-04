@@ -17,7 +17,7 @@
 
 - (void)buildMenu;
 - (void)mission;
-- (void)configure;
+- (void)settings;
 - (void)stats;
 - (void)tutorial;
 
@@ -35,7 +35,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)buildMenu {
-    CCLabel* missionLabel = [CCLabel labelWithString:@"1. mission sites" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
+    CCLabel* missionLabel = [CCLabel labelWithString:@"1. play" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     missionLabel.color = kCCLABEL_FONT_COLOR;
     CCMenuItemLabel* missionItem = [CCMenuItemLabel itemWithLabel:missionLabel
                                                         target:self
@@ -45,7 +45,7 @@
     settingsLabel.color = kCCLABEL_FONT_COLOR;
     CCMenuItemLabel* settingsItem = [CCMenuItemLabel itemWithLabel:settingsLabel
                                                         target:self
-                                                        selector:@selector(configure)];
+                                                        selector:@selector(settings)];
     settingsItem.anchorPoint = CGPointMake(0.0, 0.0);
     CCLabel* statsLabel = [CCLabel labelWithString:@"3. stats" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     statsLabel.color = kCCLABEL_FONT_COLOR;
@@ -77,11 +77,13 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)configure {
+- (void)settings {
+    [[ViewControllerManager instance] showSettingsView:[[CCDirector sharedDirector] openGLView]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)stats {
+    [[ViewControllerManager instance] showStatsView:[[CCDirector sharedDirector] openGLView]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

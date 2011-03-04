@@ -31,6 +31,8 @@ static ViewControllerManager* thisViewControllerManager = nil;
 @synthesize tutorialIndexViewController;
 @synthesize tutorialSectionViewController;
 @synthesize tutorialIntroductionViewController;
+@synthesize statsViewController;
+@synthesize settingsViewController;
 
 //===================================================================================================================================
 #pragma mark ViewControllerManager PrivateApi
@@ -337,6 +339,66 @@ static ViewControllerManager* thisViewControllerManager = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tutorialIntroductionViewWillDisappear {
     [self.tutorialIntroductionViewController viewWillDisappear:NO];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// StatsViewController
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (StatsViewController*)showStatsView:(UIView*)_containerView {
+    if (self.statsViewController == nil) {
+        self.statsViewController = [StatsViewController inView:_containerView];
+    } 
+    [_containerView addSubview:self.statsViewController.view];
+    [self settingsViewWillAppear];
+    return self.statsViewController;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeStatsView {
+    if (self.statsViewController) {
+        [self.statsViewController viewWillDisappear:NO];
+        [self.statsViewController.view removeFromSuperview];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)statsViewWillAppear {
+    [self.statsViewController viewWillAppear:NO];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)statsViewWillDisappear {
+    [self.statsViewController viewWillDisappear:NO];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// SettingsViewController
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (SettingsViewController*)showSettingsView:(UIView*)_containerView {
+    if (self.settingsViewController == nil) {
+        self.settingsViewController = [SettingsViewController inView:_containerView];
+    } 
+    [_containerView addSubview:self.settingsViewController.view];
+    [self settingsViewWillAppear];
+    return self.settingsViewController;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeSettingsView {
+    if (self.settingsViewController) {
+        [self.settingsViewController viewWillDisappear:NO];
+        [self.settingsViewController.view removeFromSuperview];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)settingsViewWillAppear {
+    [self.settingsViewController viewWillAppear:NO];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)settingsViewWillDisappear {
+    [self.settingsViewController viewWillDisappear:NO];
 }
 
 @end

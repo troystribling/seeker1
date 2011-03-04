@@ -103,12 +103,12 @@
  </layer>
  <layer name="terrain" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3PsQkAAAgDQTv339hesFQQ7gb4kAgAAJjlQXtjozc3f1xu8FsBUVQ+DYANAAA=
+   H4sIAAAAAAAAA+3OsREAIAwDsbTsvzALpMqZFJw0wNtVAADAxFlqp3e6dmrj5e8fXLt9y8GADQAA
   </data>
  </layer>
  <layer name="items" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA2NgGAWjYBSMglEwCkbBKBgFo2DggBIdzKaFHZJALIjFLmoBTSBWpLKZo2DgAQCor59NgA0AAA==
+   H4sIAAAAAAAAA+3NsQ0AMAgDQVZIOsqU7L9gGIAKGao/ye3bDAAAAEDXXWqrf6qe6sNzR9SqRO4N9id9YT6Da4ANAAA=
   </data>
  </layer>
  <layer name="sand" width="24" height="36">
@@ -117,7 +117,7 @@
   </data>
  </layer>
  <objectgroup name="objects" width="24" height="36">
-  <object name="startSite" x="210" y="1830">
+  <object name="startSite" x="90" y="2010">
    <properties>
     <property name="bearing" value="east"/>
     <property name="energy" value="500"/>

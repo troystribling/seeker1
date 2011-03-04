@@ -17,6 +17,8 @@
 #import "TutorialIndexViewController.h"
 #import "TutorialSectionViewController.h"
 #import "TutorialIntroductionViewController.h"
+#import "StatsViewController.h"
+#import "SettingsViewController.h"
  
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class DoTimesTerminalCell;
@@ -32,6 +34,8 @@
     TutorialIndexViewController* tutorialIndexViewController;
     TutorialSectionViewController* tutorialSectionViewController;
     TutorialIntroductionViewController *tutorialIntroductionViewController;
+    StatsViewController* statsViewController;
+    SettingsViewController* settingsViewController;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -44,6 +48,8 @@
 @property (nonatomic, retain) TutorialIndexViewController* tutorialIndexViewController;
 @property (nonatomic, retain) TutorialSectionViewController* tutorialSectionViewController;
 @property (nonatomic, retain) TutorialIntroductionViewController *tutorialIntroductionViewController;
+@property (nonatomic, retain) StatsViewController* statsViewController;
+@property (nonatomic, retain) SettingsViewController* settingsViewController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ViewControllerManager*)instance;
@@ -103,5 +109,17 @@
 - (void)removeTutorialIntroductionView;
 - (void)tutorialIntroductionViewWillAppear;
 - (void)tutorialIntroductionViewWillDisappear;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (StatsViewController*)showStatsView:(UIView*)_containerView;
+- (void)removeStatsView;
+- (void)statsViewWillAppear;
+- (void)statsViewWillDisappear;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (SettingsViewController*)showSettingsView:(UIView*)_containerView;
+- (void)removeSettingsView;
+- (void)settingsViewWillAppear;
+- (void)settingsViewWillDisappear;
 
 @end

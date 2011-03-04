@@ -151,6 +151,10 @@
 		05663F84130251BA008AA1DC /* map-14.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F83130251BA008AA1DC /* map-14.tmx */; };
 		05663F9113025B5E008AA1DC /* map-15.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F9013025B5E008AA1DC /* map-15.tmx */; };
 		05663F9313025EC9008AA1DC /* map-16.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F9213025EC9008AA1DC /* map-16.tmx */; };
+		057D11F513207EB8003C9FF3 /* StatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 057D11F413207EB8003C9FF3 /* StatsViewController.m */; };
+		057D11F813207EE0003C9FF3 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 057D11F713207EE0003C9FF3 /* SettingsViewController.m */; };
+		057D12311320B15C003C9FF3 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 057D12301320B15C003C9FF3 /* SettingsViewController.xib */; };
+		057D12331320B198003C9FF3 /* StatsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 057D12321320B198003C9FF3 /* StatsViewController.xib */; };
 		058912AA12F4CE0D005870C0 /* TutorialIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 058912A912F4CE0D005870C0 /* TutorialIndexViewController.m */; };
 		058912C812F4D5B9005870C0 /* TutorialIndexViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 058912C712F4D5B9005870C0 /* TutorialIndexViewController.xib */; };
 		058912CC12F4DD0C005870C0 /* TutorialIndexCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 058912CB12F4DD0C005870C0 /* TutorialIndexCell.m */; };
@@ -588,6 +592,12 @@
 		05663F83130251BA008AA1DC /* map-14.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-14.tmx"; sourceTree = "<group>"; };
 		05663F9013025B5E008AA1DC /* map-15.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-15.tmx"; sourceTree = "<group>"; };
 		05663F9213025EC9008AA1DC /* map-16.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-16.tmx"; sourceTree = "<group>"; };
+		057D11F313207EB8003C9FF3 /* StatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsViewController.h; sourceTree = "<group>"; };
+		057D11F413207EB8003C9FF3 /* StatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsViewController.m; sourceTree = "<group>"; };
+		057D11F613207EE0003C9FF3 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		057D11F713207EE0003C9FF3 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		057D12301320B15C003C9FF3 /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		057D12321320B198003C9FF3 /* StatsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatsViewController.xib; sourceTree = "<group>"; };
 		058912A812F4CE0D005870C0 /* TutorialIndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialIndexViewController.h; sourceTree = "<group>"; };
 		058912A912F4CE0D005870C0 /* TutorialIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialIndexViewController.m; sourceTree = "<group>"; };
 		058912C712F4D5B9005870C0 /* TutorialIndexViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorialIndexViewController.xib; sourceTree = "<group>"; };
@@ -1144,6 +1154,10 @@
 				0528CDB81290A00200F4078A /* MapScene.m */,
 				0556B81B129C603B00B5F8FB /* SeekerSprite.h */,
 				0556B81C129C603B00B5F8FB /* SeekerSprite.m */,
+				057D11F613207EE0003C9FF3 /* SettingsViewController.h */,
+				057D11F713207EE0003C9FF3 /* SettingsViewController.m */,
+				057D11F313207EB8003C9FF3 /* StatsViewController.h */,
+				057D11F413207EB8003C9FF3 /* StatsViewController.m */,
 				053FBFC8129D8C44000BCBCF /* StatusDisplay.h */,
 				053FBFC9129D8C45000BCBCF /* StatusDisplay.m */,
 				0594C24012F27ED700CB1418 /* UploadScene.h */,
@@ -1206,6 +1220,8 @@
 				050D765012AF0F5D005EF9BE /* InstructionsViewController.xib */,
 				050DD33A12EA6F0D00FDBC11 /* RepositoryCell.xib */,
 				05B81B7412E949C300BAC631 /* RepositoryViewController.xib */,
+				057D12301320B15C003C9FF3 /* SettingsViewController.xib */,
+				057D12321320B198003C9FF3 /* StatsViewController.xib */,
 				051FB85D12D8DBEF006702D0 /* SubroutineViewController.xib */,
 				0547A46612AC349400D2F0D1 /* TerminalViewController.xib */,
 				0547A48112AC38B100D2F0D1 /* TerminalCell.xib */,
@@ -1913,6 +1929,8 @@
 				0512FC37131AE2C900AF1B57 /* map-subs.png in Resources */,
 				05064916131C875200D85D1C /* map-prog-unselected.png in Resources */,
 				05064917131C875200D85D1C /* map-prog.png in Resources */,
+				057D12311320B15C003C9FF3 /* SettingsViewController.xib in Resources */,
+				057D12331320B198003C9FF3 /* StatsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1962,6 +1980,8 @@
 				058912CC12F4DD0C005870C0 /* TutorialIndexCell.m in Sources */,
 				05227E3B12F64E7700923DEA /* TutorialSectionViewController.m in Sources */,
 				05A5B18613172CAA006B56D2 /* TutorialIntroductionViewController.m in Sources */,
+				057D11F513207EB8003C9FF3 /* StatsViewController.m in Sources */,
+				057D11F813207EE0003C9FF3 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
