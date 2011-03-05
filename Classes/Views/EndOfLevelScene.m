@@ -61,13 +61,16 @@
     [self addChild:titleLabel];
     CCLabel* errorMsgLabel = [CCLabel labelWithString:self.level.errorMsg fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     errorMsgLabel.position = CGPointMake(screenSize.width/2.0, 347.0f);
-    errorMsgLabel.color = ccc3(204,51,0);    
+    errorMsgLabel.color = ccc3(255,255,0);    
     [self addChild:errorMsgLabel];
-    NSString* errorCodeString = [NSString stringWithFormat:@"Error Code: %@", self.level.errorCode];
-    CCLabel* errorCodeLabel = [CCLabel labelWithString:errorCodeString fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
-    errorCodeLabel.position = CGPointMake(screenSize.width/2.0, 322.0f);
+    CCLabel* errorCodeLabel = [CCLabel labelWithString:@"Error Code" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
+    errorCodeLabel.position = CGPointMake(screenSize.width/2.0, 312.0f);
     errorCodeLabel.color = ccc3(204,51,0);    
     [self addChild:errorCodeLabel];
+    CCLabel* errorCodeID = [CCLabel labelWithString:self.level.errorCode fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
+    errorCodeID.position = CGPointMake(screenSize.width/2.0, 287.0f);
+    errorCodeID.color = ccc3(204,51,0);    
+    [self addChild:errorCodeID];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -141,7 +144,7 @@
                                               alignment:UITextAlignmentLeft fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     totalScoreLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     totalScoreLabel.color = ccc3(255,255,0);
-    if (deltaCodeScore == 0) {
+    if (deltaCodeScore <= 0) {
         totalScoreLabel.position = CGPointMake(20.0f, 138.0f);
     } else {
         totalScoreLabel.position = CGPointMake(20.0f, 82.0f);

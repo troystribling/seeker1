@@ -21,17 +21,17 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kERROR_CODE_HIT_MAP_BOUNDARY        @"A-1654"
-#define kERROR_MSG_HIT_MAP_BOUNDARY         @"Map Boundary Reached"
+#define kERROR_MSG_HIT_MAP_BOUNDARY         @"Map Boundary"
 #define kERROR_CODE_NO_ENERGY               @"E-3967"
 #define kERROR_MSG_NO_ENERGY                @"Energy Depleted"
 #define kERROR_CODE_SPEED_HIGH              @"S-1471"
 #define kERROR_MSG_SPEED_HIGH               @"Maximum Speed"
 #define kERROR_CODE_SPEED_LOW               @"S-1013"
 #define kERROR_MSG_SPEED_LOW                @"Minimum Speed"
-#define kERROR_CODE_PROGRAM_CRASH           @"P-1489"
+#define kERROR_CODE_PROGRAM_CRASH           @"P-1962"
 #define kERROR_MSG_PROGRAM_CRASH            @"Program Error"
-#define kERROR_CODE_TERRRAIN                @"T-1962"
-#define kERROR_MSG_TERRRAIN                 @"Large Terrain Gradient"
+#define kERROR_CODE_TERRRAIN                @"T-3891"
+#define kERROR_MSG_TERRRAIN                 @"Terrain Gradient"
 #define kERROR_CODE_SENSOR_BIN_EMPTY        @"B-1951"
 #define kERROR_MSG_SENSOR_BIN_EMPTY         @"Sensor Bin Empty"
 #define kERROR_CODE_EXPECTED_SENSOR         @"S-1453"
@@ -61,7 +61,7 @@
 - (void)initStatusDisplay;
 - (CCTMXTiledMap*)initMap;
 - (void)centerTileMapOnStartPoint;
-- (void)centerOnSeekerPosition;
+- (void)loadProgram;
 // reset
 - (void)resetMap;
 - (void)resetSeekerStartPosition;
@@ -189,12 +189,7 @@
     self.tileMapSize = CGSizeMake(tileMapTiles.width*tileMapTileSize.width, tileMapTiles.height*tileMapTileSize.height);
     [self centerTileMapOnStartPoint];
     [self.seekerPath removeAllObjects];
-    ProgramModel* model = [ProgramModel findByLevel:self.level];
-    if (model) {
-        ProgramNgin* ngin = [ProgramNgin instance];
-        NSMutableArray* programListing = [model codeListingToInstrictions];
-        [ngin loadProgram:programListing];
-    }
+    [self loadProgram];
     [self addChild:self.tileMap z:-1 tag:kMAP];
     [self insertMenu];
     self.levelInitSeeker = YES;
@@ -240,6 +235,16 @@
     CGPoint startPoint = [self getPointFromObjectPropertiesInTileCoords:self.startSite];
     CGPoint mapTranslated = [self tileMapTranslatedToPoint:startPoint];
     [self moveMapTo:mapTranslated withDuration:1.0];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)loadProgram {
+    ProgramModel* model = [ProgramModel findByLevel:self.level];
+    if (model) {
+        ProgramNgin* ngin = [ProgramNgin instance];
+        NSMutableArray* programListing = [model codeListingToInstrictions];
+        [ngin loadProgram:programListing];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -833,6 +838,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)mapRun {
+    [self loadProgram];
     [[ProgramNgin instance] runProgram];
     [self.menu removeFromParentAndCleanup:YES];
     [self insertMenu];

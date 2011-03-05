@@ -113,6 +113,7 @@
 		0532CF7412C6BD7800DB92D8 /* elysium-locked.png in Resources */ = {isa = PBXBuildFile; fileRef = 0532CF7212C6BD7800DB92D8 /* elysium-locked.png */; };
 		0532CF7512C6BD7800DB92D8 /* memnonia-locked.png in Resources */ = {isa = PBXBuildFile; fileRef = 0532CF7312C6BD7800DB92D8 /* memnonia-locked.png */; };
 		0532CF7712C6BDD900DB92D8 /* tharsis-locked.png in Resources */ = {isa = PBXBuildFile; fileRef = 0532CF7612C6BDD900DB92D8 /* tharsis-locked.png */; };
+		0534052E132208FC008F0667 /* TutorialIntroduction1.m in Sources */ = {isa = PBXBuildFile; fileRef = 0534052D132208FC008F0667 /* TutorialIntroduction1.m */; };
 		05355F3212C3DA8F00CA770E /* MissionsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 05355F3112C3DA8F00CA770E /* MissionsScene.m */; };
 		05355F4312C3DCBA00CA770E /* LevelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05355F4212C3DCBA00CA770E /* LevelModel.m */; };
 		053B0870131378DF005F4075 /* mission-failed.png in Resources */ = {isa = PBXBuildFile; fileRef = 053B086F131378DF005F4075 /* mission-failed.png */; };
@@ -544,6 +545,8 @@
 		0532CF7212C6BD7800DB92D8 /* elysium-locked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "elysium-locked.png"; sourceTree = "<group>"; };
 		0532CF7312C6BD7800DB92D8 /* memnonia-locked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "memnonia-locked.png"; sourceTree = "<group>"; };
 		0532CF7612C6BDD900DB92D8 /* tharsis-locked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tharsis-locked.png"; sourceTree = "<group>"; };
+		0534052C132208FC008F0667 /* TutorialIntroduction1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialIntroduction1.h; sourceTree = "<group>"; };
+		0534052D132208FC008F0667 /* TutorialIntroduction1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialIntroduction1.m; sourceTree = "<group>"; };
 		05355F3012C3DA8F00CA770E /* MissionsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissionsScene.h; sourceTree = "<group>"; };
 		05355F3112C3DA8F00CA770E /* MissionsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionsScene.m; sourceTree = "<group>"; };
 		05355F4112C3DCBA00CA770E /* LevelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelModel.h; sourceTree = "<group>"; };
@@ -1200,6 +1203,15 @@
 			path = Tutorial;
 			sourceTree = "<group>";
 		};
+		053405281321FEE5008F0667 /* Introduction */ = {
+			isa = PBXGroup;
+			children = (
+				0534052C132208FC008F0667 /* TutorialIntroduction1.h */,
+				0534052D132208FC008F0667 /* TutorialIntroduction1.m */,
+			);
+			name = Introduction;
+			sourceTree = "<group>";
+		};
 		054012B812A30FF600CCC62D /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1250,6 +1262,7 @@
 		058912A712F4CDC6005870C0 /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
+				053405281321FEE5008F0667 /* Introduction */,
 				058912CA12F4DD0C005870C0 /* TutorialIndexCell.h */,
 				058912CB12F4DD0C005870C0 /* TutorialIndexCell.m */,
 				058912A812F4CE0D005870C0 /* TutorialIndexViewController.h */,
@@ -1988,6 +2001,7 @@
 				057D11F513207EB8003C9FF3 /* StatsViewController.m in Sources */,
 				057D11F813207EE0003C9FF3 /* SettingsViewController.m in Sources */,
 				05D5BFB11321AD570099CF25 /* NavigationDisplay.m in Sources */,
+				0534052E132208FC008F0667 /* TutorialIntroduction1.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

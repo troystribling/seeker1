@@ -119,7 +119,7 @@
 + (id)scene {
 	CCScene *scene = [CCScene node];
 	BootScene *layer = [BootScene node];
-	[scene addChild: layer];
+	[scene addChild:layer];
 	return scene;
 }
 

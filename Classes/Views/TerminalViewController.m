@@ -158,7 +158,7 @@
             break;
         case kTERMINAL_LAUNCHER_RUN_TAG:
             [ngin saveProgram:self.programListing];
-            [[CCDirector sharedDirector] replaceScene: [UploadScene scene]];
+            [[CCDirector sharedDirector] replaceScene:[UploadScene scene]];
             [self.view removeFromSuperview];
             break;
         case kTERMINAL_LAUNCHER_EDIT_TAG:
