@@ -31,7 +31,7 @@
 #define kERROR_CODE_PROGRAM_CRASH           @"P-1489"
 #define kERROR_MSG_PROGRAM_CRASH            @"Program Error"
 #define kERROR_CODE_TERRRAIN                @"T-1962"
-#define kERROR_MSG_TERRRAIN                 @"Maximum Terrain Gradient"
+#define kERROR_MSG_TERRRAIN                 @"Large Terrain Gradient"
 #define kERROR_CODE_SENSOR_BIN_EMPTY        @"B-1951"
 #define kERROR_MSG_SENSOR_BIN_EMPTY         @"Sensor Bin Empty"
 #define kERROR_CODE_EXPECTED_SENSOR         @"S-1453"
@@ -812,7 +812,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)mapMenu {
-    [[CCDirector sharedDirector] replaceScene: [MainScene scene]];
+    [[CCDirector sharedDirector] replaceScene:[MainScene scene]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

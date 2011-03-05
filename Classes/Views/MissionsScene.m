@@ -8,7 +8,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "MissionsScene.h"
-#import "StatusDisplay.h"
+#import "NavigationDisplay.h"
+#import "QuadsScene.h"
 #import "LevelModel.h"
 #import "UserModel.h"
 #import "TouchUtils.h"
@@ -30,6 +31,7 @@
 - (CCSprite*)getMissionSprite:(NSInteger)_mission;
 - (void)addMissionLabel:(NSInteger)_mission toSprite:(CCSprite*)_sprite;
 - (void)addMissionScore:(NSInteger)_mission toSprite:(CCSprite*)_sprite;
+- (void)backNavigation;
 
 @end
 
@@ -37,7 +39,7 @@
 @implementation MissionsScene
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize statusDisplay;
+@synthesize navigationDisplay;
 @synthesize quadrangle;
 @synthesize levelsUnlocked;
 @synthesize screenSize;
@@ -52,7 +54,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)positionToMission:(CGPoint)_position {
-    CGFloat displayOffset = self.statusDisplay.contentSize.height;
+    CGFloat displayOffset = self.navigationDisplay.contentSize.height;
     NSInteger missionWidth = self.screenSize.width / kMISSIONS_PER_ROW;
     NSInteger missionHeight = (self.screenSize.height - displayOffset) / kMISSIONS_ROWS;
     NSInteger missionColumn = _position.x / missionWidth;
@@ -62,7 +64,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGSize)missionSize {
-    CGFloat displayOffset = self.statusDisplay.contentSize.height;
+    CGFloat displayOffset = self.navigationDisplay.contentSize.height;
     NSInteger missionWidth = self.screenSize.width / kMISSIONS_PER_ROW;
     NSInteger missionHeight = (self.screenSize.height - displayOffset) / kMISSIONS_ROWS;
     return CGSizeMake(missionWidth, missionHeight);
@@ -70,7 +72,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGPoint)missionToPosition:(NSInteger)_mission {
-    CGFloat displayOffset = self.statusDisplay.contentSize.height;
+    CGFloat displayOffset = self.navigationDisplay.contentSize.height;
     NSInteger missionRow = _mission / kMISSIONS_PER_ROW;
     NSInteger missionColumn = _mission - missionRow * kMISSIONS_PER_ROW;
     CGSize missionSize = [self missionSize];
@@ -154,6 +156,11 @@
     }
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)backNavigation {
+    [[CCDirector sharedDirector] replaceScene:[QuadsScene scene]];
+}
+
 //===================================================================================================================================
 #pragma mark MissionsScene
 
@@ -170,9 +177,8 @@
 	if( (self=[super init] )) {
 		self.screenSize = [[CCDirector sharedDirector] winSize];
         self.isTouchEnabled = YES;
-        self.statusDisplay = [StatusDisplay create];
-        [self.statusDisplay insert:self];
-        [self.statusDisplay test];
+        self.navigationDisplay = [NavigationDisplay createWithTarget:self andSelector:@selector(backNavigation)];
+        [self.navigationDisplay insert:self];
         [self loadMissions];
     }
 	return self;

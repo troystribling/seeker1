@@ -18,27 +18,31 @@ typedef enum tagQuadType {
 } QuadType;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class StatusDisplay;
+@class NavigationDisplay;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface QuadsScene : CCLayer {
-    StatusDisplay* statusDisplay;
+    NavigationDisplay* navigationDisplay;
     CCSprite* tharsisSprite;
     CCSprite* memnoniaSprite;
     CCSprite* elysiumSprite;
+    CCLabel* titleLabel;
     QuadType displayedQuad; 
     CGPoint screenCenter;
     CGPoint firstTouch;
+    BOOL setTitle;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) StatusDisplay* statusDisplay;
+@property (nonatomic, retain) NavigationDisplay* navigationDisplay;
 @property (nonatomic, retain) CCSprite* tharsisSprite;
 @property (nonatomic, retain) CCSprite* memnoniaSprite;
 @property (nonatomic, retain) CCSprite* elysiumSprite;
+@property (nonatomic, retain) CCLabel* titleLabel;
 @property (nonatomic, assign) QuadType displayedQuad;
 @property (nonatomic, assign) CGPoint screenCenter;
 @property (nonatomic, assign) CGPoint firstTouch;
+@property (nonatomic, assign) BOOL setTitle;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)scene;

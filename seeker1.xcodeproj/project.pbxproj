@@ -183,6 +183,7 @@
 		05BE94551307181900AAAA1F /* map-35.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05BE94541307181900AAAA1F /* map-35.tmx */; };
 		05BE945A13072FA500AAAA1F /* map-36.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05BE945913072FA500AAAA1F /* map-36.tmx */; };
 		05D4EEED13161BA400954E03 /* mission-not-played.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D4EEEC13161BA400954E03 /* mission-not-played.png */; };
+		05D5BFB11321AD570099CF25 /* NavigationDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D5BFB01321AD570099CF25 /* NavigationDisplay.m */; };
 		05E40FAB13197AD900DE6344 /* get-started-introduction.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E40FAA13197AD900DE6344 /* get-started-introduction.png */; };
 		05E40FB613198F0500DE6344 /* rover-bins-unlock.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E40FB213198F0500DE6344 /* rover-bins-unlock.png */; };
 		05E40FB713198F0500DE6344 /* subroutines-unlock.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E40FB313198F0500DE6344 /* subroutines-unlock.png */; };
@@ -632,6 +633,8 @@
 		05BE94541307181900AAAA1F /* map-35.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-35.tmx"; sourceTree = "<group>"; };
 		05BE945913072FA500AAAA1F /* map-36.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-36.tmx"; sourceTree = "<group>"; };
 		05D4EEEC13161BA400954E03 /* mission-not-played.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mission-not-played.png"; sourceTree = "<group>"; };
+		05D5BFAF1321AD570099CF25 /* NavigationDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationDisplay.h; sourceTree = "<group>"; };
+		05D5BFB01321AD570099CF25 /* NavigationDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationDisplay.m; sourceTree = "<group>"; };
 		05E40FAA13197AD900DE6344 /* get-started-introduction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "get-started-introduction.png"; sourceTree = "<group>"; };
 		05E40FB213198F0500DE6344 /* rover-bins-unlock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rover-bins-unlock.png"; sourceTree = "<group>"; };
 		05E40FB313198F0500DE6344 /* subroutines-unlock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "subroutines-unlock.png"; sourceTree = "<group>"; };
@@ -1152,6 +1155,8 @@
 				0540119512A2B9B900CCC62D /* MainScene.m */,
 				0528CDB71290A00200F4078A /* MapScene.h */,
 				0528CDB81290A00200F4078A /* MapScene.m */,
+				05D5BFAF1321AD570099CF25 /* NavigationDisplay.h */,
+				05D5BFB01321AD570099CF25 /* NavigationDisplay.m */,
 				0556B81B129C603B00B5F8FB /* SeekerSprite.h */,
 				0556B81C129C603B00B5F8FB /* SeekerSprite.m */,
 				057D11F613207EE0003C9FF3 /* SettingsViewController.h */,
@@ -1982,6 +1987,7 @@
 				05A5B18613172CAA006B56D2 /* TutorialIntroductionViewController.m in Sources */,
 				057D11F513207EB8003C9FF3 /* StatsViewController.m in Sources */,
 				057D11F813207EE0003C9FF3 /* SettingsViewController.m in Sources */,
+				05D5BFB11321AD570099CF25 /* NavigationDisplay.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,18 +11,18 @@
 #import "cocos2d.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class StatusDisplay;
+@class NavigationDisplay;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MissionsScene : CCLayer {
-    StatusDisplay* statusDisplay;
+    NavigationDisplay* navigationDisplay;
     NSInteger quadrangle;
     NSInteger levelsUnlocked;
     CGSize screenSize;    
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) StatusDisplay* statusDisplay;
+@property (nonatomic, retain) NavigationDisplay* navigationDisplay;
 @property (nonatomic, assign) NSInteger quadrangle;
 @property (nonatomic, assign) NSInteger levelsUnlocked;
 @property (nonatomic, assign) CGSize screenSize;

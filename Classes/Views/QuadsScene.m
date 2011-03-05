@@ -8,7 +8,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "QuadsScene.h"
-#import "StatusDisplay.h"
+#import "MainScene.h"
+#import "NavigationDisplay.h"
 #import "TouchUtils.h"
 #import "LevelModel.h"
 #import "UserModel.h"
@@ -16,6 +17,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kQUAD_IMAGE_YDELTA  75.0f
+#define kQUAD_IMAGE_XDELTA  -7.5f
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface QuadsScene (PrivateAPI)
@@ -31,6 +33,8 @@
 - (NSInteger)percentComplete:(NSInteger)_quad;
 - (NSInteger)totalScore:(NSInteger)_quad;
 - (void)addQuadStats:(NSInteger)_quad toSprite:(CCSprite*)_sprite;
+- (void)addTitle;
+- (void)backNavigation;
 
 @end
 
@@ -38,26 +42,27 @@
 @implementation QuadsScene
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize statusDisplay;
+@synthesize navigationDisplay;
 @synthesize tharsisSprite;
 @synthesize memnoniaSprite;
 @synthesize elysiumSprite;
+@synthesize titleLabel;
 @synthesize displayedQuad;
 @synthesize screenCenter;
 @synthesize firstTouch;
+@synthesize setTitle;
 
 //===================================================================================================================================
 #pragma mark QuadsScene PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)initQuads {
-    
+- (void)initQuads {    
     NSInteger levelsUnlocked = [LevelModel count];
     NSInteger quadsUnlocked = levelsUnlocked / kMISSIONS_PER_QUAD;
     CGFloat quadShiftDelta = self.tharsisSprite.contentSize.height + kQUAD_IMAGE_YDELTA;
     
     self.displayedQuad = TharsisQuadType;
-    self.tharsisSprite.position = self.screenCenter;
+    self.tharsisSprite.position = CGPointMake(self.screenCenter.x + kQUAD_IMAGE_XDELTA, self.screenCenter.y);
     [self addChild:self.tharsisSprite z:-1];
 
     if (quadsUnlocked >= 1) {
@@ -75,11 +80,11 @@
     self.memnoniaSprite.anchorPoint = CGPointMake(0.5f, 0.5f);
     self.tharsisSprite.anchorPoint = CGPointMake(0.5f, 0.5f);
     
-    CGPoint nextPosition = CGPointMake(self.screenCenter.x, self.screenCenter.y - quadShiftDelta);
+    CGPoint nextPosition = CGPointMake(self.screenCenter.x + kQUAD_IMAGE_XDELTA, self.screenCenter.y - quadShiftDelta);
     self.memnoniaSprite.position = nextPosition;
     [self addChild:self.memnoniaSprite z:-1];
 
-    nextPosition = CGPointMake(self.screenCenter.x, self.screenCenter.y - 2 * quadShiftDelta);
+    nextPosition = CGPointMake(self.screenCenter.x + kQUAD_IMAGE_XDELTA, self.screenCenter.y - 2 * quadShiftDelta);
     self.elysiumSprite.position = nextPosition;
     [self addChild:self.elysiumSprite z:-1];
 }
@@ -198,17 +203,36 @@
 
     CCLabel* scoreLable = [CCLabel labelWithString:[NSString stringWithFormat:@"Score:     %d", score] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_MISSION];
     scoreLable.anchorPoint = CGPointMake(0.0, 0.0);
-    scoreLable.position = CGPointMake(0.115*spriteSize.width, -0.07*spriteSize.height);
+    scoreLable.position = CGPointMake(0.115*spriteSize.width, -0.05*spriteSize.height);
     scoreLable.color = kCCLABEL_FONT_COLOR; 
     [_sprite addChild:scoreLable];
 
     CCLabel* perCompLable = [CCLabel labelWithString:[NSString stringWithFormat:@"Completed: %d%%", perComp] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_MISSION];
     perCompLable.anchorPoint = CGPointMake(0.0, 0.0);
-    perCompLable.position = CGPointMake(0.115*spriteSize.width, -0.135*spriteSize.height);
+    perCompLable.position = CGPointMake(0.115*spriteSize.width, -0.1*spriteSize.height);
     perCompLable.color = kCCLABEL_FONT_COLOR; 
     [_sprite addChild:perCompLable];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addTitle {
+    NSInteger levelsUnlocked = [LevelModel count];
+    NSInteger quadsUnlocked = levelsUnlocked / kMISSIONS_PER_QUAD;
+    if (quadsUnlocked >= self.displayedQuad) {
+        self.titleLabel = [CCLabel labelWithString:@"Select Site" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
+        self.titleLabel.color = ccc3(0,170,0);    
+    } else {
+        self.titleLabel = [CCLabel labelWithString:@"Site Locked" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
+        self.titleLabel.color = ccc3(0,100,0);    
+    }
+    self.titleLabel.position = CGPointMake(self.screenCenter.x, 390.0f);
+    [self addChild:self.titleLabel];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)backNavigation {
+    [[CCDirector sharedDirector] replaceScene:[MainScene scene]];
+}
 
 //===================================================================================================================================
 #pragma mark QuadsScene
@@ -230,17 +254,27 @@
         self.tharsisSprite = [[[CCSprite alloc] initWithFile:@"tharsis.png"] autorelease];
         self.tharsisSprite.anchorPoint = CGPointMake(0.5f, 0.5f);
         [self addQuadStats:TharsisQuadType toSprite:self.tharsisSprite];
-        self.statusDisplay = [StatusDisplay create];
-        [self.statusDisplay insert:self];
-        [self.statusDisplay test];
         [self initQuads];
+        [self addTitle];
+        self.setTitle = NO;
         [self schedule:@selector(nextFrame:)];
+        self.navigationDisplay = [NavigationDisplay createWithTarget:self andSelector:@selector(backNavigation)];
+        [self.navigationDisplay insert:self];
     }
 	return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void) nextFrame:(ccTime)dt {
+    NSInteger runningActions = [self.tharsisSprite numberOfRunningActions];
+    runningActions += [self.elysiumSprite numberOfRunningActions];
+    runningActions += [self.memnoniaSprite numberOfRunningActions];
+	if (runningActions == 0) {
+        if (self.setTitle) {
+            [self addTitle];
+            self.setTitle = NO;
+        } 
+	}
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -258,9 +292,13 @@
             [[CCDirector sharedDirector] replaceScene:[MissionsScene scene]];
         }
     } else if (touchDelta.y < 0) {
+        [self.titleLabel removeFromParentAndCleanup:YES];
         [self backwardQuads];
+        self.setTitle = YES;
     } else {
+        [self.titleLabel removeFromParentAndCleanup:YES];
         [self fowardQuads];
+        self.setTitle = YES;
     }
 }    
 

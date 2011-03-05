@@ -59,13 +59,13 @@
     titleLabel.position = CGPointMake(screenSize.width/2.0, 380.0f);
     titleLabel.color = ccc3(204,51,0); 
     [self addChild:titleLabel];
-    CCLabel* errorMsgLabel = [CCLabel labelWithString:self.level.errorMsg fontName:kGLOBAL_FONT fontSize:18.0];
+    CCLabel* errorMsgLabel = [CCLabel labelWithString:self.level.errorMsg fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     errorMsgLabel.position = CGPointMake(screenSize.width/2.0, 347.0f);
     errorMsgLabel.color = ccc3(204,51,0);    
     [self addChild:errorMsgLabel];
     NSString* errorCodeString = [NSString stringWithFormat:@"Error Code: %@", self.level.errorCode];
-    CCLabel* errorCodeLabel = [CCLabel labelWithString:errorCodeString fontName:kGLOBAL_FONT fontSize:18.0];
-    errorCodeLabel.position = CGPointMake(screenSize.width/2.0, 327.0f);
+    CCLabel* errorCodeLabel = [CCLabel labelWithString:errorCodeString fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
+    errorCodeLabel.position = CGPointMake(screenSize.width/2.0, 322.0f);
     errorCodeLabel.color = ccc3(204,51,0);    
     [self addChild:errorCodeLabel];
 }
