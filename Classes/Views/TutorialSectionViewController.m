@@ -74,8 +74,8 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.view.frame = self.containerView.frame;
-        self.sectionList = [NSMutableArray arrayWithObjects:[NSArray arrayWithObjects:@"game-objects.png", @"pan-game-board.png", 
-                                                                @"objective.png", @"program-game-board.png",
+        self.sectionList = [NSMutableArray arrayWithObjects:[NSArray arrayWithObjects:@"objective.png", @"game-objects.png", 
+                                                                @"pan-game-board.png", @"program-game-board.png",
                                                                 @"open-terminal-game-board.png", @"write-program.png", 
                                                                 @"add-program-instruction.png", @"completed-program.png", nil],
                                                              [NSArray arrayWithObjects:@"subroutines.png", @"list-subroutines.png", 
