@@ -21,6 +21,10 @@
 @implementation SettingsViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize speedSlider;
+@synthesize soundSwitch;
+@synthesize resetLevelsButton;
+@synthesize enableLevelsButton;
 @synthesize containerView;
 
 //===================================================================================================================================
@@ -41,9 +45,31 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.view.frame = self.containerView.frame;
+        UIImage* stetchLeftTrack = [[UIImage imageNamed:@"slider-left.png"] stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0];
+        UIImage* stetchRightTrack = [[UIImage imageNamed:@"slider-right.png"] stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0];
+        [self.speedSlider setMinimumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
+        [self.speedSlider setMaximumTrackImage:stetchRightTrack forState:UIControlStateNormal];
     }
     return self;
 }
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (IBAction)speedValueChanged:(UISlider*)sender {  
+    CGFloat speedValue = [sender value];
+    CGFloat newSpeed = kSEEKER_MIN_SPEED_SETTING + kSEEKER_DELTA_SPEED_SETTING * speedValue; 
+}  
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (IBAction)soundValueChanged:(UISwitch*)sender {  
+}  
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (IBAction)resetButtonPushed:(UIButton*)sender {  
+}  
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (IBAction)enableButtonPushed:(UIButton*)sender {  
+}  
 
 //===================================================================================================================================
 #pragma mark UIViewController

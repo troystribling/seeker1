@@ -101,6 +101,8 @@
 		0527E61612BD5F3D0039D55E /* red-seeker-1-south.png in Resources */ = {isa = PBXBuildFile; fileRef = 0527E61212BD5F3D0039D55E /* red-seeker-1-south.png */; };
 		0527E61712BD5F3D0039D55E /* red-seeker-1-west.png in Resources */ = {isa = PBXBuildFile; fileRef = 0527E61312BD5F3D0039D55E /* red-seeker-1-west.png */; };
 		05287D7A1322B0F800D4B225 /* map-levels.png in Resources */ = {isa = PBXBuildFile; fileRef = 05287D791322B0F800D4B225 /* map-levels.png */; };
+		05287D991322C1B000D4B225 /* enable -levels.png in Resources */ = {isa = PBXBuildFile; fileRef = 05287D971322C1B000D4B225 /* enable -levels.png */; };
+		05287D9A1322C1B000D4B225 /* reset -levels.png in Resources */ = {isa = PBXBuildFile; fileRef = 05287D981322C1B000D4B225 /* reset -levels.png */; };
 		0528CDB512909FE600F4078A /* Seeker1AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0528CDB412909FE600F4078A /* Seeker1AppDelegate.m */; };
 		0528CDB91290A00200F4078A /* MapScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0528CDB81290A00200F4078A /* MapScene.m */; };
 		052A05EE12CFCCBA005F1948 /* DoTimesEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 052A05ED12CFCCBA005F1948 /* DoTimesEditViewController.m */; };
@@ -530,6 +532,8 @@
 		0527E61212BD5F3D0039D55E /* red-seeker-1-south.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-seeker-1-south.png"; sourceTree = "<group>"; };
 		0527E61312BD5F3D0039D55E /* red-seeker-1-west.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-seeker-1-west.png"; sourceTree = "<group>"; };
 		05287D791322B0F800D4B225 /* map-levels.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map-levels.png"; sourceTree = "<group>"; };
+		05287D971322C1B000D4B225 /* enable -levels.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "enable -levels.png"; sourceTree = "<group>"; };
+		05287D981322C1B000D4B225 /* reset -levels.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "reset -levels.png"; sourceTree = "<group>"; };
 		0528CDB312909FE600F4078A /* Seeker1AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Seeker1AppDelegate.h; sourceTree = "<group>"; };
 		0528CDB412909FE600F4078A /* Seeker1AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Seeker1AppDelegate.m; sourceTree = "<group>"; };
 		0528CDB71290A00200F4078A /* MapScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapScene.h; sourceTree = "<group>"; };
@@ -973,6 +977,7 @@
 				0512FC25131AE2C900AF1B57 /* Menu */,
 				0521EF6912C5637B0078C77C /* Missions */,
 				0510EDD612BC680E00355F28 /* Seeker */,
+				05287D961322C1B000D4B225 /* Settings */,
 				050D765C12AF0F6B005EF9BE /* StatusDisplay */,
 				050D766E12AF0F6B005EF9BE /* Terminal */,
 				052CC3EE12F5F61800F5D862 /* Tutorial */,
@@ -1136,6 +1141,15 @@
 				050A9DB612C42C9C00FF1BA9 /* QuadsScene.m */,
 			);
 			name = Missions;
+			sourceTree = "<group>";
+		};
+		05287D961322C1B000D4B225 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				05287D971322C1B000D4B225 /* enable -levels.png */,
+				05287D981322C1B000D4B225 /* reset -levels.png */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		0528CDB212909FE600F4078A /* Application */ = {
@@ -1953,6 +1967,8 @@
 				057D12311320B15C003C9FF3 /* SettingsViewController.xib in Resources */,
 				057D12331320B198003C9FF3 /* StatsViewController.xib in Resources */,
 				05287D7A1322B0F800D4B225 /* map-levels.png in Resources */,
+				05287D991322C1B000D4B225 /* enable -levels.png in Resources */,
+				05287D9A1322C1B000D4B225 /* reset -levels.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,6 +21,12 @@
 @implementation StatsViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize totalScoreLabel;
+@synthesize totalLevelsLabel;
+@synthesize totalCodeScoreLabel;
+@synthesize progressLabel;
+@synthesize performanceLabel;
+@synthesize expertiseLabel;
 @synthesize containerView;
 
 //===================================================================================================================================

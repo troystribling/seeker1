@@ -13,10 +13,22 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface StatsViewController : UIViewController {
+    IBOutlet UILabel* totalScoreLabel;
+    IBOutlet UILabel* totalLevelsLabel;
+    IBOutlet UILabel* totalCodeScoreLabel;
+    IBOutlet UILabel* progressLabel;
+    IBOutlet UILabel* performanceLabel;
+    IBOutlet UILabel* expertiseLabel;
     UIView* containerView;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@property (nonatomic, retain) UILabel* totalScoreLabel;
+@property (nonatomic, retain) UILabel* totalLevelsLabel;
+@property (nonatomic, retain) UILabel* totalCodeScoreLabel;
+@property (nonatomic, retain) UILabel* progressLabel;
+@property (nonatomic, retain) UILabel* performanceLabel;
+@property (nonatomic, retain) UILabel* expertiseLabel;
 @property (nonatomic, retain) UIView* containerView;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

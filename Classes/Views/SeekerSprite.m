@@ -16,7 +16,6 @@
 #define kSEEKER_SENSOR_BIN_SIZE             5
 #define kSEEKER_SAMPLE_BIN_SIZE             5
 #define kSEEKER_GRID_DISTANCE               15.0
-#define kSEEKER_BASE_SPEED                  15
 #define kSEEKER_ROTATION_DURATION_PER_QUAD  0.4f
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -167,11 +166,11 @@
 - (BOOL)changeSpeed:(CGFloat)_deltaSpeed {
     BOOL validSpeed = YES;
     if (self.idle) {
-        self.speed  = kSEEKER_BASE_SPEED;
+        self.speed  = kSEEKER_MIN_SPEED_SETTING;
         self.idle = NO;
     }
     if (_deltaSpeed == 0) {
-        self.speed  = kSEEKER_BASE_SPEED;
+        self.speed  = kSEEKER_MIN_SPEED_SETTING;
     } else {
         self.speed += _deltaSpeed;
     }
