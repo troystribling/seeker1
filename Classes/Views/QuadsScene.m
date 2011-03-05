@@ -35,6 +35,7 @@
 - (void)addQuadStats:(NSInteger)_quad toSprite:(CCSprite*)_sprite;
 - (void)addTitle;
 - (void)backNavigation;
+- (NSInteger)quadsUnlockedCount;
 
 @end
 
@@ -57,8 +58,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initQuads {    
-    NSInteger levelsUnlocked = [LevelModel count];
-    NSInteger quadsUnlocked = levelsUnlocked / kMISSIONS_PER_QUAD;
+    NSInteger quadsUnlocked = [self quadsUnlockedCount];
     CGFloat quadShiftDelta = self.tharsisSprite.contentSize.height + kQUAD_IMAGE_YDELTA;
     
     self.displayedQuad = TharsisQuadType;
@@ -91,8 +91,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)displayedQuadIsUnlocked {
-    NSInteger levelsUnlocked = [LevelModel count];
-    NSInteger quadsUnlocked = levelsUnlocked / kMISSIONS_PER_QUAD;
+    NSInteger quadsUnlocked = [self quadsUnlockedCount];
     if (self.displayedQuad <= quadsUnlocked) {
         return YES;
     } else {
@@ -232,6 +231,12 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)backNavigation {
     [[CCDirector sharedDirector] replaceScene:[MainScene scene]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSInteger)quadsUnlockedCount {
+    NSInteger levelsUnlocked = [LevelModel count];
+    return (levelsUnlocked -1) / kMISSIONS_PER_QUAD;
 }
 
 //===================================================================================================================================

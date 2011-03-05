@@ -18,6 +18,7 @@
 #import "TouchUtils.h"
 #import "ViewControllerManager.h"
 #import "MainScene.h"
+#import "MissionsScene.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kERROR_CODE_HIT_MAP_BOUNDARY        @"A-1654"
@@ -111,12 +112,14 @@
 - (void)runLevelCompletedAnimation;
 - (void)levelCompletedAnimation;
 // menu
-- (void)insertMenu;
+- (void)insertUpperMenu;
+- (void)insertLowerMenu;
 - (void)mapMenu;
 - (void)mapProg;
 - (void)mapSubs;
 - (void)mapStop;
-- (void)mapRun;    
+- (void)mapRun;  
+- (void)mapBack;
 // move map on touch
 - (void)onTouchMoveMapUp;
 - (void)onTouchMoveMapDown;
@@ -191,7 +194,7 @@
     [self.seekerPath removeAllObjects];
     [self loadProgram];
     [self addChild:self.tileMap z:-1 tag:kMAP];
-    [self insertMenu];
+    [self insertUpperMenu];
     self.levelInitSeeker = YES;
 }
 
@@ -268,7 +271,7 @@
     [self centerTileMapOnStartPoint];
     [self initStatusDisplay];
     [self.menu removeFromParentAndCleanup:YES];
-    [self insertMenu];
+    [self insertUpperMenu];
     [self.seeker1 initParams:self.startSite];
     self.levelResetSeeker = YES;
 }
@@ -772,7 +775,7 @@
 #pragma mark menu
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)insertMenu {
+- (void)insertUpperMenu {
     CCSprite* menuUnselected = [CCSprite spriteWithFile:@"map-menu.png"];
     CCSprite* menuSelected = [CCSprite spriteWithFile:@"map-menu-selected.png"];
     CCMenuItemSprite* menuItem = [CCMenuItemSprite itemFromNormalSprite:menuUnselected selectedSprite:menuSelected target:self selector:@selector(mapMenu)];
@@ -816,6 +819,16 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)insertLowerMenu {
+    CCSprite* menuImage = [CCSprite spriteWithFile:@"map-back.png"];
+    CCMenuItemSprite* menuItem = [CCMenuItemSprite itemFromNormalSprite:menuImage selectedSprite:menuImage target:self selector:@selector(mapBack)];
+    CCMenu* lowerMenu = [CCMenu menuWithItems:menuItem, nil];
+    [lowerMenu alignItemsHorizontallyWithPadding:0.0];
+    lowerMenu.position = CGPointMake(63.0f, 20.0f);
+    [self addChild:lowerMenu];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)mapMenu {
     [[CCDirector sharedDirector] replaceScene:[MainScene scene]];
 }
@@ -841,7 +854,12 @@
     [self loadProgram];
     [[ProgramNgin instance] runProgram];
     [self.menu removeFromParentAndCleanup:YES];
-    [self insertMenu];
+    [self insertUpperMenu];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)mapBack {
+    [[CCDirector sharedDirector] replaceScene:[MissionsScene scene]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -1040,6 +1058,7 @@
         self.endOfMissionCounter = 0;
         [self.statusDisplay insert:self];
         [[ProgramNgin instance] deleteProgram];
+        [self insertLowerMenu];
         [self initLevel];
         [self schedule:@selector(nextFrame:)];
 	}

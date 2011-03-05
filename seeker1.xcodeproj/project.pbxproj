@@ -100,6 +100,7 @@
 		0527E61512BD5F3D0039D55E /* red-seeker-1-north.png in Resources */ = {isa = PBXBuildFile; fileRef = 0527E61112BD5F3D0039D55E /* red-seeker-1-north.png */; };
 		0527E61612BD5F3D0039D55E /* red-seeker-1-south.png in Resources */ = {isa = PBXBuildFile; fileRef = 0527E61212BD5F3D0039D55E /* red-seeker-1-south.png */; };
 		0527E61712BD5F3D0039D55E /* red-seeker-1-west.png in Resources */ = {isa = PBXBuildFile; fileRef = 0527E61312BD5F3D0039D55E /* red-seeker-1-west.png */; };
+		05287D451322A5D000D4B225 /* map-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 05287D441322A5D000D4B225 /* map-back.png */; };
 		0528CDB512909FE600F4078A /* Seeker1AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0528CDB412909FE600F4078A /* Seeker1AppDelegate.m */; };
 		0528CDB91290A00200F4078A /* MapScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0528CDB81290A00200F4078A /* MapScene.m */; };
 		052A05EE12CFCCBA005F1948 /* DoTimesEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 052A05ED12CFCCBA005F1948 /* DoTimesEditViewController.m */; };
@@ -528,6 +529,7 @@
 		0527E61112BD5F3D0039D55E /* red-seeker-1-north.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-seeker-1-north.png"; sourceTree = "<group>"; };
 		0527E61212BD5F3D0039D55E /* red-seeker-1-south.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-seeker-1-south.png"; sourceTree = "<group>"; };
 		0527E61312BD5F3D0039D55E /* red-seeker-1-west.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-seeker-1-west.png"; sourceTree = "<group>"; };
+		05287D441322A5D000D4B225 /* map-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map-back.png"; sourceTree = "<group>"; };
 		0528CDB312909FE600F4078A /* Seeker1AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Seeker1AppDelegate.h; sourceTree = "<group>"; };
 		0528CDB412909FE600F4078A /* Seeker1AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Seeker1AppDelegate.m; sourceTree = "<group>"; };
 		0528CDB71290A00200F4078A /* MapScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapScene.h; sourceTree = "<group>"; };
@@ -1046,6 +1048,7 @@
 		0512FC25131AE2C900AF1B57 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				05287D441322A5D000D4B225 /* map-back.png */,
 				0512FC26131AE2C900AF1B57 /* map-menu-selected.png */,
 				0512FC27131AE2C900AF1B57 /* map-menu.png */,
 				05064914131C875200D85D1C /* map-prog-unselected.png */,
@@ -1949,6 +1952,7 @@
 				05064917131C875200D85D1C /* map-prog.png in Resources */,
 				057D12311320B15C003C9FF3 /* SettingsViewController.xib in Resources */,
 				057D12331320B198003C9FF3 /* StatsViewController.xib in Resources */,
+				05287D451322A5D000D4B225 /* map-back.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
