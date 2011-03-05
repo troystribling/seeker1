@@ -113,7 +113,7 @@
         NSInteger maxLevel = [LevelModel maxLevel];
         NSInteger level = [self missionToLevel:_mission];
         LevelModel* levelModel = [LevelModel findByLevel:level];
-        if (levelModel.codeScore <= levelModel.expectedCodeScore && levelModel.completed) {
+        if (levelModel.codeScore <= levelModel.expectedCodeScore && levelModel.completed && level != maxLevel) {
             sprite = [[[CCSprite alloc] initWithFile:@"mission-complete.png"] autorelease];
         } else if (level == maxLevel) {
             sprite = [[[CCSprite alloc] initWithFile:@"mission-not-played.png"] autorelease];

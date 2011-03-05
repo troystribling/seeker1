@@ -820,7 +820,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertLowerMenu {
-    CCSprite* menuImage = [CCSprite spriteWithFile:@"map-back.png"];
+    CCSprite* menuImage = [CCSprite spriteWithFile:@"map-levels.png"];
     CCMenuItemSprite* menuItem = [CCMenuItemSprite itemFromNormalSprite:menuImage selectedSprite:menuImage target:self selector:@selector(mapBack)];
     CCMenu* lowerMenu = [CCMenu menuWithItems:menuItem, nil];
     [lowerMenu alignItemsHorizontallyWithPadding:0.0];
