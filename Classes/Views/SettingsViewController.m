@@ -88,7 +88,7 @@
 - (IBAction)resetButtonPushed:(UIButton*)sender {  
     [LevelModel destroyAll];
     [ProgramModel destroyAll];
-    [UserModel resetTutorials];
+    [UserModel disableTutorials];
 }  
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -96,6 +96,7 @@
     for (int i = 0; i < kMISSIONS_PER_QUAD * kQUADS_TOTAL; i++) {
         [LevelModel insertForLevel:(i+1)];
     }
+    [UserModel enableTutorials];
 }  
 
 //===================================================================================================================================

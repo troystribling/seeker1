@@ -111,13 +111,24 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)resetTutorials {
++ (void)disableTutorials {
     UserModel* user = [self findFirst];
     user.getStartedShown = NO;
     user.subroutinesShown = NO;
     user.timesLoopShown = NO;
     user.untilLoopShown = NO;
     user.roverBinsShown = NO;
+    [user update];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)enableTutorials {
+    UserModel* user = [self findFirst];
+    user.getStartedShown = YES;
+    user.subroutinesShown = YES;
+    user.timesLoopShown = YES;
+    user.untilLoopShown = YES;
+    user.roverBinsShown = YES;
     [user update];
 }
 

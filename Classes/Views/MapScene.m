@@ -75,6 +75,7 @@
 // program instructions
 - (BOOL)shouldMoveMap:(CGPoint)_delta;
 - (BOOL)moveIsInPlayingAreaForDelta:(CGPoint)_delta;
+- (void)completeLevel;
 - (void)executeSeekerInstruction:(ccTime)dt;
 - (void)updatePathForPosition:(CGPoint)_position;
 - (CGFloat)useEnergy:(NSInteger)_gradient;
@@ -172,6 +173,7 @@
 @synthesize centeringOnSeekerPosition;
 @synthesize zoomMap;
 @synthesize mapZoomedIn;
+@synthesize checkLevelCompleted;
 @synthesize canTouch;
 
 //===================================================================================================================================
@@ -415,6 +417,22 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)completeLevel {
+    self.checkLevelCompleted = NO;
+    CGPoint seekerTile = [self getSeekerTile];
+    NSDictionary* itemProperties = [self getTileProperties:seekerTile forLayer:self.itemsLayer];
+    if ([self isStationTile:itemProperties]) {
+        [self.seeker1 emptySampleBin];
+        [self.seeker1 loadSensorBin];
+    }
+    if ([self.seeker1 isLevelCompleted]) {
+        [[ProgramNgin instance] stopProgram];
+        [LevelModel completeLevel:self.level forSeeker:self.seeker1];
+        [self levelCompletedAnimation];
+    }    
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)executeSeekerInstruction:(ccTime)dt {
     NSMutableArray* instructionSet = nil;
     ProgramNgin* ngin = [ProgramNgin instance];
@@ -442,18 +460,10 @@
             default:
                 break;
         }
+        self.checkLevelCompleted = YES;
     } else {
         [self halt];
         [self crashProgram];
-    }
-    if ([self isStationTile:itemProperties]) {
-        [self.seeker1 emptySampleBin];
-        [self.seeker1 loadSensorBin];
-    }
-    if ([self.seeker1 isLevelCompleted]) {
-        [[ProgramNgin instance] stopProgram];
-        [LevelModel completeLevel:self.level forSeeker:self.seeker1];
-        [self levelCompletedAnimation];
     }
 }
 
@@ -1054,6 +1064,7 @@
         self.centeringOnSeekerPosition = NO;
         self.mapZoomedIn = NO;
         self.zoomMap = NO;
+        self.checkLevelCompleted = NO;
         self.canTouch = NO;
         self.endOfMissionCounter = 0;
         [self.statusDisplay insert:self];
@@ -1096,6 +1107,8 @@
             [self onTouchZoomMap];
         } else if (self.centeringOnSeekerPosition) {
             [self centerOnSeekerPosition];
+        } else if (self.checkLevelCompleted) {
+            [self completeLevel];
         } else if ([ngin programIsRunning]) {
             [self executeSeekerInstruction:dt];
         }
