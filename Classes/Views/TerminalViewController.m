@@ -34,6 +34,7 @@
 @synthesize programView;
 @synthesize editImageView;
 @synthesize runImageView;
+@synthesize backImageView;
 @synthesize opacitySlider;
 @synthesize opacityImage;
 @synthesize opacityLabel;
@@ -164,16 +165,19 @@
         case kTERMINAL_LAUNCHER_EDIT_TAG:
             if (self.editingEnabled) {
                 self.editingEnabled = NO;
+                self.backImageView.hidden = NO;
+                self.runImageView.hidden = NO;
                 self.editImageView.image = [UIImage imageNamed:@"terminal-launcher-edit.png"];
                 [self.programView setEditing:NO animated:YES];
             } else {
                 self.editingEnabled = YES;
+                self.backImageView.hidden = YES;
+                self.runImageView.hidden = YES;
                 self.editImageView.image = [UIImage imageNamed:@"terminal-launcher-editing.png"];
                 [self.programView setEditing:YES animated:YES];
             }
             break;
         default:
-            [super touchesBegan:touches withEvent:event];
             break;
     }
 }
@@ -204,11 +208,12 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     NSInteger linesOfCode = [self.programListing count];
-    if (indexPath.row == linesOfCode || linesOfCode == 1) {
+    if (indexPath.row == linesOfCode) {
         return NO;
     } else {
         return YES;
     }
+    return YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -222,9 +227,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath*)fromIndexPath toIndexPath:(NSIndexPath*)toIndexPath {
-    NSString* lineOfCode = [self.programListing objectAtIndex:fromIndexPath.row];
-    [self.programListing removeObjectAtIndex:fromIndexPath.row];
-    [self.programListing insertObject:lineOfCode atIndex:toIndexPath.row];
+    NSInteger fromRow = fromIndexPath.row;
+    NSInteger toRow = toIndexPath.row;
+    NSMutableArray* lineOfCode = [self.programListing objectAtIndex:fromRow];
+    if (fromRow > toRow) {
+        fromRow++;
+    } else {
+        toRow++; 
+    }
+    [self.programListing insertObject:lineOfCode atIndex:toRow];
+    [self.programListing removeObjectAtIndex:fromRow];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

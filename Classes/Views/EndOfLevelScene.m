@@ -310,13 +310,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 -(void) ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent *)event {
-    if (self.level.completed) {
-        [self nextLevel];
-    } else {
-        [ProgramNgin instance].programHalted = NO;
-        [ProgramNgin instance].programRunning = NO;
-    }
-    [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
 }    
 
 @end

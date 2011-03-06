@@ -17,10 +17,10 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kDOTIMES_NUMBER_TAG                     1
 #define kDOTIMES_INSTRUCTION_TAG                2
-#define kDOTIMES_INSTRUCTION_MAX_WIDTH          206
-#define kDOTIMES_INSTRUCTION_EDIT_MAX_WIDTH     125
-#define kDOTIMES_NUMBER_MAX_WIDTH               128
-#define kDOTIMES_NUMBER_EDIT_MAX_WIDTH          40
+#define kDOTIMES_INSTRUCTION_MAX_WIDTH          187
+#define kDOTIMES_INSTRUCTION_EDIT_MAX_WIDTH     106
+#define kDOTIMES_NUMBER_MAX_WIDTH               107
+#define kDOTIMES_NUMBER_EDIT_MAX_WIDTH          46
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface DoTimesTerminalCell (PrivateAPI)
@@ -103,6 +103,7 @@
     cell.instructionLabel.userInteractionEnabled = YES;
     cell.numberLabel.userInteractionEnabled = YES;
     [cell setItemsContrainedToInstructionWidth:kDOTIMES_INSTRUCTION_MAX_WIDTH andNumberWidth:kDOTIMES_NUMBER_MAX_WIDTH];        
+    cell.promtLabel.text = [NSString stringWithFormat:@"%d.", (indexPath.row + 1)];
     return cell;
 }
 

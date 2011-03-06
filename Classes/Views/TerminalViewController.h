@@ -16,6 +16,7 @@
     IBOutlet UITableView* programView;
     IBOutlet UIImageView* editImageView;
     IBOutlet UIImageView* runImageView;
+    IBOutlet UIImageView* backImageView;
     IBOutlet UISlider* opacitySlider;
     IBOutlet UIImageView* opacityImage;
     IBOutlet UILabel* opacityLabel;
@@ -31,6 +32,7 @@
 @property (nonatomic, retain) UITableView* programView;
 @property (nonatomic, retain) UIImageView* editImageView;
 @property (nonatomic, retain) UIImageView* runImageView;
+@property (nonatomic, retain) UIImageView* backImageView;
 @property (nonatomic, retain) UISlider* opacitySlider;
 @property (nonatomic, retain) UIImageView* opacityImage;
 @property (nonatomic, retain) UILabel* opacityLabel;

@@ -143,15 +143,11 @@
             self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAllButName:self.selectedSubroutineName]];
             break;
         case TerminalDoTimesInstructionType:
-            self.instructionsList = [[ProgramNgin instance] getDoInstructions];
-            break;
         case SubroutineDoTimesInstructionType:
             self.instructionsList = [[ProgramNgin instance] getDoInstructions];
             self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAll]];
             break;
         case TerminalDoUntilInstructionType:
-            self.instructionsList = [[ProgramNgin instance] getDoInstructions];
-            break;
         case SubroutineDoUntilInstructionType:
             self.instructionsList = [[ProgramNgin instance] getDoInstructions];
             self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAll]];

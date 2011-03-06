@@ -824,7 +824,7 @@
         }
     }
     [self.menu alignItemsHorizontallyWithPadding:0.0];
-    self.menu.position = CGPointMake(160.0f, 395.0f);
+    self.menu.position = CGPointMake(160.0f, 400.0f);
     [self addChild:menu];
 }
 
@@ -834,7 +834,7 @@
     CCMenuItemSprite* menuItem = [CCMenuItemSprite itemFromNormalSprite:menuImage selectedSprite:menuImage target:self selector:@selector(mapBack)];
     CCMenu* lowerMenu = [CCMenu menuWithItems:menuItem, nil];
     [lowerMenu alignItemsHorizontallyWithPadding:0.0];
-    lowerMenu.position = CGPointMake(53.0f, 20.0f);
+    lowerMenu.position = CGPointMake(53.0f, 15.0f);
     [self addChild:lowerMenu];
 }
 

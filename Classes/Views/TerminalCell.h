@@ -14,10 +14,12 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TerminalCell : UITableViewCell <TerminalCellInterface> {
+    IBOutlet UILabel* promtLabel;
     IBOutlet UILabel* instructionLabel;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@property (nonatomic, retain) UILabel* promtLabel;
 @property (nonatomic, retain) UILabel* instructionLabel;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

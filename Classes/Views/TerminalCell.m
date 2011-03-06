@@ -12,8 +12,8 @@
 #import "ProgramNgin.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define kTERMINAL_INSTRUCTION_WIDTH         280
-#define kTERMINAL_INSTRUCTION_EDIT_WIDTH    200 
+#define kTERMINAL_INSTRUCTION_WIDTH         227
+#define kTERMINAL_INSTRUCTION_EDIT_WIDTH    147 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TerminalCell (PrivateAPI)
@@ -27,6 +27,7 @@
 @implementation TerminalCell
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize promtLabel;
 @synthesize instructionLabel;
 
 //===================================================================================================================================
@@ -38,7 +39,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (UITableViewCell*)tableView:(UITableView*)tableView promptCellForRowAtIndexPath:(NSIndexPath*)indexPath {
     TerminalCell* cell = (TerminalCell*)[CellUtils createCell:[TerminalCell class] forTableView:tableView];
-    cell.instructionLabel.text = @"~>";
+    cell.promtLabel.text = @">  ";
     return cell;
 }
 
@@ -61,7 +62,8 @@
 + (UITableViewCell*)tableView:(UITableView*)tableView terminalCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet andParentType:(TerminalCellParentType)_parentType{
     TerminalCell* cell = (TerminalCell*)[CellUtils createCell:[TerminalCell class] forTableView:tableView];
     NSString* instructionString = [self instructionToString:_instructionSet];
-    cell.instructionLabel.text = [NSString stringWithFormat:@"~> %@", instructionString];
+    cell.promtLabel.text = [NSString stringWithFormat:@"%d.", (indexPath.row + 1)];
+    cell.instructionLabel.text = instructionString;
     return cell;
 }
 
@@ -69,7 +71,8 @@
 + (UITableViewCell*)tableView:(UITableView*)tableView listCellForRowAtIndexPath:(NSIndexPath*)indexPath forInstructionSet:(NSMutableArray*)_instructionSet {
     TerminalCell* cell = (TerminalCell*)[CellUtils createCell:[TerminalCell class] forTableView:tableView];
     NSString* instructionString = [self instructionToString:_instructionSet];
-    cell.instructionLabel.text = [NSString stringWithFormat:@"%d. %@", (indexPath.row + 1), instructionString];
+    cell.promtLabel.text = [NSString stringWithFormat:@"%d.", (indexPath.row + 1)];
+    cell.instructionLabel.text = instructionString;
     return cell;
 }
 

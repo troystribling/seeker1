@@ -17,10 +17,10 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kDOUNTIL_INSTRUCTION_TAG            2
 #define kDOUNTIL_PREDICATE_TAG              1
-#define kDOUNTIL_PREDICATE_MAX_WIDTH        206
+#define kDOUNTIL_PREDICATE_MAX_WIDTH        187
 #define kDOUNTIL_PREDICATE_EDIT_MAX_WIDTH   125
-#define kDOUNTIL_INSTRUCTION_MAX_WIDTH      128
-#define kDOUNTIL_INSTRUCTION_EDIT_MAX_WIDTH 40
+#define kDOUNTIL_INSTRUCTION_MAX_WIDTH      121
+#define kDOUNTIL_INSTRUCTION_EDIT_MAX_WIDTH 30
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface DoUntilTerminalCell (PrivateAPI)
@@ -103,6 +103,7 @@
     cell.instructionLabel.userInteractionEnabled = YES;
     cell.predicateLabel.userInteractionEnabled = YES;
     [cell setItemsContrainedToInstructionWidth:kDOUNTIL_INSTRUCTION_MAX_WIDTH andPredicateWidth:kDOUNTIL_PREDICATE_MAX_WIDTH];        
+    cell.promtLabel.text = [NSString stringWithFormat:@"%d.", (indexPath.row + 1)];
     return cell;
 }
 

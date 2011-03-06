@@ -75,6 +75,7 @@
 		05197CD31301044C006DEC15 /* map-5.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05197CD21301044C006DEC15 /* map-5.tmx */; };
 		05197CD7130105FA006DEC15 /* map-6.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05197CD6130105FA006DEC15 /* map-6.tmx */; };
 		05197CD91301067B006DEC15 /* map-7.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05197CD81301067B006DEC15 /* map-7.tmx */; };
+		0519845A1323F9CB00299B48 /* map-12.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 051984591323F9CB00299B48 /* map-12.tmx */; };
 		051AB7E912C028260020AC2D /* map-2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 051AB7E612C028260020AC2D /* map-2.tmx */; };
 		051C779612B091AC00E41A23 /* terminal-launcher-edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 051C779512B091AC00E41A23 /* terminal-launcher-edit.png */; };
 		051C77C712B0A88300E41A23 /* terminal-launcher-editing.png in Resources */ = {isa = PBXBuildFile; fileRef = 051C77C612B0A88300E41A23 /* terminal-launcher-editing.png */; };
@@ -149,8 +150,7 @@
 		05663F611302343C008AA1DC /* map-8.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F5F1302343C008AA1DC /* map-8.tmx */; };
 		05663F621302343C008AA1DC /* map-9.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F601302343C008AA1DC /* map-9.tmx */; };
 		05663F65130239D4008AA1DC /* map-10.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F63130239D4008AA1DC /* map-10.tmx */; };
-		05663F66130239D4008AA1DC /* map-11.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F64130239D4008AA1DC /* map-11.tmx */; };
-		05663F6E13023E59008AA1DC /* map-12.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F6D13023E59008AA1DC /* map-12.tmx */; };
+		05663F6E13023E59008AA1DC /* map-11.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F6D13023E59008AA1DC /* map-11.tmx */; };
 		05663F7213024DFA008AA1DC /* map-13.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F7113024DFA008AA1DC /* map-13.tmx */; };
 		05663F84130251BA008AA1DC /* map-14.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F83130251BA008AA1DC /* map-14.tmx */; };
 		05663F9113025B5E008AA1DC /* map-15.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F9013025B5E008AA1DC /* map-15.tmx */; };
@@ -502,6 +502,7 @@
 		05197CD21301044C006DEC15 /* map-5.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-5.tmx"; sourceTree = "<group>"; };
 		05197CD6130105FA006DEC15 /* map-6.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-6.tmx"; sourceTree = "<group>"; };
 		05197CD81301067B006DEC15 /* map-7.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-7.tmx"; sourceTree = "<group>"; };
+		051984591323F9CB00299B48 /* map-12.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-12.tmx"; sourceTree = "<group>"; };
 		051AB7E612C028260020AC2D /* map-2.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-2.tmx"; sourceTree = "<group>"; };
 		051C779512B091AC00E41A23 /* terminal-launcher-edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-edit.png"; sourceTree = "<group>"; };
 		051C77C612B0A88300E41A23 /* terminal-launcher-editing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-editing.png"; sourceTree = "<group>"; };
@@ -596,8 +597,7 @@
 		05663F5F1302343C008AA1DC /* map-8.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-8.tmx"; sourceTree = "<group>"; };
 		05663F601302343C008AA1DC /* map-9.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-9.tmx"; sourceTree = "<group>"; };
 		05663F63130239D4008AA1DC /* map-10.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-10.tmx"; sourceTree = "<group>"; };
-		05663F64130239D4008AA1DC /* map-11.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-11.tmx"; sourceTree = "<group>"; };
-		05663F6D13023E59008AA1DC /* map-12.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-12.tmx"; sourceTree = "<group>"; };
+		05663F6D13023E59008AA1DC /* map-11.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-11.tmx"; sourceTree = "<group>"; };
 		05663F7113024DFA008AA1DC /* map-13.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-13.tmx"; sourceTree = "<group>"; };
 		05663F83130251BA008AA1DC /* map-14.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-14.tmx"; sourceTree = "<group>"; };
 		05663F9013025B5E008AA1DC /* map-15.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-15.tmx"; sourceTree = "<group>"; };
@@ -919,8 +919,8 @@
 				05663F5F1302343C008AA1DC /* map-8.tmx */,
 				05663F601302343C008AA1DC /* map-9.tmx */,
 				05663F63130239D4008AA1DC /* map-10.tmx */,
-				05663F64130239D4008AA1DC /* map-11.tmx */,
-				05663F6D13023E59008AA1DC /* map-12.tmx */,
+				05663F6D13023E59008AA1DC /* map-11.tmx */,
+				051984591323F9CB00299B48 /* map-12.tmx */,
 				05663F7113024DFA008AA1DC /* map-13.tmx */,
 				05663F83130251BA008AA1DC /* map-14.tmx */,
 				05663F9013025B5E008AA1DC /* map-15.tmx */,
@@ -1911,8 +1911,7 @@
 				05663F611302343C008AA1DC /* map-8.tmx in Resources */,
 				05663F621302343C008AA1DC /* map-9.tmx in Resources */,
 				05663F65130239D4008AA1DC /* map-10.tmx in Resources */,
-				05663F66130239D4008AA1DC /* map-11.tmx in Resources */,
-				05663F6E13023E59008AA1DC /* map-12.tmx in Resources */,
+				05663F6E13023E59008AA1DC /* map-11.tmx in Resources */,
 				05663F7213024DFA008AA1DC /* map-13.tmx in Resources */,
 				05663F84130251BA008AA1DC /* map-14.tmx in Resources */,
 				05663F9113025B5E008AA1DC /* map-15.tmx in Resources */,
@@ -1969,6 +1968,7 @@
 				05287D7A1322B0F800D4B225 /* map-levels.png in Resources */,
 				05287D991322C1B000D4B225 /* enable -levels.png in Resources */,
 				05287D9A1322C1B000D4B225 /* reset -levels.png in Resources */,
+				0519845A1323F9CB00299B48 /* map-12.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -51,7 +51,8 @@
 + (NSInteger)nextQuadrangle;
 + (void)setQuadrangle:(NSInteger)_quad;
 + (NSInteger)quadrangle;
-+ (void)resetTutorials;
++ (void)disableTutorials;
++ (void)enableTutorials;
 + (void)tutorialWasShown:(TutorialSectionID)_sectionID;
 + (BOOL)wasTutorialShown:(TutorialSectionID)_sectionID;
 + (void)setSpeedScaleFactor:(double)_fact;
