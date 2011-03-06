@@ -67,7 +67,7 @@
 + (NSInteger)nextLevel {
     UserModel* user = [self findFirst];
     user.level++;
-    NSInteger quad = user.level / kMISSIONS_PER_QUAD;
+    NSInteger quad = (user.level -1)/kMISSIONS_PER_QUAD;
     if (quad > user.quadrangle) {
         user.quadrangle++;
     }
@@ -79,7 +79,7 @@
 + (void)setLevel:(NSInteger)_level {
     UserModel* user = [self findFirst];
     user.level = _level;
-    user.quadrangle = user.level / kMISSIONS_PER_QUAD;
+    user.quadrangle = (user.level -1)/kMISSIONS_PER_QUAD;
     [user update];
 }
 
