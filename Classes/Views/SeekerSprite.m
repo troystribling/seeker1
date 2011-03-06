@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "SeekerSprite.h"
+#import "UserModel.h"
 #import "ProgramNgin.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -15,8 +16,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kSEEKER_SENSOR_BIN_SIZE             5
 #define kSEEKER_SAMPLE_BIN_SIZE             5
-#define kSEEKER_GRID_DISTANCE               15.0
-#define kSEEKER_ROTATION_DURATION_PER_QUAD  0.4f
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface SeekerSprite (PrivateAPI)
@@ -151,7 +150,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)moveBy:(CGPoint)_delta {
-    [self runAction:[CCMoveBy actionWithDuration:kSEEKER_GRID_DISTANCE/self.speed position:_delta]];
+    CGFloat speedScale = [UserModel speedScaleFactor];
+    [self runAction:[CCMoveBy actionWithDuration:kSEEKER_GRID_DISTANCE/(speedScale*self.speed) position:_delta]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -166,11 +166,11 @@
 - (BOOL)changeSpeed:(CGFloat)_deltaSpeed {
     BOOL validSpeed = YES;
     if (self.idle) {
-        self.speed  = kSEEKER_MIN_SPEED_SETTING;
+        self.speed  = kSEEKER_ZERO_GRADIENT_SPEED;
         self.idle = NO;
     }
     if (_deltaSpeed == 0) {
-        self.speed  = kSEEKER_MIN_SPEED_SETTING;
+        self.speed  = kSEEKER_ZERO_GRADIENT_SPEED;
     } else {
         self.speed += _deltaSpeed;
     }
@@ -185,7 +185,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)turnLeft {
     self.bearing = [self leftFromBearing];
-    [self runAction:[CCRotateBy actionWithDuration:kSEEKER_ROTATION_DURATION_PER_QUAD angle:-90.0]];
+    CGFloat speedScale = [UserModel speedScaleFactor];
+    [self runAction:[CCRotateBy actionWithDuration:1.0/speedScale angle:-90.0]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -274,7 +275,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)rotate:(CGFloat)_angle {
-    CGFloat duration = fabs(kSEEKER_ROTATION_DURATION_PER_QUAD * _angle / 90.0f);
+    CGFloat speedScale = [UserModel speedScaleFactor];
+    CGFloat duration = fabs(kSEEKER_ROTATION_DURATION_PER_QUAD * _angle / (speedScale*90.0f));
     [self runAction:[CCRotateBy actionWithDuration:duration angle:_angle]];
 }
 

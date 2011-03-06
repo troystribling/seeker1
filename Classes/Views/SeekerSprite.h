@@ -18,10 +18,6 @@ typedef enum tagSeekerBearing {
     WestSeekerBearing,
 } SeekerBearing;
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-#define kSEEKER_MIN_SPEED           0
-#define kSEEKER_MAX_SPEED           30
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface SeekerSprite : CCSprite {
     SeekerBearing bearing;

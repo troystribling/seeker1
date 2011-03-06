@@ -23,6 +23,8 @@
     BOOL timesLoopShown;
     BOOL untilLoopShown;
     BOOL roverBinsShown;
+    double speedScaleFactor;
+    BOOL audioEnabled;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -34,6 +36,8 @@
 @property (nonatomic, assign) BOOL timesLoopShown;
 @property (nonatomic, assign) BOOL untilLoopShown;
 @property (nonatomic, assign) BOOL roverBinsShown;
+@property (nonatomic, assign) double speedScaleFactor;
+@property (nonatomic, assign) BOOL audioEnabled;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
@@ -47,8 +51,13 @@
 + (NSInteger)nextQuadrangle;
 + (void)setQuadrangle:(NSInteger)_quad;
 + (NSInteger)quadrangle;
++ (void)resetTutorials;
 + (void)tutorialWasShown:(TutorialSectionID)_sectionID;
 + (BOOL)wasTutorialShown:(TutorialSectionID)_sectionID;
++ (void)setSpeedScaleFactor:(double)_fact;
++ (double)speedScaleFactor;
++ (void)setAudioEnabled:(BOOL)_enabled;
++ (BOOL)audioEnabled;
 + (void)insert;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -66,5 +75,7 @@
 - (void)setUntilLoopShownAsInteger:(NSInteger)_value;
 - (NSInteger)roverBinsShownAsInteger;
 - (void)setRoverBinsShownAsInteger:(NSInteger)_value;
+- (NSInteger)audioEnabledAsInteger;
+- (void)setAudioEnabledAsInteger:(NSInteger)_value;
 
 @end

@@ -120,6 +120,8 @@
     UserModel* user = [UserModel findFirst];
     if (user == nil) {
         [UserModel insert];
+    }
+    if ([LevelModel count] == 0) {
         [LevelModel insertForLevel:1];
     }
 }

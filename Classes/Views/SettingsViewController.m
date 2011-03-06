@@ -8,12 +8,18 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "SettingsViewController.h"
+#import "UserModel.h"
+#import "LevelModel.h"
+#import "ProgramModel.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kSETTINGS_LAUNCHER_BACK_TAG     1
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface SettingsViewController (PrivateAPI)
+
+- (void)showLevelManage;
+- (void)hideLevelManage;
 
 @end
 
@@ -22,13 +28,25 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize speedSlider;
-@synthesize soundSwitch;
+@synthesize audioSwitch;
 @synthesize resetLevelsButton;
 @synthesize enableLevelsButton;
 @synthesize containerView;
 
 //===================================================================================================================================
 #pragma mark SettingsViewController PrivateAPI
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)showLevelManage {
+    self.resetLevelsButton.hidden = NO;
+    self.enableLevelsButton.hidden = NO;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)hideLevelManage {
+    self.resetLevelsButton.hidden = YES;
+    self.enableLevelsButton.hidden = YES;
+}
 
 //===================================================================================================================================
 #pragma mark SettingsViewController
@@ -56,19 +74,28 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (IBAction)speedValueChanged:(UISlider*)sender {  
     CGFloat speedValue = [sender value];
-    CGFloat newSpeed = kSEEKER_MIN_SPEED_SETTING + kSEEKER_DELTA_SPEED_SETTING * speedValue; 
+    CGFloat newSpeed = kSEEKER_MIN_SPEED_SCALE + kSEEKER_DELTA_SPEED_SCALE * speedValue; 
+    [UserModel setSpeedScaleFactor:newSpeed];
 }  
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (IBAction)soundValueChanged:(UISwitch*)sender {  
+- (IBAction)soundValueChanged:(UISwitch*)sender { 
+    BOOL audioOn = sender.on;
+    [UserModel setAudioEnabled:audioOn];
 }  
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (IBAction)resetButtonPushed:(UIButton*)sender {  
+    [LevelModel destroyAll];
+    [ProgramModel destroyAll];
+    [UserModel resetTutorials];
 }  
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (IBAction)enableButtonPushed:(UIButton*)sender {  
+    for (int i = 0; i < kMISSIONS_PER_QUAD * kQUADS_TOTAL; i++) {
+        [LevelModel insertForLevel:(i+1)];
+    }
 }  
 
 //===================================================================================================================================
@@ -81,6 +108,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
+    self.speedSlider.value = ((float)[UserModel speedScaleFactor] - kSEEKER_MIN_SPEED_SCALE)/kSEEKER_DELTA_SPEED_SCALE;
+    self.audioSwitch.on = [UserModel audioEnabled];
+    [self hideLevelManage];
 	[super viewWillAppear:animated];
 }
 
@@ -105,13 +135,20 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
     UITouch* touch = [touches anyObject];
+    NSInteger numberOfTouches = [touch tapCount];
     NSInteger touchTag = touch.view.tag;
     switch (touchTag) {
         case kSETTINGS_LAUNCHER_BACK_TAG:
             [self.view removeFromSuperview];
             break;
         default:
-            [super touchesBegan:touches withEvent:event];
+            if (numberOfTouches == 3) {
+                if ( self.resetLevelsButton.hidden) {
+                    [self showLevelManage];
+                } else {
+                    [self hideLevelManage];
+                }
+            }
             break;
     }
 }

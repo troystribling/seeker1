@@ -27,6 +27,8 @@
 @synthesize timesLoopShown;
 @synthesize untilLoopShown;
 @synthesize roverBinsShown;
+@synthesize speedScaleFactor;
+@synthesize audioEnabled;
 
 //===================================================================================================================================
 #pragma mark UserModel
@@ -43,7 +45,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[SeekerDbi instance]  updateWithStatement:@"CREATE TABLE users (pk integer primary key, level integer, quadrangle integer, getStartedShown integer, subroutinesShown integer, timesLoopShown integer, untilLoopShown integer, roverBinsShown integer)"];
+	[[SeekerDbi instance]  updateWithStatement:@"CREATE TABLE users (pk integer primary key, level integer, quadrangle integer, getStartedShown integer, subroutinesShown integer, timesLoopShown integer, untilLoopShown integer, roverBinsShown integer, speedScaleFactor float, audioEnabled integer)"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -109,6 +111,17 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (void)resetTutorials {
+    UserModel* user = [self findFirst];
+    user.getStartedShown = NO;
+    user.subroutinesShown = NO;
+    user.timesLoopShown = NO;
+    user.untilLoopShown = NO;
+    user.roverBinsShown = NO;
+    [user update];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (void)tutorialWasShown:(TutorialSectionID)_sectionID {
     UserModel* user = [self findFirst];
     switch (_sectionID) {
@@ -160,6 +173,32 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (void)setSpeedScaleFactor:(double)_fact {
+    UserModel* user = [self findFirst];
+    user.speedScaleFactor = _fact;
+    [user update];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (double)speedScaleFactor {
+    UserModel* user = [self findFirst];
+    return user.speedScaleFactor;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)setAudioEnabled:(BOOL)_enabled {
+    UserModel* user = [self findFirst];
+    user.audioEnabled = _enabled;
+    [user update];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (BOOL)audioEnabled {
+    UserModel* user = [self findFirst];
+    return user.audioEnabled;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (void)insert {
     UserModel* user = [[[UserModel alloc] init] autorelease];
     user.level = 1;
@@ -169,6 +208,8 @@
     user.timesLoopShown = NO;
     user.untilLoopShown = NO;
     user.roverBinsShown = NO;
+    user.speedScaleFactor = 1.0;
+    user.audioEnabled = YES;
     [user insert];
 }
 
@@ -176,8 +217,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
     NSString* insertStatement;
-    insertStatement = [NSString stringWithFormat:@"INSERT INTO users (level, quadrangle, getStartedShown, subroutinesShown, timesLoopShown, untilLoopShown, roverBinsShown) values (%d, %d, %d, %d, %d, %d, %d)", 
-                       self.level, self.quadrangle, [self getStartedShownAsInteger], [self subroutinesShownAsInteger], [self timesLoopShownAsInteger], [self untilLoopShownAsInteger], [self roverBinsShownAsInteger]];	
+    insertStatement = [NSString stringWithFormat:@"INSERT INTO users (level, quadrangle, getStartedShown, subroutinesShown, timesLoopShown, untilLoopShown, roverBinsShown, speedScaleFactor, audioEnabled) values (%d, %d, %d, %d, %d, %d, %d, %g, %d)", 
+                       self.level, self.quadrangle, [self getStartedShownAsInteger], [self subroutinesShownAsInteger], [self timesLoopShownAsInteger], [self untilLoopShownAsInteger], [self roverBinsShownAsInteger], self.speedScaleFactor, [self audioEnabledAsInteger]];	
     [[SeekerDbi instance]  updateWithStatement:insertStatement];
 }
 
@@ -194,8 +235,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
-    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE users SET level = %d, quadrangle = %d, getStartedShown = %d, subroutinesShown = %d, timesLoopShown = %d, untilLoopShown = %d, roverBinsShown = %d WHERE pk = %d", 
-                                 self.level, self.quadrangle, [self getStartedShownAsInteger], [self subroutinesShownAsInteger], [self timesLoopShownAsInteger], [self untilLoopShownAsInteger], [self roverBinsShownAsInteger], self.pk];
+    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE users SET level = %d, quadrangle = %d, getStartedShown = %d, subroutinesShown = %d, timesLoopShown = %d, untilLoopShown = %d, roverBinsShown = %d, speedScaleFactor = %g, audioEnabled = %d WHERE pk = %d", 
+                                 self.level, self.quadrangle, [self getStartedShownAsInteger], [self subroutinesShownAsInteger], [self timesLoopShownAsInteger], [self untilLoopShownAsInteger], [self roverBinsShownAsInteger], self.speedScaleFactor, [self audioEnabledAsInteger], self.pk];
 	[[SeekerDbi instance]  updateWithStatement:updateStatement];
 }
 
@@ -269,6 +310,20 @@
 	};
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSInteger)audioEnabledAsInteger {
+	return self.audioEnabled == YES ? 1 : 0;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setAudioEnabledAsInteger:(NSInteger)_value {
+	if (_value == 1) {
+		self.audioEnabled = YES; 
+	} else {
+		self.audioEnabled = NO;
+	};
+}
+
 //===================================================================================================================================
 #pragma mark ServiceModel PrivateAPI
 
@@ -285,6 +340,8 @@
 	[self setTimesLoopShownAsInteger:(int)sqlite3_column_int(statement, 5)];
 	[self setUntilLoopShownAsInteger:(int)sqlite3_column_int(statement, 6)];
 	[self setRoverBinsShownAsInteger:(int)sqlite3_column_int(statement, 7)];
+    self.speedScaleFactor = (double)sqlite3_column_double(statement, 8);
+    [self setAudioEnabledAsInteger:(int)sqlite3_column_int(statement, 9)];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

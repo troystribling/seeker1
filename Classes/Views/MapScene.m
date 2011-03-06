@@ -48,7 +48,6 @@
 #define kMAP_ZOOM_FACTOR            0.5
 #define kMAP_ZOOM_DURATION          1.0
 #define kEND_OF_LEVEL_COUNT         50
-#define kSEEKER_DELTA_SPEED         5
 #define kSEEKER_DELTA_ENERGY        2
 #define kSEEKER_DELTA_ENERGY_MIN    1
 #define kSEEKER_DELTA_ENERGY_MAX    4
@@ -517,7 +516,8 @@
                     CGPoint deltaScreenCoords = [self moveDeltaScreenCoords:deltaTileCoords];
                     if ([self shouldMoveMap:deltaTileCoords]) {
                         CGPoint mapPosition = ccpAdd(CGPointMake(-deltaScreenCoords.x, -deltaScreenCoords.y), self.tileMap.position);
-                        [self moveMapTo:mapPosition withDuration:1.0];
+                        CGFloat speedScale = [UserModel speedScaleFactor];
+                        [self moveMapTo:mapPosition withDuration:kSEEKER_GRID_DISTANCE/(speedScale*self.seeker1.speed)];
                     } else {
                         [self.seeker1 moveBy:deltaScreenCoords];
                     }
@@ -824,7 +824,7 @@
     CCMenuItemSprite* menuItem = [CCMenuItemSprite itemFromNormalSprite:menuImage selectedSprite:menuImage target:self selector:@selector(mapBack)];
     CCMenu* lowerMenu = [CCMenu menuWithItems:menuItem, nil];
     [lowerMenu alignItemsHorizontallyWithPadding:0.0];
-    lowerMenu.position = CGPointMake(63.0f, 20.0f);
+    lowerMenu.position = CGPointMake(53.0f, 20.0f);
     [self addChild:lowerMenu];
 }
 

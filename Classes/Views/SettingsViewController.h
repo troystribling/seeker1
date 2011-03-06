@@ -14,7 +14,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface SettingsViewController : UIViewController {
     IBOutlet UISlider* speedSlider;
-    IBOutlet UISwitch* soundSwitch;
+    IBOutlet UISwitch* audioSwitch;
     IBOutlet UIButton* resetLevelsButton;
     IBOutlet UIButton* enableLevelsButton;
     UIView* containerView;
@@ -22,7 +22,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UISlider* speedSlider;
-@property (nonatomic, retain) UISwitch* soundSwitch;
+@property (nonatomic, retain) UISwitch* audioSwitch;
 @property (nonatomic, retain) UIButton* resetLevelsButton;
 @property (nonatomic, retain) UIButton* enableLevelsButton;
 @property (nonatomic, retain) UIView* containerView;

@@ -286,13 +286,13 @@
     } else if (self.counter == kEND_OF_LEVEL_TICK_2) {
         if (self.level.completed) {
             [self insertSensorsPlacedLabel:CGPointMake(20.0f, 235.0f)];
+        } else {
+            [self insertMissionFailedMenu];
         }
         [self.statusDisplay clear];
     } else if (self.counter == kEND_OF_LEVEL_TICK_3) {
         if (self.level.completed) {
             [self insertCodeScoreLabel];
-        } else {
-            [self insertMissionFailedMenu];
         }
         [self.statusDisplay test];
     } else if (self.counter == kEND_OF_LEVEL_TICK_4) {
