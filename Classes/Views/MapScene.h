@@ -64,6 +64,7 @@ typedef enum tagMapID {
     BOOL mapZoomedIn;
     BOOL checkLevelCompleted;
     BOOL canTouch;
+    BOOL pinchDetected;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -98,6 +99,7 @@ typedef enum tagMapID {
 @property (nonatomic, assign) BOOL mapZoomedIn;
 @property (nonatomic, assign) BOOL checkLevelCompleted;
 @property (nonatomic, assign) BOOL canTouch;
+@property (nonatomic, assign) BOOL pinchDetected;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)scene;

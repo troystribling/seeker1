@@ -175,6 +175,7 @@
 @synthesize mapZoomedIn;
 @synthesize checkLevelCompleted;
 @synthesize canTouch;
+@synthesize pinchDetected;
 
 //===================================================================================================================================
 #pragma mark MapScene PrivateAPI
@@ -1067,6 +1068,7 @@
         self.checkLevelCompleted = NO;
         self.canTouch = NO;
         self.endOfMissionCounter = 0;
+        self.pinchDetected = NO;
         [self.statusDisplay insert:self];
         [[ProgramNgin instance] deleteProgram];
         [self insertLowerMenu];
@@ -1117,9 +1119,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 -(void) ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent *)event {
-    CGPoint touchLocation = [TouchUtils locationFromTouches:touches]; 
-    if ([self acceptTouches:touchLocation]) {
-        self.firstTouch = [TouchUtils locationFromTouches:touches]; 
+    NSInteger nTouches = [touches count];
+    if (nTouches < 2) {
+        CGPoint touchLocation = [TouchUtils locationFromTouches:touches]; 
+        if ([self acceptTouches:touchLocation]) {
+            self.firstTouch = [TouchUtils locationFromTouches:touches]; 
+        }
+    } else {
+        self.pinchDetected = YES;
     }
 }    
 
@@ -1127,29 +1134,41 @@
 -(void) ccTouchesEnded:(NSSet*)touches withEvent:(UIEvent *)event {
     CGPoint touchLocation = [TouchUtils locationFromTouches:touches]; 
     if ([self acceptTouches:touchLocation]) {
-        NSInteger numberOfTouches = [[touches anyObject] tapCount];
-        CGPoint touchDelta = ccpSub(touchLocation, self.firstTouch);
-        if (abs(touchDelta.y) > 20 || abs(touchDelta.x) > 20) {
-            if (abs(touchDelta.y) > abs(touchDelta.x)) {
-                if (touchDelta.y > 0) {
-                    [self onTouchMoveMapUp];
+        if (!self.pinchDetected) {
+            NSInteger numberOfTaps = [[touches anyObject] tapCount];
+            CGPoint touchDelta = ccpSub(touchLocation, self.firstTouch);
+            if (abs(touchDelta.y) > 20 || abs(touchDelta.x) > 20) {
+                if (abs(touchDelta.y) > abs(touchDelta.x)) {
+                    if (touchDelta.y > 0) {
+                        [self onTouchMoveMapUp];
+                    } else {
+                        [self onTouchMoveMapDown];
+                    }
                 } else {
-                    [self onTouchMoveMapDown];
+                    if (touchDelta.x > 0) {
+                        [self onTouchMoveMapRight];
+                    } else {
+                        [self onTouchMoveMapLeft];
+                    }
                 }
-            } else {
-                if (touchDelta.x > 0) {
-                    [self onTouchMoveMapRight];
-                } else {
-                    [self onTouchMoveMapLeft];
-                }
+            } else if (numberOfTaps == 1) {
+                self.centeringOnSeekerPosition = YES;
+            } else if (numberOfTaps == 2) {
+                self.zoomMap = YES;
             }
-        } else if (numberOfTouches == 1) {
-            self.centeringOnSeekerPosition = YES;
-        } else if (numberOfTouches == 2) {
-            self.zoomMap = YES;
+        } else {
+            self.pinchDetected = NO;
         }
     }
 }    
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+-(void) ccTouchesMoved:(NSSet*)touches withEvent:(UIEvent *)event {
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void) ccTouchesCancelled:(NSSet*)touches withEvent:(UIEvent *)event {
+}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)resetLevel {

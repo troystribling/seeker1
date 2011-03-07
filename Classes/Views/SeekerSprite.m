@@ -174,9 +174,9 @@
     } else {
         self.speed += _deltaSpeed;
     }
-    if (self.speed > kSEEKER_MAX_SPEED) {
+    if (self.speed == kSEEKER_MAX_SPEED) {
         validSpeed = NO;
-    } else if (self.speed < kSEEKER_MIN_SPEED) {
+    } else if (self.speed == kSEEKER_MIN_SPEED) {
         validSpeed = NO;
     }
     return validSpeed;
@@ -186,7 +186,8 @@
 - (void)turnLeft {
     self.bearing = [self leftFromBearing];
     CGFloat speedScale = [UserModel speedScaleFactor];
-    [self runAction:[CCRotateBy actionWithDuration:1.0/speedScale angle:-90.0]];
+    CGFloat duration = kSEEKER_ROTATION_DURATION_PER_QUAD / speedScale;
+    [self runAction:[CCRotateBy actionWithDuration:duration angle:-90.0]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

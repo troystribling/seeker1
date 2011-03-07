@@ -136,14 +136,14 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
     UITouch* touch = [touches anyObject];
-    NSInteger numberOfTouches = [touch tapCount];
+    NSInteger numberOfTaps = [touch tapCount];
     NSInteger touchTag = touch.view.tag;
     switch (touchTag) {
         case kSETTINGS_LAUNCHER_BACK_TAG:
             [self.view removeFromSuperview];
             break;
         default:
-            if (numberOfTouches == 3) {
+            if (numberOfTaps == 3) {
                 if ( self.resetLevelsButton.hidden) {
                     [self showLevelManage];
                 } else {
