@@ -8,12 +8,21 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "StatsViewController.h"
+#import "LevelModel.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kSTATS_LAUNCHER_BACK_TAG     1
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface StatsViewController (PrivateAPI)
+
+- (UIColor*)getColor:(NSInteger)_metric;
+- (void)setLevels;
+- (void)setTotalScore;
+- (void)setCodeScore;
+- (void)setProgress;
+- (void)setPerformance;
+- (void)setExpertise;
 
 @end
 
@@ -32,6 +41,68 @@
 //===================================================================================================================================
 #pragma mark StatsViewController PrivateAPI
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (UIColor*)getColor:(NSInteger)_metric {
+    if (_metric < 75) {
+        return [UIColor colorWithRed:0.8 green:0.2 blue:0.0 alpha:1.0];
+    } else if (_metric < 90) {
+        return [UIColor colorWithRed:1.0 green:1.0 blue:0.0 alpha:1.0];
+    } else {
+        return [UIColor colorWithRed:0.0 green:0.667 blue:0.0 alpha:1.0];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setLevels {
+    NSInteger levels = [LevelModel count];
+    self.totalLevelsLabel.text = [NSString stringWithFormat:@"%d", levels];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setTotalScore {
+    NSInteger totScore = [LevelModel totalScore];
+    NSInteger maxScore =[LevelModel maxScore];
+    NSInteger scoreRatio = (NSInteger)(100.0*(float)totScore/(float)maxScore);
+    self.totalScoreLabel.text = [NSString stringWithFormat:@"%d", totScore];
+    self.totalScoreLabel.textColor = [self getColor:scoreRatio];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setCodeScore {
+    NSInteger cScore = [LevelModel avgCodeScore];
+    self.totalCodeScoreLabel.text = [NSString stringWithFormat:@"%d%%", cScore];
+    self.totalCodeScoreLabel.textColor = [self getColor:cScore];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setProgress {
+    NSInteger totLevels = [LevelModel count];
+    NSInteger progress = (NSInteger)(100.0*(float)totLevels/(float)(kMISSIONS_PER_QUAD*kQUADS_TOTAL));
+    self.progressLabel.text = [NSString stringWithFormat:@"%d%%", progress];
+    self.progressLabel.textColor = [self getColor:progress];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setPerformance {
+    NSInteger totLevels = [LevelModel count];
+    NSInteger compLevels = [LevelModel completedLevels];
+    NSInteger perf = (NSInteger)(100.0*(float)totLevels/(float)compLevels);
+    self.performanceLabel.text = [NSString stringWithFormat:@"%d%%", perf];
+    self.performanceLabel.textColor = [self getColor:perf];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setExpertise {
+    NSInteger totScore = [LevelModel totalScore];
+    NSInteger maxScore =[LevelModel maxScore];
+    NSInteger scoreRatio = (NSInteger)(100.0*(float)totScore/(float)maxScore);
+    NSInteger cScore = [LevelModel avgCodeScore];
+    NSInteger expert = (NSInteger)((float)(cScore + scoreRatio)/2.0);
+    self.expertiseLabel.text = [NSString stringWithFormat:@"%d%%", expert];
+    self.expertiseLabel.textColor = [self getColor:expert];
+}
+
+        
 //===================================================================================================================================
 #pragma mark StatsViewController
 
@@ -61,6 +132,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
+    [self setTotalScore];
+    [self setLevels];
+    [self setCodeScore];
+    [self setProgress];
+    [self setPerformance];
+    [self setExpertise];
 	[super viewWillAppear:animated];
 }
 

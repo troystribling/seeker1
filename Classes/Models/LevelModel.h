@@ -24,6 +24,8 @@
     NSInteger sensorsPlaced;
     NSInteger expectedCodeScore;
     NSInteger codeScore;
+    NSInteger sampleSites;
+    NSInteger sensorSites;
     NSString* errorCode;
     NSString* errorMsg;
 }
@@ -38,11 +40,17 @@
 @property (nonatomic, assign) NSInteger sensorsPlaced;
 @property (nonatomic, assign) NSInteger expectedCodeScore;
 @property (nonatomic, assign) NSInteger codeScore;
+@property (nonatomic, assign) NSInteger sampleSites;
+@property (nonatomic, assign) NSInteger sensorSites;
 @property (nonatomic, assign) NSString* errorCode;
 @property (nonatomic, assign) NSString* errorMsg;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
++ (NSInteger)totalScore;
++ (NSInteger)maxScore;
++ (NSInteger)completedLevels;
++ (NSInteger)avgCodeScore;
 + (void)drop;
 + (void)create;
 + (void)destroyAll;

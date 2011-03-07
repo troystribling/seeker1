@@ -29,6 +29,8 @@
 @synthesize sensorsPlaced;
 @synthesize expectedCodeScore;
 @synthesize codeScore;
+@synthesize sampleSites;
+@synthesize sensorSites;
 @synthesize errorCode;
 @synthesize errorMsg;
 
@@ -41,13 +43,42 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (NSInteger)totalScore {
+	return [[SeekerDbi instance]  selectIntExpression:@"SELECT SUM(score) FROM levels"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSInteger)maxScore {
+	return kPOINTS_PER_OBJECT * [[SeekerDbi instance]  selectIntExpression:@"SELECT SUM(sampleSites + sensorSites) FROM levels"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSInteger)completedLevels {
+	return [[SeekerDbi instance]  selectIntExpression:@"SELECT COUNT(pk) FROM levels WHERE completed = 1"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSInteger)avgCodeScore {
+    NSInteger avgScore = 0;
+    NSInteger cScore = [[SeekerDbi instance]  selectIntExpression:@"SELECT SUM(codeScore) FROM levels"];
+    NSInteger expScore = [[SeekerDbi instance]  selectIntExpression:@"SELECT SUM(expectedCodeScore) FROM levels"];
+    if (cScore > 0) {
+        avgScore = (NSInteger)(100.0*((float)expScore/(float)cScore));
+    }
+    if (avgScore > 100) {
+        avgScore = 100;
+    }
+	return avgScore;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (void)drop {
 	[[SeekerDbi instance]  updateWithStatement:@"DROP TABLE levels"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[SeekerDbi instance]  updateWithStatement:@"CREATE TABLE levels (pk integer primary key, level integer, completed integer, score integer, quadrangle integer, samplesReturned integer, sensorsPlaced integer, expectedCodeScore integer, codeScore integer, errorCode text, errorMsg text)"];
+	[[SeekerDbi instance]  updateWithStatement:@"CREATE TABLE levels (pk integer primary key, level integer, completed integer, score integer, quadrangle integer, samplesReturned integer, sensorsPlaced integer, expectedCodeScore integer, codeScore integer, sampleSites integer, sensorSites integer, errorCode text, errorMsg text)"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -93,8 +124,14 @@
         model = [[[LevelModel alloc] init] autorelease];
         model.level = _level;
         model.quadrangle = model.level / kMISSIONS_PER_QUAD;
-        model.completed = NO;
         model.score = 0;
+        model.samplesReturned = 0;
+        model.sensorsPlaced = 0;
+        model.expectedCodeScore =0;
+        model.completed = NO;
+        model.codeScore = 0;
+        model.sampleSites = 0;
+        model.sensorSites = 0;
         [model insert];
     }
 }
@@ -109,6 +146,8 @@
         model.sensorsPlaced = _seeker.sensorsPlaced;
         model.expectedCodeScore = _seeker.expectedCodeScore;
         model.codeScore = _seeker.codeScore;
+        model.sampleSites = _seeker.sampleSites;
+        model.sensorSites = _seeker.sensorSites;
         [model update];
     }
 }
@@ -123,6 +162,8 @@
         model.sensorsPlaced = _seeker.sensorsPlaced;
         model.expectedCodeScore = _seeker.expectedCodeScore;
         model.codeScore = _seeker.codeScore;
+        model.sampleSites = _seeker.sampleSites;
+        model.sensorSites = _seeker.sensorSites;
         [model update];
     }
 }
@@ -147,8 +188,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
     NSString* insertStatement;
-    insertStatement = [NSString stringWithFormat:@"INSERT INTO levels (level, completed, score, quadrangle, samplesReturned, sensorsPlaced, expectedCodeScore, codeScore, errorCode, errorMsg) values (%d, %d, %d, %d, %d, %d, %d, %d, '%@', '%@')", 
-                        self.level, [self completedAsInteger], self.score, self.quadrangle, self.samplesReturned, self.sensorsPlaced, self.expectedCodeScore, self.codeScore, self.errorCode, self.errorMsg];	
+    insertStatement = [NSString stringWithFormat:@"INSERT INTO levels (level, completed, score, quadrangle, samplesReturned, sensorsPlaced, expectedCodeScore, codeScore, sampleSites, sensorSites, errorCode, errorMsg) values (%d, %d, %d, %d, %d, %d, %d, %d, %d, %d, '%@', '%@')", 
+                        self.level, [self completedAsInteger], self.score, self.quadrangle, self.samplesReturned, self.sensorsPlaced, self.expectedCodeScore, self.codeScore, self.sampleSites, self.sensorSites, self.errorCode, self.errorMsg];	
     [[SeekerDbi instance]  updateWithStatement:insertStatement];
 }
 
@@ -165,8 +206,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
-    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE levels SET level = %d, completed = %d, score = %d, quadrangle = %d, samplesReturned = %d, sensorsPlaced = %d, expectedCodeScore = %d, codeScore = %d, errorCode = '%@', errorMsg = '%@' WHERE pk = %d", self.level, 
-                                    [self completedAsInteger], self.score, self.quadrangle, self.samplesReturned, self.sensorsPlaced, self.expectedCodeScore, self.codeScore, self.errorCode, self.errorMsg, self.pk];
+    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE levels SET level = %d, completed = %d, score = %d, quadrangle = %d, samplesReturned = %d, sensorsPlaced = %d, expectedCodeScore = %d, codeScore = %d, sampleSites = %d, sensorSites = %d, errorCode = '%@', errorMsg = '%@' WHERE pk = %d", self.level, 
+                                    [self completedAsInteger], self.score, self.quadrangle, self.samplesReturned, self.sensorsPlaced, self.expectedCodeScore, self.codeScore, self.sampleSites, self.sensorSites, self.errorCode, self.errorMsg, self.pk];
 	[[SeekerDbi instance]  updateWithStatement:updateStatement];
 }
 
@@ -201,11 +242,13 @@
 	self.sensorsPlaced = (int)sqlite3_column_int(statement, 6);
 	self.expectedCodeScore = (int)sqlite3_column_int(statement, 7);
 	self.codeScore = (int)sqlite3_column_int(statement, 8);
-	const char* errorCodeVal = (const char*)sqlite3_column_text(statement, 9);
+	self.sampleSites = (int)sqlite3_column_int(statement, 9);
+	self.sensorSites = (int)sqlite3_column_int(statement, 10);
+	const char* errorCodeVal = (const char*)sqlite3_column_text(statement, 11);
 	if (errorCodeVal != NULL) {		
 		self.errorCode = [NSString stringWithUTF8String:errorCodeVal];
 	}
-	const char* errorMsgVal = (const char*)sqlite3_column_text(statement, 10);
+	const char* errorMsgVal = (const char*)sqlite3_column_text(statement, 12);
 	if (errorMsgVal != NULL) {		
 		self.errorMsg = [NSString stringWithUTF8String:errorMsgVal];
 	}
