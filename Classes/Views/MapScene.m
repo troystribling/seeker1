@@ -137,6 +137,7 @@
 - (CGPoint)zoomOutScreenCoords:(CGPoint)_screenPoint;
 // utils
 - (BOOL)acceptTouches:(CGPoint)_touchLocation;
+- (float)calculatePinchScaleFromTouches:(NSSet*)touches;
 
 @end
 
@@ -1034,7 +1035,7 @@
     }
     return accept;
 }
-                       
+   
 //===================================================================================================================================
 #pragma mark MapScene
 
@@ -1164,10 +1165,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 -(void) ccTouchesMoved:(NSSet*)touches withEvent:(UIEvent *)event {
+    if (self.pinchDetected) {
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void) ccTouchesCancelled:(NSSet*)touches withEvent:(UIEvent *)event {
+    self.pinchDetected = NO;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
