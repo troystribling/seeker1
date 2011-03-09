@@ -5,55 +5,66 @@
   <tile id="0">
    <properties>
     <property name="mapID" value="empty"/>
+    <property name="mapID" value="empty"/>
    </properties>
   </tile>
   <tile id="1">
    <properties>
+    <property name="mapID" value="down-1"/>
     <property name="mapID" value="down-1"/>
    </properties>
   </tile>
   <tile id="2">
    <properties>
     <property name="mapID" value="down-2"/>
+    <property name="mapID" value="down-2"/>
    </properties>
   </tile>
   <tile id="3">
    <properties>
+    <property name="mapID" value="down-3"/>
     <property name="mapID" value="down-3"/>
    </properties>
   </tile>
   <tile id="4">
    <properties>
     <property name="mapID" value="down-4"/>
+    <property name="mapID" value="down-4"/>
    </properties>
   </tile>
   <tile id="5">
    <properties>
+    <property name="mapID" value="down-5"/>
     <property name="mapID" value="down-5"/>
    </properties>
   </tile>
   <tile id="6">
    <properties>
     <property name="mapID" value="up-1"/>
+    <property name="mapID" value="up-1"/>
    </properties>
   </tile>
   <tile id="7">
    <properties>
+    <property name="mapID" value="up-2"/>
     <property name="mapID" value="up-2"/>
    </properties>
   </tile>
   <tile id="8">
    <properties>
     <property name="mapID" value="up-3"/>
+    <property name="mapID" value="up-3"/>
    </properties>
   </tile>
   <tile id="9">
    <properties>
     <property name="mapID" value="up-4"/>
+    <property name="mapID" value="up-4"/>
    </properties>
   </tile>
   <tile id="10">
    <properties>
+    <property name="mapID" value="up-5"/>
     <property name="mapID" value="up-5"/>
    </properties>
   </tile>
@@ -103,12 +114,12 @@
  </layer>
  <layer name="terrain" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA2NgGAWjYBSMglEwCugHuIGYC0rTCnDR0Gxamz8aPvjBaPjgB6PhgwCcaBgE6BU+hDCl5o6CoQ0ARgNGnoANAAA=
+   H4sIAAAAAAAAA2NgGAWjYBSMglEwCkbBKBgFXDQ0mxtqPjcN7aCl+0fNxw+GevwOdfcPNfMByY/l+IANAAA=
   </data>
  </layer>
  <layer name="items" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA2NgGAWjYBSMglEwCmgDlMhUR6y+gQCD2W3DDRAKayUcbFraOZiAEhqNT81QAfR0L3r4kWO3JBALUsc5WIEmECvS0PxRMDAAAIebKCGADQAA
+   H4sIAAAAAAAAA2NgGAWjYBSMglEwCkbBKBjZQIlGZsIwveykFRhKbqUXwBev+OKdmnZRaiY2c5XQ6MEIJIFYkIbmawKxIg3NBwA9RmrJgA0AAA==
   </data>
  </layer>
  <layer name="sand" width="24" height="36">
@@ -117,7 +128,7 @@
   </data>
  </layer>
  <objectgroup name="objects" width="24" height="36">
-  <object name="startSite" x="210" y="1830">
+  <object name="startSite" x="90" y="2070">
    <properties>
     <property name="bearing" value="east"/>
     <property name="energy" value="500"/>

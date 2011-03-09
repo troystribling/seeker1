@@ -836,7 +836,7 @@
     CCMenuItemSprite* menuItem = [CCMenuItemSprite itemFromNormalSprite:menuImage selectedSprite:menuImage target:self selector:@selector(mapBack)];
     CCMenu* lowerMenu = [CCMenu menuWithItems:menuItem, nil];
     [lowerMenu alignItemsHorizontallyWithPadding:0.0];
-    lowerMenu.position = CGPointMake(53.0f, 15.0f);
+    lowerMenu.position = CGPointMake(self.screenCenter.x, 15.0f);
     [self addChild:lowerMenu];
 }
 

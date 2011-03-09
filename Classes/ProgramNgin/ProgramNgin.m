@@ -369,13 +369,13 @@ static ProgramNgin* thisProgramNgin = nil;
 - (NSMutableArray*)getDoUntilPredicates {
     NSMutableArray* primatives = [NSMutableArray arrayWithCapacity:10];
     [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:PathBlockedPredicateProgramInstruction], nil]];
-    [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:SensorBinEmptyPredicateProgramInstruction], nil]];
-    [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:SampleBinFullPredicateProgramInstruction], nil]];
+    [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:AtSampleProgramInstruction], nil]];
+    [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:AtSensorSiteProgramInstruction], nil]];
     [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:AtStationPredicateProgramInstruction], nil]];
     NSInteger level = [UserModel level];
     if (level >= kLEVEL_FOR_BINS) {
-        [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:AtSampleProgramInstruction], nil]];
-        [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:AtSensorSiteProgramInstruction], nil]];
+        [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:SensorBinEmptyPredicateProgramInstruction], nil]];
+        [primatives addObject:[NSMutableArray arrayWithObjects:[NSNumber numberWithInt:SampleBinFullPredicateProgramInstruction], nil]];
     }
     return primatives;
 }
