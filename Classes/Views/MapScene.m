@@ -47,6 +47,7 @@
 #define kMAP_INVERSE_PAN_SPEED      0.001
 #define kMAP_ZOOM_FACTOR            0.5
 #define kMAP_ZOOM_DURATION          1.0
+#define kMAP_INIT_TRANS_BASE_LENGTH 90.0;
 #define kEND_OF_LEVEL_COUNT         50
 #define kSEEKER_DELTA_ENERGY        2
 #define kSEEKER_DELTA_ENERGY_MIN    1
@@ -58,6 +59,7 @@
 // inialize
 - (void)initLevel;
 - (void)setSeekerStartPosition;
+- (void)intMapZoom;
 - (void)initStatusDisplay;
 - (CCTMXTiledMap*)initMap;
 - (void)centerTileMapOnStartPoint;
@@ -130,9 +132,9 @@
 - (void)centerOnSeekerPosition;
 - (CGFloat)panDuration:(CGPoint)_delta;
 // zoom map
-- (void)onTouchZoomMap;
-- (void)onTouchZoomMapIn;
-- (void)onTouchZoomMapOut;
+- (void)zoomMap;
+- (void)zoomMapIn;
+- (void)zoomMapOut;
 - (CGPoint)zoomInScreenCoords:(CGPoint)_screenPoint;
 - (CGPoint)zoomOutScreenCoords:(CGPoint)_screenPoint;
 // utils
@@ -166,14 +168,15 @@
 @synthesize levelResetSeeker;
 @synthesize levelResetMap;
 @synthesize levelInitSeeker;
+@synthesize levelInitZoom;
 @synthesize levelInitialized;
 @synthesize levelCrash;
 @synthesize levelCompleted;
 @synthesize nextLevel;
 @synthesize movingMapOnTouch;
 @synthesize centeringOnSeekerPosition;
-@synthesize zoomMap;
-@synthesize mapZoomedIn;
+@synthesize zoomingMap;
+@synthesize mapZoomedOut;
 @synthesize checkLevelCompleted;
 @synthesize canTouch;
 @synthesize pinchDetected;
@@ -223,8 +226,18 @@
     CGPoint startPoint = [self getPointFromObjectPropertiesInScreenCoords:self.startSite];
     NSString* bearing = [self.startSite valueForKey:@"bearing"];
     [self.seeker1 setToStartPoint:startPoint withBearing:bearing];
-    self.levelInitialized = YES;
+    self.levelInitZoom = YES;
     [self addChild:self.seeker1 z:0];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)intMapZoom {
+    NSString* zoom = [self.startSite valueForKey:@"zoom"];
+    if ([zoom isEqualToString:@"out"]) {
+        [self zoomMap];
+    }
+    self.levelInitZoom = NO;
+    self.levelInitialized = YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -240,7 +253,9 @@
 - (void)centerTileMapOnStartPoint {
     CGPoint startPoint = [self getPointFromObjectPropertiesInTileCoords:self.startSite];
     CGPoint mapTranslated = [self tileMapTranslatedToPoint:startPoint];
-    [self moveMapTo:mapTranslated withDuration:1.0];
+    CGFloat transDistance = ccpLength(mapTranslated);
+    CGFloat duration = transDistance/kMAP_INIT_TRANS_BASE_LENGTH;
+    [self moveMapTo:mapTranslated withDuration:duration];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -311,7 +326,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGPoint)screenCoordsToTileCoords:(CGPoint)_screenPoint {
     CGPoint tileCoords = ccpSub(_screenPoint, self.tileMap.position);
-    if (self.mapZoomedIn) {
+    if (self.mapZoomedOut) {
         tileCoords = CGPointMake(tileCoords.x / kMAP_ZOOM_FACTOR, tileCoords.y / kMAP_ZOOM_FACTOR);
     }
 	return CGPointMake(tileCoords.x, self.tileMapSize.height - tileCoords.y);
@@ -320,7 +335,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGPoint)tileCoordsToScreenCoords:(CGPoint)_tilePoint {
     CGPoint glCoords = CGPointMake(_tilePoint.x, self.tileMapSize.height - _tilePoint.y);
-    if (self.mapZoomedIn) {
+    if (self.mapZoomedOut) {
         glCoords = CGPointMake(kMAP_ZOOM_FACTOR * glCoords.x, kMAP_ZOOM_FACTOR * glCoords.y);
     }
     return ccpAdd(glCoords, self.tileMap.position);
@@ -336,7 +351,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGPoint)tileMapTranslatedToPoint:(CGPoint)_point {
     CGPoint zCenter = self.screenCenter;
-    if (self.mapZoomedIn) {
+    if (self.mapZoomedOut) {
         zCenter = CGPointMake(zCenter.x / kMAP_ZOOM_FACTOR, zCenter.y / kMAP_ZOOM_FACTOR);
     }
     CGPoint mapTranslated = ccpSub(zCenter, _point);
@@ -361,7 +376,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)shouldMoveMap:(CGPoint)_delta {
     CGSize tileMapTileSize = self.tileMapSize;
-    if (self.mapZoomedIn) {
+    if (self.mapZoomedOut) {
         tileMapTileSize = CGSizeMake(kMAP_ZOOM_FACTOR * tileMapTileSize.width, kMAP_ZOOM_FACTOR * tileMapTileSize.height);
     }        
     CGPoint newMapPosition = ccpAdd(CGPointMake(-_delta.x, -_delta.y), self.tileMap.position);
@@ -752,7 +767,7 @@
 - (void)fadeToRed {
     NSString* seekerName = [NSString stringWithFormat:@"red-seeker-1-%@.png", [self.seeker1 bearingToString]];
     self.crash = [[[CCSprite alloc] initWithFile:seekerName] autorelease]; 
-    if (self.mapZoomedIn) {
+    if (self.mapZoomedOut) {
         self.crash.scale = kMAP_ZOOM_FACTOR;
     } else {
         self.crash.scale = 1.0;
@@ -924,7 +939,7 @@
     CGSize zTileMapSize = self.tileMapSize;
     CGPoint tileMapPosition = self.tileMap.position;
     CGPoint newTileMapPosition = ccpAdd(tileMapPosition, self.onTouchMoveDelta);
-    if (self.mapZoomedIn) {
+    if (self.mapZoomedOut) {
         zTileMapSize = CGSizeMake(kMAP_ZOOM_FACTOR * zTileMapSize.width, kMAP_ZOOM_FACTOR * zTileMapSize.height);
     }        
     CGFloat xPos = MIN(0.0, newTileMapPosition.x);
@@ -969,19 +984,18 @@
 #pragma mark zoom map
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onTouchZoomMap {
-    self.zoomMap = NO;
-    if (self.mapZoomedIn) {
-        self.mapZoomedIn = NO;
-        [self onTouchZoomMapOut];
+- (void)zoomMap {
+    if (self.mapZoomedOut) {
+        self.mapZoomedOut = NO;
+        [self zoomMapOut];
     } else {
-        self.mapZoomedIn = YES;
-        [self onTouchZoomMapIn];
+        self.mapZoomedOut = YES;
+        [self zoomMapIn];
     }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onTouchZoomMapIn {
+- (void)zoomMapIn {
     CGPoint seekerScreenCoords = [self zoomInScreenCoords:self.seeker1.position];
     CGPoint seekerTileCoords = [self screenCoordsToTileCoords:seekerScreenCoords];
     CGPoint mapTranslated = [self tileMapTranslatedToPoint:CGPointMake(seekerTileCoords.x, self.tileMapSize.height - seekerTileCoords.y)];
@@ -994,7 +1008,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onTouchZoomMapOut {
+- (void)zoomMapOut {
     CGPoint seekerScreenCoords = [self zoomOutScreenCoords:self.seeker1.position];
     CGPoint seekerTileCoords = [self screenCoordsToTileCoords:seekerScreenCoords];
     CGPoint mapTranslated = [self tileMapTranslatedToPoint:CGPointMake(seekerTileCoords.x, self.tileMapSize.height - seekerTileCoords.y)];
@@ -1058,14 +1072,15 @@
         self.levelResetSeeker = NO;
         self.levelResetMap = NO;
         self.levelInitSeeker = NO;
+        self.levelInitZoom = NO;
         self.levelInitialized = NO;
         self.levelCrash = NO;
         self.levelCompleted = NO;
         self.nextLevel = NO;
         self.movingMapOnTouch = NO;
         self.centeringOnSeekerPosition = NO;
-        self.mapZoomedIn = NO;
-        self.zoomMap = NO;
+        self.mapZoomedOut = NO;
+        self.zoomingMap = NO;
         self.checkLevelCompleted = NO;
         self.canTouch = NO;
         self.endOfMissionCounter = 0;
@@ -1089,6 +1104,8 @@
         ProgramNgin* ngin = [ProgramNgin instance];
         if (self.levelInitSeeker) {
             [self setSeekerStartPosition];
+        } else if (self.levelInitZoom) {
+            [self intMapZoom];
         } else if (self.levelInitialized) {
             self.canTouch = YES;
             self.levelInitialized = NO;
@@ -1106,8 +1123,9 @@
             self.endOfMissionCounter++;
         } else if (self.movingMapOnTouch) {
             [self onTouchMoveMap];
-        } else if (self.zoomMap) {
-            [self onTouchZoomMap];
+        } else if (self.zoomingMap) {
+            self.zoomingMap = NO;
+            [self zoomMap];
         } else if (self.centeringOnSeekerPosition) {
             [self centerOnSeekerPosition];
         } else if (self.checkLevelCompleted) {
@@ -1155,7 +1173,7 @@
             } else if (numberOfTaps == 1) {
                 self.centeringOnSeekerPosition = YES;
             } else if (numberOfTaps == 2) {
-                self.zoomMap = YES;
+                self.zoomingMap = YES;
             }
         } else {
             self.pinchDetected = NO;
@@ -1213,7 +1231,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGPoint)moveDeltaScreenCoords:(CGPoint)_delta {
-    if (self.mapZoomedIn) {
+    if (self.mapZoomedOut) {
         _delta = CGPointMake(kMAP_ZOOM_FACTOR * _delta.x, kMAP_ZOOM_FACTOR * _delta.y);
     }    
     return _delta;

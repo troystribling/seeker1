@@ -124,6 +124,7 @@
     <property name="energy" value="12"/>
     <property name="sampleSites" value="1"/>
     <property name="sensorSites" value="0"/>
+    <property name="zoom" value="in"/>
    </properties>
   </object>
  </objectgroup>

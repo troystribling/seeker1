@@ -124,6 +124,7 @@
     <property name="expectedCodeScore" value="13"/>
     <property name="sampleSites" value="1"/>
     <property name="sensorSites" value="1"/>
+    <property name="zoom" value="in"/>
    </properties>
   </object>
  </objectgroup>

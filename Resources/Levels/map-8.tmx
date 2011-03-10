@@ -103,7 +103,7 @@
  </layer>
  <layer name="terrain" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3OsQkAAAgEse/cf2MHsLIRhGSBuwQAANiq542Lf6YGqF1scIANAAA=
+   H4sIAAAAAAAAA+3OsQkAAAgEsW/df2EHsLIRhGSBuwQAANiq542Lf6YGxHAco4ANAAA=
   </data>
  </layer>
  <layer name="items" width="24" height="36">
@@ -124,6 +124,7 @@
     <property name="expectedCodeScore" value="4"/>
     <property name="sampleSites" value="0"/>
     <property name="sensorSites" value="1"/>
+    <property name="zoom" value="in"/>
    </properties>
   </object>
  </objectgroup>

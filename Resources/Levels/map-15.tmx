@@ -55,6 +55,7 @@
   <tile id="10">
    <properties>
     <property name="mapID" value="up-5"/>
+    <property name="mapID" value="up-5"/>
    </properties>
   </tile>
  </tileset>
@@ -103,12 +104,12 @@
  </layer>
  <layer name="terrain" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3MsREAAAQAMTX772sCPSdpvvsIAADgoxx65V9DN2sYzrP+gA0AAA==
+   H4sIAAAAAAAAA+3MMREAAAjEMGbw7xcFLwAuWbq1CgAAfurQK/8J5a4FK0f1u4ANAAA=
   </data>
  </layer>
  <layer name="items" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA2NgGAWjYBSMglEwCkbBKBgFo2AUjALqAUkgFoSyhXDQlABNIFakgjkDAQB0muVPgA0AAA==
+   H4sIAAAAAAAAA2NgGAWjYBSMglEwCkbBKBgFo2AUkAIkgVgQyhbCQVMCNIFYkQrmjILBBwCHG/JdgA0AAA==
   </data>
  </layer>
  <layer name="sand" width="24" height="36">
@@ -117,14 +118,16 @@
   </data>
  </layer>
  <objectgroup name="objects" width="24" height="36">
-  <object name="startSite" x="150" y="2010">
+  <object name="startSite" x="150" y="1830">
    <properties>
     <property name="bearing" value="east"/>
     <property name="energy" value="500"/>
     <property name="expectedCodeScore" value="4"/>
     <property name="sampleSites" value="0"/>
     <property name="sensorSites" value="3"/>
-   </properties>
+     <property name="zoom" value="out"/>
+    <property name="zoom" value="out"/>
+  </properties>
   </object>
  </objectgroup>
 </map>

@@ -122,8 +122,9 @@
     <property name="bearing" value="north"/>
     <property name="energy" value="500"/>
     <property name="expectedCodeScore" value="4"/>
-    <property name="sampleSites" value="4"/>
-    <property name="sensorSites" value="4"/>
+    <property name="sampleSites" value="0"/>
+    <property name="sensorSites" value="3"/>
+    <property name="zoom" value="in"/>
    </properties>
   </object>
  </objectgroup>

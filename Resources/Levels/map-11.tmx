@@ -103,12 +103,12 @@
  </layer>
  <layer name="terrain" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3MoQ0AMAwEseBk/30bUFZYPbOlo1cFAACv2frm7//zn/A/IfU/fuPvE4ANAAA=
+   H4sIAAAAAAAAA+3MIQ4AIAwEwWr6//+CwCGbU8wka7cKAOBffVo3f//Jv8P/hPSf1wbXb68ngA0AAA==
   </data>
  </layer>
  <layer name="items" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA2NgGAWjYBSMglEwCkbBKBgFo2AUjIKhASSBWBBNTIiK5msCsSIVzUMHAH4vWGiADQAA
+   H4sIAAAAAAAAA2NgGAWjYBSMglEwCkbBKBgFo2AUDCYgCcSCaGJCVDRfE4gVqWjeKCAeAADEAhKGgA0AAA==
   </data>
  </layer>
  <layer name="sand" width="24" height="36">
@@ -117,13 +117,14 @@
   </data>
  </layer>
  <objectgroup name="objects" width="24" height="36">
-  <object name="startSite" x="90" y="2070">
+  <object name="startSite" x="90" y="1890">
    <properties>
     <property name="bearing" value="east"/>
     <property name="energy" value="500"/>
     <property name="expectedCodeScore" value="4"/>
     <property name="sampleSites" value="0"/>
     <property name="sensorSites" value="1"/>
+    <property name="zoom" value="out"/>
    </properties>
   </object>
  </objectgroup>
