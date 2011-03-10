@@ -323,7 +323,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    NSMutableArray* instructionSet = [self.instructionsList objectAtIndex:indexPath.row];
+    NSMutableArray* instructionSet;
+    if (indexPath.section == 0) {
+        instructionSet = [self.instructionsList objectAtIndex:indexPath.row];
+    } else {
+        instructionSet = [self.subroutinesList objectAtIndex:indexPath.row];
+    }
     return [TerminalCellFactory tableView:tableView heightForRowWithInstructionSet:instructionSet];
 }
 
