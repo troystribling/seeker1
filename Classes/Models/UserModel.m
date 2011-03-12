@@ -219,7 +219,7 @@
     user.timesLoopShown = NO;
     user.untilLoopShown = NO;
     user.roverBinsShown = NO;
-    user.speedScaleFactor = 1.0;
+    user.speedScaleFactor = kSEEKER_MIN_SPEED_SCALE;
     user.audioEnabled = YES;
     [user insert];
 }

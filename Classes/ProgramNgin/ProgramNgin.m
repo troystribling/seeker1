@@ -31,6 +31,7 @@ static ProgramNgin* thisProgramNgin = nil;
 - (NSMutableArray*)getInstructionSet:(MapScene*)_mapScene;
 - (NSMutableArray*)doUntilNextInstruction:(MapScene*)_mapScene forInstructionSet:(NSMutableArray*)_instructionSet;
 - (void)incrementLineCounter:(NSMutableArray*)_instructionSet;
+- (void)resetLineCounter:(NSMutableArray*)_instructionSet;
 // predicates
 - (BOOL)hasItem:(MapScene*)_mapScene withValue:(NSString*)_value;
 - (BOOL)pathBlocked:(MapScene*)_mapScene;
@@ -144,10 +145,10 @@ static ProgramNgin* thisProgramNgin = nil;
     if (_parent) {
         [_instructionSet addObject:_parent];
     } else {
-        [_instructionSet addObject:[NSNumber numberWithInt:0]];
+        [_instructionSet addObject:[NSMutableArray arrayWithCapacity:10]];
     }
     [_program addObject:_instructionSet];
-    [self compileInstructionSet:doInstructionSet forParentInstructionSet:_parent toProgram:doUntilInstructionSets];
+    [self compileInstructionSet:doInstructionSet forParentInstructionSet:_instructionSet toProgram:doUntilInstructionSets];
     [self resetMaxCallStackDepth:[doUntilInstructionSets count]];
 }
 
@@ -209,9 +210,11 @@ static ProgramNgin* thisProgramNgin = nil;
             break;
     }
     NSMutableArray* parent = [_instructionSet objectAtIndex:5];
-    if (!predicateTrue) {
+    NSInteger doInstructionLines = [[_instructionSet objectAtIndex:3] count];
+    NSInteger doInstructionLine = [[_instructionSet objectAtIndex:4] intValue];
+    NSInteger parentCount = [parent count];
+    if (!predicateTrue || doInstructionLines != (doInstructionLine + 1)) {
         NSMutableArray* doInstructionProgram = [_instructionSet objectAtIndex:3];
-        NSInteger doInstructionLine = [[_instructionSet objectAtIndex:4] intValue];
         NSMutableArray* doInstructionSet = [doInstructionProgram objectAtIndex:doInstructionLine];
         ProgramInstruction doInstruction = [[doInstructionSet objectAtIndex:0] intValue];
         switch (doInstruction) {
@@ -229,10 +232,11 @@ static ProgramNgin* thisProgramNgin = nil;
                 break;
         }
     } else {
-        if ([parent isKindOfClass:[NSMutableArray class]]) {
+        if (parentCount > 0) {
             [self incrementLineCounter:parent];
         } else {
-            self.codeLine++;
+            [self resetLineCounter:_instructionSet];
+            self.codeLine++;            
         }
         if (self.callStackDepth < self.maxCallStackDepth) {
             self.callStackDepth++;
@@ -250,7 +254,16 @@ static ProgramNgin* thisProgramNgin = nil;
     if (instructionLine >= instructionLines) {
         instructionLine = 0;
     }
+    NSMutableArray* parent = [_instructionSet objectAtIndex:5];
     [_instructionSet insertObject:[NSNumber numberWithInt:instructionLine] atIndex:4];
+    [_instructionSet insertObject:parent atIndex:5];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)resetLineCounter:(NSMutableArray*)_instructionSet {
+    NSMutableArray* parent = [_instructionSet objectAtIndex:5];
+    [_instructionSet insertObject:[NSNumber numberWithInt:0] atIndex:4];
+    [_instructionSet insertObject:parent atIndex:5];
 }
 
 //===================================================================================================================================
