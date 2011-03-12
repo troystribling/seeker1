@@ -301,6 +301,8 @@
     NSString* bearing = [self.startSite valueForKey:@"bearing"];
     [self.seeker1 resetToStartPoint:startPoint withBearing:bearing];
     [self addChild:self.seeker1];
+    self.mapZoomedOut = NO;
+    self.levelInitZoom = YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -987,15 +989,15 @@
 - (void)zoomMap {
     if (self.mapZoomedOut) {
         self.mapZoomedOut = NO;
-        [self zoomMapOut];
+        [self zoomMapIn];
     } else {
         self.mapZoomedOut = YES;
-        [self zoomMapIn];
+        [self zoomMapOut];
     }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)zoomMapIn {
+- (void)zoomMapOut {
     CGPoint seekerScreenCoords = [self zoomInScreenCoords:self.seeker1.position];
     CGPoint seekerTileCoords = [self screenCoordsToTileCoords:seekerScreenCoords];
     CGPoint mapTranslated = [self tileMapTranslatedToPoint:CGPointMake(seekerTileCoords.x, self.tileMapSize.height - seekerTileCoords.y)];
@@ -1008,7 +1010,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)zoomMapOut {
+- (void)zoomMapIn {
     CGPoint seekerScreenCoords = [self zoomOutScreenCoords:self.seeker1.position];
     CGPoint seekerTileCoords = [self screenCoordsToTileCoords:seekerScreenCoords];
     CGPoint mapTranslated = [self tileMapTranslatedToPoint:CGPointMake(seekerTileCoords.x, self.tileMapSize.height - seekerTileCoords.y)];

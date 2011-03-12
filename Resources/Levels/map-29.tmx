@@ -103,7 +103,7 @@
  </layer>
  <layer name="terrain" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA+3NMQoAQAgDQVv1//+1uebSBxR2YCvBRAAAAOCSlPTm3r6uzP/bvNGvrUrCbwD6T2MQgA0AAA==
+   H4sIAAAAAAAAA+3NIQoAMAxD0dq197/vKmoaP1jgP/gqIhEAAABwciTdXn87qy7NP2r6VUrYLvgnp9yADQAA
   </data>
  </layer>
  <layer name="items" width="24" height="36">
