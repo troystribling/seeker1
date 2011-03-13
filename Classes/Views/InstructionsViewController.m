@@ -131,33 +131,34 @@
 - (void)viewWillAppear:(BOOL)animated {
     self.addSubroutineImageView.hidden = YES;
     [self.subroutinesList removeAllObjects];
+    NSInteger level = [UserModel level];
     switch (self.instructionType) {
         case TerminalPrimitiveInstructionType:
             self.instructionsList = [[ProgramNgin instance] getPrimitiveInstructions];
-            if ([UserModel level] >= kLEVEL_FOR_SUBROUTINES) {
-                self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAll]];
+            if (level >= kLEVEL_FOR_SUBROUTINES) {
+                self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAll] forLevel:level];
             }
             break;
         case SubroutinePrimitiveInstructionType:
             self.instructionsList = [[ProgramNgin instance] getPrimitiveInstructions];
-            self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAllButName:self.selectedSubroutineName]];
+            self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAllByName:self.selectedSubroutineName] forLevel:level];
             break;
         case TerminalDoTimesInstructionType:
         case SubroutineDoTimesInstructionType:
             self.instructionsList = [[ProgramNgin instance] getDoInstructions];
-            self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAll]];
+            self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAll] forLevel:level];
             break;
         case TerminalDoUntilInstructionType:
         case SubroutineDoUntilInstructionType:
             self.instructionsList = [[ProgramNgin instance] getDoInstructions];
-            self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAll]];
+            self.subroutinesList = [SubroutineModel modelsToInstructions:[SubroutineModel findAll] forLevel:level];
             break;
         case TerminalDoUntilPredicateInstructionType:
         case SubroutineDoUntilPredicateInstructionType:
             self.instructionsList = [[ProgramNgin instance] getDoUntilPredicates];
             break;
         case SubroutineInstructionType:
-            self.instructionsList = [SubroutineModel modelsToInstructions:[SubroutineModel findAll]];
+            self.instructionsList = [SubroutineModel modelsToInstructions:[SubroutineModel findAll] forLevel:level];
             self.addSubroutineImageView.hidden = NO;
             break;            
         default:

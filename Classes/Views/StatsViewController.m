@@ -87,8 +87,8 @@
     NSInteger totLevels = [LevelModel count];
     NSInteger compLevels = [LevelModel completedLevels];
     NSInteger perf = 0;
-    if (compLevels > 0) {
-        perf = (NSInteger)(100.0*(float)totLevels/(float)compLevels);
+    if (totLevels > 0) {
+        perf = (NSInteger)(100.0*(float)compLevels/(float)totLevels);
     }
     self.performanceLabel.text = [NSString stringWithFormat:@"%d%%", perf];
     self.performanceLabel.textColor = [self getColor:perf];

@@ -48,8 +48,10 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
 + (NSInteger)totalScore;
++ (NSInteger)totalScoreByQudrangle:(NSInteger)_quad;
 + (NSInteger)maxScore;
 + (NSInteger)completedLevels;
++ (NSInteger)completedLevelsByQudrangle:(NSInteger)_quad;
 + (NSInteger)avgCodeScore;
 + (void)drop;
 + (void)create;

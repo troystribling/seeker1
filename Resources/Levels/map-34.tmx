@@ -108,7 +108,7 @@
  </layer>
  <layer name="items" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA2NgGAWjYBSMglEwCkbBKBh5QIhIsZEKhLCw6RE+9IoDSu2hZ5jQwx5086llHy3SkSQQC1JoBj6gCcSKNDQfALH9PdGADQAA
+   H4sIAAAAAAAAA2NgGAWjYBSMglEwCkbBKBh5QIhIsZEKhHCw6WkvLc2n1B5C5lDbH/QKF1rZR61wBwFJIBakgjm4gCYQK9LQfACz2oXwgA0AAA==
   </data>
  </layer>
  <layer name="sand" width="24" height="36">

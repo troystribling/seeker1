@@ -48,6 +48,12 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (NSInteger)totalScoreByQudrangle:(NSInteger)_quad {
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT SUM(score) FROM levels WHERE quadrangle = %d", _quad];
+	return [[SeekerDbi instance]  selectIntExpression:selectStatement];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)maxScore {
 	return kPOINTS_PER_OBJECT * [[SeekerDbi instance]  selectIntExpression:@"SELECT SUM(sampleSites + sensorSites) FROM levels"];
 }
@@ -55,6 +61,12 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)completedLevels {
 	return [[SeekerDbi instance]  selectIntExpression:@"SELECT COUNT(pk) FROM levels WHERE completed = 1"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSInteger)completedLevelsByQudrangle:(NSInteger)_quad {
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT COUNT(pk) FROM levels WHERE completed = 1 AND quadrangle = %d", _quad];
+	return [[SeekerDbi instance]  selectIntExpression:selectStatement];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

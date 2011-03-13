@@ -16,7 +16,7 @@
 #import "MissionsScene.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define kQUAD_IMAGE_YDELTA  75.0f
+#define kQUAD_IMAGE_YDELTA  80.0f
 #define kQUAD_IMAGE_XDELTA  -7.5f
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -24,6 +24,7 @@
 
 - (void)initQuads;
 - (BOOL)displayedQuadIsUnlocked;
+- (void)fowardQuadsToDisplayedQuad;
 - (void)fowardQuads;
 - (void)backwardQuads;
 - (void)shiftQuadsForward;
@@ -52,6 +53,7 @@
 @synthesize screenCenter;
 @synthesize firstTouch;
 @synthesize setTitle;
+@synthesize runningActions;
 
 //===================================================================================================================================
 #pragma mark QuadsScene PrivateAPI
@@ -61,19 +63,19 @@
     NSInteger quadsUnlocked = [self quadsUnlockedCount];
     CGFloat quadShiftDelta = self.tharsisSprite.contentSize.height + kQUAD_IMAGE_YDELTA;
     
-    self.displayedQuad = TharsisQuadType;
+    self.displayedQuad = [UserModel quadrangle];
     self.tharsisSprite.position = CGPointMake(self.screenCenter.x + kQUAD_IMAGE_XDELTA, self.screenCenter.y);
     [self addChild:self.tharsisSprite z:-1];
 
     if (quadsUnlocked >= 1) {
         self.memnoniaSprite = [[[CCSprite alloc] initWithFile:@"memnonia.png"] autorelease];
-        [self addQuadStats:TharsisQuadType toSprite:self.memnoniaSprite];
+        [self addQuadStats:MemnoniaQuadType toSprite:self.memnoniaSprite];
     } else {
         self.memnoniaSprite = [[[CCSprite alloc] initWithFile:@"memnonia-locked.png"] autorelease];
     }
     if (quadsUnlocked >= 2) {
         self.elysiumSprite = [[[CCSprite alloc] initWithFile:@"elysium.png"] autorelease];
-        [self addQuadStats:TharsisQuadType toSprite:self.elysiumSprite];
+        [self addQuadStats:ElysiumQuadType toSprite:self.elysiumSprite];
     } else {
         self.elysiumSprite = [[[CCSprite alloc] initWithFile:@"elysium-locked.png"] autorelease];
     }    
@@ -87,6 +89,8 @@
     nextPosition = CGPointMake(self.screenCenter.x + kQUAD_IMAGE_XDELTA, self.screenCenter.y - 2 * quadShiftDelta);
     self.elysiumSprite.position = nextPosition;
     [self addChild:self.elysiumSprite z:-1];
+    
+    [self fowardQuadsToDisplayedQuad];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -98,6 +102,14 @@
         return NO;
     }
 
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)fowardQuadsToDisplayedQuad {
+    if (self.displayedQuad > 0) {
+        CGFloat quadShiftDelta = self.displayedQuad * (self.tharsisSprite.contentSize.height + kQUAD_IMAGE_YDELTA);
+        [self moveQuadsBy:quadShiftDelta withDuration:self.displayedQuad*0.2];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -174,23 +186,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)percentComplete:(NSInteger)_quad {
-    NSInteger completedLevels = 0;
-    NSMutableArray* levels = [LevelModel findAllByQudrangle:_quad];
-    for (LevelModel* level in levels) {
-        if (level.completed) {
-            completedLevels++;
-        }
-    }
-    return 100.0 * ((float)completedLevels/(float)kMISSIONS_PER_QUAD);
+    NSInteger completedLevels = [LevelModel completedLevelsByQudrangle:_quad];
+    return 100.0*((float)completedLevels/(float)kMISSIONS_PER_QUAD);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)totalScore:(NSInteger)_quad {
-    NSInteger score = 0;
-    NSMutableArray* levels = [LevelModel findAllByQudrangle:_quad];
-    for (LevelModel* level in levels) {
-        score += level.score;
-    }
+    NSInteger score = [LevelModel totalScoreByQudrangle:_quad];
     return score;
 }
 
@@ -200,17 +202,17 @@
     NSInteger score = [self totalScore:_quad];
     CGSize spriteSize = _sprite.contentSize;
 
-    CCLabel* scoreLable = [CCLabel labelWithString:[NSString stringWithFormat:@"Score:     %d", score] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_MISSION];
-    scoreLable.anchorPoint = CGPointMake(0.0, 0.0);
-    scoreLable.position = CGPointMake(0.115*spriteSize.width, -0.05*spriteSize.height);
-    scoreLable.color = kCCLABEL_FONT_COLOR; 
-    [_sprite addChild:scoreLable];
-
     CCLabel* perCompLable = [CCLabel labelWithString:[NSString stringWithFormat:@"Completed: %d%%", perComp] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_MISSION];
     perCompLable.anchorPoint = CGPointMake(0.0, 0.0);
-    perCompLable.position = CGPointMake(0.115*spriteSize.width, -0.1*spriteSize.height);
+    perCompLable.position = CGPointMake(0.115*spriteSize.width, -0.065*spriteSize.height);
     perCompLable.color = kCCLABEL_FONT_COLOR; 
     [_sprite addChild:perCompLable];
+
+    CCLabel* scoreLable = [CCLabel labelWithString:[NSString stringWithFormat:@"Score:     %d", score] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_MISSION];
+    scoreLable.anchorPoint = CGPointMake(0.0, 0.0);
+    scoreLable.position = CGPointMake(0.115*spriteSize.width, -0.12*spriteSize.height);
+    scoreLable.color = kCCLABEL_FONT_COLOR; 
+    [_sprite addChild:scoreLable];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -262,6 +264,7 @@
         [self initQuads];
         [self addTitle];
         self.setTitle = NO;
+        self.runningActions = 0;
         [self schedule:@selector(nextFrame:)];
         self.navigationDisplay = [NavigationDisplay createWithTarget:self andSelector:@selector(backNavigation)];
         [self.navigationDisplay insert:self];
@@ -271,10 +274,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void) nextFrame:(ccTime)dt {
-    NSInteger runningActions = [self.tharsisSprite numberOfRunningActions];
-    runningActions += [self.elysiumSprite numberOfRunningActions];
-    runningActions += [self.memnoniaSprite numberOfRunningActions];
-	if (runningActions == 0) {
+    self.runningActions = [self.tharsisSprite numberOfRunningActions];
+    self.runningActions += [self.elysiumSprite numberOfRunningActions];
+    self.runningActions += [self.memnoniaSprite numberOfRunningActions];
+	if (self.runningActions == 0) {
         if (self.setTitle) {
             [self addTitle];
             self.setTitle = NO;
@@ -284,26 +287,30 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 -(void) ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent *)event {
-	self.firstTouch = [TouchUtils locationFromTouches:touches]; 
+    if (self.runningActions == 0) {
+        self.firstTouch = [TouchUtils locationFromTouches:touches]; 
+    }
 }    
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 -(void) ccTouchesEnded:(NSSet*)touches withEvent:(UIEvent *)event {
-	CGPoint touchLocation = [TouchUtils locationFromTouches:touches];
-    CGPoint touchDelta = ccpSub(touchLocation, self.firstTouch);
-    if (abs(touchDelta.y) < 20) {
-        if ([self displayedQuadIsUnlocked]) {
-            [UserModel setQuadrangle:self.displayedQuad];
-            [[CCDirector sharedDirector] replaceScene:[MissionsScene scene]];
+    if (self.runningActions == 0) {
+        CGPoint touchLocation = [TouchUtils locationFromTouches:touches];
+        CGPoint touchDelta = ccpSub(touchLocation, self.firstTouch);
+        if (abs(touchDelta.y) < 30) {
+            if ([self displayedQuadIsUnlocked]) {
+                [UserModel setQuadrangle:self.displayedQuad];
+                [[CCDirector sharedDirector] replaceScene:[MissionsScene scene]];
+            }
+        } else if (touchDelta.y < 0) {
+            [self.titleLabel removeFromParentAndCleanup:YES];
+            [self backwardQuads];
+            self.setTitle = YES;
+        } else {
+            [self.titleLabel removeFromParentAndCleanup:YES];
+            [self fowardQuads];
+            self.setTitle = YES;
         }
-    } else if (touchDelta.y < 0) {
-        [self.titleLabel removeFromParentAndCleanup:YES];
-        [self backwardQuads];
-        self.setTitle = YES;
-    } else {
-        [self.titleLabel removeFromParentAndCleanup:YES];
-        [self fowardQuads];
-        self.setTitle = YES;
     }
 }    
 

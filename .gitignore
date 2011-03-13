@@ -1,5 +1,6 @@
 build/*
 *.pbxuser
+*.xcuserstate
 *.perspectivev3
 .DS_Store
 .svn

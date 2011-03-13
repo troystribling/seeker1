@@ -74,6 +74,8 @@
 - (CGPoint)tileCoordsToScreenCoords:(CGPoint)_tilePoint;
 - (CGPoint)tileCoordsToTile:(CGPoint)point;
 - (CGPoint)tileMapTranslatedToPoint:(CGPoint)_point;
+- (CGPoint)moveDeltaScreenCoords:(CGPoint)_delta;
+- (CGPoint)moveDeltaTileCoords;
 // program instructions
 - (BOOL)shouldMoveMap:(CGPoint)_delta;
 - (BOOL)moveIsInPlayingAreaForDelta:(CGPoint)_delta;
@@ -371,28 +373,51 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (CGPoint)moveDeltaTileCoords {
+    CGSize moveSize = self.tileMap.tileSize;
+    return [self.seeker1 positionDeltaAlongBearing:moveSize];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGPoint)moveDeltaScreenCoords:(CGPoint)_delta {
+    if (self.mapZoomedOut) {
+        _delta = CGPointMake(kMAP_ZOOM_FACTOR * _delta.x, kMAP_ZOOM_FACTOR * _delta.y);
+    }    
+    return _delta;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 // program instructions
 //-----------------------------------------------------------------------------------------------------------------------------------
 #pragma mark program instructions
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)shouldMoveMap:(CGPoint)_delta {
+- (BOOL)shouldMoveMap:(CGPoint)_deltaTileCoords {
     CGSize tileMapTileSize = self.tileMapSize;
-    if (self.mapZoomedOut) {
-        tileMapTileSize = CGSizeMake(kMAP_ZOOM_FACTOR * tileMapTileSize.width, kMAP_ZOOM_FACTOR * tileMapTileSize.height);
-    }        
-    CGPoint newMapPosition = ccpAdd(CGPointMake(-_delta.x, -_delta.y), self.tileMap.position);
-    CGPoint newSeekerTilePosition = ccpAdd([self screenCoordsToTileCoords:self.seeker1.position], CGPointMake(_delta.x, -_delta.y));
+    CGPoint deltaScreenCoords = [self moveDeltaScreenCoords:_deltaTileCoords];
+    CGPoint newMapPosition = ccpAdd(CGPointMake(-deltaScreenCoords.x, -deltaScreenCoords.y), self.tileMap.position);
+    CGPoint seekerTileCoords = [self screenCoordsToTileCoords:self.seeker1.position];
+    CGPoint newSeekerTilePosition = ccpAdd(seekerTileCoords, CGPointMake(_deltaTileCoords.x, -_deltaTileCoords.y));
     CGPoint newSeekerScreenPosition = [self tileCoordsToScreenCoords:newSeekerTilePosition];
-    CGPoint center = self.screenCenter;
+    CGPoint centerScreenCoords = self.screenCenter;
+    CGPoint centerEastTileCoords = self.screenCenter;
+    CGPoint centerWestTileCoords = self.screenCenter;
+    CGPoint centerNorthTileCoords = self.screenCenter;
+    CGPoint centerSouthTileCoords = self.screenCenter;
+    if (self.mapZoomedOut) {
+        centerEastTileCoords = CGPointMake((centerEastTileCoords.x + 6.0) / kMAP_ZOOM_FACTOR, centerEastTileCoords.y / kMAP_ZOOM_FACTOR);
+        centerNorthTileCoords = CGPointMake(centerNorthTileCoords.x / kMAP_ZOOM_FACTOR, (centerNorthTileCoords.y - 20.0) / kMAP_ZOOM_FACTOR);
+        centerWestTileCoords = CGPointMake(centerWestTileCoords.x / kMAP_ZOOM_FACTOR, centerWestTileCoords.y / kMAP_ZOOM_FACTOR);
+        centerSouthTileCoords = CGPointMake(centerSouthTileCoords.x / kMAP_ZOOM_FACTOR, centerSouthTileCoords.y / kMAP_ZOOM_FACTOR);
+    }
     if (self.seeker1.bearing == WestSeekerBearing) {
          if (newMapPosition.x > 0) {
              return NO;
          } else if ((newMapPosition.x + tileMapTileSize.width) < 0) {
              return NO;
-         } else if ((newSeekerTilePosition.x - center.x) <= 0) {
+         } else if ((newSeekerTilePosition.x - centerWestTileCoords.x) <= 0) {
              return NO;
-         } else if ((center.x - newSeekerScreenPosition.x) <= 0) {
+         } else if ((centerScreenCoords.x - newSeekerScreenPosition.x) <= 0) {
              return NO;
          }
      } else if (self.seeker1.bearing == EastSeekerBearing) {
@@ -400,9 +425,9 @@
              return NO;
          } else if ((newMapPosition.x + tileMapTileSize.width) < 0) {
              return NO;
-         } else if ((tileMapTileSize.width - newSeekerTilePosition.x - center.x) <= 0) {
+         } else if ((tileMapTileSize.width - newSeekerTilePosition.x - centerEastTileCoords.x) <= 0) {
              return NO;
-         } else if ((newSeekerScreenPosition.x - center.x) <= 0) {
+         } else if ((newSeekerScreenPosition.x - centerScreenCoords.x) <= 0) {
              return NO;
          }
      } else if (self.seeker1.bearing == NorthSeekerBearing) {
@@ -410,9 +435,9 @@
              return NO;
          } else if ((newMapPosition.y + tileMapTileSize.height) < 0) {
              return NO;
-         } else if ((newSeekerTilePosition.y - center.y) <= 0) {
+         } else if ((newSeekerTilePosition.y - centerNorthTileCoords.y) <= 0) {
              return NO;
-         } else if ((newSeekerScreenPosition.y - center.y) <= 0) {
+         } else if ((newSeekerScreenPosition.y - centerScreenCoords.y) <= 0) {
              return NO;
          }
      } else if (self.seeker1.bearing == SouthSeekerBearing) {
@@ -420,9 +445,9 @@
              return NO;
          } else if ((newMapPosition.y + tileMapTileSize.height) < 0) {
              return NO;
-         } else if ((tileMapTileSize.height - newSeekerTilePosition.y - center.y) <= 0) {
+         } else if ((tileMapTileSize.height - newSeekerTilePosition.y - centerSouthTileCoords.y) <= 0) {
              return NO;
-         } else if ((center.y - newSeekerScreenPosition.y) <= 0) {
+         } else if ((centerScreenCoords.y - newSeekerScreenPosition.y) <= 0) {
              return NO;
          }
     }
@@ -1223,20 +1248,6 @@
         return NO;
     }
     return YES;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (CGPoint)moveDeltaTileCoords {
-    CGSize moveSize = self.tileMap.tileSize;
-    return [self.seeker1 positionDeltaAlongBearing:moveSize];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (CGPoint)moveDeltaScreenCoords:(CGPoint)_delta {
-    if (self.mapZoomedOut) {
-        _delta = CGPointMake(kMAP_ZOOM_FACTOR * _delta.x, kMAP_ZOOM_FACTOR * _delta.y);
-    }    
-    return _delta;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

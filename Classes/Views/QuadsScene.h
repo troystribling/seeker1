@@ -31,6 +31,7 @@ typedef enum tagQuadType {
     CGPoint screenCenter;
     CGPoint firstTouch;
     BOOL setTitle;
+    NSInteger runningActions;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -43,6 +44,7 @@ typedef enum tagQuadType {
 @property (nonatomic, assign) CGPoint screenCenter;
 @property (nonatomic, assign) CGPoint firstTouch;
 @property (nonatomic, assign) BOOL setTitle;
+@property (nonatomic, assign) NSInteger runningActions;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)scene;

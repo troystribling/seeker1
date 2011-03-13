@@ -94,7 +94,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSMutableArray*)findAllButName:(NSString*)_subroutineName {
++ (NSMutableArray*)findAllByName:(NSString*)_subroutineName {
 	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM subroutines WHERE subroutineName <> '%@'", _subroutineName];
     NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
     [[SeekerDbi instance] selectAllForModel:[SubroutineModel class] withStatement:selectStatement andOutputTo:output];
@@ -102,10 +102,18 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSMutableArray*)modelsToInstructions:(NSMutableArray*)_models {
++ (NSMutableArray*)modelsToInstructions:(NSMutableArray*)_models forLevel:(NSInteger)_level {
 	NSMutableArray* instructionSets = [NSMutableArray arrayWithCapacity:10];
 	for (SubroutineModel* model in _models) {
-        [instructionSets addObject:[NSArray arrayWithObjects:[NSNumber numberWithInt:SubroutineProgramInstruction], model.subroutineName, nil]];
+        if ([model.subroutineName hasPrefix:@"lvl-"]) {
+            NSString* levelPrefix = [NSString stringWithFormat:@"lvl-%d", _level];
+            if ([model.subroutineName hasPrefix:levelPrefix]) {
+                [instructionSets addObject:[NSArray arrayWithObjects:[NSNumber numberWithInt:SubroutineProgramInstruction], model.subroutineName, nil]];
+            }
+                
+        } else {
+            [instructionSets addObject:[NSArray arrayWithObjects:[NSNumber numberWithInt:SubroutineProgramInstruction], model.subroutineName, nil]];
+        }
     }
     return instructionSets;
 }

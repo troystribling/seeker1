@@ -33,8 +33,8 @@
 + (void)destroyAll;
 + (SubroutineModel*)findByName:(NSString*)_subroutineName;
 + (NSMutableArray*)findAll;
-+ (NSMutableArray*)findAllButName:(NSString*)_subroutineName;
-+ (NSMutableArray*)modelsToInstructions:(NSMutableArray*)_models;
++ (NSMutableArray*)findAllByName:(NSString*)_subroutineName;
++ (NSMutableArray*)modelsToInstructions:(NSMutableArray*)_models forLevel:(NSInteger)_level;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;
