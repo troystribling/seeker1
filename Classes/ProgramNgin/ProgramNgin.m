@@ -394,11 +394,6 @@ static ProgramNgin* thisProgramNgin = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSMutableArray*)getSubroutines {
-    return [SubroutineModel modelsToInstructions:[SubroutineModel findAll]];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (NSString*)instructionToString:(ProgramInstruction)_instruction {
     NSString* instructionString = nil;
     switch (_instruction) {
