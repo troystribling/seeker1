@@ -28,7 +28,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize speedSlider;
-@synthesize audioSwitch;
+@synthesize audioButton;
 @synthesize resetLevelsButton;
 @synthesize enableLevelsButton;
 @synthesize containerView;
@@ -79,9 +79,14 @@
 }  
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (IBAction)soundValueChanged:(UISwitch*)sender { 
-    BOOL audioOn = sender.on;
-    [UserModel setAudioEnabled:audioOn];
+- (IBAction)audioButtonPushed:(UIButton*)sender { 
+    if ([UserModel audioEnabled]) {
+        [UserModel setAudioEnabled:NO];
+        self.audioButton.selected = NO;
+    } else {
+        [UserModel setAudioEnabled:YES];
+        self.audioButton.selected = YES;
+    }
 }  
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -110,7 +115,11 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
     self.speedSlider.value = ((float)[UserModel speedScaleFactor] - kSEEKER_MIN_SPEED_SCALE)/kSEEKER_DELTA_SPEED_SCALE;
-    self.audioSwitch.on = [UserModel audioEnabled];
+    if ([UserModel audioEnabled]) {
+        self.audioButton.selected = YES;
+    } else {
+        self.audioButton.selected = NO;
+    }
     [self hideLevelManage];
 	[super viewWillAppear:animated];
 }

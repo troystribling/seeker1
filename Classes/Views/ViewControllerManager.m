@@ -349,7 +349,6 @@ static ViewControllerManager* thisViewControllerManager = nil;
         self.statsViewController = [StatsViewController inView:_containerView];
     } 
     [_containerView addSubview:self.statsViewController.view];
-    [self settingsViewWillAppear];
     return self.statsViewController;
 }
 
@@ -379,7 +378,6 @@ static ViewControllerManager* thisViewControllerManager = nil;
         self.settingsViewController = [SettingsViewController inView:_containerView];
     } 
     [_containerView addSubview:self.settingsViewController.view];
-    [self settingsViewWillAppear];
     return self.settingsViewController;
 }
 
