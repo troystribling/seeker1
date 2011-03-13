@@ -407,8 +407,8 @@
     if (self.mapZoomedOut) {
         centerEastTileCoords = CGPointMake((centerEastTileCoords.x + 6.0) / kMAP_ZOOM_FACTOR, centerEastTileCoords.y / kMAP_ZOOM_FACTOR);
         centerNorthTileCoords = CGPointMake(centerNorthTileCoords.x / kMAP_ZOOM_FACTOR, (centerNorthTileCoords.y - 20.0) / kMAP_ZOOM_FACTOR);
-        centerWestTileCoords = CGPointMake(centerWestTileCoords.x / kMAP_ZOOM_FACTOR, centerWestTileCoords.y / kMAP_ZOOM_FACTOR);
-        centerSouthTileCoords = CGPointMake(centerSouthTileCoords.x / kMAP_ZOOM_FACTOR, centerSouthTileCoords.y / kMAP_ZOOM_FACTOR);
+        centerWestTileCoords = CGPointMake((centerWestTileCoords.x - 30.0) / kMAP_ZOOM_FACTOR, centerWestTileCoords.y / kMAP_ZOOM_FACTOR);
+        centerSouthTileCoords = CGPointMake(centerSouthTileCoords.x / kMAP_ZOOM_FACTOR, (centerSouthTileCoords.y - 30.0) / kMAP_ZOOM_FACTOR);
     }
     if (self.seeker1.bearing == WestSeekerBearing) {
          if (newMapPosition.x > 0) {

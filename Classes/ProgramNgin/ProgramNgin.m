@@ -213,7 +213,7 @@ static ProgramNgin* thisProgramNgin = nil;
     NSInteger doInstructionLines = [[_instructionSet objectAtIndex:3] count];
     NSInteger doInstructionLine = [[_instructionSet objectAtIndex:4] intValue];
     NSInteger parentCount = [parent count];
-    if (!predicateTrue || doInstructionLines != (doInstructionLine + 1)) {
+    if (!predicateTrue || (doInstructionLines != (doInstructionLine + 1) && doInstructionLine != 0)) {
         NSMutableArray* doInstructionProgram = [_instructionSet objectAtIndex:3];
         NSMutableArray* doInstructionSet = [doInstructionProgram objectAtIndex:doInstructionLine];
         ProgramInstruction doInstruction = [[doInstructionSet objectAtIndex:0] intValue];
