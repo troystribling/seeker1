@@ -20,6 +20,7 @@
 #define kDOTIMES_INSTRUCTION_MAX_WIDTH          187
 #define kDOTIMES_INSTRUCTION_EDIT_MAX_WIDTH     106
 #define kDOTIMES_NUMBER_MAX_WIDTH               107
+#define kDOTIMES_NUMBER_MIN_WIDTH               30
 #define kDOTIMES_NUMBER_EDIT_MAX_WIDTH          46
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -74,7 +75,8 @@
     NSString* numberString = [NSString stringWithFormat:@"%d", [[self.instructionSet objectAtIndex:2] intValue]];
     CGSize numberSize = [self itemSize:numberString];
     CGRect numberRect = self.numberLabel.frame; 
-    numberRect.size.width = MIN(numberSize.width, _maxNumberWidth);    
+    numberRect.size.width = MAX(numberSize.width, kDOTIMES_NUMBER_MIN_WIDTH);    
+    numberRect.size.width = MIN(numberRect.size.width, _maxNumberWidth);    
 
     // get bracket and times rect
     CGRect timesClosingBracketRect = self.timesClosingBracketLabel.frame;

@@ -17,8 +17,9 @@
 #import "ProgramNgin.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define kMISSION_COLUMN_ADJUST  35.0
+#define kMISSION_COLUMN_ADJUST  45.0
 #define kMISSION_ROW_ADJUST     20.0
+#define kMISSION_YOFFSET        10.0
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MissionsScene (PrivateAPI)
@@ -60,7 +61,8 @@
     NSInteger missionWidth = (self.screenSize.width - kMISSION_ROW_ADJUST) / kMISSIONS_PER_ROW;
     NSInteger missionHeight = (self.screenSize.height - displayOffset - kMISSION_COLUMN_ADJUST) / kMISSIONS_ROWS;
     NSInteger missionColumn = _position.x / missionWidth;
-    NSInteger missionRow = (self.screenSize.height - displayOffset - _position.y - 0.35*missionHeight) / missionHeight;
+    CGSize missionSize = [self missionSize];
+    NSInteger missionRow = (self.screenSize.height - displayOffset-_position.y - kMISSION_COLUMN_ADJUST - 0.5 * missionSize.height + kMISSION_YOFFSET) / missionHeight;
     return kMISSIONS_PER_ROW * missionRow + missionColumn;
 }
 
@@ -79,7 +81,7 @@
     NSInteger missionColumn = _mission - missionRow * kMISSIONS_PER_ROW;
     CGSize missionSize = [self missionSize];
     return CGPointMake(0.5 * missionSize.width + missionColumn * missionSize.width + kMISSION_ROW_ADJUST / 2.0,  
-                       self.screenSize.height - missionRow * missionSize.height - displayOffset - kMISSION_COLUMN_ADJUST - 0.5 * missionSize.height);
+                       self.screenSize.height - missionRow * missionSize.height - displayOffset - kMISSION_COLUMN_ADJUST - 0.5 * missionSize.height + kMISSION_YOFFSET);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -135,10 +137,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addMissionLabel:(NSInteger)_mission toSprite:(CCSprite*)_sprite {
-    CCLabel* missionLable = [CCLabel labelWithString:[NSString stringWithFormat:@"%d", [self missionToLevel:_mission]] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
+    CCLabel* missionLable = 
+        [CCLabel labelWithString:[NSString stringWithFormat:@"%d", [self missionToLevel:_mission]] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
     CGSize missionSize = [self missionSize];
     missionLable.anchorPoint = CGPointMake(0.5, 0.5);
-    missionLable.position = CGPointMake(0.31*missionSize.width, 0.275*missionSize.height);
+    missionLable.position = CGPointMake(0.30*missionSize.width, 0.32*missionSize.height);
     missionLable.color = ccc3(0,0,0); 
     [_sprite addChild:missionLable];
 }
@@ -152,7 +155,7 @@
         CCLabel* missionScore = [CCLabel labelWithString:[NSString stringWithFormat:@"%d", [levelModel score]] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_MISSION];
         CGSize missionSize = [self missionSize];
         missionScore.anchorPoint = CGPointMake(0.5, 0.5);
-        missionScore.position = CGPointMake(0.29*missionSize.width, -0.06*missionSize.height);
+        missionScore.position = CGPointMake(0.31*missionSize.width, -0.11*missionSize.height);
         missionScore.color = ccc3(103,243,27); 
         [_sprite addChild:missionScore];
     }
@@ -181,11 +184,11 @@
         self.isTouchEnabled = YES;
         self.navigationDisplay = [NavigationDisplay createWithTarget:self andSelector:@selector(backNavigation)];
         [self.navigationDisplay insert:self];
-		CGPoint screenCenter = CGPointMake(self.screenSize.width/2, self.screenSize.height/2);
-        CCLabel* levelLabel = [CCLabel labelWithString:@"Select Level" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
-        levelLabel.color = ccc3(0,170,0);    
-        levelLabel.position = CGPointMake(screenCenter.x, 390.0f);
-        [self addChild:levelLabel];
+        CCSprite* backgroundGrid = [CCSprite spriteWithFile:@"missions-background.png"];
+        backgroundGrid.anchorPoint = CGPointMake(0.0, 0.0);
+        backgroundGrid.position = CGPointMake(0.0, 0.0);
+        backgroundGrid.scale = 0.5;
+        [self addChild:backgroundGrid];
         [self loadMissions];
     }
 	return self;
