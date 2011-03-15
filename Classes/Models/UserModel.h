@@ -51,7 +51,7 @@
 + (NSInteger)nextQuadrangle;
 + (void)setQuadrangle:(NSInteger)_quad;
 + (NSInteger)quadrangle;
-+ (BOOL)isNextQuad;
++ (BOOL)isFirstQuadLevel;
 + (void)disableTutorials;
 + (void)enableTutorials;
 + (void)tutorialWasShown:(TutorialSectionID)_sectionID;

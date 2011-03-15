@@ -3,7 +3,7 @@
 //  seeker1
 //
 //  Created by Troy Stribling on 3/14/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 imaginary products. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------

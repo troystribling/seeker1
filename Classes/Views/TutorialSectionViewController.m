@@ -7,7 +7,9 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "TutorialSectionViewController.h"
+#import "ViewControllerManager.h"
+#import "UserModel.h"
+#import "cocos2d.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kTUTORIAL_SECTION_LAUNCHER_BACK_TAG   1
@@ -67,6 +69,31 @@
     TutorialSectionViewController* viewController = 
         [[TutorialSectionViewController alloc] initWithNibName:@"TutorialSectionViewController" bundle:nil inView:_containerView];
     return viewController;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)nextLevel {   
+    TutorialSectionID sectionID = GettingStartedTutorialSectionID;
+    switch ([UserModel level]) {
+        case kLEVEL_FOR_SUBROUTINES:
+            sectionID = SubroutinesTutorialSectionID;
+            break;
+        case kLEVEL_FOR_TIMES:
+            sectionID = TimesLoopTutorialSectionID;
+            break;
+        case kLEVEL_FOR_UNTIL:
+            sectionID = UntilLoopTutorialSectionID;
+            break;
+        case kLEVEL_FOR_BINS:
+            sectionID = RoverBinsTutorialSectionID;
+            break;
+        default:
+            break;
+    }
+    if (sectionID != GettingStartedTutorialSectionID) {
+        [[ViewControllerManager instance] showTutorialIntroductionView:[[CCDirector sharedDirector] openGLView] withSectionID:sectionID];
+        [UserModel tutorialWasShown:sectionID];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

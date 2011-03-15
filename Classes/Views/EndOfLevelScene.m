@@ -38,7 +38,6 @@
 - (void)skipMission;
 - (void)againMission;
 - (void)nextMission;
-- (void)nextLevel;
 
 @end
 
@@ -200,7 +199,7 @@
 - (void)skipMission {
     [ProgramNgin instance].programHalted = NO;
     [ProgramNgin instance].programRunning = NO;
-    [self nextLevel];
+    [TutorialSectionViewController nextLevel];
     [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
 }
 
@@ -216,36 +215,12 @@
 - (void)nextMission {
     [ProgramNgin instance].programHalted = NO;
     [ProgramNgin instance].programRunning = NO;
-    [self nextLevel];
-    if ([UserModel isNextQuad]) {
+    [UserModel nextLevel];
+    if ([UserModel isFirstQuadLevel]) {
         [[CCDirector sharedDirector] replaceScene: [EndOfSiteScene scene]];
     } else  {
         [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
-    }
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)nextLevel {   
-    TutorialSectionID sectionID = GettingStartedTutorialSectionID;
-    switch ([UserModel nextLevel]) {
-        case kLEVEL_FOR_SUBROUTINES:
-            sectionID = SubroutinesTutorialSectionID;
-            break;
-        case kLEVEL_FOR_TIMES:
-            sectionID = TimesLoopTutorialSectionID;
-            break;
-        case kLEVEL_FOR_UNTIL:
-            sectionID = UntilLoopTutorialSectionID;
-            break;
-        case kLEVEL_FOR_BINS:
-            sectionID = RoverBinsTutorialSectionID;
-            break;
-        default:
-            break;
-    }
-    if (sectionID != GettingStartedTutorialSectionID) {
-        [[ViewControllerManager instance] showTutorialIntroductionView:[[CCDirector sharedDirector] openGLView] withSectionID:sectionID];
-        [UserModel tutorialWasShown:sectionID];
+        [TutorialSectionViewController nextLevel];
     }
 }
 

@@ -15,16 +15,18 @@
 #import "ViewControllerManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+#define kEND_OF_LEVEL_TICK_1    40
+#define kEND_OF_LEVEL_TICK_2    80
+#define kEND_OF_LEVEL_TICK_3    120
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface EndOfSiteScene (PrivateAPI)
 
-- (void)nextMission;
+- (void)insertCompletedDisplay;
+- (void)insertNextDisplay;
 - (void)insertNextMissionMenu;
-- (void)firstQuadDisplay;
-- (void)secondQuadDisplay;
-- (void)thirdQuadDisplay;
-- (void)endOfGame;
+- (void)nextMission;
 
 @end
 
@@ -39,35 +41,55 @@
 #pragma mark EndOfSiteScene PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)insertDisplay {
+- (void)insertCompletedDisplay {
+    CCLabel* completedLabel = [CCLabel labelWithString:@"completed site" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
+    CCLabel* siteLabel;
     NSInteger lastQuad = [UserModel quadrangle] - 1;
     switch (lastQuad) {
         case TharsisQuadType:
-            [self firstQuadDisplay];
+            siteLabel = [CCLabel labelWithString:@"tharsis" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_REALLY_LARGE];
             break;
         case MemnoniaQuadType:
-            [self secondQuadDisplay];
+            siteLabel = [CCLabel labelWithString:@"memnonia" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_REALLY_LARGE];
             break;
         case ElysiumQuadType:
-            [self thirdQuadDisplay];
+            siteLabel = [CCLabel labelWithString:@"elysium" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_REALLY_LARGE];
             break;
     }
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    completedLabel.position = CGPointMake(screenSize.width/2.0, 380.0f);
+    completedLabel.color = kCCLABEL_FONT_COLOR;
+    [self addChild:completedLabel];
+    siteLabel.position = CGPointMake(screenSize.width/2.0, 345.0f);
+    siteLabel.color = kCCLABEL_FONT_COLOR;
+    [self addChild:siteLabel];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)firstQuadDisplay {
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)secondQuadDisplay {
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)thirdQuadDisplay {
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)endOfGame {
+- (void)insertNextDisplay {
+    NSInteger nextQuad = [UserModel quadrangle];
+    CCLabel* nextLabel;
+    CCLabel* siteLabel;
+    switch (nextQuad) {
+        case MemnoniaQuadType:
+            nextLabel = [CCLabel labelWithString:@"next site" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
+            siteLabel = [CCLabel labelWithString:@"memnonia" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_REALLY_LARGE];
+            break;
+        case ElysiumQuadType:
+            nextLabel = [CCLabel labelWithString:@"next site" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
+            siteLabel = [CCLabel labelWithString:@"elysium" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_REALLY_LARGE];
+            break;
+        default:
+            siteLabel = [CCLabel labelWithString:@"game over" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_REALLY_LARGE];
+            break;
+    }
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    nextLabel.position = CGPointMake(screenSize.width/2.0, 300.0f);
+    nextLabel.color = kCCLABEL_FONT_COLOR;
+    [self addChild:nextLabel];
+    siteLabel.position = CGPointMake(screenSize.width/2.0, 260.0f);
+    siteLabel.color = kCCLABEL_FONT_COLOR;
+    [self addChild:siteLabel];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -79,12 +101,13 @@
                                                         selector:@selector(nextMission)];
     CCMenu* menu = [CCMenu menuWithItems:nextItem, nil];
     [menu alignItemsHorizontallyWithPadding:90.0];
-    menu.position = CGPointMake(155.0f, 35.0f);
+    menu.position = CGPointMake(245.0f, 35.0f);
     [self addChild:menu];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)nextMission {
+    [TutorialSectionViewController nextLevel];
     [[CCDirector sharedDirector] replaceScene: [QuadsScene scene]];
 }
 
@@ -114,6 +137,14 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void) nextFrame:(ccTime)dt {
     self.counter++;
+    if (self.counter == kEND_OF_LEVEL_TICK_1) {
+        [self.statusDisplay test];
+    } else if (self.counter == kEND_OF_LEVEL_TICK_2) {
+        [self.statusDisplay clear];
+    } else if (self.counter == kEND_OF_LEVEL_TICK_3) {
+        [self insertNextMissionMenu];
+        [self.statusDisplay test];
+    }    
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

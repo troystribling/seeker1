@@ -62,8 +62,7 @@
     NSInteger missionWidth = (self.screenSize.width - kMISSION_ROW_ADJUST) / kMISSIONS_PER_ROW;
     NSInteger missionHeight = (self.screenSize.height - displayOffset - kMISSION_COLUMN_ADJUST) / kMISSIONS_ROWS;
     NSInteger missionColumn = _position.x / missionWidth;
-    CGSize missionSize = [self missionSize];
-    NSInteger missionRow = (self.screenSize.height - displayOffset-_position.y - kMISSION_COLUMN_ADJUST - 0.5 * missionSize.height) / missionHeight;
+    NSInteger missionRow = (self.screenSize.height - displayOffset-_position.y - kMISSION_COLUMN_ADJUST + kMISSION_YOFFSET) / missionHeight;
     return kMISSIONS_PER_ROW * missionRow + missionColumn;
 }
 

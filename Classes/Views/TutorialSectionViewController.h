@@ -38,6 +38,7 @@ typedef enum tutorialSectionID {
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)inView:(UIView*)_containerView;
++ (void)nextLevel;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil inView:(UIView*)_containerView;
 - (void)setTutorialSection:(TutorialSectionID)_sectionID;
 

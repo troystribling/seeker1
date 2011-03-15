@@ -111,10 +111,10 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (BOOL)isNextQuad {
++ (BOOL)isFirstQuadLevel {
     BOOL nextQuad = NO;
     UserModel* user = [self findFirst];
-    NSInteger quadLevel = user.level - kMISSIONS_PER_QUAD * user.quadrangle + 1;
+    NSInteger quadLevel = user.level - kMISSIONS_PER_QUAD * user.quadrangle;
     if (quadLevel == 1) {
         nextQuad = YES;
     }
