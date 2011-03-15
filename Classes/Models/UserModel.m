@@ -79,7 +79,7 @@
 + (void)setLevel:(NSInteger)_level {
     UserModel* user = [self findFirst];
     user.level = _level;
-    user.quadrangle = (user.level -1)/kMISSIONS_PER_QUAD;
+    user.quadrangle = (user.level - 1)/kMISSIONS_PER_QUAD;
     [user update];
 }
 
@@ -108,6 +108,17 @@
 + (NSInteger)quadrangle {
     UserModel* user = [self findFirst];
     return user.quadrangle;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (BOOL)isNextQuad {
+    BOOL nextQuad = NO;
+    UserModel* user = [self findFirst];
+    NSInteger quadLevel = user.level - kMISSIONS_PER_QUAD * user.quadrangle + 1;
+    if (quadLevel == 1) {
+        nextQuad = YES;
+    }
+    return nextQuad;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

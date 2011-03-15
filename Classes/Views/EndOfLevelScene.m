@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "EndOfLevelScene.h"
+#import "EndOfSiteScene.h"
 #import "MapScene.h"
 #import "UserModel.h"
 #import "LevelModel.h"
@@ -177,12 +178,12 @@
     CCMenuItemLabel* againItem = [CCMenuItemLabel itemWithLabel:againLabel
                                                          target:self
                                                          selector:@selector(againMission)];
-    CCLabel* skipLabel = [CCLabel labelWithString:@"Next>" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
-    skipLabel.color = kCCLABEL_FONT_COLOR;
-    CCMenuItemLabel* skipItem = [CCMenuItemLabel itemWithLabel:skipLabel
+    CCLabel* nextLabel = [CCLabel labelWithString:@"Next>" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
+    nextLabel.color = kCCLABEL_FONT_COLOR;
+    CCMenuItemLabel* nextItem = [CCMenuItemLabel itemWithLabel:nextLabel
                                                         target:self
                                                       selector:@selector(nextMission)];
-    CCMenu* menu = [CCMenu menuWithItems:againItem, skipItem, nil];
+    CCMenu* menu = [CCMenu menuWithItems:againItem, nextItem, nil];
     [menu alignItemsHorizontallyWithPadding:90.0];
     menu.position = CGPointMake(155.0f, 35.0f);
     [self addChild:menu];
@@ -216,7 +217,11 @@
     [ProgramNgin instance].programHalted = NO;
     [ProgramNgin instance].programRunning = NO;
     [self nextLevel];
-    [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
+    if ([UserModel isNextQuad]) {
+        [[CCDirector sharedDirector] replaceScene: [EndOfSiteScene scene]];
+    } else  {
+        [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -259,8 +264,6 @@
 - (id)init {
 	if((self=[super init])) {
         self.counter = 0;
-        self.isTouchEnabled = YES;
-        self.level.completed = [LevelModel levelCompleted:[UserModel level]];
         self.level = [LevelModel findByLevel:[UserModel level]];
         if (self.level.completed) {
             [self insertCompletedTitleLabel];

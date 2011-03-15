@@ -125,6 +125,12 @@
 		053D9195132D43FD00BD41EE /* audio-off.png in Resources */ = {isa = PBXBuildFile; fileRef = 053D9193132D43FD00BD41EE /* audio-off.png */; };
 		053D9196132D43FD00BD41EE /* audio-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 053D9194132D43FD00BD41EE /* audio-on.png */; };
 		053D9198132D808200BD41EE /* missions-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 053D9197132D808200BD41EE /* missions-background.png */; };
+		053F6403132E7330002FACA0 /* quads-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 053F6402132E7330002FACA0 /* quads-background.png */; };
+		053F6406132E8B20002FACA0 /* select-site.png in Resources */ = {isa = PBXBuildFile; fileRef = 053F6404132E8B20002FACA0 /* select-site.png */; };
+		053F6407132E8B20002FACA0 /* site-locked.png in Resources */ = {isa = PBXBuildFile; fileRef = 053F6405132E8B20002FACA0 /* site-locked.png */; };
+		053F6409132E926D002FACA0 /* missions-completed.png in Resources */ = {isa = PBXBuildFile; fileRef = 053F6408132E926D002FACA0 /* missions-completed.png */; };
+		053F640B132E97A2002FACA0 /* missions-total-score.png in Resources */ = {isa = PBXBuildFile; fileRef = 053F640A132E97A2002FACA0 /* missions-total-score.png */; };
+		053F640E132EE53F002FACA0 /* EndOfSiteScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 053F640D132EE53E002FACA0 /* EndOfSiteScene.m */; };
 		053FBFCA129D8C45000BCBCF /* StatusDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 053FBFC9129D8C45000BCBCF /* StatusDisplay.m */; };
 		0540119612A2B9B900CCC62D /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0540119512A2B9B900CCC62D /* MainScene.m */; };
 		054012BB12A30FF600CCC62D /* Apple ][.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 054012B912A30FF600CCC62D /* Apple ][.ttf */; };
@@ -566,6 +572,13 @@
 		053D9193132D43FD00BD41EE /* audio-off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "audio-off.png"; sourceTree = "<group>"; };
 		053D9194132D43FD00BD41EE /* audio-on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "audio-on.png"; sourceTree = "<group>"; };
 		053D9197132D808200BD41EE /* missions-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "missions-background.png"; sourceTree = "<group>"; };
+		053F6402132E7330002FACA0 /* quads-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "quads-background.png"; sourceTree = "<group>"; };
+		053F6404132E8B20002FACA0 /* select-site.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "select-site.png"; sourceTree = "<group>"; };
+		053F6405132E8B20002FACA0 /* site-locked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "site-locked.png"; sourceTree = "<group>"; };
+		053F6408132E926D002FACA0 /* missions-completed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "missions-completed.png"; sourceTree = "<group>"; };
+		053F640A132E97A2002FACA0 /* missions-total-score.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "missions-total-score.png"; sourceTree = "<group>"; };
+		053F640C132EE53E002FACA0 /* EndOfSiteScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndOfSiteScene.h; sourceTree = "<group>"; };
+		053F640D132EE53E002FACA0 /* EndOfSiteScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndOfSiteScene.m; sourceTree = "<group>"; };
 		053FBFC8129D8C44000BCBCF /* StatusDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusDisplay.h; sourceTree = "<group>"; };
 		053FBFC9129D8C45000BCBCF /* StatusDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusDisplay.m; sourceTree = "<group>"; };
 		0540119412A2B9B900CCC62D /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScene.h; sourceTree = "<group>"; };
@@ -1097,6 +1110,7 @@
 				0521EF6A12C5637B0078C77C /* elysium.png */,
 				0532CF7212C6BD7800DB92D8 /* elysium-locked.png */,
 				0521EF6B12C5637B0078C77C /* memnonia.png */,
+				053F6408132E926D002FACA0 /* missions-completed.png */,
 				0532CF6F12C6BA5A00DB92D8 /* mission-complete.png */,
 				053B086F131378DF005F4075 /* mission-failed.png */,
 				0532CF7312C6BD7800DB92D8 /* memnonia-locked.png */,
@@ -1104,6 +1118,10 @@
 				0542036912CA715700F48FE4 /* mission-incomplete.png */,
 				05D4EEEC13161BA400954E03 /* mission-not-played.png */,
 				053D9197132D808200BD41EE /* missions-background.png */,
+				053F640A132E97A2002FACA0 /* missions-total-score.png */,
+				053F6402132E7330002FACA0 /* quads-background.png */,
+				053F6405132E8B20002FACA0 /* site-locked.png */,
+				053F6404132E8B20002FACA0 /* select-site.png */,
 				0521EF6C12C5637B0078C77C /* tharsis.png */,
 				0532CF7612C6BDD900DB92D8 /* tharsis-locked.png */,
 			);
@@ -1180,6 +1198,8 @@
 				050B27801290C82400CC6149 /* BootScene.m */,
 				0518052B12EFA4A400952699 /* EndOfLevelScene.h */,
 				0518052C12EFA4A400952699 /* EndOfLevelScene.m */,
+				053F640C132EE53E002FACA0 /* EndOfSiteScene.h */,
+				053F640D132EE53E002FACA0 /* EndOfSiteScene.m */,
 				0540119412A2B9B900CCC62D /* MainScene.h */,
 				0540119512A2B9B900CCC62D /* MainScene.m */,
 				0528CDB71290A00200F4078A /* MapScene.h */,
@@ -1981,6 +2001,11 @@
 				053D9195132D43FD00BD41EE /* audio-off.png in Resources */,
 				053D9196132D43FD00BD41EE /* audio-on.png in Resources */,
 				053D9198132D808200BD41EE /* missions-background.png in Resources */,
+				053F6403132E7330002FACA0 /* quads-background.png in Resources */,
+				053F6406132E8B20002FACA0 /* select-site.png in Resources */,
+				053F6407132E8B20002FACA0 /* site-locked.png in Resources */,
+				053F6409132E926D002FACA0 /* missions-completed.png in Resources */,
+				053F640B132E97A2002FACA0 /* missions-total-score.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2034,6 +2059,7 @@
 				057D11F813207EE0003C9FF3 /* SettingsViewController.m in Sources */,
 				05D5BFB11321AD570099CF25 /* NavigationDisplay.m in Sources */,
 				0534052E132208FC008F0667 /* TutorialIntroduction1.m in Sources */,
+				053F640E132EE53F002FACA0 /* EndOfSiteScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

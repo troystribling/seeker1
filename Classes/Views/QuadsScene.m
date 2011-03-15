@@ -16,8 +16,9 @@
 #import "MissionsScene.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define kQUAD_IMAGE_YDELTA  80.0f
-#define kQUAD_IMAGE_XDELTA  -7.5f
+#define kQUAD_IMAGE_YDELTA          80.0f
+#define kQUAD_IMAGE_XDELTA          -7.5f
+#define kMISSIONS_COMPLETED_DELTA   120.0
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface QuadsScene (PrivateAPI)
@@ -48,7 +49,7 @@
 @synthesize tharsisSprite;
 @synthesize memnoniaSprite;
 @synthesize elysiumSprite;
-@synthesize titleLabel;
+@synthesize titleSprite;
 @synthesize displayedQuad;
 @synthesize screenCenter;
 @synthesize firstTouch;
@@ -202,17 +203,25 @@
     NSInteger score = [self totalScore:_quad];
     CGSize spriteSize = _sprite.contentSize;
 
-    CCLabel* perCompLable = [CCLabel labelWithString:[NSString stringWithFormat:@"Completed: %d%%", perComp] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_MISSION];
+    CCSprite* perCompSprite = [CCSprite spriteWithFile:@"missions-completed.png"];
+    perCompSprite.anchorPoint = CGPointMake(0.0, 0.0);
+    perCompSprite.position = CGPointMake(0.115*spriteSize.width, -0.07*spriteSize.height);
+    CCLabel* perCompLable = [CCLabel labelWithString:[NSString stringWithFormat:@"%d%%", perComp] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_MISSION];
     perCompLable.anchorPoint = CGPointMake(0.0, 0.0);
-    perCompLable.position = CGPointMake(0.115*spriteSize.width, -0.065*spriteSize.height);
+    perCompLable.position = CGPointMake(0.115*spriteSize.width + kMISSIONS_COMPLETED_DELTA, -0.075*spriteSize.height);
     perCompLable.color = kCCLABEL_FONT_COLOR; 
     [_sprite addChild:perCompLable];
+    [_sprite addChild:perCompSprite];
 
-    CCLabel* scoreLable = [CCLabel labelWithString:[NSString stringWithFormat:@"Score:     %d", score] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_MISSION];
+    CCSprite* scoreSprite = [CCSprite spriteWithFile:@"missions-total-score.png"];
+    scoreSprite.anchorPoint = CGPointMake(0.0, 0.0);
+    scoreSprite.position = CGPointMake(0.115*spriteSize.width, -0.135*spriteSize.height);
+    CCLabel* scoreLable = [CCLabel labelWithString:[NSString stringWithFormat:@"%d", score] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_MISSION];
     scoreLable.anchorPoint = CGPointMake(0.0, 0.0);
-    scoreLable.position = CGPointMake(0.115*spriteSize.width, -0.12*spriteSize.height);
+    scoreLable.position = CGPointMake(0.115*spriteSize.width + kMISSIONS_COMPLETED_DELTA, -0.135*spriteSize.height);
     scoreLable.color = kCCLABEL_FONT_COLOR; 
     [_sprite addChild:scoreLable];
+    [_sprite addChild:scoreSprite];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -220,14 +229,13 @@
     NSInteger levelsUnlocked = [LevelModel count];
     NSInteger quadsUnlocked = levelsUnlocked / kMISSIONS_PER_QUAD;
     if (quadsUnlocked >= self.displayedQuad) {
-        self.titleLabel = [CCLabel labelWithString:@"Select Site" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
-        self.titleLabel.color = ccc3(0,170,0);    
+        self.titleSprite = [CCSprite spriteWithFile:@"select-site.png"];
     } else {
-        self.titleLabel = [CCLabel labelWithString:@"Site Locked" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
-        self.titleLabel.color = ccc3(0,100,0);    
+        self.titleSprite = [CCSprite spriteWithFile:@"site-unlocked.png"];
     }
-    self.titleLabel.position = CGPointMake(self.screenCenter.x, 390.0f);
-    [self addChild:self.titleLabel];
+    self.titleSprite.position = CGPointMake(self.screenCenter.x, 390.0f);
+    self.titleSprite.anchorPoint = CGPointMake(0.5, 0.5);
+    [self addChild:self.titleSprite];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -260,6 +268,10 @@
 		self.screenCenter = CGPointMake(screenSize.width/2, screenSize.height/2);
         self.tharsisSprite = [[[CCSprite alloc] initWithFile:@"tharsis.png"] autorelease];
         self.tharsisSprite.anchorPoint = CGPointMake(0.5f, 0.5f);
+        CCSprite* backgroundGrid = [CCSprite spriteWithFile:@"quads-background.png"];
+        backgroundGrid.anchorPoint = CGPointMake(0.0, 0.0);
+        backgroundGrid.position = CGPointMake(0.0, 0.0);
+        [self addChild:backgroundGrid z:-10];
         [self addQuadStats:TharsisQuadType toSprite:self.tharsisSprite];
         [self initQuads];
         [self addTitle];
@@ -303,11 +315,11 @@
                 [[CCDirector sharedDirector] replaceScene:[MissionsScene scene]];
             }
         } else if (touchDelta.y < 0) {
-            [self.titleLabel removeFromParentAndCleanup:YES];
+            [self.titleSprite removeFromParentAndCleanup:YES];
             [self backwardQuads];
             self.setTitle = YES;
         } else {
-            [self.titleLabel removeFromParentAndCleanup:YES];
+            [self.titleSprite removeFromParentAndCleanup:YES];
             [self fowardQuads];
             self.setTitle = YES;
         }

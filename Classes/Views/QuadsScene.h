@@ -26,7 +26,7 @@ typedef enum tagQuadType {
     CCSprite* tharsisSprite;
     CCSprite* memnoniaSprite;
     CCSprite* elysiumSprite;
-    CCLabel* titleLabel;
+    CCSprite* titleSprite;
     QuadType displayedQuad; 
     CGPoint screenCenter;
     CGPoint firstTouch;
@@ -39,7 +39,7 @@ typedef enum tagQuadType {
 @property (nonatomic, retain) CCSprite* tharsisSprite;
 @property (nonatomic, retain) CCSprite* memnoniaSprite;
 @property (nonatomic, retain) CCSprite* elysiumSprite;
-@property (nonatomic, retain) CCLabel* titleLabel;
+@property (nonatomic, retain) CCSprite* titleSprite;
 @property (nonatomic, assign) QuadType displayedQuad;
 @property (nonatomic, assign) CGPoint screenCenter;
 @property (nonatomic, assign) CGPoint firstTouch;

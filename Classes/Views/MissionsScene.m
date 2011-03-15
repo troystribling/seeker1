@@ -17,9 +17,10 @@
 #import "ProgramNgin.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define kMISSION_COLUMN_ADJUST  45.0
-#define kMISSION_ROW_ADJUST     20.0
-#define kMISSION_YOFFSET        10.0
+#define kMISSION_COLUMN_ADJUST  53.0
+#define kMISSION_ROW_ADJUST     19.0
+#define kMISSION_YOFFSET        13.0
+#define kMISSION_XOFFSET        1.0
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MissionsScene (PrivateAPI)
@@ -62,7 +63,7 @@
     NSInteger missionHeight = (self.screenSize.height - displayOffset - kMISSION_COLUMN_ADJUST) / kMISSIONS_ROWS;
     NSInteger missionColumn = _position.x / missionWidth;
     CGSize missionSize = [self missionSize];
-    NSInteger missionRow = (self.screenSize.height - displayOffset-_position.y - kMISSION_COLUMN_ADJUST - 0.5 * missionSize.height + kMISSION_YOFFSET) / missionHeight;
+    NSInteger missionRow = (self.screenSize.height - displayOffset-_position.y - kMISSION_COLUMN_ADJUST - 0.5 * missionSize.height) / missionHeight;
     return kMISSIONS_PER_ROW * missionRow + missionColumn;
 }
 
@@ -80,7 +81,7 @@
     NSInteger missionRow = _mission / kMISSIONS_PER_ROW;
     NSInteger missionColumn = _mission - missionRow * kMISSIONS_PER_ROW;
     CGSize missionSize = [self missionSize];
-    return CGPointMake(0.5 * missionSize.width + missionColumn * missionSize.width + kMISSION_ROW_ADJUST / 2.0,  
+    return CGPointMake(0.5 * missionSize.width + missionColumn * missionSize.width + kMISSION_ROW_ADJUST / 2.0 + kMISSION_XOFFSET,  
                        self.screenSize.height - missionRow * missionSize.height - displayOffset - kMISSION_COLUMN_ADJUST - 0.5 * missionSize.height + kMISSION_YOFFSET);
 }
 
@@ -187,7 +188,6 @@
         CCSprite* backgroundGrid = [CCSprite spriteWithFile:@"missions-background.png"];
         backgroundGrid.anchorPoint = CGPointMake(0.0, 0.0);
         backgroundGrid.position = CGPointMake(0.0, 0.0);
-        backgroundGrid.scale = 0.5;
         [self addChild:backgroundGrid];
         [self loadMissions];
     }
