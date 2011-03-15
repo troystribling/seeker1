@@ -156,7 +156,7 @@
         CGSize missionSize = [self missionSize];
         missionScore.anchorPoint = CGPointMake(0.5, 0.5);
         missionScore.position = CGPointMake(0.31*missionSize.width, -0.11*missionSize.height);
-        missionScore.color = ccc3(103,243,27); 
+        missionScore.color = kCCLABEL_FONT_COLOR; 
         [_sprite addChild:missionScore];
     }
 }

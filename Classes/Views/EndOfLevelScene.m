@@ -57,19 +57,19 @@
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     CCLabel* titleLabel = [CCLabel labelWithString:@"Mission Failure" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
     titleLabel.position = CGPointMake(screenSize.width/2.0, 380.0f);
-    titleLabel.color = ccc3(204,51,0); 
+    titleLabel.color = kCCLABEL_FONT_RED_COLOR; 
     [self addChild:titleLabel];
     CCLabel* errorMsgLabel = [CCLabel labelWithString:self.level.errorMsg fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     errorMsgLabel.position = CGPointMake(screenSize.width/2.0, 347.0f);
-    errorMsgLabel.color = ccc3(255,255,0);    
+    errorMsgLabel.color = kCCLABEL_FONT_GOLD_COLOR;    
     [self addChild:errorMsgLabel];
     CCLabel* errorCodeLabel = [CCLabel labelWithString:@"Error Code" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     errorCodeLabel.position = CGPointMake(screenSize.width/2.0, 312.0f);
-    errorCodeLabel.color = ccc3(204,51,0);    
+    errorCodeLabel.color = kCCLABEL_FONT_RED_COLOR;    
     [self addChild:errorCodeLabel];
     CCLabel* errorCodeID = [CCLabel labelWithString:self.level.errorCode fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     errorCodeID.position = CGPointMake(screenSize.width/2.0, 287.0f);
-    errorCodeID.color = ccc3(204,51,0);    
+    errorCodeID.color = kCCLABEL_FONT_RED_COLOR;    
     [self addChild:errorCodeID];
 }
 
@@ -77,7 +77,7 @@
 - (void)insertCompletedTitleLabel {
     CCLabel* titleLabel = [CCLabel labelWithString:@"Mission Completed" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
     titleLabel.position = CGPointMake(20.0, 360.0f);
-    titleLabel.color = ccc3(255,255,0);    
+    titleLabel.color = kCCLABEL_FONT_GOLD_COLOR;    
     titleLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     [self addChild:titleLabel];
 }
@@ -130,7 +130,7 @@
         codeScoreLabel = [CCLabel labelWithString:codeScoreString dimensions:CGSizeMake(250, 90) 
                                          alignment:UITextAlignmentLeft fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
         codeScoreLabel.position = CGPointMake(20.0f, 143.0f);
-        codeScoreLabel.color = ccc3(204,51,0);
+        codeScoreLabel.color = kCCLABEL_FONT_RED_COLOR;
     }
     codeScoreLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     [self addChild:codeScoreLabel];
@@ -143,7 +143,7 @@
     CCLabel* totalScoreLabel = [CCLabel labelWithString:totalScoreString dimensions:CGSizeMake(300, 60) 
                                               alignment:UITextAlignmentLeft fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     totalScoreLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
-    totalScoreLabel.color = ccc3(255,255,0);
+    totalScoreLabel.color = kCCLABEL_FONT_GOLD_COLOR;
     if (deltaCodeScore <= 0) {
         totalScoreLabel.position = CGPointMake(20.0f, 138.0f);
     } else {
@@ -155,12 +155,12 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertMissionFailedMenu {
     CCLabel* redoLabel = [CCLabel labelWithString:@"<Redo" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
-    redoLabel.color = ccc3(204,51,0);
+    redoLabel.color = kCCLABEL_FONT_RED_COLOR;
     CCMenuItemLabel* redoItem = [CCMenuItemLabel itemWithLabel:redoLabel
                                                         target:self
                                                         selector:@selector(redoMission)];
     CCLabel* skipLabel = [CCLabel labelWithString:@"Skip>" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
-    skipLabel.color = ccc3(204,51,0);
+    skipLabel.color = kCCLABEL_FONT_RED_COLOR;
     CCMenuItemLabel* skipItem = [CCMenuItemLabel itemWithLabel:skipLabel
                                                         target:self
                                                         selector:@selector(skipMission)];

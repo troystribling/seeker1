@@ -61,7 +61,7 @@
     completedLabel.color = kCCLABEL_FONT_COLOR;
     [self addChild:completedLabel];
     siteLabel.position = CGPointMake(screenSize.width/2.0, 345.0f);
-    siteLabel.color = kCCLABEL_FONT_COLOR;
+    siteLabel.color = kCCLABEL_FONT_GOLD_COLOR;
     [self addChild:siteLabel];
 }
 
@@ -84,11 +84,11 @@
             break;
     }
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
-    nextLabel.position = CGPointMake(screenSize.width/2.0, 300.0f);
+    nextLabel.position = CGPointMake(screenSize.width/2.0, 275.0f);
     nextLabel.color = kCCLABEL_FONT_COLOR;
     [self addChild:nextLabel];
-    siteLabel.position = CGPointMake(screenSize.width/2.0, 260.0f);
-    siteLabel.color = kCCLABEL_FONT_COLOR;
+    siteLabel.position = CGPointMake(screenSize.width/2.0, 240.0f);
+    siteLabel.color = kCCLABEL_FONT_GOLD_COLOR;
     [self addChild:siteLabel];
 }
 
@@ -138,8 +138,10 @@
 - (void) nextFrame:(ccTime)dt {
     self.counter++;
     if (self.counter == kEND_OF_LEVEL_TICK_1) {
+        [self insertCompletedDisplay];
         [self.statusDisplay test];
     } else if (self.counter == kEND_OF_LEVEL_TICK_2) {
+        [self insertNextDisplay];
         [self.statusDisplay clear];
     } else if (self.counter == kEND_OF_LEVEL_TICK_3) {
         [self insertNextMissionMenu];
