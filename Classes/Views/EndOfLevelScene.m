@@ -216,7 +216,7 @@
     [ProgramNgin instance].programHalted = NO;
     [ProgramNgin instance].programRunning = NO;
     [UserModel nextLevel];
-    if ([UserModel isFirstQuadLevel]) {
+    if ([UserModel isLastLevel]) {
         [[CCDirector sharedDirector] replaceScene: [EndOfSiteScene scene]];
     } else  {
         [[CCDirector sharedDirector] replaceScene: [MapScene scene]];

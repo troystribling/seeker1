@@ -29,6 +29,7 @@
 @synthesize roverBinsShown;
 @synthesize speedScaleFactor;
 @synthesize audioEnabled;
+@synthesize gameOver;
 
 //===================================================================================================================================
 #pragma mark UserModel
@@ -45,7 +46,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[SeekerDbi instance]  updateWithStatement:@"CREATE TABLE users (pk integer primary key, level integer, quadrangle integer, getStartedShown integer, subroutinesShown integer, timesLoopShown integer, untilLoopShown integer, roverBinsShown integer, speedScaleFactor float, audioEnabled integer)"];
+	[[SeekerDbi instance]  updateWithStatement:@"CREATE TABLE users (pk integer primary key, level integer, quadrangle integer, getStartedShown integer, subroutinesShown integer, timesLoopShown integer, untilLoopShown integer, roverBinsShown integer, speedScaleFactor float, audioEnabled integer, gameOver integer)"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -66,7 +67,13 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)nextLevel {
     UserModel* user = [self findFirst];
-    user.level++;
+    NSInteger maxLevel =  kMISSIONS_PER_QUAD * kQUADS_TOTAL;
+    if (user.level < maxLevel) {
+        user.level++;
+        user.gameOver = NO;
+    } else  {
+        user.gameOver = YES;
+    }
     NSInteger quad = (user.level -1)/kMISSIONS_PER_QUAD;
     if (quad > user.quadrangle) {
         user.quadrangle++;
@@ -78,8 +85,19 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)setLevel:(NSInteger)_level {
     UserModel* user = [self findFirst];
+    NSInteger maxLevel =  kMISSIONS_PER_QUAD * kQUADS_TOTAL;
+    if (_level > maxLevel) {
+        _level = maxLevel;
+        user.gameOver = YES;
+    } else  {
+        user.gameOver = NO;
+    }
     user.level = _level;
-    user.quadrangle = (user.level - 1)/kMISSIONS_PER_QUAD;
+    NSInteger quad = (user.level - 1)/kMISSIONS_PER_QUAD;
+    if (quad >= kQUADS_TOTAL) {
+        quad = kQUADS_TOTAL;
+    }
+    user.quadrangle = quad;
     [user update];
 }
 
@@ -90,16 +108,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSInteger)nextQuadrangle {
-    UserModel* user = [self findFirst];
-    user.quadrangle++;
-    [user update];
-    return user.quadrangle;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 + (void)setQuadrangle:(NSInteger)_quad {
     UserModel* user = [self findFirst];
+    if (_quad >= kQUADS_TOTAL) {
+        _quad = kQUADS_TOTAL;
+    }
     user.quadrangle = _quad;
     [user update];
 }
@@ -111,7 +124,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (BOOL)isFirstQuadLevel {
++ (BOOL)isLastLevel {
     BOOL nextQuad = NO;
     UserModel* user = [self findFirst];
     NSInteger quadLevel = user.level - kMISSIONS_PER_QUAD * user.quadrangle;
@@ -221,6 +234,12 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (BOOL)gameOver {
+    UserModel* user = [self findFirst];
+    return user.gameOver;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (void)insert {
     UserModel* user = [[[UserModel alloc] init] autorelease];
     user.level = 1;
@@ -232,6 +251,7 @@
     user.roverBinsShown = NO;
     user.speedScaleFactor = kSEEKER_MIN_SPEED_SCALE;
     user.audioEnabled = YES;
+    user.gameOver = NO;
     [user insert];
 }
 
@@ -239,8 +259,10 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
     NSString* insertStatement;
-    insertStatement = [NSString stringWithFormat:@"INSERT INTO users (level, quadrangle, getStartedShown, subroutinesShown, timesLoopShown, untilLoopShown, roverBinsShown, speedScaleFactor, audioEnabled) values (%d, %d, %d, %d, %d, %d, %d, %g, %d)", 
-                       self.level, self.quadrangle, [self getStartedShownAsInteger], [self subroutinesShownAsInteger], [self timesLoopShownAsInteger], [self untilLoopShownAsInteger], [self roverBinsShownAsInteger], self.speedScaleFactor, [self audioEnabledAsInteger]];	
+    insertStatement = [NSString stringWithFormat:@"INSERT INTO users (level, quadrangle, getStartedShown, subroutinesShown, timesLoopShown,             untilLoopShown, roverBinsShown, speedScaleFactor, audioEnabled, gameOver) values (%d, %d, %d, %d, %d, %d, %d, %g, %d, %d)", 
+        self.level, self.quadrangle, [self getStartedShownAsInteger], [self subroutinesShownAsInteger], [self timesLoopShownAsInteger], 
+        [self untilLoopShownAsInteger], [self roverBinsShownAsInteger], self.speedScaleFactor, [self audioEnabledAsInteger], 
+        [self gameOverAsInteger]];	
     [[SeekerDbi instance]  updateWithStatement:insertStatement];
 }
 
@@ -257,8 +279,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
-    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE users SET level = %d, quadrangle = %d, getStartedShown = %d, subroutinesShown = %d, timesLoopShown = %d, untilLoopShown = %d, roverBinsShown = %d, speedScaleFactor = %g, audioEnabled = %d WHERE pk = %d", 
-                                 self.level, self.quadrangle, [self getStartedShownAsInteger], [self subroutinesShownAsInteger], [self timesLoopShownAsInteger], [self untilLoopShownAsInteger], [self roverBinsShownAsInteger], self.speedScaleFactor, [self audioEnabledAsInteger], self.pk];
+    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE users SET level = %d, quadrangle = %d, getStartedShown = %d, subroutinesShown = %d, timesLoopShown = %d, untilLoopShown = %d, roverBinsShown = %d, speedScaleFactor = %g, audioEnabled = %d, gameOver = %d WHERE pk = %d",
+        self.level, self.quadrangle, [self getStartedShownAsInteger], [self subroutinesShownAsInteger], [self timesLoopShownAsInteger], [self untilLoopShownAsInteger], [self roverBinsShownAsInteger], self.speedScaleFactor, [self audioEnabledAsInteger], [self gameOverAsInteger], self.pk];
 	[[SeekerDbi instance]  updateWithStatement:updateStatement];
 }
 
@@ -346,6 +368,20 @@
 	};
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSInteger)gameOverAsInteger {
+	return self.gameOver == YES ? 1 : 0;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setGameOverAsInteger:(NSInteger)_value {
+	if (_value == 1) {
+		self.gameOver = YES; 
+	} else {
+		self.gameOver = NO;
+	};
+}
+
 //===================================================================================================================================
 #pragma mark ServiceModel PrivateAPI
 
@@ -364,6 +400,7 @@
 	[self setRoverBinsShownAsInteger:(int)sqlite3_column_int(statement, 7)];
     self.speedScaleFactor = (double)sqlite3_column_double(statement, 8);
     [self setAudioEnabledAsInteger:(int)sqlite3_column_int(statement, 9)];
+    [self setGameOverAsInteger:(int)sqlite3_column_int(statement, 10)];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
