@@ -54,16 +54,20 @@
     [self addChild:sprite];
     CGPoint site_position = CGPointMake(screenSize.width/2.0, 358.0);
     NSInteger lastQuad = [UserModel quadrangle] - 1;
-    switch (lastQuad) {
-        case TharsisQuadType:
-            [self insertTharsis:site_position];
-            break;
-        case MemnoniaQuadType:
-            [self insertMemnonia:site_position];
-            break;
-        case ElysiumQuadType:
-            [self insertElysium:site_position];
-            break;
+    if (![UserModel gameOver]) {
+        switch (lastQuad) {
+            case TharsisQuadType:
+                [self insertTharsis:site_position];
+                break;
+            case MemnoniaQuadType:
+                [self insertMemnonia:site_position];
+                break;
+            case ElysiumQuadType:
+                [self insertElysium:site_position];
+                break;
+        }
+    } else {
+        [self insertElysium:site_position];
     }
 }
 
@@ -133,7 +137,7 @@
 - (void)insertGameOver {
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     CCSprite* titleSprite = [CCSprite spriteWithFile:@"game-over.png"];
-    titleSprite.position = CGPointMake(screenSize.width/2.0, 225.0);
+    titleSprite.position = CGPointMake(screenSize.width/2.0, 125.0);
     [self addChild:titleSprite];
 }
 

@@ -125,13 +125,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (BOOL)isLastLevel {
-    BOOL nextQuad = NO;
+    BOOL lastLevel = NO;
     UserModel* user = [self findFirst];
     NSInteger quadLevel = user.level - kMISSIONS_PER_QUAD * user.quadrangle;
-    if (quadLevel == 1) {
-        nextQuad = YES;
+    if (quadLevel == 1 || user.gameOver) {
+        lastLevel = YES;
     }
-    return nextQuad;
+    return lastLevel;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
