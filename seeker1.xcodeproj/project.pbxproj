@@ -117,7 +117,6 @@
 		0532CF7412C6BD7800DB92D8 /* elysium-locked.png in Resources */ = {isa = PBXBuildFile; fileRef = 0532CF7212C6BD7800DB92D8 /* elysium-locked.png */; };
 		0532CF7512C6BD7800DB92D8 /* memnonia-locked.png in Resources */ = {isa = PBXBuildFile; fileRef = 0532CF7312C6BD7800DB92D8 /* memnonia-locked.png */; };
 		0532CF7712C6BDD900DB92D8 /* tharsis-locked.png in Resources */ = {isa = PBXBuildFile; fileRef = 0532CF7612C6BDD900DB92D8 /* tharsis-locked.png */; };
-		0534052E132208FC008F0667 /* TutorialIntroduction1.m in Sources */ = {isa = PBXBuildFile; fileRef = 0534052D132208FC008F0667 /* TutorialIntroduction1.m */; };
 		05355F3212C3DA8F00CA770E /* MissionsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 05355F3112C3DA8F00CA770E /* MissionsScene.m */; };
 		05355F4312C3DCBA00CA770E /* LevelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05355F4212C3DCBA00CA770E /* LevelModel.m */; };
 		053B0870131378DF005F4075 /* mission-failed.png in Resources */ = {isa = PBXBuildFile; fileRef = 053B086F131378DF005F4075 /* mission-failed.png */; };
@@ -151,6 +150,7 @@
 		0547E5A3130397AF00E32962 /* map-21.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 0547E5A1130397AF00E32962 /* map-21.tmx */; };
 		0547E5AB13039A4400E32962 /* map-22.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 0547E5AA13039A4400E32962 /* map-22.tmx */; };
 		0547E5AF1303B1EE00E32962 /* map-23.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 0547E5AE1303B1EE00E32962 /* map-23.tmx */; };
+		055433F913317F8E00AB42E4 /* empty-map.png in Resources */ = {isa = PBXBuildFile; fileRef = 055433F813317F8E00AB42E4 /* empty-map.png */; };
 		0556B81D129C603B00B5F8FB /* SeekerSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 0556B81C129C603B00B5F8FB /* SeekerSprite.m */; };
 		0558413D12F900EB00E506D4 /* completed-program.png in Resources */ = {isa = PBXBuildFile; fileRef = 0558413812F900EB00E506D4 /* completed-program.png */; };
 		0558413E12F900EB00E506D4 /* open-terminal-game-board.png in Resources */ = {isa = PBXBuildFile; fileRef = 0558413912F900EB00E506D4 /* open-terminal-game-board.png */; };
@@ -175,6 +175,7 @@
 		056E3D33132FCF62003F317A /* tharsis-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 056E3D29132FCF62003F317A /* tharsis-icon.png */; };
 		056E3D34132FCF62003F317A /* tharsis-title.png in Resources */ = {isa = PBXBuildFile; fileRef = 056E3D2A132FCF62003F317A /* tharsis-title.png */; };
 		056E3D36133046FB003F317A /* go-to-next-site.png in Resources */ = {isa = PBXBuildFile; fileRef = 056E3D35133046FB003F317A /* go-to-next-site.png */; };
+		05763F731330F67B00CCCBDC /* done-last-site.png in Resources */ = {isa = PBXBuildFile; fileRef = 05763F721330F67B00CCCBDC /* done-last-site.png */; };
 		057D11F513207EB8003C9FF3 /* StatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 057D11F413207EB8003C9FF3 /* StatsViewController.m */; };
 		057D11F813207EE0003C9FF3 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 057D11F713207EE0003C9FF3 /* SettingsViewController.m */; };
 		057D12311320B15C003C9FF3 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 057D12301320B15C003C9FF3 /* SettingsViewController.xib */; };
@@ -572,8 +573,6 @@
 		0532CF7212C6BD7800DB92D8 /* elysium-locked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "elysium-locked.png"; sourceTree = "<group>"; };
 		0532CF7312C6BD7800DB92D8 /* memnonia-locked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "memnonia-locked.png"; sourceTree = "<group>"; };
 		0532CF7612C6BDD900DB92D8 /* tharsis-locked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tharsis-locked.png"; sourceTree = "<group>"; };
-		0534052C132208FC008F0667 /* TutorialIntroduction1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialIntroduction1.h; sourceTree = "<group>"; };
-		0534052D132208FC008F0667 /* TutorialIntroduction1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialIntroduction1.m; sourceTree = "<group>"; };
 		05355F3012C3DA8F00CA770E /* MissionsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissionsScene.h; sourceTree = "<group>"; };
 		05355F3112C3DA8F00CA770E /* MissionsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionsScene.m; sourceTree = "<group>"; };
 		05355F4112C3DCBA00CA770E /* LevelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelModel.h; sourceTree = "<group>"; };
@@ -618,6 +617,7 @@
 		0547E5A1130397AF00E32962 /* map-21.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-21.tmx"; sourceTree = "<group>"; };
 		0547E5AA13039A4400E32962 /* map-22.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-22.tmx"; sourceTree = "<group>"; };
 		0547E5AE1303B1EE00E32962 /* map-23.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-23.tmx"; sourceTree = "<group>"; };
+		055433F813317F8E00AB42E4 /* empty-map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "empty-map.png"; path = "Intro/empty-map.png"; sourceTree = "<group>"; };
 		0556B81B129C603B00B5F8FB /* SeekerSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeekerSprite.h; sourceTree = "<group>"; };
 		0556B81C129C603B00B5F8FB /* SeekerSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeekerSprite.m; sourceTree = "<group>"; };
 		0558413812F900EB00E506D4 /* completed-program.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "completed-program.png"; sourceTree = "<group>"; };
@@ -643,6 +643,7 @@
 		056E3D29132FCF62003F317A /* tharsis-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tharsis-icon.png"; sourceTree = "<group>"; };
 		056E3D2A132FCF62003F317A /* tharsis-title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tharsis-title.png"; sourceTree = "<group>"; };
 		056E3D35133046FB003F317A /* go-to-next-site.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "go-to-next-site.png"; sourceTree = "<group>"; };
+		05763F721330F67B00CCCBDC /* done-last-site.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done-last-site.png"; sourceTree = "<group>"; };
 		057D11F313207EB8003C9FF3 /* StatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsViewController.h; sourceTree = "<group>"; };
 		057D11F413207EB8003C9FF3 /* StatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsViewController.m; sourceTree = "<group>"; };
 		057D11F613207EE0003C9FF3 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -1014,6 +1015,7 @@
 		050D765212AF0F6B005EF9BE /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				055433F813317F8E00AB42E4 /* empty-map.png */,
 				050D765312AF0F6B005EF9BE /* BootDisplay */,
 				056E3D20132FCF62003F317A /* EndOfSite */,
 				0512FC25131AE2C900AF1B57 /* Menu */,
@@ -1272,15 +1274,6 @@
 			path = Tutorial;
 			sourceTree = "<group>";
 		};
-		053405281321FEE5008F0667 /* Introduction */ = {
-			isa = PBXGroup;
-			children = (
-				0534052C132208FC008F0667 /* TutorialIntroduction1.h */,
-				0534052D132208FC008F0667 /* TutorialIntroduction1.m */,
-			);
-			name = Introduction;
-			sourceTree = "<group>";
-		};
 		054012B812A30FF600CCC62D /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1332,6 +1325,7 @@
 			isa = PBXGroup;
 			children = (
 				056E3D21132FCF62003F317A /* completed-site.png */,
+				05763F721330F67B00CCCBDC /* done-last-site.png */,
 				056E3D22132FCF62003F317A /* elysium-icon.png */,
 				056E3D23132FCF62003F317A /* elysium-title.png */,
 				056E3D24132FCF62003F317A /* end-of-site-background.png */,
@@ -1349,7 +1343,6 @@
 		058912A712F4CDC6005870C0 /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
-				053405281321FEE5008F0667 /* Introduction */,
 				058912CA12F4DD0C005870C0 /* TutorialIndexCell.h */,
 				058912CB12F4DD0C005870C0 /* TutorialIndexCell.m */,
 				058912A812F4CE0D005870C0 /* TutorialIndexViewController.h */,
@@ -2058,6 +2051,8 @@
 				056E3D33132FCF62003F317A /* tharsis-icon.png in Resources */,
 				056E3D34132FCF62003F317A /* tharsis-title.png in Resources */,
 				056E3D36133046FB003F317A /* go-to-next-site.png in Resources */,
+				05763F731330F67B00CCCBDC /* done-last-site.png in Resources */,
+				055433F913317F8E00AB42E4 /* empty-map.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2110,7 +2105,6 @@
 				057D11F513207EB8003C9FF3 /* StatsViewController.m in Sources */,
 				057D11F813207EE0003C9FF3 /* SettingsViewController.m in Sources */,
 				05D5BFB11321AD570099CF25 /* NavigationDisplay.m in Sources */,
-				0534052E132208FC008F0667 /* TutorialIntroduction1.m in Sources */,
 				053F640E132EE53F002FACA0 /* EndOfSiteScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

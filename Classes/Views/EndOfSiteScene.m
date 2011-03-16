@@ -9,6 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "EndOfSiteScene.h"
 #import "QuadsScene.h"
+#import "MainScene.h"
 #import "UserModel.h"
 #import "LevelModel.h"
 #import "StatusDisplay.h"
@@ -32,6 +33,7 @@
 - (void)insertMemnonia:(CGPoint)_position;
 - (void)insertElysium:(CGPoint)_position;
 - (void)insertGameOver;
+- (void)doneWithGame;
 
 @end
 
@@ -52,7 +54,7 @@
     CCSprite* sprite = [CCSprite spriteWithFile:@"completed-site.png"];
     sprite.position = CGPointMake(screenSize.width/2.0, 380.0f);
     [self addChild:sprite];
-    CGPoint site_position = CGPointMake(screenSize.width/2.0, 358.0);
+    CGPoint site_position = CGPointMake(screenSize.width/2.0, 355.0);
     NSInteger lastQuad = [UserModel quadrangle] - 1;
     if (![UserModel gameOver]) {
         switch (lastQuad) {
@@ -74,7 +76,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertNextDisplay {
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
-    CGPoint site_position = CGPointMake(screenSize.width/2.0, 183.0);
+    CGPoint site_position = CGPointMake(screenSize.width/2.0, 190.0);
     NSInteger nextQuad = [UserModel quadrangle];
     if (![UserModel gameOver]) {
         switch (nextQuad) {
@@ -99,7 +101,7 @@
 - (void)insertNextSite {
     CCSprite* sprite = [CCSprite spriteWithFile:@"next-site.png"];
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
-    sprite.position = CGPointMake(screenSize.width/2.0, 205.0f);
+    sprite.position = CGPointMake(screenSize.width/2.0, 215.0f);
     [self addChild:sprite];
 }
 
@@ -109,7 +111,7 @@
     titleSprite.position = _position;
     [self addChild:titleSprite];
     CCSprite* iconSprite = [CCSprite spriteWithFile:@"tharsis-icon.png"];
-    iconSprite.position = CGPointMake(_position.x, _position.y - 73.0);
+    iconSprite.position = CGPointMake(_position.x, _position.y - 70.0);
     [self addChild:iconSprite];
 }
 
@@ -119,7 +121,7 @@
     titleSprite.position = _position;
     [self addChild:titleSprite];
     CCSprite* iconSprite = [CCSprite spriteWithFile:@"memnonia-icon.png"];
-    iconSprite.position = CGPointMake(_position.x, _position.y - 73.0);
+    iconSprite.position = CGPointMake(_position.x, _position.y - 70.0);
     [self addChild:iconSprite];
 }
 
@@ -129,7 +131,7 @@
     titleSprite.position = _position;
     [self addChild:titleSprite];
     CCSprite* iconSprite = [CCSprite spriteWithFile:@"elysium-icon.png"];
-    iconSprite.position = CGPointMake(_position.x, _position.y - 73.0);
+    iconSprite.position = CGPointMake(_position.x, _position.y - 70.0);
     [self addChild:iconSprite];
 }
 
@@ -137,7 +139,7 @@
 - (void)insertGameOver {
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     CCSprite* titleSprite = [CCSprite spriteWithFile:@"game-over.png"];
-    titleSprite.position = CGPointMake(screenSize.width/2.0, 125.0);
+    titleSprite.position = CGPointMake(screenSize.width/2.0, 150.0);
     [self addChild:titleSprite];
 }
 
@@ -152,9 +154,24 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)inserDoneMenu {
+    CCSprite* doneSprite = [CCSprite spriteWithFile:@"done-last-site.png"];
+    CCMenuItemLabel* doneItem = [CCMenuItemSprite itemFromNormalSprite:doneSprite selectedSprite:doneSprite target:self selector:@selector(doneWithGame)];
+    CCMenu* menu = [CCMenu menuWithItems:doneItem, nil];
+    [menu alignItemsHorizontallyWithPadding:90.0];
+    menu.position = CGPointMake(245.0f, 35.0f);
+    [self addChild:menu];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)nextMission {
     [TutorialSectionViewController nextLevel];
     [[CCDirector sharedDirector] replaceScene: [QuadsScene scene]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)doneWithGame {
+    [[CCDirector sharedDirector] replaceScene: [MainScene scene]];
 }
 
 //===================================================================================================================================
@@ -197,6 +214,8 @@
     } else if (self.counter == kEND_OF_LEVEL_TICK_3) {
         if (self.showNextMenu) {
             [self insertNextMissionMenu];
+        } else {
+            [self inserDoneMenu];
         }
         [self.statusDisplay test];
     }    
