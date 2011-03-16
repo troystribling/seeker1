@@ -164,6 +164,17 @@
 		05663F84130251BA008AA1DC /* map-14.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F83130251BA008AA1DC /* map-14.tmx */; };
 		05663F9113025B5E008AA1DC /* map-15.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F9013025B5E008AA1DC /* map-15.tmx */; };
 		05663F9313025EC9008AA1DC /* map-16.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F9213025EC9008AA1DC /* map-16.tmx */; };
+		056E3D2B132FCF62003F317A /* completed-site.png in Resources */ = {isa = PBXBuildFile; fileRef = 056E3D21132FCF62003F317A /* completed-site.png */; };
+		056E3D2C132FCF62003F317A /* elysium-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 056E3D22132FCF62003F317A /* elysium-icon.png */; };
+		056E3D2D132FCF62003F317A /* elysium-title.png in Resources */ = {isa = PBXBuildFile; fileRef = 056E3D23132FCF62003F317A /* elysium-title.png */; };
+		056E3D2E132FCF62003F317A /* end-of-site-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 056E3D24132FCF62003F317A /* end-of-site-background.png */; };
+		056E3D2F132FCF62003F317A /* game-over.png in Resources */ = {isa = PBXBuildFile; fileRef = 056E3D25132FCF62003F317A /* game-over.png */; };
+		056E3D30132FCF62003F317A /* memnonia-title.png in Resources */ = {isa = PBXBuildFile; fileRef = 056E3D26132FCF62003F317A /* memnonia-title.png */; };
+		056E3D31132FCF62003F317A /* memnonia-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 056E3D27132FCF62003F317A /* memnonia-icon.png */; };
+		056E3D32132FCF62003F317A /* next-site.png in Resources */ = {isa = PBXBuildFile; fileRef = 056E3D28132FCF62003F317A /* next-site.png */; };
+		056E3D33132FCF62003F317A /* tharsis-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 056E3D29132FCF62003F317A /* tharsis-icon.png */; };
+		056E3D34132FCF62003F317A /* tharsis-title.png in Resources */ = {isa = PBXBuildFile; fileRef = 056E3D2A132FCF62003F317A /* tharsis-title.png */; };
+		056E3D36133046FB003F317A /* go-to-next-site.png in Resources */ = {isa = PBXBuildFile; fileRef = 056E3D35133046FB003F317A /* go-to-next-site.png */; };
 		057D11F513207EB8003C9FF3 /* StatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 057D11F413207EB8003C9FF3 /* StatsViewController.m */; };
 		057D11F813207EE0003C9FF3 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 057D11F713207EE0003C9FF3 /* SettingsViewController.m */; };
 		057D12311320B15C003C9FF3 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 057D12301320B15C003C9FF3 /* SettingsViewController.xib */; };
@@ -621,6 +632,17 @@
 		05663F83130251BA008AA1DC /* map-14.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-14.tmx"; sourceTree = "<group>"; };
 		05663F9013025B5E008AA1DC /* map-15.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-15.tmx"; sourceTree = "<group>"; };
 		05663F9213025EC9008AA1DC /* map-16.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-16.tmx"; sourceTree = "<group>"; };
+		056E3D21132FCF62003F317A /* completed-site.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "completed-site.png"; sourceTree = "<group>"; };
+		056E3D22132FCF62003F317A /* elysium-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "elysium-icon.png"; sourceTree = "<group>"; };
+		056E3D23132FCF62003F317A /* elysium-title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "elysium-title.png"; sourceTree = "<group>"; };
+		056E3D24132FCF62003F317A /* end-of-site-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "end-of-site-background.png"; sourceTree = "<group>"; };
+		056E3D25132FCF62003F317A /* game-over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "game-over.png"; sourceTree = "<group>"; };
+		056E3D26132FCF62003F317A /* memnonia-title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "memnonia-title.png"; sourceTree = "<group>"; };
+		056E3D27132FCF62003F317A /* memnonia-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "memnonia-icon.png"; sourceTree = "<group>"; };
+		056E3D28132FCF62003F317A /* next-site.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next-site.png"; sourceTree = "<group>"; };
+		056E3D29132FCF62003F317A /* tharsis-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tharsis-icon.png"; sourceTree = "<group>"; };
+		056E3D2A132FCF62003F317A /* tharsis-title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tharsis-title.png"; sourceTree = "<group>"; };
+		056E3D35133046FB003F317A /* go-to-next-site.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "go-to-next-site.png"; sourceTree = "<group>"; };
 		057D11F313207EB8003C9FF3 /* StatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsViewController.h; sourceTree = "<group>"; };
 		057D11F413207EB8003C9FF3 /* StatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsViewController.m; sourceTree = "<group>"; };
 		057D11F613207EE0003C9FF3 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -993,6 +1015,7 @@
 			isa = PBXGroup;
 			children = (
 				050D765312AF0F6B005EF9BE /* BootDisplay */,
+				056E3D20132FCF62003F317A /* EndOfSite */,
 				0512FC25131AE2C900AF1B57 /* Menu */,
 				0521EF6912C5637B0078C77C /* Missions */,
 				0510EDD612BC680E00355F28 /* Seeker */,
@@ -1303,6 +1326,24 @@
 				0547A4C012AC509700D2F0D1 /* ProgramNgin.m */,
 			);
 			path = ProgramNgin;
+			sourceTree = "<group>";
+		};
+		056E3D20132FCF62003F317A /* EndOfSite */ = {
+			isa = PBXGroup;
+			children = (
+				056E3D21132FCF62003F317A /* completed-site.png */,
+				056E3D22132FCF62003F317A /* elysium-icon.png */,
+				056E3D23132FCF62003F317A /* elysium-title.png */,
+				056E3D24132FCF62003F317A /* end-of-site-background.png */,
+				056E3D25132FCF62003F317A /* game-over.png */,
+				056E3D35133046FB003F317A /* go-to-next-site.png */,
+				056E3D26132FCF62003F317A /* memnonia-title.png */,
+				056E3D27132FCF62003F317A /* memnonia-icon.png */,
+				056E3D28132FCF62003F317A /* next-site.png */,
+				056E3D29132FCF62003F317A /* tharsis-icon.png */,
+				056E3D2A132FCF62003F317A /* tharsis-title.png */,
+			);
+			path = EndOfSite;
 			sourceTree = "<group>";
 		};
 		058912A712F4CDC6005870C0 /* Tutorial */ = {
@@ -2006,6 +2047,17 @@
 				053F6407132E8B20002FACA0 /* site-locked.png in Resources */,
 				053F6409132E926D002FACA0 /* missions-completed.png in Resources */,
 				053F640B132E97A2002FACA0 /* missions-total-score.png in Resources */,
+				056E3D2B132FCF62003F317A /* completed-site.png in Resources */,
+				056E3D2C132FCF62003F317A /* elysium-icon.png in Resources */,
+				056E3D2D132FCF62003F317A /* elysium-title.png in Resources */,
+				056E3D2E132FCF62003F317A /* end-of-site-background.png in Resources */,
+				056E3D2F132FCF62003F317A /* game-over.png in Resources */,
+				056E3D30132FCF62003F317A /* memnonia-title.png in Resources */,
+				056E3D31132FCF62003F317A /* memnonia-icon.png in Resources */,
+				056E3D32132FCF62003F317A /* next-site.png in Resources */,
+				056E3D33132FCF62003F317A /* tharsis-icon.png in Resources */,
+				056E3D34132FCF62003F317A /* tharsis-title.png in Resources */,
+				056E3D36133046FB003F317A /* go-to-next-site.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

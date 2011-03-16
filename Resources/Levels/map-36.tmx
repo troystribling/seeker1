@@ -93,6 +93,7 @@
   <tile id="24">
    <properties>
     <property name="itemID" value="station"/>
+    <property name="itemID" value="station"/>
    </properties>
   </tile>
  </tileset>
@@ -108,7 +109,7 @@
  </layer>
  <layer name="items" width="24" height="36">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA2NgGAWjYBSMglEwCkbBKBh5QAiNLYRLIYXmo9tDTfNp4W5k85FpdDa17aJ1+NPC7fQKG1LEqWEHLcOKGmZLArEgFczBBTSBWJGG5gMAOfBXzYANAAA=
+   H4sIAAAAAAAAA2NgGAWjYBSMglEwCkbBKBh5QAiNLYRLIYXmo9tDTfNp4W5k85FpdDa17aJ1+NPC7fjMpJZ92MyhZ5wPRrMlgViQCubgAppArEhD8wGAOCcugA0AAA==
   </data>
  </layer>
  <layer name="sand" width="24" height="36">

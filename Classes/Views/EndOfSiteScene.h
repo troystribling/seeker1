@@ -17,11 +17,13 @@
 @interface EndOfSiteScene : CCLayer {
     StatusDisplay* statusDisplay;
     NSInteger counter;
+    BOOL showNextMenu;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) StatusDisplay* statusDisplay;
 @property (nonatomic, assign) NSInteger counter;
+@property (nonatomic, assign) BOOL showNextMenu;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)scene;

@@ -27,6 +27,11 @@
 - (void)insertNextDisplay;
 - (void)insertNextMissionMenu;
 - (void)nextMission;
+- (void)insertNextSite;
+- (void)insertTharsis:(CGPoint)_position;
+- (void)insertMemnonia:(CGPoint)_position;
+- (void)insertElysium:(CGPoint)_position;
+- (void)insertGameOver;
 
 @end
 
@@ -36,69 +41,103 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize statusDisplay;
 @synthesize counter;
+@synthesize showNextMenu;
 
 //===================================================================================================================================
 #pragma mark EndOfSiteScene PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertCompletedDisplay {
-    CCLabel* completedLabel = [CCLabel labelWithString:@"completed site" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
-    CCLabel* siteLabel;
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    CCSprite* sprite = [CCSprite spriteWithFile:@"completed-site.png"];
+    sprite.position = CGPointMake(screenSize.width/2.0, 380.0f);
+    [self addChild:sprite];
+    CGPoint site_position = CGPointMake(screenSize.width/2.0, 358.0);
     NSInteger lastQuad = [UserModel quadrangle] - 1;
     switch (lastQuad) {
         case TharsisQuadType:
-            siteLabel = [CCLabel labelWithString:@"tharsis" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_REALLY_LARGE];
+            [self insertTharsis:site_position];
             break;
         case MemnoniaQuadType:
-            siteLabel = [CCLabel labelWithString:@"memnonia" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_REALLY_LARGE];
+            [self insertMemnonia:site_position];
             break;
         case ElysiumQuadType:
-            siteLabel = [CCLabel labelWithString:@"elysium" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_REALLY_LARGE];
+            [self insertElysium:site_position];
             break;
     }
-    CGSize screenSize = [[CCDirector sharedDirector] winSize];
-    completedLabel.position = CGPointMake(screenSize.width/2.0, 380.0f);
-    completedLabel.color = kCCLABEL_FONT_COLOR;
-    [self addChild:completedLabel];
-    siteLabel.position = CGPointMake(screenSize.width/2.0, 345.0f);
-    siteLabel.color = kCCLABEL_FONT_GOLD_COLOR;
-    [self addChild:siteLabel];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertNextDisplay {
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    CGPoint site_position = CGPointMake(screenSize.width/2.0, 183.0);
     NSInteger nextQuad = [UserModel quadrangle];
-    CCLabel* nextLabel;
-    CCLabel* siteLabel;
     switch (nextQuad) {
         case MemnoniaQuadType:
-            nextLabel = [CCLabel labelWithString:@"next site" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
-            siteLabel = [CCLabel labelWithString:@"memnonia" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_REALLY_LARGE];
+            [self insertNextSite];
+            [self insertMemnonia:site_position];
             break;
         case ElysiumQuadType:
-            nextLabel = [CCLabel labelWithString:@"next site" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
-            siteLabel = [CCLabel labelWithString:@"elysium" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_REALLY_LARGE];
+            [self insertNextSite];
+            [self insertElysium:site_position];
             break;
         default:
-            siteLabel = [CCLabel labelWithString:@"game over" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_REALLY_LARGE];
+            self.showNextMenu = NO;
+            [self insertGameOver];
             break;
     }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)insertNextSite {
+    CCSprite* sprite = [CCSprite spriteWithFile:@"next-site.png"];
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
-    nextLabel.position = CGPointMake(screenSize.width/2.0, 275.0f);
-    nextLabel.color = kCCLABEL_FONT_COLOR;
-    [self addChild:nextLabel];
-    siteLabel.position = CGPointMake(screenSize.width/2.0, 240.0f);
-    siteLabel.color = kCCLABEL_FONT_GOLD_COLOR;
-    [self addChild:siteLabel];
+    sprite.position = CGPointMake(screenSize.width/2.0, 205.0f);
+    [self addChild:sprite];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)insertTharsis:(CGPoint)_position {
+    CCSprite* titleSprite = [CCSprite spriteWithFile:@"tharsis-title.png"];
+    titleSprite.position = _position;
+    [self addChild:titleSprite];
+    CCSprite* iconSprite = [CCSprite spriteWithFile:@"tharsis-icon.png"];
+    iconSprite.position = CGPointMake(_position.x, _position.y - 73.0);
+    [self addChild:iconSprite];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)insertMemnonia:(CGPoint)_position {
+    CCSprite* titleSprite = [CCSprite spriteWithFile:@"memnonia-title.png"];
+    titleSprite.position = _position;
+    [self addChild:titleSprite];
+    CCSprite* iconSprite = [CCSprite spriteWithFile:@"memnonia-icon.png"];
+    iconSprite.position = CGPointMake(_position.x, _position.y - 73.0);
+    [self addChild:iconSprite];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)insertElysium:(CGPoint)_position {
+    CCSprite* titleSprite = [CCSprite spriteWithFile:@"elysium-title.png"];
+    titleSprite.position = _position;
+    [self addChild:titleSprite];
+    CCSprite* iconSprite = [CCSprite spriteWithFile:@"elysium-icon.png"];
+    iconSprite.position = CGPointMake(_position.x, _position.y - 73.0);
+    [self addChild:iconSprite];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)insertGameOver {
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    CCSprite* titleSprite = [CCSprite spriteWithFile:@"game-over.png"];
+    titleSprite.position = CGPointMake(screenSize.width/2.0, 240.0);
+    [self addChild:titleSprite];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertNextMissionMenu {
-    CCLabel* nextLabel = [CCLabel labelWithString:@"Next>" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
-    nextLabel.color = kCCLABEL_FONT_COLOR;
-    CCMenuItemLabel* nextItem = [CCMenuItemLabel itemWithLabel:nextLabel
-                                                        target:self
-                                                        selector:@selector(nextMission)];
+    CCSprite* nextSprite = [CCSprite spriteWithFile:@"go-to-next-site.png"];
+    CCMenuItemLabel* nextItem = [CCMenuItemSprite itemFromNormalSprite:nextSprite selectedSprite:nextSprite target:self selector:@selector(nextMission)];
     CCMenu* menu = [CCMenu menuWithItems:nextItem, nil];
     [menu alignItemsHorizontallyWithPadding:90.0];
     menu.position = CGPointMake(245.0f, 35.0f);
@@ -129,7 +168,12 @@
         self.statusDisplay = [StatusDisplay createWithFile:@"empty-display.png"];
         [self.statusDisplay insert:self];
         [self.statusDisplay test];
+        CCSprite* backgroundGrid = [CCSprite spriteWithFile:@"end-of-site-background.png"];
+        backgroundGrid.anchorPoint = CGPointMake(0.0, 0.0);
+        backgroundGrid.position = CGPointMake(0.0, 0.0);
+        [self addChild:backgroundGrid];
         [self schedule:@selector(nextFrame:)];
+        self.showNextMenu = YES;
     }
 	return self;
 }
@@ -144,7 +188,9 @@
         [self insertNextDisplay];
         [self.statusDisplay clear];
     } else if (self.counter == kEND_OF_LEVEL_TICK_3) {
-        [self insertNextMissionMenu];
+        if (self.showNextMenu) {
+            [self insertNextMissionMenu];
+        }
         [self.statusDisplay test];
     }    
 }

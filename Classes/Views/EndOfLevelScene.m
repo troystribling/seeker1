@@ -154,12 +154,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertMissionFailedMenu {
-    CCLabel* redoLabel = [CCLabel labelWithString:@"<Redo" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
+    CCLabel* redoLabel = [CCLabel labelWithString:@"<redo" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
     redoLabel.color = kCCLABEL_FONT_RED_COLOR;
     CCMenuItemLabel* redoItem = [CCMenuItemLabel itemWithLabel:redoLabel
                                                         target:self
                                                         selector:@selector(redoMission)];
-    CCLabel* skipLabel = [CCLabel labelWithString:@"Skip>" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
+    CCLabel* skipLabel = [CCLabel labelWithString:@"skip>" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
     skipLabel.color = kCCLABEL_FONT_RED_COLOR;
     CCMenuItemLabel* skipItem = [CCMenuItemLabel itemWithLabel:skipLabel
                                                         target:self
@@ -172,12 +172,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertMissionCompletedMenu {
-    CCLabel* againLabel = [CCLabel labelWithString:@"<Again" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
+    CCLabel* againLabel = [CCLabel labelWithString:@"<again" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
     againLabel.color = kCCLABEL_FONT_COLOR;
     CCMenuItemLabel* againItem = [CCMenuItemLabel itemWithLabel:againLabel
                                                          target:self
                                                          selector:@selector(againMission)];
-    CCLabel* nextLabel = [CCLabel labelWithString:@"Next>" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
+    CCLabel* nextLabel = [CCLabel labelWithString:@"next>" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
     nextLabel.color = kCCLABEL_FONT_COLOR;
     CCMenuItemLabel* nextItem = [CCMenuItemLabel itemWithLabel:nextLabel
                                                         target:self

@@ -61,7 +61,7 @@
 #define kGLOBAL_FONT_SIZE_REALLY_LARGE  30.0
 #define kGLOBAL_FONT_SIZE_MISSION       18.0
 #define kCCLABEL_FONT_COLOR             ccc3(0,170,0)
-#define kCCLABEL_FONT_GOLD_COLOR        ccc3(255,255,0)
+#define kCCLABEL_FONT_GOLD_COLOR        ccc3(200,200,0)
 #define kCCLABEL_FONT_RED_COLOR         ccc3(204,51,0)
 
 //-----------------------------------------------------------------------------------------------------------------------------------
