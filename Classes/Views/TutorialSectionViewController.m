@@ -1,4 +1,4 @@
-    //
+//
 //  TutorialSectionViewController.m
 //  seeker1
 //
@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "ViewControllerManager.h"
+
 #import "UserModel.h"
 #import "cocos2d.h"
 

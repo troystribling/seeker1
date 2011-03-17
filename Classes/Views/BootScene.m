@@ -11,6 +11,7 @@
 #import "ViewControllerManager.h"
 #import "StatusDisplay.h"
 #import "MainScene.h"
+#import "IntroMap1Scene.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kSTARTUP_TICKS  400
@@ -107,7 +108,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)showGetStartedIntroduction {
     if (![UserModel wasTutorialShown:GettingStartedTutorialSectionID]) {
-        [[ViewControllerManager instance] showTutorialIntroductionView:[[CCDirector sharedDirector] openGLView] withSectionID:GettingStartedTutorialSectionID];
+        [[CCDirector sharedDirector] replaceScene:[IntroMap1Scene scene]];
         [UserModel tutorialWasShown:GettingStartedTutorialSectionID];
     }
 }
