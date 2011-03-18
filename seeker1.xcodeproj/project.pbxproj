@@ -135,6 +135,19 @@
 		054012BB12A30FF600CCC62D /* Apple ][.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 054012B912A30FF600CCC62D /* Apple ][.ttf */; };
 		054012BC12A30FF600CCC62D /* Retroville NC.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 054012BA12A30FF600CCC62D /* Retroville NC.ttf */; };
 		0542036A12CA715700F48FE4 /* mission-incomplete.png in Resources */ = {isa = PBXBuildFile; fileRef = 0542036912CA715700F48FE4 /* mission-incomplete.png */; };
+		05462DB31332777300B4D8B7 /* IntroMap5Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 05462DB21332777300B4D8B7 /* IntroMap5Scene.m */; };
+		05462DBF1332E29700B4D8B7 /* map1-text-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 05462DB41332E29700B4D8B7 /* map1-text-1.png */; };
+		05462DC01332E29700B4D8B7 /* map1-text-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 05462DB51332E29700B4D8B7 /* map1-text-2.png */; };
+		05462DC11332E29700B4D8B7 /* map1-text-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 05462DB61332E29700B4D8B7 /* map1-text-3.png */; };
+		05462DC21332E29700B4D8B7 /* map1-text-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 05462DB71332E29700B4D8B7 /* map1-text-4.png */; };
+		05462DC31332E29700B4D8B7 /* map1-text-5.png in Resources */ = {isa = PBXBuildFile; fileRef = 05462DB81332E29700B4D8B7 /* map1-text-5.png */; };
+		05462DC41332E29700B4D8B7 /* map1-text-6.png in Resources */ = {isa = PBXBuildFile; fileRef = 05462DB91332E29700B4D8B7 /* map1-text-6.png */; };
+		05462DC51332E29700B4D8B7 /* map1-text-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 05462DBA1332E29700B4D8B7 /* map1-text-7.png */; };
+		05462DC61332E29700B4D8B7 /* map1-text-8.png in Resources */ = {isa = PBXBuildFile; fileRef = 05462DBB1332E29700B4D8B7 /* map1-text-8.png */; };
+		05462DC71332E29700B4D8B7 /* map1-text-9.png in Resources */ = {isa = PBXBuildFile; fileRef = 05462DBC1332E29700B4D8B7 /* map1-text-9.png */; };
+		05462DC81332E29700B4D8B7 /* map1-text-10.png in Resources */ = {isa = PBXBuildFile; fileRef = 05462DBD1332E29700B4D8B7 /* map1-text-10.png */; };
+		05462DC91332E29700B4D8B7 /* tap-to-continue.png in Resources */ = {isa = PBXBuildFile; fileRef = 05462DBE1332E29700B4D8B7 /* tap-to-continue.png */; };
+		05462DCB1332F41600B4D8B7 /* map1-text-11.png in Resources */ = {isa = PBXBuildFile; fileRef = 05462DCA1332F41600B4D8B7 /* map1-text-11.png */; };
 		0547A46312AC33C700D2F0D1 /* TerminalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0547A46112AC33C700D2F0D1 /* TerminalViewController.m */; };
 		0547A46712AC349400D2F0D1 /* TerminalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0547A46612AC349400D2F0D1 /* TerminalViewController.xib */; };
 		0547A48012AC388C00D2F0D1 /* TerminalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0547A47F12AC388C00D2F0D1 /* TerminalCell.m */; };
@@ -615,6 +628,20 @@
 		054012B912A30FF600CCC62D /* Apple ][.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Apple ][.ttf"; sourceTree = "<group>"; };
 		054012BA12A30FF600CCC62D /* Retroville NC.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Retroville NC.ttf"; sourceTree = "<group>"; };
 		0542036912CA715700F48FE4 /* mission-incomplete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mission-incomplete.png"; sourceTree = "<group>"; };
+		05462DB11332777300B4D8B7 /* IntroMap5Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroMap5Scene.h; sourceTree = "<group>"; };
+		05462DB21332777300B4D8B7 /* IntroMap5Scene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroMap5Scene.m; sourceTree = "<group>"; };
+		05462DB41332E29700B4D8B7 /* map1-text-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map1-text-1.png"; sourceTree = "<group>"; };
+		05462DB51332E29700B4D8B7 /* map1-text-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map1-text-2.png"; sourceTree = "<group>"; };
+		05462DB61332E29700B4D8B7 /* map1-text-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map1-text-3.png"; sourceTree = "<group>"; };
+		05462DB71332E29700B4D8B7 /* map1-text-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map1-text-4.png"; sourceTree = "<group>"; };
+		05462DB81332E29700B4D8B7 /* map1-text-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map1-text-5.png"; sourceTree = "<group>"; };
+		05462DB91332E29700B4D8B7 /* map1-text-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map1-text-6.png"; sourceTree = "<group>"; };
+		05462DBA1332E29700B4D8B7 /* map1-text-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map1-text-7.png"; sourceTree = "<group>"; };
+		05462DBB1332E29700B4D8B7 /* map1-text-8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map1-text-8.png"; sourceTree = "<group>"; };
+		05462DBC1332E29700B4D8B7 /* map1-text-9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map1-text-9.png"; sourceTree = "<group>"; };
+		05462DBD1332E29700B4D8B7 /* map1-text-10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map1-text-10.png"; sourceTree = "<group>"; };
+		05462DBE1332E29700B4D8B7 /* tap-to-continue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tap-to-continue.png"; sourceTree = "<group>"; };
+		05462DCA1332F41600B4D8B7 /* map1-text-11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map1-text-11.png"; sourceTree = "<group>"; };
 		0547A46012AC33C700D2F0D1 /* TerminalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerminalViewController.h; sourceTree = "<group>"; };
 		0547A46112AC33C700D2F0D1 /* TerminalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerminalViewController.m; sourceTree = "<group>"; };
 		0547A46612AC349400D2F0D1 /* TerminalViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TerminalViewController.xib; sourceTree = "<group>"; };
@@ -1391,6 +1418,8 @@
 				05543402133194FF00AB42E4 /* IntroMap3Scene.m */,
 				055434041331953300AB42E4 /* IntroMap4Scene.h */,
 				055434051331953400AB42E4 /* IntroMap4Scene.m */,
+				05462DB11332777300B4D8B7 /* IntroMap5Scene.h */,
+				05462DB21332777300B4D8B7 /* IntroMap5Scene.m */,
 				055434071331956300AB42E4 /* IntroTerm1Scene.h */,
 				055434081331956300AB42E4 /* IntroTerm1Scene.m */,
 				0554340A1331958000AB42E4 /* IntroTerm2Scene.h */,
@@ -1411,6 +1440,18 @@
 				055434261331A0F600AB42E4 /* empty-map.png */,
 				055434271331A0F600AB42E4 /* empty-term.png */,
 				055434281331A0F600AB42E4 /* instructions.png */,
+				05462DB41332E29700B4D8B7 /* map1-text-1.png */,
+				05462DB51332E29700B4D8B7 /* map1-text-2.png */,
+				05462DB61332E29700B4D8B7 /* map1-text-3.png */,
+				05462DB71332E29700B4D8B7 /* map1-text-4.png */,
+				05462DB81332E29700B4D8B7 /* map1-text-5.png */,
+				05462DB91332E29700B4D8B7 /* map1-text-6.png */,
+				05462DBA1332E29700B4D8B7 /* map1-text-7.png */,
+				05462DBB1332E29700B4D8B7 /* map1-text-8.png */,
+				05462DBC1332E29700B4D8B7 /* map1-text-9.png */,
+				05462DBD1332E29700B4D8B7 /* map1-text-10.png */,
+				05462DCA1332F41600B4D8B7 /* map1-text-11.png */,
+				05462DBE1332E29700B4D8B7 /* tap-to-continue.png */,
 				055434291331A0F600AB42E4 /* term-1.png */,
 				0554342A1331A0F600AB42E4 /* term-2.png */,
 				0554342B1331A0F600AB42E4 /* term-3.png */,
@@ -2158,6 +2199,18 @@
 				055434311331A0F600AB42E4 /* term-2.png in Resources */,
 				055434321331A0F600AB42E4 /* term-3.png in Resources */,
 				055434331331A0F600AB42E4 /* term-4.png in Resources */,
+				05462DBF1332E29700B4D8B7 /* map1-text-1.png in Resources */,
+				05462DC01332E29700B4D8B7 /* map1-text-2.png in Resources */,
+				05462DC11332E29700B4D8B7 /* map1-text-3.png in Resources */,
+				05462DC21332E29700B4D8B7 /* map1-text-4.png in Resources */,
+				05462DC31332E29700B4D8B7 /* map1-text-5.png in Resources */,
+				05462DC41332E29700B4D8B7 /* map1-text-6.png in Resources */,
+				05462DC51332E29700B4D8B7 /* map1-text-7.png in Resources */,
+				05462DC61332E29700B4D8B7 /* map1-text-8.png in Resources */,
+				05462DC71332E29700B4D8B7 /* map1-text-9.png in Resources */,
+				05462DC81332E29700B4D8B7 /* map1-text-10.png in Resources */,
+				05462DC91332E29700B4D8B7 /* tap-to-continue.png in Resources */,
+				05462DCB1332F41600B4D8B7 /* map1-text-11.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2224,6 +2277,7 @@
 				0554341E1331967E00AB42E4 /* IntroInstruction3Scene.m in Sources */,
 				05543421133196BD00AB42E4 /* IntroInstruction4Scene.m in Sources */,
 				0554342413319A4400AB42E4 /* TutorialIntroductionViewController.m in Sources */,
+				05462DB31332777300B4D8B7 /* IntroMap5Scene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
