@@ -11,8 +11,9 @@
 #import "IntroMap2Scene.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define kMAX_TAPS           11
+#define kMAX_TAPS           10
 #define kINTRO_1_TICK_1     30
+#define kITEM_COUNTER_DELTA 60
 #define kTAP_COUNTER_DELTA  180
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -20,6 +21,7 @@
 
 -(void)showTapToContinue;
 -(void)showMessage;
+-(void)showItem;
 
 @end
 
@@ -52,11 +54,17 @@
 -(void)showMessage {
     self.acceptTouches = NO;
     self.messageDisplayedCount = self.counter;
+    self.tapCounter++;
+    if (self.tapCounterMessageSprite) {
+        [self.tapCounterMessageSprite removeFromParentAndCleanup:YES];
+        self.tapCounterMessageSprite = nil;
+    }
     if (self.tapCounter > 1) {
         [self.displayedMessageSprite removeFromParentAndCleanup:YES];
     }
     if (self.itemSprite) {
         [self.itemSprite removeFromParentAndCleanup:YES];
+        self.itemSprite = nil;
     }
     switch (self.tapCounter) {
         case 1:
@@ -89,14 +97,49 @@
         case 10:
             self.displayedMessageSprite = [CCSprite spriteWithFile:@"map1-text-10.png"];
             break;
-        case 11:
-            self.displayedMessageSprite = [CCSprite spriteWithFile:@"map1-text-11.png"];
-            break;
     }
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     self.displayedMessageSprite.position = CGPointMake(screenSize.width/2, 290.0);
     self.displayedMessageSprite.anchorPoint = CGPointMake(0.5, 0.5);
     [self addChild:self.displayedMessageSprite];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+-(void)showItem {
+    switch (self.tapCounter) {
+        case 1:
+        case 2:
+            break;
+        case 3:
+            self.itemSprite = [CCSprite spriteWithFile:@"map1-rover.png"];
+            break;
+        case 4:
+            self.itemSprite = [CCSprite spriteWithFile:@"map1-home-base.png"];
+            break;
+        case 5:
+            self.itemSprite = [CCSprite spriteWithFile:@"map1-pod-site.png"];
+            break;
+        case 6:
+            self.itemSprite = [CCSprite spriteWithFile:@"map1-pod.png"];
+            break;
+        case 7:
+            self.itemSprite = [CCSprite spriteWithFile:@"map1-sample-site.png"];
+            break;
+        case 8:
+            self.itemSprite = [CCSprite spriteWithFile:@"map1-sample-home.png"];
+            break;
+        case 9:
+            self.itemSprite = [CCSprite spriteWithFile:@"map1-terrain.png"];
+            break;
+        case 10:
+            break;
+    }
+    if (self.itemSprite) {
+        CGSize screenSize = [[CCDirector sharedDirector] winSize];
+        self.itemSprite.position = CGPointMake(screenSize.width/2 - 40.0, 150.0);
+        self.itemSprite.anchorPoint = CGPointMake(0.5, 0.5);
+        [self addChild:self.itemSprite];
+    }
 }
 
 //===================================================================================================================================
@@ -117,8 +160,8 @@
         self.tapCounter = 0;
         self.messageDisplayedCount = kINTRO_1_TICK_1;
         self.tapCounterMessageSprite = nil;
-        self.isTouchEnabled = YES;
         self.itemSprite = nil;
+        self.isTouchEnabled = YES;
         CCSprite* backgroundGrid = [CCSprite spriteWithFile:@"intro-map.png"];
         backgroundGrid.anchorPoint = CGPointMake(0.0, 0.0);
         backgroundGrid.position = CGPointMake(0.0, 0.0);
@@ -135,22 +178,18 @@
 - (void) nextFrame:(ccTime)dt {
     self.counter++;
     if (self.counter == kINTRO_1_TICK_1) {
-        self.tapCounter++;
         [self showMessage];
     } else if ((self.counter - self.messageDisplayedCount) > kTAP_COUNTER_DELTA && self.tapCounterMessageSprite == nil) {
         [self showTapToContinue];
+    } else if ((self.counter - self.messageDisplayedCount) > kITEM_COUNTER_DELTA && self.itemSprite == nil) {
+        [self showItem];
     }    
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 -(void) ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent *)event {
     if (self.acceptTouches) {
-        self.tapCounter++;
-        if (self.tapCounter <= kMAX_TAPS) {
-            if (self.tapCounterMessageSprite) {
-                [self.tapCounterMessageSprite removeFromParentAndCleanup:YES];
-            }
-            self.tapCounterMessageSprite = nil;
+        if (self.tapCounter < kMAX_TAPS) {
             [self showMessage];
         } else {
             [[CCDirector sharedDirector] replaceScene: [IntroMap2Scene scene]];

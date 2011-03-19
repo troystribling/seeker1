@@ -404,7 +404,7 @@ static ProgramNgin* thisProgramNgin = nil;
             instructionString = @"turn left";
             break;
         case PutSensorProgramInstruction:
-            instructionString = @"put sensor";
+            instructionString = @"put pod";
             break;
         case GetSampleProgramInstruction:
             instructionString = @"get sample";
@@ -416,7 +416,7 @@ static ProgramNgin* thisProgramNgin = nil;
             instructionString = @"path blocked";
             break;
         case SensorBinEmptyPredicateProgramInstruction:
-            instructionString = @"sensor bin empty";
+            instructionString = @"pod bin empty";
             break;
         case SampleBinFullPredicateProgramInstruction:
             instructionString = @"sample bin full";
@@ -428,7 +428,7 @@ static ProgramNgin* thisProgramNgin = nil;
             instructionString = @"at sample";
             break;
         case AtSensorSiteProgramInstruction:
-            instructionString = @"at sensor site";
+            instructionString = @"at pod site";
             break;
     }
     return instructionString;

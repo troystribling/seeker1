@@ -147,8 +147,14 @@
 		05462DC71332E29700B4D8B7 /* map1-text-9.png in Resources */ = {isa = PBXBuildFile; fileRef = 05462DBC1332E29700B4D8B7 /* map1-text-9.png */; };
 		05462DC81332E29700B4D8B7 /* map1-text-10.png in Resources */ = {isa = PBXBuildFile; fileRef = 05462DBD1332E29700B4D8B7 /* map1-text-10.png */; };
 		05462DC91332E29700B4D8B7 /* tap-to-continue.png in Resources */ = {isa = PBXBuildFile; fileRef = 05462DBE1332E29700B4D8B7 /* tap-to-continue.png */; };
-		05462DCB1332F41600B4D8B7 /* map1-text-11.png in Resources */ = {isa = PBXBuildFile; fileRef = 05462DCA1332F41600B4D8B7 /* map1-text-11.png */; };
 		05462DCD13343A0900B4D8B7 /* intro-map.png in Resources */ = {isa = PBXBuildFile; fileRef = 05462DCC13343A0900B4D8B7 /* intro-map.png */; };
+		05462DCF13350FDC00B4D8B7 /* map1-rover.png in Resources */ = {isa = PBXBuildFile; fileRef = 05462DCE13350FDB00B4D8B7 /* map1-rover.png */; };
+		05462DD113351C1800B4D8B7 /* map1-pod-site.png in Resources */ = {isa = PBXBuildFile; fileRef = 05462DD013351C1600B4D8B7 /* map1-pod-site.png */; };
+		05462DD6133526C400B4D8B7 /* map1-home-base.png in Resources */ = {isa = PBXBuildFile; fileRef = 05462DD2133526AC00B4D8B7 /* map1-home-base.png */; };
+		05462DD7133526C400B4D8B7 /* map1-pod.png in Resources */ = {isa = PBXBuildFile; fileRef = 05462DD3133526AD00B4D8B7 /* map1-pod.png */; };
+		05462DD8133526C400B4D8B7 /* map1-sample-home.png in Resources */ = {isa = PBXBuildFile; fileRef = 05462DD4133526B200B4D8B7 /* map1-sample-home.png */; };
+		05462DD9133526C400B4D8B7 /* map1-sample-site.png in Resources */ = {isa = PBXBuildFile; fileRef = 05462DD5133526B900B4D8B7 /* map1-sample-site.png */; };
+		05462DDD133530B200B4D8B7 /* map1-terrain.png in Resources */ = {isa = PBXBuildFile; fileRef = 05462DDC133530AD00B4D8B7 /* map1-terrain.png */; };
 		0547A46312AC33C700D2F0D1 /* TerminalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0547A46112AC33C700D2F0D1 /* TerminalViewController.m */; };
 		0547A46712AC349400D2F0D1 /* TerminalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0547A46612AC349400D2F0D1 /* TerminalViewController.xib */; };
 		0547A48012AC388C00D2F0D1 /* TerminalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0547A47F12AC388C00D2F0D1 /* TerminalCell.m */; };
@@ -642,8 +648,14 @@
 		05462DBC1332E29700B4D8B7 /* map1-text-9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map1-text-9.png"; sourceTree = "<group>"; };
 		05462DBD1332E29700B4D8B7 /* map1-text-10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map1-text-10.png"; sourceTree = "<group>"; };
 		05462DBE1332E29700B4D8B7 /* tap-to-continue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tap-to-continue.png"; sourceTree = "<group>"; };
-		05462DCA1332F41600B4D8B7 /* map1-text-11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map1-text-11.png"; sourceTree = "<group>"; };
 		05462DCC13343A0900B4D8B7 /* intro-map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-map.png"; sourceTree = "<group>"; };
+		05462DCE13350FDB00B4D8B7 /* map1-rover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map1-rover.png"; sourceTree = "<group>"; };
+		05462DD013351C1600B4D8B7 /* map1-pod-site.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map1-pod-site.png"; sourceTree = "<group>"; };
+		05462DD2133526AC00B4D8B7 /* map1-home-base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map1-home-base.png"; sourceTree = "<group>"; };
+		05462DD3133526AD00B4D8B7 /* map1-pod.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map1-pod.png"; sourceTree = "<group>"; };
+		05462DD4133526B200B4D8B7 /* map1-sample-home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map1-sample-home.png"; sourceTree = "<group>"; };
+		05462DD5133526B900B4D8B7 /* map1-sample-site.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map1-sample-site.png"; sourceTree = "<group>"; };
+		05462DDC133530AD00B4D8B7 /* map1-terrain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map1-terrain.png"; sourceTree = "<group>"; };
 		0547A46012AC33C700D2F0D1 /* TerminalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerminalViewController.h; sourceTree = "<group>"; };
 		0547A46112AC33C700D2F0D1 /* TerminalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerminalViewController.m; sourceTree = "<group>"; };
 		0547A46612AC349400D2F0D1 /* TerminalViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TerminalViewController.xib; sourceTree = "<group>"; };
@@ -1443,6 +1455,13 @@
 				055434271331A0F600AB42E4 /* empty-term.png */,
 				05462DCC13343A0900B4D8B7 /* intro-map.png */,
 				055434281331A0F600AB42E4 /* instructions.png */,
+				05462DD2133526AC00B4D8B7 /* map1-home-base.png */,
+				05462DD3133526AD00B4D8B7 /* map1-pod.png */,
+				05462DD013351C1600B4D8B7 /* map1-pod-site.png */,
+				05462DCE13350FDB00B4D8B7 /* map1-rover.png */,
+				05462DD4133526B200B4D8B7 /* map1-sample-home.png */,
+				05462DD5133526B900B4D8B7 /* map1-sample-site.png */,
+				05462DDC133530AD00B4D8B7 /* map1-terrain.png */,
 				05462DB41332E29700B4D8B7 /* map1-text-1.png */,
 				05462DB51332E29700B4D8B7 /* map1-text-2.png */,
 				05462DB61332E29700B4D8B7 /* map1-text-3.png */,
@@ -1453,7 +1472,6 @@
 				05462DBB1332E29700B4D8B7 /* map1-text-8.png */,
 				05462DBC1332E29700B4D8B7 /* map1-text-9.png */,
 				05462DBD1332E29700B4D8B7 /* map1-text-10.png */,
-				05462DCA1332F41600B4D8B7 /* map1-text-11.png */,
 				05462DBE1332E29700B4D8B7 /* tap-to-continue.png */,
 				055434291331A0F600AB42E4 /* term-1.png */,
 				0554342A1331A0F600AB42E4 /* term-2.png */,
@@ -2213,8 +2231,14 @@
 				05462DC71332E29700B4D8B7 /* map1-text-9.png in Resources */,
 				05462DC81332E29700B4D8B7 /* map1-text-10.png in Resources */,
 				05462DC91332E29700B4D8B7 /* tap-to-continue.png in Resources */,
-				05462DCB1332F41600B4D8B7 /* map1-text-11.png in Resources */,
 				05462DCD13343A0900B4D8B7 /* intro-map.png in Resources */,
+				05462DCF13350FDC00B4D8B7 /* map1-rover.png in Resources */,
+				05462DD113351C1800B4D8B7 /* map1-pod-site.png in Resources */,
+				05462DD6133526C400B4D8B7 /* map1-home-base.png in Resources */,
+				05462DD7133526C400B4D8B7 /* map1-pod.png in Resources */,
+				05462DD8133526C400B4D8B7 /* map1-sample-home.png in Resources */,
+				05462DD9133526C400B4D8B7 /* map1-sample-site.png in Resources */,
+				05462DDD133530B200B4D8B7 /* map1-terrain.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
