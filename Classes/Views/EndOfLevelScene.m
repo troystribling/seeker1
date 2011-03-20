@@ -197,10 +197,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)skipMission {
-    [ProgramNgin instance].programHalted = NO;
-    [ProgramNgin instance].programRunning = NO;
-    [TutorialSectionViewController nextLevel];
-    [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
+    [self nextMission];
 }
 
 

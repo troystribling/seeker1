@@ -167,6 +167,7 @@
             if (self.selectedTutorial == 0) {
                 [self.view removeFromSuperview];
             } else {
+                self.nextView.hidden = NO;
                 [self previousTutorial];
                 [self loadTutorial];
             }
