@@ -7,11 +7,12 @@
 //
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "IntroMap2Scene.h"
+#import "IntroTerm1Scene.h"
 #import "StatusDisplay.h"
 #import "SeekerSprite.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define kMAX_TAPS           1
+#define kMAX_TAPS           3
 #define kINTRO_2_TICK_1     30
 #define kITEM_COUNTER_DELTA 60
 #define kTAP_COUNTER_DELTA  180
@@ -23,8 +24,12 @@
 - (void)updateEnergy;
 - (void)updateSensorCount;
 - (void)initStatusDisplay;
--(void)showTapToContinue;
--(void)showMessage;
+- (void)showTapToContinue;
+- (void)showMessage;
+- (void)showItem;
+- (void)showProgramGraphic;
+- (void)showProgMenu;
+- (void)touchProg;
 
 @end
 
@@ -43,6 +48,7 @@
 @synthesize counter;
 @synthesize energy;
 @synthesize acceptTouches;
+@synthesize readyForItem;
 
 //===================================================================================================================================
 #pragma mark IntroMap2Scene PrivateAPI
@@ -82,7 +88,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
--(void)showTapToContinue {
+- (void)showTapToContinue {
     self.acceptTouches = YES;
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     self.tapCounterMessageSprite = [CCSprite spriteWithFile:@"tap-to-continue.png"];
@@ -91,8 +97,9 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
--(void)showMessage {
+- (void)showMessage {
     self.acceptTouches = NO;
+    self.readyForItem = YES;
     self.messageDisplayedCount = self.counter;
     self.tapCounter++;
     if (self.tapCounterMessageSprite) {
@@ -106,11 +113,55 @@
         case 1:
             self.displayedMessageSprite = [CCSprite spriteWithFile:@"map2-text-1.png"];
             break;
+        case 2:
+            self.displayedMessageSprite = [CCSprite spriteWithFile:@"map2-text-2.png"];
+            break;
+        case 3:
+            self.displayedMessageSprite = [CCSprite spriteWithFile:@"map2-text-3.png"];
+            break;
     }
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     self.displayedMessageSprite.position = CGPointMake(screenSize.width/2, 285.0);
     self.displayedMessageSprite.anchorPoint = CGPointMake(0.5, 0.5);
     [self addChild:self.displayedMessageSprite];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)showItem {
+    self.readyForItem = NO;
+    switch (self.tapCounter) {
+        case 1:
+            break;
+        case 2:
+            [self showProgramGraphic];
+            break;
+        case 3:
+            [self showProgMenu];
+            break;
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)showProgramGraphic {
+    CCSprite* graphic = [CCSprite spriteWithFile:@"map2-program-graphic.png"];
+    graphic.position = CGPointMake(0.0, 0.0);
+    graphic.anchorPoint = CGPointMake(0.0, 0.0);
+    [self addChild:graphic z:0];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)showProgMenu {
+    CCSprite* progSprite = [CCSprite spriteWithFile:@"map2-nav-prog.png"];
+    CCMenuItemLabel* nextItem = [CCMenuItemSprite itemFromNormalSprite:progSprite selectedSprite:progSprite target:self selector:@selector(touchProg)];
+    CCMenu* menu = [CCMenu menuWithItems:nextItem, nil];
+    [menu alignItemsHorizontallyWithPadding:0.0];
+    menu.position = CGPointMake(195.0f, 399.0f);
+    [self addChild:menu z:0];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)touchProg {
+    [[CCDirector sharedDirector] replaceScene: [IntroTerm1Scene scene]];
 }
 
 //===================================================================================================================================
@@ -130,7 +181,9 @@
         self.counter = 0;
         self.energy = 6;
         self.tapCounter = 0;
+        self.readyForItem = NO;
         self.messageDisplayedCount = kINTRO_2_TICK_1;
+        self.isTouchEnabled = YES;
         CCSprite* backgroundGrid = [CCSprite spriteWithFile:@"empty-map.png"];
         backgroundGrid.anchorPoint = CGPointMake(0.0, 0.0);
         backgroundGrid.position = CGPointMake(0.0, 0.0);
@@ -149,8 +202,10 @@
     self.counter++;
     if (self.counter == kINTRO_2_TICK_1) {
         [self showMessage];
-    } else if ((self.counter - self.messageDisplayedCount) > kTAP_COUNTER_DELTA && self.tapCounterMessageSprite == nil) {
+    } else if ((self.counter - self.messageDisplayedCount) > kTAP_COUNTER_DELTA && self.tapCounterMessageSprite == nil && self.tapCounter != kMAX_TAPS) {
         [self showTapToContinue];
+    } else if ((self.counter - self.messageDisplayedCount) > kITEM_COUNTER_DELTA && self.readyForItem) {
+        [self showItem];
     }    
 }
 
@@ -159,7 +214,6 @@
     if (self.acceptTouches) {
         if (self.tapCounter < kMAX_TAPS) {
             [self showMessage];
-        } else {
         }
     }
 }    

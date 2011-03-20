@@ -26,6 +26,7 @@
     NSInteger tapCounter;
     NSInteger energy;
     BOOL acceptTouches;
+    BOOL readyForItem;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -40,6 +41,7 @@
 @property (nonatomic, assign) NSInteger tapCounter;
 @property (nonatomic, assign) NSInteger energy;
 @property (nonatomic, assign) BOOL acceptTouches;
+@property (nonatomic, assign) BOOL readyForItem;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)scene;
