@@ -196,6 +196,8 @@
 		0558413E12F900EB00E506D4 /* open-terminal-game-board.png in Resources */ = {isa = PBXBuildFile; fileRef = 0558413912F900EB00E506D4 /* open-terminal-game-board.png */; };
 		0558413F12F900EB00E506D4 /* program-game-board.png in Resources */ = {isa = PBXBuildFile; fileRef = 0558413A12F900EB00E506D4 /* program-game-board.png */; };
 		0558414112F900EB00E506D4 /* write-program.png in Resources */ = {isa = PBXBuildFile; fileRef = 0558413C12F900EB00E506D4 /* write-program.png */; };
+		05638061133583C9004A5E15 /* map2-home-base.png in Resources */ = {isa = PBXBuildFile; fileRef = 0563805F133583C9004A5E15 /* map2-home-base.png */; };
+		05638062133583C9004A5E15 /* map2-sensor-site.png in Resources */ = {isa = PBXBuildFile; fileRef = 05638060133583C9004A5E15 /* map2-sensor-site.png */; };
 		05663F611302343C008AA1DC /* map-8.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F5F1302343C008AA1DC /* map-8.tmx */; };
 		05663F621302343C008AA1DC /* map-9.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F601302343C008AA1DC /* map-9.tmx */; };
 		05663F65130239D4008AA1DC /* map-10.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05663F63130239D4008AA1DC /* map-10.tmx */; };
@@ -246,6 +248,7 @@
 		05BE9450130705A000AAAA1F /* map-34.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05BE944F130705A000AAAA1F /* map-34.tmx */; };
 		05BE94551307181900AAAA1F /* map-35.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05BE94541307181900AAAA1F /* map-35.tmx */; };
 		05BE945A13072FA500AAAA1F /* map-36.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05BE945913072FA500AAAA1F /* map-36.tmx */; };
+		05C02715133597B700F7B52F /* map2-text-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C02714133597B700F7B52F /* map2-text-1.png */; };
 		05D4EEED13161BA400954E03 /* mission-not-played.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D4EEEC13161BA400954E03 /* mission-not-played.png */; };
 		05D5BFB11321AD570099CF25 /* NavigationDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D5BFB01321AD570099CF25 /* NavigationDisplay.m */; };
 		05E40FAB13197AD900DE6344 /* get-started-introduction.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E40FAA13197AD900DE6344 /* get-started-introduction.png */; };
@@ -718,6 +721,8 @@
 		0558413912F900EB00E506D4 /* open-terminal-game-board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open-terminal-game-board.png"; sourceTree = "<group>"; };
 		0558413A12F900EB00E506D4 /* program-game-board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "program-game-board.png"; sourceTree = "<group>"; };
 		0558413C12F900EB00E506D4 /* write-program.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write-program.png"; sourceTree = "<group>"; };
+		0563805F133583C9004A5E15 /* map2-home-base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map2-home-base.png"; sourceTree = "<group>"; };
+		05638060133583C9004A5E15 /* map2-sensor-site.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map2-sensor-site.png"; sourceTree = "<group>"; };
 		05663F5F1302343C008AA1DC /* map-8.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-8.tmx"; sourceTree = "<group>"; };
 		05663F601302343C008AA1DC /* map-9.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-9.tmx"; sourceTree = "<group>"; };
 		05663F63130239D4008AA1DC /* map-10.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-10.tmx"; sourceTree = "<group>"; };
@@ -775,6 +780,7 @@
 		05BE944F130705A000AAAA1F /* map-34.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-34.tmx"; sourceTree = "<group>"; };
 		05BE94541307181900AAAA1F /* map-35.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-35.tmx"; sourceTree = "<group>"; };
 		05BE945913072FA500AAAA1F /* map-36.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-36.tmx"; sourceTree = "<group>"; };
+		05C02714133597B700F7B52F /* map2-text-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map2-text-1.png"; sourceTree = "<group>"; };
 		05D4EEEC13161BA400954E03 /* mission-not-played.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mission-not-played.png"; sourceTree = "<group>"; };
 		05D5BFAF1321AD570099CF25 /* NavigationDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationDisplay.h; sourceTree = "<group>"; };
 		05D5BFB01321AD570099CF25 /* NavigationDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationDisplay.m; sourceTree = "<group>"; };
@@ -1472,6 +1478,9 @@
 				05462DBB1332E29700B4D8B7 /* map1-text-8.png */,
 				05462DBC1332E29700B4D8B7 /* map1-text-9.png */,
 				05462DBD1332E29700B4D8B7 /* map1-text-10.png */,
+				0563805F133583C9004A5E15 /* map2-home-base.png */,
+				05638060133583C9004A5E15 /* map2-sensor-site.png */,
+				05C02714133597B700F7B52F /* map2-text-1.png */,
 				05462DBE1332E29700B4D8B7 /* tap-to-continue.png */,
 				055434291331A0F600AB42E4 /* term-1.png */,
 				0554342A1331A0F600AB42E4 /* term-2.png */,
@@ -2239,6 +2248,9 @@
 				05462DD8133526C400B4D8B7 /* map1-sample-home.png in Resources */,
 				05462DD9133526C400B4D8B7 /* map1-sample-site.png in Resources */,
 				05462DDD133530B200B4D8B7 /* map1-terrain.png in Resources */,
+				05638061133583C9004A5E15 /* map2-home-base.png in Resources */,
+				05638062133583C9004A5E15 /* map2-sensor-site.png in Resources */,
+				05C02715133597B700F7B52F /* map2-text-1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
