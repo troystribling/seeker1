@@ -13,13 +13,23 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface IntroTerm1Scene : CCLayer {
+    CCSprite* displayedMessageSprite;
+    CCSprite* tapCounterMessageSprite;
     NSInteger counter;
+    NSInteger messageDisplayedCount;;
+    NSInteger tapCounter;
     BOOL acceptTouches;
+    BOOL readyForPrompt;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@property (nonatomic, retain) CCSprite* displayedMessageSprite;
+@property (nonatomic, retain) CCSprite* tapCounterMessageSprite;
 @property (nonatomic, assign) NSInteger counter;
+@property (nonatomic, assign) NSInteger messageDisplayedCount;
+@property (nonatomic, assign) NSInteger tapCounter;
 @property (nonatomic, assign) BOOL acceptTouches;
+@property (nonatomic, assign) BOOL readyForPrompt;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)scene;

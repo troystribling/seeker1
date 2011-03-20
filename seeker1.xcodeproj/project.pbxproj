@@ -83,6 +83,11 @@
 		051DCDCF133662A300F34140 /* map2-nav-prog.png in Resources */ = {isa = PBXBuildFile; fileRef = 051DCDCB133662A300F34140 /* map2-nav-prog.png */; };
 		051DCDD0133662A300F34140 /* map2-text-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 051DCDCC133662A300F34140 /* map2-text-2.png */; };
 		051DCDD1133662A300F34140 /* map2-text-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 051DCDCD133662A300F34140 /* map2-text-3.png */; };
+		051DCDD61336AA7A00F34140 /* term1-text-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 051DCDD21336AA7400F34140 /* term1-text-1.png */; };
+		051DCDD71336AA7A00F34140 /* term1-text-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 051DCDD31336AA7500F34140 /* term1-text-2.png */; };
+		051DCDD81336AA7A00F34140 /* term1-text-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 051DCDD41336AA7600F34140 /* term1-text-3.png */; };
+		051DCDD91336AA7A00F34140 /* term1-text-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 051DCDD51336AA7800F34140 /* term1-text-4.png */; };
+		051DCDDB1336B88E00F34140 /* term-prompt.png in Resources */ = {isa = PBXBuildFile; fileRef = 051DCDDA1336B88D00F34140 /* term-prompt.png */; };
 		051E5896129B7CF000A5440E /* items.plist in Resources */ = {isa = PBXBuildFile; fileRef = 051E5894129B7CF000A5440E /* items.plist */; };
 		051E5897129B7CF000A5440E /* items.png in Resources */ = {isa = PBXBuildFile; fileRef = 051E5895129B7CF000A5440E /* items.png */; };
 		051F8622129641B30081CF3E /* CCAnimationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 051F8621129641B30081CF3E /* CCAnimationHelper.m */; };
@@ -577,6 +582,11 @@
 		051DCDCB133662A300F34140 /* map2-nav-prog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map2-nav-prog.png"; sourceTree = "<group>"; };
 		051DCDCC133662A300F34140 /* map2-text-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map2-text-2.png"; sourceTree = "<group>"; };
 		051DCDCD133662A300F34140 /* map2-text-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map2-text-3.png"; sourceTree = "<group>"; };
+		051DCDD21336AA7400F34140 /* term1-text-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "term1-text-1.png"; sourceTree = "<group>"; };
+		051DCDD31336AA7500F34140 /* term1-text-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "term1-text-2.png"; sourceTree = "<group>"; };
+		051DCDD41336AA7600F34140 /* term1-text-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "term1-text-3.png"; sourceTree = "<group>"; };
+		051DCDD51336AA7800F34140 /* term1-text-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "term1-text-4.png"; sourceTree = "<group>"; };
+		051DCDDA1336B88D00F34140 /* term-prompt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "term-prompt.png"; sourceTree = "<group>"; };
 		051E5894129B7CF000A5440E /* items.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = items.plist; sourceTree = "<group>"; };
 		051E5895129B7CF000A5440E /* items.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = items.png; sourceTree = "<group>"; };
 		051F8620129641B30081CF3E /* CCAnimationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAnimationHelper.h; sourceTree = "<group>"; };
@@ -1498,6 +1508,11 @@
 				0554342A1331A0F600AB42E4 /* term-2.png */,
 				0554342B1331A0F600AB42E4 /* term-3.png */,
 				0554342C1331A0F600AB42E4 /* term-4.png */,
+				051DCDDA1336B88D00F34140 /* term-prompt.png */,
+				051DCDD21336AA7400F34140 /* term1-text-1.png */,
+				051DCDD31336AA7500F34140 /* term1-text-2.png */,
+				051DCDD41336AA7600F34140 /* term1-text-3.png */,
+				051DCDD51336AA7800F34140 /* term1-text-4.png */,
 			);
 			path = Intro;
 			sourceTree = "<group>";
@@ -2267,6 +2282,11 @@
 				051DCDCF133662A300F34140 /* map2-nav-prog.png in Resources */,
 				051DCDD0133662A300F34140 /* map2-text-2.png in Resources */,
 				051DCDD1133662A300F34140 /* map2-text-3.png in Resources */,
+				051DCDD61336AA7A00F34140 /* term1-text-1.png in Resources */,
+				051DCDD71336AA7A00F34140 /* term1-text-2.png in Resources */,
+				051DCDD81336AA7A00F34140 /* term1-text-3.png in Resources */,
+				051DCDD91336AA7A00F34140 /* term1-text-4.png in Resources */,
+				051DCDDB1336B88E00F34140 /* term-prompt.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
