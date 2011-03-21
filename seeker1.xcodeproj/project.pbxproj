@@ -88,6 +88,10 @@
 		051DCDD81336AA7A00F34140 /* term1-text-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 051DCDD41336AA7600F34140 /* term1-text-3.png */; };
 		051DCDD91336AA7A00F34140 /* term1-text-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 051DCDD51336AA7800F34140 /* term1-text-4.png */; };
 		051DCDDB1336B88E00F34140 /* term-prompt.png in Resources */ = {isa = PBXBuildFile; fileRef = 051DCDDA1336B88D00F34140 /* term-prompt.png */; };
+		051DCDE01336D4E900F34140 /* inst-move.png in Resources */ = {isa = PBXBuildFile; fileRef = 051DCDDC1336D4D800F34140 /* inst-move.png */; };
+		051DCDE11336D4E900F34140 /* inst1-text-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 051DCDDD1336D4DA00F34140 /* inst1-text-1.png */; };
+		051DCDE21336D4E900F34140 /* inst1-text-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 051DCDDE1336D4DE00F34140 /* inst1-text-2.png */; };
+		051DCDE31336D4E900F34140 /* inst1-text-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 051DCDDF1336D4E300F34140 /* inst1-text-3.png */; };
 		051E5896129B7CF000A5440E /* items.plist in Resources */ = {isa = PBXBuildFile; fileRef = 051E5894129B7CF000A5440E /* items.plist */; };
 		051E5897129B7CF000A5440E /* items.png in Resources */ = {isa = PBXBuildFile; fileRef = 051E5895129B7CF000A5440E /* items.png */; };
 		051F8622129641B30081CF3E /* CCAnimationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 051F8621129641B30081CF3E /* CCAnimationHelper.m */; };
@@ -587,6 +591,10 @@
 		051DCDD41336AA7600F34140 /* term1-text-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "term1-text-3.png"; sourceTree = "<group>"; };
 		051DCDD51336AA7800F34140 /* term1-text-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "term1-text-4.png"; sourceTree = "<group>"; };
 		051DCDDA1336B88D00F34140 /* term-prompt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "term-prompt.png"; sourceTree = "<group>"; };
+		051DCDDC1336D4D800F34140 /* inst-move.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inst-move.png"; sourceTree = "<group>"; };
+		051DCDDD1336D4DA00F34140 /* inst1-text-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inst1-text-1.png"; sourceTree = "<group>"; };
+		051DCDDE1336D4DE00F34140 /* inst1-text-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inst1-text-2.png"; sourceTree = "<group>"; };
+		051DCDDF1336D4E300F34140 /* inst1-text-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inst1-text-3.png"; sourceTree = "<group>"; };
 		051E5894129B7CF000A5440E /* items.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = items.plist; sourceTree = "<group>"; };
 		051E5895129B7CF000A5440E /* items.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = items.png; sourceTree = "<group>"; };
 		051F8620129641B30081CF3E /* CCAnimationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAnimationHelper.h; sourceTree = "<group>"; };
@@ -1479,6 +1487,10 @@
 				055434271331A0F600AB42E4 /* empty-term.png */,
 				05462DCC13343A0900B4D8B7 /* intro-map.png */,
 				055434281331A0F600AB42E4 /* instructions.png */,
+				051DCDDC1336D4D800F34140 /* inst-move.png */,
+				051DCDDD1336D4DA00F34140 /* inst1-text-1.png */,
+				051DCDDE1336D4DE00F34140 /* inst1-text-2.png */,
+				051DCDDF1336D4E300F34140 /* inst1-text-3.png */,
 				05462DD2133526AC00B4D8B7 /* map1-home-base.png */,
 				05462DD3133526AD00B4D8B7 /* map1-pod.png */,
 				05462DD013351C1600B4D8B7 /* map1-pod-site.png */,
@@ -2287,6 +2299,10 @@
 				051DCDD81336AA7A00F34140 /* term1-text-3.png in Resources */,
 				051DCDD91336AA7A00F34140 /* term1-text-4.png in Resources */,
 				051DCDDB1336B88E00F34140 /* term-prompt.png in Resources */,
+				051DCDE01336D4E900F34140 /* inst-move.png in Resources */,
+				051DCDE11336D4E900F34140 /* inst1-text-1.png in Resources */,
+				051DCDE21336D4E900F34140 /* inst1-text-2.png in Resources */,
+				051DCDE31336D4E900F34140 /* inst1-text-3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

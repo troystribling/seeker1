@@ -43,7 +43,7 @@
 - (id)init {
 	if((self=[super init])) {
         self.counter = 0;
-        CCSprite* backgroundGrid = [CCSprite spriteWithFile:@"term-2.png"];
+        CCSprite* backgroundGrid = [CCSprite spriteWithFile:@"term-1.png"];
         backgroundGrid.anchorPoint = CGPointMake(0.0, 0.0);
         backgroundGrid.position = CGPointMake(0.0, 0.0);
         [self addChild:backgroundGrid z:-10];

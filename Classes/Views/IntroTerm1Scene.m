@@ -78,7 +78,7 @@
             break;
     }
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
-    self.displayedMessageSprite.position = CGPointMake(screenSize.width/2, 175.0);
+    self.displayedMessageSprite.position = CGPointMake(screenSize.width/2, 160.0);
     self.displayedMessageSprite.anchorPoint = CGPointMake(0.5, 0.5);
     [self addChild:self.displayedMessageSprite];
 }
