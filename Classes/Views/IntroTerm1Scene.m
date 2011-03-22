@@ -12,16 +12,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kMAX_TAPS               4
-#define kINTRO_1_TICK_1         30
-#define kPROMPT_COUNTER_DELTA   60
-#define kTAP_COUNTER_DELTA      180
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface IntroTerm1Scene (PrivateAPI)
 
-- (void)showTapToContinue;
-- (void)showMessage;
-- (void)showPromptMenu;
 - (void)touchPrompt;
 
 @end
@@ -30,38 +24,12 @@
 @implementation IntroTerm1Scene
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize displayedMessageSprite;
-@synthesize tapCounterMessageSprite;
-@synthesize counter;
-@synthesize messageDisplayedCount;
-@synthesize tapCounter;
-@synthesize acceptTouches;
-@synthesize readyForPrompt;
 
 //===================================================================================================================================
 #pragma mark IntroTerm1Scene PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)showTapToContinue {
-    self.acceptTouches = YES;
-    CGSize screenSize = [[CCDirector sharedDirector] winSize];
-    self.tapCounterMessageSprite = [CCSprite spriteWithFile:@"tap-to-continue.png"];
-    self.tapCounterMessageSprite.position = CGPointMake(screenSize.width/2.0, 15.0);
-    [self addChild:self.tapCounterMessageSprite];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)showMessage {
-    self.acceptTouches = NO;
-    self.messageDisplayedCount = self.counter;
-    self.tapCounter++;
-    if (self.tapCounterMessageSprite) {
-        [self.tapCounterMessageSprite removeFromParentAndCleanup:YES];
-        self.tapCounterMessageSprite = nil;
-    }
-    if (self.tapCounter > 1) {
-        [self.displayedMessageSprite removeFromParentAndCleanup:YES];
-    }
     switch (self.tapCounter) {
         case 1:
             self.displayedMessageSprite = [CCSprite spriteWithFile:@"term1-text-1.png"];
@@ -84,7 +52,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)showPromptMenu {
+- (void)showPrompt {
     self.readyForPrompt = NO;
     CCSprite* progSprite = [CCSprite spriteWithFile:@"term-prompt.png"];
     CCMenuItemLabel* nextItem = [CCMenuItemSprite itemFromNormalSprite:progSprite selectedSprite:progSprite target:self selector:@selector(touchPrompt)];
@@ -114,11 +82,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)init {
 	if((self=[super init])) {
-        self.counter = 0;
-        self.messageDisplayedCount = 0;
-        self.tapCounter = 0;
-        self.isTouchEnabled = YES;
-        self.readyForPrompt = NO;
+        self.maxTaps = kMAX_TAPS;
         CCSprite* backgroundGrid = [CCSprite spriteWithFile:@"empty-term.png"];
         backgroundGrid.anchorPoint = CGPointMake(0.0, 0.0);
         backgroundGrid.position = CGPointMake(0.0, 0.0);
@@ -127,26 +91,5 @@
     }
 	return self;
 }
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void) nextFrame:(ccTime)dt {
-    self.counter++;
-    if (self.counter == kINTRO_1_TICK_1) {
-        [self showMessage];
-    } else if ((self.counter - self.messageDisplayedCount) > kTAP_COUNTER_DELTA && self.tapCounterMessageSprite == nil && self.tapCounter != kMAX_TAPS) {
-        [self showTapToContinue];
-    } else if ((self.counter - self.messageDisplayedCount) > kPROMPT_COUNTER_DELTA && self.readyForPrompt) {
-        [self showPromptMenu];
-    }    
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
--(void) ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent *)event {
-    if (self.acceptTouches) {
-        if (self.tapCounter < kMAX_TAPS) {
-            [self showMessage];
-        }
-    }
-}    
 
 @end

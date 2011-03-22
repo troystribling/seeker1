@@ -6,30 +6,15 @@
 //  Copyright 2011 imaginary products. All rights reserved.
 //
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import <Foundation/Foundation.h>
-#import "cocos2d.h"
+#import "IntroScene.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface IntroInstruction1Scene : CCLayer {
-    CCSprite* displayedMessageSprite;
-    CCSprite* tapCounterMessageSprite;
-    NSInteger messageDisplayedCount;;
-    NSInteger tapCounter;
-    NSInteger counter;
-    BOOL acceptTouches;
-    BOOL readyForPrompt;
+@interface IntroInstruction1Scene : IntroScene {
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) CCSprite* displayedMessageSprite;
-@property (nonatomic, retain) CCSprite* tapCounterMessageSprite;
-@property (nonatomic, assign) NSInteger counter;
-@property (nonatomic, assign) NSInteger messageDisplayedCount;
-@property (nonatomic, assign) NSInteger tapCounter;
-@property (nonatomic, assign) BOOL acceptTouches;
-@property (nonatomic, assign) BOOL readyForPrompt;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (id)scene;
