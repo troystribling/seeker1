@@ -15,6 +15,7 @@
 #define kSTART_PROGRAM      30
 #define kSEEKER_STEP_SIZE   60
 #define kSEEKER_MOVE_COUNT  3
+#define kSEEKER_SPEED       15
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface IntroMap3Scene (PrivateAPI)
@@ -34,6 +35,7 @@
 @implementation IntroMap3Scene
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize startMission;
 @synthesize statusDisplay;
 @synthesize displayedMessageSprite;
 @synthesize tapCounterMessageSprite;
@@ -42,6 +44,7 @@
 @synthesize seeker;
 @synthesize seekerMoveCount;
 @synthesize counter;
+@synthesize startCount;
 @synthesize energy;
 @synthesize acceptTouches;
 @synthesize moveSeeker;
@@ -55,6 +58,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initObjects {
     self.seeker = [SeekerSprite create];
+    self.seeker.speed = kSEEKER_SPEED;
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     [self.seeker setToStartPoint:CGPointMake(screenSize.width/2.0 - 10.0, 240.0) withBearing:@"south"];
     CCSprite* homeBase = [CCSprite spriteWithFile:@"map-home-base.png"];
@@ -62,7 +66,7 @@
     self.sensorSiteSprite = [CCSprite spriteWithFile:@"map-sensor-site.png"];
     self.sensorSiteSprite.position = CGPointMake(screenSize.width/2.0 - 10.0, 60.0);
     [self addChild:homeBase z:-1];
-    [self addChild:self.seeker z:0];
+    [self addChild:self.seeker z:10];
     [self addChild:self.sensorSiteSprite z:0];
 }
 
@@ -89,6 +93,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)showTapToContinue {
     self.acceptTouches = YES;
+    self.tapContinue = NO;
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     self.tapCounterMessageSprite = [CCSprite spriteWithFile:@"tap-to-continue.png"];
     self.tapCounterMessageSprite.position = CGPointMake(screenSize.width/2.0, 15.0);
@@ -103,13 +108,15 @@
         self.moveSeeker = NO;
         self.putPod = YES;
     }
-    [self.seeker moveBy:CGPointMake(0.0, kSEEKER_STEP_SIZE)];    
+    [self.seeker moveBy:CGPointMake(0.0, -kSEEKER_STEP_SIZE)];    
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)showPutPod {
     [self.sensorSprite removeFromParentAndCleanup:YES];
     self.sensorSiteSprite = [CCSprite spriteWithFile:@"map-sensor.png"];
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    self.sensorSiteSprite.position = CGPointMake(screenSize.width/2.0 - 10.0, 60.0);
     [self addChild:self.sensorSiteSprite z:0];
     self.putPod = NO;
     self.missionComplete = YES;
@@ -117,6 +124,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)showMissionComplete {    
+    self.missionComplete = NO;
+    self.tapContinue = YES;
+    self.displayedMessageSprite = [CCSprite spriteWithFile:@"map3-mission-completed.png"];
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    self.displayedMessageSprite.position = CGPointMake(screenSize.width/2, 235.0);
+    self.displayedMessageSprite.anchorPoint = CGPointMake(0.5, 0.5);
+    [self addChild:self.displayedMessageSprite];
 }
 
 //===================================================================================================================================
@@ -136,7 +150,9 @@
         self.counter = 0;
         self.energy = 6;
         self.seekerMoveCount = 0;
+        self.startCount = 0;
         self.isTouchEnabled = YES;
+        self.startMission = YES;
         self.moveSeeker = NO;
         self.putPod = NO;
         self.missionComplete = NO;
@@ -159,7 +175,10 @@
     self.counter++;
     NSInteger seekerActions = [self.seeker numberOfRunningActions];
     if (seekerActions == 0) {
-        if (self.counter == kSTART_PROGRAM) {
+        if (self.startMission) {
+            self.startMission = NO;
+            self.startCount = self.counter;
+        } else if (self.counter - self.startCount == kSTART_PROGRAM) {
             self.moveSeeker = YES;
         } else if (self.moveSeeker) {
             [self showMoveSeeker];
@@ -176,6 +195,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 -(void) ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent *)event {
     if (self.acceptTouches) {
+        [[CCDirector sharedDirector] replaceScene: [IntroMap4Scene scene]];
     }
 }    
 

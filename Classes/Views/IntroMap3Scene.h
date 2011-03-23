@@ -22,8 +22,10 @@
     CCSprite* sensorSprite;
     SeekerSprite* seeker;
     NSInteger counter;
+    NSInteger startCount;
     NSInteger seekerMoveCount;
     NSInteger energy;
+    BOOL startMission;
     BOOL acceptTouches;
     BOOL moveSeeker;
     BOOL putPod;
@@ -39,8 +41,10 @@
 @property (nonatomic, retain) CCSprite* sensorSprite;
 @property (nonatomic, retain) SeekerSprite* seeker;
 @property (nonatomic, assign) NSInteger counter;
+@property (nonatomic, assign) NSInteger startCount;
 @property (nonatomic, assign) NSInteger seekerMoveCount;
 @property (nonatomic, assign) NSInteger energy;
+@property (nonatomic, assign) BOOL startMission;
 @property (nonatomic, assign) BOOL acceptTouches;
 @property (nonatomic, assign) BOOL moveSeeker;
 @property (nonatomic, assign) BOOL putPod;
