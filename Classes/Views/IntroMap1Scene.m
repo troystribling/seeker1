@@ -14,7 +14,7 @@
 #define kMAX_TAPS           10
 #define kINTRO_1_TICK_1     30
 #define kITEM_COUNTER_DELTA 60
-#define kTAP_COUNTER_DELTA  180
+#define kTAP_COUNTER_DELTA  120
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface IntroMap1Scene (PrivateAPI)

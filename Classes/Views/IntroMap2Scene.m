@@ -15,7 +15,7 @@
 #define kMAX_TAPS           3
 #define kINTRO_2_TICK_1     30
 #define kITEM_COUNTER_DELTA 60
-#define kTAP_COUNTER_DELTA  180
+#define kTAP_COUNTER_DELTA  120
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface IntroMap2Scene (PrivateAPI)
@@ -58,9 +58,9 @@
     self.seeker = [SeekerSprite create];
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     [self.seeker setToStartPoint:CGPointMake(screenSize.width/2.0 - 10.0, 240.0) withBearing:@"south"];
-    CCSprite* homeBase = [CCSprite spriteWithFile:@"map2-home-base.png"];
+    CCSprite* homeBase = [CCSprite spriteWithFile:@"map-home-base.png"];
     homeBase.position = CGPointMake(screenSize.width/2.0 - 40.0, 210.0);
-    self.sensorSiteSprite = [CCSprite spriteWithFile:@"map2-sensor-site.png"];
+    self.sensorSiteSprite = [CCSprite spriteWithFile:@"map-sensor-site.png"];
     self.sensorSiteSprite.position = CGPointMake(screenSize.width/2.0 - 10.0, 60.0);
     [self addChild:homeBase z:-1];
     [self addChild:self.seeker z:0];
