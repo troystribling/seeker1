@@ -7,14 +7,15 @@
 //
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "IntroInstruction3Scene.h"
-#import "StatusDisplay.h"
+#import "IntroTerm4Scene.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define kINTRO_1_TICK_1    40
-#define kINTRO_1_TICK_2    40
+#define kMAX_TAPS               1
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface IntroInstruction3Scene (PrivateAPI)
+
+- (void)touchPrompt;
 
 @end
 
@@ -22,11 +23,40 @@
 @implementation IntroInstruction3Scene
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize counter;
-@synthesize acceptTouches;
 
 //===================================================================================================================================
 #pragma mark IntroInstruction3Scene PrivateAPI
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)showMessage {
+    switch (self.tapCounter) {
+        case 1:
+            self.displayedMessageSprite = [CCSprite spriteWithFile:@"inst3-text-1.png"];
+            self.readyForPrompt = YES;
+            break;
+    }
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    self.displayedMessageSprite.position = CGPointMake(screenSize.width/2, 90.0);
+    self.displayedMessageSprite.anchorPoint = CGPointMake(0.5, 0.5);
+    [self addChild:self.displayedMessageSprite];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)showPrompt {
+    self.readyForPrompt = NO;
+    CCSprite* progSprite = [CCSprite spriteWithFile:@"inst-move.png"];
+    CCMenuItemLabel* nextItem = [CCMenuItemSprite itemFromNormalSprite:progSprite selectedSprite:progSprite target:self selector:@selector(touchPrompt)];
+    CCMenu* menu = [CCMenu menuWithItems:nextItem, nil];
+    [menu alignItemsHorizontallyWithPadding:0.0];
+    menu.position = CGPointMake(160.0, 389.0);
+    menu.anchorPoint = CGPointMake(0.0, 0.0);
+    [self addChild:menu z:0];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)touchPrompt {
+    [[CCDirector sharedDirector] replaceScene: [IntroTerm4Scene scene]];
+}
 
 //===================================================================================================================================
 #pragma mark IntroInstruction3Scene
@@ -42,7 +72,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)init {
 	if((self=[super init])) {
-        self.counter = 0;
+        self.maxTaps = kMAX_TAPS;
         CCSprite* backgroundGrid = [CCSprite spriteWithFile:@"instructions.png"];
         backgroundGrid.anchorPoint = CGPointMake(0.0, 0.0);
         backgroundGrid.position = CGPointMake(0.0, 0.0);
@@ -51,19 +81,5 @@
     }
 	return self;
 }
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void) nextFrame:(ccTime)dt {
-    self.counter++;
-    if (self.counter == kINTRO_1_TICK_1) {
-    } else if (self.counter == kINTRO_1_TICK_2) {
-    }    
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
--(void) ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent *)event {
-    if (self.acceptTouches) {
-    }
-}    
 
 @end
