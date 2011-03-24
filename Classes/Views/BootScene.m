@@ -12,7 +12,7 @@
 #import "StatusDisplay.h"
 #import "MainScene.h"
 #import "IntroMap1Scene.h"
-#import "IntroMap3Scene.h"
+#import "IntroMap4Scene.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kSTARTUP_TICKS  400
@@ -110,7 +110,7 @@
 - (void)showGetStartedIntroduction {
     if (![UserModel wasTutorialShown:GettingStartedTutorialSectionID]) {
 //        [[CCDirector sharedDirector] replaceScene:[IntroMap1Scene scene]];
-        [[CCDirector sharedDirector] replaceScene:[IntroMap3Scene scene]];
+        [[CCDirector sharedDirector] replaceScene:[IntroMap4Scene scene]];
         [UserModel tutorialWasShown:GettingStartedTutorialSectionID];
     }
 }

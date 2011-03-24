@@ -128,9 +128,7 @@
     [self addChild:self.sensorSiteSprite z:0];
     self.putPod = NO;
     self.missionComplete = YES;
-    if (self.instructionSprite) {
-        [self.instructionSprite removeFromParentAndCleanup:YES];
-    }
+    [self.instructionSprite removeFromParentAndCleanup:YES];
     self.instructionSprite = [CCSprite spriteWithFile:@"map3-put-pod.png"];
     [self addChild:self.instructionSprite z:10];
     self.instructionSprite.position = CGPointMake(screenSize.width/2.0 + 1.5*kSEEKER_STEP_SIZE, 60.0);

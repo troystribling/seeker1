@@ -231,7 +231,7 @@
     if (quadsUnlocked >= self.displayedQuad) {
         self.titleSprite = [CCSprite spriteWithFile:@"select-site.png"];
     } else {
-        self.titleSprite = [CCSprite spriteWithFile:@"site-unlocked.png"];
+        self.titleSprite = [CCSprite spriteWithFile:@"site-locked.png"];
     }
     self.titleSprite.position = CGPointMake(self.screenCenter.x, 390.0f);
     self.titleSprite.anchorPoint = CGPointMake(0.5, 0.5);
