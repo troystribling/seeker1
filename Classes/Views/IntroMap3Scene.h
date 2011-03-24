@@ -20,6 +20,7 @@
     CCSprite* tapCounterMessageSprite;
     CCSprite* sensorSiteSprite;
     CCSprite* sensorSprite;
+    CCSprite* instructionSprite;
     SeekerSprite* seeker;
     NSInteger counter;
     NSInteger startCount;
@@ -39,6 +40,7 @@
 @property (nonatomic, retain) CCSprite* tapCounterMessageSprite;
 @property (nonatomic, retain) CCSprite* sensorSiteSprite;
 @property (nonatomic, retain) CCSprite* sensorSprite;
+@property (nonatomic, retain) CCSprite* instructionSprite;
 @property (nonatomic, retain) SeekerSprite* seeker;
 @property (nonatomic, assign) NSInteger counter;
 @property (nonatomic, assign) NSInteger startCount;

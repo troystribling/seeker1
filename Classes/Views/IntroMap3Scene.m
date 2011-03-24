@@ -41,6 +41,7 @@
 @synthesize tapCounterMessageSprite;
 @synthesize sensorSiteSprite;
 @synthesize sensorSprite;
+@synthesize instructionSprite;
 @synthesize seeker;
 @synthesize seekerMoveCount;
 @synthesize counter;
@@ -108,6 +109,13 @@
         self.moveSeeker = NO;
         self.putPod = YES;
     }
+    if (self.instructionSprite) {
+        [self.instructionSprite removeFromParentAndCleanup:YES];
+    }
+    CGSize screenSize = [[CCDirector sharedDirector] winSize];
+    self.instructionSprite = [CCSprite spriteWithFile:@"map3-move.png"];
+    self.instructionSprite.position = CGPointMake(screenSize.width/2.0 + 1.5*kSEEKER_STEP_SIZE, 210.0 - (self.seekerMoveCount - 1.5) * kSEEKER_STEP_SIZE);
+    [self addChild:self.instructionSprite z:10];
     [self.seeker moveBy:CGPointMake(0.0, -kSEEKER_STEP_SIZE)];    
 }
 
@@ -120,6 +128,12 @@
     [self addChild:self.sensorSiteSprite z:0];
     self.putPod = NO;
     self.missionComplete = YES;
+    if (self.instructionSprite) {
+        [self.instructionSprite removeFromParentAndCleanup:YES];
+    }
+    self.instructionSprite = [CCSprite spriteWithFile:@"map3-put-pod.png"];
+    [self addChild:self.instructionSprite z:10];
+    self.instructionSprite.position = CGPointMake(screenSize.width/2.0 + 1.5*kSEEKER_STEP_SIZE, 60.0);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -128,9 +142,10 @@
     self.tapContinue = YES;
     self.displayedMessageSprite = [CCSprite spriteWithFile:@"map3-mission-completed.png"];
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
-    self.displayedMessageSprite.position = CGPointMake(screenSize.width/2, 235.0);
+    self.displayedMessageSprite.position = CGPointMake(screenSize.width/2, 275.0);
     self.displayedMessageSprite.anchorPoint = CGPointMake(0.5, 0.5);
     [self addChild:self.displayedMessageSprite];
+    [self.seeker rotate:360.0];
 }
 
 //===================================================================================================================================
@@ -157,6 +172,7 @@
         self.putPod = NO;
         self.missionComplete = NO;
         self.tapContinue = NO;
+        self.instructionSprite = nil;
         CCSprite* backgroundGrid = [CCSprite spriteWithFile:@"empty-map-stop.png"];
         backgroundGrid.anchorPoint = CGPointMake(0.0, 0.0);
         backgroundGrid.position = CGPointMake(0.0, 0.0);
