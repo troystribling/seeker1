@@ -12,6 +12,7 @@
 #import "TutorialIndexCell.h"
 #import "TutorialIndexViewController.h"
 #import "UserModel.h"
+#import "IntroMap1Scene.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kTUTORIAL_INDEX_LAUNCHER_BACK_TAG   1
@@ -155,9 +156,10 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ViewControllerManager * viewMgr = [ViewControllerManager instance];
+    [self.view removeFromSuperview];
     switch (indexPath.row) {
         case 0:
-            [viewMgr showTutorialSectionView:self.view withSectionID:GettingStartedTutorialSectionID];
+            [[CCDirector sharedDirector] replaceScene:[IntroMap1Scene scene]];
             break;
         case 1:
             [viewMgr showTutorialSectionView:self.view withSectionID:SubroutinesTutorialSectionID];

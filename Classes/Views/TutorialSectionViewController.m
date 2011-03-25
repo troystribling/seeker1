@@ -102,11 +102,7 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.view.frame = self.containerView.frame;
-        self.sectionList = [NSMutableArray arrayWithObjects:[NSArray arrayWithObjects:@"objective.png", @"game-objects.png", 
-                                                                @"pan-game-board.png", @"program-game-board.png",
-                                                                @"open-terminal-game-board.png", @"write-program.png", 
-                                                                @"add-program-instruction.png", @"completed-program.png", nil],
-                                                             [NSArray arrayWithObjects:@"subroutines.png", @"list-subroutines.png", 
+        self.sectionList = [NSMutableArray arrayWithObjects:[NSArray arrayWithObjects:@"subroutines.png", @"list-subroutines.png", 
                                                                 @"create-edit-subroutines.png", nil],
                                                              [NSArray arrayWithObjects:@"times-loop.png", nil],
                                                              [NSArray arrayWithObjects:@"until-loop.png", @"predicates.png", nil],
@@ -117,7 +113,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setTutorialSection:(TutorialSectionID)_sectionID {
-    self.tutorialList = [self.sectionList objectAtIndex:_sectionID];
+    self.tutorialList = [self.sectionList objectAtIndex:_sectionID + 1];
 }
                                         
 //===================================================================================================================================

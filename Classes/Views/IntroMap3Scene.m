@@ -28,6 +28,7 @@
 - (void)showMoveSeeker;
 - (void)showPutPod;
 - (void)showMissionComplete;
+- (void)showInstruction:(NSString*)_file atPoint:(CGPoint)_position;
 
 @end
 
@@ -113,9 +114,8 @@
         [self.instructionSprite removeFromParentAndCleanup:YES];
     }
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
-    self.instructionSprite = [CCSprite spriteWithFile:@"map-move.png"];
-    self.instructionSprite.position = CGPointMake(screenSize.width/2.0 + 1.5*kSEEKER_STEP_SIZE, 210.0 - (self.seekerMoveCount - 1.5) * kSEEKER_STEP_SIZE);
-    [self addChild:self.instructionSprite z:10];
+    CGPoint position = CGPointMake(screenSize.width/2.0 + 1.5*kSEEKER_STEP_SIZE, 210.0 - (self.seekerMoveCount - 1.5) * kSEEKER_STEP_SIZE);
+    [self showInstruction:@"map-move.png" atPoint:position];
     [self.seeker moveBy:CGPointMake(0.0, -kSEEKER_STEP_SIZE)];    
 }
 
@@ -129,9 +129,8 @@
     self.putPod = NO;
     self.missionComplete = YES;
     [self.instructionSprite removeFromParentAndCleanup:YES];
-    self.instructionSprite = [CCSprite spriteWithFile:@"map-put-pod.png"];
+    [self showInstruction:@"map-put-pod.png" atPoint:CGPointMake(screenSize.width/2.0 + 1.5*kSEEKER_STEP_SIZE, 60.0)];
     [self addChild:self.instructionSprite z:10];
-    self.instructionSprite.position = CGPointMake(screenSize.width/2.0 + 1.5*kSEEKER_STEP_SIZE, 60.0);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -144,6 +143,14 @@
     self.displayedMessageSprite.anchorPoint = CGPointMake(0.5, 0.5);
     [self addChild:self.displayedMessageSprite];
     [self.seeker rotate:360.0];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)showInstruction:(NSString*)_file atPoint:(CGPoint)_position {
+    self.instructionSprite = [CCSprite spriteWithFile:_file];
+    self.instructionSprite.position = _position;
+    [self addChild:self.instructionSprite z:10];
+    [self.instructionSprite runAction:[CCFadeOut actionWithDuration:1.0]];
 }
 
 //===================================================================================================================================

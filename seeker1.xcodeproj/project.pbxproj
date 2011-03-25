@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		050125F312FBAAE800D0B43B /* add-program-instruction.png in Resources */ = {isa = PBXBuildFile; fileRef = 050125F212FBAAE800D0B43B /* add-program-instruction.png */; };
 		050125F512FBAAF400D0B43B /* rover-bins.png in Resources */ = {isa = PBXBuildFile; fileRef = 050125F412FBAAF400D0B43B /* rover-bins.png */; };
 		05064916131C875200D85D1C /* map-prog-unselected.png in Resources */ = {isa = PBXBuildFile; fileRef = 05064914131C875200D85D1C /* map-prog-unselected.png */; };
 		05064917131C875200D85D1C /* map-prog.png in Resources */ = {isa = PBXBuildFile; fileRef = 05064915131C875200D85D1C /* map-prog.png */; };
@@ -105,7 +104,6 @@
 		0521EF6D12C5637B0078C77C /* elysium.png in Resources */ = {isa = PBXBuildFile; fileRef = 0521EF6A12C5637B0078C77C /* elysium.png */; };
 		0521EF6E12C5637B0078C77C /* memnonia.png in Resources */ = {isa = PBXBuildFile; fileRef = 0521EF6B12C5637B0078C77C /* memnonia.png */; };
 		0521EF6F12C5637B0078C77C /* tharsis.png in Resources */ = {isa = PBXBuildFile; fileRef = 0521EF6C12C5637B0078C77C /* tharsis.png */; };
-		05227E3812F64DF500923DEA /* objective.png in Resources */ = {isa = PBXBuildFile; fileRef = 05227E3712F64DF500923DEA /* objective.png */; };
 		05227E3B12F64E7700923DEA /* TutorialSectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05227E3A12F64E7700923DEA /* TutorialSectionViewController.m */; };
 		05227E4112F6589400923DEA /* terminal-launcher-exit.png in Resources */ = {isa = PBXBuildFile; fileRef = 05227E3F12F6589400923DEA /* terminal-launcher-exit.png */; };
 		05227E4212F6589400923DEA /* terminal-launcher-next.png in Resources */ = {isa = PBXBuildFile; fileRef = 05227E4012F6589400923DEA /* terminal-launcher-next.png */; };
@@ -114,7 +112,6 @@
 		0522D27412CBF17300E0530C /* DoTimesTerminalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0522D27312CBF17300E0530C /* DoTimesTerminalCell.xib */; };
 		05242E0413188E4900E59909 /* TutorialIntroductionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05242E0313188E4900E59909 /* TutorialIntroductionViewController.xib */; };
 		05246DA212CD01B0000EB7AF /* TerminalCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 05246DA112CD01B0000EB7AF /* TerminalCellFactory.m */; };
-		0527D45812FF3EC700AF6A0F /* pan-game-board.png in Resources */ = {isa = PBXBuildFile; fileRef = 0527D45712FF3EC700AF6A0F /* pan-game-board.png */; };
 		0527D46412FF60A500AF6A0F /* map-3.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 0527D46312FF60A500AF6A0F /* map-3.tmx */; };
 		0527E61412BD5F3D0039D55E /* red-seeker-1-east.png in Resources */ = {isa = PBXBuildFile; fileRef = 0527E61012BD5F3D0039D55E /* red-seeker-1-east.png */; };
 		0527E61512BD5F3D0039D55E /* red-seeker-1-north.png in Resources */ = {isa = PBXBuildFile; fileRef = 0527E61112BD5F3D0039D55E /* red-seeker-1-north.png */; };
@@ -129,7 +126,6 @@
 		052A05FF12CFCFE6005F1948 /* DoTimesEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 052A05FE12CFCFE6005F1948 /* DoTimesEditViewController.xib */; };
 		052A060B12CFD712005F1948 /* terminal-launcher-done.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A060A12CFD712005F1948 /* terminal-launcher-done.png */; };
 		052A2F0512CEC529002EE6D1 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A2F0412CEC529002EE6D1 /* Default.png */; };
-		052CC3F012F5F61800F5D862 /* game-objects.png in Resources */ = {isa = PBXBuildFile; fileRef = 052CC3EF12F5F61800F5D862 /* game-objects.png */; };
 		052E490C133907780030244B /* inst-put-pod.png in Resources */ = {isa = PBXBuildFile; fileRef = 052E4903133907780030244B /* inst-put-pod.png */; };
 		052E490D133907780030244B /* inst2-text-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 052E4904133907780030244B /* inst2-text-1.png */; };
 		052E490E133907780030244B /* inst3-text-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 052E4905133907780030244B /* inst3-text-1.png */; };
@@ -223,10 +219,6 @@
 		055434321331A0F600AB42E4 /* term-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 0554342B1331A0F600AB42E4 /* term-3.png */; };
 		055434331331A0F600AB42E4 /* term-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 0554342C1331A0F600AB42E4 /* term-4.png */; };
 		0556B81D129C603B00B5F8FB /* SeekerSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 0556B81C129C603B00B5F8FB /* SeekerSprite.m */; };
-		0558413D12F900EB00E506D4 /* completed-program.png in Resources */ = {isa = PBXBuildFile; fileRef = 0558413812F900EB00E506D4 /* completed-program.png */; };
-		0558413E12F900EB00E506D4 /* open-terminal-game-board.png in Resources */ = {isa = PBXBuildFile; fileRef = 0558413912F900EB00E506D4 /* open-terminal-game-board.png */; };
-		0558413F12F900EB00E506D4 /* program-game-board.png in Resources */ = {isa = PBXBuildFile; fileRef = 0558413A12F900EB00E506D4 /* program-game-board.png */; };
-		0558414112F900EB00E506D4 /* write-program.png in Resources */ = {isa = PBXBuildFile; fileRef = 0558413C12F900EB00E506D4 /* write-program.png */; };
 		0559FD66133ADB0300993D91 /* map-sample.png in Resources */ = {isa = PBXBuildFile; fileRef = 0559FD65133ADB0300993D91 /* map-sample.png */; };
 		0559FD68133ADBBD00993D91 /* map-get-sample.png in Resources */ = {isa = PBXBuildFile; fileRef = 0559FD67133ADBBD00993D91 /* map-get-sample.png */; };
 		05638061133583C9004A5E15 /* map-home-base.png in Resources */ = {isa = PBXBuildFile; fileRef = 0563805F133583C9004A5E15 /* map-home-base.png */; };
@@ -284,7 +276,6 @@
 		05C02715133597B700F7B52F /* map2-text-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C02714133597B700F7B52F /* map2-text-1.png */; };
 		05D4EEED13161BA400954E03 /* mission-not-played.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D4EEEC13161BA400954E03 /* mission-not-played.png */; };
 		05D5BFB11321AD570099CF25 /* NavigationDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D5BFB01321AD570099CF25 /* NavigationDisplay.m */; };
-		05E40FAB13197AD900DE6344 /* get-started-introduction.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E40FAA13197AD900DE6344 /* get-started-introduction.png */; };
 		05E40FB613198F0500DE6344 /* rover-bins-unlock.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E40FB213198F0500DE6344 /* rover-bins-unlock.png */; };
 		05E40FB713198F0500DE6344 /* subroutines-unlock.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E40FB313198F0500DE6344 /* subroutines-unlock.png */; };
 		05E40FB813198F0500DE6344 /* times-loop-unlock.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E40FB413198F0500DE6344 /* times-loop-unlock.png */; };
@@ -519,7 +510,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		050125F212FBAAE800D0B43B /* add-program-instruction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-program-instruction.png"; sourceTree = "<group>"; };
 		050125F412FBAAF400D0B43B /* rover-bins.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rover-bins.png"; sourceTree = "<group>"; };
 		05064914131C875200D85D1C /* map-prog-unselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map-prog-unselected.png"; sourceTree = "<group>"; };
 		05064915131C875200D85D1C /* map-prog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map-prog.png"; sourceTree = "<group>"; };
@@ -630,7 +620,6 @@
 		0521EF6A12C5637B0078C77C /* elysium.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = elysium.png; sourceTree = "<group>"; };
 		0521EF6B12C5637B0078C77C /* memnonia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = memnonia.png; sourceTree = "<group>"; };
 		0521EF6C12C5637B0078C77C /* tharsis.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tharsis.png; sourceTree = "<group>"; };
-		05227E3712F64DF500923DEA /* objective.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = objective.png; sourceTree = "<group>"; };
 		05227E3912F64E7700923DEA /* TutorialSectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialSectionViewController.h; sourceTree = "<group>"; };
 		05227E3A12F64E7700923DEA /* TutorialSectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialSectionViewController.m; sourceTree = "<group>"; };
 		05227E3F12F6589400923DEA /* terminal-launcher-exit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-exit.png"; sourceTree = "<group>"; };
@@ -642,7 +631,6 @@
 		05242E0313188E4900E59909 /* TutorialIntroductionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TutorialIntroductionViewController.xib; sourceTree = "<group>"; };
 		05246DA012CD01B0000EB7AF /* TerminalCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerminalCellFactory.h; sourceTree = "<group>"; };
 		05246DA112CD01B0000EB7AF /* TerminalCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerminalCellFactory.m; sourceTree = "<group>"; };
-		0527D45712FF3EC700AF6A0F /* pan-game-board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pan-game-board.png"; sourceTree = "<group>"; };
 		0527D46312FF60A500AF6A0F /* map-3.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-3.tmx"; sourceTree = "<group>"; };
 		0527E61012BD5F3D0039D55E /* red-seeker-1-east.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-seeker-1-east.png"; sourceTree = "<group>"; };
 		0527E61112BD5F3D0039D55E /* red-seeker-1-north.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-seeker-1-north.png"; sourceTree = "<group>"; };
@@ -660,7 +648,6 @@
 		052A05FE12CFCFE6005F1948 /* DoTimesEditViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoTimesEditViewController.xib; sourceTree = "<group>"; };
 		052A060A12CFD712005F1948 /* terminal-launcher-done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-done.png"; sourceTree = "<group>"; };
 		052A2F0412CEC529002EE6D1 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		052CC3EF12F5F61800F5D862 /* game-objects.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "game-objects.png"; sourceTree = "<group>"; };
 		052E4903133907780030244B /* inst-put-pod.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inst-put-pod.png"; sourceTree = "<group>"; };
 		052E4904133907780030244B /* inst2-text-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inst2-text-1.png"; sourceTree = "<group>"; };
 		052E4905133907780030244B /* inst3-text-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inst3-text-1.png"; sourceTree = "<group>"; };
@@ -781,10 +768,6 @@
 		0554342C1331A0F600AB42E4 /* term-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "term-4.png"; sourceTree = "<group>"; };
 		0556B81B129C603B00B5F8FB /* SeekerSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeekerSprite.h; sourceTree = "<group>"; };
 		0556B81C129C603B00B5F8FB /* SeekerSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeekerSprite.m; sourceTree = "<group>"; };
-		0558413812F900EB00E506D4 /* completed-program.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "completed-program.png"; sourceTree = "<group>"; };
-		0558413912F900EB00E506D4 /* open-terminal-game-board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open-terminal-game-board.png"; sourceTree = "<group>"; };
-		0558413A12F900EB00E506D4 /* program-game-board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "program-game-board.png"; sourceTree = "<group>"; };
-		0558413C12F900EB00E506D4 /* write-program.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "write-program.png"; sourceTree = "<group>"; };
 		0559FD65133ADB0300993D91 /* map-sample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map-sample.png"; sourceTree = "<group>"; };
 		0559FD67133ADBBD00993D91 /* map-get-sample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map-get-sample.png"; sourceTree = "<group>"; };
 		0563805F133583C9004A5E15 /* map-home-base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map-home-base.png"; sourceTree = "<group>"; };
@@ -850,7 +833,6 @@
 		05D4EEEC13161BA400954E03 /* mission-not-played.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mission-not-played.png"; sourceTree = "<group>"; };
 		05D5BFAF1321AD570099CF25 /* NavigationDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationDisplay.h; sourceTree = "<group>"; };
 		05D5BFB01321AD570099CF25 /* NavigationDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationDisplay.m; sourceTree = "<group>"; };
-		05E40FAA13197AD900DE6344 /* get-started-introduction.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "get-started-introduction.png"; sourceTree = "<group>"; };
 		05E40FB213198F0500DE6344 /* rover-bins-unlock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rover-bins-unlock.png"; sourceTree = "<group>"; };
 		05E40FB313198F0500DE6344 /* subroutines-unlock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "subroutines-unlock.png"; sourceTree = "<group>"; };
 		05E40FB413198F0500DE6344 /* times-loop-unlock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "times-loop-unlock.png"; sourceTree = "<group>"; };
@@ -1414,15 +1396,6 @@
 		052CC3EE12F5F61800F5D862 /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
-				05E40FAA13197AD900DE6344 /* get-started-introduction.png */,
-				052CC3EF12F5F61800F5D862 /* game-objects.png */,
-				0527D45712FF3EC700AF6A0F /* pan-game-board.png */,
-				05227E3712F64DF500923DEA /* objective.png */,
-				0558413A12F900EB00E506D4 /* program-game-board.png */,
-				0558413912F900EB00E506D4 /* open-terminal-game-board.png */,
-				0558413C12F900EB00E506D4 /* write-program.png */,
-				050125F212FBAAE800D0B43B /* add-program-instruction.png */,
-				0558413812F900EB00E506D4 /* completed-program.png */,
 				05E40FB313198F0500DE6344 /* subroutines-unlock.png */,
 				053CD81112FDD26C00410FC8 /* subroutines.png */,
 				0594276812FA5AB4005026F7 /* list-subroutines.png */,
@@ -2217,24 +2190,16 @@
 				050DD33B12EA6F0D00FDBC11 /* RepositoryCell.xib in Resources */,
 				058912C812F4D5B9005870C0 /* TutorialIndexViewController.xib in Resources */,
 				058912D312F4E27D005870C0 /* TutorialIndexCell.xib in Resources */,
-				052CC3F012F5F61800F5D862 /* game-objects.png in Resources */,
-				05227E3812F64DF500923DEA /* objective.png in Resources */,
 				05227E4112F6589400923DEA /* terminal-launcher-exit.png in Resources */,
 				05227E4212F6589400923DEA /* terminal-launcher-next.png in Resources */,
 				05227E8412F675AF00923DEA /* TutorialSectionViewController.xib in Resources */,
-				0558413D12F900EB00E506D4 /* completed-program.png in Resources */,
-				0558413E12F900EB00E506D4 /* open-terminal-game-board.png in Resources */,
-				0558413F12F900EB00E506D4 /* program-game-board.png in Resources */,
-				0558414112F900EB00E506D4 /* write-program.png in Resources */,
 				0594276C12FA5AB4005026F7 /* create-edit-subroutines.png in Resources */,
 				0594276D12FA5AB4005026F7 /* list-subroutines.png in Resources */,
 				0594276E12FA5AB4005026F7 /* predicates.png in Resources */,
 				0594276F12FA5AB4005026F7 /* times-loop.png in Resources */,
 				0594277012FA5AB4005026F7 /* until-loop.png in Resources */,
-				050125F312FBAAE800D0B43B /* add-program-instruction.png in Resources */,
 				050125F512FBAAF400D0B43B /* rover-bins.png in Resources */,
 				053CD81212FDD26C00410FC8 /* subroutines.png in Resources */,
-				0527D45812FF3EC700AF6A0F /* pan-game-board.png in Resources */,
 				0527D46412FF60A500AF6A0F /* map-3.tmx in Resources */,
 				05197CD1130103BB006DEC15 /* map-4.tmx in Resources */,
 				05197CD31301044C006DEC15 /* map-5.tmx in Resources */,
@@ -2280,7 +2245,6 @@
 				053B0870131378DF005F4075 /* mission-failed.png in Resources */,
 				05D4EEED13161BA400954E03 /* mission-not-played.png in Resources */,
 				05242E0413188E4900E59909 /* TutorialIntroductionViewController.xib in Resources */,
-				05E40FAB13197AD900DE6344 /* get-started-introduction.png in Resources */,
 				05E40FB613198F0500DE6344 /* rover-bins-unlock.png in Resources */,
 				05E40FB713198F0500DE6344 /* subroutines-unlock.png in Resources */,
 				05E40FB813198F0500DE6344 /* times-loop-unlock.png in Resources */,

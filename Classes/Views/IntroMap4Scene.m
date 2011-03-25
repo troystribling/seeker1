@@ -36,6 +36,7 @@
 - (void)showTurnLeft2;
 - (void)showTurnLeft;
 - (void)showMessage;
+- (void)showInstruction:(NSString*)_file atPoint:(CGPoint)_location;
 
 @end
 
@@ -46,8 +47,7 @@
 @synthesize statusDisplay;
 @synthesize displayedMessageSprite;
 @synthesize tapCounterMessageSprite;
-@synthesize sensorSiteSprite;
-@synthesize sensorSprite;
+@synthesize sampleSprite;
 @synthesize instructionSprite;
 @synthesize seeker;
 @synthesize tapCounter;
@@ -79,11 +79,11 @@
     [self.seeker setToStartPoint:CGPointMake(screenSize.width/2.0 - 10.0, 240.0) withBearing:@"south"];
     CCSprite* homeBase = [CCSprite spriteWithFile:@"map-home-base.png"];
     homeBase.position = CGPointMake(screenSize.width/2.0 - 40.0, 210.0);
-    self.sensorSiteSprite = [CCSprite spriteWithFile:@"map-sample.png"];
-    self.sensorSiteSprite.position = CGPointMake(screenSize.width/2.0 - 10.0, 60.0);
+    self.sampleSprite = [CCSprite spriteWithFile:@"map-sample.png"];
+    self.sampleSprite.position = CGPointMake(screenSize.width/2.0 - 10.0, 60.0);
     [self addChild:homeBase z:-1];
     [self addChild:self.seeker z:10];
-    [self addChild:self.sensorSiteSprite z:0];
+    [self addChild:self.sampleSprite z:0];
     self.startMission = YES;
 }
 
@@ -131,9 +131,8 @@
         [self.instructionSprite removeFromParentAndCleanup:YES];
     }
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
-    self.instructionSprite = [CCSprite spriteWithFile:@"map-move.png"];
-    self.instructionSprite.position = CGPointMake(screenSize.width/2.0 + 1.5*kSEEKER_STEP_SIZE, 210.0 - (self.seekerMoveCount - 1.5) * kSEEKER_STEP_SIZE);
-    [self addChild:self.instructionSprite z:10];
+    CGPoint position = CGPointMake(screenSize.width/2.0 + 1.5*kSEEKER_STEP_SIZE, 210.0 - (self.seekerMoveCount - 1.5) * kSEEKER_STEP_SIZE);
+    [self showInstruction:@"map-move.png" atPoint:position];
     [self.seeker moveBy:CGPointMake(0.0, -kSEEKER_STEP_SIZE)];    
 }
 
@@ -147,9 +146,8 @@
     }
     [self.instructionSprite removeFromParentAndCleanup:YES];
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
-    self.instructionSprite = [CCSprite spriteWithFile:@"map-move.png"];
-    self.instructionSprite.position = CGPointMake(screenSize.width/2.0 + 1.5*kSEEKER_STEP_SIZE, 60.0 + (self.seekerMoveCount - 3) * kSEEKER_STEP_SIZE);
-    [self addChild:self.instructionSprite z:10];
+    CGPoint position = CGPointMake(screenSize.width/2.0 + 1.5*kSEEKER_STEP_SIZE, 60.0 + (self.seekerMoveCount - 4) * kSEEKER_STEP_SIZE);
+    [self showInstruction:@"map-move.png" atPoint:position];
     [self.seeker moveBy:CGPointMake(0.0, kSEEKER_STEP_SIZE)];    
 }
 
@@ -157,12 +155,10 @@
 - (void)showGetSample {
     self.getSample = NO;
     self.turnLeft1 = YES;
-    [self.sensorSprite removeFromParentAndCleanup:YES];
+    [self.sampleSprite removeFromParentAndCleanup:YES];
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     [self.instructionSprite removeFromParentAndCleanup:YES];
-    self.instructionSprite = [CCSprite spriteWithFile:@"map-get-sample.png"];
-    [self addChild:self.instructionSprite z:10];
-    self.instructionSprite.position = CGPointMake(screenSize.width/2.0 + 1.5*kSEEKER_STEP_SIZE, 60.0);
+    [self showInstruction:@"map-get-sample.png" atPoint:CGPointMake(screenSize.width/2.0 + 1.5*kSEEKER_STEP_SIZE, 60.0)];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -183,9 +179,7 @@
 - (void)showTurnLeft {
     [self.instructionSprite removeFromParentAndCleanup:YES];
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
-    self.instructionSprite = [CCSprite spriteWithFile:@"map-turn-left.png"];
-    self.instructionSprite.position = CGPointMake(screenSize.width/2.0 + 1.5*kSEEKER_STEP_SIZE, 60.0);
-    [self addChild:self.instructionSprite z:10];
+    [self showInstruction:@"map-turn-left.png" atPoint:CGPointMake(screenSize.width/2.0 + 1.5*kSEEKER_STEP_SIZE, 60.0)];
     [self.seeker turnLeft];    
 }
 
@@ -193,30 +187,40 @@
 - (void)showMessage {
     self.acceptTouches = NO;
     self.tapCounter++;
+    self.tapContinue = YES;
     if (self.tapCounterMessageSprite) {
         [self.tapCounterMessageSprite removeFromParentAndCleanup:YES];
+        self.tapCounterMessageSprite = nil;
     }
-    if (self.tapCounter > 1) {
+    if (self.displayedMessageSprite) {
         [self.displayedMessageSprite removeFromParentAndCleanup:YES];
+        self.displayedMessageSprite = nil;
     }
     switch (self.tapCounter) {
         case 1:
-            self.tapContinue = YES;
             self.displayedMessageSprite = [CCSprite spriteWithFile:@"map4-text-1.png"];
             break;
         case 2:
-            self.tapContinue = YES;
             self.displayedMessageSprite = [CCSprite spriteWithFile:@"map4-text-2.png"];
             break;
         case 3:
             [self.instructionSprite removeFromParentAndCleanup:YES];
             self.displayedMessageSprite = [CCSprite spriteWithFile:@"map-mission-completed.png"];
+            [self.seeker rotate:360.0];
             break;
     }
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     self.displayedMessageSprite.position = CGPointMake(screenSize.width/2, 275.0);
     self.displayedMessageSprite.anchorPoint = CGPointMake(0.5, 0.5);
     [self addChild:self.displayedMessageSprite];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)showInstruction:(NSString*)_file atPoint:(CGPoint)_position {
+    self.instructionSprite = [CCSprite spriteWithFile:_file];
+    self.instructionSprite.position = _position;
+    [self addChild:self.instructionSprite z:10];
+    [self.instructionSprite runAction:[CCFadeOut actionWithDuration:1.0]];
 }
 
 //===================================================================================================================================
@@ -250,6 +254,8 @@
         self.turnLeft2 = NO;
         self.stopMission = NO;
         self.instructionSprite = nil;
+        self.displayedMessageSprite = nil;
+        self.tapCounterMessageSprite = nil;
         CCSprite* backgroundGrid = [CCSprite spriteWithFile:@"empty-map-stop.png"];
         backgroundGrid.anchorPoint = CGPointMake(0.0, 0.0);
         backgroundGrid.position = CGPointMake(0.0, 0.0);
@@ -300,12 +306,9 @@
         if (self.tapCounter == 1) {
             self.messageDisplayedCount = self.counter;
         } else if (self.tapCounter == 2) {
-            self.tapCounter++;
             self.acceptTouches = NO;
             self.startCount = self.counter; 
             [self.tapCounterMessageSprite removeFromParentAndCleanup:YES];
-        } else if (self.tapCounter == kMAX_TAPS) {
-            [self showMessage];
         } else {
             [[CCDirector sharedDirector] replaceScene: [MainScene scene]];
         }

@@ -18,8 +18,7 @@
     StatusDisplay* statusDisplay;
     CCSprite* displayedMessageSprite;
     CCSprite* tapCounterMessageSprite;
-    CCSprite* sensorSiteSprite;
-    CCSprite* sensorSprite;
+    CCSprite* sampleSprite;
     CCSprite* instructionSprite;
     SeekerSprite* seeker;
     NSInteger counter;
@@ -44,8 +43,7 @@
     @property (nonatomic, retain) StatusDisplay* statusDisplay;
     @property (nonatomic, retain) CCSprite* displayedMessageSprite;
     @property (nonatomic, retain) CCSprite* tapCounterMessageSprite;
-    @property (nonatomic, retain) CCSprite* sensorSiteSprite;
-    @property (nonatomic, retain) CCSprite* sensorSprite;
+    @property (nonatomic, retain) CCSprite* sampleSprite;
     @property (nonatomic, retain) CCSprite* instructionSprite;
     @property (nonatomic, retain) SeekerSprite* seeker;
     @property (nonatomic, assign) NSInteger tapCounter;

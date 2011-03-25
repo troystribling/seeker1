@@ -46,8 +46,7 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         self.containerView = _containerView;
         self.view.frame = self.containerView.frame;
-        self.featureList = [NSMutableArray arrayWithObjects:@"get-started-introduction.png", @"subroutines-unlock.png",
-                                                            @"times-loop-unlock.png", @"until-loop-unlock.png",
+        self.featureList = [NSMutableArray arrayWithObjects:@"subroutines-unlock.png", @"times-loop-unlock.png", @"until-loop-unlock.png",
                                                             @"rover-bins-unlock.png",nil];
     }
     return self;
@@ -56,7 +55,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setTutorialIntroduction:(TutorialSectionID)_sectionID {
     self.sectionID = _sectionID;
-    self.selectedFeature.image = [UIImage imageNamed:[self.featureList objectAtIndex:_sectionID]];
+    self.selectedFeature.image = [UIImage imageNamed:[self.featureList objectAtIndex:_sectionID + 1]];
 }
 
 //===================================================================================================================================
