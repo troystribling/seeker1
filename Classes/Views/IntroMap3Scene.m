@@ -113,7 +113,7 @@
         [self.instructionSprite removeFromParentAndCleanup:YES];
     }
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
-    self.instructionSprite = [CCSprite spriteWithFile:@"map3-move.png"];
+    self.instructionSprite = [CCSprite spriteWithFile:@"map-move.png"];
     self.instructionSprite.position = CGPointMake(screenSize.width/2.0 + 1.5*kSEEKER_STEP_SIZE, 210.0 - (self.seekerMoveCount - 1.5) * kSEEKER_STEP_SIZE);
     [self addChild:self.instructionSprite z:10];
     [self.seeker moveBy:CGPointMake(0.0, -kSEEKER_STEP_SIZE)];    
@@ -129,7 +129,7 @@
     self.putPod = NO;
     self.missionComplete = YES;
     [self.instructionSprite removeFromParentAndCleanup:YES];
-    self.instructionSprite = [CCSprite spriteWithFile:@"map3-put-pod.png"];
+    self.instructionSprite = [CCSprite spriteWithFile:@"map-put-pod.png"];
     [self addChild:self.instructionSprite z:10];
     self.instructionSprite.position = CGPointMake(screenSize.width/2.0 + 1.5*kSEEKER_STEP_SIZE, 60.0);
 }
@@ -138,7 +138,7 @@
 - (void)showMissionComplete {    
     self.missionComplete = NO;
     self.tapContinue = YES;
-    self.displayedMessageSprite = [CCSprite spriteWithFile:@"map3-mission-completed.png"];
+    self.displayedMessageSprite = [CCSprite spriteWithFile:@"map-mission-completed.png"];
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     self.displayedMessageSprite.position = CGPointMake(screenSize.width/2, 275.0);
     self.displayedMessageSprite.anchorPoint = CGPointMake(0.5, 0.5);
