@@ -5,7 +5,6 @@
 //  Created by Troy Stribling on 11/14/10.
 //  Copyright imaginary products 2010. All rights reserved.
 //
-
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"

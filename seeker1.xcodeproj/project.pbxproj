@@ -287,6 +287,7 @@
 		051C323A133E67AD00D9D869 /* ZipUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 051C3014133E54E700D9D869 /* ZipUtils.m */; };
 		051C323B133E692200D9D869 /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = 051C2FFF133E54E700D9D869 /* base64.c */; };
 		051C323C133E69EF00D9D869 /* ccUtils.c in Sources */ = {isa = PBXBuildFile; fileRef = 051C3008133E54E700D9D869 /* ccUtils.c */; };
+		051C3263133E8DE700D9D869 /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 051C3262133E8DE600D9D869 /* AudioManager.m */; };
 		051C779612B091AC00E41A23 /* terminal-launcher-edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 051C779512B091AC00E41A23 /* terminal-launcher-edit.png */; };
 		051C77C712B0A88300E41A23 /* terminal-launcher-editing.png in Resources */ = {isa = PBXBuildFile; fileRef = 051C77C612B0A88300E41A23 /* terminal-launcher-editing.png */; };
 		051DCDCE133662A300F34140 /* map2-program-graphic.png in Resources */ = {isa = PBXBuildFile; fileRef = 051DCDCA133662A300F34140 /* map2-program-graphic.png */; };
@@ -819,6 +820,8 @@
 		051C316A133E605300D9D869 /* CocosDenshion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CocosDenshion.m; path = libs/CocosDenshion/CocosDenshion.m; sourceTree = SOURCE_ROOT; };
 		051C316B133E605300D9D869 /* SimpleAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleAudioEngine.h; path = libs/CocosDenshion/SimpleAudioEngine.h; sourceTree = SOURCE_ROOT; };
 		051C316C133E605300D9D869 /* SimpleAudioEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimpleAudioEngine.m; path = libs/CocosDenshion/SimpleAudioEngine.m; sourceTree = SOURCE_ROOT; };
+		051C3261133E8DE600D9D869 /* AudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
+		051C3262133E8DE600D9D869 /* AudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioManager.m; sourceTree = "<group>"; };
 		051C779512B091AC00E41A23 /* terminal-launcher-edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-edit.png"; sourceTree = "<group>"; };
 		051C77C612B0A88300E41A23 /* terminal-launcher-editing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-editing.png"; sourceTree = "<group>"; };
 		051DCDCA133662A300F34140 /* map2-program-graphic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map2-program-graphic.png"; sourceTree = "<group>"; };
@@ -1590,6 +1593,8 @@
 		051F861F129641B30081CF3E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				051C3261133E8DE600D9D869 /* AudioManager.h */,
+				051C3262133E8DE600D9D869 /* AudioManager.m */,
 				052CBFB1133D71BE00B3D999 /* AnimatedSprite.h */,
 				052CBFB2133D71BE00B3D999 /* AnimatedSprite.m */,
 				051F8620129641B30081CF3E /* CCAnimationHelper.h */,
@@ -2497,6 +2502,7 @@
 				0554342413319A4400AB42E4 /* TutorialIntroductionViewController.m in Sources */,
 				051DCDE61337121C00F34140 /* IntroScene.m in Sources */,
 				052CBFB3133D71BE00B3D999 /* AnimatedSprite.m in Sources */,
+				051C3263133E8DE700D9D869 /* AudioManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
