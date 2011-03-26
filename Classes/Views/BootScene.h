@@ -16,21 +16,21 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface BootScene : CCLayer {
     StatusDisplay* statusDisplay;
-    CCLabel* bootingLabel;
-    CCLabel* productLabel;
-    CCLabel* post;
-    CCLabel* console;
-    CCLabel* connection;
+    CCLabelTTF* bootingLabel;
+    CCLabelTTF* productLabel;
+    CCLabelTTF* post;
+    CCLabelTTF* console;
+    CCLabelTTF* connection;
     NSInteger counter;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) StatusDisplay* statusDisplay;
-@property (nonatomic, retain) CCLabel* bootingLabel;
-@property (nonatomic, retain) CCLabel* productLabel;
-@property (nonatomic, retain) CCLabel* post;
-@property (nonatomic, retain) CCLabel* console;
-@property (nonatomic, retain) CCLabel* connection;
+@property (nonatomic, retain) CCLabelTTF* bootingLabel;
+@property (nonatomic, retain) CCLabelTTF* productLabel;
+@property (nonatomic, retain) CCLabelTTF* post;
+@property (nonatomic, retain) CCLabelTTF* console;
+@property (nonatomic, retain) CCLabelTTF* connection;
 @property (nonatomic, assign) NSInteger counter;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

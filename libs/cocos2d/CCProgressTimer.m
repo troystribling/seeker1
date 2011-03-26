@@ -78,9 +78,9 @@ const char kProgressTextureCoords = 0x1e;
 }
 -(void)dealloc
 {
-	if(vertexData_){
+	if(vertexData_)
 		free(vertexData_);
-	}
+	
 	[sprite_ release];
 	[super dealloc];
 }
@@ -132,14 +132,21 @@ const char kProgressTextureCoords = 0x1e;
 ///
 //	@returns the vertex position from the texture coordinate
 ///
--(CGPoint)vertexFromTexCoord:(CGPoint) texCoord
+-(ccVertex2F)vertexFromTexCoord:(CGPoint) texCoord
 {
+	CGPoint tmp;
+	ccVertex2F ret;
 	if (sprite_.texture) {
-		return ccp(sprite_.texture.contentSize.width * texCoord.x/sprite_.texture.maxS,
-				   sprite_.texture.contentSize.height * (1 - (texCoord.y/sprite_.texture.maxT)));
-	} else {
-		return CGPointZero;
-	}
+		CCTexture2D *texture = [sprite_ texture];
+		CGSize texSize = [texture contentSizeInPixels];
+		tmp = ccp(texSize.width * texCoord.x/texture.maxS,
+				   texSize.height * (1 - (texCoord.y/texture.maxT)));
+	} else
+		tmp = CGPointZero;
+	
+	ret.x = tmp.x;
+	ret.y = tmp.y;
+	return ret;
 }
 -(void)updateColor {
 	ccColor4F color = ccc4FFromccc3B(sprite_.color);
@@ -149,9 +156,8 @@ const char kProgressTextureCoords = 0x1e;
 		color.g *= op;
 		color.b *= op;
 		color.a = op;
-	} else {
+	} else
 		color.a = sprite_.opacity/255.f;
-	}
 	
 	if(vertexData_){
 		for (int i=0; i < vertexDataCount_; ++i) {
@@ -454,14 +460,14 @@ const char kProgressTextureCoords = 0x1e;
 	return CGPointZero;
 }
 
--(void)draw {
+-(void)draw
+{
 	if(!vertexData_)return;
 	if(!sprite_)return;
-	BOOL newBlend = NO;
-	if( sprite_.blendFunc.src != CC_BLEND_SRC || sprite_.blendFunc.dst != CC_BLEND_DST ) {
-		newBlend = YES;
-		glBlendFunc( sprite_.blendFunc.src, sprite_.blendFunc.dst );
-	}
+	ccBlendFunc blendFunc = sprite_.blendFunc;
+	BOOL newBlend = blendFunc.src != CC_BLEND_SRC || blendFunc.dst != CC_BLEND_DST;
+	if( newBlend )
+		glBlendFunc( blendFunc.src, blendFunc.dst );
 	
 	///	========================================================================
 	//	Replaced [texture_ drawAtPoint:CGPointZero] with my own vertexData

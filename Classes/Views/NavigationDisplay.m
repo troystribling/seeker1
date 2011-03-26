@@ -45,7 +45,8 @@
 	if((self=[super initWithFile:@"terminal-launcher.png"])) {
         self.anchorPoint = CGPointMake(0.0, 0.0);
         CCSprite* backSprite = [CCSprite spriteWithFile:@"terminal-launcher-back.png"];
-        CCMenuItemSprite* backItem = [CCMenuItemSprite itemFromNormalSprite:backSprite selectedSprite:backSprite target:_target selector:_selector];
+        CCSprite* backSpriteSelected = [CCSprite spriteWithFile:@"terminal-launcher-back.png"];
+        CCMenuItemSprite* backItem = [CCMenuItemSprite itemFromNormalSprite:backSprite selectedSprite:backSpriteSelected target:_target selector:_selector];
         CCMenu* menu = [CCMenu menuWithItems:backItem, nil];
         [menu alignItemsHorizontallyWithPadding:0.0];
         menu.position = CGPointMake(60.0, 32.5);

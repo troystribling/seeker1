@@ -33,7 +33,7 @@
 //
 // singleton stuff
 //
-static CCActionManager *_sharedManager = nil;
+static CCActionManager *sharedManager_ = nil;
 
 @interface CCActionManager (Private)
 -(void) removeActionAtIndex:(NSUInteger)index hashElement:(tHashElement*)element;
@@ -47,22 +47,23 @@ static CCActionManager *_sharedManager = nil;
 #pragma mark ActionManager - init
 + (CCActionManager *)sharedManager
 {
-	if (!_sharedManager)
-		_sharedManager = [[self alloc] init];
+	if (!sharedManager_)
+		sharedManager_ = [[self alloc] init];
 		
-	return _sharedManager;
+	return sharedManager_;
 }
 
 +(id)alloc
 {
-	NSAssert(_sharedManager == nil, @"Attempted to allocate a second instance of a singleton.");
+	NSAssert(sharedManager_ == nil, @"Attempted to allocate a second instance of a singleton.");
 	return [super alloc];
 }
 
 +(void)purgeSharedManager
 {
 	[[CCScheduler sharedScheduler] unscheduleUpdateForTarget:self];
-	[_sharedManager release];
+	[sharedManager_ release];
+	sharedManager_ = nil;
 }
 
 -(id) init
@@ -81,7 +82,7 @@ static CCActionManager *_sharedManager = nil;
 	
 	[self removeAllActions];
 
-	_sharedManager = nil;
+	sharedManager_ = nil;
 
 	[super dealloc];
 }
@@ -195,7 +196,7 @@ static CCActionManager *_sharedManager = nil;
 {
 	for(tHashElement *element=targets; element != NULL; ) {	
 		id target = element->target;
-		element=element->hh.next;
+		element = element->hh.next;
 		[self removeAllActionsFromTarget:target];
 	}
 }
@@ -217,9 +218,10 @@ static CCActionManager *_sharedManager = nil;
 			currentTargetSalvaged = YES;
 		else
 			[self deleteHashElement:element];
-	} else {
-//		CCLOG(@"cocos2d: removeAllActionsFromTarget: Target not found");
 	}
+//	else {
+//		CCLOG(@"cocos2d: removeAllActionsFromTarget: Target not found");
+//	}
 }
 
 -(void) removeAction: (CCAction*) action
@@ -233,13 +235,12 @@ static CCActionManager *_sharedManager = nil;
 	HASH_FIND_INT(targets, &target, element );
 	if( element ) {
 		NSUInteger i = ccArrayGetIndexOfObject(element->actions, action);
-		if( i != NSNotFound ) {
-			
+		if( i != NSNotFound )
 			[self removeActionAtIndex:i hashElement:element];
-		}
-	} else {
-//		CCLOG(@"cocos2d: removeAction: Target not found");
 	}
+//	else {
+//		CCLOG(@"cocos2d: removeAction: Target not found");
+//	}
 }
 
 -(void) removeActionByTag:(int) aTag target:(id)target
@@ -259,9 +260,10 @@ static CCActionManager *_sharedManager = nil;
 				return [self removeActionAtIndex:i hashElement:element];
 		}
 //		CCLOG(@"cocos2d: removeActionByTag: Action not found!");
-	} else {
-//		CCLOG(@"cocos2d: removeActionByTag: Target not found!");
 	}
+//	else {
+//		CCLOG(@"cocos2d: removeActionByTag: Target not found!");
+//	}
 }
 
 #pragma mark ActionManager - get
@@ -284,9 +286,10 @@ static CCActionManager *_sharedManager = nil;
 			}
 		}
 //		CCLOG(@"cocos2d: getActionByTag: Action not found");
-	} else {
-//		CCLOG(@"cocos2d: getActionByTag: Target not found");
 	}
+//	else {
+//		CCLOG(@"cocos2d: getActionByTag: Target not found");
+//	}
 	return nil;
 }
 
@@ -305,7 +308,7 @@ static CCActionManager *_sharedManager = nil;
 
 -(void) update: (ccTime) dt
 {
-	for(tHashElement *elt=targets; elt != NULL; ) {	
+	for(tHashElement *elt = targets; elt != NULL; ) {	
 
 		currentTarget = elt;
 		currentTargetSalvaged = NO;
@@ -313,7 +316,7 @@ static CCActionManager *_sharedManager = nil;
 		if( ! currentTarget->paused ) {
 			
 			// The 'actions' ccArray may change while inside this loop.
-			for( currentTarget->actionIndex = 0; currentTarget->actionIndex <  currentTarget->actions->num; currentTarget->actionIndex++) {
+			for( currentTarget->actionIndex = 0; currentTarget->actionIndex < currentTarget->actions->num; currentTarget->actionIndex++) {
 				currentTarget->currentAction = currentTarget->actions->arr[currentTarget->actionIndex];
 				currentTarget->currentActionSalvaged = NO;
 				
@@ -340,7 +343,7 @@ static CCActionManager *_sharedManager = nil;
 
 		// elt, at this moment, is still valid
 		// so it is safe to ask this here (issue #490)
-		elt=elt->hh.next;
+		elt = elt->hh.next;
 	
 		// only delete currentTarget if no actions were scheduled during the cycle (issue #481)
 		if( currentTargetSalvaged && currentTarget->actions->num == 0 )

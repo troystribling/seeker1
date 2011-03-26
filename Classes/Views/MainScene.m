@@ -35,31 +35,31 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)buildMenu {
-    CCLabel* missionLabel = [CCLabel labelWithString:@"1. play" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
+    CCLabelTTF* missionLabel = [CCLabelTTF labelWithString:@"1. play" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     missionLabel.color = kCCLABEL_FONT_COLOR;
     CCMenuItemLabel* missionItem = [CCMenuItemLabel itemWithLabel:missionLabel
                                                         target:self
                                                         selector:@selector(mission)];
     missionItem.anchorPoint = CGPointMake(0.0, 0.0);
-    CCLabel* settingsLabel = [CCLabel labelWithString:@"2. settings" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
+    CCLabelTTF* settingsLabel = [CCLabelTTF labelWithString:@"2. settings" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     settingsLabel.color = kCCLABEL_FONT_COLOR;
     CCMenuItemLabel* settingsItem = [CCMenuItemLabel itemWithLabel:settingsLabel
                                                         target:self
                                                         selector:@selector(settings)];
     settingsItem.anchorPoint = CGPointMake(0.0, 0.0);
-    CCLabel* statsLabel = [CCLabel labelWithString:@"3. stats" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
+    CCLabelTTF* statsLabel = [CCLabelTTF labelWithString:@"3. stats" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     statsLabel.color = kCCLABEL_FONT_COLOR;
     CCMenuItemLabel* statsItem = [CCMenuItemLabel itemWithLabel:statsLabel
                                                             target:self
                                                             selector:@selector(stats)];
     statsItem.anchorPoint = CGPointMake(0.0, 0.0);
-    CCLabel* repositoryLabel = [CCLabel labelWithString:@"4. repository" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
+    CCLabelTTF* repositoryLabel = [CCLabelTTF labelWithString:@"4. repository" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     repositoryLabel.color = kCCLABEL_FONT_COLOR;
     CCMenuItemLabel* repositoryItem = [CCMenuItemLabel itemWithLabel:repositoryLabel
                                                        target:self
                                                        selector:@selector(repository)];
     repositoryItem.anchorPoint = CGPointMake(0.0, 0.0);
-    CCLabel* tutorialLabel = [CCLabel labelWithString:@"5. tutorial" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
+    CCLabelTTF* tutorialLabel = [CCLabelTTF labelWithString:@"5. tutorial" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     tutorialLabel.color = kCCLABEL_FONT_COLOR;
     CCMenuItemLabel* tutorialItem = [CCMenuItemLabel itemWithLabel:tutorialLabel
                                                       target:self

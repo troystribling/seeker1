@@ -55,19 +55,19 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertFailedTitleLabel {
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
-    CCLabel* titleLabel = [CCLabel labelWithString:@"Mission Failure" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
+    CCLabelTTF* titleLabel = [CCLabelTTF labelWithString:@"Mission Failure" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
     titleLabel.position = CGPointMake(screenSize.width/2.0, 380.0f);
     titleLabel.color = kCCLABEL_FONT_RED_COLOR; 
     [self addChild:titleLabel];
-    CCLabel* errorMsgLabel = [CCLabel labelWithString:self.level.errorMsg fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
+    CCLabelTTF* errorMsgLabel = [CCLabelTTF labelWithString:self.level.errorMsg fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     errorMsgLabel.position = CGPointMake(screenSize.width/2.0, 347.0f);
     errorMsgLabel.color = kCCLABEL_FONT_GOLD_COLOR;    
     [self addChild:errorMsgLabel];
-    CCLabel* errorCodeLabel = [CCLabel labelWithString:@"Error Code" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
+    CCLabelTTF* errorCodeLabel = [CCLabelTTF labelWithString:@"Error Code" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     errorCodeLabel.position = CGPointMake(screenSize.width/2.0, 312.0f);
     errorCodeLabel.color = kCCLABEL_FONT_RED_COLOR;    
     [self addChild:errorCodeLabel];
-    CCLabel* errorCodeID = [CCLabel labelWithString:self.level.errorCode fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
+    CCLabelTTF* errorCodeID = [CCLabelTTF labelWithString:self.level.errorCode fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     errorCodeID.position = CGPointMake(screenSize.width/2.0, 287.0f);
     errorCodeID.color = kCCLABEL_FONT_RED_COLOR;    
     [self addChild:errorCodeID];
@@ -75,7 +75,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertCompletedTitleLabel {
-    CCLabel* titleLabel = [CCLabel labelWithString:@"Mission Completed" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
+    CCLabelTTF* titleLabel = [CCLabelTTF labelWithString:@"Mission Completed" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
     titleLabel.position = CGPointMake(20.0, 360.0f);
     titleLabel.color = kCCLABEL_FONT_GOLD_COLOR;    
     titleLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
@@ -87,8 +87,8 @@
     NSInteger samplesReturnedScore = self.level.samplesReturned * kPOINTS_PER_OBJECT;
     NSString* samplesReturnedString = [NSString stringWithFormat:@"Samples Returned     %d*%d = %d", 
                                        self.level.samplesReturned, kPOINTS_PER_OBJECT, samplesReturnedScore];
-    CCLabel* samplesReturnedLabel = [CCLabel labelWithString:samplesReturnedString dimensions:CGSizeMake(250, 60) 
-                                                   alignment:UITextAlignmentLeft fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
+    CCLabelTTF* samplesReturnedLabel = [CCLabelTTF labelWithString:samplesReturnedString dimensions:CGSizeMake(250, 60) 
+                                                         alignment:UITextAlignmentLeft fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     samplesReturnedLabel.position = _position;
     samplesReturnedLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     samplesReturnedLabel.color = kCCLABEL_FONT_COLOR;
@@ -100,7 +100,7 @@
     NSInteger sensorsPlacedScore = self.level.sensorsPlaced * kPOINTS_PER_OBJECT;
     NSString* sensorsPlacedString = [NSString stringWithFormat:@"Sensors Placed       %d*%d = %d", 
                                        self.level.sensorsPlaced, kPOINTS_PER_OBJECT, sensorsPlacedScore];
-    CCLabel* sensorsPlacedLabel = [CCLabel labelWithString:sensorsPlacedString dimensions:CGSizeMake(250, 60) 
+    CCLabelTTF* sensorsPlacedLabel = [CCLabelTTF labelWithString:sensorsPlacedString dimensions:CGSizeMake(250, 60) 
                                                alignment:UITextAlignmentLeft fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     sensorsPlacedLabel.position = _position;
     sensorsPlacedLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
@@ -118,16 +118,16 @@
     } 
     NSInteger codeScore = (int)(100.0*(float)(expScore)/(float)self.level.codeScore);
     NSInteger codeScorePoints = deltaCodeScore * kPOINTS_PER_CODE_LINE;
-    CCLabel* codeScoreLabel;
+    CCLabelTTF* codeScoreLabel;
     if (deltaCodeScore == 0) {        
         NSString* codeScoreString = [NSString stringWithFormat:@"Code Score: %d%%", codeScore];
-        codeScoreLabel = [CCLabel labelWithString:codeScoreString fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
+        codeScoreLabel = [CCLabelTTF labelWithString:codeScoreString fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
         codeScoreLabel.position = CGPointMake(20.0f, 208.0f);
         codeScoreLabel.color = kCCLABEL_FONT_COLOR;
     } else {
         NSString* codeScoreString = [NSString stringWithFormat:@"Code Score: %d%%     Penalty          %d*%d = %d", 
                                       codeScore, deltaCodeScore, kPOINTS_PER_CODE_LINE, codeScorePoints];
-        codeScoreLabel = [CCLabel labelWithString:codeScoreString dimensions:CGSizeMake(250, 90) 
+        codeScoreLabel = [CCLabelTTF labelWithString:codeScoreString dimensions:CGSizeMake(250, 90) 
                                          alignment:UITextAlignmentLeft fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
         codeScoreLabel.position = CGPointMake(20.0f, 143.0f);
         codeScoreLabel.color = kCCLABEL_FONT_RED_COLOR;
@@ -140,7 +140,7 @@
 - (void)insertCompletedTotalScoreLabel {
     NSInteger deltaCodeScore = self.level.codeScore - self.level.expectedCodeScore;
     NSString* totalScoreString = [NSString stringWithFormat:@"Total Score: %d", self.level.score];
-    CCLabel* totalScoreLabel = [CCLabel labelWithString:totalScoreString dimensions:CGSizeMake(300, 60) 
+    CCLabelTTF* totalScoreLabel = [CCLabelTTF labelWithString:totalScoreString dimensions:CGSizeMake(300, 60) 
                                               alignment:UITextAlignmentLeft fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE];
     totalScoreLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
     totalScoreLabel.color = kCCLABEL_FONT_GOLD_COLOR;
@@ -154,12 +154,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertMissionFailedMenu {
-    CCLabel* redoLabel = [CCLabel labelWithString:@"<redo" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
+    CCLabelTTF* redoLabel = [CCLabelTTF labelWithString:@"<redo" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
     redoLabel.color = kCCLABEL_FONT_RED_COLOR;
     CCMenuItemLabel* redoItem = [CCMenuItemLabel itemWithLabel:redoLabel
                                                         target:self
                                                         selector:@selector(redoMission)];
-    CCLabel* skipLabel = [CCLabel labelWithString:@"skip>" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
+    CCLabelTTF* skipLabel = [CCLabelTTF labelWithString:@"skip>" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
     skipLabel.color = kCCLABEL_FONT_RED_COLOR;
     CCMenuItemLabel* skipItem = [CCMenuItemLabel itemWithLabel:skipLabel
                                                         target:self
@@ -172,12 +172,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertMissionCompletedMenu {
-    CCLabel* againLabel = [CCLabel labelWithString:@"<again" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
+    CCLabelTTF* againLabel = [CCLabelTTF labelWithString:@"<again" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
     againLabel.color = kCCLABEL_FONT_COLOR;
     CCMenuItemLabel* againItem = [CCMenuItemLabel itemWithLabel:againLabel
                                                          target:self
                                                          selector:@selector(againMission)];
-    CCLabel* nextLabel = [CCLabel labelWithString:@"next>" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
+    CCLabelTTF* nextLabel = [CCLabelTTF labelWithString:@"next>" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
     nextLabel.color = kCCLABEL_FONT_COLOR;
     CCMenuItemLabel* nextItem = [CCMenuItemLabel itemWithLabel:nextLabel
                                                         target:self

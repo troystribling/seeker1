@@ -13,7 +13,7 @@
 #import "TutorialIndexViewController.h"
 #import "UserModel.h"
 #import "IntroMap1Scene.h"
-#import "IntroMap3Scene.h"
+#import "IntroMap2Scene.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kTUTORIAL_INDEX_LAUNCHER_BACK_TAG   1
@@ -160,7 +160,8 @@
     [self.view removeFromSuperview];
     switch (indexPath.row) {
         case 0:
-            [[CCDirector sharedDirector] replaceScene:[IntroMap1Scene scene]];
+//            [[CCDirector sharedDirector] replaceScene:[IntroMap1Scene scene]];
+            [[CCDirector sharedDirector] replaceScene:[IntroMap2Scene scene]];
             break;
         case 1:
             [viewMgr showTutorialSectionView:self.view withSectionID:SubroutinesTutorialSectionID];

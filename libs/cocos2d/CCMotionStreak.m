@@ -38,7 +38,7 @@
 
 @implementation CCMotionStreak
 
-@synthesize ribbon=ribbon_;
+@synthesize ribbon = ribbon_;
 
 +(id)streakWithFade:(float)fade minSeg:(float)seg image:(NSString*)path width:(float)width length:(float)length color:(ccColor4B)color
 {
@@ -51,11 +51,11 @@
 		segThreshold_ = seg;
 		width_ = width;
 		lastLocation_ = CGPointZero;
-		ribbon_ = [CCRibbon ribbonWithWidth: width_ image:path length:length color:color fade:fade];
+		ribbon_ = [CCRibbon ribbonWithWidth:width_ image:path length:length color:color fade:fade];
 		[self addChild:ribbon_];
 
 		// update ribbon position
-		[self schedule:@selector(update:) interval:0];
+		[self scheduleUpdate];
 	}
 	return self;
 }
@@ -64,7 +64,7 @@
 {
 	CGPoint location = [self convertToWorldSpace:CGPointZero];
 	[ribbon_ setPosition:ccp(-1*location.x, -1*location.y)];
-	float len = sqrtf(powf(lastLocation_.x - location.x, 2) + powf(lastLocation_.y - location.y, 2));
+	float len = ccpLength(ccpSub(lastLocation_, location));
 	if (len > segThreshold_)
 	{
 		[ribbon_ addPointAt:location width:width_];

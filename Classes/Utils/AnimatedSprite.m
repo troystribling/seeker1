@@ -19,6 +19,9 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation AnimatedSprite
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize delegate;
+
 //===================================================================================================================================
 #pragma mark AnimatedSprite PrivateAPI
 
@@ -35,15 +38,23 @@
     NSString* plistFile = [NSString stringWithFormat:@"%@.plist", _file];
 	CCSpriteFrameCache* frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
 	[frameCache addSpriteFramesWithFile:plistFile];
-    NSString* frameName = [NSString stringWithFormat:@"%@.png", _file];
+    NSString* frameName = [NSString stringWithFormat:@"%@-0.png", _file];
 	if ((self = [super initWithSpriteFrameName:frameName])) {
-		CCAnimation* anim = [CCAnimation animationWithFrame:_file frameCount:_frameCount delay:_delay];
+		CCAnimation* anim = [CCAnimation animationWithFrame:_file frameCount:(_frameCount - 1) delay:_delay];
 		CCAnimate* animate = [CCAnimate actionWithAnimation:anim];
 		CCRepeatForever* repeat = [CCRepeatForever actionWithAction:animate];
 		[self runAction:repeat];
 		[self scheduleUpdate];
+        self.delegate = nil;
 	}
 	return self;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+-(void) update:(ccTime)_delta {
+    if ([self.delegate respondsToSelector:@selector(animationUpdated:)]) {
+        [self.delegate animationUpdated:_delta];
+    }
 }
 
 @end

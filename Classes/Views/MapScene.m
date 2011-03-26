@@ -875,7 +875,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertLowerMenu {
     CCSprite* menuImage = [CCSprite spriteWithFile:@"map-levels.png"];
-    CCMenuItemSprite* menuItem = [CCMenuItemSprite itemFromNormalSprite:menuImage selectedSprite:menuImage target:self selector:@selector(mapBack)];
+    CCSprite* menuImageSelected = [CCSprite spriteWithFile:@"map-levels.png"];
+    CCMenuItemSprite* menuItem = [CCMenuItemSprite itemFromNormalSprite:menuImage selectedSprite:menuImageSelected target:self selector:@selector(mapBack)];
     CCMenu* lowerMenu = [CCMenu menuWithItems:menuItem, nil];
     [lowerMenu alignItemsHorizontallyWithPadding:0.0];
     lowerMenu.position = CGPointMake(self.screenCenter.x, 15.0f);

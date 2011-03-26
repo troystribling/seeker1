@@ -5,6 +5,26 @@
 	<key>frames</key>
 	<dict>
 		
+		<key>map2-nav-prog-0.png</key>
+		<dict>
+			<key>aliases</key>
+			<array/>
+			<key>spriteColorRect</key>
+			<string>{{0, 0}, {70, 30}}</string>
+			<key>spriteOffset</key>
+			<string>{0, -0}</string>
+			<key>spriteSize</key>
+			<string>{70, 30}</string>
+			<key>spriteSourceSize</key>
+			<string>{70, 30}</string>
+			<key>spriteTrimmed</key>
+			<true/>
+			<key>textureRect</key>
+			<string>{{3, 135}, {70, 30}}</string>
+			<key>textureRotated</key>
+			<false/>
+		</dict>
+		
 		<key>map2-nav-prog-1.png</key>
 		<dict>
 			<key>aliases</key>
@@ -20,7 +40,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 180}, {70, 30}}</string>
+			<string>{{3, 234}, {70, 30}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -40,9 +60,9 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 30}, {70, 30}}</string>
+			<string>{{76, 149}, {30, 70}}</string>
 			<key>textureRotated</key>
-			<false/>
+			<true/>
 		</dict>
 		
 		<key>map2-nav-prog-2.png</key>
@@ -60,7 +80,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 0}, {70, 30}}</string>
+			<string>{{3, 168}, {70, 30}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -80,9 +100,9 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 120}, {70, 30}}</string>
+			<string>{{76, 3}, {30, 70}}</string>
 			<key>textureRotated</key>
-			<false/>
+			<true/>
 		</dict>
 		
 		<key>map2-nav-prog-4.png</key>
@@ -100,9 +120,9 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 270}, {70, 30}}</string>
+			<string>{{76, 76}, {30, 70}}</string>
 			<key>textureRotated</key>
-			<false/>
+			<true/>
 		</dict>
 		
 		<key>map2-nav-prog-5.png</key>
@@ -120,7 +140,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 210}, {70, 30}}</string>
+			<string>{{3, 69}, {70, 30}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -140,7 +160,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 150}, {70, 30}}</string>
+			<string>{{3, 36}, {70, 30}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -160,7 +180,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 240}, {70, 30}}</string>
+			<string>{{3, 102}, {70, 30}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -180,7 +200,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 90}, {70, 30}}</string>
+			<string>{{3, 201}, {70, 30}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -200,27 +220,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 300}, {70, 30}}</string>
-			<key>textureRotated</key>
-			<false/>
-		</dict>
-		
-		<key>map2-nav-prog.png</key>
-		<dict>
-			<key>aliases</key>
-			<array/>
-			<key>spriteColorRect</key>
-			<string>{{0, 0}, {70, 30}}</string>
-			<key>spriteOffset</key>
-			<string>{0, -0}</string>
-			<key>spriteSize</key>
-			<string>{70, 30}</string>
-			<key>spriteSourceSize</key>
-			<string>{70, 30}</string>
-			<key>spriteTrimmed</key>
-			<true/>
-			<key>textureRect</key>
-			<string>{{0, 60}, {70, 30}}</string>
+			<string>{{3, 3}, {70, 30}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>

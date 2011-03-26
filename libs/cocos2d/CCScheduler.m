@@ -81,11 +81,9 @@ typedef struct _hashSelectorEntry
 
 -(id) init
 {
-	NSException* myException = [NSException
-								exceptionWithName:@"TimerInvalid"
-								reason:@"Invalid init for Timer. Use initWithTarget:sel:"
-								userInfo:nil];
-	@throw myException;
+	NSAssert(NO, @"CCTimer: Init not supported.");
+	[self release];
+	return nil;
 }
 
 +(id) timerWithTarget:(id)t selector:(SEL)s
@@ -178,6 +176,7 @@ static CCScheduler *sharedScheduler;
 +(void)purgeSharedScheduler
 {
 	[sharedScheduler release];
+	sharedScheduler = nil;
 }
 
 - (id) init
@@ -257,31 +256,28 @@ static CCScheduler *sharedScheduler;
 		// Is this the 1st element ? Then set the pause level to all the selectors of this target
 		element->paused = paused;
 	
-	} else {
+	} else
 		NSAssert( element->paused == paused, @"CCScheduler. Trying to schedule a selector with a pause value different than the target");
-	}
+	
 	
 	if( element->timers == nil )
 		element->timers = ccArrayNew(10);
-	else if( element->timers->num == element->timers->max )
-		ccArrayDoubleCapacity(element->timers);
-	
-
-	BOOL found = NO;
-	for( unsigned int i=0; i< element->timers->num; i++ ) {
-		CCTimer *timer = element->timers->arr[i];
-		if( selector == timer->selector ) {
-			CCLOG(@"CCScheduler#scheduleSelector. Selector already scheduled. Updating interval from: %.2f to %.2f", timer->interval, interval);
-			timer->interval = interval;
-			found = YES;
+	else
+	{
+		for( unsigned int i=0; i< element->timers->num; i++ ) {
+			CCTimer *timer = element->timers->arr[i];
+			if( selector == timer->selector ) {
+				CCLOG(@"CCScheduler#scheduleSelector. Selector already scheduled. Updating interval from: %.2f to %.2f", timer->interval, interval);
+				timer->interval = interval;
+				return;
+			}
 		}
+		ccArrayEnsureExtraCapacity(element->timers, 1);
 	}
 	
-	if( ! found ) {
-		CCTimer *timer = [[CCTimer alloc] initWithTarget:target selector:selector interval:interval];
-		ccArrayAppendObject(element->timers, timer);
-		[timer release];
-	}
+	CCTimer *timer = [[CCTimer alloc] initWithTarget:target selector:selector interval:interval];
+	ccArrayAppendObject(element->timers, timer);
+	[timer release];
 }
 
 -(void) unscheduleSelector:(SEL)selector forTarget:(id)target
@@ -307,7 +303,6 @@ static CCScheduler *sharedScheduler;
 				if( timer == element->currentTimer && !element->currentTimerSalvaged ) {
 					[element->currentTimer retain];
 					element->currentTimerSalvaged = YES;
-					
 				}
 
 				ccArrayRemoveObjectAtIndex(element->timers, i );
@@ -317,9 +312,8 @@ static CCScheduler *sharedScheduler;
 					element->timerIndex--;
 
 				if( element->timers->num == 0 ) {
-					if( currentTarget == element ) {
-						currentTargetSalvaged = YES;						
-					}
+					if( currentTarget == element )
+						currentTargetSalvaged = YES;
 					else
 						[self removeHashElement: element];
 				}
@@ -349,7 +343,7 @@ static CCScheduler *sharedScheduler;
 	// empty list ?
 	if( ! *list ) {
 		DL_APPEND( *list, listElement );
-
+	
 	} else {
 		BOOL added = NO;		
 	
@@ -589,7 +583,7 @@ static CCScheduler *sharedScheduler;
 		
 		// elt, at this moment, is still valid
 		// so it is safe to ask this here (issue #490)
-		elt=elt->hh.next;
+		elt = elt->hh.next;
 		
 		// only delete currentTarget if no actions were scheduled during the cycle (issue #481)
 		if( currentTargetSalvaged && currentTarget->timers->num == 0 )

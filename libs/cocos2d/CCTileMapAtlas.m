@@ -23,6 +23,7 @@
  *
  */
 
+#import "ccConfig.h"
 #import "CCTileMapAtlas.h"
 #import "ccMacros.h"
 #import "Support/CCFileUtils.h"
@@ -56,7 +57,7 @@
 
 		[self updateAtlasValues];
 		
-		[self setContentSize: CGSizeMake(tgaInfo->width*itemWidth, tgaInfo->height*itemHeight)];
+		[self setContentSize: CGSizeMake(tgaInfo->width*itemWidth_, tgaInfo->height*itemHeight_)];
 	}
 
 	return self;
@@ -76,6 +77,7 @@
 {
 	if( tgaInfo )
 		tgaDestroy(tgaInfo);
+	
 	tgaInfo = nil;
 
 	[posToAtlasIndex release];
@@ -87,8 +89,8 @@
 	NSAssert( tgaInfo != nil, @"tgaInfo must be non-nil");
 
 	itemsToRender = 0;
-	for(int x=0;x < tgaInfo->width; x++ ) {
-		for( int y=0; y < tgaInfo->height; y++ ) {
+	for(int x = 0;x < tgaInfo->width; x++ ) {
+		for(int y = 0; y < tgaInfo->height; y++ ) {
 			ccColor3B *ptr = (ccColor3B*) tgaInfo->imageData;
 			ccColor3B value = ptr[x + y * tgaInfo->width];
 			if( value.r )
@@ -110,9 +112,9 @@
 	
 	tgaInfo = tgaLoad( [path UTF8String] );
 #if 1
-	if( tgaInfo->status != TGA_OK ) {
+	if( tgaInfo->status != TGA_OK )
 		[NSException raise:@"TileMapAtlasLoadTGA" format:@"TileMapAtas cannot load TGA file"];
-	}
+	
 #endif
 }
 
@@ -128,9 +130,9 @@
 	
 	ccColor3B *ptr = (ccColor3B*) tgaInfo->imageData;
 	ccColor3B value = ptr[pos.x + pos.y * tgaInfo->width];
-	if( value.r == 0 ) {
+	if( value.r == 0 )
 		CCLOG(@"cocos2d: Value.r must be non 0.");
-	} else {
+	else {
 		ptr[pos.x + pos.y * tgaInfo->width] = tile;
 		
 		// XXX: this method consumes a lot of memory
@@ -158,29 +160,45 @@
 
 	int x = pos.x;
 	int y = pos.y;
-	float row = (value.r % itemsPerRow) * texStepX;
-	float col = (value.r / itemsPerRow) * texStepY;
+	float row = (value.r % itemsPerRow_);
+	float col = (value.r / itemsPerRow_);
+	
+	float textureWide = [[textureAtlas_ texture] pixelsWide];
+	float textureHigh = [[textureAtlas_ texture] pixelsHigh];
 
-	quad.tl.texCoords.u = row;
-	quad.tl.texCoords.v = col;
-	quad.tr.texCoords.u = row + texStepX;
-	quad.tr.texCoords.v = col;
-	quad.bl.texCoords.u = row;
-	quad.bl.texCoords.v = col + texStepY;
-	quad.br.texCoords.u = row + texStepX;
-	quad.br.texCoords.v = col + texStepY;
+#if CC_FIX_ARTIFACTS_BY_STRECHING_TEXEL
+	float left		= (2*row*itemWidth_+1)/(2*textureWide);
+	float right		= left+(itemWidth_*2-2)/(2*textureWide);
+	float top		= (2*col*itemHeight_+1)/(2*textureHigh);
+	float bottom	= top+(itemHeight_*2-2)/(2*textureHigh);
+#else
+	float left		= (row*itemWidth_)/textureWide;
+	float right		= left+itemWidth_/textureWide;
+	float top		= (col*itemHeight_)/textureHigh;
+	float bottom	= top+itemHeight_/textureHigh;
+#endif
+	
 
-	quad.bl.vertices.x = (int) (x * itemWidth);
-	quad.bl.vertices.y = (int) (y * itemHeight);
+	quad.tl.texCoords.u = left;
+	quad.tl.texCoords.v = top;
+	quad.tr.texCoords.u = right;
+	quad.tr.texCoords.v = top;
+	quad.bl.texCoords.u = left;
+	quad.bl.texCoords.v = bottom;
+	quad.br.texCoords.u = right;
+	quad.br.texCoords.v = bottom;
+
+	quad.bl.vertices.x = (int) (x * itemWidth_);
+	quad.bl.vertices.y = (int) (y * itemHeight_);
 	quad.bl.vertices.z = 0.0f;
-	quad.br.vertices.x = (int)(x * itemWidth + itemWidth);
-	quad.br.vertices.y = (int)(y * itemHeight);
+	quad.br.vertices.x = (int)(x * itemWidth_ + itemWidth_);
+	quad.br.vertices.y = (int)(y * itemHeight_);
 	quad.br.vertices.z = 0.0f;
-	quad.tl.vertices.x = (int)(x * itemWidth);
-	quad.tl.vertices.y = (int)(y * itemHeight + itemHeight);
+	quad.tl.vertices.x = (int)(x * itemWidth_);
+	quad.tl.vertices.y = (int)(y * itemHeight_ + itemHeight_);
 	quad.tl.vertices.z = 0.0f;
-	quad.tr.vertices.x = (int)(x * itemWidth + itemWidth);
-	quad.tr.vertices.y = (int)(y * itemHeight + itemHeight);
+	quad.tr.vertices.x = (int)(x * itemWidth_ + itemWidth_);
+	quad.tr.vertices.y = (int)(y * itemHeight_ + itemHeight_);
 	quad.tr.vertices.z = 0.0f;
 	
 	[textureAtlas_ updateQuad:&quad atIndex:idx];
@@ -193,8 +211,8 @@
 	
 	int total = 0;
 
-	for(int x=0;x < tgaInfo->width; x++ ) {
-		for( int y=0; y < tgaInfo->height; y++ ) {
+	for(int x = 0;x < tgaInfo->width; x++ ) {
+		for(int y = 0; y < tgaInfo->height; y++ ) {
 			if( total < itemsToRender ) {
 				ccColor3B *ptr = (ccColor3B*) tgaInfo->imageData;
 				ccColor3B value = ptr[x + y * tgaInfo->width];

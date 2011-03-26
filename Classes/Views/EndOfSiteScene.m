@@ -146,7 +146,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertNextMissionMenu {
     CCSprite* nextSprite = [CCSprite spriteWithFile:@"go-to-next-site.png"];
-    CCMenuItemLabel* nextItem = [CCMenuItemSprite itemFromNormalSprite:nextSprite selectedSprite:nextSprite target:self selector:@selector(nextMission)];
+    CCSprite* nextSpriteSelected = [CCSprite spriteWithFile:@"go-to-next-site.png"];
+    CCMenuItemLabel* nextItem = [CCMenuItemSprite itemFromNormalSprite:nextSprite selectedSprite:nextSpriteSelected target:self selector:@selector(nextMission)];
     CCMenu* menu = [CCMenu menuWithItems:nextItem, nil];
     [menu alignItemsHorizontallyWithPadding:90.0];
     menu.position = CGPointMake(245.0f, 35.0f);
@@ -156,7 +157,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)inserDoneMenu {
     CCSprite* doneSprite = [CCSprite spriteWithFile:@"done-last-site.png"];
-    CCMenuItemLabel* doneItem = [CCMenuItemSprite itemFromNormalSprite:doneSprite selectedSprite:doneSprite target:self selector:@selector(doneWithGame)];
+    CCSprite* doneSpriteSelected = [CCSprite spriteWithFile:@"done-last-site.png"];
+    CCMenuItemLabel* doneItem = [CCMenuItemSprite itemFromNormalSprite:doneSprite selectedSprite:doneSpriteSelected target:self selector:@selector(doneWithGame)];
     CCMenu* menu = [CCMenu menuWithItems:doneItem, nil];
     [menu alignItemsHorizontallyWithPadding:90.0];
     menu.position = CGPointMake(245.0f, 35.0f);

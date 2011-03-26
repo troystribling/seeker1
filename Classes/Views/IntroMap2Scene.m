@@ -10,6 +10,7 @@
 #import "IntroTerm1Scene.h"
 #import "StatusDisplay.h"
 #import "SeekerSprite.h"
+#import "AnimatedSprite.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kMAX_TAPS           3
@@ -151,8 +152,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)showProgMenu {
-    CCSprite* progSprite = [CCSprite spriteWithFile:@"map2-nav-prog.png"];
-    CCMenuItemLabel* nextItem = [CCMenuItemSprite itemFromNormalSprite:progSprite selectedSprite:progSprite target:self selector:@selector(touchProg)];
+    AnimatedSprite* progSprite = [AnimatedSprite animationFromFile:@"map2-nav-prog" withFrameCount:11 andDelay:0.1];
+    AnimatedSprite* progSpriteSelected = [AnimatedSprite animationFromFile:@"map2-nav-prog" withFrameCount:11 andDelay:0.1];
+    CCMenuItemLabel* nextItem = [CCMenuItemSprite itemFromNormalSprite:progSprite selectedSprite:progSpriteSelected target:self selector:@selector(touchProg)];
     CCMenu* menu = [CCMenu menuWithItems:nextItem, nil];
     [menu alignItemsHorizontallyWithPadding:0.0];
     menu.position = CGPointMake(195.0f, 399.0f);

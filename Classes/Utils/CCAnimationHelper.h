@@ -15,7 +15,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CCAnimation (Helper) 
 
-+(CCAnimation*) animationWithFile:(NSString*)name frameCount:(int)frameCount delay:(float)delay;
-+(CCAnimation*) animationWithFrame:(NSString*)frame frameCount:(int)frameCount delay:(float)delay;
++(CCAnimation*) animationWithFile:(NSString*)_name frameCount:(int)_frameCount delay:(CGFloat)_delay;
++(CCAnimation*) animationWithFrame:(NSString*)_frame frameCount:(int)_frameCount delay:(CGFloat)_delay;
 
 @end

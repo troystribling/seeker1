@@ -28,9 +28,14 @@
  cocos2d (cc) types
 */
 
-#import <objc/objc.h>				// BOOL
+#import <Availability.h>
+#import <Foundation/Foundation.h>
+
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 #import <CoreGraphics/CGGeometry.h>	// CGPoint
-#import <OpenGLES/ES1/gl.h>			// GLenum, GLubyte
+#endif
+
+#import "Platforms/CCGL.h"
 
 /** RGB color composed of bytes 3 bytes
 @since v0.8
@@ -51,33 +56,33 @@ ccc3(const GLubyte r, const GLubyte g, const GLubyte b)
 }
 //ccColor3B predefined colors
 //! White color (255,255,255)
-static const ccColor3B ccWHITE={255,255,255};
+static const ccColor3B ccWHITE = {255,255,255};
 //! Yellow color (255,255,0)
-static const ccColor3B ccYELLOW={255,255,0};
+static const ccColor3B ccYELLOW = {255,255,0};
 //! Blue color (0,0,255)
-static const ccColor3B ccBLUE={0,0,255};
+static const ccColor3B ccBLUE = {0,0,255};
 //! Green Color (0,255,0)
-static const ccColor3B ccGREEN={0,255,0};
+static const ccColor3B ccGREEN = {0,255,0};
 //! Red Color (255,0,0,)
-static const ccColor3B ccRED={255,0,0};
+static const ccColor3B ccRED = {255,0,0};
 //! Magenta Color (255,0,255)
-static const ccColor3B ccMAGENTA={255,0,255};
+static const ccColor3B ccMAGENTA = {255,0,255};
 //! Black Color (0,0,0)
-static const ccColor3B ccBLACK={0,0,0};
+static const ccColor3B ccBLACK = {0,0,0};
 //! Orange Color (255,127,0)
-static const ccColor3B ccORANGE={255,127,0};
+static const ccColor3B ccORANGE = {255,127,0};
 //! Gray Color (166,166,166)
-static const ccColor3B ccGRAY={166,166,166};
+static const ccColor3B ccGRAY = {166,166,166};
 
 /** RGBA color composed of 4 bytes
 @since v0.8
 */
 typedef struct _ccColor4B
 {
-	unsigned char r;
-	unsigned char g;
-	unsigned char b;
-	unsigned char a;
+	GLubyte	r;
+	GLubyte	g;
+	GLubyte	b;
+	GLubyte a;
 } ccColor4B;
 //! helper macro that creates an ccColor4B type
 static inline ccColor4B
@@ -92,10 +97,10 @@ ccc4(const GLubyte r, const GLubyte g, const GLubyte b, const GLubyte o)
 @since v0.8
 */
 typedef struct _ccColor4F {
-	float r;
-	float g;
-	float b;
-	float a;
+	GLfloat r;
+	GLfloat g;
+	GLfloat b;
+	GLfloat a;
 } ccColor4F;
 
 /** Returns a ccColor4F from a ccColor3B. Alpha will be 1.
@@ -122,27 +127,31 @@ static inline BOOL ccc4FEqual(ccColor4F a, ccColor4F b)
 	return a.r == b.r && a.g == b.g && a.b == b.b && a.a == b.a;
 }
 
-/** A vertex composed of 2 floats: x, y
+/** A vertex composed of 2 GLfloats: x, y
  @since v0.8
  */
-#define ccVertex2F CGPoint
+typedef struct _ccVertex2F
+{
+	GLfloat x;
+	GLfloat y;
+} ccVertex2F;
 
 /** A vertex composed of 2 floats: x, y
  @since v0.8
  */
 typedef struct _ccVertex3F
 {
-		float x;
-		float y;
-		float z;
+	GLfloat x;
+	GLfloat y;
+	GLfloat z;
 } ccVertex3F;
 		
 /** A texcoord composed of 2 floats: u, y
  @since v0.8
  */
 typedef struct _ccTex2F {
-	 float u;
-	 float v;
+	 GLfloat u;
+	 GLfloat v;
 } ccTex2F;
 
  
@@ -151,7 +160,7 @@ typedef struct _ccPointSprite
 {
 	ccVertex2F	pos;		// 8 bytes
 	ccColor4F	colors;		// 16 bytes
-	float		size;		// 4 bytes
+	GLfloat		size;		// 4 bytes
 } ccPointSprite;
 
 //!	A 2D Quad. 4 * 2 floats
@@ -174,13 +183,13 @@ typedef struct _ccQuad3 {
 //! A 2D grid size
 typedef struct _ccGridSize
 {
-	int	x;
-	int	y;
+	NSInteger	x;
+	NSInteger	y;
 } ccGridSize;
 
 //! helper function to create a ccGridSize
 static inline ccGridSize
-ccg(const int x, const int y)
+ccg(const NSInteger x, const NSInteger y)
 {
 	ccGridSize v = {x, y};
 	return v;

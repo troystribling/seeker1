@@ -60,8 +60,16 @@ Copyright (C) 2008 Apple Inc. All Rights Reserved.
 
 */
 
-#import <UIKit/UIKit.h>
-#import <OpenGLES/ES1/gl.h>
+#import <Availability.h>
+
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+#import <UIKit/UIKit.h>			// for UIImage
+#endif
+
+#import <Foundation/Foundation.h> //	for NSObject
+
+#import "Platforms/CCGL.h" // OpenGL stuff
+#import "Platforms/CCNS.h" // Next-Step stuff
 
 //CONSTANTS:
 
@@ -72,7 +80,7 @@ typedef enum {
 	kCCTexture2DPixelFormat_Automatic = 0,
 	//! 32-bit texture: RGBA8888
 	kCCTexture2DPixelFormat_RGBA8888,
-	//! 16-bit texture: used with images that have alpha pre-multiplied
+	//! 16-bit texture without Alpha channel
 	kCCTexture2DPixelFormat_RGB565,
 	//! 8-bit textures used as masks
 	kCCTexture2DPixelFormat_A8,
@@ -105,17 +113,21 @@ typedef enum {
  */
 @interface CCTexture2D : NSObject
 {
-	GLuint						_name;
-	CGSize						_size;
-	NSUInteger					_width,
-								_height;
-	CCTexture2DPixelFormat		_format;
-	GLfloat						_maxS,
-								_maxT;
-	BOOL						_hasPremultipliedAlpha;
+	GLuint						name_;
+	CGSize						size_;
+	NSUInteger					width_,
+								height_;
+	CCTexture2DPixelFormat		format_;
+	GLfloat						maxS_,
+								maxT_;
+	BOOL						hasPremultipliedAlpha_;
 }
 /** Intializes with a texture2d with data */
 - (id) initWithData:(const void*)data pixelFormat:(CCTexture2DPixelFormat)pixelFormat pixelsWide:(NSUInteger)width pixelsHigh:(NSUInteger)height contentSize:(CGSize)size;
+
+/** These functions are needed to create mutable textures */
+- (void) releaseData:(void*)data;
+- (void*) keepData:(void*)data length:(NSUInteger)length;
 
 /** pixel format of the texture */
 @property(nonatomic,readonly) CCTexture2DPixelFormat pixelFormat;
@@ -127,14 +139,18 @@ typedef enum {
 /** texture name */
 @property(nonatomic,readonly) GLuint name;
 
-/** content size */
-@property(nonatomic,readonly, nonatomic) CGSize contentSize;
+/** returns content size of the texture in pixels */
+@property(nonatomic,readonly, nonatomic) CGSize contentSizeInPixels;
+
 /** texture max S */
 @property(nonatomic,readwrite) GLfloat maxS;
 /** texture max T */
 @property(nonatomic,readwrite) GLfloat maxT;
 /** whether or not the texture has their Alpha premultiplied */
 @property(nonatomic,readonly) BOOL hasPremultipliedAlpha;
+
+/** returns the content size of the texture in points */
+-(CGSize) contentSize;
 @end
 
 /**
@@ -154,7 +170,11 @@ Note that RGBA type textures will have their alpha premultiplied - use the blend
 */
 @interface CCTexture2D (Image)
 /** Initializes a texture from a UIImage object */
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 - (id) initWithImage:(UIImage *)uiImage;
+#elif defined(__MAC_OS_X_VERSION_MAX_ALLOWED)
+- (id) initWithImage:(CGImageRef)cgImage;
+#endif
 @end
 
 /**
@@ -163,20 +183,55 @@ Note that the generated textures are of type A8 - use the blending mode (GL_SRC_
 */
 @interface CCTexture2D (Text)
 /** Initializes a texture from a string with dimensions, alignment, font name and font size */
-- (id) initWithString:(NSString*)string dimensions:(CGSize)dimensions alignment:(UITextAlignment)alignment fontName:(NSString*)name fontSize:(CGFloat)size;
+- (id) initWithString:(NSString*)string dimensions:(CGSize)dimensions alignment:(CCTextAlignment)alignment fontName:(NSString*)name fontSize:(CGFloat)size;
 /** Initializes a texture from a string with font name and font size */
 - (id) initWithString:(NSString*)string fontName:(NSString*)name fontSize:(CGFloat)size;
 @end
+
 
 /**
  Extensions to make it easy to create a CCTexture2D object from a PVRTC file
  Note that the generated textures don't have their alpha premultiplied - use the blending mode (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA).
  */
-@interface CCTexture2D (PVRTC)
-/** Initializes a texture from a PVRTC buffer */
+@interface CCTexture2D (PVRSupport)
+/** Initializes a texture from a PVR Texture Compressed (PVRTC) buffer
+ *
+ * IMPORTANT: This method is only defined on iOS. It is not supported on the Mac version.
+ */
+#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 -(id) initWithPVRTCData: (const void*)data level:(int)level bpp:(int)bpp hasAlpha:(BOOL)hasAlpha length:(int)length;
-/** Initializes a texture from a PVRTC file */
--(id) initWithPVRTCFile: (NSString*) file;
+#endif // __IPHONE_OS_VERSION_MAX_ALLOWED
+/** Initializes a texture from a PVR file.
+ 
+ Supported PVR formats:
+ - BGRA 8888
+ - RGBA 8888
+ - RGBA 4444
+ - RGBA 5551
+ - RBG 565
+ - A 8
+ - I 8
+ - AI 8
+ - PVRTC 2BPP
+ - PVRTC 4BPP
+ 
+ By default PVR images are treated as if they alpha channel is NOT premultiplied. You can override this behavior with this class method:
+ - PVRImagesHavePremultipliedAlpha:(BOOL)haveAlphaPremultiplied;
+ 
+ IMPORTANT: This method is only defined on iOS. It is not supported on the Mac version.
+ 
+ */
+-(id) initWithPVRFile: (NSString*) file;
+
+/** treats (or not) PVR files as if they have alpha premultiplied.
+ Since it is impossible to know at runtime if the PVR images have the alpha channel premultiplied, it is
+ possible load them as if they have (or not) the alpha channel premultiplied.
+ 
+ By default it is disabled.
+ 
+ @since v0.99.5
+ */
++(void) PVRImagesHavePremultipliedAlpha:(BOOL)haveAlphaPremultiplied;
 @end
 
 /**
@@ -235,6 +290,8 @@ typedef struct _ccTexParams {
    - If the image is an RGBA (with Alpha) then the default pixel format will be used (it can be a 8-bit, 16-bit or 32-bit texture)
    - If the image is an RGB (without Alpha) then an RGB565 texture will be used (16-bit texture)
  
+ This parameter is not valid for PVR images.
+ 
  @since v0.8
  */
 +(void) setDefaultAlphaPixelFormat:(CCTexture2DPixelFormat)format;
@@ -244,6 +301,8 @@ typedef struct _ccTexParams {
  */
 +(CCTexture2DPixelFormat) defaultAlphaPixelFormat;
 @end
+
+
 
 
 

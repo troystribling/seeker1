@@ -45,7 +45,8 @@
 - (void)showPrompt {
     self.readyForPrompt = NO;
     CCSprite* progSprite = [CCSprite spriteWithFile:@"term-prompt.png"];
-    CCMenuItemLabel* nextItem = [CCMenuItemSprite itemFromNormalSprite:progSprite selectedSprite:progSprite target:self selector:@selector(touchPrompt)];
+    CCSprite* progSpriteSelected = [CCSprite spriteWithFile:@"term-prompt.png"];
+    CCMenuItemLabel* nextItem = [CCMenuItemSprite itemFromNormalSprite:progSprite selectedSprite:progSpriteSelected target:self selector:@selector(touchPrompt)];
     CCMenu* menu = [CCMenu menuWithItems:nextItem, nil];
     [menu alignItemsHorizontallyWithPadding:0.0];
     menu.position = CGPointMake(155.0, 298.0);

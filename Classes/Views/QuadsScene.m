@@ -206,7 +206,7 @@
     CCSprite* perCompSprite = [CCSprite spriteWithFile:@"missions-completed.png"];
     perCompSprite.anchorPoint = CGPointMake(0.0, 0.0);
     perCompSprite.position = CGPointMake(0.115*spriteSize.width, -0.07*spriteSize.height);
-    CCLabel* perCompLable = [CCLabel labelWithString:[NSString stringWithFormat:@"%d%%", perComp] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_MISSION];
+    CCLabelTTF* perCompLable = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d%%", perComp] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_MISSION];
     perCompLable.anchorPoint = CGPointMake(0.0, 0.0);
     perCompLable.position = CGPointMake(0.115*spriteSize.width + kMISSIONS_COMPLETED_DELTA, -0.075*spriteSize.height);
     perCompLable.color = kCCLABEL_FONT_COLOR; 
@@ -216,7 +216,7 @@
     CCSprite* scoreSprite = [CCSprite spriteWithFile:@"missions-total-score.png"];
     scoreSprite.anchorPoint = CGPointMake(0.0, 0.0);
     scoreSprite.position = CGPointMake(0.115*spriteSize.width, -0.135*spriteSize.height);
-    CCLabel* scoreLable = [CCLabel labelWithString:[NSString stringWithFormat:@"%d", score] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_MISSION];
+    CCLabelTTF* scoreLable = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", score] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_MISSION];
     scoreLable.anchorPoint = CGPointMake(0.0, 0.0);
     scoreLable.position = CGPointMake(0.115*spriteSize.width + kMISSIONS_COMPLETED_DELTA, -0.135*spriteSize.height);
     scoreLable.color = kCCLABEL_FONT_COLOR; 

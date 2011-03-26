@@ -58,13 +58,13 @@
         self.counter = 0;
         self.isTouchEnabled = YES;
         
-        self.percentUploadLabel = [CCLabel labelWithString:@"upload  0%  (2Kb/s)" fontName:@"Courier" fontSize:20];
+        self.percentUploadLabel = [CCLabelTTF labelWithString:@"upload  0%  (2Kb/s)" fontName:@"Courier" fontSize:20];
         self.percentUploadLabel.position = CGPointMake(20.0f, 375.0f);
         self.percentUploadLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
         self.percentUploadLabel.color = kCCLABEL_FONT_COLOR;
         [self addChild:self.percentUploadLabel];
 
-        self.uploadProgressLabel = [CCLabel labelWithString:@"=>" fontName:@"Courier" fontSize:20];
+        self.uploadProgressLabel = [CCLabelTTF labelWithString:@"=>" fontName:@"Courier" fontSize:20];
         self.uploadProgressLabel.position = CGPointMake(20.0f, 350.0f);
         self.uploadProgressLabel.anchorPoint = CGPointMake(0.0f, 0.0f);
         self.uploadProgressLabel.color = kCCLABEL_FONT_COLOR;

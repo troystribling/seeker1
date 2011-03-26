@@ -24,9 +24,6 @@
  */
 
 
-
-#import <UIKit/UIKit.h>
-
 #import "CCNode.h"
 
 /** CCScene is a subclass of CCNode that is used only as an abstract concept.
@@ -39,7 +36,7 @@
 
  It is a good practice to use and CCScene as the parent of all your nodes.
 */
-@interface CCScene : CCNode {
-
+@interface CCScene : CCNode
+{
 }
 @end
