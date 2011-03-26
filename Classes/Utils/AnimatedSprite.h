@@ -13,11 +13,11 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface AnimatedSprite : CCSpriteSheet {
+@interface AnimatedSprite : CCSprite {
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (id)animationFromFile:(NSString*)_file;
-- (id)initFromFile:(NSString*)_file;
++ (id)animationFromFile:(NSString*)_file withFrameCount:(int)_frameCount andDelay:(CGFloat)_delay;
+- (id)initFromFile:(NSString*)_file withFrameCount:(int)_frameCount andDelay:(CGFloat)_delay;
 
 @end

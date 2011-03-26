@@ -26,18 +26,18 @@
 #pragma mark AnimatedSprite
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (id)animationFromFile:(NSString*)_file {
-    return [[[self alloc] initFromFile:_file] autorelease];
++ (id)animationFromFile:(NSString*)_file withFrameCount:(int)_frameCount andDelay:(CGFloat)_delay {
+    return [[[self alloc] initFromFile:_file withFrameCount:_frameCount andDelay:_delay] autorelease];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initFromFile:(NSString*)_file {
-    NSArray* fileComponents = [_file componentsSeparatedByString:@"."];
-    NSString* plistFile = [NSString stringWithFormat:@"%@.plist", [fileComponents objectAtIndex:0]];
+- (id)initFromFile:(NSString*)_file withFrameCount:(int)_frameCount andDelay:(CGFloat)_delay {
+    NSString* plistFile = [NSString stringWithFormat:@"%@.plist", _file];
 	CCSpriteFrameCache* frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
 	[frameCache addSpriteFramesWithFile:plistFile];
-	if ((self = [super initWithFile:_file capacity:10])) {
-		CCAnimation* anim = [CCAnimation animationWithFrame:@"ship-anim" frameCount:5 delay:0.08f];
+    NSString* frameName = [NSString stringWithFormat:@"%@.png", _file];
+	if ((self = [super initWithSpriteFrameName:frameName])) {
+		CCAnimation* anim = [CCAnimation animationWithFrame:_file frameCount:_frameCount delay:_delay];
 		CCAnimate* animate = [CCAnimate actionWithAnimation:anim];
 		CCRepeatForever* repeat = [CCRepeatForever actionWithAction:animate];
 		[self runAction:repeat];
