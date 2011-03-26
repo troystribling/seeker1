@@ -126,6 +126,9 @@
 		052A05FF12CFCFE6005F1948 /* DoTimesEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 052A05FE12CFCFE6005F1948 /* DoTimesEditViewController.xib */; };
 		052A060B12CFD712005F1948 /* terminal-launcher-done.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A060A12CFD712005F1948 /* terminal-launcher-done.png */; };
 		052A2F0512CEC529002EE6D1 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 052A2F0412CEC529002EE6D1 /* Default.png */; };
+		052CBFA7133CEA6A00B3D999 /* map4-mission-completed.png in Resources */ = {isa = PBXBuildFile; fileRef = 052CBFA6133CEA6A00B3D999 /* map4-mission-completed.png */; };
+		052CBFB3133D71BE00B3D999 /* AnimatedSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 052CBFB2133D71BE00B3D999 /* AnimatedSprite.m */; };
+		052CBFB5133D753400B3D999 /* map2-nav-prog.plist in Resources */ = {isa = PBXBuildFile; fileRef = 052CBFB4133D753400B3D999 /* map2-nav-prog.plist */; };
 		052E490C133907780030244B /* inst-put-pod.png in Resources */ = {isa = PBXBuildFile; fileRef = 052E4903133907780030244B /* inst-put-pod.png */; };
 		052E490D133907780030244B /* inst2-text-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 052E4904133907780030244B /* inst2-text-1.png */; };
 		052E490E133907780030244B /* inst3-text-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 052E4905133907780030244B /* inst3-text-1.png */; };
@@ -648,6 +651,10 @@
 		052A05FE12CFCFE6005F1948 /* DoTimesEditViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoTimesEditViewController.xib; sourceTree = "<group>"; };
 		052A060A12CFD712005F1948 /* terminal-launcher-done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-done.png"; sourceTree = "<group>"; };
 		052A2F0412CEC529002EE6D1 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		052CBFA6133CEA6A00B3D999 /* map4-mission-completed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map4-mission-completed.png"; sourceTree = "<group>"; };
+		052CBFB1133D71BE00B3D999 /* AnimatedSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedSprite.h; sourceTree = "<group>"; };
+		052CBFB2133D71BE00B3D999 /* AnimatedSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedSprite.m; sourceTree = "<group>"; };
+		052CBFB4133D753400B3D999 /* map2-nav-prog.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "map2-nav-prog.plist"; sourceTree = "<group>"; };
 		052E4903133907780030244B /* inst-put-pod.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inst-put-pod.png"; sourceTree = "<group>"; };
 		052E4904133907780030244B /* inst2-text-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inst2-text-1.png"; sourceTree = "<group>"; };
 		052E4905133907780030244B /* inst3-text-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inst3-text-1.png"; sourceTree = "<group>"; };
@@ -1261,6 +1268,8 @@
 		051F861F129641B30081CF3E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				052CBFB1133D71BE00B3D999 /* AnimatedSprite.h */,
+				052CBFB2133D71BE00B3D999 /* AnimatedSprite.m */,
 				051F8620129641B30081CF3E /* CCAnimationHelper.h */,
 				051F8621129641B30081CF3E /* CCAnimationHelper.m */,
 				0547A49C12AC3B0B00D2F0D1 /* CellUtils.h */,
@@ -1537,9 +1546,11 @@
 				05462DBD1332E29700B4D8B7 /* map1-text-10.png */,
 				051DCDCA133662A300F34140 /* map2-program-graphic.png */,
 				051DCDCB133662A300F34140 /* map2-nav-prog.png */,
+				052CBFB4133D753400B3D999 /* map2-nav-prog.plist */,
 				05C02714133597B700F7B52F /* map2-text-1.png */,
 				051DCDCC133662A300F34140 /* map2-text-2.png */,
 				051DCDCD133662A300F34140 /* map2-text-3.png */,
+				052CBFA6133CEA6A00B3D999 /* map4-mission-completed.png */,
 				053CF9AD133C1A9200DABF42 /* map4-text-1.png */,
 				053CF9AE133C1A9200DABF42 /* map4-text-2.png */,
 				05462DBE1332E29700B4D8B7 /* tap-to-continue.png */,
@@ -2347,6 +2358,8 @@
 				053CF9AC133C02C200DABF42 /* map-turn-left.png in Resources */,
 				053CF9AF133C1A9200DABF42 /* map4-text-1.png in Resources */,
 				053CF9B0133C1A9200DABF42 /* map4-text-2.png in Resources */,
+				052CBFA7133CEA6A00B3D999 /* map4-mission-completed.png in Resources */,
+				052CBFB5133D753400B3D999 /* map2-nav-prog.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2414,6 +2427,7 @@
 				05543421133196BD00AB42E4 /* IntroInstruction4Scene.m in Sources */,
 				0554342413319A4400AB42E4 /* TutorialIntroductionViewController.m in Sources */,
 				051DCDE61337121C00F34140 /* IntroScene.m in Sources */,
+				052CBFB3133D71BE00B3D999 /* AnimatedSprite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

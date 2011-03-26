@@ -13,6 +13,7 @@
 #import "TutorialIndexViewController.h"
 #import "UserModel.h"
 #import "IntroMap1Scene.h"
+#import "IntroMap3Scene.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kTUTORIAL_INDEX_LAUNCHER_BACK_TAG   1

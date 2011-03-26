@@ -25,9 +25,11 @@
     NSInteger messageDisplayedCount;
     NSInteger tapCounter;
     NSInteger startCount;
+    NSInteger instructionCount;
     NSInteger seekerMoveCount;
     NSInteger energy;
     BOOL startMission;
+    BOOL setInstructionCounter;
     BOOL stopMission;
     BOOL acceptTouches;
     BOOL moveSeekerDown;
@@ -48,10 +50,12 @@
     @property (nonatomic, retain) SeekerSprite* seeker;
     @property (nonatomic, assign) NSInteger tapCounter;
     @property (nonatomic, assign) NSInteger startCount;
+    @property (nonatomic, assign) NSInteger instructionCount;
     @property (nonatomic, assign) NSInteger counter;
     @property (nonatomic, assign) NSInteger messageDisplayedCount;
     @property (nonatomic, assign) NSInteger seekerMoveCount;
     @property (nonatomic, assign) NSInteger energy;
+    @property (nonatomic, assign) BOOL setInstructionCounter;
     @property (nonatomic, assign) BOOL startMission;
     @property (nonatomic, assign) BOOL stopMission;
     @property (nonatomic, assign) BOOL acceptTouches;

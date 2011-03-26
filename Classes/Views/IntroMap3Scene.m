@@ -13,6 +13,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kSTART_PROGRAM      30
+#define kINSTRUCTION_DELAY  20
 #define kSEEKER_STEP_SIZE   60
 #define kSEEKER_MOVE_COUNT  3
 #define kSEEKER_SPEED       15
@@ -36,7 +37,6 @@
 @implementation IntroMap3Scene
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize startMission;
 @synthesize statusDisplay;
 @synthesize displayedMessageSprite;
 @synthesize tapCounterMessageSprite;
@@ -47,7 +47,10 @@
 @synthesize seekerMoveCount;
 @synthesize counter;
 @synthesize startCount;
+@synthesize instructionCount;
 @synthesize energy;
+@synthesize startMission;
+@synthesize setInstructionCounter;
 @synthesize acceptTouches;
 @synthesize moveSeeker;
 @synthesize putPod;
@@ -106,6 +109,7 @@
 - (void)showMoveSeeker {
     [self updateEnergy];
     self.seekerMoveCount++;
+    self.setInstructionCounter = YES;
     if (self.seekerMoveCount == kSEEKER_MOVE_COUNT) {
         self.moveSeeker = NO;
         self.putPod = YES;
@@ -171,12 +175,14 @@
         self.energy = 6;
         self.seekerMoveCount = 0;
         self.startCount = 0;
+        self.instructionCount = 0;
         self.isTouchEnabled = YES;
         self.startMission = YES;
         self.moveSeeker = NO;
         self.putPod = NO;
         self.missionComplete = NO;
         self.tapContinue = NO;
+        self.setInstructionCounter = NO;
         self.instructionSprite = nil;
         CCSprite* backgroundGrid = [CCSprite spriteWithFile:@"empty-map-stop.png"];
         backgroundGrid.anchorPoint = CGPointMake(0.0, 0.0);
@@ -201,9 +207,13 @@
             self.startCount = self.counter;
         } else if (self.counter - self.startCount == kSTART_PROGRAM) {
             self.moveSeeker = YES;
-        } else if (self.moveSeeker) {
+            self.setInstructionCounter = YES;
+        } else if (self.setInstructionCounter) {
+            self.instructionCount = self.counter;
+            self.setInstructionCounter = NO;
+        } else if (self.moveSeeker && (self.counter - self.instructionCount) == kINSTRUCTION_DELAY) {
             [self showMoveSeeker];
-        } else if (self.putPod) {
+        } else if (self.putPod && (self.counter - self.instructionCount) == kINSTRUCTION_DELAY) {
             [self showPutPod];
         } else if (self.missionComplete) {
             [self showMissionComplete];

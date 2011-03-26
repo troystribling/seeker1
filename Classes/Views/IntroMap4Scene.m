@@ -13,6 +13,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kSHOW_MESSAGE           30
+#define kINSTRUCTION_DELAY      20
 #define kTAP_COUNTER_DELTA      150
 #define kMAX_TAPS               3
 #define kSTART_PROGRAM          30
@@ -55,8 +56,10 @@
 @synthesize counter;
 @synthesize messageDisplayedCount;
 @synthesize startCount;
+@synthesize instructionCount;
 @synthesize energy;
 @synthesize startMission;
+@synthesize setInstructionCounter;
 @synthesize stopMission;
 @synthesize acceptTouches;
 @synthesize moveSeekerDown;
@@ -121,6 +124,7 @@
 - (void)showMoveSeekerDown {
     [self updateEnergy];
     self.seekerMoveCount++;
+    self.setInstructionCounter = YES;
     if (self.seekerMoveCount == 1) {
         [self.displayedMessageSprite removeFromParentAndCleanup:YES];
     } else if (self.seekerMoveCount == kSEEKER_MOVE_DOWN_COUNT) {
@@ -140,6 +144,7 @@
 - (void)showMoveSeekerUp {
     [self updateEnergy];
     self.seekerMoveCount++;
+    self.setInstructionCounter = YES;
     if (self.seekerMoveCount == kSEEKER_MOVE_UP_COUNT) {
         self.moveSeekerUp = NO;
         self.stopMission = YES;
@@ -155,6 +160,7 @@
 - (void)showGetSample {
     self.getSample = NO;
     self.turnLeft1 = YES;
+    self.setInstructionCounter = YES;
     [self.sampleSprite removeFromParentAndCleanup:YES];
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     [self.instructionSprite removeFromParentAndCleanup:YES];
@@ -164,6 +170,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)showTurnLeft1 {
     self.turnLeft1 = NO;
+    self.setInstructionCounter = YES;
     [self showTurnLeft];
     self.turnLeft2 = YES;
 }
@@ -171,6 +178,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)showTurnLeft2 {
     self.turnLeft2 = NO;
+    self.setInstructionCounter = YES;
     [self showTurnLeft];
     self.moveSeekerUp = YES;
 }
@@ -205,7 +213,7 @@
             break;
         case 3:
             [self.instructionSprite removeFromParentAndCleanup:YES];
-            self.displayedMessageSprite = [CCSprite spriteWithFile:@"map-mission-completed.png"];
+            self.displayedMessageSprite = [CCSprite spriteWithFile:@"map4-mission-completed.png"];
             [self.seeker rotate:360.0];
             break;
     }
@@ -239,17 +247,19 @@
 	if((self=[super init])) {
         self.counter = 0;
         self.counter = 0;
-        self.energy = 12;
+        self.energy = 10;
         self.seekerMoveCount = 0;
         self.tapCounter = 0;
         self.messageDisplayedCount = 0;
         self.startCount = 0;
+        self.instructionCount = 0;
         self.isTouchEnabled = YES;
         self.moveSeekerUp = NO;
         self.moveSeekerDown = NO;
         self.getSample = NO;
         self.missionComplete = NO;
         self.tapContinue = NO;
+        self.setInstructionCounter = NO;
         self.turnLeft1 = NO;
         self.turnLeft2 = NO;
         self.stopMission = NO;
@@ -286,15 +296,19 @@
             [self showTapToContinue];
         } else if (self.counter - self.startCount == kSTART_PROGRAM) {
             self.moveSeekerDown = YES;
-        } else if (self.moveSeekerDown) {
+            self.setInstructionCounter = YES;
+       } else if (self.setInstructionCounter) {
+            self.instructionCount = self.counter;
+            self.setInstructionCounter = NO;
+        } else if (self.moveSeekerDown && (self.counter - self.instructionCount) == kINSTRUCTION_DELAY) {
             [self showMoveSeekerDown];
-        } else if (self.getSample) {
+        } else if (self.getSample && (self.counter - self.instructionCount) == kINSTRUCTION_DELAY) {
             [self showGetSample];
-        } else if (self.turnLeft1) {
+        } else if (self.turnLeft1 && (self.counter - self.instructionCount) == kINSTRUCTION_DELAY) {
             [self showTurnLeft1];
-        } else if (self.turnLeft2) {
+        } else if (self.turnLeft2 && (self.counter - self.instructionCount) == kINSTRUCTION_DELAY) {
             [self showTurnLeft2];
-        } else if (self.moveSeekerUp) {
+        } else if (self.moveSeekerUp && (self.counter - self.instructionCount) == kINSTRUCTION_DELAY) {
             [self showMoveSeekerUp];
         }    
     }
