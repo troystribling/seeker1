@@ -24,16 +24,15 @@ typedef enum audioBackgroundID {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface AudioManager : NSObject {
-    BOOL backgroundMusicIsPlaying;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, assign) BOOL backgroundMusicIsPlaying;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (AudioManager*)instance;
 - (void)playEffect:(AudioEffectID)_audioID;
 - (void)playBackgroundMusic:(AudioBackgroundID)_audioID;
 - (void)pauseBackgroundMusic;
+- (void)loadAudio;
 
 @end

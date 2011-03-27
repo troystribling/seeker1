@@ -10,6 +10,7 @@
 #import "MainScene.h"
 #import "QuadsScene.h"
 #import "StatusDisplay.h"
+#import "AudioManager.h"
 #import "ViewControllerManager.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -73,26 +74,31 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)mission {
+    [[AudioManager instance] playEffect:MainMenuAudioEffectID];
     [[CCDirector sharedDirector] replaceScene:[QuadsScene scene]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)settings {
+    [[AudioManager instance] playEffect:MainMenuAudioEffectID];
     [[ViewControllerManager instance] showSettingsView:[[CCDirector sharedDirector] openGLView]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)stats {
+    [[AudioManager instance] playEffect:MainMenuAudioEffectID];
     [[ViewControllerManager instance] showStatsView:[[CCDirector sharedDirector] openGLView]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tutorial {
+    [[AudioManager instance] playEffect:MainMenuAudioEffectID];
     [[ViewControllerManager instance] showTutorialIndexView:[[CCDirector sharedDirector] openGLView]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)repository {
+    [[AudioManager instance] playEffect:MainMenuAudioEffectID];
     [[ViewControllerManager instance] showRepositoryView:[[CCDirector sharedDirector] openGLView]];
 }
 

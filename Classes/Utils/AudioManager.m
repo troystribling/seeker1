@@ -22,13 +22,13 @@ static AudioManager* thisAudioManager = nil;
 @implementation AudioManager
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize backgroundMusicIsPlaying;
 
 //===================================================================================================================================
 #pragma mark AudioManager Effects
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)playMainMenuAudio {
+    [[SimpleAudioEngine sharedEngine] playEffect:@"main-menu.wav"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -50,7 +50,6 @@ static AudioManager* thisAudioManager = nil;
     @synchronized(self) {
         if (thisAudioManager == nil) {
             thisAudioManager = [[self alloc] init];
-            thisAudioManager.backgroundMusicIsPlaying = NO;
         }
     }
     return thisAudioManager;
@@ -73,7 +72,6 @@ static AudioManager* thisAudioManager = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)playBackgroundMusic:(AudioBackgroundID)_audioID {
     if ([UserModel audioEnabled]) {
-        self.backgroundMusicIsPlaying = YES;
         switch (_audioID) {
             case StartAudioBackgroundID:
                 [self playStartAudio];
@@ -84,10 +82,20 @@ static AudioManager* thisAudioManager = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)pauseBackgroundMusic {
-    if (self.backgroundMusicIsPlaying) {
+    if ([[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying]) {
         [[SimpleAudioEngine sharedEngine] pauseBackgroundMusic];
     }
-    self.backgroundMusicIsPlaying = NO;
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)loadAudio {
+    SimpleAudioEngine* sae = [SimpleAudioEngine sharedEngine];
+    if (sae != nil) {
+        [sae preloadEffect:@"main-menu.wav"];
+        if (sae.willPlayBackgroundMusic) {
+            sae.effectsVolume = 1.0;
+            sae.backgroundMusicVolume = 1.0;
+        }
+    }
+}
 @end

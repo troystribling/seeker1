@@ -14,6 +14,7 @@
 #import "BootScene.h"
 #import "UserModel.h"
 #import "LevelModel.h"
+#import "AudioManager.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface Seeker1AppDelegate (PrivateAPI)
@@ -37,6 +38,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void) applicationDidFinishLaunching:(UIApplication*)application {
     [self initDb];
+    [[AudioManager instance] loadAudio];
 	// CC_DIRECTOR_INIT()
 	//
 	// 1. Initializes an EAGLView with 0-bit depth format, and RGB565 render buffer
