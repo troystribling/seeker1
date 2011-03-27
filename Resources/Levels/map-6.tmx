@@ -120,8 +120,8 @@
   <object name="startSite" x="90" y="1770">
    <properties>
     <property name="bearing" value="south"/>
-    <property name="energy" value="500"/>
-    <property name="expectedCodeScore" value="4"/>
+    <property name="energy" value="12"/>
+    <property name="expectedCodeScore" value="9"/>
     <property name="sampleSites" value="0"/>
     <property name="sensorSites" value="1"/>
     <property name="zoom" value="in"/>

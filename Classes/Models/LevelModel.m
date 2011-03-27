@@ -135,7 +135,7 @@
     if (model == nil) {
         model = [[[LevelModel alloc] init] autorelease];
         model.level = _level;
-        model.quadrangle = model.level / kMISSIONS_PER_QUAD;
+        model.quadrangle = (model.level -1) / kMISSIONS_PER_QUAD;
         model.score = 0;
         model.samplesReturned = 0;
         model.sensorsPlaced = 0;
