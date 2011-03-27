@@ -113,7 +113,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setTutorialSection:(TutorialSectionID)_sectionID {
-    self.tutorialList = [self.sectionList objectAtIndex:_sectionID + 1];
+    self.tutorialList = [self.sectionList objectAtIndex:_sectionID - 1];
 }
                                         
 //===================================================================================================================================

@@ -55,7 +55,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setTutorialIntroduction:(TutorialSectionID)_sectionID {
     self.sectionID = _sectionID;
-    self.selectedFeature.image = [UIImage imageNamed:[self.featureList objectAtIndex:_sectionID + 1]];
+    self.selectedFeature.image = [UIImage imageNamed:[self.featureList objectAtIndex:_sectionID - 1]];
 }
 
 //===================================================================================================================================
