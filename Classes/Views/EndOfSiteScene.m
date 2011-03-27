@@ -168,6 +168,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)nextMission {
     [TutorialSectionViewController nextLevel];
+    [LevelModel insertForLevel:[UserModel level]];
     [[CCDirector sharedDirector] replaceScene: [QuadsScene scene]];
 }
 

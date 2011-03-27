@@ -178,9 +178,11 @@
                 self.nextView.hidden = YES;
             } 
             break;
-        default:
-            break;
     }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
 }
 
 @end

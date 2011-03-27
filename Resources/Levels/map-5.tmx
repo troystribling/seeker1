@@ -144,7 +144,7 @@
   <object name="startSite" x="150" y="1830">
    <properties>
     <property name="bearing" value="south"/>
-    <property name="energy" value="20"/>
+    <property name="energy" value="18"/>
     <property name="expectedCodeScore" value="15"/>
     <property name="sampleSites" value="3"/>
     <property name="sensorSites" value="0"/>

@@ -99,10 +99,12 @@
         case kFEATURE_UNLOCK_LAUNCHER_TUTORIAL_TAG:
             [[ViewControllerManager instance] showTutorialSectionView:[[CCDirector sharedDirector] openGLView] withSectionID:self.sectionID];
             break;
-        default:
-            break;
     }
     [self.view removeFromSuperview];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
 }
 
 @end
