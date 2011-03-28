@@ -14,12 +14,19 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 typedef enum audioEffectID {
     MainMenuAudioEffectID,
+    SiteAudioEffectID,
+    SiteUpAudioEffectID,
+    SiteDownAudioEffectID,
+    MissionAudioEffectID,
     MapMenuAudioEffectID,
 } AudioEffectID;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 typedef enum audioBackgroundID {
-    StartAudioBackgroundID,
+    BootingAudioBackgroundID,
+    TharsisAudioBackgroundID,
+    MemnoniaAudioBackgroundID,
+    ElysiumAudioBackgroundID,
 } AudioBackgroundID;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -33,6 +40,8 @@ typedef enum audioBackgroundID {
 - (void)playEffect:(AudioEffectID)_audioID;
 - (void)playBackgroundMusic:(AudioBackgroundID)_audioID;
 - (void)pauseBackgroundMusic;
+- (void)resumeBackgroundMusic;
+- (void)stopBackgroundMusic;
 - (void)loadAudio;
 
 @end

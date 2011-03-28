@@ -15,6 +15,7 @@
 #import "TouchUtils.h"
 #import "MapScene.h"
 #import "ProgramNgin.h"
+#import "AudioManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kMISSION_COLUMN_ADJUST  53.0
@@ -200,6 +201,7 @@
     NSInteger mission = [self positionToMission:touchLocation];
     if ([self missionIsUnlocked:mission]) {
         NSInteger level = [self missionToLevel:mission];
+        [[AudioManager instance] playEffect:MissionAudioEffectID];
         [ProgramNgin instance].programHalted = NO;
         [ProgramNgin instance].programRunning = NO;
         [UserModel setLevel:level];

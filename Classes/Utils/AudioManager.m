@@ -21,27 +21,6 @@ static AudioManager* thisAudioManager = nil;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation AudioManager
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-
-//===================================================================================================================================
-#pragma mark AudioManager Effects
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)playMainMenuAudio {
-    [[SimpleAudioEngine sharedEngine] playEffect:@"main-menu.wav"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)playMapMenuAudio {
-}
-
-//===================================================================================================================================
-#pragma mark AudioManager Background Music
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)playStartAudio {
-}
-
 //===================================================================================================================================
 #pragma mark AudioManager
 
@@ -60,10 +39,19 @@ static AudioManager* thisAudioManager = nil;
     if ([UserModel audioEnabled]) {
         switch (_audioID) {
             case MainMenuAudioEffectID:
-                [self playMainMenuAudio];
+                [[SimpleAudioEngine sharedEngine] playEffect:@"main-menu.wav"];
+                break;
+            case SiteAudioEffectID:
+                [[SimpleAudioEngine sharedEngine] playEffect:@"site.wav"];
+                break;
+            case SiteUpAudioEffectID:
+                break;
+            case SiteDownAudioEffectID:
+                break;
+            case MissionAudioEffectID:
+                [[SimpleAudioEngine sharedEngine] playEffect:@"mission.wav"];
                 break;
             case MapMenuAudioEffectID:
-                [self playMapMenuAudio];
                 break;
         }
     }
@@ -73,8 +61,13 @@ static AudioManager* thisAudioManager = nil;
 - (void)playBackgroundMusic:(AudioBackgroundID)_audioID {
     if ([UserModel audioEnabled]) {
         switch (_audioID) {
-            case StartAudioBackgroundID:
-                [self playStartAudio];
+            case BootingAudioBackgroundID:
+                break;
+            case TharsisAudioBackgroundID:
+                break;
+            case MemnoniaAudioBackgroundID:
+                break;
+            case ElysiumAudioBackgroundID:
                 break;
         }
     }
@@ -88,10 +81,26 @@ static AudioManager* thisAudioManager = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)resumeBackgroundMusic {
+    if (![[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying]) {
+        [[SimpleAudioEngine sharedEngine] resumeBackgroundMusic];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)stopBackgroundMusic {
+    if ([[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying]) {
+        [[SimpleAudioEngine sharedEngine] stopBackgroundMusic];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadAudio {
     SimpleAudioEngine* sae = [SimpleAudioEngine sharedEngine];
     if (sae != nil) {
         [sae preloadEffect:@"main-menu.wav"];
+        [sae preloadEffect:@"site.wav"];
+        [sae preloadEffect:@"mission.wav"];
         if (sae.willPlayBackgroundMusic) {
             sae.effectsVolume = 1.0;
             sae.backgroundMusicVolume = 1.0;

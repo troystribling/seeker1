@@ -14,6 +14,7 @@
 #import "LevelModel.h"
 #import "UserModel.h"
 #import "MissionsScene.h"
+#import "AudioManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kQUAD_IMAGE_YDELTA          80.0f
@@ -311,6 +312,7 @@
         CGPoint touchDelta = ccpSub(touchLocation, self.firstTouch);
         if (abs(touchDelta.y) < 30) {
             if ([self displayedQuadIsUnlocked]) {
+                [[AudioManager instance] playEffect:SiteAudioEffectID];
                 [UserModel setQuadrangle:self.displayedQuad];
                 [[CCDirector sharedDirector] replaceScene:[MissionsScene scene]];
             }
