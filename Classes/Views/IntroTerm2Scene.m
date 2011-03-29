@@ -45,8 +45,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)showPrompt {
     self.readyForPrompt = NO;
-    AnimatedSprite* progSprite = [AnimatedSprite animationFromFile:@"term1-prompt" withFrameCount:11 andDelay:0.1];
-    AnimatedSprite* progSpriteSelected = [AnimatedSprite animationFromFile:@"term1-prompt" withFrameCount:11 andDelay:0.1];
+    AnimatedSprite* progSprite = [AnimatedSprite animationFromFile:@"term2-prompt" withFrameCount:11 andDelay:0.1];
+    AnimatedSprite* progSpriteSelected = [AnimatedSprite animationFromFile:@"term2-prompt" withFrameCount:11 andDelay:0.1];
     CCMenuItemLabel* nextItem = [CCMenuItemSprite itemFromNormalSprite:progSprite selectedSprite:progSpriteSelected target:self selector:@selector(touchPrompt)];
     CCMenu* menu = [CCMenu menuWithItems:nextItem, nil];
     [menu alignItemsHorizontallyWithPadding:0.0];

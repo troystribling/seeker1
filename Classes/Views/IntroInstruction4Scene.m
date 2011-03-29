@@ -8,6 +8,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "IntroInstruction4Scene.h"
 #import "IntroTerm5Scene.h"
+#import "AnimatedSprite.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kMAX_TAPS               1
@@ -42,12 +43,12 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)showPrompt {
     self.readyForPrompt = NO;
-    CCSprite* progSprite = [CCSprite spriteWithFile:@"inst-put-pod.png"];
-    CCSprite* progSpriteSelected = [CCSprite spriteWithFile:@"inst-put-pod.png"];
+    AnimatedSprite* progSprite = [AnimatedSprite animationFromFile:@"inst-put-pod" withFrameCount:11 andDelay:0.1];
+    AnimatedSprite* progSpriteSelected = [AnimatedSprite animationFromFile:@"inst-put-pod" withFrameCount:11 andDelay:0.1];
     CCMenuItemLabel* nextItem = [CCMenuItemSprite itemFromNormalSprite:progSprite selectedSprite:progSpriteSelected target:self selector:@selector(touchPrompt)];
     CCMenu* menu = [CCMenu menuWithItems:nextItem, nil];
     [menu alignItemsHorizontallyWithPadding:0.0];
-    menu.position = CGPointMake(160.0, 289.0);
+    menu.position = CGPointMake(160.0, 288.0);
     menu.anchorPoint = CGPointMake(0.0, 0.0);
     [self addChild:menu z:0];
 }

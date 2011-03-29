@@ -8,6 +8,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "IntroTerm4Scene.h"
 #import "IntroInstruction4Scene.h"
+#import "AnimatedSprite.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kMAX_TAPS               1
@@ -42,8 +43,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)showPrompt {
     self.readyForPrompt = NO;
-    CCSprite* progSprite = [CCSprite spriteWithFile:@"term-prompt.png"];
-    CCSprite* progSpriteSelected = [CCSprite spriteWithFile:@"term-prompt.png"];
+    AnimatedSprite* progSprite = [AnimatedSprite animationFromFile:@"term4-prompt" withFrameCount:11 andDelay:0.1];
+    AnimatedSprite* progSpriteSelected = [AnimatedSprite animationFromFile:@"term4-prompt" withFrameCount:11 andDelay:0.1];
     CCMenuItemLabel* nextItem = [CCMenuItemSprite itemFromNormalSprite:progSprite selectedSprite:progSpriteSelected target:self selector:@selector(touchPrompt)];
     CCMenu* menu = [CCMenu menuWithItems:nextItem, nil];
     [menu alignItemsHorizontallyWithPadding:0.0];
