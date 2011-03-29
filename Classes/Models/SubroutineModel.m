@@ -105,8 +105,8 @@
 + (NSMutableArray*)modelsToInstructions:(NSMutableArray*)_models forLevel:(NSInteger)_level {
 	NSMutableArray* instructionSets = [NSMutableArray arrayWithCapacity:10];
 	for (SubroutineModel* model in _models) {
-        if ([model.subroutineName hasPrefix:@"lvl-"]) {
-            NSString* levelPrefix = [NSString stringWithFormat:@"lvl-%d", _level];
+        if ([model.subroutineName hasPrefix:@"mis-"]) {
+            NSString* levelPrefix = [NSString stringWithFormat:@"mis-%d", _level];
             if ([model.subroutineName hasPrefix:levelPrefix]) {
                 [instructionSets addObject:[NSArray arrayWithObjects:[NSNumber numberWithInt:SubroutineProgramInstruction], model.subroutineName, nil]];
             }
