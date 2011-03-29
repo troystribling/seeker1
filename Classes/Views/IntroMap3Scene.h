@@ -22,6 +22,7 @@
     CCSprite* sensorSprite;
     CCSprite* instructionSprite;
     SeekerSprite* seeker;
+    CGFloat speedScaleFactor;
     NSInteger counter;
     NSInteger startCount;
     NSInteger instructionCount;
@@ -44,6 +45,7 @@
 @property (nonatomic, retain) CCSprite* sensorSprite;
 @property (nonatomic, retain) CCSprite* instructionSprite;
 @property (nonatomic, retain) SeekerSprite* seeker;
+@property (nonatomic, assign) CGFloat speedScaleFactor;
 @property (nonatomic, assign) NSInteger counter;
 @property (nonatomic, assign) NSInteger startCount;
 @property (nonatomic, assign) NSInteger instructionCount;

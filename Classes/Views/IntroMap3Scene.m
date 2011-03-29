@@ -10,6 +10,7 @@
 #import "IntroMap4Scene.h"
 #import "StatusDisplay.h"
 #import "SeekerSprite.h"
+#import "UserModel.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kSTART_PROGRAM      30
@@ -44,6 +45,7 @@
 @synthesize sensorSprite;
 @synthesize instructionSprite;
 @synthesize seeker;
+@synthesize speedScaleFactor;
 @synthesize seekerMoveCount;
 @synthesize counter;
 @synthesize startCount;
@@ -64,6 +66,8 @@
 - (void)initObjects {
     self.seeker = [SeekerSprite create];
     self.seeker.speed = kSEEKER_SPEED;
+    self.speedScaleFactor = [UserModel speedScaleFactor];
+    [UserModel setSpeedScaleFactor:1.0];
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     [self.seeker setToStartPoint:CGPointMake(screenSize.width/2.0 - 10.0, 240.0) withBearing:@"south"];
     CCSprite* homeBase = [CCSprite spriteWithFile:@"map-home-base.png"];
@@ -226,6 +230,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 -(void) ccTouchesBegan:(NSSet*)touches withEvent:(UIEvent *)event {
     if (self.acceptTouches) {
+        [UserModel setSpeedScaleFactor:self.speedScaleFactor];
         [[CCDirector sharedDirector] replaceScene: [IntroMap4Scene scene]];
     }
 }    

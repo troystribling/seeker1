@@ -10,6 +10,7 @@
 #import "StatusDisplay.h"
 #import "SeekerSprite.h"
 #import "MainScene.h"
+#import "UserModel.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kSHOW_MESSAGE           30
@@ -51,6 +52,7 @@
 @synthesize sampleSprite;
 @synthesize instructionSprite;
 @synthesize seeker;
+@synthesize speedScaleFactor;
 @synthesize tapCounter;
 @synthesize seekerMoveCount;
 @synthesize counter;
@@ -78,6 +80,8 @@
 - (void)initObjects {
     self.seeker = [SeekerSprite create];
     self.seeker.speed = kSEEKER_SPEED;
+    self.speedScaleFactor = [UserModel speedScaleFactor];
+    [UserModel setSpeedScaleFactor:1.0];
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     [self.seeker setToStartPoint:CGPointMake(screenSize.width/2.0 - 10.0, 240.0) withBearing:@"south"];
     CCSprite* homeBase = [CCSprite spriteWithFile:@"map-home-base.png"];
@@ -324,6 +328,7 @@
             self.startCount = self.counter; 
             [self.tapCounterMessageSprite removeFromParentAndCleanup:YES];
         } else {
+            [UserModel setSpeedScaleFactor:self.speedScaleFactor];
             [[CCDirector sharedDirector] replaceScene: [MainScene scene]];
         }
     }
