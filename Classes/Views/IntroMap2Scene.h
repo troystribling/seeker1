@@ -21,6 +21,7 @@
     CCSprite* sensorSiteSprite;
     CCSprite* sensorSprite;
     SeekerSprite* seeker;
+    CGFloat speedScaleFactor;
     NSInteger counter;
     NSInteger messageDisplayedCount;;
     NSInteger tapCounter;
@@ -36,6 +37,7 @@
 @property (nonatomic, retain) CCSprite* sensorSiteSprite;
 @property (nonatomic, retain) CCSprite* sensorSprite;
 @property (nonatomic, retain) SeekerSprite* seeker;
+@property (nonatomic, assign) CGFloat speedScaleFactor;
 @property (nonatomic, assign) NSInteger counter;
 @property (nonatomic, assign) NSInteger messageDisplayedCount;
 @property (nonatomic, assign) NSInteger tapCounter;

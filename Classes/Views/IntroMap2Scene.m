@@ -11,6 +11,7 @@
 #import "StatusDisplay.h"
 #import "SeekerSprite.h"
 #import "AnimatedSprite.h"
+#import "UserModel.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kMAX_TAPS           3
@@ -44,6 +45,7 @@
 @synthesize sensorSiteSprite;
 @synthesize sensorSprite;
 @synthesize seeker;
+@synthesize speedScaleFactor;
 @synthesize messageDisplayedCount;
 @synthesize tapCounter;
 @synthesize counter;
@@ -57,6 +59,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initObjects {
     self.seeker = [SeekerSprite create];
+    self.speedScaleFactor = [UserModel speedScaleFactor];
+    [UserModel setSpeedScaleFactor:1.0];
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     [self.seeker setToStartPoint:CGPointMake(screenSize.width/2.0 - 10.0, 240.0) withBearing:@"south"];
     CCSprite* homeBase = [CCSprite spriteWithFile:@"map-home-base.png"];
@@ -163,6 +167,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)touchProg {
+    [UserModel setSpeedScaleFactor:self.speedScaleFactor];
     [[CCDirector sharedDirector] replaceScene: [IntroTerm1Scene scene]];
 }
 

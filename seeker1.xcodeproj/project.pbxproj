@@ -343,6 +343,7 @@
 		052CBFA7133CEA6A00B3D999 /* map4-mission-completed.png in Resources */ = {isa = PBXBuildFile; fileRef = 052CBFA6133CEA6A00B3D999 /* map4-mission-completed.png */; };
 		052CBFB3133D71BE00B3D999 /* AnimatedSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 052CBFB2133D71BE00B3D999 /* AnimatedSprite.m */; };
 		052CBFB5133D753400B3D999 /* map2-nav-prog.plist in Resources */ = {isa = PBXBuildFile; fileRef = 052CBFB4133D753400B3D999 /* map2-nav-prog.plist */; };
+		052D297F13422F6E006E8F12 /* subroutine-names.png in Resources */ = {isa = PBXBuildFile; fileRef = 052D297E13422F6E006E8F12 /* subroutine-names.png */; };
 		052E490C133907780030244B /* inst-put-pod.png in Resources */ = {isa = PBXBuildFile; fileRef = 052E4903133907780030244B /* inst-put-pod.png */; };
 		052E490D133907780030244B /* inst2-text-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 052E4904133907780030244B /* inst2-text-1.png */; };
 		052E490E133907780030244B /* inst3-text-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 052E4905133907780030244B /* inst3-text-1.png */; };
@@ -899,6 +900,7 @@
 		052CBFB1133D71BE00B3D999 /* AnimatedSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedSprite.h; sourceTree = "<group>"; };
 		052CBFB2133D71BE00B3D999 /* AnimatedSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedSprite.m; sourceTree = "<group>"; };
 		052CBFB4133D753400B3D999 /* map2-nav-prog.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "map2-nav-prog.plist"; sourceTree = "<group>"; };
+		052D297E13422F6E006E8F12 /* subroutine-names.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "subroutine-names.png"; sourceTree = "<group>"; };
 		052E4903133907780030244B /* inst-put-pod.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inst-put-pod.png"; sourceTree = "<group>"; };
 		052E4904133907780030244B /* inst2-text-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inst2-text-1.png"; sourceTree = "<group>"; };
 		052E4905133907780030244B /* inst3-text-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inst3-text-1.png"; sourceTree = "<group>"; };
@@ -1762,6 +1764,7 @@
 				053CD81112FDD26C00410FC8 /* subroutines.png */,
 				0594276812FA5AB4005026F7 /* list-subroutines.png */,
 				0594276712FA5AB4005026F7 /* create-edit-subroutines.png */,
+				052D297E13422F6E006E8F12 /* subroutine-names.png */,
 				05E40FB413198F0500DE6344 /* times-loop-unlock.png */,
 				0594276A12FA5AB4005026F7 /* times-loop.png */,
 				05E40FB513198F0500DE6344 /* until-loop-unlock.png */,
@@ -2494,6 +2497,7 @@
 				051DAF8C13417B8500A3F4BC /* term4-prompt.plist in Resources */,
 				051DAF8D13417B8500A3F4BC /* term4-prompt.png in Resources */,
 				051DAF8F1341831C00A3F4BC /* term-run.plist in Resources */,
+				052D297F13422F6E006E8F12 /* subroutine-names.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,6 +19,7 @@
 #import "ViewControllerManager.h"
 #import "MainScene.h"
 #import "MissionsScene.h"
+#import "AnimatedSprite.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kERROR_CODE_HIT_MAP_BOUNDARY        @"A-1654"
@@ -52,6 +53,7 @@
 #define kSEEKER_DELTA_ENERGY        2
 #define kSEEKER_DELTA_ENERGY_MIN    1
 #define kSEEKER_DELTA_ENERGY_MAX    4
+#define kCRASH_DURATION             1.0
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapScene (PrivateAPI)
@@ -111,7 +113,12 @@
 - (void)crashSampleBinFull;
 - (void)crashNoSampleAtPosition;
 // crash animations
+- (void)initCrashSprite:(NSString*)_file;
+- (void)initCrashAnimatedSprite:(NSString*)_file;
 - (void)fadeToRed;
+- (void)vanishToPoint;
+- (void)vanishToLineY;
+- (void)vanishToLineX;
 // level completed animations
 - (void)runLevelCompletedAnimation;
 - (void)levelCompletedAnimation;
@@ -734,7 +741,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashNoEnergy {
     [LevelModel setLevel:self.level errorCode:kERROR_CODE_NO_ENERGY andMessage:kERROR_MSG_NO_ENERGY];
-    [self fadeToRed];
+    [self vanishToPoint];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -791,18 +798,61 @@
 #pragma mark crash animations
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)fadeToRed {
-    NSString* seekerName = [NSString stringWithFormat:@"red-seeker-1-%@.png", [self.seeker1 bearingToString]];
-    self.crash = [[[CCSprite alloc] initWithFile:seekerName] autorelease]; 
+- (void)initCrashSprite:(NSString*)_file {
+    self.crash = [[[CCSprite alloc] initWithFile:_file] autorelease]; 
     if (self.mapZoomedOut) {
         self.crash.scale = kMAP_ZOOM_FACTOR;
     } else {
         self.crash.scale = 1.0;
     }
-    self.crash.opacity = 0.0;
     self.crash.position = self.seeker1.position;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)initCrashAnimatedSprite:(NSString*)_file withFrameCount:(NSInteger)_frameCount andDelay:(CGFloat)_delay {
+    self.crash = [AnimatedSprite animationFromFile:_file withFrameCount:_frameCount andDelay:_delay]; 
+    if (self.mapZoomedOut) {
+        self.crash.scale = kMAP_ZOOM_FACTOR;
+    } else {
+        self.crash.scale = 1.0;
+    }
+    self.crash.position = self.seeker1.position;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)fadeToRed {
+    NSString* seekerName = [NSString stringWithFormat:@"red-seeker-1-%@.png", [self.seeker1 bearingToString]];
+    [self initCrashSprite:seekerName];
+    self.crash.opacity = 0.0;
     [self addChild:self.crash];
-	[self.crash runAction:[CCFadeIn actionWithDuration:1.0]];
+	[self.crash runAction:[CCFadeIn actionWithDuration:kCRASH_DURATION]];
+    self.levelCrash = YES;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)vanishToPoint {
+    [self initCrashSprite:@"seeker-1.png"];
+    [self addChild:self.crash];
+	[self.crash runAction:[CCScaleTo actionWithDuration:kCRASH_DURATION scale:0.0]];
+    [self.seeker1 removeFromParentAndCleanup:YES];
+    self.levelCrash = YES;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)vanishToLineY {
+    [self initCrashSprite:@"seeker-1.png"];
+    [self addChild:self.crash];
+	[self.crash runAction:[CCScaleTo actionWithDuration:kCRASH_DURATION scaleX:0.0 scaleY:1.0]];
+    [self.seeker1 removeFromParentAndCleanup:YES];
+    self.levelCrash = YES;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)vanishToLineX {
+    [self initCrashSprite:@"seeker-1.png"];
+    [self addChild:self.crash];
+	[self.crash runAction:[CCScaleTo actionWithDuration:kCRASH_DURATION scaleX:1.0 scaleY:0.0]];
+    [self.seeker1 removeFromParentAndCleanup:YES];
     self.levelCrash = YES;
 }
 

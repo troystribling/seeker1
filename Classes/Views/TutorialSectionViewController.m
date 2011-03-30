@@ -103,7 +103,7 @@
         self.containerView = _containerView;
         self.view.frame = self.containerView.frame;
         self.sectionList = [NSMutableArray arrayWithObjects:[NSArray arrayWithObjects:@"subroutines.png", @"list-subroutines.png", 
-                                                                @"create-edit-subroutines.png", nil],
+                                                                @"create-edit-subroutines.png", @"subroutine-names.png", nil],
                                                              [NSArray arrayWithObjects:@"times-loop.png", nil],
                                                              [NSArray arrayWithObjects:@"until-loop.png", @"predicates.png", nil],
                                                              [NSArray arrayWithObjects:@"rover-bins.png", nil], nil];
