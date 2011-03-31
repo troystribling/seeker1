@@ -55,7 +55,7 @@
 #define kSEEKER_DELTA_ENERGY_MAX    4
 #define kCRASH_DURATION             1.0
 #define kCRASH_ANIMATION_DURATION   0.1
-#define kCRASH_ANIMATION_LENGTH     120
+#define kCRASH_ANIMATION_LENGTH     100
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapScene (PrivateAPI)
@@ -123,8 +123,9 @@
 - (void)blinkYellow;
 - (void)vanish;
 - (void)vanishToPoint;
-- (void)vanishToLineY;
-- (void)vanishToLineX;
+- (void)vanishToLine;
+- (void)vanishToLineToPoint;
+- (void)fadeToNoise;
 // level completed animations
 - (void)runLevelCompletedAnimation;
 - (void)levelCompletedAnimation;
@@ -743,7 +744,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashHitMapBoundary {
     [LevelModel setLevel:self.level errorCode:kERROR_CODE_HIT_MAP_BOUNDARY andMessage:kERROR_MSG_HIT_MAP_BOUNDARY];
-    [self vanishToLineX];
+    [self vanishToLine];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -761,25 +762,25 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashSpeedLow {
     [LevelModel setLevel:self.level errorCode:kERROR_CODE_SPEED_LOW andMessage:kERROR_MSG_SPEED_LOW];
-    [self fadeToYellow];
+    [self vanish];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashProgram {
     [LevelModel setLevel:self.level errorCode:kERROR_CODE_PROGRAM_CRASH andMessage:kERROR_MSG_PROGRAM_CRASH];
-    [self fadeToRed];
+    [self fadeToNoise];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashTerrain {
     [LevelModel setLevel:self.level errorCode:kERROR_CODE_TERRRAIN andMessage:kERROR_MSG_TERRRAIN];
-    [self fadeToRed];
+    [self vanishToLineToPoint];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashSensorBinEmpty {
     [LevelModel setLevel:self.level errorCode:kERROR_CODE_SENSOR_BIN_EMPTY andMessage:kERROR_MSG_SENSOR_BIN_EMPTY];
-    [self fadeToRed];
+    [self fadeToYellow];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -884,20 +885,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)vanishToLineY {
-    [self initCrashSprite:@"seeker-1.png"];
-    [self addChild:self.crash];
-    CGFloat scaleFactor = 1.0;
-    if (self.mapZoomedOut) {
-        scaleFactor = kMAP_ZOOM_FACTOR;
-    } 
-	[self.crash runAction:[CCScaleTo actionWithDuration:kCRASH_DURATION scaleX:0.0 scaleY:scaleFactor]];
-    [self.seeker1 removeFromParentAndCleanup:YES];
-    self.levelCrash = YES;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)vanishToLineX {
+- (void)vanishToLine {
     [self initCrashSprite:@"seeker-1.png"];
     [self addChild:self.crash];
     CGFloat scaleFactor = 1.0;
@@ -907,6 +895,29 @@
 	[self.crash runAction:[CCScaleTo actionWithDuration:kCRASH_DURATION scaleX:scaleFactor scaleY:0.0]];
     [self.seeker1 removeFromParentAndCleanup:YES];
     self.levelCrash = YES;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)vanishToLineToPoint {
+    [self initCrashSprite:@"seeker-1.png"];
+    [self addChild:self.crash];
+    CGFloat scaleFactor = 1.0;
+    if (self.mapZoomedOut) {
+        scaleFactor = kMAP_ZOOM_FACTOR;
+    } 
+    id toLineAction = [CCScaleTo actionWithDuration:kCRASH_DURATION/2.0 scaleX:0.1 scaleY:scaleFactor];
+    id toPointAction = [CCScaleTo actionWithDuration:kCRASH_DURATION/2.0 scaleX:0.0 scaleY:0.0];
+	[self.crash runAction:[CCSequence actions:toLineAction, toPointAction, nil]];
+    [self.seeker1 removeFromParentAndCleanup:YES];
+    self.levelCrash = YES;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)fadeToNoise {
+    [self initCrashAnimatedSprite:@"noise" withFrameCount:20 andDelay:kCRASH_ANIMATION_DURATION];
+    [self addChild:self.crash];
+    [self.seeker1 removeFromParentAndCleanup:YES];
+    self.crashAnimationCounter = self.counter;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

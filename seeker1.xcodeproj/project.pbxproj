@@ -321,6 +321,8 @@
 		051E5897129B7CF000A5440E /* items.png in Resources */ = {isa = PBXBuildFile; fileRef = 051E5895129B7CF000A5440E /* items.png */; };
 		051F8622129641B30081CF3E /* CCAnimationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 051F8621129641B30081CF3E /* CCAnimationHelper.m */; };
 		051FB85E12D8DBEF006702D0 /* SubroutineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 051FB85D12D8DBEF006702D0 /* SubroutineViewController.xib */; };
+		0521E43E13443BEF00A8DB29 /* noise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0521E43C13443BEF00A8DB29 /* noise.plist */; };
+		0521E43F13443BEF00A8DB29 /* noise.png in Resources */ = {isa = PBXBuildFile; fileRef = 0521E43D13443BEF00A8DB29 /* noise.png */; };
 		0521EF6D12C5637B0078C77C /* elysium.png in Resources */ = {isa = PBXBuildFile; fileRef = 0521EF6A12C5637B0078C77C /* elysium.png */; };
 		0521EF6E12C5637B0078C77C /* memnonia.png in Resources */ = {isa = PBXBuildFile; fileRef = 0521EF6B12C5637B0078C77C /* memnonia.png */; };
 		0521EF6F12C5637B0078C77C /* tharsis.png in Resources */ = {isa = PBXBuildFile; fileRef = 0521EF6C12C5637B0078C77C /* tharsis.png */; };
@@ -873,6 +875,8 @@
 		051F8620129641B30081CF3E /* CCAnimationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAnimationHelper.h; sourceTree = "<group>"; };
 		051F8621129641B30081CF3E /* CCAnimationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCAnimationHelper.m; sourceTree = "<group>"; };
 		051FB85D12D8DBEF006702D0 /* SubroutineViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubroutineViewController.xib; sourceTree = "<group>"; };
+		0521E43C13443BEF00A8DB29 /* noise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = noise.plist; sourceTree = "<group>"; };
+		0521E43D13443BEF00A8DB29 /* noise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noise.png; sourceTree = "<group>"; };
 		0521EF6A12C5637B0078C77C /* elysium.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = elysium.png; sourceTree = "<group>"; };
 		0521EF6B12C5637B0078C77C /* memnonia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = memnonia.png; sourceTree = "<group>"; };
 		0521EF6C12C5637B0078C77C /* tharsis.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tharsis.png; sourceTree = "<group>"; };
@@ -1299,6 +1303,8 @@
 		0510EDD612BC680E00355F28 /* Seeker */ = {
 			isa = PBXGroup;
 			children = (
+				0521E43C13443BEF00A8DB29 /* noise.plist */,
+				0521E43D13443BEF00A8DB29 /* noise.png */,
 				0527E61012BD5F3D0039D55E /* red-seeker-1.png */,
 				0513E95C13440E2400C29310 /* red-blink.plist */,
 				0513E95D13440E2400C29310 /* red-blink.png */,
@@ -2506,6 +2512,8 @@
 				0513E95F13440E2400C29310 /* red-blink.png in Resources */,
 				0513E9621344194C00C29310 /* yellow-blink.plist in Resources */,
 				0513E9631344194C00C29310 /* yellow-blink.png in Resources */,
+				0521E43E13443BEF00A8DB29 /* noise.plist in Resources */,
+				0521E43F13443BEF00A8DB29 /* noise.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
