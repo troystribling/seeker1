@@ -51,6 +51,8 @@ typedef enum tagMapID {
     CCTMXObjectGroup* objectsLayer;
     CCSprite* crash;
     CCMenu* menu;
+    NSInteger counter;
+    NSInteger crashAnimationCounter;
     BOOL levelResetSeeker;
     BOOL levelResetMap;
     BOOL levelCrash;
@@ -87,6 +89,8 @@ typedef enum tagMapID {
 @property (nonatomic, retain) CCTMXObjectGroup* objectsLayer;
 @property (nonatomic, retain) CCSprite* crash;
 @property (nonatomic, retain) CCMenu* menu;
+@property (nonatomic, assign) NSInteger counter;
+@property (nonatomic, assign) NSInteger crashAnimationCounter;
 @property (nonatomic, assign) BOOL levelResetSeeker;
 @property (nonatomic, assign) BOOL levelResetMap;
 @property (nonatomic, assign) BOOL levelCrash;

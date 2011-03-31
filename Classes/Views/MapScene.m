@@ -54,6 +54,8 @@
 #define kSEEKER_DELTA_ENERGY_MIN    1
 #define kSEEKER_DELTA_ENERGY_MAX    4
 #define kCRASH_DURATION             1.0
+#define kCRASH_ANIMATION_DURATION   0.1
+#define kCRASH_ANIMATION_LENGTH     120
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapScene (PrivateAPI)
@@ -116,6 +118,10 @@
 - (void)initCrashSprite:(NSString*)_file;
 - (void)initCrashAnimatedSprite:(NSString*)_file;
 - (void)fadeToRed;
+- (void)fadeToYellow;
+- (void)blinkRed;
+- (void)blinkYellow;
+- (void)vanish;
 - (void)vanishToPoint;
 - (void)vanishToLineY;
 - (void)vanishToLineX;
@@ -174,6 +180,8 @@
 @synthesize objectsLayer;
 @synthesize crash;
 @synthesize menu;
+@synthesize counter;
+@synthesize crashAnimationCounter;
 @synthesize levelResetSeeker;
 @synthesize levelResetMap;
 @synthesize levelInitSeeker;
@@ -735,7 +743,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashHitMapBoundary {
     [LevelModel setLevel:self.level errorCode:kERROR_CODE_HIT_MAP_BOUNDARY andMessage:kERROR_MSG_HIT_MAP_BOUNDARY];
-    [self fadeToRed];
+    [self vanishToLineX];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -753,7 +761,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashSpeedLow {
     [LevelModel setLevel:self.level errorCode:kERROR_CODE_SPEED_LOW andMessage:kERROR_MSG_SPEED_LOW];
-    [self fadeToRed];
+    [self fadeToYellow];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -777,7 +785,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashNoSensorSiteAtPosition {
     [LevelModel setLevel:self.level errorCode:kERROR_CODE_EXPECTED_SENSOR andMessage:kERROR_MSG_EXPECTED_SENSOR];
-    [self fadeToRed];
+    [self blinkYellow];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -789,7 +797,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashNoSampleAtPosition {
     [LevelModel setLevel:self.level errorCode:kERROR_CODE_EXPECTED_SAMPLE andMessage:kERROR_MSG_EXPECTED_SAMPLE];
-    [self fadeToRed];
+    [self blinkRed];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -805,6 +813,8 @@
     } else {
         self.crash.scale = 1.0;
     }
+    CGFloat startRotation = [self.seeker1 rotationFromNorthToBearing:self.seeker1.bearing];
+    self.crash.rotation = startRotation;
     self.crash.position = self.seeker1.position;
 }
 
@@ -816,16 +826,51 @@
     } else {
         self.crash.scale = 1.0;
     }
+    CGFloat startRotation = [self.seeker1 rotationFromNorthToBearing:self.seeker1.bearing];
+    self.crash.rotation = startRotation;
     self.crash.position = self.seeker1.position;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)fadeToRed {
-    NSString* seekerName = [NSString stringWithFormat:@"red-seeker-1-%@.png", [self.seeker1 bearingToString]];
-    [self initCrashSprite:seekerName];
+    [self initCrashSprite:@"red-seeker-1.png"];
     self.crash.opacity = 0.0;
     [self addChild:self.crash];
 	[self.crash runAction:[CCFadeIn actionWithDuration:kCRASH_DURATION]];
+    self.levelCrash = YES;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)fadeToYellow {
+    [self initCrashSprite:@"yellow-seeker-1.png"];
+    self.crash.opacity = 0.0;
+    [self addChild:self.crash];
+	[self.crash runAction:[CCFadeIn actionWithDuration:kCRASH_DURATION]];
+    self.levelCrash = YES;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)blinkRed {
+    [self initCrashAnimatedSprite:@"red-blink" withFrameCount:4 andDelay:kCRASH_ANIMATION_DURATION];
+    [self addChild:self.crash];
+    [self.seeker1 removeFromParentAndCleanup:YES];
+    self.crashAnimationCounter = self.counter;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)blinkYellow {
+    [self initCrashAnimatedSprite:@"yellow-blink" withFrameCount:4 andDelay:kCRASH_ANIMATION_DURATION];
+    [self addChild:self.crash];
+    [self.seeker1 removeFromParentAndCleanup:YES];
+    self.crashAnimationCounter = self.counter;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)vanish {
+    [self initCrashSprite:@"seeker-1.png"];
+    [self addChild:self.crash];
+	[self.crash runAction:[CCFadeOut actionWithDuration:kCRASH_DURATION]];
+    [self.seeker1 removeFromParentAndCleanup:YES];
     self.levelCrash = YES;
 }
 
@@ -842,7 +887,11 @@
 - (void)vanishToLineY {
     [self initCrashSprite:@"seeker-1.png"];
     [self addChild:self.crash];
-	[self.crash runAction:[CCScaleTo actionWithDuration:kCRASH_DURATION scaleX:0.0 scaleY:1.0]];
+    CGFloat scaleFactor = 1.0;
+    if (self.mapZoomedOut) {
+        scaleFactor = kMAP_ZOOM_FACTOR;
+    } 
+	[self.crash runAction:[CCScaleTo actionWithDuration:kCRASH_DURATION scaleX:0.0 scaleY:scaleFactor]];
     [self.seeker1 removeFromParentAndCleanup:YES];
     self.levelCrash = YES;
 }
@@ -851,7 +900,11 @@
 - (void)vanishToLineX {
     [self initCrashSprite:@"seeker-1.png"];
     [self addChild:self.crash];
-	[self.crash runAction:[CCScaleTo actionWithDuration:kCRASH_DURATION scaleX:1.0 scaleY:0.0]];
+    CGFloat scaleFactor = 1.0;
+    if (self.mapZoomedOut) {
+        scaleFactor = kMAP_ZOOM_FACTOR;
+    } 
+	[self.crash runAction:[CCScaleTo actionWithDuration:kCRASH_DURATION scaleX:scaleFactor scaleY:0.0]];
     [self.seeker1 removeFromParentAndCleanup:YES];
     self.levelCrash = YES;
 }
@@ -1147,6 +1200,8 @@
 		self.screenCenter = CGPointMake(screenSize.width/2, screenSize.height/2);
         self.seekerPath = [NSMutableArray arrayWithCapacity:10];
         self.statusDisplay = [StatusDisplay create];
+        self.counter = 0;
+        self.crashAnimationCounter = 0;
         self.levelResetSeeker = NO;
         self.levelResetMap = NO;
         self.levelInitSeeker = NO;
@@ -1177,6 +1232,7 @@
     NSInteger mapActions = [self.tileMap numberOfRunningActions];
     NSInteger seekerActions = [self.seeker1 numberOfRunningActions];
     NSInteger crashActions = 0;
+    self.counter++;
     if (self.crash) {crashActions = [self.crash numberOfRunningActions];}
 	if (mapActions == 0 && seekerActions == 0 && crashActions == 0) {
         ProgramNgin* ngin = [ProgramNgin instance];
@@ -1211,7 +1267,10 @@
         } else if ([ngin programIsRunning]) {
             [self executeSeekerInstruction:dt];
         }
-	}
+	} else if ((self.counter - self.crashAnimationCounter) == kCRASH_ANIMATION_LENGTH && crashActions == 1) {
+        [self crashCompleted];
+    }
+        
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
