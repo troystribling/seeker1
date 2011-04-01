@@ -53,6 +53,7 @@ typedef enum tagMapID {
     CCMenu* menu;
     NSInteger counter;
     NSInteger crashAnimationCounter;
+    NSInteger victoryAnimationCounter;
     BOOL levelResetSeeker;
     BOOL levelResetMap;
     BOOL levelCrash;
@@ -91,6 +92,7 @@ typedef enum tagMapID {
 @property (nonatomic, retain) CCMenu* menu;
 @property (nonatomic, assign) NSInteger counter;
 @property (nonatomic, assign) NSInteger crashAnimationCounter;
+@property (nonatomic, assign) NSInteger victoryAnimationCounter;
 @property (nonatomic, assign) BOOL levelResetSeeker;
 @property (nonatomic, assign) BOOL levelResetMap;
 @property (nonatomic, assign) BOOL levelCrash;

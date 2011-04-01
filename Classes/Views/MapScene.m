@@ -138,6 +138,7 @@
 - (void)rotateFullWithWingFlap;
 - (void)rotateHalfBounce;
 - (void)rotateHalfBounceWithHeadTurn;
+- (void)rotateExpandContract;
 - (void)rotateExpandContractWithHeadTurn;
 // menu
 - (void)insertUpperMenu;
@@ -193,6 +194,7 @@
 @synthesize menu;
 @synthesize counter;
 @synthesize crashAnimationCounter;
+@synthesize victoryAnimationCounter;
 @synthesize levelResetSeeker;
 @synthesize levelResetMap;
 @synthesize levelInitSeeker;
@@ -946,19 +948,20 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)runLevelCompletedAnimation {
     self.levelCompleted = NO;
-    if (self.level == kLEVEL_FOR_SUBROUTINES) {
-    } else if (self.level == kLEVEL_FOR_TIMES) {
-    } else if (self.level == kLEVEL_FOR_UNTIL) {
-    } else if (self.level == kLEVEL_FOR_BINS) {
-    } else if (self.level == kEND_OF_SITE_1) {
-    } else if (self.level == kEND_OF_SITE_2) {
-    } else if (self.level == kEND_OF_SITE_3) {
-    } else if (self.level < kEND_OF_SITE_1) {
-        [self rotateFull];
-    } else if (self.level < kEND_OF_SITE_2) {
-        [self rotateHalfBounce];
-    } else {        
-    }
+    [self rotateExpandContract];
+//    if (self.level == kLEVEL_FOR_SUBROUTINES) {
+//    } else if (self.level == kLEVEL_FOR_TIMES) {
+//    } else if (self.level == kLEVEL_FOR_UNTIL) {
+//    } else if (self.level == kLEVEL_FOR_BINS) {
+//    } else if (self.level == kEND_OF_SITE_1) {
+//    } else if (self.level == kEND_OF_SITE_2) {
+//    } else if (self.level == kEND_OF_SITE_3) {
+//    } else if (self.level < kEND_OF_SITE_1) {
+//        [self rotateFull];
+//    } else if (self.level < kEND_OF_SITE_2) {
+//        [self rotateHalfBounce];
+//    } else {        
+//    }
     self.nextLevel = YES;
 }
 
@@ -985,7 +988,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)rotateHalfBounce {
-    [self.seeker1 runAction:[CCRotateBy actionWithDuration:kVICTORY_DURATION angle:360.0]];
+    id rotateCW1 = [CCRotateBy actionWithDuration:kVICTORY_DURATION/4.0 angle:-90.0];
+    id rotateCW = [CCRotateBy actionWithDuration:kVICTORY_DURATION/2.0 angle:180.0];
+    [self.seeker1 runAction:[CCSequence actions:rotateCW1, rotateCW, rotateCW1, nil]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -995,7 +1000,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)rotateExpandContract {
-    [self.seeker1 runAction:[CCRotateBy actionWithDuration:kVICTORY_DURATION angle:360.0]];
+    id expand = [CCScaleTo actionWithDuration:kVICTORY_DURATION/6.0 scale:1.2];
+    id contract = [CCScaleTo actionWithDuration:kVICTORY_DURATION/6.0 scale:1.0];
+    [self.seeker1 runAction:[CCSequence actions:expand, contract, expand, contract, expand, contract, nil]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -1346,6 +1353,8 @@
         }
 	} else if ((self.counter - self.crashAnimationCounter) == kCRASH_ANIMATION_LENGTH && crashActions == 1) {
         [self crashCompleted];
+	} else if ((self.counter - self.victoryAnimationCounter) == kVICTORY_ANIMATION_LENGTH && seekerActions == 1) {
+        [self runLevelCompletedAnimation];
     }
         
 }
