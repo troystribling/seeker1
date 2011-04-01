@@ -44,18 +44,21 @@
 #define kERROR_MSG_EXPECTED_SAMPLE          @"expected sample"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#define kMAP_EDGE_BUFFER            0
-#define kMAP_INVERSE_PAN_SPEED      0.001
-#define kMAP_ZOOM_FACTOR            0.5
-#define kMAP_ZOOM_DURATION          1.0
-#define kMAP_INIT_TRANS_BASE_LENGTH 90.0;
-#define kEND_OF_LEVEL_COUNT         50
-#define kSEEKER_DELTA_ENERGY        2
-#define kSEEKER_DELTA_ENERGY_MIN    1
-#define kSEEKER_DELTA_ENERGY_MAX    4
-#define kCRASH_DURATION             1.0
-#define kCRASH_ANIMATION_DURATION   0.1
-#define kCRASH_ANIMATION_LENGTH     100
+#define kMAP_EDGE_BUFFER                0
+#define kMAP_INVERSE_PAN_SPEED          0.001
+#define kMAP_ZOOM_FACTOR                0.5
+#define kMAP_ZOOM_DURATION              1.0
+#define kMAP_INIT_TRANS_BASE_LENGTH     90.0;
+#define kEND_OF_LEVEL_COUNT             50
+#define kSEEKER_DELTA_ENERGY            2
+#define kSEEKER_DELTA_ENERGY_MIN        1
+#define kSEEKER_DELTA_ENERGY_MAX        4
+#define kCRASH_DURATION                 1.0
+#define kCRASH_ANIMATION_DURATION       0.1
+#define kCRASH_ANIMATION_LENGTH         100
+#define kVICTORY_DURATION               1.0
+#define kVICTORY_ANIMATION_DURATION     0.1
+#define kVICTORY_ANIMATION_LENGTH       100
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapScene (PrivateAPI)
@@ -130,6 +133,12 @@
 // level completed animations
 - (void)runLevelCompletedAnimation;
 - (void)levelCompletedAnimation;
+- (void)rotateFull;
+- (void)rotateFullWithHeadTurn;
+- (void)rotateFullWithWingFlap;
+- (void)rotateHalfBounce;
+- (void)rotateHalfBounceWithHeadTurn;
+- (void)rotateExpandContractWithHeadTurn;
 // menu
 - (void)insertUpperMenu;
 - (void)insertLowerMenu;
@@ -937,13 +946,61 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)runLevelCompletedAnimation {
     self.levelCompleted = NO;
-    [self.seeker1 rotate:360.0];
+    if (self.level == kLEVEL_FOR_SUBROUTINES) {
+    } else if (self.level == kLEVEL_FOR_TIMES) {
+    } else if (self.level == kLEVEL_FOR_UNTIL) {
+    } else if (self.level == kLEVEL_FOR_BINS) {
+    } else if (self.level == kEND_OF_SITE_1) {
+    } else if (self.level == kEND_OF_SITE_2) {
+    } else if (self.level == kEND_OF_SITE_3) {
+    } else if (self.level < kEND_OF_SITE_1) {
+        [self rotateFull];
+    } else if (self.level < kEND_OF_SITE_2) {
+        [self rotateHalfBounce];
+    } else {        
+    }
     self.nextLevel = YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)levelCompletedAnimation {
     self.levelCompleted = YES;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)rotateFull {
+    [self.seeker1 runAction:[CCRotateBy actionWithDuration:kVICTORY_DURATION angle:360.0]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)rotateFullWithHeadTurn {
+    [self.seeker1 runAction:[CCRotateBy actionWithDuration:kVICTORY_DURATION angle:360.0]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)rotateFullWithWingFlap {
+    [self.seeker1 runAction:[CCRotateBy actionWithDuration:kVICTORY_DURATION angle:360.0]];
+}
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)rotateHalfBounce {
+    [self.seeker1 runAction:[CCRotateBy actionWithDuration:kVICTORY_DURATION angle:360.0]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)rotateHalfBounceWithHeadTurn {
+    [self.seeker1 runAction:[CCRotateBy actionWithDuration:kVICTORY_DURATION angle:360.0]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)rotateExpandContract {
+    [self.seeker1 runAction:[CCRotateBy actionWithDuration:kVICTORY_DURATION angle:360.0]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)rotateExpandContractWithHeadTurn {
+    [self.seeker1 runAction:[CCRotateBy actionWithDuration:kVICTORY_DURATION angle:360.0]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

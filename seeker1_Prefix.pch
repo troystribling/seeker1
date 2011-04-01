@@ -35,6 +35,9 @@
 #define kLEVEL_FOR_TIMES        19
 #define kLEVEL_FOR_UNTIL        25
 #define kLEVEL_FOR_BINS         31
+#define kEND_OF_SITE_1          12
+#define kEND_OF_SITE_2          24
+#define kEND_OF_SITE_3          36
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 // missions 

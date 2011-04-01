@@ -40,7 +40,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{56, 0}, {56, 56}}</string>
+			<string>{{0, 56}, {56, 56}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
@@ -60,7 +60,7 @@
 			<key>spriteTrimmed</key>
 			<true/>
 			<key>textureRect</key>
-			<string>{{0, 56}, {56, 56}}</string>
+			<string>{{56, 0}, {56, 56}}</string>
 			<key>textureRotated</key>
 			<false/>
 		</dict>
