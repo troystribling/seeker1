@@ -295,6 +295,8 @@
 		051C3263133E8DE700D9D869 /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 051C3262133E8DE600D9D869 /* AudioManager.m */; };
 		051C779612B091AC00E41A23 /* terminal-launcher-edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 051C779512B091AC00E41A23 /* terminal-launcher-edit.png */; };
 		051C77C712B0A88300E41A23 /* terminal-launcher-editing.png in Resources */ = {isa = PBXBuildFile; fileRef = 051C77C612B0A88300E41A23 /* terminal-launcher-editing.png */; };
+		051D794113455AFA009B8B38 /* spherize.plist in Resources */ = {isa = PBXBuildFile; fileRef = 051D793F13455AFA009B8B38 /* spherize.plist */; };
+		051D794213455AFA009B8B38 /* spherize.png in Resources */ = {isa = PBXBuildFile; fileRef = 051D794013455AFA009B8B38 /* spherize.png */; };
 		051DAF8613417B8500A3F4BC /* inst-move.plist in Resources */ = {isa = PBXBuildFile; fileRef = 051DAF7E13417B8500A3F4BC /* inst-move.plist */; };
 		051DAF8713417B8500A3F4BC /* inst-put-pod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 051DAF7F13417B8500A3F4BC /* inst-put-pod.plist */; };
 		051DAF8813417B8500A3F4BC /* term2-prompt.plist in Resources */ = {isa = PBXBuildFile; fileRef = 051DAF8013417B8500A3F4BC /* term2-prompt.plist */; };
@@ -847,6 +849,8 @@
 		051C3262133E8DE600D9D869 /* AudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioManager.m; sourceTree = "<group>"; };
 		051C779512B091AC00E41A23 /* terminal-launcher-edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-edit.png"; sourceTree = "<group>"; };
 		051C77C612B0A88300E41A23 /* terminal-launcher-editing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-editing.png"; sourceTree = "<group>"; };
+		051D793F13455AFA009B8B38 /* spherize.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = spherize.plist; sourceTree = "<group>"; };
+		051D794013455AFA009B8B38 /* spherize.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spherize.png; sourceTree = "<group>"; };
 		051DAF7E13417B8500A3F4BC /* inst-move.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "inst-move.plist"; sourceTree = "<group>"; };
 		051DAF7F13417B8500A3F4BC /* inst-put-pod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "inst-put-pod.plist"; sourceTree = "<group>"; };
 		051DAF8013417B8500A3F4BC /* term2-prompt.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "term2-prompt.plist"; sourceTree = "<group>"; };
@@ -1309,6 +1313,8 @@
 				0513E95C13440E2400C29310 /* red-blink.plist */,
 				0513E95D13440E2400C29310 /* red-blink.png */,
 				0510EDD712BC680E00355F28 /* seeker-1.png */,
+				051D793F13455AFA009B8B38 /* spherize.plist */,
+				051D794013455AFA009B8B38 /* spherize.png */,
 				0513E9561343FA7B00C29310 /* yellow-seeker-1.png */,
 				0513E9601344194C00C29310 /* yellow-blink.plist */,
 				0513E9611344194C00C29310 /* yellow-blink.png */,
@@ -2514,6 +2520,8 @@
 				0513E9631344194C00C29310 /* yellow-blink.png in Resources */,
 				0521E43E13443BEF00A8DB29 /* noise.plist in Resources */,
 				0521E43F13443BEF00A8DB29 /* noise.png in Resources */,
+				051D794113455AFA009B8B38 /* spherize.plist in Resources */,
+				051D794213455AFA009B8B38 /* spherize.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

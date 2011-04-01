@@ -126,6 +126,7 @@
 - (void)vanishToLine;
 - (void)vanishToLineToPoint;
 - (void)fadeToNoise;
+- (void)spherize;
 // level completed animations
 - (void)runLevelCompletedAnimation;
 - (void)levelCompletedAnimation;
@@ -756,7 +757,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashSpeedHigh {
     [LevelModel setLevel:self.level errorCode:kERROR_CODE_SPEED_HIGH andMessage:kERROR_MSG_SPEED_HIGH];
-    [self fadeToRed];
+    [self spherize];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -868,7 +869,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)vanish {
-    [self initCrashSprite:@"seeker-1.png"];
+    [self initCrashSprite:@"red-seeker-1.png"];
     [self addChild:self.crash];
 	[self.crash runAction:[CCFadeOut actionWithDuration:kCRASH_DURATION]];
     [self.seeker1 removeFromParentAndCleanup:YES];
@@ -877,7 +878,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)vanishToPoint {
-    [self initCrashSprite:@"seeker-1.png"];
+    [self initCrashSprite:@"red-seeker-1.png"];
     [self addChild:self.crash];
 	[self.crash runAction:[CCScaleTo actionWithDuration:kCRASH_DURATION scale:0.0]];
     [self.seeker1 removeFromParentAndCleanup:YES];
@@ -886,7 +887,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)vanishToLine {
-    [self initCrashSprite:@"seeker-1.png"];
+    [self initCrashSprite:@"red-seeker-1.png"];
     [self addChild:self.crash];
     CGFloat scaleFactor = 1.0;
     if (self.mapZoomedOut) {
@@ -899,7 +900,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)vanishToLineToPoint {
-    [self initCrashSprite:@"seeker-1.png"];
+    [self initCrashSprite:@"red-seeker-1.png"];
     [self addChild:self.crash];
     CGFloat scaleFactor = 1.0;
     if (self.mapZoomedOut) {
@@ -915,6 +916,14 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)fadeToNoise {
     [self initCrashAnimatedSprite:@"noise" withFrameCount:20 andDelay:kCRASH_ANIMATION_DURATION];
+    [self addChild:self.crash];
+    [self.seeker1 removeFromParentAndCleanup:YES];
+    self.crashAnimationCounter = self.counter;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)spherize {
+    [self initCrashAnimatedSprite:@"spherize" withFrameCount:12 andDelay:kCRASH_ANIMATION_DURATION];
     [self addChild:self.crash];
     [self.seeker1 removeFromParentAndCleanup:YES];
     self.crashAnimationCounter = self.counter;
