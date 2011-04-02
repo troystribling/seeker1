@@ -58,7 +58,7 @@
 #define kCRASH_ANIMATION_LENGTH         100
 #define kVICTORY_DURATION               1.0
 #define kVICTORY_ANIMATION_DURATION     0.1
-#define kVICTORY_ANIMATION_LENGTH       100
+#define kVICTORY_ANIMATION_LENGTH       300
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapScene (PrivateAPI)
@@ -119,7 +119,7 @@
 - (void)crashNoSampleAtPosition;
 // crash animations
 - (void)initCrashSprite:(NSString*)_file;
-- (void)initCrashAnimatedSprite:(NSString*)_file;
+- (void)initCrashAnimatedSprite:(NSString*)_file withFrameCount:(NSInteger)_frameCount andDelay:(CGFloat)_delay;
 - (void)fadeToRed;
 - (void)fadeToYellow;
 - (void)blinkRed;
@@ -133,13 +133,12 @@
 // level completed animations
 - (void)runLevelCompletedAnimation;
 - (void)levelCompletedAnimation;
+- (void)initVictoryAnimatedSprite:(NSString*)_file withFrameCount:(NSInteger)_frameCount andDelay:(CGFloat)_delay;
 - (void)rotateFull;
-- (void)rotateFullWithHeadTurn;
-- (void)rotateFullWithWingFlap;
 - (void)rotateHalfBounce;
-- (void)rotateHalfBounceWithHeadTurn;
 - (void)rotateExpandContract;
-- (void)rotateExpandContractWithHeadTurn;
+- (void)rotateHead;
+- (void)flapWings;
 // menu
 - (void)insertUpperMenu;
 - (void)insertLowerMenu;
@@ -190,7 +189,8 @@
 @synthesize itemsLayer;
 @synthesize sandLayer;
 @synthesize objectsLayer;
-@synthesize crash;
+@synthesize crashSprite;
+@synthesize victorySprite;
 @synthesize menu;
 @synthesize counter;
 @synthesize crashAnimationCounter;
@@ -306,9 +306,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)resetMap {
     self.levelResetMap = NO;
-    if (self.crash){
-        [self.crash removeFromParentAndCleanup:YES];
-        self.crash = nil;
+    if (self.crashSprite){
+        [self.crashSprite removeFromParentAndCleanup:YES];
+        self.crashSprite = nil;
     } else {
         [self.seeker1 removeFromParentAndCleanup:YES];
     }
@@ -820,52 +820,52 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initCrashSprite:(NSString*)_file {
-    self.crash = [[[CCSprite alloc] initWithFile:_file] autorelease]; 
+    self.crashSprite = [[[CCSprite alloc] initWithFile:_file] autorelease]; 
     if (self.mapZoomedOut) {
-        self.crash.scale = kMAP_ZOOM_FACTOR;
+        self.crashSprite.scale = kMAP_ZOOM_FACTOR;
     } else {
-        self.crash.scale = 1.0;
+        self.crashSprite.scale = 1.0;
     }
     CGFloat startRotation = [self.seeker1 rotationFromNorthToBearing:self.seeker1.bearing];
-    self.crash.rotation = startRotation;
-    self.crash.position = self.seeker1.position;
+    self.crashSprite.rotation = startRotation;
+    self.crashSprite.position = self.seeker1.position;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)initCrashAnimatedSprite:(NSString*)_file withFrameCount:(NSInteger)_frameCount andDelay:(CGFloat)_delay {
-    self.crash = [AnimatedSprite animationFromFile:_file withFrameCount:_frameCount andDelay:_delay]; 
+    self.crashSprite = [AnimatedSprite animationFromFile:_file withFrameCount:_frameCount andDelay:_delay]; 
     if (self.mapZoomedOut) {
-        self.crash.scale = kMAP_ZOOM_FACTOR;
+        self.crashSprite.scale = kMAP_ZOOM_FACTOR;
     } else {
-        self.crash.scale = 1.0;
+        self.crashSprite.scale = 1.0;
     }
     CGFloat startRotation = [self.seeker1 rotationFromNorthToBearing:self.seeker1.bearing];
-    self.crash.rotation = startRotation;
-    self.crash.position = self.seeker1.position;
+    self.crashSprite.rotation = startRotation;
+    self.crashSprite.position = self.seeker1.position;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)fadeToRed {
     [self initCrashSprite:@"red-seeker-1.png"];
-    self.crash.opacity = 0.0;
-    [self addChild:self.crash];
-	[self.crash runAction:[CCFadeIn actionWithDuration:kCRASH_DURATION]];
+    self.crashSprite.opacity = 0.0;
+    [self addChild:self.crashSprite];
+	[self.crashSprite runAction:[CCFadeIn actionWithDuration:kCRASH_DURATION]];
     self.levelCrash = YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)fadeToYellow {
     [self initCrashSprite:@"yellow-seeker-1.png"];
-    self.crash.opacity = 0.0;
-    [self addChild:self.crash];
-	[self.crash runAction:[CCFadeIn actionWithDuration:kCRASH_DURATION]];
+    self.crashSprite.opacity = 0.0;
+    [self addChild:self.crashSprite];
+	[self.crashSprite runAction:[CCFadeIn actionWithDuration:kCRASH_DURATION]];
     self.levelCrash = YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)blinkRed {
     [self initCrashAnimatedSprite:@"red-blink" withFrameCount:4 andDelay:kCRASH_ANIMATION_DURATION];
-    [self addChild:self.crash];
+    [self addChild:self.crashSprite];
     [self.seeker1 removeFromParentAndCleanup:YES];
     self.crashAnimationCounter = self.counter;
 }
@@ -873,7 +873,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)blinkYellow {
     [self initCrashAnimatedSprite:@"yellow-blink" withFrameCount:4 andDelay:kCRASH_ANIMATION_DURATION];
-    [self addChild:self.crash];
+    [self addChild:self.crashSprite];
     [self.seeker1 removeFromParentAndCleanup:YES];
     self.crashAnimationCounter = self.counter;
 }
@@ -881,8 +881,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)vanish {
     [self initCrashSprite:@"red-seeker-1.png"];
-    [self addChild:self.crash];
-	[self.crash runAction:[CCFadeOut actionWithDuration:kCRASH_DURATION]];
+    [self addChild:self.crashSprite];
+	[self.crashSprite runAction:[CCFadeOut actionWithDuration:kCRASH_DURATION]];
     [self.seeker1 removeFromParentAndCleanup:YES];
     self.levelCrash = YES;
 }
@@ -890,8 +890,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)vanishToPoint {
     [self initCrashSprite:@"red-seeker-1.png"];
-    [self addChild:self.crash];
-	[self.crash runAction:[CCScaleTo actionWithDuration:kCRASH_DURATION scale:0.0]];
+    [self addChild:self.crashSprite];
+	[self.crashSprite runAction:[CCScaleTo actionWithDuration:kCRASH_DURATION scale:0.0]];
     [self.seeker1 removeFromParentAndCleanup:YES];
     self.levelCrash = YES;
 }
@@ -899,12 +899,12 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)vanishToLine {
     [self initCrashSprite:@"red-seeker-1.png"];
-    [self addChild:self.crash];
+    [self addChild:self.crashSprite];
     CGFloat scaleFactor = 1.0;
     if (self.mapZoomedOut) {
         scaleFactor = kMAP_ZOOM_FACTOR;
     } 
-	[self.crash runAction:[CCScaleTo actionWithDuration:kCRASH_DURATION scaleX:scaleFactor scaleY:0.0]];
+	[self.crashSprite runAction:[CCScaleTo actionWithDuration:kCRASH_DURATION scaleX:scaleFactor scaleY:0.0]];
     [self.seeker1 removeFromParentAndCleanup:YES];
     self.levelCrash = YES;
 }
@@ -912,14 +912,14 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)vanishToLineToPoint {
     [self initCrashSprite:@"red-seeker-1.png"];
-    [self addChild:self.crash];
+    [self addChild:self.crashSprite];
     CGFloat scaleFactor = 1.0;
     if (self.mapZoomedOut) {
         scaleFactor = kMAP_ZOOM_FACTOR;
     } 
     id toLineAction = [CCScaleTo actionWithDuration:kCRASH_DURATION/2.0 scaleX:0.1 scaleY:scaleFactor];
     id toPointAction = [CCScaleTo actionWithDuration:kCRASH_DURATION/2.0 scaleX:0.0 scaleY:0.0];
-	[self.crash runAction:[CCSequence actions:toLineAction, toPointAction, nil]];
+	[self.crashSprite runAction:[CCSequence actions:toLineAction, toPointAction, nil]];
     [self.seeker1 removeFromParentAndCleanup:YES];
     self.levelCrash = YES;
 }
@@ -927,7 +927,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)fadeToNoise {
     [self initCrashAnimatedSprite:@"noise" withFrameCount:20 andDelay:kCRASH_ANIMATION_DURATION];
-    [self addChild:self.crash];
+    [self addChild:self.crashSprite];
     [self.seeker1 removeFromParentAndCleanup:YES];
     self.crashAnimationCounter = self.counter;
 }
@@ -935,7 +935,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)spherize {
     [self initCrashAnimatedSprite:@"spherize" withFrameCount:12 andDelay:kCRASH_ANIMATION_DURATION];
-    [self addChild:self.crash];
+    [self addChild:self.crashSprite];
     [self.seeker1 removeFromParentAndCleanup:YES];
     self.crashAnimationCounter = self.counter;
 }
@@ -948,7 +948,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)runLevelCompletedAnimation {
     self.levelCompleted = NO;
-    [self rotateExpandContract];
+    [self rotateHead];
 //    if (self.level == kLEVEL_FOR_SUBROUTINES) {
 //    } else if (self.level == kLEVEL_FOR_TIMES) {
 //    } else if (self.level == kLEVEL_FOR_UNTIL) {
@@ -971,31 +971,32 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)initVictoryAnimatedSprite:(NSString*)_file withFrameCount:(NSInteger)_frameCount andDelay:(CGFloat)_delay {
+    self.victorySprite = [AnimatedSprite animationFromFile:_file withFrameCount:_frameCount andDelay:_delay]; 
+    if (self.mapZoomedOut) {
+        self.victorySprite.scale = kMAP_ZOOM_FACTOR;
+    } else {
+        self.victorySprite.scale = 1.0;
+    }
+    CGFloat startRotation = [self.seeker1 rotationFromNorthToBearing:self.seeker1.bearing];
+    self.victorySprite.rotation = startRotation;
+    self.victorySprite.position = self.seeker1.position;
+    self.victorySprite.anchorPoint = CGPointMake(0.5f, 0.5f);
+    self.victoryAnimationCounter = self.counter;
+    [self addChild:self.victorySprite];
+    [self.seeker1 removeFromParentAndCleanup:YES];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)rotateFull {
     [self.seeker1 runAction:[CCRotateBy actionWithDuration:kVICTORY_DURATION angle:360.0]];
 }
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)rotateFullWithHeadTurn {
-    [self.seeker1 runAction:[CCRotateBy actionWithDuration:kVICTORY_DURATION angle:360.0]];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)rotateFullWithWingFlap {
-    [self.seeker1 runAction:[CCRotateBy actionWithDuration:kVICTORY_DURATION angle:360.0]];
-}
-
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)rotateHalfBounce {
     id rotateCW1 = [CCRotateBy actionWithDuration:kVICTORY_DURATION/4.0 angle:-90.0];
     id rotateCW = [CCRotateBy actionWithDuration:kVICTORY_DURATION/2.0 angle:180.0];
     [self.seeker1 runAction:[CCSequence actions:rotateCW1, rotateCW, rotateCW1, nil]];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)rotateHalfBounceWithHeadTurn {
-    [self.seeker1 runAction:[CCRotateBy actionWithDuration:kVICTORY_DURATION angle:360.0]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -1006,7 +1007,12 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)rotateExpandContractWithHeadTurn {
+- (void)rotateHead {
+    [self initVictoryAnimatedSprite:@"rotate-head" withFrameCount:10 andDelay:kCRASH_ANIMATION_DURATION];
+ }
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)flapWings {
     [self.seeker1 runAction:[CCRotateBy actionWithDuration:kVICTORY_DURATION angle:360.0]];
 }
 
@@ -1141,8 +1147,8 @@
     CGFloat duration = [self panDuration:delta];
     if ([self.seeker1 parent]) {
         [self.seeker1 runAction:[CCMoveBy actionWithDuration:duration position:delta]];
-    } else if (self.crash) {
-        [self.crash runAction:[CCMoveBy actionWithDuration:duration position:delta]];
+    } else if (self.crashSprite) {
+        [self.crashSprite runAction:[CCMoveBy actionWithDuration:duration position:delta]];
     }
     [self moveMapTo:newTileMapPosition withDuration:duration];
     self.movingMapOnTouch = NO;
@@ -1176,12 +1182,12 @@
         CGPoint delta = ccpSub(mapTranslated, mapPosition);
         duration = [self panDuration:delta];
         [self.seeker1 runAction:[CCMoveBy actionWithDuration:duration position:delta]];
-    } else if (self.crash) {
-        CGPoint crashPosition = [self screenCoordsToTileCoords:self.crash.position];
+    } else if (self.crashSprite) {
+        CGPoint crashPosition = [self screenCoordsToTileCoords:self.crashSprite.position];
         mapTranslated = [self tileMapTranslatedToPoint:CGPointMake(crashPosition.x, self.tileMapSize.height - crashPosition.y)];
         CGPoint delta = ccpSub(mapTranslated, mapPosition);
         duration = [self panDuration:delta];
-        [self.crash runAction:[CCMoveBy actionWithDuration:duration position:delta]];
+        [self.crashSprite runAction:[CCMoveBy actionWithDuration:duration position:delta]];
     }
     [self moveMapTo:mapTranslated withDuration:duration];
     self.centeringOnSeekerPosition = NO;
@@ -1317,7 +1323,7 @@
     NSInteger seekerActions = [self.seeker1 numberOfRunningActions];
     NSInteger crashActions = 0;
     self.counter++;
-    if (self.crash) {crashActions = [self.crash numberOfRunningActions];}
+    if (self.crashSprite) {crashActions = [self.crashSprite numberOfRunningActions];}
 	if (mapActions == 0 && seekerActions == 0 && crashActions == 0) {
         ProgramNgin* ngin = [ProgramNgin instance];
         if (self.levelInitSeeker) {
@@ -1353,7 +1359,7 @@
         }
 	} else if ((self.counter - self.crashAnimationCounter) == kCRASH_ANIMATION_LENGTH && crashActions == 1) {
         [self crashCompleted];
-	} else if ((self.counter - self.victoryAnimationCounter) == kVICTORY_ANIMATION_LENGTH && seekerActions == 1) {
+	} else if ((self.counter - self.victoryAnimationCounter) == kVICTORY_ANIMATION_LENGTH && self.nextLevel) {
         [self runLevelCompletedAnimation];
     }
         

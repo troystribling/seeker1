@@ -49,7 +49,8 @@ typedef enum tagMapID {
     CCTMXLayer* itemsLayer;
     CCTMXLayer* sandLayer;
     CCTMXObjectGroup* objectsLayer;
-    CCSprite* crash;
+    CCSprite* crashSprite;
+    CCSprite* victorySprite;
     CCMenu* menu;
     NSInteger counter;
     NSInteger crashAnimationCounter;
@@ -88,7 +89,8 @@ typedef enum tagMapID {
 @property (nonatomic, retain) CCTMXLayer* itemsLayer;
 @property (nonatomic, retain) CCTMXLayer* sandLayer;
 @property (nonatomic, retain) CCTMXObjectGroup* objectsLayer;
-@property (nonatomic, retain) CCSprite* crash;
+@property (nonatomic, retain) CCSprite* crashSprite;
+@property (nonatomic, retain) CCSprite* victorySprite;
 @property (nonatomic, retain) CCMenu* menu;
 @property (nonatomic, assign) NSInteger counter;
 @property (nonatomic, assign) NSInteger crashAnimationCounter;
