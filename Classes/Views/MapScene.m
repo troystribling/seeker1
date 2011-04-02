@@ -58,7 +58,7 @@
 #define kCRASH_ANIMATION_LENGTH         100
 #define kVICTORY_DURATION               1.0
 #define kVICTORY_ANIMATION_DURATION     0.05
-#define kVICTORY_ANIMATION_LENGTH       300
+#define kVICTORY_ANIMATION_LENGTH       200
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MapScene (PrivateAPI)
@@ -1372,7 +1372,9 @@
         } else if (self.endOfMissionCounter == kEND_OF_LEVEL_COUNT) {
             [[CCDirector sharedDirector] replaceScene: [EndOfLevelScene scene]];
         } else if (self.featureUnlocked) {
+            [self runFeatureUnlocked]; 
         } else if (self.gameOver) {
+            [self runGameOver];
         } else if (self.nextLevel) {
             self.endOfMissionCounter++;
         } else if (self.movingMapOnTouch) {
