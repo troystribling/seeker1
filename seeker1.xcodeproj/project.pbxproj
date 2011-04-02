@@ -48,6 +48,8 @@
 		050DD33B12EA6F0D00FDBC11 /* RepositoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050DD33A12EA6F0D00FDBC11 /* RepositoryCell.xib */; };
 		050DD34912EA6F6E00FDBC11 /* RepositoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 050DD34812EA6F6E00FDBC11 /* RepositoryCell.m */; };
 		050F795012AC670F0017BDE1 /* LauncherView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050F794F12AC670F0017BDE1 /* LauncherView.m */; };
+		051073DD1346D73A007C0718 /* flap-wings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 051073DB1346D73A007C0718 /* flap-wings.plist */; };
+		051073DE1346D73A007C0718 /* flap-wings.png in Resources */ = {isa = PBXBuildFile; fileRef = 051073DC1346D73A007C0718 /* flap-wings.png */; };
 		0510D4F813062DB40073A9BE /* map-29.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 0510D4F713062DB40073A9BE /* map-29.tmx */; };
 		0510D4FF1306310D0073A9BE /* map-30.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 0510D4FE1306310D0073A9BE /* map-30.tmx */; };
 		0510D501130632AB0073A9BE /* map-31.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 0510D500130632AB0073A9BE /* map-31.tmx */; };
@@ -597,6 +599,8 @@
 		050DD34812EA6F6E00FDBC11 /* RepositoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepositoryCell.m; sourceTree = "<group>"; };
 		050F794E12AC670F0017BDE1 /* LauncherView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauncherView.h; sourceTree = "<group>"; };
 		050F794F12AC670F0017BDE1 /* LauncherView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LauncherView.m; sourceTree = "<group>"; };
+		051073DB1346D73A007C0718 /* flap-wings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "flap-wings.plist"; sourceTree = "<group>"; };
+		051073DC1346D73A007C0718 /* flap-wings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flap-wings.png"; sourceTree = "<group>"; };
 		0510D4F713062DB40073A9BE /* map-29.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-29.tmx"; sourceTree = "<group>"; };
 		0510D4FE1306310D0073A9BE /* map-30.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-30.tmx"; sourceTree = "<group>"; };
 		0510D500130632AB0073A9BE /* map-31.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-31.tmx"; sourceTree = "<group>"; };
@@ -1311,6 +1315,8 @@
 		0510EDD612BC680E00355F28 /* Seeker */ = {
 			isa = PBXGroup;
 			children = (
+				051073DB1346D73A007C0718 /* flap-wings.plist */,
+				051073DC1346D73A007C0718 /* flap-wings.png */,
 				0521E43C13443BEF00A8DB29 /* noise.plist */,
 				0521E43D13443BEF00A8DB29 /* noise.png */,
 				0527E61012BD5F3D0039D55E /* red-seeker-1.png */,
@@ -2530,6 +2536,8 @@
 				051D794213455AFA009B8B38 /* spherize.png in Resources */,
 				051EA41B1345982900BB662A /* rotate-head.plist in Resources */,
 				051EA41C1345982900BB662A /* rotate-head.png in Resources */,
+				051073DD1346D73A007C0718 /* flap-wings.plist in Resources */,
+				051073DE1346D73A007C0718 /* flap-wings.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

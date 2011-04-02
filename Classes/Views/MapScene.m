@@ -57,7 +57,7 @@
 #define kCRASH_ANIMATION_DURATION       0.1
 #define kCRASH_ANIMATION_LENGTH         100
 #define kVICTORY_DURATION               1.0
-#define kVICTORY_ANIMATION_DURATION     0.1
+#define kVICTORY_ANIMATION_DURATION     0.05
 #define kVICTORY_ANIMATION_LENGTH       300
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -133,6 +133,8 @@
 // level completed animations
 - (void)runLevelCompletedAnimation;
 - (void)levelCompletedAnimation;
+- (void)runFeatureUnlocked;
+- (void)runGameOver;
 - (void)initVictoryAnimatedSprite:(NSString*)_file withFrameCount:(NSInteger)_frameCount andDelay:(CGFloat)_delay;
 - (void)rotateFull;
 - (void)rotateHalfBounce;
@@ -210,6 +212,8 @@
 @synthesize checkLevelCompleted;
 @synthesize canTouch;
 @synthesize pinchDetected;
+@synthesize featureUnlocked;
+@synthesize gameOver;
 
 //===================================================================================================================================
 #pragma mark MapScene PrivateAPI
@@ -948,26 +952,46 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)runLevelCompletedAnimation {
     self.levelCompleted = NO;
-    [self rotateHead];
-//    if (self.level == kLEVEL_FOR_SUBROUTINES) {
-//    } else if (self.level == kLEVEL_FOR_TIMES) {
-//    } else if (self.level == kLEVEL_FOR_UNTIL) {
-//    } else if (self.level == kLEVEL_FOR_BINS) {
-//    } else if (self.level == kEND_OF_SITE_1) {
-//    } else if (self.level == kEND_OF_SITE_2) {
-//    } else if (self.level == kEND_OF_SITE_3) {
-//    } else if (self.level < kEND_OF_SITE_1) {
-//        [self rotateFull];
-//    } else if (self.level < kEND_OF_SITE_2) {
-//        [self rotateHalfBounce];
-//    } else {        
-//    }
+    if (self.level == (kLEVEL_FOR_SUBROUTINES - 1)) {
+        [self rotateFull];
+        self.featureUnlocked = YES;
+    } else if (self.level == (kLEVEL_FOR_TIMES - 1)) {
+        [self rotateHalfBounce];
+        self.featureUnlocked = YES;
+    } else if (self.level == (kLEVEL_FOR_UNTIL - 1)) {
+        [self rotateHalfBounce];
+        self.featureUnlocked = YES;
+    } else if (self.level == (kLEVEL_FOR_BINS - 1)) {
+        [self rotateExpandContract];
+        self.featureUnlocked = YES;
+    } else if (self.level == kMISSIONS_PER_QUAD*kQUADS_TOTAL) {
+        self.gameOver = YES;
+        [self rotateExpandContract];
+    } else if (self.level < (kLEVEL_FOR_SUBROUTINES - 1)) {
+        [self rotateFull];
+    } else if (self.level < (kLEVEL_FOR_UNTIL - 1)) {
+        [self rotateHalfBounce];
+    } else { 
+        [self rotateExpandContract];
+    }
     self.nextLevel = YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)levelCompletedAnimation {
     self.levelCompleted = YES;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)runFeatureUnlocked {
+    self.featureUnlocked = NO;
+    [self flapWings];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)runGameOver {
+    self.gameOver = NO;
+    [self rotateHead];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -1008,12 +1032,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)rotateHead {
-    [self initVictoryAnimatedSprite:@"rotate-head" withFrameCount:10 andDelay:kCRASH_ANIMATION_DURATION];
+    [self initVictoryAnimatedSprite:@"rotate-head" withFrameCount:19 andDelay:kVICTORY_ANIMATION_DURATION];
  }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)flapWings {
-    [self.seeker1 runAction:[CCRotateBy actionWithDuration:kVICTORY_DURATION angle:360.0]];
+    [self initVictoryAnimatedSprite:@"flap-wings" withFrameCount:8 andDelay:kVICTORY_ANIMATION_DURATION];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -1308,6 +1332,8 @@
         self.canTouch = NO;
         self.endOfMissionCounter = 0;
         self.pinchDetected = NO;
+        self.featureUnlocked = NO;
+        self.gameOver = NO;
         [self.statusDisplay insert:self];
         [[ProgramNgin instance] deleteProgram];
         [self insertLowerMenu];
@@ -1322,9 +1348,11 @@
     NSInteger mapActions = [self.tileMap numberOfRunningActions];
     NSInteger seekerActions = [self.seeker1 numberOfRunningActions];
     NSInteger crashActions = 0;
+    NSInteger victoryActions = 0;
     self.counter++;
     if (self.crashSprite) {crashActions = [self.crashSprite numberOfRunningActions];}
-	if (mapActions == 0 && seekerActions == 0 && crashActions == 0) {
+    if (self.victorySprite) {victoryActions = [self.victorySprite numberOfRunningActions];}
+	if (mapActions == 0 && seekerActions == 0 && crashActions == 0 && victoryActions == 0) {
         ProgramNgin* ngin = [ProgramNgin instance];
         if (self.levelInitSeeker) {
             [self setSeekerStartPosition];
@@ -1343,6 +1371,8 @@
             [self runLevelCompletedAnimation];
         } else if (self.endOfMissionCounter == kEND_OF_LEVEL_COUNT) {
             [[CCDirector sharedDirector] replaceScene: [EndOfLevelScene scene]];
+        } else if (self.featureUnlocked) {
+        } else if (self.gameOver) {
         } else if (self.nextLevel) {
             self.endOfMissionCounter++;
         } else if (self.movingMapOnTouch) {
@@ -1360,7 +1390,7 @@
 	} else if ((self.counter - self.crashAnimationCounter) == kCRASH_ANIMATION_LENGTH && crashActions == 1) {
         [self crashCompleted];
 	} else if ((self.counter - self.victoryAnimationCounter) == kVICTORY_ANIMATION_LENGTH && self.nextLevel) {
-        [self runLevelCompletedAnimation];
+        [[CCDirector sharedDirector] replaceScene: [EndOfLevelScene scene]];
     }
         
 }
