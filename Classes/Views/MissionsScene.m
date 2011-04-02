@@ -165,6 +165,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)backNavigation {
+    [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[CCDirector sharedDirector] replaceScene:[QuadsScene scene]];
 }
 
@@ -201,7 +202,7 @@
     NSInteger mission = [self positionToMission:touchLocation];
     if ([self missionIsUnlocked:mission]) {
         NSInteger level = [self missionToLevel:mission];
-        [[AudioManager instance] playEffect:MissionAudioEffectID];
+        [[AudioManager instance] playEffect:SelectAudioEffectID];
         [ProgramNgin instance].programHalted = NO;
         [ProgramNgin instance].programRunning = NO;
         [UserModel setLevel:level];

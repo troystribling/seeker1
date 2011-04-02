@@ -11,6 +11,7 @@
 #import "UserModel.h"
 #import "LevelModel.h"
 #import "ProgramModel.h"
+#import "AudioManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kSETTINGS_LAUNCHER_BACK_TAG     1
@@ -150,6 +151,7 @@
     switch (touchTag) {
         case kSETTINGS_LAUNCHER_BACK_TAG:
             [self.view removeFromSuperview];
+            [[AudioManager instance] playEffect:SelectAudioEffectID];
             break;
         default:
             if (numberOfTaps == 3) {

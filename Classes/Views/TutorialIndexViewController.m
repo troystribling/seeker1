@@ -8,11 +8,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "ViewControllerManager.h"
+#import "cocos2d.h"
 #import "CellUtils.h"
 #import "TutorialIndexCell.h"
 #import "TutorialIndexViewController.h"
 #import "UserModel.h"
 #import "IntroMap1Scene.h"
+#import "AudioManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kTUTORIAL_INDEX_LAUNCHER_BACK_TAG   1
@@ -65,11 +67,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     self.tutorialsList = [NSMutableArray arrayWithObjects:@"1. get started", nil];
     NSInteger level = [UserModel level];
-    if (level == kLEVEL_FOR_TIMES) {
-        [self.tutorialsList addObject:@"2. times loop"];
-    }
     if (level == kLEVEL_FOR_SUBROUTINES) {
-        [self.tutorialsList addObject: @"3. subroutines"];
+        [self.tutorialsList addObject: @"2. subroutines"];
+    }
+    if (level == kLEVEL_FOR_TIMES) {
+        [self.tutorialsList addObject:@"3. times loop"];
     }
     if (level == kLEVEL_FOR_UNTIL) {
         [self.tutorialsList addObject: @"4. until loop"];
@@ -77,6 +79,7 @@
     if (level == kLEVEL_FOR_BINS) {
         [self.tutorialsList addObject: @"5. rover bins"];
     }
+    [self.tutorialsView reloadData];
 	[super viewWillAppear:animated];
 }
 
@@ -105,6 +108,7 @@
     switch (touchTag) {
         case kTUTORIAL_INDEX_LAUNCHER_BACK_TAG:
             [self.view removeFromSuperview];
+            [[AudioManager instance] playEffect:SelectAudioEffectID];
             break;
         default:
             break;
@@ -156,22 +160,23 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ViewControllerManager * viewMgr = [ViewControllerManager instance];
+    [[AudioManager instance] playEffect:SelectAudioEffectID];
     [self.view removeFromSuperview];
     switch (indexPath.row) {
         case 0:
             [[CCDirector sharedDirector] replaceScene:[IntroMap1Scene scene]];
             break;
         case 1:
-            [viewMgr showTutorialSectionView:self.view withSectionID:SubroutinesTutorialSectionID];
+            [viewMgr showTutorialSectionView:[[CCDirector sharedDirector] openGLView] withSectionID:SubroutinesTutorialSectionID];
             break;
         case 2:
-            [viewMgr showTutorialSectionView:self.view withSectionID:TimesLoopTutorialSectionID];
+            [viewMgr showTutorialSectionView:[[CCDirector sharedDirector] openGLView] withSectionID:TimesLoopTutorialSectionID];
             break;
         case 3:
-            [viewMgr showTutorialSectionView:self.view withSectionID:UntilLoopTutorialSectionID];
+            [viewMgr showTutorialSectionView:[[CCDirector sharedDirector] openGLView] withSectionID:UntilLoopTutorialSectionID];
             break;
         case 4:
-            [viewMgr showTutorialSectionView:self.view withSectionID:RoverBinsTutorialSectionID];
+            [viewMgr showTutorialSectionView:[[CCDirector sharedDirector] openGLView] withSectionID:RoverBinsTutorialSectionID];
             break;
         default:
             break;

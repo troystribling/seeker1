@@ -38,20 +38,8 @@ static AudioManager* thisAudioManager = nil;
 - (void)playEffect:(AudioEffectID)_audioID {
     if ([UserModel audioEnabled]) {
         switch (_audioID) {
-            case MainMenuAudioEffectID:
-                [[SimpleAudioEngine sharedEngine] playEffect:@"main-menu.wav"];
-                break;
-            case SiteAudioEffectID:
-                [[SimpleAudioEngine sharedEngine] playEffect:@"site.wav"];
-                break;
-            case SiteUpAudioEffectID:
-                break;
-            case SiteDownAudioEffectID:
-                break;
-            case MissionAudioEffectID:
-                [[SimpleAudioEngine sharedEngine] playEffect:@"mission.wav"];
-                break;
-            case MapMenuAudioEffectID:
+            case SelectAudioEffectID:
+                [[SimpleAudioEngine sharedEngine] playEffect:@"select.wav"];
                 break;
         }
     }

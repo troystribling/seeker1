@@ -12,6 +12,7 @@
 #import "ViewControllerManager.h"
 #import "SubroutineModel.h"
 #import "ProgramNgin.h"
+#import "AudioManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kDOTIMES_LAUNCHER_BACK_TAG          1
@@ -92,6 +93,7 @@
     switch (touchTag) {
         case kDOTIMES_LAUNCHER_BACK_TAG:
             [self.view removeFromSuperview];
+            [[AudioManager instance] playEffect:SelectAudioEffectID];
             break;
         case kDOTIMES_LAUNCHER_DONE_TAG:
             numberVal = [self.numberTextField.text intValue];
@@ -107,6 +109,7 @@
                 [SubroutineModel insertSubroutine:subroutineViewController.subroutineListing withName:subroutineViewController.subroutineName];
                 [viewControllerManager subroutineViewWillAppear];
             }
+            [[AudioManager instance] playEffect:SelectAudioEffectID];
             break;
         default:
             [super touchesBegan:touches withEvent:event];

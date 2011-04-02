@@ -241,6 +241,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)backNavigation {
+    [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[CCDirector sharedDirector] replaceScene:[MainScene scene]];
 }
 
@@ -312,7 +313,7 @@
         CGPoint touchDelta = ccpSub(touchLocation, self.firstTouch);
         if (abs(touchDelta.y) < 30) {
             if ([self displayedQuadIsUnlocked]) {
-                [[AudioManager instance] playEffect:SiteAudioEffectID];
+                [[AudioManager instance] playEffect:SelectAudioEffectID];
                 [UserModel setQuadrangle:self.displayedQuad];
                 [[CCDirector sharedDirector] replaceScene:[MissionsScene scene]];
             }

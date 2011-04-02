@@ -87,6 +87,7 @@
 		05197CD7130105FA006DEC15 /* map-6.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05197CD6130105FA006DEC15 /* map-6.tmx */; };
 		05197CD91301067B006DEC15 /* map-7.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05197CD81301067B006DEC15 /* map-7.tmx */; };
 		0519845A1323F9CB00299B48 /* map-12.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 051984591323F9CB00299B48 /* map-12.tmx */; };
+		051A5C4613479736001BEB0A /* select.wav in Resources */ = {isa = PBXBuildFile; fileRef = 051A5C4513479736001BEB0A /* select.wav */; };
 		051AB7E912C028260020AC2D /* map-2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 051AB7E612C028260020AC2D /* map-2.tmx */; };
 		051C3162133E5B6C00D9D869 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 051C3160133E5B6C00D9D869 /* Default.png */; };
 		051C3163133E5B6C00D9D869 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 051C3161133E5B6C00D9D869 /* Icon.png */; };
@@ -504,9 +505,6 @@
 		05C02715133597B700F7B52F /* map2-text-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 05C02714133597B700F7B52F /* map2-text-1.png */; };
 		05D4EEED13161BA400954E03 /* mission-not-played.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D4EEEC13161BA400954E03 /* mission-not-played.png */; };
 		05D5BFB11321AD570099CF25 /* NavigationDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D5BFB01321AD570099CF25 /* NavigationDisplay.m */; };
-		05E01448133FF0DB00A5B99B /* main-menu.wav in Resources */ = {isa = PBXBuildFile; fileRef = 05E01447133FF0DB00A5B99B /* main-menu.wav */; };
-		05E0145113400DD900A5B99B /* mission.wav in Resources */ = {isa = PBXBuildFile; fileRef = 05E0144F13400DD900A5B99B /* mission.wav */; };
-		05E0145213400DD900A5B99B /* site.wav in Resources */ = {isa = PBXBuildFile; fileRef = 05E0145013400DD900A5B99B /* site.wav */; };
 		05E0145513404CF500A5B99B /* term1-prompt.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05E0145313404CF400A5B99B /* term1-prompt.plist */; };
 		05E0145613404CF500A5B99B /* term1-prompt.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E0145413404CF400A5B99B /* term1-prompt.png */; };
 		05E40FB613198F0500DE6344 /* rover-bins-unlock.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E40FB213198F0500DE6344 /* rover-bins-unlock.png */; };
@@ -640,6 +638,7 @@
 		05197CD6130105FA006DEC15 /* map-6.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-6.tmx"; sourceTree = "<group>"; };
 		05197CD81301067B006DEC15 /* map-7.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-7.tmx"; sourceTree = "<group>"; };
 		051984591323F9CB00299B48 /* map-12.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-12.tmx"; sourceTree = "<group>"; };
+		051A5C4513479736001BEB0A /* select.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = select.wav; sourceTree = "<group>"; };
 		051AB7E612C028260020AC2D /* map-2.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-2.tmx"; sourceTree = "<group>"; };
 		051C2F6B133E54E700D9D869 /* CCAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAction.h; sourceTree = "<group>"; };
 		051C2F6C133E54E700D9D869 /* CCAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCAction.m; sourceTree = "<group>"; };
@@ -1106,9 +1105,6 @@
 		05D4EEEC13161BA400954E03 /* mission-not-played.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mission-not-played.png"; sourceTree = "<group>"; };
 		05D5BFAF1321AD570099CF25 /* NavigationDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationDisplay.h; sourceTree = "<group>"; };
 		05D5BFB01321AD570099CF25 /* NavigationDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationDisplay.m; sourceTree = "<group>"; };
-		05E01447133FF0DB00A5B99B /* main-menu.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "main-menu.wav"; sourceTree = "<group>"; };
-		05E0144F13400DD900A5B99B /* mission.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = mission.wav; sourceTree = "<group>"; };
-		05E0145013400DD900A5B99B /* site.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = site.wav; sourceTree = "<group>"; };
 		05E0145313404CF400A5B99B /* term1-prompt.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "term1-prompt.plist"; sourceTree = "<group>"; };
 		05E0145413404CF400A5B99B /* term1-prompt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "term1-prompt.png"; sourceTree = "<group>"; };
 		05E40FB213198F0500DE6344 /* rover-bins-unlock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rover-bins-unlock.png"; sourceTree = "<group>"; };
@@ -2007,9 +2003,7 @@
 		05E01446133FF0DB00A5B99B /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				05E01447133FF0DB00A5B99B /* main-menu.wav */,
-				05E0144F13400DD900A5B99B /* mission.wav */,
-				05E0145013400DD900A5B99B /* site.wav */,
+				051A5C4513479736001BEB0A /* select.wav */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -2510,9 +2504,6 @@
 				052CBFB5133D753400B3D999 /* map2-nav-prog.plist in Resources */,
 				051C3162133E5B6C00D9D869 /* Default.png in Resources */,
 				051C3163133E5B6C00D9D869 /* Icon.png in Resources */,
-				05E01448133FF0DB00A5B99B /* main-menu.wav in Resources */,
-				05E0145113400DD900A5B99B /* mission.wav in Resources */,
-				05E0145213400DD900A5B99B /* site.wav in Resources */,
 				05E0145513404CF500A5B99B /* term1-prompt.plist in Resources */,
 				05E0145613404CF500A5B99B /* term1-prompt.png in Resources */,
 				051DAF8613417B8500A3F4BC /* inst-move.plist in Resources */,
@@ -2538,6 +2529,7 @@
 				051EA41C1345982900BB662A /* rotate-head.png in Resources */,
 				051073DD1346D73A007C0718 /* flap-wings.plist in Resources */,
 				051073DE1346D73A007C0718 /* flap-wings.png in Resources */,
+				051A5C4613479736001BEB0A /* select.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

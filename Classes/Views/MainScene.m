@@ -74,31 +74,31 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)mission {
-    [[AudioManager instance] playEffect:MainMenuAudioEffectID];
+    [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[CCDirector sharedDirector] replaceScene:[QuadsScene scene]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)settings {
-    [[AudioManager instance] playEffect:MainMenuAudioEffectID];
+    [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[ViewControllerManager instance] showSettingsView:[[CCDirector sharedDirector] openGLView]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)stats {
-    [[AudioManager instance] playEffect:MainMenuAudioEffectID];
+    [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[ViewControllerManager instance] showStatsView:[[CCDirector sharedDirector] openGLView]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tutorial {
-    [[AudioManager instance] playEffect:MainMenuAudioEffectID];
+    [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[ViewControllerManager instance] showTutorialIndexView:[[CCDirector sharedDirector] openGLView]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)repository {
-    [[AudioManager instance] playEffect:MainMenuAudioEffectID];
+    [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[ViewControllerManager instance] showRepositoryView:[[CCDirector sharedDirector] openGLView]];
 }
 

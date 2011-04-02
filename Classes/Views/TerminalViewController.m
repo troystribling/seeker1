@@ -16,6 +16,7 @@
 #import "ViewControllerManager.h"
 #import "TerminalCellFactory.h"
 #import "TerminalCell.h"
+#import "AudioManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kTERMINAL_LAUNCHER_BACK_TAG     1
@@ -156,11 +157,13 @@
             }
             [self.view removeFromSuperview];
             [ngin saveProgram:self.programListing];
+            [[AudioManager instance] playEffect:SelectAudioEffectID];
             break;
         case kTERMINAL_LAUNCHER_RUN_TAG:
             [ngin saveProgram:self.programListing];
             [[CCDirector sharedDirector] replaceScene:[UploadScene scene]];
             [self.view removeFromSuperview];
+            [[AudioManager instance] playEffect:SelectAudioEffectID];
             break;
         case kTERMINAL_LAUNCHER_EDIT_TAG:
             if (self.editingEnabled) {
@@ -176,6 +179,7 @@
                 self.editImageView.image = [UIImage imageNamed:@"terminal-launcher-editing.png"];
                 [self.programView setEditing:YES animated:YES];
             }
+            [[AudioManager instance] playEffect:SelectAudioEffectID];
             break;
         default:
             break;
@@ -255,6 +259,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedLine = indexPath;
+    [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:TerminalPrimitiveInstructionType];
 }
 

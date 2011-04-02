@@ -11,6 +11,7 @@
 #import "cocos2d.h"
 #import "ViewControllerManager.h"
 #import "SubroutineModel.h"
+#import "AudioManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kCREATE_SUBROUTINE_LAUNCHER_BACK_TAG    1
@@ -90,6 +91,7 @@
         case kCREATE_SUBROUTINE_LAUNCHER_BACK_TAG:
             [self.view removeFromSuperview];
             [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:SubroutineInstructionType];
+            [[AudioManager instance] playEffect:SelectAudioEffectID];
             break;
         default:
             [super touchesBegan:touches withEvent:event];

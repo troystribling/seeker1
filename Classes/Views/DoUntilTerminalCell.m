@@ -13,6 +13,7 @@
 #import "CellUtils.h"
 #import "ViewControllerManager.h"
 #import "ProgramNgin.h"
+#import "AudioManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kDOUNTIL_INSTRUCTION_TAG            2
@@ -151,6 +152,7 @@
             } else {
                 [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:SubroutineDoUntilInstructionType andInstructionSet:self.instructionSet];
             }
+            [[AudioManager instance] playEffect:SelectAudioEffectID];
             break;
         case kDOUNTIL_PREDICATE_TAG:
             if (self.parentType == TerminalTerminalCellParentType) {
@@ -158,6 +160,7 @@
             } else {
                 [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:SubroutineDoUntilPredicateInstructionType andInstructionSet:self.instructionSet];
             }
+            [[AudioManager instance] playEffect:SelectAudioEffectID];
             break;
         default:
             [super touchesBegan:touches withEvent:event];

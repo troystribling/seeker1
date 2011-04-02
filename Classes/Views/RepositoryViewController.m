@@ -15,6 +15,7 @@
 #import "TerminalViewController.h"
 #import "ProgramModel.h"
 #import "UserModel.h"
+#import "AudioManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kREPOSITORY_LAUNCHER_BACK_TAG     1
@@ -93,6 +94,7 @@
     switch (touchTag) {
         case kREPOSITORY_LAUNCHER_BACK_TAG:
             [self.view removeFromSuperview];
+            [[AudioManager instance] playEffect:SelectAudioEffectID];
             break;
        default:
             [super touchesBegan:touches withEvent:event];
@@ -137,6 +139,7 @@
     ProgramModel* model = [self.programsList objectAtIndex:indexPath.row];
     [UserModel setLevel:model.level];
     [[ViewControllerManager instance] showTerminalView:[[CCDirector sharedDirector] openGLView] launchedFromMap:NO];
+    [[AudioManager instance] playEffect:SelectAudioEffectID];
     [self.view removeFromSuperview];
 }
 

@@ -15,6 +15,7 @@
 #import "StatusDisplay.h"
 #import "ProgramNgin.h"
 #import "ViewControllerManager.h"
+#import "AudioManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kEND_OF_LEVEL_TICK_1    40
@@ -192,6 +193,7 @@
 - (void)redoMission {
     [ProgramNgin instance].programHalted = NO;
     [ProgramNgin instance].programRunning = NO;
+    [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
 }
 
@@ -205,6 +207,7 @@
 - (void)againMission {
     [ProgramNgin instance].programHalted = NO;
     [ProgramNgin instance].programRunning = NO;
+    [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[CCDirector sharedDirector] replaceScene: [MapScene scene]];
 }
 
@@ -213,6 +216,7 @@
     [ProgramNgin instance].programHalted = NO;
     [ProgramNgin instance].programRunning = NO;
     [UserModel nextLevel];
+    [[AudioManager instance] playEffect:SelectAudioEffectID];
     if ([UserModel isLastLevel]) {
         [[CCDirector sharedDirector] replaceScene: [EndOfSiteScene scene]];
     } else  {

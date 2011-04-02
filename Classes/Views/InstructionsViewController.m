@@ -13,6 +13,7 @@
 #import "SubroutineModel.h"
 #import "TerminalCell.h"
 #import "ProgramNgin.h"
+#import "AudioManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kINSTRUCTIONS_LAUNCHER_BACK_TAG         1
@@ -193,9 +194,11 @@
     switch (touchTag) {
         case kINSTRUCTIONS_LAUNCHER_BACK_TAG:
             [self.view removeFromSuperview];
+            [[AudioManager instance] playEffect:SelectAudioEffectID];
             break;
         case kINSTRUCTIONS_LAUNCHER_ADD_SUB_TAG:
             [self.view removeFromSuperview];
+            [[AudioManager instance] playEffect:SelectAudioEffectID];
             [[ViewControllerManager instance] showCreateSubroutineView:[[CCDirector sharedDirector] openGLView]];
             break;            
         default:
@@ -319,6 +322,7 @@
             [viewControllerManager showSubroutineView:[[CCDirector sharedDirector] openGLView] withName:subroutineName];
             break;            
     }
+    [[AudioManager instance] playEffect:SelectAudioEffectID];
     [self.view removeFromSuperview];
 }
 

@@ -12,6 +12,7 @@
 #import "SubroutineModel.h"
 #import "TerminalCell.h"
 #import "TerminalCellFactory.h"
+#import "AudioManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kSUBROUTINE_LAUNCHER_DONE_TAG   1
@@ -122,6 +123,7 @@
             [self.view removeFromSuperview];
             [SubroutineModel insertSubroutine:self.subroutineListing withName:self.subroutineName];
             [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:SubroutineInstructionType];
+            [[AudioManager instance] playEffect:SelectAudioEffectID];
             break;
         case kSUBROUTINE_LAUNCHER_EDIT_TAG:
             if (self.editingEnabled) {
@@ -133,6 +135,7 @@
                 self.editImageView.image = [UIImage imageNamed:@"terminal-launcher-editing.png"];
                 [self.subroutineView setEditing:YES animated:YES];
             }
+            [[AudioManager instance] playEffect:SelectAudioEffectID];
             break;
         default:
             [super touchesBegan:touches withEvent:event];

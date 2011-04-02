@@ -13,12 +13,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 typedef enum audioEffectID {
-    MainMenuAudioEffectID,
-    SiteAudioEffectID,
-    SiteUpAudioEffectID,
-    SiteDownAudioEffectID,
-    MissionAudioEffectID,
-    MapMenuAudioEffectID,
+    SelectAudioEffectID,
 } AudioEffectID;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

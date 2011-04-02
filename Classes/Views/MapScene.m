@@ -20,6 +20,7 @@
 #import "MainScene.h"
 #import "MissionsScene.h"
 #import "AnimatedSprite.h"
+#import "AudioManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kERROR_CODE_HIT_MAP_BOUNDARY        @"A-1654"
@@ -313,9 +314,19 @@
     if (self.crashSprite){
         [self.crashSprite removeFromParentAndCleanup:YES];
         self.crashSprite = nil;
+    } else if (self.victorySprite) {
+        [self.victorySprite removeFromParentAndCleanup:YES];
+        self.victorySprite = nil;
     } else {
         [self.seeker1 removeFromParentAndCleanup:YES];
     }
+    self.counter = 0;
+    self.endOfMissionCounter = -2*kEND_OF_LEVEL_COUNT;
+    self.victoryAnimationCounter = -2*kVICTORY_ANIMATION_LENGTH;
+    self.crashAnimationCounter = -2*kCRASH_ANIMATION_LENGTH;
+    self.nextLevel = NO;
+    self.gameOver = NO;
+    self.featureUnlocked = NO;
     CCTMXTiledMap* newTileMap = [self initMap];
     [self addChild:newTileMap z:-1 tag:kMAP];
     [self.tileMap removeFromParentAndCleanup:YES];
@@ -1102,27 +1113,32 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)mapMenu {
+    [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[CCDirector sharedDirector] replaceScene:[MainScene scene]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)mapProg {
+    [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[ViewControllerManager instance] showTerminalView:[[CCDirector sharedDirector] openGLView] launchedFromMap:YES];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)mapSubs {
+    [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:SubroutineInstructionType];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)mapStop {
+    [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[ProgramNgin instance] stopProgram];
     [self resetLevel];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)mapRun {
+    [[AudioManager instance] playEffect:SelectAudioEffectID];
     [self loadProgram];
     [[ProgramNgin instance] runProgram];
     [self.menu removeFromParentAndCleanup:YES];
@@ -1131,6 +1147,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)mapBack {
+    [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[CCDirector sharedDirector] replaceScene:[MissionsScene scene]];
 }
 
@@ -1315,7 +1332,9 @@
         self.seekerPath = [NSMutableArray arrayWithCapacity:10];
         self.statusDisplay = [StatusDisplay create];
         self.counter = 0;
-        self.crashAnimationCounter = 0;
+        self.endOfMissionCounter = -2*kEND_OF_LEVEL_COUNT;
+        self.victoryAnimationCounter = -2*kVICTORY_ANIMATION_LENGTH;
+        self.crashAnimationCounter = -2*kCRASH_ANIMATION_LENGTH;
         self.levelResetSeeker = NO;
         self.levelResetMap = NO;
         self.levelInitSeeker = NO;
@@ -1330,7 +1349,6 @@
         self.zoomingMap = NO;
         self.checkLevelCompleted = NO;
         self.canTouch = NO;
-        self.endOfMissionCounter = 0;
         self.pinchDetected = NO;
         self.featureUnlocked = NO;
         self.gameOver = NO;

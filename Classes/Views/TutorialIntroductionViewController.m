@@ -9,6 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "ViewControllerManager.h"
 #import "cocos2d.h"
+#import "AudioManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kFEATURE_UNLOCK_LAUNCHER_EXIT_TAG       1
@@ -97,6 +98,7 @@
         case kFEATURE_UNLOCK_LAUNCHER_EXIT_TAG:
             break;
         case kFEATURE_UNLOCK_LAUNCHER_TUTORIAL_TAG:
+            [[AudioManager instance] playEffect:SelectAudioEffectID];
             [[ViewControllerManager instance] showTutorialSectionView:[[CCDirector sharedDirector] openGLView] withSectionID:self.sectionID];
             break;
     }

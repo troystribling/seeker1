@@ -9,6 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "StatsViewController.h"
 #import "LevelModel.h"
+#import "AudioManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kSTATS_LAUNCHER_BACK_TAG     1
@@ -169,9 +170,9 @@
     switch (touchTag) {
         case kSTATS_LAUNCHER_BACK_TAG:
             [self.view removeFromSuperview];
+            [[AudioManager instance] playEffect:SelectAudioEffectID];
             break;
         default:
-            [super touchesBegan:touches withEvent:event];
             break;
     }
 }

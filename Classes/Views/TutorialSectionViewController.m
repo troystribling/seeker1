@@ -8,7 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "ViewControllerManager.h"
-
+#import "AudioManager.h"
 #import "UserModel.h"
 #import "cocos2d.h"
 
@@ -167,13 +167,16 @@
                 [self previousTutorial];
                 [self loadTutorial];
             }
+            [[AudioManager instance] playEffect:SelectAudioEffectID];
             break;
         case kTUTORIAL_SECTION_LAUNCHER_EXIT_TAG:
+            [[AudioManager instance] playEffect:SelectAudioEffectID];
             [self.view removeFromSuperview];
             break;
         case kTUTORIAL_SECTION_LAUNCHER_NEXT_TAG:
             [self nextTutorial];
             [self loadTutorial];
+            [[AudioManager instance] playEffect:SelectAudioEffectID];
             if (self.selectedTutorial == ([self.tutorialList count] - 1)) {
                 self.nextView.hidden = YES;
             } 

@@ -14,6 +14,7 @@
 #import "LevelModel.h"
 #import "StatusDisplay.h"
 #import "ViewControllerManager.h"
+#import "AudioManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kEND_OF_LEVEL_TICK_1    40
@@ -169,11 +170,13 @@
 - (void)nextMission {
     [TutorialSectionViewController nextLevel];
     [LevelModel insertForLevel:[UserModel level]];
+    [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[CCDirector sharedDirector] replaceScene: [QuadsScene scene]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)doneWithGame {
+    [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[CCDirector sharedDirector] replaceScene: [MainScene scene]];
 }
 
