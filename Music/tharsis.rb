@@ -55,23 +55,23 @@ str 'rhythm' do
 end
 
 #.........................................................................................................
-# atmos
+# perc
 #.........................................................................................................
-atmos_i1 = [n([:C,5]), n(:R), n([:C,5]), n(:R)]
-atmos_intro = [atmos_i1, atmos_i1]
+perc_i1 = [n([:C,5]), n(:R), n([:C,5]), n(:R)]
+perc_intro = [perc_i1, perc_i1]
 
 #.........................................................................................................
 start = 1
-atmos_p1 = [n([:C,5]), n(:R), n([:C,5]), n(:R)]
-atmos_p2 = [n([:C,5]), n(:R, :l=>4), n([:C,5], :l=>16), n([:C,5], :l=>16), n([:C,5], :l=>16), n(:R, :l=>16), n(:R, :l=>4)]
-atmos_phrases = [atmos_p1, atmos_p1, atmos_p1, atmos_p1, atmos_p2]
+perc_p1 = [n([:C,5]), n(:R), n([:C,5]), n(:R)]
+perc_p2 = [n([:C,5]), n(:R, :l=>4), n([:C,5], :l=>16), n([:C,5], :l=>16), n([:C,5], :l=>16), n(:R, :l=>16), n(:R, :l=>4)]
+perc_phrases = [perc_p1, perc_p1, perc_p1, perc_p1, perc_p2]
 #.........................................................................................................
-str 'atmos' do
+str 'perc' do
   if count > start
-    c = (count - 1) % atmos_phrases.length
-    ch(2) << atmos_phrases
+    c = (count - 1) % perc_phrases.length
+    ch(2) << perc_phrases
   else
-    ch(2) << atmos_intro
+    ch(2) << perc_intro
   end
 end
 
