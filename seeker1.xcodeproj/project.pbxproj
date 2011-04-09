@@ -85,6 +85,7 @@
 		0517EE2E12D2B400006CB4A9 /* DoUntilTerminalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0517EE2D12D2B400006CB4A9 /* DoUntilTerminalCell.m */; };
 		0517EE4912D2C17F006CB4A9 /* DoUntilTerminalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0517EE4812D2C17F006CB4A9 /* DoUntilTerminalCell.xib */; };
 		0518052D12EFA4A400952699 /* EndOfLevelScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0518052C12EFA4A400952699 /* EndOfLevelScene.m */; };
+		051814A21350D8E9002EC648 /* boot.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 051814A11350D8E9002EC648 /* boot.mp3 */; };
 		051849921313406900D8E961 /* lcd phone.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 051849911313406900D8E961 /* lcd phone.ttf */; };
 		051849E6131348A200D8E961 /* Supertext 01.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 051849E5131348A200D8E961 /* Supertext 01.ttf */; };
 		05197CD1130103BB006DEC15 /* map-4.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 05197CD0130103BB006DEC15 /* map-4.tmx */; };
@@ -641,6 +642,7 @@
 		0517EE4812D2C17F006CB4A9 /* DoUntilTerminalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoUntilTerminalCell.xib; sourceTree = "<group>"; };
 		0518052B12EFA4A400952699 /* EndOfLevelScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndOfLevelScene.h; sourceTree = "<group>"; };
 		0518052C12EFA4A400952699 /* EndOfLevelScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndOfLevelScene.m; sourceTree = "<group>"; };
+		051814A11350D8E9002EC648 /* boot.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = boot.mp3; sourceTree = "<group>"; };
 		051849911313406900D8E961 /* lcd phone.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "lcd phone.ttf"; sourceTree = "<group>"; };
 		051849E5131348A200D8E961 /* Supertext 01.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Supertext 01.ttf"; sourceTree = "<group>"; };
 		05197CD0130103BB006DEC15 /* map-4.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-4.tmx"; sourceTree = "<group>"; };
@@ -2013,6 +2015,7 @@
 		05E01446133FF0DB00A5B99B /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				051814A11350D8E9002EC648 /* boot.mp3 */,
 				0510351D135017E8001CF684 /* crash.mp3 */,
 				0510351E135017E8001CF684 /* feature-unlocked.mp3 */,
 				0510351F135017E8001CF684 /* item-displayed.wav */,
@@ -2550,6 +2553,7 @@
 				05103524135017E8001CF684 /* item-displayed.wav in Resources */,
 				05103525135017E8001CF684 /* memnonia.mp3 in Resources */,
 				05103526135017E8001CF684 /* mission-completed.mp3 in Resources */,
+				051814A21350D8E9002EC648 /* boot.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
