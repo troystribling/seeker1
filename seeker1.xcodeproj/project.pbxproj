@@ -48,6 +48,11 @@
 		050DD33B12EA6F0D00FDBC11 /* RepositoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050DD33A12EA6F0D00FDBC11 /* RepositoryCell.xib */; };
 		050DD34912EA6F6E00FDBC11 /* RepositoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 050DD34812EA6F6E00FDBC11 /* RepositoryCell.m */; };
 		050F795012AC670F0017BDE1 /* LauncherView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050F794F12AC670F0017BDE1 /* LauncherView.m */; };
+		05103522135017E8001CF684 /* crash.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0510351D135017E8001CF684 /* crash.mp3 */; };
+		05103523135017E8001CF684 /* feature-unlocked.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0510351E135017E8001CF684 /* feature-unlocked.mp3 */; };
+		05103524135017E8001CF684 /* item-displayed.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0510351F135017E8001CF684 /* item-displayed.wav */; };
+		05103525135017E8001CF684 /* memnonia.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 05103520135017E8001CF684 /* memnonia.mp3 */; };
+		05103526135017E8001CF684 /* mission-completed.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 05103521135017E8001CF684 /* mission-completed.mp3 */; };
 		051073DD1346D73A007C0718 /* flap-wings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 051073DB1346D73A007C0718 /* flap-wings.plist */; };
 		051073DE1346D73A007C0718 /* flap-wings.png in Resources */ = {isa = PBXBuildFile; fileRef = 051073DC1346D73A007C0718 /* flap-wings.png */; };
 		0510D4F813062DB40073A9BE /* map-29.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 0510D4F713062DB40073A9BE /* map-29.tmx */; };
@@ -597,6 +602,11 @@
 		050DD34812EA6F6E00FDBC11 /* RepositoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepositoryCell.m; sourceTree = "<group>"; };
 		050F794E12AC670F0017BDE1 /* LauncherView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauncherView.h; sourceTree = "<group>"; };
 		050F794F12AC670F0017BDE1 /* LauncherView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LauncherView.m; sourceTree = "<group>"; };
+		0510351D135017E8001CF684 /* crash.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = crash.mp3; sourceTree = "<group>"; };
+		0510351E135017E8001CF684 /* feature-unlocked.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "feature-unlocked.mp3"; sourceTree = "<group>"; };
+		0510351F135017E8001CF684 /* item-displayed.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "item-displayed.wav"; sourceTree = "<group>"; };
+		05103520135017E8001CF684 /* memnonia.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = memnonia.mp3; sourceTree = "<group>"; };
+		05103521135017E8001CF684 /* mission-completed.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "mission-completed.mp3"; sourceTree = "<group>"; };
 		051073DB1346D73A007C0718 /* flap-wings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "flap-wings.plist"; sourceTree = "<group>"; };
 		051073DC1346D73A007C0718 /* flap-wings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flap-wings.png"; sourceTree = "<group>"; };
 		0510D4F713062DB40073A9BE /* map-29.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-29.tmx"; sourceTree = "<group>"; };
@@ -2003,6 +2013,11 @@
 		05E01446133FF0DB00A5B99B /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				0510351D135017E8001CF684 /* crash.mp3 */,
+				0510351E135017E8001CF684 /* feature-unlocked.mp3 */,
+				0510351F135017E8001CF684 /* item-displayed.wav */,
+				05103520135017E8001CF684 /* memnonia.mp3 */,
+				05103521135017E8001CF684 /* mission-completed.mp3 */,
 				051A5C4513479736001BEB0A /* select.wav */,
 			);
 			path = Audio;
@@ -2530,6 +2545,11 @@
 				051073DD1346D73A007C0718 /* flap-wings.plist in Resources */,
 				051073DE1346D73A007C0718 /* flap-wings.png in Resources */,
 				051A5C4613479736001BEB0A /* select.wav in Resources */,
+				05103522135017E8001CF684 /* crash.mp3 in Resources */,
+				05103523135017E8001CF684 /* feature-unlocked.mp3 in Resources */,
+				05103524135017E8001CF684 /* item-displayed.wav in Resources */,
+				05103525135017E8001CF684 /* memnonia.mp3 in Resources */,
+				05103526135017E8001CF684 /* mission-completed.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
