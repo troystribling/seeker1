@@ -26,23 +26,19 @@ end
 #.........................................................................................................
 # rhythm
 #.........................................................................................................
-rythm_i1 = [n(:R, :l=>1), n(:R, :l=>1)]
-rythm_intro = [rythm_i1]
-
-#.........................................................................................................
 start = 1
-rhythm_p1 = [n(:R, :l=>4), np([:C,5], :aeolian, :l=>8, :v=>0.99)[7,4]]
-rhythm_phrases =  [rhythm_p1]
+rhythm_p1 = [n(:R, :l=>1), n(:R, :l=>8)]
+rhythm_p2 = [n(:R, :l=>4), np([:D,5], :mixolydian, :l=>8, :v=>0.99)[4,2]]
+rhythm_p3 = [n(:R, :l=>8), np([:D,5], :aeolian, :l=>8, :v=>0.99)[3,5]]
+rhythm_p4 = [n(:R, :l=>8), np([:D,5], :aeolian, :l=>16, :v=>0.99)[4,2,3], n(:R, :l=>8)]
+rhythm_p5 = [n(:R, :l=>1), n(:R, :l=>8)]
+rhythm_phrases =[rhythm_p1, rhythm_p2, rhythm_p3, rhythm_p2, rhythm_p3, rhythm_p2, rhythm_p3, rhythm_p2, rhythm_p3, rhythm_p4, rhythm_p5]
 
 #.........................................................................................................
-# str 'rhythm' do
-#   if count > start
-#     c = (count - 1) % rhythm_phrases.length
-#     ch(1) << rhythm_phrases
-#   else
-#     ch(1) << rythm_intro
-#   end
-# end
+str 'rhythm' do
+  c = (count - 1) % rhythm_phrases.length
+  ch(1) << rhythm_phrases
+end
 
 #.........................................................................................................
 # perc
