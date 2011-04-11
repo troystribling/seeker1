@@ -83,6 +83,7 @@
 		0513E9631344194C00C29310 /* yellow-blink.png in Resources */ = {isa = PBXBuildFile; fileRef = 0513E9611344194C00C29310 /* yellow-blink.png */; };
 		0514FB8512D8040100713A49 /* terminal-launcher-add-subroutine.png in Resources */ = {isa = PBXBuildFile; fileRef = 0514FB8412D8040100713A49 /* terminal-launcher-add-subroutine.png */; };
 		0516E7A3135237D800C727FD /* tharsis.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0516E7A2135237D800C727FD /* tharsis.mp3 */; };
+		0516E7A51352705700C727FD /* elysium.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0516E7A41352705700C727FD /* elysium.mp3 */; };
 		0517EE2E12D2B400006CB4A9 /* DoUntilTerminalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0517EE2D12D2B400006CB4A9 /* DoUntilTerminalCell.m */; };
 		0517EE4912D2C17F006CB4A9 /* DoUntilTerminalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0517EE4812D2C17F006CB4A9 /* DoUntilTerminalCell.xib */; };
 		0518052D12EFA4A400952699 /* EndOfLevelScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0518052C12EFA4A400952699 /* EndOfLevelScene.m */; };
@@ -639,6 +640,7 @@
 		0513E9611344194C00C29310 /* yellow-blink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yellow-blink.png"; sourceTree = "<group>"; };
 		0514FB8412D8040100713A49 /* terminal-launcher-add-subroutine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terminal-launcher-add-subroutine.png"; sourceTree = "<group>"; };
 		0516E7A2135237D800C727FD /* tharsis.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tharsis.mp3; sourceTree = "<group>"; };
+		0516E7A41352705700C727FD /* elysium.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = elysium.mp3; sourceTree = "<group>"; };
 		0517EE2C12D2B400006CB4A9 /* DoUntilTerminalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoUntilTerminalCell.h; sourceTree = "<group>"; };
 		0517EE2D12D2B400006CB4A9 /* DoUntilTerminalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoUntilTerminalCell.m; sourceTree = "<group>"; };
 		0517EE4812D2C17F006CB4A9 /* DoUntilTerminalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DoUntilTerminalCell.xib; sourceTree = "<group>"; };
@@ -2019,6 +2021,7 @@
 			children = (
 				051814A11350D8E9002EC648 /* boot.mp3 */,
 				0510351D135017E8001CF684 /* crash.mp3 */,
+				0516E7A41352705700C727FD /* elysium.mp3 */,
 				0510351E135017E8001CF684 /* feature-unlocked.mp3 */,
 				0510351F135017E8001CF684 /* item-displayed.wav */,
 				05103520135017E8001CF684 /* memnonia.mp3 */,
@@ -2558,6 +2561,7 @@
 				05103526135017E8001CF684 /* mission-completed.mp3 in Resources */,
 				051814A21350D8E9002EC648 /* boot.mp3 in Resources */,
 				0516E7A3135237D800C727FD /* tharsis.mp3 in Resources */,
+				0516E7A51352705700C727FD /* elysium.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
