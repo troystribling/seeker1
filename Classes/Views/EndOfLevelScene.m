@@ -250,6 +250,7 @@
         [self.statusDisplay insert:self];
         [self.statusDisplay test];
         [self schedule:@selector(nextFrame:)];
+        [[AudioManager instance] stopBackgroundMusic];
     }
 	return self;
 }
@@ -262,28 +263,33 @@
             [self insertSamplesReturnedLabel:CGPointMake(20.0f, 295.0f)];
         }
         [self.statusDisplay test];
+        [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
     } else if (self.counter == kEND_OF_LEVEL_TICK_2) {
         if (self.level.completed) {
             [self insertSensorsPlacedLabel:CGPointMake(20.0f, 235.0f)];
         } else {
             [self insertMissionFailedMenu];
         }
+        [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
         [self.statusDisplay clear];
     } else if (self.counter == kEND_OF_LEVEL_TICK_3) {
         if (self.level.completed) {
             [self insertCodeScoreLabel];
         }
+        [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
         [self.statusDisplay test];
     } else if (self.counter == kEND_OF_LEVEL_TICK_4) {
         if (self.level.completed) {
             [self insertCompletedTotalScoreLabel];
         }
+        [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
         [self.statusDisplay clear];
     } else if (self.counter == kEND_OF_LEVEL_TICK_5) {
         if (self.level.completed) {
             [self insertMissionCompletedMenu];
             [self.statusDisplay test];
         } 
+        [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
     }    
 }
 

@@ -14,14 +14,19 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 typedef enum audioEffectID {
     SelectAudioEffectID,
+    ItemDisplayedAudioEffectID,
 } AudioEffectID;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 typedef enum audioBackgroundID {
-    BootingAudioBackgroundID,
+    BootAudioBackgroundID,
+    CrashAudioBackgroundID,
     TharsisAudioBackgroundID,
     MemnoniaAudioBackgroundID,
     ElysiumAudioBackgroundID,
+    GameOverAudioBackgroundID,
+    FeatureUnlockedAudioBackgroundID,
+    MissionCompletedAudioBackgroundID,
 } AudioBackgroundID;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -37,6 +42,7 @@ typedef enum audioBackgroundID {
 - (void)pauseBackgroundMusic;
 - (void)resumeBackgroundMusic;
 - (void)stopBackgroundMusic;
+- (BOOL)isBackgroundMusicPlaying;
 - (void)loadAudio;
 
 @end

@@ -41,6 +41,9 @@ static AudioManager* thisAudioManager = nil;
             case SelectAudioEffectID:
                 [[SimpleAudioEngine sharedEngine] playEffect:@"select.wav"];
                 break;
+            case ItemDisplayedAudioEffectID:
+                [[SimpleAudioEngine sharedEngine] playEffect:@"item-displayed.wav"];
+                break;
         }
     }
 }
@@ -49,13 +52,29 @@ static AudioManager* thisAudioManager = nil;
 - (void)playBackgroundMusic:(AudioBackgroundID)_audioID {
     if ([UserModel audioEnabled]) {
         switch (_audioID) {
-            case BootingAudioBackgroundID:
+            case BootAudioBackgroundID:
+                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"boot.mp3" loop:YES];
+                break;
+            case CrashAudioBackgroundID:
+                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"crash.mp3" loop:YES];
                 break;
             case TharsisAudioBackgroundID:
+                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"tharsis.mp3" loop:YES];
                 break;
             case MemnoniaAudioBackgroundID:
+                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"memnonia.mp3" loop:YES];
                 break;
             case ElysiumAudioBackgroundID:
+                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"elysium.mp3" loop:YES];
+                break;
+            case GameOverAudioBackgroundID:
+                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"game-over.mp3" loop:YES];
+                break;
+            case FeatureUnlockedAudioBackgroundID:
+                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"feature-unlocked.mp3" loop:YES];
+                break;
+            case MissionCompletedAudioBackgroundID:
+                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"mission-completed.mp3" loop:YES];
                 break;
         }
     }
@@ -83,12 +102,23 @@ static AudioManager* thisAudioManager = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)isBackgroundMusicPlaying {
+    return [[SimpleAudioEngine sharedEngine] isBackgroundMusicPlaying];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadAudio {
     SimpleAudioEngine* sae = [SimpleAudioEngine sharedEngine];
     if (sae != nil) {
-        [sae preloadEffect:@"main-menu.wav"];
-        [sae preloadEffect:@"site.wav"];
-        [sae preloadEffect:@"mission.wav"];
+        [sae preloadEffect:@"select.wav"];
+        [sae preloadEffect:@"item-displayed.wav"];
+        [sae preloadEffect:@"boot.mp3"];
+        [sae preloadEffect:@"crash.mp3"];
+        [sae preloadEffect:@"elysium.mp3"];
+        [sae preloadEffect:@"game-over.mp3"];
+        [sae preloadEffect:@"memnonia.mp3"];
+        [sae preloadEffect:@"mission-completed.mp3"];
+        [sae preloadEffect:@"tharsis.mp3"];
         if (sae.willPlayBackgroundMusic) {
             sae.effectsVolume = 1.0;
             sae.backgroundMusicVolume = 1.0;

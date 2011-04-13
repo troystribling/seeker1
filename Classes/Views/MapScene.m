@@ -515,6 +515,7 @@
     if ([self.seeker1 isLevelCompleted]) {
         [[ProgramNgin instance] stopProgram];
         [LevelModel completeLevel:self.level forSeeker:self.seeker1];
+        [[AudioManager instance] playBackgroundMusic:MissionCompletedAudioBackgroundID];
         [self levelCompletedAnimation];
     }    
 }
@@ -771,60 +772,70 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashHitMapBoundary {
     [LevelModel setLevel:self.level errorCode:kERROR_CODE_HIT_MAP_BOUNDARY andMessage:kERROR_MSG_HIT_MAP_BOUNDARY];
+    [[AudioManager instance] playBackgroundMusic:CrashAudioBackgroundID];
     [self vanishToLine];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashNoEnergy {
     [LevelModel setLevel:self.level errorCode:kERROR_CODE_NO_ENERGY andMessage:kERROR_MSG_NO_ENERGY];
+    [[AudioManager instance] playBackgroundMusic:CrashAudioBackgroundID];
     [self vanishToPoint];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashSpeedHigh {
     [LevelModel setLevel:self.level errorCode:kERROR_CODE_SPEED_HIGH andMessage:kERROR_MSG_SPEED_HIGH];
+    [[AudioManager instance] playBackgroundMusic:CrashAudioBackgroundID];
     [self spherize];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashSpeedLow {
     [LevelModel setLevel:self.level errorCode:kERROR_CODE_SPEED_LOW andMessage:kERROR_MSG_SPEED_LOW];
+    [[AudioManager instance] playBackgroundMusic:CrashAudioBackgroundID];
     [self vanish];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashProgram {
     [LevelModel setLevel:self.level errorCode:kERROR_CODE_PROGRAM_CRASH andMessage:kERROR_MSG_PROGRAM_CRASH];
+    [[AudioManager instance] playBackgroundMusic:CrashAudioBackgroundID];
     [self fadeToNoise];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashTerrain {
     [LevelModel setLevel:self.level errorCode:kERROR_CODE_TERRRAIN andMessage:kERROR_MSG_TERRRAIN];
+    [[AudioManager instance] playBackgroundMusic:CrashAudioBackgroundID];
     [self vanishToLineToPoint];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashSensorBinEmpty {
     [LevelModel setLevel:self.level errorCode:kERROR_CODE_SENSOR_BIN_EMPTY andMessage:kERROR_MSG_SENSOR_BIN_EMPTY];
+    [[AudioManager instance] playBackgroundMusic:CrashAudioBackgroundID];
     [self fadeToYellow];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashNoSensorSiteAtPosition {
     [LevelModel setLevel:self.level errorCode:kERROR_CODE_EXPECTED_SENSOR andMessage:kERROR_MSG_EXPECTED_SENSOR];
+    [[AudioManager instance] playBackgroundMusic:CrashAudioBackgroundID];
     [self blinkYellow];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashSampleBinFull {
     [LevelModel setLevel:self.level errorCode:kERROR_CODE_SAMPLE_BIN_FULL andMessage:kERROR_MSG_SAMPLE_BIN_FULL];
+    [[AudioManager instance] playBackgroundMusic:CrashAudioBackgroundID];
     [self fadeToRed];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)crashNoSampleAtPosition {
     [LevelModel setLevel:self.level errorCode:kERROR_CODE_EXPECTED_SAMPLE andMessage:kERROR_MSG_EXPECTED_SAMPLE];
+    [[AudioManager instance] playBackgroundMusic:CrashAudioBackgroundID];
     [self blinkRed];
 }
 

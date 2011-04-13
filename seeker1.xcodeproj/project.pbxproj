@@ -97,6 +97,7 @@
 		0519845A1323F9CB00299B48 /* map-12.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 051984591323F9CB00299B48 /* map-12.tmx */; };
 		051A5C4613479736001BEB0A /* select.wav in Resources */ = {isa = PBXBuildFile; fileRef = 051A5C4513479736001BEB0A /* select.wav */; };
 		051AB7E912C028260020AC2D /* map-2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 051AB7E612C028260020AC2D /* map-2.tmx */; };
+		051BD17E13552B4D00DD9264 /* game-over.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 051BD17D13552B4D00DD9264 /* game-over.mp3 */; };
 		051C3162133E5B6C00D9D869 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 051C3160133E5B6C00D9D869 /* Default.png */; };
 		051C3163133E5B6C00D9D869 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 051C3161133E5B6C00D9D869 /* Icon.png */; };
 		051C3171133E657A00D9D869 /* CDAudioManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 051C3164133E605300D9D869 /* CDAudioManager.h */; };
@@ -656,6 +657,7 @@
 		051984591323F9CB00299B48 /* map-12.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-12.tmx"; sourceTree = "<group>"; };
 		051A5C4513479736001BEB0A /* select.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = select.wav; sourceTree = "<group>"; };
 		051AB7E612C028260020AC2D /* map-2.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "map-2.tmx"; sourceTree = "<group>"; };
+		051BD17D13552B4D00DD9264 /* game-over.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "game-over.mp3"; sourceTree = "<group>"; };
 		051C2F6B133E54E700D9D869 /* CCAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAction.h; sourceTree = "<group>"; };
 		051C2F6C133E54E700D9D869 /* CCAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCAction.m; sourceTree = "<group>"; };
 		051C2F6D133E54E700D9D869 /* CCActionCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCActionCamera.h; sourceTree = "<group>"; };
@@ -2023,6 +2025,7 @@
 				0510351D135017E8001CF684 /* crash.mp3 */,
 				0516E7A41352705700C727FD /* elysium.mp3 */,
 				0510351E135017E8001CF684 /* feature-unlocked.mp3 */,
+				051BD17D13552B4D00DD9264 /* game-over.mp3 */,
 				0510351F135017E8001CF684 /* item-displayed.wav */,
 				05103520135017E8001CF684 /* memnonia.mp3 */,
 				05103521135017E8001CF684 /* mission-completed.mp3 */,
@@ -2562,6 +2565,7 @@
 				051814A21350D8E9002EC648 /* boot.mp3 in Resources */,
 				0516E7A3135237D800C727FD /* tharsis.mp3 in Resources */,
 				0516E7A51352705700C727FD /* elysium.mp3 in Resources */,
+				051BD17E13552B4D00DD9264 /* game-over.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

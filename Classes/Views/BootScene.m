@@ -12,6 +12,7 @@
 #import "StatusDisplay.h"
 #import "MainScene.h"
 #import "IntroMap1Scene.h"
+#import "AudioManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kSTARTUP_TICKS  400
@@ -134,6 +135,7 @@
         [self insertBootingLabel];
         [self insertProductLabel];
         [self schedule:@selector(nextFrame:)];
+        [[AudioManager instance] playBackgroundMusic:BootAudioBackgroundID];
     }
 	return self;
 }
@@ -170,15 +172,18 @@
         [self.statusDisplay clear];
         [self.post removeFromParentAndCleanup:YES];
         [self insertPOST:@"POST    [OK]"];
+        [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
         [self insertConsole:@"console [start]"];
     } else if (self.counter == kBOOT_TICK_12) {
         [self.statusDisplay test];
         [self.console removeFromParentAndCleanup:YES];
         [self insertConsole:@"console [started]"];
+        [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
         [self insertConnection:@"connecting"];
     } else if (self.counter == kBOOT_TICK_13) {
         [self.statusDisplay clear];
         [self.connection removeFromParentAndCleanup:YES];
+        [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
         [self insertConnection:@"connected"];
     }    
 }

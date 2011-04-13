@@ -9,15 +9,11 @@ end
 #.........................................................................................................
 # lead
 #.........................................................................................................
-lead_p1 = []
-3.times do |i|
-  lead_p1 += [np([:As,4], :dorian, :l=>16, :v=>0.99)[7-i,5-i,7-i], n(:R, :l=>16)]
-end
-lead_p2 = [np([:As,4], :mixolydian, :l=>16, :v=>0.99)[6], n(:R, :l=>16), np([:A,4], :dorian, :l=>16, :v=>0.99)[6,4,2,4]]
-lead_p3 = [np([:A,4], :dorian, :l=>16, :v=>0.99)[6], n(:R, :l=>16), np([:As,4], :dorian, :l=>16, :v=>0.99)[6,4,2], n(:R, :l=>16)]
-lead_p4 = [np([:A,4], :mixolydian, :l=>16, :v=>0.99)[6], n(:R, :l=>16), np([:A,4], :dorian, :l=>16, :v=>0.99)[3,4,2], n(:R, :l=>16)]
-lead_p5 = [np([:A,4], :dorian, :l=>16, :v=>0.99)[2], n(:R, :l=>16), np([:A,4], :dorian, :l=>16, :v=>0.99)[2,4,6], n(:R, :l=>16)]
-lead = [lead_p1, lead_p2, lead_p3, lead_p2, lead_p3, lead_p2, lead_p4, lead_p5]
+lead_p1 = [np([:As,4], :phrygian, :l=>8, :v=>0.99)[2,5,4], n(:R, :l=>8)]
+lead_p2 = [np([:C,4], :dorian, :l=>8, :v=>0.99)[1,6,4], n(:R, :l=>8)]
+lead_p3 = [np([:C,4], :phrygian, :l=>8, :v=>0.99)[1,4,3], n(:R, :l=>8)]
+lead_p4 = [np([:C,4], :dorian, :l=>8, :v=>0.99)[4,6,1], n(:R, :l=>8)]
+lead = [lead_p1, lead_p2, lead_p1, lead_p2, lead_p3, lead_p1, lead_p2, lead_p1, lead_p2, lead_p4]
 
 #.........................................................................................................
 str 'lead' do
@@ -28,17 +24,24 @@ end
 #.........................................................................................................
 # rhythm
 #.........................................................................................................
-rhythm_p1 = [n(:R, :l=>2), n(:R, :l=>4)]
-rhythm_p2 = [np([:A,4], :dorian, :l=>16, :v=>0.99)[6,4,2,4], n(:R, :l=>16)]
-rhythm_p3 = [np([:As,4], :mixolydian, :l=>16, :v=>0.99)[6,4,2], n(:R, :l=>8), n(:R, :l=>16)]
-rhythm_p4 = [np([:As,4], :dorian, :l=>16, :v=>0.99)[3,4,2], n(:R, :l=>8), n(:R, :l=>16)]
-rhythm_p5 = [np([:As,4], :mixolydian, :l=>16, :v=>0.99)[2,4,6], n(:R, :l=>8), n(:R, :l=>16)]
-rhythm_phrases =  [rhythm_p1, rhythm_p2, rhythm_p3, rhythm_p2, rhythm_p3, rhythm_p4, rhythm_p5]
+rythm_i1 = [n(:R, :l=>1), n(:R, :l=>1), n(:R, :l=>1), n(:R, :l=>4)]
+rythm_intro = [rythm_i1]
+
+#.........................................................................................................
+start = 1
+rhythm_p1 = [n(:R, :l=>2), n(:R, :l=>8)]
+rhythm_p2 = [np([:As,4], :dorian, :l=>8, :v=>0.99)[2,5,4], n(:R, :l=>8)]
+rhythm_p3 = [np([:C,4], :dorian, :l=>8, :v=>0.99)[1,6,4], n(:R, :l=>8)]
+rhythm_phrases =  [rhythm_p1, rhythm_p2, rhythm_p1, rhythm_p2, rhythm_p3, rhythm_p1, rhythm_p2, rhythm_p1, rhythm_p2 ,rhythm_p3]
 
 #.........................................................................................................
 str 'rhythm' do
-  c = (count - 1) % rhythm_phrases.length
-  ch(1) << rhythm_phrases
+  if count > start
+    c = (count - 1) % rhythm_phrases.length
+    ch(1) << rhythm_phrases
+  else
+    ch(1) << rythm_intro
+  end
 end
 
 #.........................................................................................................
