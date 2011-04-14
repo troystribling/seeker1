@@ -54,10 +54,10 @@
 #define kSEEKER_DELTA_ENERGY            2
 #define kSEEKER_DELTA_ENERGY_MIN        1
 #define kSEEKER_DELTA_ENERGY_MAX        4
-#define kCRASH_DURATION                 1.0
+#define kCRASH_DURATION                 2.0
 #define kCRASH_ANIMATION_DURATION       0.1
-#define kCRASH_ANIMATION_LENGTH         100
-#define kVICTORY_DURATION               1.0
+#define kCRASH_ANIMATION_LENGTH         200
+#define kVICTORY_DURATION               2.0
 #define kVICTORY_ANIMATION_DURATION     0.05
 #define kVICTORY_ANIMATION_LENGTH       200
 

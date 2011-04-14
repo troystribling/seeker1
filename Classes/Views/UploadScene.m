@@ -11,6 +11,7 @@
 #import "MapScene.h"
 #import "StatusDisplay.h"
 #import "ProgramNgin.h"
+#import "AudioManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kUPLOAD_TICK_1      20
@@ -73,6 +74,8 @@
         self.statusDisplay = [StatusDisplay createWithFile:@"empty-display.png"];
         [self.statusDisplay insert:self];
         [self schedule:@selector(nextFrame:)];
+
+        [[AudioManager instance] playQuadBackgroundMusic];
     }
 	return self;
 }

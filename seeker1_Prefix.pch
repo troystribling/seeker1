@@ -76,10 +76,10 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kSEEKER_MIN_SPEED_SCALE             1.0
 #define kSEEKER_DELTA_SPEED_SCALE           5.0
-#define kSEEKER_ROTATION_DURATION_PER_QUAD  0.5f
+#define kSEEKER_ROTATION_DURATION_PER_QUAD  0.35f
 #define kSEEKER_MIN_SPEED                   0
 #define kSEEKER_MAX_SPEED                   30
 #define kSEEKER_DELTA_SPEED                 5
 #define kSEEKER_ZERO_GRADIENT_SPEED         15
-#define kSEEKER_GRID_DISTANCE               15.0
+#define kSEEKER_GRID_DISTANCE               10.0
 

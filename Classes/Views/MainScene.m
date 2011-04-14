@@ -75,35 +75,30 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)mission {
     [[AudioManager instance] playEffect:SelectAudioEffectID];
-    [[AudioManager instance] stopBackgroundMusic];
     [[CCDirector sharedDirector] replaceScene:[QuadsScene scene]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)settings {
     [[AudioManager instance] playEffect:SelectAudioEffectID];
-    [[AudioManager instance] stopBackgroundMusic];
     [[ViewControllerManager instance] showSettingsView:[[CCDirector sharedDirector] openGLView]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)stats {
     [[AudioManager instance] playEffect:SelectAudioEffectID];
-    [[AudioManager instance] stopBackgroundMusic];
     [[ViewControllerManager instance] showStatsView:[[CCDirector sharedDirector] openGLView]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tutorial {
     [[AudioManager instance] playEffect:SelectAudioEffectID];
-    [[AudioManager instance] stopBackgroundMusic];
     [[ViewControllerManager instance] showTutorialIndexView:[[CCDirector sharedDirector] openGLView]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)repository {
     [[AudioManager instance] playEffect:SelectAudioEffectID];
-    [[AudioManager instance] stopBackgroundMusic];
     [[ViewControllerManager instance] showRepositoryView:[[CCDirector sharedDirector] openGLView]];
 }
 

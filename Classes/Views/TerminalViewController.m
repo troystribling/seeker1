@@ -160,6 +160,7 @@
             [[AudioManager instance] playEffect:SelectAudioEffectID];
             break;
         case kTERMINAL_LAUNCHER_RUN_TAG:
+            [[AudioManager instance] stopBackgroundMusic];
             [ngin saveProgram:self.programListing];
             [[CCDirector sharedDirector] replaceScene:[UploadScene scene]];
             [self.view removeFromSuperview];
