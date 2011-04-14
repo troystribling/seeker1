@@ -74,6 +74,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)mission {
+    [[AudioManager instance] stopBackgroundMusic];
     [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[CCDirector sharedDirector] replaceScene:[QuadsScene scene]];
 }
@@ -98,6 +99,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)repository {
+    [[AudioManager instance] stopBackgroundMusic];
     [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[ViewControllerManager instance] showRepositoryView:[[CCDirector sharedDirector] openGLView]];
 }

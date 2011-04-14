@@ -192,7 +192,6 @@
         backgroundGrid.position = CGPointMake(0.0, 0.0);
         [self addChild:backgroundGrid];
         [self loadMissions];
-        [[AudioManager instance] playBackgroundMusic:BootAudioBackgroundID];
     }
 	return self;
 }
@@ -203,7 +202,6 @@
     NSInteger mission = [self positionToMission:touchLocation];
     if ([self missionIsUnlocked:mission]) {
         NSInteger level = [self missionToLevel:mission];
-        [[AudioManager instance] stopBackgroundMusic];
         [[AudioManager instance] playEffect:SelectAudioEffectID];
         [ProgramNgin instance].programHalted = NO;
         [ProgramNgin instance].programRunning = NO;
