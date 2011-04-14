@@ -1131,24 +1131,28 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)mapMenu {
+    [[AudioManager instance] stopBackgroundMusic];
     [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[CCDirector sharedDirector] replaceScene:[MainScene scene]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)mapProg {
+    [[AudioManager instance] stopBackgroundMusic];
     [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[ViewControllerManager instance] showTerminalView:[[CCDirector sharedDirector] openGLView] launchedFromMap:YES];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)mapSubs {
+    [[AudioManager instance] stopBackgroundMusic];
     [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:SubroutineInstructionType];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)mapStop {
+    [[AudioManager instance] stopBackgroundMusic];
     [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[ProgramNgin instance] stopProgram];
     [self resetLevel];
@@ -1156,6 +1160,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)mapRun {
+    [[AudioManager instance] stopBackgroundMusic];
     [[AudioManager instance] playEffect:SelectAudioEffectID];
     [self loadProgram];
     [[ProgramNgin instance] runProgram];
@@ -1165,6 +1170,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)mapBack {
+    [[AudioManager instance] stopBackgroundMusic];
     [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[CCDirector sharedDirector] replaceScene:[MissionsScene scene]];
 }
