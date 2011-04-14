@@ -39,6 +39,7 @@ typedef enum audioBackgroundID {
 + (AudioManager*)instance;
 - (void)playEffect:(AudioEffectID)_audioID;
 - (void)playBackgroundMusic:(AudioBackgroundID)_audioID;
+- (void)playQuadBackgroundMusic;
 - (void)pauseBackgroundMusic;
 - (void)resumeBackgroundMusic;
 - (void)stopBackgroundMusic;

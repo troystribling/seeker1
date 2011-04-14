@@ -515,7 +515,6 @@
     if ([self.seeker1 isLevelCompleted]) {
         [[ProgramNgin instance] stopProgram];
         [LevelModel completeLevel:self.level forSeeker:self.seeker1];
-        [[AudioManager instance] playBackgroundMusic:MissionCompletedAudioBackgroundID];
         [self levelCompletedAnimation];
     }    
 }
@@ -975,25 +974,33 @@
 - (void)runLevelCompletedAnimation {
     self.levelCompleted = NO;
     if (self.level == (kLEVEL_FOR_SUBROUTINES - 1)) {
+        [[AudioManager instance] playBackgroundMusic:FeatureUnlockedAudioBackgroundID];
         [self rotateFull];
         self.featureUnlocked = YES;
     } else if (self.level == (kLEVEL_FOR_TIMES - 1)) {
+        [[AudioManager instance] playBackgroundMusic:FeatureUnlockedAudioBackgroundID];
         [self rotateHalfBounce];
         self.featureUnlocked = YES;
     } else if (self.level == (kLEVEL_FOR_UNTIL - 1)) {
+        [[AudioManager instance] playBackgroundMusic:FeatureUnlockedAudioBackgroundID];
         [self rotateHalfBounce];
         self.featureUnlocked = YES;
     } else if (self.level == (kLEVEL_FOR_BINS - 1)) {
+        [[AudioManager instance] playBackgroundMusic:FeatureUnlockedAudioBackgroundID];
         [self rotateExpandContract];
         self.featureUnlocked = YES;
     } else if (self.level == kMISSIONS_PER_QUAD*kQUADS_TOTAL) {
+        [[AudioManager instance] playBackgroundMusic:GameOverAudioBackgroundID];
         self.gameOver = YES;
         [self rotateExpandContract];
     } else if (self.level < (kLEVEL_FOR_SUBROUTINES - 1)) {
+        [[AudioManager instance] playBackgroundMusic:MissionCompletedAudioBackgroundID];
         [self rotateFull];
     } else if (self.level < (kLEVEL_FOR_UNTIL - 1)) {
+        [[AudioManager instance] playBackgroundMusic:MissionCompletedAudioBackgroundID];
         [self rotateHalfBounce];
     } else { 
+        [[AudioManager instance] playBackgroundMusic:MissionCompletedAudioBackgroundID];
         [self rotateExpandContract];
     }
     self.nextLevel = YES;

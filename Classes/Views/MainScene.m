@@ -125,9 +125,7 @@
         self.statusDisplay = [StatusDisplay create];
         [self.statusDisplay insert:self];
         [self.statusDisplay test];
-        if (![[AudioManager instance] isBackgroundMusicPlaying]) {
-            [[AudioManager instance] playBackgroundMusic:BootAudioBackgroundID];
-        }
+        [[AudioManager instance] playBackgroundMusic:BootAudioBackgroundID];
     }
 	return self;
 }

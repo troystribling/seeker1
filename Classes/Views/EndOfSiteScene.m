@@ -18,8 +18,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kEND_OF_LEVEL_TICK_1    40
-#define kEND_OF_LEVEL_TICK_2    80
-#define kEND_OF_LEVEL_TICK_3    120
+#define kEND_OF_LEVEL_TICK_2    90
+#define kEND_OF_LEVEL_TICK_3    140
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -108,6 +108,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertTharsis:(CGPoint)_position {
+    [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
     CCSprite* titleSprite = [CCSprite spriteWithFile:@"tharsis-title.png"];
     titleSprite.position = _position;
     [self addChild:titleSprite];
@@ -118,6 +119,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertMemnonia:(CGPoint)_position {
+    [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
     CCSprite* titleSprite = [CCSprite spriteWithFile:@"memnonia-title.png"];
     titleSprite.position = _position;
     [self addChild:titleSprite];
@@ -128,6 +130,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertElysium:(CGPoint)_position {
+    [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
     CCSprite* titleSprite = [CCSprite spriteWithFile:@"elysium-title.png"];
     titleSprite.position = _position;
     [self addChild:titleSprite];
@@ -138,6 +141,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertGameOver {
+    [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     CCSprite* titleSprite = [CCSprite spriteWithFile:@"game-over.png"];
     titleSprite.position = CGPointMake(screenSize.width/2.0, 150.0);
@@ -146,6 +150,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertNextMissionMenu {
+    [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
     CCSprite* nextSprite = [CCSprite spriteWithFile:@"go-to-next-site.png"];
     CCSprite* nextSpriteSelected = [CCSprite spriteWithFile:@"go-to-next-site.png"];
     CCMenuItemLabel* nextItem = [CCMenuItemSprite itemFromNormalSprite:nextSprite selectedSprite:nextSpriteSelected target:self selector:@selector(nextMission)];
@@ -156,7 +161,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)inserDoneMenu {
+- (void)insertDoneMenu {
     CCSprite* doneSprite = [CCSprite spriteWithFile:@"done-last-site.png"];
     CCSprite* doneSpriteSelected = [CCSprite spriteWithFile:@"done-last-site.png"];
     CCMenuItemLabel* doneItem = [CCMenuItemSprite itemFromNormalSprite:doneSprite selectedSprite:doneSpriteSelected target:self selector:@selector(doneWithGame)];
@@ -221,7 +226,7 @@
         if (self.showNextMenu) {
             [self insertNextMissionMenu];
         } else {
-            [self inserDoneMenu];
+            [self insertDoneMenu];
         }
         [self.statusDisplay test];
     }    

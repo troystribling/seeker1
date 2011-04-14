@@ -13,6 +13,7 @@
 #import "ProgramModel.h"
 #import "MapScene.h"
 #import "SeekerSprite.h"
+#import "AudioManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 static ProgramNgin* thisProgramNgin = nil;
@@ -478,6 +479,7 @@ static ProgramNgin* thisProgramNgin = nil;
     self.codeLine = 0;
     self.programRunning = YES;
     self.programHalted = NO;
+    [[AudioManager instance] playQuadBackgroundMusic];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -485,6 +487,7 @@ static ProgramNgin* thisProgramNgin = nil;
     self.codeLine = 0;
     self.programRunning = NO;
     self.programHalted = NO;
+    [[AudioManager instance] stopBackgroundMusic];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -492,6 +495,7 @@ static ProgramNgin* thisProgramNgin = nil;
     self.codeLine = 0;
     self.programRunning = NO;
     self.programHalted = YES;
+    [[AudioManager instance] stopBackgroundMusic];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

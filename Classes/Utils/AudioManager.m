@@ -9,6 +9,7 @@
 #import "AudioManager.h"
 #import "SimpleAudioEngine.h"
 #import "UserModel.h"
+#import "QuadsScene.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 static AudioManager* thisAudioManager = nil;
@@ -51,31 +52,53 @@ static AudioManager* thisAudioManager = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)playBackgroundMusic:(AudioBackgroundID)_audioID {
     if ([UserModel audioEnabled]) {
-        switch (_audioID) {
-            case BootAudioBackgroundID:
-                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"boot.mp3" loop:YES];
-                break;
-            case CrashAudioBackgroundID:
-                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"crash.mp3" loop:YES];
-                break;
-            case TharsisAudioBackgroundID:
-                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"tharsis.mp3" loop:YES];
-                break;
-            case MemnoniaAudioBackgroundID:
-                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"memnonia.mp3" loop:YES];
-                break;
-            case ElysiumAudioBackgroundID:
-                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"elysium.mp3" loop:YES];
-                break;
-            case GameOverAudioBackgroundID:
-                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"game-over.mp3" loop:YES];
-                break;
-            case FeatureUnlockedAudioBackgroundID:
-                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"feature-unlocked.mp3" loop:YES];
-                break;
-            case MissionCompletedAudioBackgroundID:
-                [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"mission-completed.mp3" loop:YES];
-                break;
+        if (![[AudioManager instance] isBackgroundMusicPlaying]) {
+            switch (_audioID) {
+                case BootAudioBackgroundID:
+                    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"boot.mp3" loop:YES];
+                    break;
+                case CrashAudioBackgroundID:
+                    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"crash.mp3" loop:YES];
+                    break;
+                case TharsisAudioBackgroundID:
+                    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"tharsis.mp3" loop:YES];
+                    break;
+                case MemnoniaAudioBackgroundID:
+                    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"memnonia.mp3" loop:YES];
+                    break;
+                case ElysiumAudioBackgroundID:
+                    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"elysium.mp3" loop:YES];
+                    break;
+                case GameOverAudioBackgroundID:
+                    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"game-over.mp3" loop:YES];
+                    break;
+                case FeatureUnlockedAudioBackgroundID:
+                    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"feature-unlocked.mp3" loop:YES];
+                    break;
+                case MissionCompletedAudioBackgroundID:
+                    [[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"mission-completed.mp3" loop:YES];
+                    break;
+            }
+        }
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)playQuadBackgroundMusic {
+    QuadType quadID = [UserModel quadrangle];
+    if ([UserModel audioEnabled]) {
+        if (![[AudioManager instance] isBackgroundMusicPlaying]) {
+            switch (quadID) {
+                case TharsisQuadType:
+                    [self playBackgroundMusic:TharsisAudioBackgroundID];
+                    break;
+                case MemnoniaQuadType:
+                    [self playBackgroundMusic:MemnoniaAudioBackgroundID];
+                    break;
+                case ElysiumQuadType:
+                    [self playBackgroundMusic:ElysiumAudioBackgroundID];
+                    break;
+            }
         }
     }
 }

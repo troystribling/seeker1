@@ -19,10 +19,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kEND_OF_LEVEL_TICK_1    40
-#define kEND_OF_LEVEL_TICK_2    80
-#define kEND_OF_LEVEL_TICK_3    120
-#define kEND_OF_LEVEL_TICK_4    160
-#define kEND_OF_LEVEL_TICK_5    200
+#define kEND_OF_LEVEL_TICK_2    90
+#define kEND_OF_LEVEL_TICK_3    140
+#define kEND_OF_LEVEL_TICK_4    190
+#define kEND_OF_LEVEL_TICK_5    240
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface EndOfLevelScene (PrivateAPI)
@@ -55,6 +55,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertFailedTitleLabel {
+    [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
     CGSize screenSize = [[CCDirector sharedDirector] winSize];
     CCLabelTTF* titleLabel = [CCLabelTTF labelWithString:@"Mission Failure" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
     titleLabel.position = CGPointMake(screenSize.width/2.0, 380.0f);
@@ -76,6 +77,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertCompletedTitleLabel {
+    [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
     CCLabelTTF* titleLabel = [CCLabelTTF labelWithString:@"Mission Completed" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
     titleLabel.position = CGPointMake(20.0, 360.0f);
     titleLabel.color = kCCLABEL_FONT_GOLD_COLOR;    
@@ -85,6 +87,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertSamplesReturnedLabel:(CGPoint)_position {
+    [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
     NSInteger samplesReturnedScore = self.level.samplesReturned * kPOINTS_PER_OBJECT;
     NSString* samplesReturnedString = [NSString stringWithFormat:@"Samples Returned     %d*%d = %d", 
                                        self.level.samplesReturned, kPOINTS_PER_OBJECT, samplesReturnedScore];
@@ -98,6 +101,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertSensorsPlacedLabel:(CGPoint)_position {
+    [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
     NSInteger sensorsPlacedScore = self.level.sensorsPlaced * kPOINTS_PER_OBJECT;
     NSString* sensorsPlacedString = [NSString stringWithFormat:@"Sensors Placed       %d*%d = %d", 
                                        self.level.sensorsPlaced, kPOINTS_PER_OBJECT, sensorsPlacedScore];
@@ -111,6 +115,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertCodeScoreLabel {
+    [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
     NSInteger deltaCodeScore = self.level.codeScore - self.level.expectedCodeScore;
     NSInteger expScore = self.level.expectedCodeScore;
     if (deltaCodeScore < 0) {
@@ -139,6 +144,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertCompletedTotalScoreLabel {
+    [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
     NSInteger deltaCodeScore = self.level.codeScore - self.level.expectedCodeScore;
     NSString* totalScoreString = [NSString stringWithFormat:@"Total Score: %d", self.level.score];
     CCLabelTTF* totalScoreLabel = [CCLabelTTF labelWithString:totalScoreString dimensions:CGSizeMake(300, 60) 
@@ -155,6 +161,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertMissionFailedMenu {
+    [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
     CCLabelTTF* redoLabel = [CCLabelTTF labelWithString:@"<redo" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
     redoLabel.color = kCCLABEL_FONT_RED_COLOR;
     CCMenuItemLabel* redoItem = [CCMenuItemLabel itemWithLabel:redoLabel
@@ -173,6 +180,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insertMissionCompletedMenu {
+    [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
     CCLabelTTF* againLabel = [CCLabelTTF labelWithString:@"<again" fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_LARGE];
     againLabel.color = kCCLABEL_FONT_COLOR;
     CCMenuItemLabel* againItem = [CCMenuItemLabel itemWithLabel:againLabel
@@ -250,7 +258,9 @@
         [self.statusDisplay insert:self];
         [self.statusDisplay test];
         [self schedule:@selector(nextFrame:)];
-        [[AudioManager instance] stopBackgroundMusic];
+        if (self.level.level != kMISSIONS_PER_QUAD*kQUADS_TOTAL) {
+            [[AudioManager instance] stopBackgroundMusic];
+        }
     }
 	return self;
 }
@@ -263,33 +273,28 @@
             [self insertSamplesReturnedLabel:CGPointMake(20.0f, 295.0f)];
         }
         [self.statusDisplay test];
-        [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
     } else if (self.counter == kEND_OF_LEVEL_TICK_2) {
         if (self.level.completed) {
             [self insertSensorsPlacedLabel:CGPointMake(20.0f, 235.0f)];
         } else {
             [self insertMissionFailedMenu];
         }
-        [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
         [self.statusDisplay clear];
     } else if (self.counter == kEND_OF_LEVEL_TICK_3) {
         if (self.level.completed) {
             [self insertCodeScoreLabel];
         }
-        [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
         [self.statusDisplay test];
     } else if (self.counter == kEND_OF_LEVEL_TICK_4) {
         if (self.level.completed) {
             [self insertCompletedTotalScoreLabel];
         }
-        [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
         [self.statusDisplay clear];
     } else if (self.counter == kEND_OF_LEVEL_TICK_5) {
         if (self.level.completed) {
             [self insertMissionCompletedMenu];
             [self.statusDisplay test];
         } 
-        [[AudioManager instance] playEffect:ItemDisplayedAudioEffectID];
     }    
 }
 
