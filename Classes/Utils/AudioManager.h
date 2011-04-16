@@ -44,6 +44,8 @@ typedef enum audioBackgroundID {
 - (void)resumeBackgroundMusic;
 - (void)stopBackgroundMusic;
 - (BOOL)isBackgroundMusicPlaying;
-- (void)loadAudio;
+- (void)loadStartupAudio;
+- (void)loadBackgroundAudio:(AudioBackgroundID)_audioID;
+- (void)loadQuadBackgroundMusic;
 
 @end

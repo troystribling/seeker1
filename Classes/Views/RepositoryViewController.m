@@ -95,6 +95,7 @@
         case kREPOSITORY_LAUNCHER_BACK_TAG:
             [self.view removeFromSuperview];
             [[AudioManager instance] playEffect:SelectAudioEffectID];
+            [[AudioManager instance] playBackgroundMusic:BootAudioBackgroundID];
             break;
        default:
             [super touchesBegan:touches withEvent:event];

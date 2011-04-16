@@ -38,7 +38,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void) applicationDidFinishLaunching:(UIApplication*)application {
     [self initDb];
-    [[AudioManager instance] loadAudio];
+    [[AudioManager instance] loadStartupAudio];
 	// CC_DIRECTOR_INIT()
 	//
 	// 1. Initializes an EAGLView with 0-bit depth format, and RGB565 render buffer

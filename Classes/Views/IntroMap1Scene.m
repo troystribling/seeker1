@@ -9,6 +9,7 @@
 #import "IntroMap1Scene.h"
 #import "StatusDisplay.h"
 #import "IntroMap2Scene.h"
+#import "AudioManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kMAX_TAPS           10
@@ -170,6 +171,7 @@
         [self.statusDisplay insert:self];
         [self.statusDisplay test];
         [self schedule:@selector(nextFrame:)];
+        [[AudioManager instance] stopBackgroundMusic];
     }
 	return self;
 }

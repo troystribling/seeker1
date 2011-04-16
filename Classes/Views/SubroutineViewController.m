@@ -208,7 +208,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedLine = indexPath;
-    [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] forSubroutine:self.subroutineName];
 }
 

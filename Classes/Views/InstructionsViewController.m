@@ -322,7 +322,6 @@
             [viewControllerManager showSubroutineView:[[CCDirector sharedDirector] openGLView] withName:subroutineName];
             break;            
     }
-    [[AudioManager instance] playEffect:SelectAudioEffectID];
     [self.view removeFromSuperview];
 }
 

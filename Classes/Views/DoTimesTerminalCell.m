@@ -150,7 +150,6 @@
     switch (touchTag) {
         case kDOTIMES_NUMBER_TAG:
             [[ViewControllerManager instance] showDoTimesEditView:[[CCDirector sharedDirector] openGLView] forTerminalCell:self];
-            [[AudioManager instance] playEffect:SelectAudioEffectID];
             break;
         case kDOTIMES_INSTRUCTION_TAG:
             if (self.parentType == TerminalTerminalCellParentType) {
@@ -158,7 +157,6 @@
             } else {
                 [[ViewControllerManager instance] showInstructionsView:[[CCDirector sharedDirector] openGLView] withInstructionType:SubroutineDoTimesInstructionType andInstructionSet:self.instructionSet];
             }
-            [[AudioManager instance] playEffect:SelectAudioEffectID];
             break;
         default:
             [super touchesBegan:touches withEvent:event];

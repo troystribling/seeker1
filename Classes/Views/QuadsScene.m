@@ -315,6 +315,7 @@
             if ([self displayedQuadIsUnlocked]) {
                 [[AudioManager instance] playEffect:SelectAudioEffectID];
                 [UserModel setQuadrangle:self.displayedQuad];
+                [[AudioManager instance] loadQuadBackgroundMusic];
                 [[CCDirector sharedDirector] replaceScene:[MissionsScene scene]];
             }
         } else if (touchDelta.y < 0) {
