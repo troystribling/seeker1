@@ -1054,8 +1054,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)rotateExpandContract {
-    id expand = [CCScaleTo actionWithDuration:kVICTORY_DURATION/6.0 scale:1.2];
-    id contract = [CCScaleTo actionWithDuration:kVICTORY_DURATION/6.0 scale:1.0];
+    CGFloat baseScale = 1.0;
+    if (self.mapZoomedOut) {
+        baseScale = kMAP_ZOOM_FACTOR;
+    } 
+    id expand = [CCScaleTo actionWithDuration:kVICTORY_DURATION/6.0 scale:baseScale*1.2];
+    id contract = [CCScaleTo actionWithDuration:kVICTORY_DURATION/6.0 scale:baseScale];
     [self.seeker1 runAction:[CCSequence actions:expand, contract, expand, contract, expand, contract, nil]];
 }
 

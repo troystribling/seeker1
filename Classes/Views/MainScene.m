@@ -93,6 +93,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tutorial {
+    [[AudioManager instance] stopBackgroundMusic];
     [[AudioManager instance] playEffect:SelectAudioEffectID];
     [[ViewControllerManager instance] showTutorialIndexView:[[CCDirector sharedDirector] openGLView]];
 }

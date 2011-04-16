@@ -67,16 +67,16 @@
 - (void)viewWillAppear:(BOOL)animated {
     self.tutorialsList = [NSMutableArray arrayWithObjects:@"1. get started", nil];
     NSInteger level = [UserModel level];
-    if (level == kLEVEL_FOR_SUBROUTINES) {
+    if (level >= kLEVEL_FOR_SUBROUTINES) {
         [self.tutorialsList addObject: @"2. subroutines"];
     }
-    if (level == kLEVEL_FOR_TIMES) {
+    if (level >= kLEVEL_FOR_TIMES) {
         [self.tutorialsList addObject:@"3. times loop"];
     }
-    if (level == kLEVEL_FOR_UNTIL) {
+    if (level >= kLEVEL_FOR_UNTIL) {
         [self.tutorialsList addObject: @"4. until loop"];
     }
-    if (level == kLEVEL_FOR_BINS) {
+    if (level >= kLEVEL_FOR_BINS) {
         [self.tutorialsList addObject: @"5. rover bins"];
     }
     [self.tutorialsView reloadData];
@@ -109,6 +109,7 @@
         case kTUTORIAL_INDEX_LAUNCHER_BACK_TAG:
             [self.view removeFromSuperview];
             [[AudioManager instance] playEffect:SelectAudioEffectID];
+            [[AudioManager instance] playBackgroundMusic:BootAudioBackgroundID];
             break;
         default:
             break;
