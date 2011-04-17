@@ -19,6 +19,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CreateSubroutineViewController (PrivateAPI)
 
+- (void)showAlert:(NSString*)title;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,6 +32,13 @@
 
 //===================================================================================================================================
 #pragma mark CreateSubroutineViewController PrivateAPI
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)showAlert:(NSString*)title {
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];	
+    [alert release];
+}
 
 //===================================================================================================================================
 #pragma mark CreateSubroutineViewController
@@ -108,14 +117,23 @@
     BOOL returnStatus = YES;
     if ([subroutineName isEqualToString:@""]) {
         returnStatus = NO;
+        [self showAlert:@"no name"];
     } else if ([subroutineName rangeOfString:@"~"].location != NSNotFound) {
         returnStatus = NO;
+        [self showAlert:@"name invalid"];
     } else if ([subroutineName rangeOfString:@"*"].location != NSNotFound) {  
         returnStatus = NO;
+        [self showAlert:@"name invalid"];
     } else {
-        [SubroutineModel createSubroutineWithName:subroutineName];
-        [self.view removeFromSuperview];
-        [[ViewControllerManager instance] showSubroutineView:[[CCDirector sharedDirector] openGLView] withName:subroutineName];
+        SubroutineModel* model = [SubroutineModel findByName:subroutineName];
+        if (model == nil) {
+            [SubroutineModel createSubroutineWithName:subroutineName];
+            [self.view removeFromSuperview];
+            [[ViewControllerManager instance] showSubroutineView:[[CCDirector sharedDirector] openGLView] withName:subroutineName];
+        } else {
+            returnStatus = NO;
+            [self showAlert:@"subroutine exists"];
+        }
     }
 	return returnStatus; 
 }
