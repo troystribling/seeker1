@@ -117,8 +117,11 @@
     if ([self missionIsUnlocked:_mission]) {
         NSInteger maxLevel = [LevelModel maxLevel];
         NSInteger level = [self missionToLevel:_mission];
+        NSInteger lastLevel = kMISSIONS_PER_QUAD * kQUADS_TOTAL;
         LevelModel* levelModel = [LevelModel findByLevel:level];
         if (levelModel.codeScore <= levelModel.expectedCodeScore && levelModel.completed && level != maxLevel) {
+            sprite = [[[CCSprite alloc] initWithFile:@"mission-complete.png"] autorelease];
+        } else if (level == lastLevel && [UserModel gameOver] ) {
             sprite = [[[CCSprite alloc] initWithFile:@"mission-complete.png"] autorelease];
         } else if (level == maxLevel) {
             sprite = [[[CCSprite alloc] initWithFile:@"mission-not-played.png"] autorelease];
@@ -152,7 +155,8 @@
     NSInteger maxLevel = [LevelModel maxLevel];
     NSInteger level = [self missionToLevel:_mission];
     LevelModel* levelModel = [LevelModel findByLevel:level];
-    if ([levelModel completed] && level != maxLevel) {
+    NSInteger lastLevel = kMISSIONS_PER_QUAD * kQUADS_TOTAL;
+    if (([levelModel completed] && level != maxLevel) || ([levelModel completed] && level == lastLevel)) {
         CCLabelTTF* missionScore = 
             [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", [levelModel score]] fontName:kGLOBAL_FONT fontSize:kGLOBAL_FONT_SIZE_MISSION];
         CGSize missionSize = [self missionSize];

@@ -122,7 +122,7 @@
    <properties>
     <property name="bearing" value="north"/>
     <property name="energy" value="288"/>
-    <property name="expectedCodeScore" value="38"/>
+    <property name="expectedCodeScore" value="34"/>
     <property name="sampleSites" value="0"/>
     <property name="sensorSites" value="25"/>
     <property name="zoom" value="out"/>
