@@ -2765,6 +2765,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: William Stribling (EP33FMNW27)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2785,6 +2786,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = seeker1;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5250E128-5F1B-4B58-B40C-CCDACAF13240";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -2794,6 +2796,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: William Stribling (EP33FMNW27)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -2812,6 +2815,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = seeker1;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5250E128-5F1B-4B58-B40C-CCDACAF13240";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-Wall";
 			};
