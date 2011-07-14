@@ -14,6 +14,7 @@
 	<array>
 		<string>Icon.png</string>
 		<string>Icon2x.png</string>
+		<string>Icon@2x.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
 	<string>com.imaginaryProducts.seeker-1</string>
@@ -37,6 +38,8 @@
 		<string>PF Tempesta Seven Condensed.ttf</string>
 		<string>Volter (Goldfish).ttf</string>
 	</array>
+	<key>UIPrerenderedIcon</key>
+	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<dict>
 		<key>accelerometer</key>
@@ -50,7 +53,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>UIPrerenderedIcon</key>
-	<true/>
 </dict>
 </plist>
